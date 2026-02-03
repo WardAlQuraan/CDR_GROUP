@@ -1,0 +1,88 @@
+<app-base-dialog
+  title="admin.eventsAdmin.viewEvent"
+  [showActions]="false">
+
+  <div class="view-content">
+    <!-- Basic Info -->
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>event</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.eventsAdmin.basicInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content view-fields">
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.eventsAdmin.titleEn' | translate }}</span>
+          <span class="field-value">{{ event.titleEn }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.eventsAdmin.titleAr' | translate }}</span>
+          <span class="field-value" dir="rtl">{{ event.titleAr }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    @if (event.descriptionEn || event.descriptionAr) {
+      <div class="form-section section-blue">
+        <div class="section-header">
+          <div class="section-icon">
+            <mat-icon>description</mat-icon>
+          </div>
+          <div class="section-title">{{ 'admin.eventsAdmin.descriptionSection' | translate }}</div>
+        </div>
+
+        <div class="section-content view-fields">
+          @if (event.descriptionEn) {
+            <div class="view-field">
+              <span class="field-label">{{ 'admin.eventsAdmin.descriptionEn' | translate }}</span>
+              <span class="field-value description">{{ event.descriptionEn }}</span>
+            </div>
+          }
+          @if (event.descriptionAr) {
+            <div class="view-field">
+              <span class="field-label">{{ 'admin.eventsAdmin.descriptionAr' | translate }}</span>
+              <span class="field-value description" dir="rtl">{{ event.descriptionAr }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Event Details -->
+    <div class="form-section section-orange">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>link</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.eventsAdmin.detailsSection' | translate }}</div>
+      </div>
+
+      <div class="section-content view-fields">
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.eventsAdmin.eventUrl' | translate }}</span>
+          <span class="field-value">
+            @if (event.eventUrl) {
+              <a [href]="event.eventUrl" target="_blank" rel="noopener noreferrer">{{ event.eventUrl }}</a>
+            } @else {
+              -
+            }
+          </span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.eventsAdmin.department' | translate }}</span>
+          <span class="field-value">{{ getDepartmentName() }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dialog-actions">
+      <button mat-raised-button color="primary" (click)="onClose()">
+        {{ 'common.close' | translate }}
+      </button>
+    </div>
+  </div>
+
+</app-base-dialog>

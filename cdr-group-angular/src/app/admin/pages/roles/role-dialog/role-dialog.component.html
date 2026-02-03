@@ -1,0 +1,103 @@
+<app-base-dialog
+  [title]="dialogTitle"
+  [saveLabel]="saveLabel"
+  [saveDisabled]="!isViewMode && form.invalid"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <!-- Create/Edit Mode -->
+  @if (isCreateMode || isEditMode) {
+    <form [formGroup]="form" class="dialog-form">
+      <div class="form-section section-primary">
+        <div class="section-header">
+          <div class="section-icon">
+            <mat-icon>admin_panel_settings</mat-icon>
+          </div>
+          <div class="section-title">{{ 'admin.roles.roleInfo' | translate }}</div>
+        </div>
+
+        <div class="section-content">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'admin.roles.name' | translate }}</mat-label>
+            <mat-icon matPrefix>label</mat-icon>
+            <input matInput formControlName="name" [placeholder]="'admin.roles.placeholders.name' | translate">
+            @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+              <mat-error>{{ 'admin.roles.errors.nameRequired' | translate }}</mat-error>
+            }
+            @if (form.get('name')?.hasError('minlength') && form.get('name')?.touched) {
+              <mat-error>{{ 'admin.roles.errors.nameMinLength' | translate }}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'admin.roles.description' | translate }}</mat-label>
+            <mat-icon matPrefix>description</mat-icon>
+            <textarea matInput formControlName="description" rows="3" [placeholder]="'admin.roles.placeholders.description' | translate"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  }
+
+  <!-- View Mode -->
+  @if (isViewMode && data.role) {
+    <div class="view-content">
+      <div class="form-section section-primary">
+        <div class="section-header">
+          <div class="section-icon">
+            <mat-icon>admin_panel_settings</mat-icon>
+          </div>
+          <div class="section-title">{{ 'admin.roles.roleInfo' | translate }}</div>
+        </div>
+
+        <div class="section-content view-fields">
+          <div class="view-field">
+            <span class="field-label">{{ 'admin.roles.name' | translate }}</span>
+            <span class="field-value">{{ data.role.name }}</span>
+          </div>
+          <div class="view-field">
+            <span class="field-label">{{ 'admin.roles.description' | translate }}</span>
+            <span class="field-value">{{ data.role.description || '-' }}</span>
+          </div>
+          <div class="view-field">
+            <span class="field-label">{{ 'admin.roles.type' | translate }}</span>
+            <span class="field-value">
+              @if (data.role.isSystemRole) {
+                <mat-chip color="primary">{{ 'admin.roles.system' | translate }}</mat-chip>
+              } @else {
+                <mat-chip>{{ 'admin.roles.custom' | translate }}</mat-chip>
+              }
+            </span>
+          </div>
+          <div class="view-field">
+            <span class="field-label">{{ 'admin.roles.created' | translate }}</span>
+            <span class="field-value">{{ data.role.createdAt | date:'medium' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Permissions List -->
+      <div class="form-section section-purple">
+        <div class="section-header">
+          <div class="section-icon">
+            <mat-icon>security</mat-icon>
+          </div>
+          <div class="section-title">{{ 'admin.roles.permissions' | translate }} ({{ data.role.permissions.length || 0 }})</div>
+        </div>
+
+        <div class="section-content">
+          <div class="permissions-list">
+            @for (permission of data.role.permissions; track permission) {
+              <mat-chip>{{ permission }}</mat-chip>
+            }
+            @if (!data.role.permissions.length) {
+              <span class="no-permissions">{{ 'admin.roles.noPermissions' | translate }}</span>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+</app-base-dialog>

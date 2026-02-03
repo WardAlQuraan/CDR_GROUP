@@ -1,0 +1,118 @@
+.login-form {
+  padding: 0 1rem;
+
+  // Override Material theming variables at the root level
+  --mdc-outlined-text-field-outline-color: rgba(255, 255, 255, 0.5);
+  --mdc-outlined-text-field-focus-outline-color: #81b29a;
+  --mdc-outlined-text-field-error-outline-color: #f44336;
+  --mdc-outlined-text-field-hover-outline-color: rgba(255, 255, 255, 0.8);
+  --mdc-outlined-text-field-label-text-color: rgba(255, 255, 255, 0.7);
+  --mdc-outlined-text-field-focus-label-text-color: #81b29a;
+  --mdc-outlined-text-field-error-label-text-color: #f44336;
+  --mdc-outlined-text-field-input-text-color: white;
+  --mdc-outlined-text-field-caret-color: white;
+  --mat-form-field-focus-state-layer-opacity: 0;
+
+  mat-form-field {
+    // Default outline
+    --mdc-outlined-text-field-outline-color: rgba(255, 255, 255, 0.5);
+    --mdc-outlined-text-field-outline-width: 1px;
+
+    // Focus state
+    --mdc-outlined-text-field-focus-outline-color: #81b29a;
+    --mdc-outlined-text-field-focus-outline-width: 2px;
+
+    // Hover state
+    --mdc-outlined-text-field-hover-outline-color: rgba(255, 255, 255, 0.8);
+
+    // Error state
+    --mdc-outlined-text-field-error-outline-color: #f44336;
+    --mdc-outlined-text-field-error-focus-outline-color: #f44336;
+    --mdc-outlined-text-field-error-hover-outline-color: #f44336;
+
+    // Label colors
+    --mdc-outlined-text-field-label-text-color: rgba(255, 255, 255, 0.7);
+    --mdc-outlined-text-field-focus-label-text-color: #81b29a;
+    --mdc-outlined-text-field-hover-label-text-color: rgba(255, 255, 255, 0.9);
+    --mdc-outlined-text-field-error-label-text-color: #f44336;
+    --mdc-outlined-text-field-error-focus-label-text-color: #f44336;
+    --mdc-outlined-text-field-error-hover-label-text-color: #f44336;
+
+    // Input text
+    --mdc-outlined-text-field-input-text-color: white;
+    --mdc-outlined-text-field-caret-color: white;
+
+    // Error text color
+    --mat-form-field-error-text-color: #f44336;
+  }
+
+  // Icon styling
+  .mat-mdc-form-field-icon-prefix,
+  .mat-mdc-form-field-icon-suffix {
+    color: rgba(255, 255, 255, 0.7) !important;
+
+    .mat-icon {
+      color: inherit !important;
+    }
+
+    .mat-mdc-icon-button {
+      --mdc-icon-button-icon-color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  // Error message styling
+  mat-error {
+    color: #f44336 !important;
+    font-size: 0.75rem;
+  }
+
+  // Checkbox styling
+  mat-checkbox {
+    --mdc-checkbox-unselected-icon-color: rgba(255, 255, 255, 0.7);
+    --mdc-checkbox-unselected-hover-icon-color: rgba(255, 255, 255, 0.9);
+    --mdc-checkbox-unselected-focus-icon-color: rgba(255, 255, 255, 0.9);
+    --mdc-checkbox-selected-icon-color: #81b29a;
+    --mdc-checkbox-selected-hover-icon-color: #81b29a;
+    --mdc-checkbox-selected-focus-icon-color: #81b29a;
+    --mdc-checkbox-selected-pressed-icon-color: #81b29a;
+    --mdc-checkbox-selected-checkmark-color: white;
+  }
+}
+
+.login-btn {
+  --mdc-filled-button-container-color: #F2CC8F;
+  --mdc-filled-button-label-text-color: white;
+  --mdc-filled-button-hover-container-color: #E07A5F;
+  --mdc-filled-button-pressed-container-color: #E07A5F;
+  --mdc-filled-button-focus-container-color: #E07A5F;
+  height: 48px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 100px;
+
+  mat-icon {
+    margin-right: 0.5rem;
+  }
+}
+
+.forgot-link {
+  font-size: 0.875rem;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+mat-icon.me-2 {
+  vertical-align: middle;
+}
+
+// Alert styling for login error
+.alert-danger {
+  background-color: rgba(244, 67, 54, 0.15);
+  border: 1px solid #f44336;
+  color: #f44336;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+}

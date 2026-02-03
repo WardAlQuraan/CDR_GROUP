@@ -1,0 +1,99 @@
+// Dashboard Container
+.dashboard-container {
+  padding: 1.5rem;
+  min-height: calc(100vh - 120px);
+}
+
+// Organization Tree Section
+.org-tree-section {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+
+  .section-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #e9ecef;
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+
+    .header-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .header-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #81B29A 0%, #5a9178 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        mat-icon {
+          color: white;
+          font-size: 24px;
+        }
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #1e293b;
+      }
+
+      p {
+        margin: 0.25rem 0 0;
+        font-size: 0.875rem;
+        color: #64748b;
+      }
+    }
+  }
+
+  .tree-content {
+    padding: 1.5rem;
+    min-height: 400px;
+  }
+}
+
+// RTL Support
+:host-context([dir="rtl"]) {
+  .section-header {
+    .header-info {
+      text-align: right;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+
+  .org-tree-section {
+    .section-header {
+      padding: 1rem 1.25rem;
+
+      .header-info {
+        .header-icon {
+          width: 40px;
+          height: 40px;
+
+          mat-icon {
+            font-size: 20px;
+          }
+        }
+
+        h2 {
+          font-size: 1.1rem;
+        }
+      }
+    }
+
+    .tree-content {
+      padding: 1rem;
+    }
+  }
+}

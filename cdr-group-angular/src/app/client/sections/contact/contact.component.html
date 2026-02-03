@@ -1,0 +1,58 @@
+<section class="contact-section section-padding" id="section_5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-12">
+        <h2 class="mb-4">{{ 'contact.title' | translate }}</h2>
+
+        <form class="custom-form contact-form" (ngSubmit)="onSubmit()">
+          <div class="form-floating mb-4">
+            <input type="text" name="full-name" id="contact-full-name" class="form-control" [placeholder]="'common.fullName' | translate" [(ngModel)]="formData.fullName" required>
+            <label for="contact-full-name">{{ 'common.fullName' | translate }}</label>
+          </div>
+
+          <div class="form-floating mb-4">
+            <input type="email" name="email" id="contact-email" class="form-control" [placeholder]="'common.email' | translate" [(ngModel)]="formData.email" required>
+            <label for="contact-email">{{ 'common.email' | translate }}</label>
+          </div>
+
+          <div class="form-floating mb-4">
+            <textarea name="message" id="contact-message" class="form-control" [placeholder]="'common.message' | translate" [(ngModel)]="formData.message" required></textarea>
+            <label for="contact-message">{{ 'common.message' | translate }}</label>
+          </div>
+
+          <button type="submit" class="form-control">{{ 'common.submit' | translate }}</button>
+        </form>
+      </div>
+
+      <div class="col-lg-6 col-12 mt-5 mt-lg-0">
+        <div class="contact-info">
+          <img src="assets/images/WorldMap.svg" class="img-fluid" alt="World Map">
+
+          <div class="contact-info-item">
+            <div class="contact-info-body">
+              <strong>London, UK</strong>
+
+              <p class="mt-2 mb-1">
+                <a href="tel:010-020-0340" class="text-white">
+                  <i class="bi-telephone me-2"></i>
+                  010-020-0340
+                </a>
+              </p>
+
+              <p class="mb-0">
+                <a href="mailto:info@tiyagolfclub.com" class="text-white">
+                  <i class="bi-envelope me-2"></i>
+                  info&#64;tiyagolfclub.com
+                </a>
+              </p>
+            </div>
+
+            <div class="contact-info-footer">
+              <a href="mailto:info@tiyagolfclub.com">{{ 'contact.getInTouch' | translate }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

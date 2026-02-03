@@ -1,0 +1,15 @@
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\bin\Release\net10.0\cdr-group.Contracts.deps.json
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\bin\Release\net10.0\cdr-group.Contracts.dll
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\bin\Release\net10.0\cdr-group.Contracts.pdb
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\bin\Release\net10.0\cdr-group.Domain.dll
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\bin\Release\net10.0\cdr-group.Domain.pdb
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\obj\Release\net10.0\cdr-group.Contracts.csproj.AssemblyReference.cache
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\obj\Release\net10.0\cdr-group.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\obj\Release\net10.0\cdr-group.Contracts.AssemblyInfoInputs.cache
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\obj\Release\net10.0\cdr-group.Contracts.AssemblyInfo.cs
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\obj\Release\net10.0\cdr-group.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\obj\Release\net10.0\cdr-grou.16D7EA09.Up2Date
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\obj\Release\net10.0\cdr-group.Contracts.dll
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\obj\Release\net10.0\refint\cdr-group.Contracts.dll
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\obj\Release\net10.0\cdr-group.Contracts.pdb
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\obj\Release\net10.0\ref\cdr-group.Contracts.dll

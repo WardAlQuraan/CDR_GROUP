@@ -1,0 +1,112 @@
+<div class="admin-wrapper" [class.collapsed]="isCollapsed" [class.mobile]="isMobile">
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" [class.collapsed]="isCollapsed && !isMobile">
+    <!-- Toggle Button -->
+    <button class="toggle-btn" (click)="toggleSidenav()" [class.collapsed]="isCollapsed">
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+
+    <!-- Sidebar Header -->
+    <div class="sidenav-header">
+      <a routerLink="/admin" class="brand">
+        <img src="assets/images/logo.png" alt="Logo" class="brand-logo">
+        <span class="brand-text">{{ 'header.logo' | translate }}</span>
+      </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sidenav-nav">
+      @for (item of navItems; track item.route) {
+        <a class="nav-item"
+           [routerLink]="item.route"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{exact: item.exact ?? false}">
+          <mat-icon>{{ item.icon }}</mat-icon>
+          <span class="nav-text">{{ item.label | translate }}</span>
+          <span class="nav-tooltip">{{ item.label | translate }}</span>
+        </a>
+      }
+    </nav>
+
+    <!-- Sidebar Footer -->
+    <div class="sidenav-footer">
+      <button class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span class="nav-text">{{ 'admin.logout' | translate }}</span>
+        <span class="nav-tooltip">{{ 'admin.logout' | translate }}</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile Overlay -->
+  @if (isMobile && !isCollapsed) {
+    <div class="mobile-overlay" (click)="toggleSidenav()"></div>
+  }
+
+  <!-- Main Content -->
+  <main class="admin-main">
+    <!-- Toolbar -->
+    <mat-toolbar class="admin-toolbar">
+      @if (isMobile) {
+        <button mat-icon-button (click)="toggleSidenav()" class="mobile-menu-btn">
+          <mat-icon>menu</mat-icon>
+        </button>
+      }
+
+      <span class="toolbar-spacer"></span>
+
+      <!-- User Menu -->
+      <button class="user-menu-trigger" [matMenuTriggerFor]="userMenu">
+        <div class="user-avatar">
+          <mat-icon>person</mat-icon>
+        </div>
+        <span class="user-name">{{ authService.user()?.name }}</span>
+        <mat-icon class="dropdown-icon">expand_more</mat-icon>
+      </button>
+
+      <mat-menu #userMenu="matMenu" class="user-dropdown-menu" xPosition="after">
+        <!-- User Info Header --> 
+        <div class="menu-header" (click)="$event.stopPropagation()">
+          <div class="menu-avatar"> 
+            <mat-icon>person</mat-icon>
+          </div>
+          <div class="menu-user-info">
+            <span class="menu-user-name">{{ authService.user()?.name }}</span>
+            <span class="menu-user-role">Administrator</span>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <!-- Language Toggle -->
+        <button mat-menu-item (click)="translationService.toggleLanguage()">
+          <mat-icon class="menu-icon language">language</mat-icon>
+          <span>{{ translationService.getOtherLanguageName() }}</span>
+        </button>
+
+        <!-- Back to Site -->
+        <button mat-menu-item routerLink="/">
+          <mat-icon class="menu-icon home">home</mat-icon>
+          <span>{{ 'admin.backToSite' | translate }}</span>
+        </button>
+
+        <mat-divider></mat-divider>
+
+        <!-- Logout -->
+        <button mat-menu-item class="logout-item" (click)="logout()">
+          <mat-icon class="menu-icon logout">logout</mat-icon>
+          <span>{{ 'admin.logout' | translate }}</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <!-- Page Content -->
+    <div class="page-content">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,107 @@
+<app-hero [isSmall]="true" title="events.eventListing"></app-hero>
+
+<section class="events-listing-section section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="mb-5">{{ 'events.latestEvents' | translate }}</h2>
+      </div>
+
+      @for (event of featuredEvents; track event.id) {
+        <div class="col-lg-6 col-12 mb-4">
+          <div class="custom-block custom-block-bg">
+            <div class="custom-block-image-wrap">
+              <a [routerLink]="['/events', event.id]">
+                <img [src]="event.image" class="custom-block-image img-fluid" [alt]="event.title">
+
+                <a [routerLink]="['/events', event.id]" class="custom-block-icon">
+                  <i class="bi-link"></i>
+                </a>
+              </a>
+
+              <div class="custom-block-date-wrap">
+                <strong class="text-white">{{ event.date }}</strong>
+                <span class="text-white">{{ event.month }}</span>
+              </div>
+
+              <div class="custom-btn-wrap">
+                <a [routerLink]="['/events', event.id]" class="custom-btn">{{ 'events.buyTicket' | translate }}</a>
+              </div>
+            </div>
+
+            <div class="custom-block-info">
+              <h5 class="mb-2">
+                <a [routerLink]="['/events', event.id]">{{ event.title }}</a>
+              </h5>
+
+              <p class="mb-0">{{ event.description }}</p>
+
+              <div class="d-flex flex-wrap mt-3">
+                <span class="custom-block-span">
+                  <i class="bi-geo-alt me-1"></i>
+                  {{ event.location }}
+                </span>
+
+                <span class="custom-block-span">
+                  <i class="bi-ticket me-1"></i>
+                  ${{ event.ticketPrice }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="events-section section-padding section-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="mb-5">{{ 'events.title' | translate }}</h2>
+      </div>
+
+      @for (event of events; track event.id) {
+        <div class="col-lg-6 col-12 mb-4">
+          <div class="custom-block custom-block-bg">
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-12">
+                <div class="custom-block-date-wrap">
+                  <strong class="custom-block-date">{{ event.date }}</strong>
+                  <span class="text-white">{{ event.month }}</span>
+                </div>
+              </div>
+
+              <div class="col-lg-8 col-md-8 col-12 d-flex flex-column">
+                <div class="custom-block-info">
+                  <h5 class="mb-2">
+                    <a [routerLink]="['/events', event.id]">{{ event.title }}</a>
+                  </h5>
+
+                  <p class="mb-0">{{ event.description }}</p>
+
+                  <div class="d-flex flex-wrap mt-3">
+                    <span class="custom-block-span">
+                      <i class="bi-geo-alt me-1"></i>
+                      {{ event.location }}
+                    </span>
+
+                    <span class="custom-block-span">
+                      <i class="bi-ticket me-1"></i>
+                      ${{ event.ticketPrice }}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="mt-auto">
+                  <a [routerLink]="['/events', event.id]" class="custom-btn custom-border-btn">{{ 'events.buyTicket' | translate }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

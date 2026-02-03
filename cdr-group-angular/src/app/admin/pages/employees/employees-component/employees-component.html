@@ -1,0 +1,19 @@
+<app-data-grid
+  [data]="employees"
+  [config]="gridConfig"
+  [totalCount]="totalCount"
+  [loading]="loading"
+  [pageIndex]="pageNumber - 1"
+  [pageSize]="pageSize"
+  (pageChange)="onPageChange($event)"
+  (sortChange)="onSortChange($event)"
+  (filterChange)="onFilterChange($event)"
+  (addClick)="openCreateDialog()">
+</app-data-grid>
+
+<input
+  #fileInput
+  type="file"
+  accept="image/*"
+  style="display: none"
+  (change)="onFileSelected($event)">

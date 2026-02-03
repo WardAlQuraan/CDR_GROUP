@@ -1,0 +1,25 @@
+app-date-picker {
+  display: block;
+  width: 100%;
+  flex: 1;
+
+  mat-form-field {
+    width: 100%;
+
+    .mat-mdc-text-field-wrapper {
+      background-color: white !important;
+    }
+
+    .mdc-text-field--outlined {
+      background-color: white !important;
+    }
+
+    .mat-mdc-form-field-flex {
+      background-color: white !important;
+    }
+  }
+}
+
+.mat-datepicker-content-container {
+  background-color: white !important;
+}

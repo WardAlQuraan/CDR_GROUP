@@ -1,0 +1,192 @@
+<div class="bulk-upload-dialog">
+  <div class="dialog-header">
+    <mat-icon class="header-icon">cloud_upload</mat-icon>
+    <h2>{{ title | translate }}</h2>
+  </div>
+
+  <!-- Existing Files Section -->
+  @if (loadingExisting) {
+    <div class="loading-existing">
+      <mat-spinner diameter="24"></mat-spinner>
+      <span>{{ 'common.loadingFiles' | translate }}</span>
+    </div>
+  } @else if (existingFiles.length > 0) {
+    <div class="existing-files-section">
+      <div class="section-header">
+        <mat-icon>folder</mat-icon>
+        <span>{{ 'common.existingFiles' | translate }} ({{ existingFiles.length }})</span>
+      </div>
+      <div class="existing-files-list">
+        @for (file of existingFiles; track file.id) {
+          <div class="existing-file-item">
+            <mat-icon class="file-icon">insert_drive_file</mat-icon>
+            <div class="file-details" (click)="viewOrDownloadFile(file)">
+              <span class="file-name">{{ file.fileName }}</span>
+              <span class="file-size">{{ formatFileSize(file.size) }}</span>
+            </div>
+            @if (file.id === updatingPrimaryId) {
+              <mat-spinner diameter="20"></mat-spinner>
+            } @else {
+              <mat-checkbox
+                [checked]="file.isPrimary"
+                (change)="setExistingAsPrimary(file)"
+                [disabled]="!!updatingPrimaryId"
+                color="primary">
+                {{ 'common.primary' | translate }}
+              </mat-checkbox>
+            }
+            <button mat-icon-button
+              (click)="viewOrDownloadFile(file)"
+              [matTooltip]="isViewable(file) ? ('common.view' | translate) : ('common.download' | translate)"
+              matTooltipClass="action-tooltip">
+              <mat-icon class="view-icon">{{ isViewable(file) ? 'visibility' : 'download' }}</mat-icon>
+            </button>
+            <button mat-icon-button color="warn"
+              (click)="deleteExistingFile(file)"
+              [disabled]="file.id === deletingFileId"
+              [matTooltip]="'common.delete' | translate"
+              matTooltipClass="action-tooltip">
+              @if (file.id === deletingFileId) {
+                <mat-spinner diameter="18"></mat-spinner>
+              } @else {
+                <mat-icon class="delete-icon">delete</mat-icon>
+              }
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  @if (!uploadComplete) {
+    <!-- File Drop Zone -->
+    <div class="drop-zone" (click)="fileInput.click()">
+      <input
+        #fileInput
+        type="file"
+        multiple
+        [accept]="acceptedTypes"
+        (change)="onFilesSelected($event)"
+        style="display: none">
+      <mat-icon>add_circle_outline</mat-icon>
+      <p>{{ 'common.clickToSelectFiles' | translate }}</p>
+      <span class="hint">{{ 'common.multipleFilesAllowed' | translate }}</span>
+    </div>
+
+    <!-- Selected Files List -->
+    @if (files.length > 0) {
+      <div class="files-section">
+        <div class="files-header">
+          <span>{{ 'common.selectedFiles' | translate }} ({{ files.length }})</span>
+          <button mat-button color="warn" (click)="clearAll()" [disabled]="uploading">
+            <mat-icon>delete_sweep</mat-icon>
+            {{ 'common.clearAll' | translate }}
+          </button>
+        </div>
+
+        <div class="files-list">
+          @for (item of files; track item.file.name; let i = $index) {
+            <div class="file-item" [class.uploading]="item.status === 'uploading'">
+              <div class="file-info">
+                <mat-icon class="file-icon">insert_drive_file</mat-icon>
+                <div class="file-details">
+                  <span class="file-name">{{ item.file.name }}</span>
+                  <span class="file-size">{{ formatFileSize(item.file.size) }}</span>
+                </div>
+              </div>
+              <div class="file-actions">
+                <mat-checkbox
+                  [checked]="item.isPrimary"
+                  (change)="setAsPrimary(i)"
+                  [disabled]="uploading || item.status === 'uploading'"
+                  color="primary">
+                  {{ 'common.primary' | translate }}
+                </mat-checkbox>
+                @if (item.status === 'uploading') {
+                  <mat-spinner diameter="20"></mat-spinner>
+                } @else {
+                  <button mat-icon-button color="warn" (click)="removeFile(i)" [disabled]="uploading">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  } @else {
+    <!-- Upload Results -->
+    <div class="results-section">
+      <div class="results-summary">
+        <div class="summary-item success">
+          <mat-icon>check_circle</mat-icon>
+          <span>{{ successCount }} {{ 'common.successful' | translate }}</span>
+        </div>
+        @if (errorCount > 0) {
+          <div class="summary-item error">
+            <mat-icon>error</mat-icon>
+            <span>{{ errorCount }} {{ 'common.failed' | translate }}</span>
+          </div>
+        }
+      </div>
+
+      <div class="files-list results">
+        @for (item of files; track item.file.name) {
+          <div class="file-item" [class.success]="item.status === 'success'" [class.error]="item.status === 'error'">
+            <div class="file-info">
+              @if (item.status === 'success') {
+                <mat-icon class="status-icon success">check_circle</mat-icon>
+              } @else {
+                <mat-icon class="status-icon error">error</mat-icon>
+              }
+              <div class="file-details">
+                <span class="file-name">{{ item.file.name }}</span>
+                @if (item.message) {
+                  <span class="file-message" [class.error]="item.status === 'error'">{{ item.message }}</span>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- Dialog Actions -->
+  <div class="dialog-actions">
+    @if (!uploadComplete) {
+      <button mat-button (click)="onClose()" [disabled]="uploading">
+        {{ 'common.cancel' | translate }}
+      </button>
+      @if (files.length > 0) {
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="upload()"
+          [disabled]="uploading">
+          @if (uploading) {
+            <mat-spinner diameter="20"></mat-spinner>
+          } @else {
+            <mat-icon>cloud_upload</mat-icon>
+          }
+          {{ 'common.upload' | translate }}
+        </button>
+      } 
+    } @else {
+      @if (errorCount > 0) {
+        <button mat-stroked-button color="warn" (click)="retryFailed()" [disabled]="uploading">
+          @if (uploading) {
+            <mat-spinner diameter="20"></mat-spinner>
+          } @else {
+            <mat-icon>refresh</mat-icon>
+          }
+          {{ 'common.retryFailed' | translate }}
+        </button>
+      }
+      <button mat-raised-button color="primary" (click)="onClose()" [disabled]="uploading">
+        {{ 'common.close' | translate }}
+      </button>
+    }
+  </div>
+</div>

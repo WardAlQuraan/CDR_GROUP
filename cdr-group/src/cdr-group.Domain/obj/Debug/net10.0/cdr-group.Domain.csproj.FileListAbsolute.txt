@@ -1,0 +1,11 @@
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Domain\bin\Debug\net10.0\cdr-group.Domain.deps.json
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Domain\bin\Debug\net10.0\cdr-group.Domain.dll
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Domain\bin\Debug\net10.0\cdr-group.Domain.pdb
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Domain\obj\Debug\net10.0\cdr-group.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Domain\obj\Debug\net10.0\cdr-group.Domain.AssemblyInfoInputs.cache
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Domain\obj\Debug\net10.0\cdr-group.Domain.AssemblyInfo.cs
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Domain\obj\Debug\net10.0\cdr-group.Domain.csproj.CoreCompileInputs.cache
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Domain\obj\Debug\net10.0\cdr-group.Domain.dll
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Domain\obj\Debug\net10.0\refint\cdr-group.Domain.dll
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Domain\obj\Debug\net10.0\cdr-group.Domain.pdb
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Domain\obj\Debug\net10.0\ref\cdr-group.Domain.dll

@@ -1,0 +1,103 @@
+<section class="events-section section-padding" id="section_events">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5">
+        <h2 class="section-title">{{ 'events.latestEvents' | translate }}</h2>
+        <p class="section-subtitle">{{ 'events.subtitle' | translate }}</p>
+      </div>
+    </div>
+
+    @if (loading) {
+      <div class="loading-container">
+        <mat-spinner diameter="50"></mat-spinner>
+      </div>
+    } @else if (error) {
+      <div class="error-container">
+        <mat-icon>error_outline</mat-icon>
+        <p>{{ 'events.noEvents' | translate }}</p>
+        <button mat-raised-button color="primary" (click)="loadEvents()">
+          {{ 'common.retry' | translate }}
+        </button>
+      </div>
+    } @else if (events.length === 0) {
+      <div class="empty-container">
+        <mat-icon>event_busy</mat-icon>
+        <p>{{ 'events.noEvents' | translate }}</p>
+      </div>
+    } @else {
+      <div class="events-wrapper" [class.is-loading]="paginationLoading">
+        @if (paginationLoading) {
+          <div class="loading-overlay">
+            <mat-spinner diameter="40"></mat-spinner>
+          </div>
+        }
+        <div class="events-grid">
+        @for (event of events; track event.id; let i = $index) {
+          <div class="event-card clickable" [class.no-date]="!event.eventDate" [class.has-image]="event.primaryFileUrl" (click)="openEventDetail(event)">
+            @if (event.primaryFileUrl) {
+              <div class="event-image">
+                <img [src]="event.primaryFileUrl" [alt]="event.title">
+              </div>
+            }
+            @if (event.eventDate) {
+              <div class="event-date" [style.background]="getColor(i)">
+                <span class="day">{{ getDateDay(event.eventDate) }}</span>
+                <span class="month">{{ getDateMonth(event.eventDate) }}</span>
+                <span class="year">{{ getDateYear(event.eventDate) }}</span>
+              </div>
+            }
+            <div class="event-content">
+              <h3 class="event-title">{{ event.title }}</h3>
+              @if (event.description) {
+                <p class="event-description">{{ event.description }}</p>
+              }
+              <div class="event-meta">
+                @if (event.department) {
+                  <span class="department-badge">
+                    <mat-icon>business</mat-icon>
+                    {{ event.department }}
+                  </span>
+                }
+                <div class="event-links">
+                  @if (event.eventUrl) {
+                    <span class="external-link" (click)="openExternalLink(event, $event)">
+                      <mat-icon>link</mat-icon>
+                      {{ 'events.viewExternalLink' | translate }}
+                    </span>
+                  }
+                  <span class="link-indicator">
+                    <mat-icon>visibility</mat-icon>
+                    {{ 'events.viewDetails' | translate }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Pagination -->
+      @if (totalPages > 1) {
+        <div class="pagination-container">
+          <button class="pagination-btn" [disabled]="!hasPreviousPage" (click)="previousPage()">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+
+          @for (page of [].constructor(totalPages); track $index) {
+            <button
+              class="pagination-btn page-number"
+              [class.active]="pageNumber === $index + 1"
+              (click)="goToPage($index + 1)">
+              {{ $index + 1 }}
+            </button>
+          }
+
+          <button class="pagination-btn" [disabled]="!hasNextPage" (click)="nextPage()">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      }
+      </div>
+    }
+  </div>
+</section>

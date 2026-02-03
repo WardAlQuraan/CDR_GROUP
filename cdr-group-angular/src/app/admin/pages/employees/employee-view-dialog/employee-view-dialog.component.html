@@ -1,0 +1,108 @@
+<app-base-dialog
+  title="admin.employees.viewEmployee"
+  [showActions]="false">
+
+  <div class="view-content">
+    <!-- Basic Info -->
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>person</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.employees.basicInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content view-fields">
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.employees.code' | translate }}</span>
+          <span class="field-value">{{ employee.employeeCode }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.employees.nameEn' | translate }}</span>
+          <span class="field-value">{{ employee.fullNameEn }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.employees.nameAr' | translate }}</span>
+          <span class="field-value" dir="rtl">{{ employee.fullNameAr }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.employees.status' | translate }}</span>
+          <span class="field-value">
+            @if (employee.isActive) {
+              <mat-chip color="primary">{{ 'admin.employees.active' | translate }}</mat-chip>
+            } @else {
+              <mat-chip color="warn">{{ 'admin.employees.inactive' | translate }}</mat-chip>
+            }
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="form-section section-blue">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>contact_mail</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.employees.contactInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content view-fields">
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.employees.email' | translate }}</span>
+          <span class="field-value">{{ employee.email || '-' }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.employees.phone' | translate }}</span>
+          <span class="field-value">{{ employee.phone || '-' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Work Info -->
+    <div class="form-section section-orange">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>work</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.employees.workInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content view-fields">
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.employees.department' | translate }}</span>
+          <span class="field-value">{{ employee.departmentName || '-' }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.employees.position' | translate }}</span>
+          <span class="field-value">{{ employee.positionName || '-' }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.employees.hireDate' | translate }}</span>
+          <span class="field-value">{{ employee.hireDate ? (employee.hireDate | date:'mediumDate') : '-' }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.employees.salary' | translate }}</span>
+          <span class="field-value">{{ employee.salary ? (employee.salary | currency) : '-' }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.employees.manager' | translate }}</span>
+          <span class="field-value">{{ getManagerName() }}</span>
+        </div>
+        @if (employee.username) {
+          <div class="view-field">
+            <span class="field-label">{{ 'admin.employees.linkedUser' | translate }}</span>
+            <span class="field-value">{{ employee.username }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="dialog-actions">
+      <button mat-raised-button color="primary" (click)="onClose()">
+        {{ 'common.close' | translate }}
+      </button>
+    </div>
+  </div>
+
+</app-base-dialog>

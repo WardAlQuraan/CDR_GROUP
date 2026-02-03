@@ -1,0 +1,22 @@
+<div class="org-chart-page">
+  <div class="page-header">
+    <div class="header-content">
+      <mat-icon class="header-icon">account_tree</mat-icon>
+      <div class="header-text">
+        <h1>{{ 'admin.departments.organizationChart' | translate }}</h1>
+        <p class="department-name" *ngIf="department">{{ departmentName }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <div class="loading-container" *ngIf="loading">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+
+    <app-org-chart
+      *ngIf="!loading && departmentId"
+      [departmentId]="departmentId">
+    </app-org-chart>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<app-base-dialog
+  [title]="'admin.roles.managePermissions'"
+  [saveLabel]="'common.save'"
+  [saveDisabled]="loadingPermissions"
+  [loading]="loading"
+  (save)="onSave()"
+  (cancel)="onCancel()">
+
+  <div class="permissions-manager">
+    @if (loadingPermissions) {
+      <div class="loading-container">
+        <mat-spinner diameter="40"></mat-spinner>
+        <span>{{ 'common.loading' | translate }}</span>
+      </div>
+    } @else {
+      <div class="role-info">
+        <mat-icon>admin_panel_settings</mat-icon>
+        <span class="role-name">{{ data.role.name }}</span>
+        <span class="selected-count">({{ selectedPermissionIds.size }} {{ 'admin.roles.selected' | translate }})</span>
+      </div>
+
+      <mat-accordion class="permissions-accordion" multi>
+        @for (group of permissionGroups; track group.module) {
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-checkbox
+                  [checked]="isAllSelectedInGroup(group)"
+                  [indeterminate]="isSomeSelectedInGroup(group)"
+                  (click)="$event.stopPropagation()"
+                  (change)="toggleAllInGroup(group)">
+                  {{ group.module }}
+                </mat-checkbox>
+              </mat-panel-title>
+              <mat-panel-description>
+                {{ group.selectedIds.size }}/{{ group.permissions.length }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-selection-list (selectionChange)="onSelectionChange($event, group)">
+              @for (permission of group.permissions; track permission.id) {
+                <mat-list-option [value]="permission.id" [selected]="selectedPermissionIds.has(permission.id)">
+                  <span matListItemTitle>{{ permission.name }}</span>
+                  @if (permission.description) {
+                    <span matListItemLine class="permission-description">{{ permission.description }}</span>
+                  }
+                </mat-list-option>
+              }
+            </mat-selection-list>
+          </mat-expansion-panel>
+        }
+      </mat-accordion>
+
+      @if (permissionGroups.length === 0) {
+        <div class="no-permissions">
+          {{ 'admin.roles.noPermissions' | translate }}
+        </div>
+      }
+    }
+  </div>
+
+</app-base-dialog>

@@ -1,0 +1,433 @@
+using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using cdr_group.Application.Helpers;
+using cdr_group.Contracts.DTOs.Common;
+using cdr_group.Contracts.DTOs.Employee;
+using cdr_group.Contracts.Interfaces.Repositories;
+using cdr_group.Contracts.Interfaces.Services;
+using cdr_group.Domain.Constants;
+using cdr_group.Domain.Entities;
+
+namespace cdr_group.Application.Services
+{
+    public class EmployeeService : BaseService<Employee, EmployeeDto, CreateEmployeeDto, UpdateEmployeeDto>, IEmployeeService
+    {
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public EmployeeService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment webHostEnvironment, IHttpContextAccessor httpContextAccessor) : base(unitOfWork, mapper)
+        {
+            _webHostEnvironment = webHostEnvironment;
+            _httpContextAccessor = httpContextAccessor;
+        }
+
+        protected override IRepository<Employee> Repository => UnitOfWork.Employees;
+
+        public override async Task<IEnumerable<EmployeeDto>> GetAllAsync()
+        {
+            var (employees, _) = await UnitOfWork.Employees.GetEmployeesPagedAsync(new PagedRequest { PageSize = int.MaxValue });
+            var employeeDtos = Mapper.Map<List<EmployeeDto>>(employees);
+            await PopulateFilePathsAsync(employeeDtos);
+            return employeeDtos;
+        }
+
+        public override async Task<PagedResult<EmployeeDto>> GetPagedAsync(PagedRequest request)
+        {
+            var (employees, totalCount) = await UnitOfWork.Employees.GetEmployeesPagedAsync(request);
+            var employeeDtos = Mapper.Map<List<EmployeeDto>>(employees);
+            await PopulateFilePathsAsync(employeeDtos);
+            return new PagedResult<EmployeeDto>(employeeDtos, totalCount, request.PageNumber, request.PageSize);
+        }
+
+        public override async Task<EmployeeDto?> GetByIdAsync(Guid id)
+        {
+            var employee = await UnitOfWork.Employees.GetWithManagerAsync(id);
+            var dto = Mapper.Map<EmployeeDto>(employee);
+            if (dto != null)
+            {
+                await PopulateFilePathAsync(dto);
+            }
+            return dto;
+        }
+
+        public async Task<EmployeeDto?> GetByEmployeeCodeAsync(string employeeCode)
+        {
+            var employee = await UnitOfWork.Employees.GetByEmployeeCodeAsync(employeeCode);
+            var dto = Mapper.Map<EmployeeDto>(employee);
+            if (dto != null)
+            {
+                await PopulateFilePathAsync(dto);
+            }
+            return dto;
+        }
+
+        public async Task<EmployeeDto?> GetByUserIdAsync(Guid userId)
+        {
+            var employee = await UnitOfWork.Employees.GetByUserIdAsync(userId);
+            var dto = Mapper.Map<EmployeeDto>(employee);
+            if (dto != null)
+            {
+                await PopulateFilePathAsync(dto);
+            }
+            return dto;
+        }
+
+        public async Task<EmployeeWithSubordinatesDto?> GetWithSubordinatesAsync(Guid id)
+        {
+            var employee = await UnitOfWork.Employees.GetWithSubordinatesAsync(id);
+            var dto = Mapper.Map<EmployeeWithSubordinatesDto>(employee);
+            if (dto != null)
+            {
+                await PopulateFilePathAsync(dto);
+            }
+            return dto;
+        }
+
+        public async Task<IEnumerable<EmployeeBasicDto>> GetSubordinatesAsync(Guid managerId)
+        {
+            var subordinates = await UnitOfWork.Employees.GetByManagerIdAsync(managerId);
+            return Mapper.Map<IEnumerable<EmployeeBasicDto>>(subordinates);
+        }
+
+        public async Task<IEnumerable<EmployeeDto>> GetByDepartmentIdAsync(Guid departmentId)
+        {
+            var employees = await UnitOfWork.Employees.GetByDepartmentIdAsync(departmentId);
+            var employeeDtos = Mapper.Map<List<EmployeeDto>>(employees);
+            await PopulateFilePathsAsync(employeeDtos);
+            return employeeDtos;
+        }
+
+        public async Task<IEnumerable<EmployeeTreeNodeDto>> GetTreeAsync(Guid? departmentId = null)
+        {
+            IEnumerable<Domain.Entities.Employee> employees;
+
+            if (departmentId.HasValue)
+            {
+                employees = await UnitOfWork.Employees.GetByDepartmentIdAsync(departmentId.Value);
+            }
+            else
+            {
+                var (allEmployees, _) = await UnitOfWork.Employees.GetEmployeesPagedAsync(new PagedRequest { PageSize = int.MaxValue });
+                employees = allEmployees;
+            }
+
+            var employeeList = employees.ToList();
+
+            // Create a dictionary for quick lookup
+            var employeeDict = employeeList.ToDictionary(e => e.Id, e => new EmployeeTreeNodeDto
+            {
+                Id = e.Id,
+                EmployeeCode = e.EmployeeCode,
+                FirstNameEn = e.FirstNameEn,
+                LastNameEn = e.LastNameEn,
+                FirstNameAr = e.FirstNameAr,
+                LastNameAr = e.LastNameAr,
+                Email = e.Email,
+                Phone = e.Phone,
+                HireDate = e.HireDate,
+                Salary = e.Salary,
+                PositionId = e.PositionId,
+                PositionNameEn = e.Position?.NameEn,
+                PositionNameAr = e.Position?.NameAr,
+                DepartmentId = e.DepartmentId,
+                DepartmentNameEn = e.Department?.NameEn,
+                DepartmentNameAr = e.Department?.NameAr,
+                ManagerId = e.ManagerId,
+                UserId = e.UserId,
+                Username = e.User?.Username,
+                IsActive = e.IsActive,
+                CreatedAt = e.CreatedAt,
+                UpdatedAt = e.UpdatedAt
+            });
+
+            // Populate file paths for all employees
+            foreach (var employee in employeeList)
+            {
+                var files = await UnitOfWork.FileAttachments.GetByEntityAsync(employee.Id, EntityTypes.Employee);
+                var file = files.FirstOrDefault();
+                employeeDict[employee.Id].FilePath = UrlHelper.BuildFullUrl(file?.Path, _httpContextAccessor);
+            }
+
+            // Build tree structure
+            var rootNodes = new List<EmployeeTreeNodeDto>();
+
+            foreach (var employee in employeeList)
+            {
+                var node = employeeDict[employee.Id];
+
+                if (employee.ManagerId.HasValue && employeeDict.ContainsKey(employee.ManagerId.Value))
+                {
+                    // Add as child to manager
+                    employeeDict[employee.ManagerId.Value].Children.Add(node);
+                }
+                else
+                {
+                    // No manager or manager not in list - this is a root node
+                    rootNodes.Add(node);
+                }
+            }
+
+            return rootNodes;
+        }
+
+        public async Task<EmployeeDto?> AssignManagerAsync(Guid employeeId, Guid? managerId)
+        {
+            var employee = await UnitOfWork.Employees.GetByIdAsync(employeeId);
+            if (employee == null) return null;
+
+            // Prevent self-reference
+            if (managerId == employeeId)
+            {
+                throw new InvalidOperationException("An employee cannot be their own manager.");
+            }
+
+            // Prevent circular reference
+            if (managerId.HasValue)
+            {
+                if (await IsCircularReference(employeeId, managerId.Value))
+                {
+                    throw new InvalidOperationException("Cannot assign manager: circular reference detected.");
+                }
+
+                var manager = await UnitOfWork.Employees.GetByIdAsync(managerId.Value);
+                if (manager == null)
+                {
+                    throw new InvalidOperationException("Manager not found.");
+                }
+            }
+
+            employee.ManagerId = managerId;
+            await UnitOfWork.Employees.UpdateAsync(employee);
+            await UnitOfWork.SaveChangesAsync();
+
+            return await GetByIdAsync(employeeId);
+        }
+
+        public async Task<EmployeeDto?> LinkToUserAsync(Guid employeeId, Guid? userId)
+        {
+            var employee = await UnitOfWork.Employees.GetByIdAsync(employeeId);
+            if (employee == null) return null;
+
+            if (userId.HasValue)
+            {
+                var user = await UnitOfWork.Users.GetByIdAsync(userId.Value);
+                if (user == null)
+                {
+                    throw new InvalidOperationException("User not found.");
+                }
+
+                // Check if user is already linked to another employee
+                var existingEmployee = await UnitOfWork.Employees.GetByUserIdAsync(userId.Value);
+                if (existingEmployee != null && existingEmployee.Id != employeeId)
+                {
+                    throw new InvalidOperationException("User is already linked to another employee.");
+                }
+            }
+
+            employee.UserId = userId;
+            await UnitOfWork.Employees.UpdateAsync(employee);
+            await UnitOfWork.SaveChangesAsync();
+
+            return await GetByIdAsync(employeeId);
+        }
+
+        public async Task<EmployeeDto?> AssignDepartmentAsync(Guid employeeId, Guid? departmentId)
+        {
+            var employee = await UnitOfWork.Employees.GetByIdAsync(employeeId);
+            if (employee == null) return null;
+
+            if (departmentId.HasValue)
+            {
+                var department = await UnitOfWork.Departments.GetByIdAsync(departmentId.Value);
+                if (department == null)
+                {
+                    throw new InvalidOperationException("Department not found.");
+                }
+            }
+
+            employee.DepartmentId = departmentId;
+            await UnitOfWork.Employees.UpdateAsync(employee);
+            await UnitOfWork.SaveChangesAsync();
+
+            return await GetByIdAsync(employeeId);
+        }
+
+        protected override async Task ValidateCreateAsync(CreateEmployeeDto dto)
+        {
+            await ValidateEmployeeCode(dto.EmployeeCode);
+
+            if (dto.ManagerId.HasValue)
+            {
+                var manager = await UnitOfWork.Employees.GetByIdAsync(dto.ManagerId.Value);
+                if (manager == null)
+                {
+                    throw new InvalidOperationException("Manager not found.");
+                }
+            }
+
+            await ValidateUser(dto.UserId, null, null);
+            await ValidateDepartment(dto.DepartmentId);
+            await ValidatePosition(dto.PositionId, dto.Salary);
+        }
+
+        
+
+
+        protected override async Task ValidateUpdateAsync(Guid id, UpdateEmployeeDto dto, Employee entity)
+        {
+            if (dto.EmployeeCode != null && dto.EmployeeCode != entity.EmployeeCode)
+            {
+                await ValidateEmployeeCode(dto.EmployeeCode);
+            }
+
+            if (dto.ManagerId.HasValue)
+            {
+                if (dto.ManagerId == id)
+                {
+                    throw new InvalidOperationException("An employee cannot be their own manager.");
+                }
+
+                if (await IsCircularReference(id, dto.ManagerId.Value))
+                {
+                    throw new InvalidOperationException("Cannot assign manager: circular reference detected.");
+                }
+
+                var manager = await UnitOfWork.Employees.GetByIdAsync(dto.ManagerId.Value);
+                if (manager == null)
+                {
+                    throw new InvalidOperationException("Manager not found.");
+                }
+            }
+
+            await ValidateUser(dto.UserId, entity.UserId, id);
+            await ValidateDepartment(dto.DepartmentId);
+            await ValidatePosition(dto.PositionId, dto.Salary);
+        }
+
+        private async Task ValidateDepartment(Guid? departmentId)
+        {
+            if (departmentId.HasValue)
+            {
+                var department = await UnitOfWork.Departments.GetByIdAsync(departmentId.Value);
+                if (department == null)
+                {
+                    throw new InvalidOperationException("Department not found.");
+                }
+            }
+        }
+        private async Task ValidateEmployeeCode(string code)
+        {
+            if (await UnitOfWork.Employees.EmployeeCodeExistsAsync(code))
+            {
+                throw new InvalidOperationException("Employee code already exists.");
+            }
+        }
+
+        private async Task ValidateUser(Guid? newUserId, Guid? oldUserId, Guid? execludedId)
+        {
+            if (newUserId.HasValue && newUserId != oldUserId)
+            {
+                var user = await UnitOfWork.Users.GetByIdAsync(newUserId.Value);
+                if (user == null)
+                {
+                    throw new InvalidOperationException("User not found.");
+                }
+
+                var existingEmployee = await UnitOfWork.Employees.GetByUserIdAsync(newUserId.Value, execludedId);
+                if (existingEmployee != null)
+                {
+                    throw new InvalidOperationException("User is already linked to another employee.");
+                }
+            }
+        }
+
+        private async Task ValidatePosition(Guid? positionId, decimal? salary)
+        {
+            if (positionId.HasValue)
+            {
+                var position = await UnitOfWork.Positions.GetByIdAsync(positionId.Value);
+                if(position is null)
+                {
+                    throw new InvalidOperationException("Position Not Found");
+                }
+                if (salary.HasValue)
+                {
+                    if (position.MinSalary.HasValue && salary < position.MinSalary)
+                    {
+                        throw new InvalidOperationException("The salary of the employee is less than the minimum salary of this position");
+                    }
+                    if (position.MaxSalary.HasValue && salary > position.MaxSalary)
+                    {
+                        throw new InvalidOperationException("The salary of the employee is greater than the maximum salary of this position");
+                    }
+                }
+            }
+        }
+
+
+        private async Task<bool> IsCircularReference(Guid employeeId, Guid potentialManagerId)
+        {
+            var visited = new HashSet<Guid> { employeeId };
+            var currentId = potentialManagerId;
+
+            while (currentId != Guid.Empty)
+            {
+                if (visited.Contains(currentId))
+                {
+                    return true;
+                }
+
+                visited.Add(currentId);
+
+                var employee = await UnitOfWork.Employees.GetByIdAsync(currentId);
+                if (employee?.ManagerId == null)
+                {
+                    break;
+                }
+
+                currentId = employee.ManagerId.Value;
+            }
+
+            return false;
+        }
+
+        protected override async Task BeforeDeleteAsync(Employee entity)
+        {
+            // Delete all files associated with this employee
+            var files = await UnitOfWork.FileAttachments.GetByEntityAsync(entity.Id, EntityTypes.Employee);
+
+            foreach (var file in files)
+            {
+                // Delete physical file from wwwroot
+                var absolutePath = Path.Combine(_webHostEnvironment.WebRootPath, file.Path);
+                if (File.Exists(absolutePath))
+                {
+                    File.Delete(absolutePath);
+                }
+
+                // Soft delete the file record
+                await UnitOfWork.FileAttachments.DeleteAsync(file);
+            }
+
+            await base.BeforeDeleteAsync(entity);
+        }
+
+        private async Task PopulateFilePathAsync(EmployeeDto dto)
+        {
+            var files = await UnitOfWork.FileAttachments.GetByEntityAsync(dto.Id, EntityTypes.Employee);
+            var file = files.FirstOrDefault();
+            dto.FilePath = UrlHelper.BuildFullUrl(file?.Path, _httpContextAccessor);
+        }
+
+        private async Task PopulateFilePathsAsync(List<EmployeeDto> dtos)
+        {
+            foreach (var dto in dtos)
+            {
+                var files = await UnitOfWork.FileAttachments.GetByEntityAsync(dto.Id, EntityTypes.Employee);
+                var file = files.FirstOrDefault();
+                dto.FilePath = UrlHelper.BuildFullUrl(file?.Path, _httpContextAccessor);
+            }
+        }
+    }
+}

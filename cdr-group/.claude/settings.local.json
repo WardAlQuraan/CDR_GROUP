@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet publish:*)",
+      "Bash(dir:*)",
+      "Bash(findstr:*)",
+      "Bash(wc:*)",
+      "Bash(tree:*)",
+      "Bash(dotnet new:*)",
+      "Bash(dotnet sln add:*)",
+      "Bash(dotnet add package:*)",
+      "Bash(dotnet ef migrations add:*)",
+      "Bash(dotnet tool install:*)",
+      "Bash(dotnet run:*)",
+      "Bash(dotnet ef migrations:*)",
+      "Bash(dotnet remove package:*)",
+      "Bash(dotnet list package:*)",
+      "Bash(del \"c:\\\\Users\\\\w.alquraan\\\\Desktop\\\\cdr-group\\\\cdr-group\\\\src\\\\cdr-group.Contracts\\\\Interfaces\\\\Services\\\\IUrlBuilderService.cs\")"
+    ]
+  }
+}

@@ -1,0 +1,74 @@
+<section class="team-section section-padding" id="section_team">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5">
+        <h2 class="section-title">{{ 'team.title' | translate }}</h2>
+        <p class="section-subtitle">{{ 'team.subtitle' | translate }}</p>
+      </div>
+    </div>
+
+    @if (loading) {
+      <div class="loading-container">
+        <mat-spinner diameter="50"></mat-spinner>
+      </div>
+    } @else if (error) {
+      <div class="error-container">
+        <mat-icon>error_outline</mat-icon>
+        <p>{{ 'members.noMembers' | translate }}</p>
+        <button mat-raised-button color="primary" (click)="loadData()">
+          {{ 'members.retry' | translate }}
+        </button>
+      </div>
+    } @else if (teamData.length === 0) {
+      <div class="empty-container">
+        <mat-icon>people_outline</mat-icon>
+        <p>{{ 'members.noMembers' | translate }}</p>
+      </div>
+    } @else {
+      <div class="org-tree">
+        @for (root of teamData; track root.id) {
+          <ng-container *ngTemplateOutlet="memberNode; context: { member: root, level: 0, index: 0 }"></ng-container>
+        }
+      </div>
+    }
+  </div>
+</section>
+
+<!-- Recursive template for member nodes -->
+<ng-template #memberNode let-member="member" let-level="level" let-index="index">
+  <div class="tree-level" [class.root-level]="level === 0">
+    <!-- Member Card -->
+    <div class="member-card" [class.has-children]="hasChildren(member)">
+      <div class="card-inner">
+        <div class="avatar" [style.background-color]="getColor(level + index)">
+          @if (member.image) {
+            <img [src]="member.image" [alt]="member.name">
+          } @else {
+            <span>{{ member.initials }}</span>
+          }
+        </div>
+        <div class="info">
+          <h4 class="name">{{ member.name }}</h4>
+          @if (member.position) {
+            <p class="position">{{ member.position }}</p>
+          }
+          @if (member.department) {
+            <span class="department">{{ member.department }}</span>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Children -->
+    @if (hasChildren(member)) {
+      <div class="children-container">
+        <div class="connector-line"></div>
+        <div class="children-wrapper">
+          @for (child of member.children; track child.id; let i = $index) {
+            <ng-container *ngTemplateOutlet="memberNode; context: { member: child, level: level + 1, index: i }"></ng-container>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</ng-template>

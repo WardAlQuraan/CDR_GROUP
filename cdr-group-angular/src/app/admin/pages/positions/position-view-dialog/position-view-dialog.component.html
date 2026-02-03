@@ -1,0 +1,96 @@
+<app-base-dialog
+  title="admin.positions.viewPosition"
+  [showActions]="false">
+
+  <div class="view-content">
+    <!-- Basic Info -->
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>work_outline</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.positions.basicInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content view-fields">
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.positions.code' | translate }}</span>
+          <span class="field-value">{{ position.code }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.positions.nameEn' | translate }}</span>
+          <span class="field-value">{{ position.nameEn }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.positions.nameAr' | translate }}</span>
+          <span class="field-value" dir="rtl">{{ position.nameAr }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.positions.status' | translate }}</span>
+          <span class="field-value">
+            @if (position.isActive) {
+              <mat-chip color="primary">{{ 'admin.positions.active' | translate }}</mat-chip>
+            } @else {
+              <mat-chip color="warn">{{ 'admin.positions.inactive' | translate }}</mat-chip>
+            }
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    @if (position.descriptionEn || position.descriptionAr) {
+      <div class="form-section section-blue">
+        <div class="section-header">
+          <div class="section-icon">
+            <mat-icon>description</mat-icon>
+          </div>
+          <div class="section-title">{{ 'admin.positions.descriptionSection' | translate }}</div>
+        </div>
+
+        <div class="section-content view-fields">
+          @if (position.descriptionEn) {
+            <div class="view-field">
+              <span class="field-label">{{ 'admin.positions.descriptionEn' | translate }}</span>
+              <span class="field-value description">{{ position.descriptionEn }}</span>
+            </div>
+          }
+          @if (position.descriptionAr) {
+            <div class="view-field">
+              <span class="field-label">{{ 'admin.positions.descriptionAr' | translate }}</span>
+              <span class="field-value description" dir="rtl">{{ position.descriptionAr }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Salary & Department -->
+    <div class="form-section section-orange">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>attach_money</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.positions.salarySection' | translate }}</div>
+      </div>
+
+      <div class="section-content view-fields">
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.positions.salaryRange' | translate }}</span>
+          <span class="field-value">{{ getSalaryRange() }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.positions.department' | translate }}</span>
+          <span class="field-value">{{ getDepartmentName() }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dialog-actions">
+      <button mat-raised-button color="primary" (click)="onClose()">
+        {{ 'common.close' | translate }}
+      </button>
+    </div>
+  </div>
+
+</app-base-dialog>

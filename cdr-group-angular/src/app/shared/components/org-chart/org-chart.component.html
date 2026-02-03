@@ -1,0 +1,21 @@
+@if (loading) {
+  <div class="org-chart-loading">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+} @else if (error) {
+  <div class="org-chart-error">
+    <mat-icon>error_outline</mat-icon>
+    <p>{{ 'admin.employees.errors.loadFailed' | translate }}</p>
+    <button mat-raised-button color="primary" (click)="loadData()">
+      <mat-icon>refresh</mat-icon>
+      {{ 'common.retry' | translate }}
+    </button>
+  </div>
+} @else if (!hasData) {
+  <div class="org-chart-empty">
+    <mat-icon>people_outline</mat-icon>
+    <p>{{ 'admin.noEmployeesFound' | translate }}</p>
+  </div>
+} @else {
+  <div #chartContainer class="org-chart-container"></div>
+}

@@ -1,0 +1,40 @@
+<app-base-dialog
+  title="admin.departments.assignManager"
+  saveLabel="common.assign"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <form [formGroup]="form" class="dialog-form">
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>supervisor_account</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.departments.selectManager' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <div class="department-info">
+          <span class="label">{{ 'admin.departments.department' | translate }}:</span>
+          <span class="value">{{ isArabic ? department.nameAr : department.nameEn }}</span>
+        </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'admin.departments.manager' | translate }}</mat-label>
+          <mat-icon matPrefix>supervisor_account</mat-icon>
+          <mat-select formControlName="managerId">
+            <mat-option [value]="null">{{ 'admin.departments.noManager' | translate }}</mat-option>
+            @for (emp of employees; track emp.id) {
+              <mat-option [value]="emp.id">{{ getEmployeeName(emp) }} ({{ emp.employeeCode }})</mat-option>
+            }
+          </mat-select>
+          @if (loadingEmployees) {
+            <mat-hint>{{ 'common.loading' | translate }}</mat-hint>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+</app-base-dialog>

@@ -1,0 +1,40 @@
+<app-base-dialog
+  title="admin.employees.linkToUser"
+  saveLabel="common.link"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <form [formGroup]="form" class="dialog-form">
+    <div class="form-section section-purple">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>person_add</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.employees.selectUser' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <div class="employee-info">
+          <span class="label">{{ 'admin.employees.employee' | translate }}:</span>
+          <span class="value">{{ isArabic ? employee.fullNameAr : employee.fullNameEn }}</span>
+        </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'admin.employees.user' | translate }}</mat-label>
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-select formControlName="userId">
+            <mat-option [value]="null">{{ 'admin.employees.noUser' | translate }}</mat-option>
+            @for (user of availableUsers; track user.id) {
+              <mat-option [value]="user.id">{{ user.username }} ({{ user.email }})</mat-option>
+            }
+          </mat-select>
+          @if (loadingUsers) {
+            <mat-hint>{{ 'common.loading' | translate }}</mat-hint>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+</app-base-dialog>

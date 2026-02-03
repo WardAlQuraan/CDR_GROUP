@@ -1,0 +1,50 @@
+<section class="about-section section-padding" id="section_2">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 col-12 mb-5 mb-lg-0">
+        <h2 class="mb-3">{{ 'about.title' | translate }}</h2>
+
+        <p><strong>{{ 'about.since' | translate }}</strong>, {{ 'about.description' | translate }}</p>
+
+        <p>{{ 'about.passion' | translate }}</p>
+      </div>
+
+      <div class="col-lg-7 col-12">
+        <div class="row">
+          @for (member of teamMembers; track member.name) {
+            <div class="col-lg-6 col-md-6 col-12 mb-4 mb-lg-0">
+              <div class="member-block">
+                <div class="member-block-image-wrap">
+                  <img [src]="member.image" class="member-block-image img-fluid" [alt]="member.name">
+
+                  <ul class="social-icon">
+                    @if (member.socialLinks.instagram) {
+                      <li class="social-icon-item">
+                        <a [href]="member.socialLinks.instagram" class="social-icon-link bi-instagram"></a>
+                      </li>
+                    }
+                    @if (member.socialLinks.twitter) {
+                      <li class="social-icon-item">
+                        <a [href]="member.socialLinks.twitter" class="social-icon-link bi-twitter"></a>
+                      </li>
+                    }
+                    @if (member.socialLinks.whatsapp) {
+                      <li class="social-icon-item">
+                        <a [href]="member.socialLinks.whatsapp" class="social-icon-link bi-whatsapp"></a>
+                      </li>
+                    }
+                  </ul>
+                </div>
+
+                <div class="member-block-info">
+                  <h4>{{ member.name }}</h4>
+                  <p>{{ member.role }}</p>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

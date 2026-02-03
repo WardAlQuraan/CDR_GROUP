@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/cdr-group.API/cdr-group.API.csproj" />
+    <Project Path="src/cdr-group.Application/cdr-group.Application.csproj" />
+    <Project Path="src/cdr-group.Contracts/cdr-group.Contracts.csproj" />
+    <Project Path="src/cdr-group.Domain/cdr-group.Domain.csproj" />
+    <Project Path="src/cdr-group.Infrastructure/cdr-group.Infrastructure.csproj" />
+    <Project Path="src/cdr-group.Persistence/cdr-group.Persistence.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,121 @@
+.permissions-manager {
+  min-height: 300px;
+
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    gap: 16px;
+    color: var(--p-color);
+  }
+
+  .role-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #059669 100%);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    color: #ffffff;
+
+    mat-icon {
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
+
+    .role-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .selected-count {
+      margin-left: auto;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+  }
+
+  .permissions-accordion {
+    display: block;
+    max-height: 400px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 3px;
+
+      &:hover {
+        background: #a1a1a1;
+      }
+    }
+
+    mat-expansion-panel {
+      margin-bottom: 12px;
+      border-radius: 12px !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      mat-expansion-panel-header {
+        background: #f8f9fa;
+        border-radius: 12px;
+
+        &:hover {
+          background: #f0f0f0 !important;
+        }
+
+        mat-panel-title {
+          mat-checkbox {
+            font-weight: 600;
+            color: var(--secondary-color);
+          }
+        }
+
+        mat-panel-description {
+          color: var(--p-color);
+          font-size: 0.85rem;
+        }
+      }
+
+      mat-selection-list {
+        padding: 0;
+
+        mat-list-option {
+          border-radius: 8px;
+          margin: 4px 8px;
+
+          &:hover {
+            background-color: #f8f9fa;
+          }
+
+          .permission-description {
+            color: var(--p-color);
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+
+  .no-permissions {
+    text-align: center;
+    padding: 48px;
+    color: var(--p-color);
+    font-style: italic;
+  }
+}

@@ -1,0 +1,2948 @@
+[
+  {
+    "ContainingType": "cdr_group.API.Controllers.AuthController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/Auth/change-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Auth.ChangePasswordRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Auth.LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Auth.TokenDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.AuthController",
+    "Method": "GetCurrentUser",
+    "RelativePath": "api/Auth/me",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Auth.UserInfoDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.AuthController",
+    "Method": "RefreshToken",
+    "RelativePath": "api/Auth/refresh-token",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Auth.RefreshTokenRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Auth.TokenDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.AuthController",
+    "Method": "Register",
+    "RelativePath": "api/Auth/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Auth.RegisterDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Auth.TokenDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.AuthController",
+    "Method": "RevokeToken",
+    "RelativePath": "api/Auth/revoke-token",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Auth.RefreshTokenRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.DepartmentsController",
+    "Method": "GetPaged",
+    "RelativePath": "api/Departments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchTerm",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortBy",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortDescending",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchProperties",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Common.PagedResult\u00601[[cdr_group.Contracts.DTOs.Department.DepartmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.DepartmentsController",
+    "Method": "Create",
+    "RelativePath": "api/Departments",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Department.CreateDepartmentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Department.DepartmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.DepartmentsController",
+    "Method": "GetById",
+    "RelativePath": "api/Departments/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Department.DepartmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.DepartmentsController",
+    "Method": "Update",
+    "RelativePath": "api/Departments/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Department.UpdateDepartmentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Department.DepartmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.DepartmentsController",
+    "Method": "Delete",
+    "RelativePath": "api/Departments/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.Base.BaseController\u00604[[cdr_group.Contracts.DTOs.Department.DepartmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Department.CreateDepartmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Department.UpdateDepartmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.Interfaces.Services.IDepartmentService, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "Exists",
+    "RelativePath": "api/Departments/{id}/exists",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.DepartmentsController",
+    "Method": "AssignManager",
+    "RelativePath": "api/Departments/{id}/manager",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "managerId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Department.DepartmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.DepartmentsController",
+    "Method": "GetSubDepartments",
+    "RelativePath": "api/Departments/{id}/sub-departments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Department.DepartmentBasicDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.DepartmentsController",
+    "Method": "GetWithSubDepartments",
+    "RelativePath": "api/Departments/{id}/with-sub-departments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Department.DepartmentWithSubDepartmentsDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.DepartmentsController",
+    "Method": "GetActiveDepartments",
+    "RelativePath": "api/Departments/active",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Department.DepartmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.Base.BaseController\u00604[[cdr_group.Contracts.DTOs.Department.DepartmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Department.CreateDepartmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Department.UpdateDepartmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.Interfaces.Services.IDepartmentService, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "GetAll",
+    "RelativePath": "api/Departments/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Department.DepartmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.DepartmentsController",
+    "Method": "GetByCode",
+    "RelativePath": "api/Departments/by-code/{code}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "code",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Department.DepartmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.DepartmentsController",
+    "Method": "GetByName",
+    "RelativePath": "api/Departments/by-name/{name}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Department.DepartmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.DepartmentsController",
+    "Method": "GetRootDepartments",
+    "RelativePath": "api/Departments/root",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Department.DepartmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EmployeesController",
+    "Method": "GetPaged",
+    "RelativePath": "api/Employees",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchTerm",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortBy",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortDescending",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchProperties",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Common.PagedResult\u00601[[cdr_group.Contracts.DTOs.Employee.EmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EmployeesController",
+    "Method": "Create",
+    "RelativePath": "api/Employees",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Employee.CreateEmployeeDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Employee.EmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EmployeesController",
+    "Method": "GetById",
+    "RelativePath": "api/Employees/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Employee.EmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EmployeesController",
+    "Method": "Update",
+    "RelativePath": "api/Employees/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Employee.UpdateEmployeeDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Employee.EmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EmployeesController",
+    "Method": "Delete",
+    "RelativePath": "api/Employees/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EmployeesController",
+    "Method": "AssignDepartment",
+    "RelativePath": "api/Employees/{id}/department",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "departmentId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Employee.EmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.Base.BaseController\u00604[[cdr_group.Contracts.DTOs.Employee.EmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Employee.CreateEmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Employee.UpdateEmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.Interfaces.Services.IEmployeeService, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "Exists",
+    "RelativePath": "api/Employees/{id}/exists",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EmployeesController",
+    "Method": "AssignManager",
+    "RelativePath": "api/Employees/{id}/manager",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "managerId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Employee.EmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EmployeesController",
+    "Method": "GetSubordinates",
+    "RelativePath": "api/Employees/{id}/subordinates",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Employee.EmployeeBasicDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EmployeesController",
+    "Method": "LinkToUser",
+    "RelativePath": "api/Employees/{id}/user",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Employee.EmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EmployeesController",
+    "Method": "GetWithSubordinates",
+    "RelativePath": "api/Employees/{id}/with-subordinates",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Employee.EmployeeWithSubordinatesDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.Base.BaseController\u00604[[cdr_group.Contracts.DTOs.Employee.EmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Employee.CreateEmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Employee.UpdateEmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.Interfaces.Services.IEmployeeService, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "GetAll",
+    "RelativePath": "api/Employees/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Employee.EmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EmployeesController",
+    "Method": "GetByEmployeeCode",
+    "RelativePath": "api/Employees/by-code/{employeeCode}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employeeCode",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Employee.EmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EmployeesController",
+    "Method": "GetByDepartmentId",
+    "RelativePath": "api/Employees/by-department/{departmentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Employee.EmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EmployeesController",
+    "Method": "GetByUserId",
+    "RelativePath": "api/Employees/by-user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Employee.EmployeeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EmployeesController",
+    "Method": "GetTree",
+    "RelativePath": "api/Employees/tree",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Employee.EmployeeTreeNodeDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EventsController",
+    "Method": "GetPaged",
+    "RelativePath": "api/Events",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchTerm",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortBy",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortDescending",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchProperties",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Common.PagedResult\u00601[[cdr_group.Contracts.DTOs.Event.EventDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EventsController",
+    "Method": "Create",
+    "RelativePath": "api/Events",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Event.CreateEventDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Event.EventDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EventsController",
+    "Method": "GetById",
+    "RelativePath": "api/Events/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Event.EventDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EventsController",
+    "Method": "Update",
+    "RelativePath": "api/Events/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Event.UpdateEventDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Event.EventDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EventsController",
+    "Method": "Delete",
+    "RelativePath": "api/Events/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.Base.BaseController\u00604[[cdr_group.Contracts.DTOs.Event.EventDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Event.CreateEventDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Event.UpdateEventDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.Interfaces.Services.IEventService, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "Exists",
+    "RelativePath": "api/Events/{id}/exists",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.Base.BaseController\u00604[[cdr_group.Contracts.DTOs.Event.EventDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Event.CreateEventDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Event.UpdateEventDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.Interfaces.Services.IEventService, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "GetAll",
+    "RelativePath": "api/Events/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Event.EventDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.EventsController",
+    "Method": "GetByDepartment",
+    "RelativePath": "api/Events/by-department/{departmentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Event.EventDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.FilesController",
+    "Method": "GetPaged",
+    "RelativePath": "api/Files",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchTerm",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortBy",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortDescending",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchProperties",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Common.PagedResult\u00601[[cdr_group.Contracts.DTOs.FileAttachment.FileAttachmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.FilesController",
+    "Method": "Upload",
+    "RelativePath": "api/Files",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "EntityId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "EntityType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RemoveOldFiles",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsPrimary",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.FileAttachment.FileAttachmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.FilesController",
+    "Method": "GetById",
+    "RelativePath": "api/Files/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.FileAttachment.FileAttachmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.FilesController",
+    "Method": "Update",
+    "RelativePath": "api/Files/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.FileAttachment.UpdateFileAttachmentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.FileAttachment.FileAttachmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.FilesController",
+    "Method": "Delete",
+    "RelativePath": "api/Files/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.Base.BaseController\u00604[[cdr_group.Contracts.DTOs.FileAttachment.FileAttachmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.FileAttachment.CreateFileAttachmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.FileAttachment.UpdateFileAttachmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.Interfaces.Services.IFileAttachmentService, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "Exists",
+    "RelativePath": "api/Files/{id}/exists",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.Base.BaseController\u00604[[cdr_group.Contracts.DTOs.FileAttachment.FileAttachmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.FileAttachment.CreateFileAttachmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.FileAttachment.UpdateFileAttachmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.Interfaces.Services.IFileAttachmentService, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "GetAll",
+    "RelativePath": "api/Files/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.FileAttachment.FileAttachmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.FilesController",
+    "Method": "BulkOperation",
+    "RelativePath": "api/Files/bulk",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "items",
+        "Type": "System.Collections.Generic.List\u00601[[cdr_group.Contracts.DTOs.FileAttachment.BulkFileOperationItemDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.FileAttachment.BulkFileOperationResultDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.FilesController",
+    "Method": "GetByEntityId",
+    "RelativePath": "api/Files/by-entity/{entityId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "entityId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.FileAttachment.FileAttachmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.FilesController",
+    "Method": "GetByEntity",
+    "RelativePath": "api/Files/by-entity/{entityId}/{entityType}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "entityId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "entityType",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.FileAttachment.FileAttachmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.FilesController",
+    "Method": "GetByEntityType",
+    "RelativePath": "api/Files/by-type/{entityType}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "entityType",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.FileAttachment.FileAttachmentDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.InfoController",
+    "Method": "GetClientIp",
+    "RelativePath": "api/Info/ip",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.API.Controllers.ClientInfoDto, cdr-group.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PermissionsController",
+    "Method": "GetPaged",
+    "RelativePath": "api/Permissions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchTerm",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortBy",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortDescending",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchProperties",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Common.PagedResult\u00601[[cdr_group.Contracts.DTOs.Identity.PermissionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PermissionsController",
+    "Method": "Create",
+    "RelativePath": "api/Permissions",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Identity.CreatePermissionDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.PermissionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PermissionsController",
+    "Method": "GetById",
+    "RelativePath": "api/Permissions/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.PermissionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PermissionsController",
+    "Method": "Update",
+    "RelativePath": "api/Permissions/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Identity.UpdatePermissionDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.PermissionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PermissionsController",
+    "Method": "Delete",
+    "RelativePath": "api/Permissions/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.Base.BaseController\u00604[[cdr_group.Contracts.DTOs.Identity.PermissionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Identity.CreatePermissionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Identity.UpdatePermissionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.Interfaces.Services.IPermissionService, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "Exists",
+    "RelativePath": "api/Permissions/{id}/exists",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PermissionsController",
+    "Method": "GetAll",
+    "RelativePath": "api/Permissions/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Identity.PermissionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PermissionsController",
+    "Method": "GetByModule",
+    "RelativePath": "api/Permissions/by-module/{module}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "module",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Identity.PermissionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PermissionsController",
+    "Method": "GetByName",
+    "RelativePath": "api/Permissions/by-name/{name}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.PermissionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PermissionsController",
+    "Method": "GetByRoleId",
+    "RelativePath": "api/Permissions/by-role/{roleId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roleId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Identity.PermissionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PermissionsController",
+    "Method": "GetByUserId",
+    "RelativePath": "api/Permissions/by-user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Identity.PermissionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PositionsController",
+    "Method": "GetPaged",
+    "RelativePath": "api/Positions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchTerm",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortBy",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortDescending",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchProperties",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Common.PagedResult\u00601[[cdr_group.Contracts.DTOs.Position.PositionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PositionsController",
+    "Method": "Create",
+    "RelativePath": "api/Positions",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Position.CreatePositionDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Position.PositionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PositionsController",
+    "Method": "GetById",
+    "RelativePath": "api/Positions/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Position.PositionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PositionsController",
+    "Method": "Update",
+    "RelativePath": "api/Positions/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Position.UpdatePositionDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Position.PositionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PositionsController",
+    "Method": "Delete",
+    "RelativePath": "api/Positions/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PositionsController",
+    "Method": "AssignDepartment",
+    "RelativePath": "api/Positions/{id}/department",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "departmentId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Position.PositionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.Base.BaseController\u00604[[cdr_group.Contracts.DTOs.Position.PositionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Position.CreatePositionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Position.UpdatePositionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.Interfaces.Services.IPositionService, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "Exists",
+    "RelativePath": "api/Positions/{id}/exists",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PositionsController",
+    "Method": "GetWithEmployeeCount",
+    "RelativePath": "api/Positions/{id}/with-employee-count",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Position.PositionWithEmployeesDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PositionsController",
+    "Method": "GetActivePositions",
+    "RelativePath": "api/Positions/active",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Position.PositionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.Base.BaseController\u00604[[cdr_group.Contracts.DTOs.Position.PositionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Position.CreatePositionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Position.UpdatePositionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.Interfaces.Services.IPositionService, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "GetAll",
+    "RelativePath": "api/Positions/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Position.PositionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PositionsController",
+    "Method": "GetByCode",
+    "RelativePath": "api/Positions/by-code/{code}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "code",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Position.PositionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PositionsController",
+    "Method": "GetByDepartmentId",
+    "RelativePath": "api/Positions/by-department/{departmentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Position.PositionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.PositionsController",
+    "Method": "GetByName",
+    "RelativePath": "api/Positions/by-name/{name}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Position.PositionDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.RolesController",
+    "Method": "GetPaged",
+    "RelativePath": "api/Roles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchTerm",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortBy",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortDescending",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchProperties",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Common.PagedResult\u00601[[cdr_group.Contracts.DTOs.Identity.RoleDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.RolesController",
+    "Method": "Create",
+    "RelativePath": "api/Roles",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Identity.CreateRoleDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.RoleDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.RolesController",
+    "Method": "GetById",
+    "RelativePath": "api/Roles/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.RoleDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.RolesController",
+    "Method": "Update",
+    "RelativePath": "api/Roles/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Identity.UpdateRoleDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.RoleDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.RolesController",
+    "Method": "Delete",
+    "RelativePath": "api/Roles/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.Base.BaseController\u00604[[cdr_group.Contracts.DTOs.Identity.RoleDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Identity.CreateRoleDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Identity.UpdateRoleDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.Interfaces.Services.IRoleService, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "Exists",
+    "RelativePath": "api/Roles/{id}/exists",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.RolesController",
+    "Method": "AssignPermissions",
+    "RelativePath": "api/Roles/{id}/permissions",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Identity.AssignPermissionsDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.RoleDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.RolesController",
+    "Method": "RemovePermissions",
+    "RelativePath": "api/Roles/{id}/permissions",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "permissionIds",
+        "Type": "System.Collections.Generic.List\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.RoleDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.Base.BaseController\u00604[[cdr_group.Contracts.DTOs.Identity.RoleDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Identity.CreateRoleDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Identity.UpdateRoleDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.Interfaces.Services.IRoleService, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "GetAll",
+    "RelativePath": "api/Roles/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Identity.RoleDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.RolesController",
+    "Method": "GetByName",
+    "RelativePath": "api/Roles/by-name/{name}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.RoleDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.UsersController",
+    "Method": "GetPaged",
+    "RelativePath": "api/Users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchTerm",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortBy",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortDescending",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchProperties",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Common.PagedResult\u00601[[cdr_group.Contracts.DTOs.Identity.UserDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.UsersController",
+    "Method": "Create",
+    "RelativePath": "api/Users",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Identity.CreateUserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.UserDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.UsersController",
+    "Method": "GetById",
+    "RelativePath": "api/Users/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.UserDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.UsersController",
+    "Method": "Update",
+    "RelativePath": "api/Users/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Identity.UpdateUserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.UserDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.UsersController",
+    "Method": "Delete",
+    "RelativePath": "api/Users/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.UsersController",
+    "Method": "Activate",
+    "RelativePath": "api/Users/{id}/activate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.UsersController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/Users/{id}/change-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Identity.ChangePasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.UsersController",
+    "Method": "Deactivate",
+    "RelativePath": "api/Users/{id}/deactivate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.Base.BaseController\u00604[[cdr_group.Contracts.DTOs.Identity.UserDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Identity.CreateUserDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Identity.UpdateUserDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.Interfaces.Services.IUserService, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "Exists",
+    "RelativePath": "api/Users/{id}/exists",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.UsersController",
+    "Method": "AssignRoles",
+    "RelativePath": "api/Users/{id}/roles",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "cdr_group.Contracts.DTOs.Identity.AssignRolesDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.UserDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.UsersController",
+    "Method": "RemoveRoles",
+    "RelativePath": "api/Users/{id}/roles",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "roleIds",
+        "Type": "System.Collections.Generic.List\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.UserDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.Base.BaseController\u00604[[cdr_group.Contracts.DTOs.Identity.UserDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Identity.CreateUserDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.DTOs.Identity.UpdateUserDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[cdr_group.Contracts.Interfaces.Services.IUserService, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "GetAll",
+    "RelativePath": "api/Users/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[cdr_group.Contracts.DTOs.Identity.UserDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.UsersController",
+    "Method": "GetByEmail",
+    "RelativePath": "api/Users/by-email/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.UserDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "cdr_group.API.Controllers.UsersController",
+    "Method": "GetByUsername",
+    "RelativePath": "api/Users/by-username/{username}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "cdr_group.Contracts.DTOs.Common.ApiResponse\u00601[[cdr_group.Contracts.DTOs.Identity.UserDto, cdr-group.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

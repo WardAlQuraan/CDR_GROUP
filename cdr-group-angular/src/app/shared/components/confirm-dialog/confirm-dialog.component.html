@@ -1,0 +1,18 @@
+<div class="confirm-dialog">
+  <div class="dialog-icon" [ngClass]="confirmColor">
+    <mat-icon>{{ icon }}</mat-icon>
+  </div>
+
+  <h2 class="dialog-title">{{ title | translate }}</h2>
+
+  <p class="dialog-message">{{ message | translate }}</p>
+
+  <div class="dialog-actions">
+    <button mat-button class="cancel-btn" (click)="onCancel()">
+      {{ cancelLabel | translate }}
+    </button>
+    <button mat-raised-button [color]="confirmColor" class="confirm-btn" (click)="onConfirm()">
+      {{ confirmLabel | translate }}
+    </button>
+  </div>
+</div>
