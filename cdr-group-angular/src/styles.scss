@@ -1297,6 +1297,13 @@ strong {
   min-width: 400px;
 }
 
+@media screen and (max-width: 480px) {
+  .mat-mdc-dialog-surface {
+    min-width: calc(100vw - 32px) !important;
+    max-width: calc(100vw - 32px) !important;
+  }
+}
+
 /*---------------------------------------
   IMAGE PREVIEW DIALOG
 -----------------------------------------*/

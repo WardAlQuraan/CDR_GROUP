@@ -209,6 +209,7 @@ mat-dialog-content {
 
       mat-form-field {
         flex: 1;
+        min-width: 0;
       }
     }
 
@@ -220,6 +221,91 @@ mat-dialog-content {
         --mdc-icon-button-icon-color: var(--primary-color);
       }
     }
+}
+
+// Responsive styles for small screens
+@media (max-width: 599px) {
+  h2[mat-dialog-title] {
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+
+  mat-dialog-content {
+    padding: 1rem !important;
+  }
+
+  ::ng-deep .dialog-form {
+    gap: 1rem;
+
+    mat-form-field {
+      // Fix label/placeholder sizing on small screens
+      --mdc-outlined-text-field-label-text-size: 0.875rem;
+
+      .mat-mdc-form-field-infix {
+        min-height: 48px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+
+      .mdc-text-field {
+        padding: 0 12px;
+      }
+
+      .mat-mdc-form-field-icon-prefix {
+        padding-right: 8px;
+        margin-right: 2px;
+      }
+
+      input,
+      textarea {
+        font-size: 0.9375rem;
+      }
+
+      .mdc-floating-label {
+        font-size: 0.875rem;
+      }
+    }
+
+    .form-row {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .form-section {
+      .section-header {
+        padding: 12px;
+
+        .section-icon {
+          width: 32px;
+          height: 32px;
+
+          mat-icon {
+            font-size: 18px;
+            width: 18px;
+            height: 18px;
+          }
+        }
+
+        .section-title {
+          font-size: 0.875rem;
+        }
+      }
+
+      .section-content {
+        padding: 16px 12px 4px;
+      }
+    }
+  }
+
+  mat-dialog-actions {
+    padding: 0.875rem 1rem !important;
+    flex-wrap: wrap;
+
+    button {
+      min-width: 90px;
+      font-size: 0.875rem;
+    }
+  }
 }
 
 mat-dialog-actions {
