@@ -35,6 +35,8 @@ $transition: 200ms ease;
 
 :host {
   display: block;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 // ==================== CONTAINER ====================
@@ -43,6 +45,8 @@ $transition: 200ms ease;
   border-radius: $radius-lg;
   box-shadow: $shadow-md;
   padding: 1.5rem;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 // ==================== HEADER ====================
@@ -416,11 +420,13 @@ $transition: 200ms ease;
   position: relative;
   border: 1px solid $border-color;
   border-radius: $radius-md;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   min-height: 200px;
 
   table {
     width: 100%;
+    min-width: 600px;
   }
 
   // Header

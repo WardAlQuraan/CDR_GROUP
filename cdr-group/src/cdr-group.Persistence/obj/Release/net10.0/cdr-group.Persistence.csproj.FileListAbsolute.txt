@@ -17,3 +17,4 @@ C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Persistence\obj\Re
 C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Persistence\obj\Release\net10.0\cdr-group.Persistence.pdb
 C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Persistence\obj\Release\net10.0\cdr-group.Persistence.genruntimeconfig.cache
 C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Persistence\obj\Release\net10.0\ref\cdr-group.Persistence.dll
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Persistence\obj\Release\net10.0\cdr-group.Persistence.sourcelink.json

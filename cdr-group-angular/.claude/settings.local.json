@@ -16,7 +16,10 @@
       "Bash(npm install:*)",
       "Bash(find:*)",
       "Bash(npx ng build:*)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(ng serve:*)",
+      "Bash(timeout:*)",
+      "Bash(npm run start)"
     ]
   }
 }

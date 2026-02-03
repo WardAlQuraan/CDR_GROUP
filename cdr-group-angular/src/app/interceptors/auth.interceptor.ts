@@ -15,6 +15,13 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // Add ngrok header to bypass browser warning (required for ngrok free tier)
+    request = request.clone({
+      setHeaders: {
+        'ngrok-skip-browser-warning': 'true'
+      }
+    });
+
     // Skip auth header for refresh token and login/register requests
     if (this.isAuthEndpoint(request.url)) {
       return next.handle(request);

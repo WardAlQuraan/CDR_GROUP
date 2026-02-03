@@ -13,7 +13,31 @@
         </span> -->
       </a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <!-- User dropdown - visible on all screen sizes -->
+      <div class="navbar-user-section d-flex align-items-center order-lg-last">
+        @if (authService.isLoggedIn()) {
+          <div class="dropdown">
+            <a class="custom-btn custom-border-btn custom-btn-bg-white btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle"></i>
+              <span class="d-none d-md-inline ms-1">{{ authService.user()?.name }}</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              @if (authService.isAdmin()) {
+                <li><a class="dropdown-item" routerLink="/admin"><i class="bi bi-speedometer2 me-2"></i>{{ 'admin.dashboard' | translate }}</a></li>
+                <li><hr class="dropdown-divider"></li>
+              }
+              <li><a class="dropdown-item" href="javascript:void(0)" (click)="onLogout()"><i class="bi bi-box-arrow-right me-2"></i>{{ 'header.logout' | translate }}</a></li>
+            </ul>
+          </div>
+        } @else {
+          <a class="custom-btn custom-border-btn custom-btn-bg-white btn" data-bs-toggle="offcanvas" href="#offcanvasLogin" role="button" aria-controls="offcanvasLogin">
+            <i class="bi bi-person"></i>
+            <span class="d-none d-md-inline ms-1">{{ 'header.memberLogin' | translate }}</span>
+          </a>
+        }
+      </div>
+
+      <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -46,26 +70,6 @@
             </a>
           </li>
         </ul>
-
-        <div class="ms-lg-3">
-          @if (authService.isLoggedIn()) {
-            <div class="dropdown">
-              <a class="custom-btn custom-border-btn custom-btn-bg-white btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-circle me-1"></i>
-                {{ authService.user()?.name }}
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                @if (authService.isAdmin()) {
-                  <li><a class="dropdown-item" routerLink="/admin"><i class="bi bi-speedometer2 me-2"></i>{{ 'admin.dashboard' | translate }}</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                }
-                <li><a class="dropdown-item" href="javascript:void(0)" (click)="onLogout()"><i class="bi bi-box-arrow-right me-2"></i>{{ 'header.logout' | translate }}</a></li>
-              </ul>
-            </div>
-          } @else {
-            <a class="custom-btn custom-border-btn custom-btn-bg-white btn" data-bs-toggle="offcanvas" href="#offcanvasLogin" role="button" aria-controls="offcanvasLogin">{{ 'header.memberLogin' | translate }}</a>
-          }
-        </div>
       </div>
     </div>
   </nav>

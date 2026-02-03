@@ -15,3 +15,4 @@ C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Infrastructure\obj
 C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Infrastructure\obj\Release\net10.0\refint\cdr-group.Infrastructure.dll
 C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Infrastructure\obj\Release\net10.0\cdr-group.Infrastructure.pdb
 C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Infrastructure\obj\Release\net10.0\ref\cdr-group.Infrastructure.dll
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Infrastructure\obj\Release\net10.0\cdr-group.Infrastructure.sourcelink.json

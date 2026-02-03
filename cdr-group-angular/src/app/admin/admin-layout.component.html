@@ -1,7 +1,7 @@
 <div class="admin-wrapper" [class.collapsed]="isCollapsed" [class.mobile]="isMobile">
   <!-- Sidebar -->
   <aside class="admin-sidebar" [class.collapsed]="isCollapsed && !isMobile">
-    <!-- Toggle Button -->
+    <!-- Toggle Button (Desktop) -->
     <button class="toggle-btn" (click)="toggleSidenav()" [class.collapsed]="isCollapsed">
       <div class="hamburger">
         <span></span>
@@ -9,6 +9,13 @@
         <span></span>
       </div>
     </button>
+
+    <!-- Close Button (Mobile) -->
+    @if (isMobile) {
+      <button class="mobile-close-btn" (click)="toggleSidenav()">
+        <mat-icon>close</mat-icon>
+      </button>
+    }
 
     <!-- Sidebar Header -->
     <div class="sidenav-header">

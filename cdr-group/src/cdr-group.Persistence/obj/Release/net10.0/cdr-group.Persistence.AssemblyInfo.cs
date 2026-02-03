@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("cdr-group.Persistence")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+65f1fc11a7115c7c820d91cbd15e82464bf11018")]
 [assembly: System.Reflection.AssemblyProductAttribute("cdr-group.Persistence")]
 [assembly: System.Reflection.AssemblyTitleAttribute("cdr-group.Persistence")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

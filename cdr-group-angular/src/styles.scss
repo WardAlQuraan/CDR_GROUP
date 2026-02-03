@@ -464,6 +464,14 @@ strong {
   }
 }
 
+/* Show dropdown when Bootstrap adds .show class (click toggle) */
+.navbar .dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  margin-top: 0;
+  pointer-events: auto;
+}
+
 .navbar-toggler {
   border: 0;
   padding: 0;

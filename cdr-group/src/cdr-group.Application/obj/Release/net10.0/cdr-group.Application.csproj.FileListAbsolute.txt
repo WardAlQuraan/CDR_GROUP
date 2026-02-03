@@ -17,3 +17,4 @@ C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Application\obj\Re
 C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Application\obj\Release\net10.0\refint\cdr-group.Application.dll
 C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Application\obj\Release\net10.0\cdr-group.Application.pdb
 C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Application\obj\Release\net10.0\ref\cdr-group.Application.dll
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Application\obj\Release\net10.0\cdr-group.Application.sourcelink.json

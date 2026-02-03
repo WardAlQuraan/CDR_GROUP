@@ -13,3 +13,4 @@ C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\obj\Rele
 C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\obj\Release\net10.0\refint\cdr-group.Contracts.dll
 C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\obj\Release\net10.0\cdr-group.Contracts.pdb
 C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\obj\Release\net10.0\ref\cdr-group.Contracts.dll
+C:\Users\w.alquraan\Desktop\cdr-group\cdr-group\src\cdr-group.Contracts\obj\Release\net10.0\cdr-group.Contracts.sourcelink.json
