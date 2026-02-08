@@ -8,14 +8,14 @@
 -----------------------------------------*/
 :root {
   --white-color: #ffffff;
-  --primary-color: #81B29A;
-  --secondary-color: #3D405B;
-  --section-bg-color: #F4F1DE;
-  --custom-btn-bg-color: #F2CC8F;
-  --custom-btn-bg-hover-color: #E07A5F; 
+  --primary-color: #D9A93E;
+  --secondary-color: #3E423D;
+  --section-bg-color: #F5F3ED;
+  --custom-btn-bg-color: #D9A93E;
+  --custom-btn-bg-hover-color: #C4962E;
   --dark-color: #000000;
   --p-color: #717275;
-  --link-hover-color: #F2CC8F;
+  --link-hover-color: #D9A93E;
 
   --body-font-family: 'DM Sans', sans-serif;
 
@@ -325,11 +325,11 @@ strong {
 }
 
 .sticky-wrapper.is-sticky .navbar {
-  background-color: rgb(61 64 91);
+  background-color: #3E423D;
 }
 
 .navbar {
-  background: #3D405B;
+  background: #3E423D;
   z-index: 99;
   padding-top: 15px;
   padding-bottom: 15px;
@@ -538,15 +538,16 @@ strong {
   HERO
 -----------------------------------------*/
 .hero-section {
-  background-image: url('/assets/images/anna-rosar-ZxFyVBHMK-c-unsplash.jpg');
+  background-image: url('/assets/images/cdrgroup_cover.jpg');
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  background-size: 100% auto;
+  background-position: center center;
+  background-color: #3E423D;
   position: relative;
   padding-top: 100px;
   padding-bottom: 100px;
-  height: 100vh;
-  min-height: 670px;
+  height: auto;
+  min-height: 500px;
   margin-bottom: -90px;
 }
 
@@ -930,6 +931,8 @@ strong {
 .site-footer {
   position: relative;
   padding-bottom: 200px;
+  background-color: var(--primary-color);
+  color: var(--white-color);
 }
 
 .site-footer .container {
@@ -946,7 +949,7 @@ strong {
 }
 
 .site-footer-title {
-  color: var(--secondary-color);
+  color: var(--white-color);
 }
 
 .site-footer p span {
@@ -1292,14 +1295,13 @@ strong {
 }
 
 .mat-mdc-dialog-surface {
-  width: fit-content !important;
+  width: 600px !important;
   max-width: 90vw !important;
-  min-width: 400px;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .mat-mdc-dialog-surface {
-    min-width: calc(100vw - 32px) !important;
+    width: calc(100vw - 32px) !important;
     max-width: calc(100vw - 32px) !important;
   }
 }

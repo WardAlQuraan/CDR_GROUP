@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { BaseService } from './base.service';
 import { ApiResponse } from '../models/api-response.model';
+import { PagedRequest, PagedResult } from '../models/paged.model';
 import {
   EventDto,
   CreateEventDto,
@@ -17,7 +19,11 @@ export class EventsService extends BaseService<EventDto, CreateEventDto, UpdateE
     super(http, 'events');
   }
 
-  getByDepartmentId(departmentId: string): Observable<ApiResponse<EventDto[]>> {
-    return this.get<EventDto[]>(`/by-department/${departmentId}`);
+  getPagedByCompany(companyCode: string, request?: PagedRequest): Observable<ApiResponse<PagedResult<EventDto>>> {
+    let params = this.buildPagedParams(request);
+    params = params.set('companyCode', companyCode);
+    return this.http.get<ApiResponse<PagedResult<EventDto>>>(this.getApiUrl(), { params }).pipe(
+      catchError(error => this.handleError(error))
+    );
   }
 }

@@ -102,11 +102,11 @@ app-org-chart {
 
 // SVG Definitions for gradients
 .avatar-gradient-stop-1 {
-  stop-color: #10b981;
+  stop-color: #D9A93E;
 }
 
 .avatar-gradient-stop-2 {
-  stop-color: #059669;
+  stop-color: #C4962E;
 }
 
 // Link lines between nodes - modern curved style
@@ -126,7 +126,7 @@ app-org-chart {
   }
 
   &:hover .node-card-border {
-    stroke: #10b981;
+    stroke: #D9A93E;
     stroke-width: 2px;
   }
 }
@@ -148,7 +148,7 @@ app-org-chart {
 // Avatar circle with gradient
 .node-avatar-circle {
   fill: url(#avatarGradient);
-  filter: drop-shadow(0 2px 4px rgba(16, 185, 129, 0.3));
+  filter: drop-shadow(0 2px 4px rgba(217, 169, 62, 0.3));
 }
 
 // Avatar text (initials)
@@ -170,7 +170,7 @@ app-org-chart {
 
 // Title text
 .node-title-text {
-  fill: #10b981;
+  fill: #D9A93E;
   font-size: 11px;
   font-weight: 600;
 }
@@ -184,8 +184,8 @@ app-org-chart {
 
 // Connector dot at bottom of cards
 .node-connector {
-  fill: #10b981;
-  filter: drop-shadow(0 1px 2px rgba(16, 185, 129, 0.4));
+  fill: #D9A93E;
+  filter: drop-shadow(0 1px 2px rgba(217, 169, 62, 0.4));
 }
 
 // Top connector dot

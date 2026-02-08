@@ -84,7 +84,8 @@
           formControlName="companyId"
           label="admin.departments.company"
           icon="apartment"
-          nullOptionLabel="admin.departments.noCompany"
+          [showNullOption]="false"
+          [required]="true"
           [dataSource$]="companies$"
           [optionMapper]="companyMapper"
           [resetOnDataSourceChange]="false">

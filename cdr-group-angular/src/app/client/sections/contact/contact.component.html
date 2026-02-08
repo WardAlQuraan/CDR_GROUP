@@ -20,35 +20,57 @@
             <label for="contact-message">{{ 'common.message' | translate }}</label>
           </div>
 
-          <button type="submit" class="form-control">{{ 'common.submit' | translate }}</button>
+          @if (submitSuccess) {
+            <div class="alert alert-success">{{ 'contact.successMessage' | translate }}</div>
+          }
+          @if (submitError) {
+            <div class="alert alert-danger">{{ submitError }}</div>
+          }
+
+          <button type="submit" class="form-control" [disabled]="submitting">
+            @if (submitting) {
+              <span class="spinner-border spinner-border-sm me-2"></span>
+            }
+            {{ 'common.submit' | translate }}
+          </button>
         </form>
       </div>
 
       <div class="col-lg-6 col-12 mt-5 mt-lg-0">
         <div class="contact-info">
-          <img src="assets/images/WorldMap.svg" class="img-fluid" alt="World Map">
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.5!2d35.87!3d31.95!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDU3JzAwLjAiTiAzNcKwNTInMDAuMCJF!5e0!3m2!1sen!2sjo!4v1700000000000"
+              width="100%"
+              height="250"
+              style="border:0; border-radius: 12px;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
 
           <div class="contact-info-item">
             <div class="contact-info-body">
-              <strong>London, UK</strong>
+              <strong>Abdoun, Amman, Jordan 11183</strong>
 
               <p class="mt-2 mb-1">
-                <a href="tel:010-020-0340" class="text-white">
+                <a href="tel:+962798081801" class="text-white">
                   <i class="bi-telephone me-2"></i>
-                  010-020-0340
+                  +962 798 081 801
                 </a>
               </p>
 
               <p class="mb-0">
-                <a href="mailto:info@tiyagolfclub.com" class="text-white">
-                  <i class="bi-envelope me-2"></i>
-                  info&#64;tiyagolfclub.com
+                <a href="https://wa.me/962798081801" target="_blank" rel="noopener" class="text-white">
+                  <i class="bi-whatsapp me-2"></i>
+                  WhatsApp
                 </a>
               </p>
             </div>
 
             <div class="contact-info-footer">
-              <a href="mailto:info@tiyagolfclub.com">{{ 'contact.getInTouch' | translate }}</a>
+              <a href="https://www.bing.com/maps/search?q=abdon+amman%2C+Jordan%2C+amman%2C+11183%2C+JO" target="_blank" rel="noopener">{{ 'contact.getInTouch' | translate }}</a>
             </div>
           </div>
         </div>

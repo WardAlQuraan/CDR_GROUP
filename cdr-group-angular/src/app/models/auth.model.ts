@@ -92,7 +92,11 @@ export const Permissions = {
   COMPANIES_READ: 'companies.read',
   COMPANIES_CREATE: 'companies.create',
   COMPANIES_UPDATE: 'companies.update',
-  COMPANIES_DELETE: 'companies.delete'
+  COMPANIES_DELETE: 'companies.delete',
+
+  // Contact Us
+  CONTACTUS_READ: 'contactus.read',
+  CONTACTUS_DELETE: 'contactus.delete'
 } as const;
 
 export type Permission = typeof Permissions[keyof typeof Permissions];

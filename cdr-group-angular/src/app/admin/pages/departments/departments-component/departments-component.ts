@@ -10,7 +10,6 @@ import { PagedRequest } from '../../../../models/paged.model';
 import { DataGridConfig, FilterValues } from '../../../../shared/components/data-grid/data-grid.models';
 import { DepartmentDialogComponent, DepartmentDialogData } from '../department-dialog/department-dialog.component';
 import { DepartmentViewDialogComponent } from '../department-view-dialog/department-view-dialog.component';
-import { DepartmentAssignManagerDialogComponent } from '../department-assign-manager-dialog/department-assign-manager-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 
@@ -141,13 +140,6 @@ export class DepartmentsComponent implements OnInit {
           onClick: (row) => this.openEditDialog(row)
         },
         {
-          icon: 'supervisor_account',
-          tooltip: 'admin.departments.assignManager',
-          permission: Permissions.DEPARTMENTS_ASSIGN_MANAGER,
-          color: 'primary',
-          onClick: (row) => this.openAssignManagerDialog(row)
-        },
-        {
           icon: 'delete',
           tooltip: 'admin.departments.delete',
           permission: Permissions.DEPARTMENTS_DELETE,
@@ -261,19 +253,6 @@ export class DepartmentsComponent implements OnInit {
     window.open(url, '_blank');
   }
 
-  openAssignManagerDialog(department: DepartmentDto): void {
-    const dialogRef = this.dialog.open(DepartmentAssignManagerDialogComponent, {
-      width: '500px',
-      data: department,
-      disableClose: true
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.loadDepartments();
-      }
-    });
-  }
 
   deleteDepartment(department: DepartmentDto): void {
     const dialogData: ConfirmDialogData = {

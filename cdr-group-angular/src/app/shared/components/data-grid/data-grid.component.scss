@@ -1,11 +1,11 @@
 @use 'sass:color';
 
 // Variables
-$primary-color: #81B29A;
-$primary-dark: #6a9b82;
-$primary-light: rgba(129, 178, 154, 0.1);
-$primary-lighter: rgba(129, 178, 154, 0.05);
-$dark-color: #3D405B;
+$primary-color: #D9A93E;
+$primary-dark: #C4962E;
+$primary-light: rgba(217, 169, 62, 0.1);
+$primary-lighter: rgba(217, 169, 62, 0.05);
+$dark-color: #3E423D;
 $text-secondary: #6c757d;
 $text-muted: #9ca3af;
 $border-color: #e5e7eb;
@@ -85,7 +85,7 @@ $transition: 200ms ease;
     border-radius: $radius-md;
     transition: $transition;
     box-shadow: $shadow-sm;
-    background: linear-gradient(135deg, $primary-color 0%, $primary-dark 100%);
+    background: $primary-color;
     color: $white;
     border: none;
 
@@ -98,7 +98,7 @@ $transition: 200ms ease;
     &:hover {
       transform: translateY(-2px);
       box-shadow: $shadow-md;
-      background: linear-gradient(135deg, $primary-dark 0%, color.adjust($primary-dark, $lightness: -5%) 100%);
+      background: $primary-dark;
     }
 
     &:active {
@@ -431,7 +431,7 @@ $transition: 200ms ease;
 
   // Header
   .mat-mdc-header-row {
-    background: linear-gradient(135deg, $primary-color 0%, $primary-dark 100%);
+    background: $dark-color;
   }
 
   .mat-mdc-header-cell {

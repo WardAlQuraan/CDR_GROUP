@@ -11,7 +11,6 @@ import { PagedRequest } from '../../../../models/paged.model';
 import { DataGridConfig, FilterValues } from '../../../../shared/components/data-grid/data-grid.models';
 import { EmployeeDialogComponent, EmployeeDialogData } from '../employee-dialog/employee-dialog.component';
 import { EmployeeViewDialogComponent } from '../employee-view-dialog/employee-view-dialog.component';
-import { EmployeeAssignManagerDialogComponent } from '../employee-assign-manager-dialog/employee-assign-manager-dialog.component';
 import { EmployeeLinkUserDialogComponent } from '../employee-link-user-dialog/employee-link-user-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
@@ -131,13 +130,6 @@ export class EmployeesComponent implements OnInit {
           permission: Permissions.EMPLOYEES_UPDATE,
           color: 'info',
           onClick: (row) => this.openEditDialog(row)
-        },
-        {
-          icon: 'supervisor_account',
-          tooltip: 'admin.employees.assignManager',
-          permission: Permissions.EMPLOYEES_ASSIGN_MANAGER,
-          color: 'primary',
-          onClick: (row) => this.openAssignManagerDialog(row)
         },
         {
           icon: 'person_add',
@@ -260,18 +252,6 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
-  openAssignManagerDialog(employee: EmployeeDto): void {
-    const dialogRef = this.dialog.open(EmployeeAssignManagerDialogComponent, {
-      data: employee,
-      disableClose: true
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.loadEmployees();
-      }
-    });
-  }
 
   openLinkToUserDialog(employee: EmployeeDto): void {
     const dialogRef = this.dialog.open(EmployeeLinkUserDialogComponent, {

@@ -1,4 +1,4 @@
-import { Component, OnInit, effect } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, effect } from '@angular/core';
 import { EmployeesService } from '../../../services/employees.service';
 import { TranslationService } from '../../../services/translation.service';
 import { EmployeeTreeNodeDto } from '../../../models/employee.model';
@@ -19,16 +19,18 @@ interface TeamMember {
   templateUrl: './team.component.html',
   styleUrl: './team.component.scss',
 })
-export class TeamComponent implements OnInit {
+export class TeamComponent implements OnChanges {
+  @Input() companyCode = 'CDR';
+
   loading = false;
   error = false;
   teamData: TeamMember[] = [];
 
   private colors = [
-    '#81B29A',
-    '#3D405B',
-    '#F2CC8F',
-    '#E07A5F',
+    '#D9A93E',
+    '#3E423D',
+    '#D9A93E',
+    '#C4962E',
     '#5C8D89',
     '#7B68EE',
     '#FF6B6B',
@@ -47,8 +49,10 @@ export class TeamComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.loadData();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['companyCode']) {
+      this.loadData();
+    }
   }
 
   get isArabic(): boolean {
@@ -59,7 +63,7 @@ export class TeamComponent implements OnInit {
     this.loading = true;
     this.error = false;
 
-    this.employeesService.getTree().subscribe({
+    this.employeesService.getTree(undefined, this.companyCode || undefined).subscribe({
       next: (response) => {
         if (response.success && response.data) {
           this.teamData = response.data.map(node => this.mapToTeamMember(node));

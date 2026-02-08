@@ -6,6 +6,7 @@
   <mat-select
     [value]="value"
     [disabled]="disabled || loading"
+    [required]="required"
     (selectionChange)="onSelectionChange($event.value)">
     @if (showNullOption) {
       <mat-option [value]="null">{{ nullOptionLabel | translate }}</mat-option>

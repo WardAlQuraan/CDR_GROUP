@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BaseService } from './base.service';
+import { CacheService } from './cache.service';
 import { ApiResponse } from '../models/api-response.model';
 import {
   CompanyDto,
@@ -13,7 +14,7 @@ import {
   providedIn: 'root'
 })
 export class CompaniesService extends BaseService<CompanyDto, CreateCompanyDto, UpdateCompanyDto> {
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient, private cacheService: CacheService) {
     super(http, 'companies');
   }
 
@@ -22,6 +23,6 @@ export class CompaniesService extends BaseService<CompanyDto, CreateCompanyDto, 
   }
 
   getActiveCompanies(): Observable<ApiResponse<CompanyDto[]>> {
-    return this.get<CompanyDto[]>('/active');
+    return this.cacheService.get('active-companies', () => this.get<CompanyDto[]>('/active'));
   }
 }

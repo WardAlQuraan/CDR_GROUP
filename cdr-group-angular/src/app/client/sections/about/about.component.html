@@ -1,45 +1,46 @@
 <section class="about-section section-padding" id="section_2">
   <div class="container">
-    <div class="row">
+    <div class="row align-items-center">
       <div class="col-lg-5 col-12 mb-5 mb-lg-0">
-        <h2 class="mb-3">{{ 'about.title' | translate }}</h2>
+        <span class="about-label">{{ 'about.subtitle' | translate }}</span>
+        <h2 class="about-title">{{ 'about.title' | translate }}</h2>
 
-        <p><strong>{{ 'about.since' | translate }}</strong>, {{ 'about.description' | translate }}</p>
+        <p class="about-text">{{ 'about.description' | translate }}</p>
+        <p class="about-text">{{ 'about.passion' | translate }}</p>
 
-        <p>{{ 'about.passion' | translate }}</p>
+        <div class="about-highlights">
+          <div class="highlight-item">
+            <div class="highlight-icon">
+              <i class="bi bi-lightbulb"></i>
+            </div>
+            <div>
+              <h5>{{ 'about.mission' | translate }}</h5>
+              <p>{{ 'about.missionText' | translate }}</p>
+            </div>
+          </div>
+
+          <div class="highlight-item">
+            <div class="highlight-icon">
+              <i class="bi bi-eye"></i>
+            </div>
+            <div>
+              <h5>{{ 'about.vision' | translate }}</h5>
+              <p>{{ 'about.visionText' | translate }}</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="col-lg-7 col-12">
-        <div class="row">
+        <div class="team-cards">
           @for (member of teamMembers; track member.name) {
-            <div class="col-lg-6 col-md-6 col-12 mb-4 mb-lg-0">
-              <div class="member-block">
-                <div class="member-block-image-wrap">
-                  <img [src]="member.image" class="member-block-image img-fluid" [alt]="member.name">
-
-                  <ul class="social-icon">
-                    @if (member.socialLinks.instagram) {
-                      <li class="social-icon-item">
-                        <a [href]="member.socialLinks.instagram" class="social-icon-link bi-instagram"></a>
-                      </li>
-                    }
-                    @if (member.socialLinks.twitter) {
-                      <li class="social-icon-item">
-                        <a [href]="member.socialLinks.twitter" class="social-icon-link bi-twitter"></a>
-                      </li>
-                    }
-                    @if (member.socialLinks.whatsapp) {
-                      <li class="social-icon-item">
-                        <a [href]="member.socialLinks.whatsapp" class="social-icon-link bi-whatsapp"></a>
-                      </li>
-                    }
-                  </ul>
-                </div>
-
-                <div class="member-block-info">
-                  <h4>{{ member.name }}</h4>
-                  <p>{{ member.role }}</p>
-                </div>
+            <div class="team-card">
+              <div class="team-card-image">
+                <img [src]="member.image" [alt]="member.name">
+              </div>
+              <div class="team-card-info">
+                <h4>{{ member.name }}</h4>
+                <span>{{ member.role }}</span>
               </div>
             </div>
           }

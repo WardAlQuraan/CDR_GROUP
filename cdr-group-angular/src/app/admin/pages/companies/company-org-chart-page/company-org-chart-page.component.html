@@ -1,0 +1,22 @@
+<div class="org-chart-page">
+  <div class="page-header">
+    <div class="header-content">
+      <mat-icon class="header-icon">account_tree</mat-icon>
+      <div class="header-text">
+        <h1>{{ 'admin.companies.organizationChart' | translate }}</h1>
+        <p class="company-name" *ngIf="company">{{ companyName }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <div class="loading-container" *ngIf="loading">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+
+    <app-org-chart
+      *ngIf="!loading && companyCode"
+      [companyCode]="companyCode">
+    </app-org-chart>
+  </div>
+</div>

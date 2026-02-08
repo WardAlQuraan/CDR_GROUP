@@ -1,6 +1,23 @@
 <app-hero></app-hero>
 <app-about></app-about>
-<app-events></app-events>
-<app-team></app-team>
-<app-newsletter></app-newsletter>
+
+@if (companies.length > 1) {
+  <div class="company-filter-section">
+    <div class="container">
+      <div class="company-filter">
+        @for (company of companies; track company.id) {
+          <button
+            class="company-filter-btn"
+            [class.active]="selectedCompanyCode === company.code"
+            (click)="onCompanyChange(company.code)">
+            {{ getCompanyName(company) }}
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+}
+
+<app-events [companyCode]="selectedCompanyCode"></app-events>
+<app-team [companyCode]="selectedCompanyCode"></app-team>
 <app-contact></app-contact>

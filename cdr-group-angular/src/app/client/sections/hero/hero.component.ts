@@ -15,6 +15,7 @@ export class HeroComponent implements OnInit, OnDestroy {
   words = ['hero.modern', 'hero.creative', 'hero.lifestyle'];
   currentWordIndex = 0;
   isVisible = true;
+  showMore = false;
   private intervalId: ReturnType<typeof setInterval> | null = null;
 
   ngOnInit() {
@@ -37,5 +38,9 @@ export class HeroComponent implements OnInit, OnDestroy {
 
   get currentWord(): string {
     return this.words[this.currentWordIndex];
+  }
+
+  toggleMore(): void {
+    this.showMore = !this.showMore;
   }
 }

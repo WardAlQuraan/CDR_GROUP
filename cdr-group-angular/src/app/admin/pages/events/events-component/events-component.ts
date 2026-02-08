@@ -76,11 +76,11 @@ export class EventsComponent implements OnInit {
           cell: (row) => this.isArabic ? row.titleAr : row.titleEn
         },
         {
-          key: 'department',
-          header: 'admin.eventsAdmin.department',
+          key: 'company',
+          header: 'admin.eventsAdmin.company',
           cell: (row) => {
-            if (!row.departmentId) return '-';
-            return (this.isArabic ? row.departmentNameAr : row.departmentNameEn) || '-';
+            if (!row.companyId) return '-';
+            return (this.isArabic ? row.companyNameAr : row.companyName) || '-';
           }
         },
         {

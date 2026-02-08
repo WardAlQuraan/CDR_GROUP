@@ -21,7 +21,6 @@ import { PermissionsDialogComponent } from './pages/roles/permissions-dialog/per
 import { EmployeesComponent } from './pages/employees/employees-component/employees-component';
 import { EmployeeDialogComponent } from './pages/employees/employee-dialog/employee-dialog.component';
 import { EmployeeViewDialogComponent } from './pages/employees/employee-view-dialog/employee-view-dialog.component';
-import { EmployeeAssignManagerDialogComponent } from './pages/employees/employee-assign-manager-dialog/employee-assign-manager-dialog.component';
 import { EmployeeLinkUserDialogComponent } from './pages/employees/employee-link-user-dialog/employee-link-user-dialog.component';
 import { PositionsComponent } from './pages/positions/positions-component/positions-component';
 import { PositionDialogComponent } from './pages/positions/position-dialog/position-dialog.component';
@@ -30,13 +29,15 @@ import { PositionAssignDepartmentDialogComponent } from './pages/positions/posit
 import { DepartmentsComponent } from './pages/departments/departments-component/departments-component';
 import { DepartmentDialogComponent } from './pages/departments/department-dialog/department-dialog.component';
 import { DepartmentViewDialogComponent } from './pages/departments/department-view-dialog/department-view-dialog.component';
-import { DepartmentAssignManagerDialogComponent } from './pages/departments/department-assign-manager-dialog/department-assign-manager-dialog.component';
 import { DepartmentOrgChartPageComponent } from './pages/departments/department-org-chart-page/department-org-chart-page.component';
 import { EventsComponent } from './pages/events/events-component/events-component';
 import { EventDialogComponent } from './pages/events/event-dialog/event-dialog.component';
 import { EventViewDialogComponent } from './pages/events/event-view-dialog/event-view-dialog.component';
 import { CompaniesComponent } from './pages/companies/companies-component/companies-component';
 import { CompanyDialogComponent } from './pages/companies/company-dialog/company-dialog.component';
+import { CompanyOrgChartPageComponent } from './pages/companies/company-org-chart-page/company-org-chart-page.component';
+import { ContactUsAdminComponent } from './pages/contact-us/contact-us-component/contact-us-component';
+import { ContactUsViewDialogComponent } from './pages/contact-us/contact-us-view-dialog/contact-us-view-dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,6 @@ import { CompanyDialogComponent } from './pages/companies/company-dialog/company
     EmployeesComponent,
     EmployeeDialogComponent,
     EmployeeViewDialogComponent,
-    EmployeeAssignManagerDialogComponent,
     EmployeeLinkUserDialogComponent,
     PositionsComponent,
     PositionDialogComponent,
@@ -59,13 +59,15 @@ import { CompanyDialogComponent } from './pages/companies/company-dialog/company
     DepartmentsComponent,
     DepartmentDialogComponent,
     DepartmentViewDialogComponent,
-    DepartmentAssignManagerDialogComponent,
     DepartmentOrgChartPageComponent,
     EventsComponent,
     EventDialogComponent,
     EventViewDialogComponent,
     CompaniesComponent,
-    CompanyDialogComponent
+    CompanyDialogComponent,
+    CompanyOrgChartPageComponent,
+    ContactUsAdminComponent,
+    ContactUsViewDialogComponent
   ],
   imports: [
     SharedModule,

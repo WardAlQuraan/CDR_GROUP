@@ -9,6 +9,8 @@ import { DepartmentsComponent } from './pages/departments/departments-component/
 import { DepartmentOrgChartPageComponent } from './pages/departments/department-org-chart-page/department-org-chart-page.component';
 import { EventsComponent } from './pages/events/events-component/events-component';
 import { CompaniesComponent } from './pages/companies/companies-component/companies-component';
+import { CompanyOrgChartPageComponent } from './pages/companies/company-org-chart-page/company-org-chart-page.component';
+import { ContactUsAdminComponent } from './pages/contact-us/contact-us-component/contact-us-component';
 
 export const adminRoutes: Routes = [
   {
@@ -24,6 +26,8 @@ export const adminRoutes: Routes = [
       { path: 'departments/:id/org-chart', component: DepartmentOrgChartPageComponent },
       { path: 'events', component: EventsComponent },
       { path: 'companies', component: CompaniesComponent },
+      { path: 'companies/:id/org-chart', component: CompanyOrgChartPageComponent },
+      { path: 'contact-us', component: ContactUsAdminComponent },
       { path: 'settings', component: DashboardComponent }, // Placeholder
     ]
   }

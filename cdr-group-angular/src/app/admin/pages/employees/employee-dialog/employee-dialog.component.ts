@@ -41,7 +41,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
   // Mapper functions for async-select
   departmentMapper = (dept: DepartmentDto): SelectOption => ({
     value: dept.id,
-    label: `${this.isArabic ? dept.nameAr : dept.nameEn} (${dept.code})`
+    label: `${this.isArabic ? dept.nameAr : dept.nameEn} (${(this.isArabic ? dept.companyNameAr : dept.companyName) || dept.code})`
   });
 
   positionMapper = (pos: PositionDto): SelectOption => ({
@@ -122,7 +122,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
         lastNameAr: [emp.lastNameAr, [Validators.required, Validators.maxLength(100)]],
         email: [emp.email, [Validators.email, Validators.maxLength(256)]],
         phone: [emp.phone, [Validators.maxLength(20)]],
-        departmentId: [emp.departmentId],
+        departmentId: [emp.departmentId, [Validators.required]],
         positionId: [emp.positionId],
         hireDate: [emp.hireDate ? new Date(emp.hireDate) : null],
         salary: [emp.salary, [Validators.min(0)]],
@@ -138,7 +138,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
         lastNameAr: ['', [Validators.required, Validators.maxLength(100)]],
         email: ['', [Validators.email, Validators.maxLength(256)]],
         phone: ['', [Validators.maxLength(20)]],
-        departmentId: [null],
+        departmentId: [null, [Validators.required]],
         positionId: [null],
         hireDate: [null],
         salary: [null, [Validators.min(0)]],

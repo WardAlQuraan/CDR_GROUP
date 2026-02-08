@@ -1,0 +1,56 @@
+<app-base-dialog
+  title="admin.contactUs.viewMessage"
+  [showActions]="false">
+
+  <div class="view-content">
+    <!-- Sender Info -->
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>person</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.contactUs.senderInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content view-fields">
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.contactUs.fullName' | translate }}</span>
+          <span class="field-value">{{ message.fullName }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.contactUs.email' | translate }}</span>
+          <span class="field-value">
+            <a href="mailto:{{ message.email }}">{{ message.email }}</a>
+          </span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.contactUs.date' | translate }}</span>
+          <span class="field-value">{{ message.createdAt | date:'medium' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Message -->
+    <div class="form-section section-blue">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>mail</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.contactUs.message' | translate }}</div>
+      </div>
+
+      <div class="section-content view-fields">
+        <div class="view-field">
+          <span class="field-value message-body">{{ message.message }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dialog-actions">
+      <button mat-raised-button color="primary" (click)="onClose()">
+        {{ 'common.close' | translate }}
+      </button>
+    </div>
+  </div>
+
+</app-base-dialog>

@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { EventDto, CreateEventDto, UpdateEventDto } from '../../../../models/event.model';
-import { DepartmentDto } from '../../../../models/department.model';
+import { CompanyDto } from '../../../../models/company.model';
 import { ApiResponse } from '../../../../models/api-response.model';
 import { EventsService } from '../../../../services/events.service';
-import { DepartmentsService } from '../../../../services/departments.service';
+import { CompaniesService } from '../../../../services/companies.service';
 import { SnackbarService } from '../../../../services/snackbar.service';
 import { TranslationService } from '../../../../services/translation.service';
 import { SelectOption } from '../../../../shared/components/async-select/async-select.component';
@@ -29,18 +29,18 @@ export class EventDialogComponent implements OnInit {
   mode: EventDialogMode;
   loading = false;
 
-  departmentsDataSource$!: Observable<ApiResponse<DepartmentDto[]>>;
+  companiesDataSource$!: Observable<ApiResponse<CompanyDto[]>>;
 
-  departmentMapper = (dept: DepartmentDto): SelectOption => ({
-    value: dept.id,
-    label: `${this.isArabic ? dept.nameAr : dept.nameEn} (${dept.code})`
+  companyMapper = (company: CompanyDto): SelectOption => ({
+    value: company.id,
+    label: `${this.isArabic ? company.nameAr : company.nameEn} (${company.code})`
   });
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<EventDialogComponent>,
     private eventsService: EventsService,
-    private departmentsService: DepartmentsService,
+    private companiesService: CompaniesService,
     private snackbar: SnackbarService,
     private translationService: TranslationService,
     @Inject(MAT_DIALOG_DATA) public data: EventDialogData
@@ -50,7 +50,7 @@ export class EventDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.departmentsDataSource$ = this.departmentsService.getActiveDepartments();
+    this.companiesDataSource$ = this.companiesService.getActiveCompanies();
   }
 
   get isArabic(): boolean {
@@ -83,7 +83,7 @@ export class EventDialogComponent implements OnInit {
         descriptionAr: [event.descriptionAr, [Validators.maxLength(2000)]],
         eventDate: [event.eventDate ? new Date(event.eventDate) : null],
         eventUrl: [event.eventUrl, [Validators.maxLength(500)]],
-        departmentId: [event.departmentId]
+        companyId: [event.companyId, [Validators.required]]
       });
     } else {
       this.form = this.fb.group({
@@ -93,7 +93,7 @@ export class EventDialogComponent implements OnInit {
         descriptionAr: ['', [Validators.maxLength(2000)]],
         eventDate: [null],
         eventUrl: ['', [Validators.maxLength(500)]],
-        departmentId: [null]
+        companyId: [null, [Validators.required]]
       });
     }
   }
@@ -125,7 +125,7 @@ export class EventDialogComponent implements OnInit {
       descriptionAr: this.form.value.descriptionAr || undefined,
       eventDate: this.form.value.eventDate || undefined,
       eventUrl: this.form.value.eventUrl || undefined,
-      departmentId: this.form.value.departmentId || undefined
+      companyId: this.form.value.companyId || undefined
     };
 
     this.eventsService.create(createDto).subscribe({
@@ -148,7 +148,7 @@ export class EventDialogComponent implements OnInit {
       descriptionAr: this.form.value.descriptionAr || undefined,
       eventDate: this.form.value.eventDate || undefined,
       eventUrl: this.form.value.eventUrl || undefined,
-      departmentId: this.form.value.departmentId || undefined
+      companyId: this.form.value.companyId || undefined
     };
 
     this.eventsService.update(this.data.event!.id, updateDto).subscribe({

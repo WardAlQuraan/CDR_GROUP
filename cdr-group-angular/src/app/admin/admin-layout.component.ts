@@ -32,6 +32,7 @@ export class AdminLayoutComponent implements OnInit {
     { label: 'admin.departments.title', icon: 'business', route: '/admin/departments', permission: Permissions.DEPARTMENTS_READ },
     { label: 'admin.companies.title', icon: 'apartment', route: '/admin/companies', permission: Permissions.COMPANIES_READ },
     { label: 'admin.eventsAdmin.title', icon: 'event', route: '/admin/events', permission: Permissions.EVENTS_READ },
+    { label: 'admin.contactUs.title', icon: 'mail', route: '/admin/contact-us', permission: Permissions.CONTACTUS_READ },
   ];
 
   constructor(

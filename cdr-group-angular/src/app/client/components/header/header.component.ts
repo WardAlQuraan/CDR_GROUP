@@ -1,7 +1,9 @@
 import { Component, HostListener, OnInit, signal, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslationService } from '../../../services/translation.service';
 import { AuthService } from '../../../services/auth.service';
+import { CompaniesService } from '../../../services/companies.service';
+import { CompanyDto } from '../../../models/company.model';
 
 @Component({
   selector: 'app-header',
@@ -11,16 +13,60 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   translationService = inject(TranslationService);
   authService = inject(AuthService);
+  private companiesService = inject(CompaniesService);
 
   isSticky = signal(false);
   activeSection = signal('home');
+  companies: CompanyDto[] = [];
+  selectedCompanyCode = 'CDR';
 
   private sections = ['section_2', 'section_events', 'section_team', 'section_5'];
 
+  get isArabic(): boolean {
+    return this.translationService.language() === 'ar';
+  }
+
+  get isCompanyRoute(): boolean {
+    return this.router.url.includes('company=');
+  }
+
+  navigateToCompany(companyCode: string): void {
+    this.router.navigate(['/'], { queryParams: { company: companyCode } });
+  }
+
+  get selectedCompanyName(): string {
+    const company = this.companies.find(c => c.code === this.selectedCompanyCode);
+    if (company) {
+      return this.getCompanyName(company);
+    }
+    return this.selectedCompanyCode;
+  }
+
   ngOnInit() {
     this.updateActiveSection();
+    this.loadCompanies();
+    this.route.queryParams.subscribe(params => {
+      if (params['company']) {
+        this.selectedCompanyCode = params['company'];
+      }
+    });
+  }
+
+  private loadCompanies(): void {
+    this.companiesService.getActiveCompanies().subscribe({
+      next: (response) => {
+        if (response.success && response.data) {
+          this.companies = response.data;
+        }
+      }
+    });
+  }
+
+  getCompanyName(company: CompanyDto): string {
+    return this.isArabic ? company.nameAr : company.nameEn;
   }
 
   @HostListener('window:scroll', [])

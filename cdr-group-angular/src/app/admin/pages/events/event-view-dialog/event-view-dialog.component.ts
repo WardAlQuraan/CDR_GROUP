@@ -20,9 +20,9 @@ export class EventViewDialogComponent {
     return this.translationService.language() === 'ar';
   }
 
-  getDepartmentName(): string {
-    if (!this.event.departmentId) return '-';
-    return this.isArabic ? this.event.departmentNameAr || '-' : this.event.departmentNameEn || '-';
+  getCompanyName(): string {
+    if (!this.event.companyId) return '-';
+    return this.isArabic ? this.event.companyNameAr || '-' : this.event.companyName || '-';
   }
 
   onClose(): void {

@@ -38,6 +38,7 @@ interface OrgNode {
 export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @ViewChild('chartContainer', { static: false }) chartContainer!: ElementRef;
   @Input() departmentId?: string;
+  @Input() companyCode?: string;
 
   loading = false;
   error = false;
@@ -71,7 +72,8 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['departmentId'] && !changes['departmentId'].firstChange) {
+    if ((changes['departmentId'] && !changes['departmentId'].firstChange) ||
+        (changes['companyCode'] && !changes['companyCode'].firstChange)) {
       this.loadData();
     }
   }
@@ -95,7 +97,7 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
   loadData(): void {
     this.loading = true;
     this.error = false;
-    this.employeesService.getTree(this.departmentId).subscribe({
+    this.employeesService.getTree(this.departmentId, this.companyCode).subscribe({
       next: (response) => {
         if (response.success && response.data && response.data.length > 0) {
           // Handle multiple root nodes by creating a virtual root
@@ -177,8 +179,10 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
     d3.select(container).selectAll('*').remove();
 
     // Card dimensions - vertical centered layout
-    const cardWidth = 180;
-    const cardHeight = 120;
+    const cardWidth = 200;
+    const cardHeight = 160;
+    const avatarRadius = 32;
+    const avatarCenterY = 40;
     const horizontalSpacing = 40;
     const verticalSpacing = 60;
 
@@ -231,11 +235,11 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
 
     avatarGradient.append('stop')
       .attr('offset', '0%')
-      .attr('stop-color', '#34d399');
+      .attr('stop-color', '#D9A93E');
 
     avatarGradient.append('stop')
       .attr('offset', '100%')
-      .attr('stop-color', '#059669');
+      .attr('stop-color', '#C4962E');
 
     // Link gradient
     const linkGradient = defs.append('linearGradient')
@@ -247,7 +251,7 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
 
     linkGradient.append('stop')
       .attr('offset', '0%')
-      .attr('stop-color', '#10b981');
+      .attr('stop-color', '#D9A93E');
 
     linkGradient.append('stop')
       .attr('offset', '100%')
@@ -273,7 +277,7 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
       .append('circle')
       .attr('cx', 0)
       .attr('cy', 0)
-      .attr('r', 20);
+      .attr('r', avatarRadius);
 
     // Create main group with translation (centered in viewBox)
     const g = this.svg.append('g')
@@ -302,7 +306,7 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
                   ${targetX} ${targetY}`;
       })
       .style('fill', 'none')
-      .style('stroke', '#10b981')
+      .style('stroke', '#D9A93E')
       .style('stroke-width', '2.5px')
       .style('stroke-linecap', 'round');
 
@@ -340,10 +344,10 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
         let html = '';
         if (d.data.filePath) {
           html += `<div style="text-align: center; margin-bottom: 8px;">
-            <img src="${d.data.filePath}" alt="${d.data.name}" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #34d399;">
+            <img src="${d.data.filePath}" alt="${d.data.name}" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #D9A93E;">
           </div>`;
         }
-        html += `<div style="font-weight: 600; color: #34d399; margin-bottom: 4px; text-align: center;">${d.data.name}</div>`;
+        html += `<div style="font-weight: 600; color: #D9A93E; margin-bottom: 4px; text-align: center;">${d.data.name}</div>`;
         if (d.data.title) html += `<div><span style="color: #94a3b8;">${titleLabel}:</span> ${d.data.title}</div>`;
         if (d.data.department) html += `<div><span style="color: #94a3b8;">${deptLabel}:</span> ${d.data.department}</div>`;
 
@@ -386,13 +390,23 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
     // Centered vertical layout - works for both RTL and LTR
     const centerX = cardWidth / 2;
 
+    // Avatar border ring - for all nodes
+    nodes.append('circle')
+      .attr('class', 'node-avatar-ring')
+      .attr('cx', centerX)
+      .attr('cy', avatarCenterY)
+      .attr('r', avatarRadius + 3)
+      .style('fill', 'none')
+      .style('stroke', 'url(#avatarGradient)')
+      .style('stroke-width', '2.5px');
+
     // Avatar circle with gradient - for nodes WITHOUT image
     nodes.filter(d => !d.data.filePath)
       .append('circle')
       .attr('class', 'node-avatar-circle')
       .attr('cx', centerX)
-      .attr('cy', 24)
-      .attr('r', 20)
+      .attr('cy', avatarCenterY)
+      .attr('r', avatarRadius)
       .style('fill', 'url(#avatarGradient)');
 
     // Avatar initials - for nodes WITHOUT image
@@ -400,66 +414,67 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
       .append('text')
       .attr('class', 'node-avatar-text')
       .attr('x', centerX)
-      .attr('y', 24)
+      .attr('y', avatarCenterY)
       .attr('text-anchor', 'middle')
       .attr('dominant-baseline', 'central')
       .style('fill', 'white')
-      .style('font-size', '11px')
+      .style('font-size', '15px')
       .style('font-weight', '700')
       .style('letter-spacing', '0.5px')
       .text(d => d.data.initials);
 
-    // Avatar image - for nodes WITH image
+    // Avatar image background - for nodes WITH image
     nodes.filter(d => !!d.data.filePath)
       .append('circle')
       .attr('cx', centerX)
-      .attr('cy', 24)
-      .attr('r', 20)
+      .attr('cy', avatarCenterY)
+      .attr('r', avatarRadius)
       .style('fill', '#e2e8f0');
 
+    // Avatar image - for nodes WITH image
     nodes.filter(d => !!d.data.filePath)
       .append('image')
       .attr('class', 'node-avatar-image')
-      .attr('x', centerX - 20)
-      .attr('y', 4)
-      .attr('width', 40)
-      .attr('height', 40)
-      .attr('clip-path', 'circle(20px at 20px 20px)')
+      .attr('x', centerX - avatarRadius)
+      .attr('y', avatarCenterY - avatarRadius)
+      .attr('width', avatarRadius * 2)
+      .attr('height', avatarRadius * 2)
+      .attr('clip-path', `circle(${avatarRadius}px at ${avatarRadius}px ${avatarRadius}px)`)
       .attr('preserveAspectRatio', 'xMidYMid slice')
       .attr('href', d => d.data.filePath || '');
 
-    // Name - centered below avatar with more margin
+    // Name - centered below avatar
     nodes.append('text')
       .attr('class', 'node-name-text')
       .attr('x', centerX)
-      .attr('y', 58)
+      .attr('y', avatarCenterY + avatarRadius + 22)
       .attr('text-anchor', 'middle')
       .style('fill', '#1e293b')
-      .style('font-size', '12px')
+      .style('font-size', '13px')
       .style('font-weight', '700')
-      .text(d => this.truncateText(d.data.name, 16));
+      .text(d => this.truncateText(d.data.name, 18));
 
     // Title - centered below name
     nodes.append('text')
       .attr('class', 'node-title-text')
       .attr('x', centerX)
-      .attr('y', 76)
+      .attr('y', avatarCenterY + avatarRadius + 40)
       .attr('text-anchor', 'middle')
-      .style('fill', '#10b981')
-      .style('font-size', '10px')
+      .style('fill', '#D9A93E')
+      .style('font-size', '11px')
       .style('font-weight', '600')
-      .text(d => this.truncateText(d.data.title, 20));
+      .text(d => this.truncateText(d.data.title, 22));
 
     // Department - centered at bottom
     nodes.append('text')
       .attr('class', 'node-department-text')
       .attr('x', centerX)
-      .attr('y', 94)
+      .attr('y', avatarCenterY + avatarRadius + 56)
       .attr('text-anchor', 'middle')
       .style('fill', '#64748b')
-      .style('font-size', '9px')
+      .style('font-size', '10px')
       .style('font-weight', '500')
-      .text(d => this.truncateText(d.data.department, 22));
+      .text(d => this.truncateText(d.data.department, 24));
 
     // Bottom connector dot for nodes with children
     nodes.filter(d => !!(d.children && d.children.length > 0))
@@ -468,7 +483,7 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
       .attr('cx', centerX)
       .attr('cy', cardHeight)
       .attr('r', 4)
-      .style('fill', '#10b981');
+      .style('fill', '#D9A93E');
 
     // Top connector dot for non-root nodes (exclude children of virtual root)
     nodes.filter(d => d.parent !== null && !d.parent.data.isVirtualRoot)

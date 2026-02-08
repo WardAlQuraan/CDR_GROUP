@@ -1,0 +1,41 @@
+<section class="company-detail-section">
+  <div class="container">
+    @if (loading) {
+      <div class="loading-container">
+        <mat-spinner diameter="50"></mat-spinner>
+      </div>
+    } @else if (error || !company) {
+      <div class="error-container">
+        <mat-icon>business_center</mat-icon>
+        <h2>{{ 'companyDetail.notFound' | translate }}</h2>
+        <p>{{ 'companyDetail.notFoundDesc' | translate }}</p>
+        <a routerLink="/" class="back-btn">
+          <mat-icon>arrow_back</mat-icon>
+          {{ 'common.backToHome' | translate }}
+        </a>
+      </div>
+    } @else {
+      <div class="company-header-card">
+        <div class="company-info">
+          <div class="company-icon">
+            <mat-icon>apartment</mat-icon>
+          </div>
+          <div class="company-text">
+            <h1>{{ companyName }}</h1>
+            @if (companyDescription) {
+              <p class="company-description">{{ companyDescription }}</p>
+            }
+          </div>
+        </div>
+        <a routerLink="/" class="back-link">
+          <mat-icon>arrow_back</mat-icon>
+          {{ 'common.backToHome' | translate }}
+        </a>
+      </div>
+
+      <div class="org-chart-container">
+        <app-org-chart [companyCode]="companyCode!"></app-org-chart>
+      </div>
+    }
+  </div>
+</section>

@@ -4,8 +4,8 @@
 $sidebar-width: 260px;
 $sidebar-collapsed-width: 72px;
 $transition-speed: 0.3s;
-$primary-color: #81B29A;
-$dark-color: #3D405B;
+$primary-color: #D9A93E;
+$dark-color: #3E423D;
 
 // Admin Wrapper
 .admin-wrapper {
@@ -20,7 +20,7 @@ $dark-color: #3D405B;
 // Sidebar
 .admin-sidebar {
   width: $sidebar-width;
-  background: linear-gradient(180deg, #3D405B 0%, #2d2f42 100%);
+  background: linear-gradient(180deg, #3E423D 0%, #2E312D 100%);
   display: flex;
   flex-direction: column;
   position: fixed;

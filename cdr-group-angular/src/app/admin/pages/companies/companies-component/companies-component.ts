@@ -107,6 +107,12 @@ export class CompaniesComponent implements OnInit {
       ],
       actions: [
         {
+          icon: 'account_tree',
+          tooltip: 'admin.companies.organizationChart',
+          color: 'success',
+          onClick: (row) => this.openOrgChart(row)
+        },
+        {
           icon: 'edit',
           tooltip: 'admin.companies.edit',
           permission: Permissions.COMPANIES_UPDATE,
@@ -213,6 +219,11 @@ export class CompaniesComponent implements OnInit {
         this.loadCompanies();
       }
     });
+  }
+
+  openOrgChart(company: CompanyDto): void {
+    const url = `/admin/companies/${company.code}/org-chart`;
+    window.open(url, '_blank');
   }
 
   deleteCompany(company: CompanyDto): void {

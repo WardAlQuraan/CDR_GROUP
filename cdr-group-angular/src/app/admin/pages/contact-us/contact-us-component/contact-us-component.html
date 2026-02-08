@@ -1,0 +1,11 @@
+<app-data-grid
+  [data]="messages"
+  [config]="gridConfig"
+  [totalCount]="totalCount"
+  [loading]="loading"
+  [pageIndex]="pageNumber - 1"
+  [pageSize]="pageSize"
+  (pageChange)="onPageChange($event)"
+  (sortChange)="onSortChange($event)"
+  (filterChange)="onFilterChange($event)">
+</app-data-grid>

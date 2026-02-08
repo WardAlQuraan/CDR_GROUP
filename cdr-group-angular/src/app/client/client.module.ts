@@ -17,13 +17,13 @@ import { HeroComponent } from './sections/hero/hero.component';
 import { AboutComponent } from './sections/about/about.component';
 import { EventsComponent } from './sections/events/events.component';
 import { ContactComponent } from './sections/contact/contact.component';
-import { NewsletterComponent } from './sections/newsletter/newsletter.component';
 import { TeamComponent } from './sections/team/team.component';
 
 // Pages
 import { HomeComponent } from './pages/home/home.component';
 import { EventListingComponent } from './pages/event-listing/event-listing.component';
 import { EventDetailComponent } from './pages/event-detail/event-detail.component';
+import { CompanyDetailComponent } from './pages/company-detail/company-detail.component';
 
 // Routes
 import { clientRoutes } from './client.routes';
@@ -41,12 +41,12 @@ import { clientRoutes } from './client.routes';
     AboutComponent,
     EventsComponent,
     ContactComponent,
-    NewsletterComponent,
     TeamComponent,
     // Pages
     HomeComponent,
     EventListingComponent,
     EventDetailComponent,
+    CompanyDetailComponent,
   ],
   imports: [
     SharedModule,

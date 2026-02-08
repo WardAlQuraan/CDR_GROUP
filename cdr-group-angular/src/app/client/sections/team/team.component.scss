@@ -58,7 +58,7 @@
   &.root-level {
     > .member-card {
       .card-inner {
-        background: linear-gradient(135deg, #81B29A 0%, #5a9178 100%);
+        background: linear-gradient(135deg, #D9A93E 0%, #C4962E 100%);
         color: white;
         transform: scale(1.1);
         box-shadow: 0 20px 40px rgba(129, 178, 154, 0.3);
@@ -148,7 +148,7 @@
 
     .position {
       font-size: 0.875rem;
-      color: #81B29A;
+      color: #D9A93E;
       font-weight: 600;
       margin: 0 0 0.5rem;
     }
@@ -176,7 +176,7 @@
 .connector-line {
   width: 2px;
   height: 40px;
-  background: linear-gradient(180deg, #81B29A 0%, #e2e8f0 100%);
+  background: linear-gradient(180deg, #D9A93E 0%, #e2e8f0 100%);
 }
 
 .children-wrapper {

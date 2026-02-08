@@ -86,12 +86,13 @@
         </div>
 
         <app-async-select
-          formControlName="departmentId"
-          [label]="'admin.eventsAdmin.department' | translate"
-          [nullOptionLabel]="'admin.eventsAdmin.noDepartment' | translate"
-          icon="business"
-          [dataSource$]="departmentsDataSource$"
-          [optionMapper]="departmentMapper">
+          formControlName="companyId"
+          label="admin.eventsAdmin.company"
+          icon="apartment"
+          [showNullOption]="false"
+          [required]="true"
+          [dataSource$]="companiesDataSource$"
+          [optionMapper]="companyMapper">
         </app-async-select>
       </div>
     </div>

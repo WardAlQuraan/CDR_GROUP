@@ -6,7 +6,7 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" routerLink="/">
-        <img src="assets/images/logo.png" class="navbar-brand-image img-fluid" alt="CDR Group Logo">
+        <img src="assets/images/logo.jpg" class="navbar-brand-image img-fluid" alt="CDR Group Logo">
         <!-- <span class="navbar-brand-text">
           {{ 'header.logo' | translate }}
           <small>{{ 'header.logoSubtitle' | translate }}</small>
@@ -43,6 +43,23 @@
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
+          @if (companies.length > 0) {
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" [class.active]="isCompanyRoute" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ selectedCompanyName }}
+              </a>
+              <ul class="dropdown-menu">
+                @for (company of companies; track company.id) {
+                  <li>
+                    <a class="dropdown-item" href="javascript:void(0)" (click)="navigateToCompany(company.code)">
+                      {{ getCompanyName(company) }}
+                    </a>
+                  </li>
+                }
+              </ul>
+            </li>
+          }
+
           <li class="nav-item">
             <a class="nav-link" [class.active]="activeSection() === 'home'" routerLink="/" (click)="scrollToTop()">{{ 'common.home' | translate }}</a>
           </li>
@@ -51,7 +68,6 @@
             <a class="nav-link" [class.active]="activeSection() === 'section_2'" (click)="navigateToSection('section_2')">{{ 'common.about' | translate }}</a>
           </li>
 
-          
           <li class="nav-item">
             <a class="nav-link" [class.active]="activeSection() === 'section_events'" (click)="navigateToSection('section_events')">{{ 'common.events' | translate }}</a>
           </li>

@@ -12,7 +12,7 @@ interface DisplayEvent {
   id: string;
   title: string;
   description: string;
-  department: string;
+  company: string;
   eventUrl?: string;
   eventDate?: Date;
   primaryFileUrl?: string;
@@ -85,7 +85,7 @@ export class EventDetailComponent implements OnInit {
       id: event.id,
       title: this.isArabic ? event.titleAr : event.titleEn,
       description: (this.isArabic ? event.descriptionAr : event.descriptionEn) || '',
-      department: (this.isArabic ? event.departmentNameAr : event.departmentNameEn) || '',
+      company: (this.isArabic ? event.companyNameAr : event.companyName) || '',
       eventUrl: event.eventUrl,
       eventDate: event.eventDate,
       primaryFileUrl: event.primaryFileUrl

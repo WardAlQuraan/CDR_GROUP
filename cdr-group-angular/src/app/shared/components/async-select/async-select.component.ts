@@ -35,6 +35,7 @@ export class AsyncSelectComponent<T> implements OnInit, OnDestroy, OnChanges, Co
   @Input() optionMapper!: OptionMapper<T>;
   @Input() filterFn?: (item: T) => boolean;
   @Input() resetOnDataSourceChange = true;
+  @Input() required = false;
 
   @Output() selectionChange = new EventEmitter<any>();
 

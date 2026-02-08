@@ -7,7 +7,7 @@ h2[mat-dialog-title] {
   padding: 1.25rem 1.5rem;
   font-size: 1.25rem;
   font-weight: 600;
-  background: linear-gradient(135deg, var(--primary-color) 0%, #059669 100%);
+  background: var(--secondary-color);
   color: var(--white-color);
   border-bottom: none;
   letter-spacing: 0.3px;
@@ -137,11 +137,11 @@ mat-dialog-content {
         background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
 
         .section-icon {
-          background: linear-gradient(135deg, var(--primary-color) 0%, #059669 100%);
+          background: linear-gradient(135deg, var(--primary-color) 0%, #C4962E 100%);
         }
 
         .section-title {
-          color: #047857;
+          color: var(--primary-color);
         }
       }
 
@@ -339,11 +339,11 @@ mat-dialog-actions {
 
   // Save/Submit button styling
   button[mat-raised-button] {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #059669 100%);
-    box-shadow: 0 2px 8px rgba(129, 178, 154, 0.4);
+    background: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(217, 169, 62, 0.4);
 
     &:hover:not([disabled]) {
-      box-shadow: 0 4px 12px rgba(129, 178, 154, 0.5);
+      box-shadow: 0 4px 12px rgba(217, 169, 62, 0.5);
       transform: translateY(-1px);
     }
 

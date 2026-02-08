@@ -6,9 +6,9 @@ export interface EventDto {
   descriptionAr?: string;
   eventUrl?: string;
   eventDate?: Date;
-  departmentId?: string;
-  departmentNameEn?: string;
-  departmentNameAr?: string;
+  companyId?: string;
+  companyName?: string;
+  companyNameAr?: string;
   primaryFileUrl?: string;
 
   createdAt: Date;
@@ -28,7 +28,7 @@ export interface CreateEventDto {
   descriptionAr?: string;
   eventUrl?: string;
   eventDate?: Date;
-  departmentId?: string;
+  companyId?: string;
 }
 
 export interface UpdateEventDto {
@@ -38,5 +38,5 @@ export interface UpdateEventDto {
   descriptionAr?: string;
   eventUrl?: string;
   eventDate?: Date;
-  departmentId?: string;
+  companyId?: string;
 }
