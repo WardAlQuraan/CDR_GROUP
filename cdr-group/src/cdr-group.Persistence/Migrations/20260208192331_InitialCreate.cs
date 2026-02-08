@@ -281,7 +281,7 @@ namespace cdr_group.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     ParentDepartmentId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
-                    CompanyId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    CompanyId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     ManagerId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
@@ -299,7 +299,7 @@ namespace cdr_group.Persistence.Migrations
                         column: x => x.CompanyId,
                         principalTable: "Companies",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Departments_Departments_ParentDepartmentId",
                         column: x => x.ParentDepartmentId,
@@ -457,16 +457,9 @@ namespace cdr_group.Persistence.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.InsertData(
-                table: "Departments",
-                columns: new[] { "Id", "Code", "CompanyId", "CreatedAt", "CreatedBy", "DescriptionAr", "DescriptionEn", "IsActive", "IsDeleted", "ManagerId", "NameAr", "NameEn", "ParentDepartmentId", "UpdatedAt", "UpdatedBy" },
-                values: new object[,]
-                {
-                    { new Guid("44444444-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "IT", null, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "قسم تكنولوجيا المعلومات وتطوير البرمجيات", "IT and Software Development department", true, false, null, "تكنولوجيا المعلومات", "Information Technology", null, null, null },
-                    { new Guid("44444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), "HR", null, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "قسم الموارد البشرية وشؤون الموظفين", "Human Resources and Personnel department", true, false, null, "الموارد البشرية", "Human Resources", null, null, null },
-                    { new Guid("44444444-cccc-cccc-cccc-cccccccccccc"), "FIN", null, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "قسم المالية والمحاسبة", "Finance and Accounting department", true, false, null, "المالية", "Finance", null, null, null },
-                    { new Guid("44444444-dddd-dddd-dddd-dddddddddddd"), "OPS", null, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "قسم العمليات والخدمات اللوجستية", "Operations and Logistics department", true, false, null, "العمليات", "Operations", null, null, null },
-                    { new Guid("44444444-eeee-eeee-eeee-eeeeeeeeeeee"), "MKT", null, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "قسم التسويق والمبيعات", "Marketing and Sales department", true, false, null, "التسويق", "Marketing", null, null, null }
-                });
+                table: "Companies",
+                columns: new[] { "Id", "Code", "CreatedAt", "CreatedBy", "DescriptionAr", "DescriptionEn", "IsActive", "IsDeleted", "NameAr", "NameEn", "UpdatedAt", "UpdatedBy" },
+                values: new object[] { new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"), "CDR", new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "شركة مجموعة سي دي آر", "CDR Group Company", true, false, "مجموعة سي دي آر", "CDR Group", null, null });
 
             migrationBuilder.InsertData(
                 table: "Permissions",
@@ -474,6 +467,7 @@ namespace cdr_group.Persistence.Migrations
                 values: new object[,]
                 {
                     { new Guid("11111111-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "Activate/Deactivate users", false, "Users", "users.activate", null, null },
+                    { new Guid("22222222-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "View employees", false, "Employees", "employees.read", null, null },
                     { new Guid("22222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "Create employees", false, "Employees", "employees.create", null, null },
                     { new Guid("22222222-cccc-cccc-cccc-cccccccccccc"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "Update employees", false, "Employees", "employees.update", null, null },
                     { new Guid("22222222-dddd-dddd-dddd-dddddddddddd"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "Delete employees", false, "Employees", "employees.delete", null, null },
@@ -529,15 +523,15 @@ namespace cdr_group.Persistence.Migrations
                 values: new object[] { new Guid("33333333-3333-3333-3333-333333333333"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "admin@cdrgroup.com", true, 0, "System", true, false, null, "Administrator", null, "$2a$11$oTDZps5ZuNoGttww.CywKero5c9rhBPEC2LRqYCc0ueL8VDIZEL/.", null, null, null, "admin" });
 
             migrationBuilder.InsertData(
-                table: "Positions",
-                columns: new[] { "Id", "Code", "CreatedAt", "CreatedBy", "DepartmentId", "DescriptionAr", "DescriptionEn", "IsActive", "IsDeleted", "MaxSalary", "MinSalary", "NameAr", "NameEn", "UpdatedAt", "UpdatedBy" },
+                table: "Departments",
+                columns: new[] { "Id", "Code", "CompanyId", "CreatedAt", "CreatedBy", "DescriptionAr", "DescriptionEn", "IsActive", "IsDeleted", "ManagerId", "NameAr", "NameEn", "ParentDepartmentId", "UpdatedAt", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { new Guid("66666666-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "SR-DEV", new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, new Guid("44444444-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "مطور برمجيات أول مسؤول عن المهام التقنية المعقدة", "Senior software developer responsible for complex technical tasks", true, false, 15000m, 8000m, "مطور أول", "Senior Developer", null, null },
-                    { new Guid("66666666-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), "JR-DEV", new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, new Guid("44444444-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "مطور برمجيات مبتدئ يتعلم ويطور مهاراته", "Junior software developer learning and growing skills", true, false, 6000m, 3000m, "مطور مبتدئ", "Junior Developer", null, null },
-                    { new Guid("66666666-cccc-cccc-cccc-cccccccccccc"), "HR-MGR", new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, new Guid("44444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), "مدير قسم الموارد البشرية", "Human resources department manager", true, false, 18000m, 10000m, "مدير الموارد البشرية", "HR Manager", null, null },
-                    { new Guid("66666666-dddd-dddd-dddd-dddddddddddd"), "HR-SPEC", new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, new Guid("44444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), "أخصائي موارد بشرية يتعامل مع التوظيف وعلاقات الموظفين", "Human resources specialist handling recruitment and employee relations", true, false, 8000m, 4000m, "أخصائي موارد بشرية", "HR Specialist", null, null },
-                    { new Guid("66666666-eeee-eeee-eeee-eeeeeeeeeeee"), "ACCT", new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, new Guid("44444444-cccc-cccc-cccc-cccccccccccc"), "محاسب مالي مسؤول عن السجلات المالية", "Financial accountant responsible for financial records", true, false, 10000m, 5000m, "محاسب", "Accountant", null, null }
+                    { new Guid("44444444-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "IT", new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "قسم تكنولوجيا المعلومات وتطوير البرمجيات", "IT and Software Development department", true, false, null, "تكنولوجيا المعلومات", "Information Technology", null, null, null },
+                    { new Guid("44444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), "HR", new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "قسم الموارد البشرية وشؤون الموظفين", "Human Resources and Personnel department", true, false, null, "الموارد البشرية", "Human Resources", null, null, null },
+                    { new Guid("44444444-cccc-cccc-cccc-cccccccccccc"), "FIN", new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "قسم المالية والمحاسبة", "Finance and Accounting department", true, false, null, "المالية", "Finance", null, null, null },
+                    { new Guid("44444444-dddd-dddd-dddd-dddddddddddd"), "OPS", new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "قسم العمليات والخدمات اللوجستية", "Operations and Logistics department", true, false, null, "العمليات", "Operations", null, null, null },
+                    { new Guid("44444444-eeee-eeee-eeee-eeeeeeeeeeee"), "MKT", new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "قسم التسويق والمبيعات", "Marketing and Sales department", true, false, null, "التسويق", "Marketing", null, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -552,68 +546,82 @@ namespace cdr_group.Persistence.Migrations
                     { new Guid("00000000-0000-0000-0000-000000000005"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("11111111-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
                     { new Guid("00000000-0000-0000-0000-000000000006"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
                     { new Guid("00000000-0000-0000-0000-000000000007"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000008"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000009"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-cccc-cccc-cccc-cccccccccccc"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000010"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-dddd-dddd-dddd-dddddddddddd"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000011"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000012"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-ffff-ffff-ffff-ffffffffffff"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000013"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000014"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000015"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-cccc-cccc-cccc-cccccccccccc"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000016"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-dddd-dddd-dddd-dddddddddddd"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000017"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000018"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("55555555-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000019"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("55555555-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000020"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("55555555-cccc-cccc-cccc-cccccccccccc"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000021"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("55555555-dddd-dddd-dddd-dddddddddddd"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000022"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("77777777-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000023"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("77777777-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000024"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("77777777-cccc-cccc-cccc-cccccccccccc"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000025"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("77777777-dddd-dddd-dddd-dddddddddddd"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000026"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("99999999-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000027"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("99999999-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000028"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("99999999-cccc-cccc-cccc-cccccccccccc"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000029"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("99999999-dddd-dddd-dddd-dddddddddddd"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000030"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("88888888-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000031"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("88888888-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000032"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("88888888-cccc-cccc-cccc-cccccccccccc"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000033"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("88888888-dddd-dddd-dddd-dddddddddddd"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000008"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000009"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000010"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-cccc-cccc-cccc-cccccccccccc"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000011"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-dddd-dddd-dddd-dddddddddddd"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000012"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000013"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-ffff-ffff-ffff-ffffffffffff"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000014"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000015"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000016"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-cccc-cccc-cccc-cccccccccccc"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000017"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-dddd-dddd-dddd-dddddddddddd"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000018"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000019"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("55555555-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000020"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("55555555-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000021"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("55555555-cccc-cccc-cccc-cccccccccccc"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000022"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("55555555-dddd-dddd-dddd-dddddddddddd"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000023"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("77777777-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000024"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("77777777-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000025"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("77777777-cccc-cccc-cccc-cccccccccccc"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000026"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("77777777-dddd-dddd-dddd-dddddddddddd"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000027"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("99999999-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000028"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("99999999-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000029"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("99999999-cccc-cccc-cccc-cccccccccccc"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000030"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("99999999-dddd-dddd-dddd-dddddddddddd"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000031"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("88888888-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000032"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("88888888-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000033"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("88888888-cccc-cccc-cccc-cccccccccccc"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000034"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("88888888-dddd-dddd-dddd-dddddddddddd"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
                     { new Guid("00000000-0000-0000-1111-000000000001"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
                     { new Guid("00000000-0000-0000-1111-000000000002"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
                     { new Guid("00000000-0000-0000-1111-000000000003"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
                     { new Guid("00000000-0000-0000-1111-000000000004"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000005"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000006"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-cccc-cccc-cccc-cccccccccccc"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000007"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-dddd-dddd-dddd-dddddddddddd"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000008"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000009"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-ffff-ffff-ffff-ffffffffffff"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000010"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000011"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000012"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-cccc-cccc-cccc-cccccccccccc"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000013"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-dddd-dddd-dddd-dddddddddddd"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000014"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000015"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("55555555-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000016"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("55555555-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000017"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("55555555-cccc-cccc-cccc-cccccccccccc"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000018"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("55555555-dddd-dddd-dddd-dddddddddddd"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000019"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("77777777-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000020"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("77777777-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000021"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("77777777-cccc-cccc-cccc-cccccccccccc"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000022"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("77777777-dddd-dddd-dddd-dddddddddddd"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000023"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("99999999-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000024"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("99999999-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000025"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("99999999-cccc-cccc-cccc-cccccccccccc"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000026"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("99999999-dddd-dddd-dddd-dddddddddddd"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000027"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("88888888-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000028"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("88888888-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000029"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("88888888-cccc-cccc-cccc-cccccccccccc"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000030"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("88888888-dddd-dddd-dddd-dddddddddddd"), new Guid("55555555-5555-5555-5555-555555555555"), null, null }
+                    { new Guid("00000000-0000-0000-1111-000000000005"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000006"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000007"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-cccc-cccc-cccc-cccccccccccc"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000008"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-dddd-dddd-dddd-dddddddddddd"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000009"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000010"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("22222222-ffff-ffff-ffff-ffffffffffff"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000011"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000012"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000013"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-cccc-cccc-cccc-cccccccccccc"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000014"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-dddd-dddd-dddd-dddddddddddd"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000015"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("33333333-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000016"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("55555555-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000017"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("55555555-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000018"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("55555555-cccc-cccc-cccc-cccccccccccc"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000019"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("55555555-dddd-dddd-dddd-dddddddddddd"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000020"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("77777777-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000021"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("77777777-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000022"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("77777777-cccc-cccc-cccc-cccccccccccc"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000023"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("77777777-dddd-dddd-dddd-dddddddddddd"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000024"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("99999999-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000025"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("99999999-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000026"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("99999999-cccc-cccc-cccc-cccccccccccc"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000027"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("99999999-dddd-dddd-dddd-dddddddddddd"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000028"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("88888888-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000029"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("88888888-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000030"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("88888888-cccc-cccc-cccc-cccccccccccc"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000031"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("88888888-dddd-dddd-dddd-dddddddddddd"), new Guid("55555555-5555-5555-5555-555555555555"), null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "Id", "CreatedAt", "CreatedBy", "IsDeleted", "RoleId", "UpdatedAt", "UpdatedBy", "UserId" },
                 values: new object[] { new Guid("44444444-4444-4444-4444-444444444444"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("11111111-1111-1111-1111-111111111111"), null, null, new Guid("33333333-3333-3333-3333-333333333333") });
+
+            migrationBuilder.InsertData(
+                table: "Positions",
+                columns: new[] { "Id", "Code", "CreatedAt", "CreatedBy", "DepartmentId", "DescriptionAr", "DescriptionEn", "IsActive", "IsDeleted", "MaxSalary", "MinSalary", "NameAr", "NameEn", "UpdatedAt", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { new Guid("66666666-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "SR-DEV", new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, new Guid("44444444-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "مطور برمجيات أول مسؤول عن المهام التقنية المعقدة", "Senior software developer responsible for complex technical tasks", true, false, 15000m, 8000m, "مطور أول", "Senior Developer", null, null },
+                    { new Guid("66666666-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), "JR-DEV", new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, new Guid("44444444-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "مطور برمجيات مبتدئ يتعلم ويطور مهاراته", "Junior software developer learning and growing skills", true, false, 6000m, 3000m, "مطور مبتدئ", "Junior Developer", null, null },
+                    { new Guid("66666666-cccc-cccc-cccc-cccccccccccc"), "HR-MGR", new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, new Guid("44444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), "مدير قسم الموارد البشرية", "Human resources department manager", true, false, 18000m, 10000m, "مدير الموارد البشرية", "HR Manager", null, null },
+                    { new Guid("66666666-dddd-dddd-dddd-dddddddddddd"), "HR-SPEC", new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, new Guid("44444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), "أخصائي موارد بشرية يتعامل مع التوظيف وعلاقات الموظفين", "Human resources specialist handling recruitment and employee relations", true, false, 8000m, 4000m, "أخصائي موارد بشرية", "HR Specialist", null, null },
+                    { new Guid("66666666-eeee-eeee-eeee-eeeeeeeeeeee"), "ACCT", new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, new Guid("44444444-cccc-cccc-cccc-cccccccccccc"), "محاسب مالي مسؤول عن السجلات المالية", "Financial accountant responsible for financial records", true, false, 10000m, 5000m, "محاسب", "Accountant", null, null }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Companies_Code",
@@ -622,9 +630,9 @@ namespace cdr_group.Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Departments_Code",
+                name: "IX_Departments_Code_CompanyId",
                 table: "Departments",
-                column: "Code",
+                columns: new[] { "Code", "CompanyId" },
                 unique: true);
 
             migrationBuilder.CreateIndex(

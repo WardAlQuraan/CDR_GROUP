@@ -97,6 +97,7 @@ namespace cdr_group.Persistence.Data
         public DbSet<FileAttachment> FileAttachments { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<ContactUs> ContactUsMessages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -199,11 +200,12 @@ namespace cdr_group.Persistence.Data
                 entity.Property(e => e.Phone).HasMaxLength(20);
                 entity.Property(e => e.Salary).HasPrecision(18, 2);
 
-                // Department relationship
+                // Department relationship (required)
                 entity.HasOne(e => e.Department)
                     .WithMany(d => d.Employees)
                     .HasForeignKey(e => e.DepartmentId)
-                    .OnDelete(DeleteBehavior.SetNull);
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
 
                 // Position relationship
                 entity.HasOne(e => e.Position)
@@ -240,18 +242,19 @@ namespace cdr_group.Persistence.Data
             modelBuilder.Entity<Department>(entity =>
             {
                 entity.HasKey(e => e.Id);
-                entity.HasIndex(e => e.Code).IsUnique();
+                entity.HasIndex(e => new { e.Code, e.CompanyId }).IsUnique();
                 entity.Property(e => e.Code).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.NameEn).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.NameAr).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.DescriptionEn).HasMaxLength(500);
                 entity.Property(e => e.DescriptionAr).HasMaxLength(500);
 
-                // Company relationship
+                // Company relationship (required)
                 entity.HasOne(e => e.Company)
                     .WithMany(c => c.Departments)
                     .HasForeignKey(e => e.CompanyId)
-                    .OnDelete(DeleteBehavior.SetNull);
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
 
                 // Self-referencing relationship for parent department
                 entity.HasOne(e => e.ParentDepartment)
@@ -310,17 +313,21 @@ namespace cdr_group.Persistence.Data
                 entity.Property(e => e.DescriptionAr).HasMaxLength(2000);
                 entity.Property(e => e.EventUrl).HasMaxLength(500);
 
-                // Company relationship (optional)
+                // Company relationship (required)
                 entity.HasOne(e => e.Company)
                     .WithMany(c => c.Events)
                     .HasForeignKey(e => e.CompanyId)
-                    .OnDelete(DeleteBehavior.SetNull);
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
 
-                // Department relationship (optional)
-                entity.HasOne(e => e.Department)
-                    .WithMany()
-                    .HasForeignKey(e => e.DepartmentId)
-                    .OnDelete(DeleteBehavior.SetNull);
+            // ContactUs configuration
+            modelBuilder.Entity<ContactUs>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.FullName).IsRequired().HasMaxLength(200);
+                entity.Property(e => e.Email).IsRequired().HasMaxLength(256);
+                entity.Property(e => e.Message).IsRequired().HasMaxLength(2000);
             });
 
             // Seed default data
@@ -344,6 +351,7 @@ namespace cdr_group.Persistence.Data
             var rolesManageId = Guid.Parse("ffffffff-ffff-ffff-ffff-ffffffffffff");
 
             // Employee Permission IDs
+            var employeesReadId = Guid.Parse("22222222-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
             var employeesCreateId = Guid.Parse("22222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb");
             var employeesUpdateId = Guid.Parse("22222222-cccc-cccc-cccc-cccccccccccc");
             var employeesDeleteId = Guid.Parse("22222222-dddd-dddd-dddd-dddddddddddd");
@@ -381,12 +389,20 @@ namespace cdr_group.Persistence.Data
             var eventsUpdateId = Guid.Parse("88888888-cccc-cccc-cccc-cccccccccccc");
             var eventsDeleteId = Guid.Parse("88888888-dddd-dddd-dddd-dddddddddddd");
 
+            // ContactUs Permission IDs
+            var contactusReadId = Guid.Parse("aabbccdd-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
+            var contactusUpdateId = Guid.Parse("aabbccdd-bbbb-bbbb-bbbb-bbbbbbbbbbbb");
+            var contactusDeleteId = Guid.Parse("aabbccdd-cccc-cccc-cccc-cccccccccccc");
+
             // Department IDs
             var itDepartmentId = Guid.Parse("44444444-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
             var hrDepartmentId = Guid.Parse("44444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb");
             var financeDepartmentId = Guid.Parse("44444444-cccc-cccc-cccc-cccccccccccc");
             var operationsDepartmentId = Guid.Parse("44444444-dddd-dddd-dddd-dddddddddddd");
             var marketingDepartmentId = Guid.Parse("44444444-eeee-eeee-eeee-eeeeeeeeeeee");
+
+            // Company IDs
+            var cdrGroupCompanyId = Guid.Parse("aabbccdd-aabb-aabb-aabb-aabbccddeeff");
 
             // Position IDs
             var seniorDeveloperId = Guid.Parse("66666666-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
@@ -436,6 +452,7 @@ namespace cdr_group.Persistence.Data
                 new Permission { Id = usersActivateId, Name = PermissionConstants.Users.Activate, Description = "Activate/Deactivate users", Module = "Users", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = rolesReadId, Name = PermissionConstants.Roles.Read, Description = "View roles", Module = "Roles", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = rolesManageId, Name = PermissionConstants.Roles.Manage, Description = "Manage roles", Module = "Roles", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = employeesReadId, Name = PermissionConstants.Employees.Read, Description = "View employees", Module = "Employees", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = employeesCreateId, Name = PermissionConstants.Employees.Create, Description = "Create employees", Module = "Employees", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = employeesUpdateId, Name = PermissionConstants.Employees.Update, Description = "Update employees", Module = "Employees", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = employeesDeleteId, Name = PermissionConstants.Employees.Delete, Description = "Delete employees", Module = "Employees", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
@@ -467,6 +484,10 @@ namespace cdr_group.Persistence.Data
                 new Permission { Id = eventsCreateId, Name = PermissionConstants.Events.Create, Description = "Create events", Module = "Events", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = eventsUpdateId, Name = PermissionConstants.Events.Update, Description = "Update events", Module = "Events", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = eventsDeleteId, Name = PermissionConstants.Events.Delete, Description = "Delete events", Module = "Events", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                // ContactUs permissions
+                new Permission { Id = contactusReadId, Name = PermissionConstants.ContactUs.Read, Description = "View contact us messages", Module = "ContactUs", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = contactusUpdateId, Name = PermissionConstants.ContactUs.Update, Description = "Update contact us messages", Module = "ContactUs", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = contactusDeleteId, Name = PermissionConstants.ContactUs.Delete, Description = "Delete contact us messages", Module = "ContactUs", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
             };
 
             modelBuilder.Entity<Permission>().HasData(permissions);
@@ -522,6 +543,21 @@ namespace cdr_group.Persistence.Data
             });
 
             // Seed default departments
+            modelBuilder.Entity<Company>().HasData(
+                new Company
+                {
+                    Id = cdrGroupCompanyId,
+                    Code = "CDR",
+                    NameEn = "CDR Group",
+                    NameAr = "مجموعة سي دي آر",
+                    DescriptionEn = "CDR Group Company",
+                    DescriptionAr = "شركة مجموعة سي دي آر",
+                    IsActive = true,
+                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                    IsDeleted = false
+                }
+            );
+
             modelBuilder.Entity<Department>().HasData(
                 new Department
                 {
@@ -532,6 +568,7 @@ namespace cdr_group.Persistence.Data
                     DescriptionEn = "IT and Software Development department",
                     DescriptionAr = "قسم تكنولوجيا المعلومات وتطوير البرمجيات",
                     IsActive = true,
+                    CompanyId = cdrGroupCompanyId,
                     CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     IsDeleted = false
                 },
@@ -544,6 +581,7 @@ namespace cdr_group.Persistence.Data
                     DescriptionEn = "Human Resources and Personnel department",
                     DescriptionAr = "قسم الموارد البشرية وشؤون الموظفين",
                     IsActive = true,
+                    CompanyId = cdrGroupCompanyId,
                     CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     IsDeleted = false
                 },
@@ -556,6 +594,7 @@ namespace cdr_group.Persistence.Data
                     DescriptionEn = "Finance and Accounting department",
                     DescriptionAr = "قسم المالية والمحاسبة",
                     IsActive = true,
+                    CompanyId = cdrGroupCompanyId,
                     CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     IsDeleted = false
                 },
@@ -568,6 +607,7 @@ namespace cdr_group.Persistence.Data
                     DescriptionEn = "Operations and Logistics department",
                     DescriptionAr = "قسم العمليات والخدمات اللوجستية",
                     IsActive = true,
+                    CompanyId = cdrGroupCompanyId,
                     CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     IsDeleted = false
                 },
@@ -580,6 +620,7 @@ namespace cdr_group.Persistence.Data
                     DescriptionEn = "Marketing and Sales department",
                     DescriptionAr = "قسم التسويق والمبيعات",
                     IsActive = true,
+                    CompanyId = cdrGroupCompanyId,
                     CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     IsDeleted = false
                 }

@@ -77,11 +77,7 @@ namespace cdr_group.Application.Services
 
             if (managerId.HasValue)
             {
-                var manager = await UnitOfWork.Employees.GetByIdAsync(managerId.Value);
-                if (manager == null)
-                {
-                    throw new InvalidOperationException("Manager not found.");
-                }
+                await ValidateEntityExistsAsync(UnitOfWork.Employees, managerId.Value, "Manager");
             }
 
             department.ManagerId = managerId;
@@ -93,67 +89,28 @@ namespace cdr_group.Application.Services
 
         protected override async Task ValidateCreateAsync(CreateDepartmentDto dto)
         {
-            if (await UnitOfWork.Departments.DepartmentCodeExistsAsync(dto.Code))
-            {
-                throw new InvalidOperationException("Department code already exists.");
-            }
-
-            if (dto.ParentDepartmentId.HasValue)
-            {
-                var parentDepartment = await UnitOfWork.Departments.GetByIdAsync(dto.ParentDepartmentId.Value);
-                if (parentDepartment == null)
-                {
-                    throw new InvalidOperationException("Parent department not found.");
-                }
-            }
-
-            if (dto.ManagerId.HasValue)
-            {
-                var manager = await UnitOfWork.Employees.GetByIdAsync(dto.ManagerId.Value);
-                if (manager == null)
-                {
-                    throw new InvalidOperationException("Manager not found.");
-                }
-            }
+            await ValidateEntityExistsAsync(UnitOfWork.Companies, dto.CompanyId, "Company");
+            await ValidateCodeUniqueAsync(dto.Code, dto.CompanyId);
+            await ValidateParentDepartmentAsync(dto.ParentDepartmentId, null, dto.CompanyId);
+            await ValidateManagerAsync(dto.ManagerId);
         }
 
         protected override async Task ValidateUpdateAsync(Guid id, UpdateDepartmentDto dto, Department entity)
         {
+            if (dto.CompanyId.HasValue)
+            {
+                await ValidateEntityExistsAsync(UnitOfWork.Companies, dto.CompanyId.Value, "Company");
+            }
+
+            var effectiveCompanyId = dto.CompanyId ?? entity.CompanyId;
+
             if (dto.Code != null && dto.Code != entity.Code)
             {
-                if (await UnitOfWork.Departments.DepartmentCodeExistsAsync(dto.Code, id))
-                {
-                    throw new InvalidOperationException("Department code already exists.");
-                }
+                await ValidateCodeUniqueAsync(dto.Code, effectiveCompanyId, id);
             }
 
-            if (dto.ParentDepartmentId.HasValue)
-            {
-                if (dto.ParentDepartmentId == id)
-                {
-                    throw new InvalidOperationException("A department cannot be its own parent.");
-                }
-
-                if (await IsCircularReference(id, dto.ParentDepartmentId.Value))
-                {
-                    throw new InvalidOperationException("Cannot assign parent department: circular reference detected.");
-                }
-
-                var parentDepartment = await UnitOfWork.Departments.GetByIdAsync(dto.ParentDepartmentId.Value);
-                if (parentDepartment == null)
-                {
-                    throw new InvalidOperationException("Parent department not found.");
-                }
-            }
-
-            if (dto.ManagerId.HasValue)
-            {
-                var manager = await UnitOfWork.Employees.GetByIdAsync(dto.ManagerId.Value);
-                if (manager == null)
-                {
-                    throw new InvalidOperationException("Manager not found.");
-                }
-            }
+            await ValidateParentDepartmentAsync(dto.ParentDepartmentId, id, effectiveCompanyId);
+            await ValidateManagerAsync(dto.ManagerId);
         }
 
         protected override async Task ValidateDeleteAsync(Guid id, Department entity)
@@ -169,6 +126,57 @@ namespace cdr_group.Application.Services
             }
         }
 
+        private async Task ValidateEntityExistsAsync<T>(IRepository<T> repository, Guid id, string entityName)
+            where T : Domain.Entities.Base.BaseEntity
+        {
+            if (!await repository.ExistsAsync(id))
+            {
+                throw new InvalidOperationException($"{entityName} not found.");
+            }
+        }
+
+        private async Task ValidateCodeUniqueAsync(string code, Guid companyId, Guid? excludeId = null)
+        {
+            if (await UnitOfWork.Departments.DepartmentCodeExistsAsync(code, companyId, excludeId))
+            {
+                throw new InvalidOperationException("Department code already exists in this company.");
+            }
+        }
+
+        private async Task ValidateParentDepartmentAsync(Guid? parentDepartmentId, Guid? currentDepartmentId, Guid companyId)
+        {
+            if (!parentDepartmentId.HasValue) return;
+
+            if (parentDepartmentId == currentDepartmentId)
+            {
+                throw new InvalidOperationException("A department cannot be its own parent.");
+            }
+
+            var parentDepartment = await UnitOfWork.Departments.GetByIdAsync(parentDepartmentId.Value);
+            if (parentDepartment == null)
+            {
+                throw new InvalidOperationException("Parent department not found.");
+            }
+
+            if (parentDepartment.CompanyId != companyId)
+            {
+                throw new InvalidOperationException("Parent department must belong to the same company.");
+            }
+
+            if (currentDepartmentId.HasValue && await IsCircularReference(currentDepartmentId.Value, parentDepartmentId.Value))
+            {
+                throw new InvalidOperationException("Cannot assign parent department: circular reference detected.");
+            }
+        }
+
+        private async Task ValidateManagerAsync(Guid? managerId)
+        {
+            if (managerId.HasValue)
+            {
+                await ValidateEntityExistsAsync(UnitOfWork.Employees, managerId.Value, "Manager");
+            }
+        }
+
         private async Task<bool> IsCircularReference(Guid departmentId, Guid potentialParentId)
         {
             var visited = new HashSet<Guid> { departmentId };
@@ -176,12 +184,10 @@ namespace cdr_group.Application.Services
 
             while (currentId != Guid.Empty)
             {
-                if (visited.Contains(currentId))
+                if (!visited.Add(currentId))
                 {
                     return true;
                 }
-
-                visited.Add(currentId);
 
                 var department = await UnitOfWork.Departments.GetByIdAsync(currentId);
                 if (department?.ParentDepartmentId == null)

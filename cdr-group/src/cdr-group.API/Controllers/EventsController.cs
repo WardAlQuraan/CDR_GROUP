@@ -16,12 +16,18 @@ namespace cdr_group.API.Controllers
         public EventsController(IEventService eventService) : base(eventService)
         {
         }
+        [NonAction]
+        public override Task<ActionResult<ApiResponse<PagedResult<EventDto>>>> GetPaged([FromQuery] PagedRequest request)
+        {
+            return base.GetPaged(request);
+        }
 
         [HttpGet]
         [AllowAnonymous]
-        public override async Task<ActionResult<ApiResponse<PagedResult<EventDto>>>> GetPaged([FromQuery] PagedRequest request)
+        public async Task<ActionResult<ApiResponse<PagedResult<EventDto>>>> GetPaged([FromQuery] EventPagedRequest request)
         {
-            return await base.GetPaged(request);
+            var result = await Service.GetPagedAsync(request);
+            return Ok(ApiResponse<PagedResult<EventDto>>.SuccessResponse(result));
         }
 
         [HttpGet("{id:guid}")]
@@ -31,11 +37,11 @@ namespace cdr_group.API.Controllers
             return await base.GetById(id);
         }
 
-        [HttpGet("by-department/{departmentId:guid}")]
+        [HttpGet("by-company/{companyId:guid}")]
         [AllowAnonymous]
-        public async Task<ActionResult<ApiResponse<IEnumerable<EventDto>>>> GetByDepartment(Guid departmentId)
+        public async Task<ActionResult<ApiResponse<IEnumerable<EventDto>>>> GetByCompany(Guid companyId)
         {
-            var events = await Service.GetByDepartmentIdAsync(departmentId);
+            var events = await Service.GetByCompanyIdAsync(companyId);
             return Ok(ApiResponse<IEnumerable<EventDto>>.SuccessResponse(events));
         }
 

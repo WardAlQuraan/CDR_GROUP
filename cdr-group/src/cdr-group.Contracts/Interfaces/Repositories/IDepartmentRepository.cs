@@ -13,7 +13,7 @@ namespace cdr_group.Contracts.Interfaces.Repositories
         Task<IEnumerable<Department>> GetRootDepartmentsAsync();
         Task<IEnumerable<Department>> GetActiveDepartmentsAsync();
         Task<(IEnumerable<Department> Items, int TotalCount)> GetDepartmentsPagedAsync(PagedRequest request);
-        Task<bool> DepartmentCodeExistsAsync(string code, Guid? excludeId = null);
+        Task<bool> DepartmentCodeExistsAsync(string code, Guid companyId, Guid? excludeId = null);
         Task<bool> HasEmployeesAsync(Guid departmentId);
         Task<bool> HasSubDepartmentsAsync(Guid departmentId);
     }

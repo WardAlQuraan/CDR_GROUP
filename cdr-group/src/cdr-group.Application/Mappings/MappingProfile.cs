@@ -1,4 +1,5 @@
 using AutoMapper;
+using cdr_group.Contracts.DTOs.ContactUs;
 using cdr_group.Contracts.DTOs.Company;
 using cdr_group.Contracts.DTOs.Department;
 using cdr_group.Contracts.DTOs.Employee;
@@ -167,16 +168,21 @@ namespace cdr_group.Application.Mappings
                 .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
                     src.Company != null ? src.Company.NameEn : null))
                 .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
-                    src.Company != null ? src.Company.NameAr : null))
-                .ForMember(dest => dest.DepartmentNameEn, opt => opt.MapFrom(src =>
-                    src.Department != null ? src.Department.NameEn : null))
-                .ForMember(dest => dest.DepartmentNameAr, opt => opt.MapFrom(src =>
-                    src.Department != null ? src.Department.NameAr : null));
+                    src.Company != null ? src.Company.NameAr : null));
 
             CreateMap<CreateEventDto, Event>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
 
             CreateMap<UpdateEventDto, Event>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            // ContactUs mappings
+            CreateMap<ContactUs, ContactUsDto>();
+
+            CreateMap<CreateContactUsDto, ContactUs>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+            CreateMap<UpdateContactUsDto, ContactUs>()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
         }
     }

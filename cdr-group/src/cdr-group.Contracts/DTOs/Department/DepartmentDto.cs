@@ -13,7 +13,7 @@ namespace cdr_group.Contracts.DTOs.Department
         public bool IsActive { get; set; }
 
         public Guid? ParentDepartmentId { get; set; }
-        public Guid? CompanyId { get; set; }
+        public Guid CompanyId { get; set; }
         public DepartmentBasicDto? ParentDepartment { get; set; }
 
         public Guid? ManagerId { get; set; }
@@ -66,7 +66,8 @@ namespace cdr_group.Contracts.DTOs.Department
 
         public bool IsActive { get; set; } = true;
 
-        public Guid? CompanyId { get; set; }
+        [Required]
+        public Guid CompanyId { get; set; }
         public Guid? ParentDepartmentId { get; set; }
         public Guid? ManagerId { get; set; }
     }

@@ -12,13 +12,9 @@ namespace cdr_group.Contracts.DTOs.Event
         public string? EventUrl { get; set; }
         public DateTime? EventDate { get; set; }
 
-        public Guid? CompanyId { get; set; }
-        public string? CompanyNameEn { get; set; }
-        public string? CompanyNameAr { get; set; }
-
-        public Guid? DepartmentId { get; set; }
-        public string? DepartmentNameEn { get; set; }
-        public string? DepartmentNameAr { get; set; }
+        public Guid CompanyId { get; set; }
+        public string CompanyNameEn { get; set; } = string.Empty;
+        public string CompanyNameAr { get; set; } = string.Empty;
 
         public string? PrimaryFileUrl { get; set; }
 
@@ -48,8 +44,14 @@ namespace cdr_group.Contracts.DTOs.Event
 
         public DateTime? EventDate { get; set; }
 
+        [Required]
+        public Guid CompanyId { get; set; }
+    }
+
+    public class EventPagedRequest : Common.PagedRequest
+    {
         public Guid? CompanyId { get; set; }
-        public Guid? DepartmentId { get; set; }
+        public string? CompanyCode { get; set; }
     }
 
     public class UpdateEventDto
@@ -73,6 +75,5 @@ namespace cdr_group.Contracts.DTOs.Event
         public DateTime? EventDate { get; set; }
 
         public Guid? CompanyId { get; set; }
-        public Guid? DepartmentId { get; set; }
     }
 }

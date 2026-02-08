@@ -98,18 +98,27 @@ namespace cdr_group.Application.Services
             return employeeDtos;
         }
 
-        public async Task<IEnumerable<EmployeeTreeNodeDto>> GetTreeAsync(Guid? departmentId = null)
+        public async Task<IEnumerable<EmployeeTreeNodeDto>> GetTreeAsync(GetTreeRequest request)
         {
-            IEnumerable<Domain.Entities.Employee> employees;
+            var (allEmployees, _) = await UnitOfWork.Employees.GetEmployeesPagedAsync(new PagedRequest { PageSize = int.MaxValue });
+            IEnumerable<Domain.Entities.Employee> employees = allEmployees;
 
-            if (departmentId.HasValue)
+            Guid? companyId = request.CompanyId;
+
+            if (!companyId.HasValue && !string.IsNullOrWhiteSpace(request.CompanyCode))
             {
-                employees = await UnitOfWork.Employees.GetByDepartmentIdAsync(departmentId.Value);
+                var company = await UnitOfWork.Companies.GetByCodeAsync(request.CompanyCode);
+                companyId = company?.Id;
             }
-            else
+
+            if (companyId.HasValue)
             {
-                var (allEmployees, _) = await UnitOfWork.Employees.GetEmployeesPagedAsync(new PagedRequest { PageSize = int.MaxValue });
-                employees = allEmployees;
+                employees = employees.Where(e => e.Department.CompanyId == companyId.Value);
+            }
+
+            if (request.DepartmentId.HasValue)
+            {
+                employees = employees.Where(e => e.DepartmentId == request.DepartmentId.Value);
             }
 
             var employeeList = employees.ToList();
@@ -131,8 +140,11 @@ namespace cdr_group.Application.Services
                 PositionNameEn = e.Position?.NameEn,
                 PositionNameAr = e.Position?.NameAr,
                 DepartmentId = e.DepartmentId,
-                DepartmentNameEn = e.Department?.NameEn,
-                DepartmentNameAr = e.Department?.NameAr,
+                DepartmentNameEn = e.Department.NameEn,
+                DepartmentNameAr = e.Department.NameAr,
+                CompanyId = e.Department.CompanyId,
+                CompanyNameEn = e.Department.Company?.NameEn,
+                CompanyNameAr = e.Department.Company?.NameAr,
                 ManagerId = e.ManagerId,
                 UserId = e.UserId,
                 Username = e.User?.Username,
@@ -237,16 +249,18 @@ namespace cdr_group.Application.Services
             var employee = await UnitOfWork.Employees.GetByIdAsync(employeeId);
             if (employee == null) return null;
 
-            if (departmentId.HasValue)
+            if (!departmentId.HasValue)
             {
-                var department = await UnitOfWork.Departments.GetByIdAsync(departmentId.Value);
-                if (department == null)
-                {
-                    throw new InvalidOperationException("Department not found.");
-                }
+                throw new InvalidOperationException("Department is required.");
             }
 
-            employee.DepartmentId = departmentId;
+            var department = await UnitOfWork.Departments.GetByIdAsync(departmentId.Value);
+            if (department == null)
+            {
+                throw new InvalidOperationException("Department not found.");
+            }
+
+            employee.DepartmentId = departmentId.Value;
             await UnitOfWork.Employees.UpdateAsync(employee);
             await UnitOfWork.SaveChangesAsync();
 
@@ -267,7 +281,7 @@ namespace cdr_group.Application.Services
             }
 
             await ValidateUser(dto.UserId, null, null);
-            await ValidateDepartment(dto.DepartmentId);
+            await ValidateDepartmentRequired(dto.DepartmentId);
             await ValidatePosition(dto.PositionId, dto.Salary);
         }
 
@@ -301,19 +315,19 @@ namespace cdr_group.Application.Services
             }
 
             await ValidateUser(dto.UserId, entity.UserId, id);
-            await ValidateDepartment(dto.DepartmentId);
+            if (dto.DepartmentId.HasValue)
+            {
+                await ValidateDepartmentRequired(dto.DepartmentId.Value);
+            }
             await ValidatePosition(dto.PositionId, dto.Salary);
         }
 
-        private async Task ValidateDepartment(Guid? departmentId)
+        private async Task ValidateDepartmentRequired(Guid departmentId)
         {
-            if (departmentId.HasValue)
+            var department = await UnitOfWork.Departments.GetByIdAsync(departmentId);
+            if (department == null)
             {
-                var department = await UnitOfWork.Departments.GetByIdAsync(departmentId.Value);
-                if (department == null)
-                {
-                    throw new InvalidOperationException("Department not found.");
-                }
+                throw new InvalidOperationException("Department not found.");
             }
         }
         private async Task ValidateEmployeeCode(string code)

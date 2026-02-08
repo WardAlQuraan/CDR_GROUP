@@ -67,5 +67,12 @@ namespace cdr_group.Domain.Constants
             public const string Update = "events.update";
             public const string Delete = "events.delete";
         }
+
+        public static class ContactUs
+        {
+            public const string Read = "contactus.read";
+            public const string Update = "contactus.update";
+            public const string Delete = "contactus.delete";
+        }
     }
 }

@@ -12,6 +12,6 @@ namespace cdr_group.Contracts.Interfaces.Services
         Task<EmployeeDto?> AssignManagerAsync(Guid employeeId, Guid? managerId);
         Task<EmployeeDto?> AssignDepartmentAsync(Guid employeeId, Guid? departmentId);
         Task<EmployeeDto?> LinkToUserAsync(Guid employeeId, Guid? userId);
-        Task<IEnumerable<EmployeeTreeNodeDto>> GetTreeAsync(Guid? departmentId = null);
+        Task<IEnumerable<EmployeeTreeNodeDto>> GetTreeAsync(GetTreeRequest request);
     }
 }

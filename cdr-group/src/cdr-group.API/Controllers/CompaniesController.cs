@@ -5,6 +5,7 @@ using cdr_group.Contracts.DTOs.Company;
 using cdr_group.Contracts.Interfaces.Services;
 using cdr_group.Domain.Constants;
 using cdr_group.Infrastructure.Authorization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace cdr_group.API.Controllers
 {
@@ -43,7 +44,7 @@ namespace cdr_group.API.Controllers
         }
 
         [HttpGet("active")]
-        [HasPermission(Permissions.Companies.Read)]
+        [AllowAnonymous]
         public async Task<ActionResult<ApiResponse<IEnumerable<CompanyDto>>>> GetActiveCompanies()
         {
             var companies = await Service.GetActiveCompaniesAsync();

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cdr_group.Persistence.Data;
 
@@ -11,9 +12,11 @@ using cdr_group.Persistence.Data;
 namespace cdr_group.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260208203531_com-required")]
+    partial class comrequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,47 +92,6 @@ namespace cdr_group.Persistence.Migrations
                             NameAr = "مجموعة سي دي آر",
                             NameEn = "CDR Group"
                         });
-                });
-
-            modelBuilder.Entity("cdr_group.Domain.Entities.ContactUs", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("varchar(2000)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ContactUsMessages");
                 });
 
             modelBuilder.Entity("cdr_group.Domain.Entities.Department", b =>
@@ -832,33 +794,6 @@ namespace cdr_group.Persistence.Migrations
                             IsDeleted = false,
                             Module = "Events",
                             Name = "events.delete"
-                        },
-                        new
-                        {
-                            Id = new Guid("aabbccdd-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "View contact us messages",
-                            IsDeleted = false,
-                            Module = "ContactUs",
-                            Name = "contactus.read"
-                        },
-                        new
-                        {
-                            Id = new Guid("aabbccdd-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Update contact us messages",
-                            IsDeleted = false,
-                            Module = "ContactUs",
-                            Name = "contactus.update"
-                        },
-                        new
-                        {
-                            Id = new Guid("aabbccdd-cccc-cccc-cccc-cccccccccccc"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Delete contact us messages",
-                            IsDeleted = false,
-                            Module = "ContactUs",
-                            Name = "contactus.delete"
                         });
                 });
 
@@ -1294,30 +1229,6 @@ namespace cdr_group.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("00000000-0000-0000-0000-000000000035"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
-                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000036"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
-                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000037"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-cccc-cccc-cccc-cccccccccccc"),
-                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
-                        },
-                        new
-                        {
                             Id = new Guid("00000000-0000-0000-1111-000000000001"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
@@ -1562,30 +1473,6 @@ namespace cdr_group.Persistence.Migrations
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
                             PermissionId = new Guid("88888888-dddd-dddd-dddd-dddddddddddd"),
-                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-1111-000000000032"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
-                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-1111-000000000033"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
-                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-1111-000000000034"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-cccc-cccc-cccc-cccccccccccc"),
                             RoleId = new Guid("55555555-5555-5555-5555-555555555555")
                         });
                 });

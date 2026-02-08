@@ -23,7 +23,7 @@ namespace cdr_group.Application.Services
 
         public override async Task<IEnumerable<EventDto>> GetAllAsync()
         {
-            var (events, _) = await UnitOfWork.Events.GetEventsPagedAsync(new PagedRequest { PageSize = int.MaxValue });
+            var (events, _) = await UnitOfWork.Events.GetEventsPagedAsync(new EventPagedRequest { PageSize = int.MaxValue });
             var eventDtos = Mapper.Map<List<EventDto>>(events);
             await PopulatePrimaryFileUrlsAsync(eventDtos);
             return eventDtos;
@@ -31,7 +31,23 @@ namespace cdr_group.Application.Services
 
         public override async Task<PagedResult<EventDto>> GetPagedAsync(PagedRequest request)
         {
-            var (events, totalCount) = await UnitOfWork.Events.GetEventsPagedAsync(request);
+            var eventRequest = request as EventPagedRequest ?? new EventPagedRequest
+            {
+                PageNumber = request.PageNumber,
+                PageSize = request.PageSize,
+                SearchTerm = request.SearchTerm,
+                SortBy = request.SortBy,
+                SortDescending = request.SortDescending,
+                SearchProperties = request.SearchProperties
+            };
+
+            if (!eventRequest.CompanyId.HasValue && !string.IsNullOrWhiteSpace(eventRequest.CompanyCode))
+            {
+                var company = await UnitOfWork.Companies.GetByCodeAsync(eventRequest.CompanyCode);
+                eventRequest.CompanyId = company?.Id;
+            }
+
+            var (events, totalCount) = await UnitOfWork.Events.GetEventsPagedAsync(eventRequest);
             var eventDtos = Mapper.Map<List<EventDto>>(events);
             await PopulatePrimaryFileUrlsAsync(eventDtos);
             return new PagedResult<EventDto>(eventDtos, totalCount, request.PageNumber, request.PageSize);
@@ -39,7 +55,7 @@ namespace cdr_group.Application.Services
 
         public override async Task<EventDto?> GetByIdAsync(Guid id)
         {
-            var eventEntity = await UnitOfWork.Events.GetWithDepartmentAsync(id);
+            var eventEntity = await UnitOfWork.Events.GetWithCompanyAsync(id);
             var dto = Mapper.Map<EventDto>(eventEntity);
             if (dto != null)
             {
@@ -48,9 +64,9 @@ namespace cdr_group.Application.Services
             return dto;
         }
 
-        public async Task<IEnumerable<EventDto>> GetByDepartmentIdAsync(Guid departmentId)
+        public async Task<IEnumerable<EventDto>> GetByCompanyIdAsync(Guid companyId)
         {
-            var events = await UnitOfWork.Events.GetByDepartmentIdAsync(departmentId);
+            var events = await UnitOfWork.Events.GetByCompanyIdAsync(companyId);
             var eventDtos = Mapper.Map<List<EventDto>>(events);
             await PopulatePrimaryFileUrlsAsync(eventDtos);
             return eventDtos;
@@ -58,24 +74,19 @@ namespace cdr_group.Application.Services
 
         protected override async Task ValidateCreateAsync(CreateEventDto dto)
         {
-            if (dto.DepartmentId.HasValue)
+            if (!await UnitOfWork.Companies.ExistsAsync(dto.CompanyId))
             {
-                var department = await UnitOfWork.Departments.GetByIdAsync(dto.DepartmentId.Value);
-                if (department == null)
-                {
-                    throw new InvalidOperationException("Department not found.");
-                }
+                throw new InvalidOperationException("Company not found.");
             }
         }
 
         protected override async Task ValidateUpdateAsync(Guid id, UpdateEventDto dto, Event entity)
         {
-            if (dto.DepartmentId.HasValue)
+            if (dto.CompanyId.HasValue)
             {
-                var department = await UnitOfWork.Departments.GetByIdAsync(dto.DepartmentId.Value);
-                if (department == null)
+                if (!await UnitOfWork.Companies.ExistsAsync(dto.CompanyId.Value))
                 {
-                    throw new InvalidOperationException("Department not found.");
+                    throw new InvalidOperationException("Company not found.");
                 }
             }
         }

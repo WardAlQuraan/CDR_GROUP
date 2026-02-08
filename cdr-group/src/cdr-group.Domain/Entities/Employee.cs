@@ -21,8 +21,8 @@ namespace cdr_group.Domain.Entities
         public bool IsActive { get; set; } = true;
 
         // Department relationship
-        public Guid? DepartmentId { get; set; }
-        public Department? Department { get; set; }
+        public Guid DepartmentId { get; set; }
+        public Department Department { get; set; } = null!;
 
         // Self-referencing relationship for manager
         public Guid? ManagerId { get; set; }

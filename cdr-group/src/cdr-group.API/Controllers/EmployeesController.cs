@@ -78,9 +78,9 @@ namespace cdr_group.API.Controllers
 
         [HttpGet("tree")]
         [AllowAnonymous]
-        public async Task<ActionResult<ApiResponse<IEnumerable<EmployeeTreeNodeDto>>>> GetTree([FromQuery] Guid? departmentId = null)
+        public async Task<ActionResult<ApiResponse<IEnumerable<EmployeeTreeNodeDto>>>> GetTree([FromQuery] GetTreeRequest request)
         {
-            var tree = await Service.GetTreeAsync(departmentId);
+            var tree = await Service.GetTreeAsync(request);
             return Ok(ApiResponse<IEnumerable<EmployeeTreeNodeDto>>.SuccessResponse(tree));
         }
 

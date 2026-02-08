@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using cdr_group.Contracts.DTOs.Common;
+using cdr_group.Contracts.DTOs.Event;
 using cdr_group.Contracts.Interfaces.Repositories;
 using cdr_group.Domain.Entities;
 using cdr_group.Persistence.Data;
@@ -13,30 +14,32 @@ namespace cdr_group.Persistence.Repositories
         {
         }
 
-        public async Task<Event?> GetWithDepartmentAsync(Guid id)
+        public async Task<Event?> GetWithCompanyAsync(Guid id)
         {
             return await _dbSet
                 .Include(e => e.Company)
-                .Include(e => e.Department)
                 .FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
         }
 
-        public async Task<IEnumerable<Event>> GetByDepartmentIdAsync(Guid departmentId)
+        public async Task<IEnumerable<Event>> GetByCompanyIdAsync(Guid companyId)
         {
             return await _dbSet
                 .Include(e => e.Company)
-                .Include(e => e.Department)
-                .Where(e => e.DepartmentId == departmentId && !e.IsDeleted)
+                .Where(e => e.CompanyId == companyId && !e.IsDeleted)
                 .OrderByDescending(e => e.CreatedAt)
                 .ToListAsync();
         }
 
-        public async Task<(IEnumerable<Event> Items, int TotalCount)> GetEventsPagedAsync(PagedRequest request)
+        public async Task<(IEnumerable<Event> Items, int TotalCount)> GetEventsPagedAsync(EventPagedRequest request)
         {
             var query = _dbSet
                 .Include(e => e.Company)
-                .Include(e => e.Department)
                 .Where(e => !e.IsDeleted);
+
+            if (request.CompanyId.HasValue)
+            {
+                query = query.Where(e => e.CompanyId == request.CompanyId.Value);
+            }
 
             query = QueryHelper.ApplySearch(query, request);
             query = QueryHelper.ApplySort(query, request, e => e.CreatedAt);

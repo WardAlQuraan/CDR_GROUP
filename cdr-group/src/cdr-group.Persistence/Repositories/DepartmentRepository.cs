@@ -67,6 +67,7 @@ namespace cdr_group.Persistence.Repositories
             return await _dbSet
                 .Include(d => d.ParentDepartment)
                 .Include(d => d.Manager)
+                .Include(d=>d.Company)
                 .Where(d => d.IsActive && !d.IsDeleted)
                 .ToListAsync();
         }
@@ -88,10 +89,11 @@ namespace cdr_group.Persistence.Repositories
             return (items, totalCount);
         }
 
-        public async Task<bool> DepartmentCodeExistsAsync(string code, Guid? excludeId = null)
+        public async Task<bool> DepartmentCodeExistsAsync(string code, Guid companyId, Guid? excludeId = null)
         {
             return await _dbSet.AnyAsync(d =>
                 d.Code == code &&
+                d.CompanyId == companyId &&
                 !d.IsDeleted &&
                 (excludeId == null || d.Id != excludeId));
         }

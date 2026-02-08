@@ -11,6 +11,7 @@ namespace cdr_group.Contracts.Interfaces.Repositories
         IFileAttachmentRepository FileAttachments { get; }
         IEventRepository Events { get; }
         ICompanyRepository Companies { get; }
+        IContactUsRepository ContactUs { get; }
         Task<int> SaveChangesAsync();
         Task BeginTransactionAsync();
         Task CommitTransactionAsync();
