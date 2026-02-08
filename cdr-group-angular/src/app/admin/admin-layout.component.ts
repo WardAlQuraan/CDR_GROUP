@@ -1,14 +1,15 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AuthService } from '../services/auth.service';
 import { TranslationService } from '../services/translation.service';
-import { Permissions } from '../models/auth.model';
+import { Permission, Permissions } from '../models/auth.model';
 
 interface NavItem {
   label: string;
   icon: string;
   route: string;
   exact?: boolean;
+  permission?: Permission;
 }
 
 @Component({
@@ -18,23 +19,26 @@ interface NavItem {
   styleUrl: './admin-layout.component.scss',
 })
 export class AdminLayoutComponent implements OnInit {
-
-
-  hasUserPermission: boolean = true;
   isMobile = false;
   isCollapsed = false;
+  navItems: NavItem[] = [];
 
-  navItems: NavItem[] = [
+  private readonly allNavItems: NavItem[] = [
     { label: 'admin.dashboard', icon: 'dashboard', route: '/admin', exact: true },
-    { label: 'admin.users.title', icon: 'people', route: '/admin/users' },
-    { label: 'admin.roles.title', icon: 'admin_panel_settings', route: '/admin/roles' },
-    { label: 'admin.employees.title', icon: 'badge', route: '/admin/employees' },
-    { label: 'admin.positions.title', icon: 'work_outline', route: '/admin/positions' },
-    { label: 'admin.departments.title', icon: 'business', route: '/admin/departments' },
-    { label: 'admin.eventsAdmin.title', icon: 'event', route: '/admin/events' },
+    { label: 'admin.users.title', icon: 'people', route: '/admin/users', permission: Permissions.USERS_READ },
+    { label: 'admin.roles.title', icon: 'admin_panel_settings', route: '/admin/roles', permission: Permissions.ROLES_READ },
+    { label: 'admin.employees.title', icon: 'badge', route: '/admin/employees', permission: Permissions.EMPLOYEES_READ },
+    { label: 'admin.positions.title', icon: 'work_outline', route: '/admin/positions', permission: Permissions.POSITIONS_READ },
+    { label: 'admin.departments.title', icon: 'business', route: '/admin/departments', permission: Permissions.DEPARTMENTS_READ },
+    { label: 'admin.companies.title', icon: 'apartment', route: '/admin/companies', permission: Permissions.COMPANIES_READ },
+    { label: 'admin.eventsAdmin.title', icon: 'event', route: '/admin/events', permission: Permissions.EVENTS_READ },
   ];
 
-  constructor(public authService: AuthService, public translationService: TranslationService, private breakpointObserver: BreakpointObserver) {
+  constructor(
+    public authService: AuthService,
+    public translationService: TranslationService,
+    private breakpointObserver: BreakpointObserver
+  ) {
     this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.TabletPortrait])
       .subscribe(result => {
         this.isMobile = result.matches;
@@ -43,26 +47,11 @@ export class AdminLayoutComponent implements OnInit {
         }
       });
   }
+
   ngOnInit(): void {
-    this.hasUserPermission = this.authService.hasPermission(Permissions.USERS_READ);
-    if (!this.hasUserPermission) {
-      this.navItems = this.navItems.filter(item => item.route !== '/admin/users');
-    }
-
-    const hasRolesPermission = this.authService.hasPermission(Permissions.ROLES_READ);
-    if (!hasRolesPermission) {
-      this.navItems = this.navItems.filter(item => item.route !== '/admin/roles');
-    }
-
-    const hasPositionsPermission = this.authService.hasPermission(Permissions.POSITIONS_READ);
-    if (!hasPositionsPermission) {
-      this.navItems = this.navItems.filter(item => item.route !== '/admin/positions');
-    }
-
-    const hasDepartmentsPermission = this.authService.hasPermission(Permissions.DEPARTMENTS_READ);
-    if (!hasDepartmentsPermission) {
-      this.navItems = this.navItems.filter(item => item.route !== '/admin/departments');
-    }
+    this.navItems = this.allNavItems.filter(item =>
+      !item.permission || this.authService.hasPermission(item.permission)
+    );
   }
 
   toggleSidenav(): void {

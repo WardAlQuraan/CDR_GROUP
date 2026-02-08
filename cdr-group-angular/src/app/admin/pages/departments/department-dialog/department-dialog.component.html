@@ -80,33 +80,37 @@
       </div>
 
       <div class="section-content">
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'admin.departments.parentDepartment' | translate }}</mat-label>
-          <mat-icon matPrefix>subdirectory_arrow_right</mat-icon>
-          <mat-select formControlName="parentDepartmentId">
-            <mat-option [value]="null">{{ 'admin.departments.noParent' | translate }}</mat-option>
-            @for (dept of departments; track dept.id) {
-              <mat-option [value]="dept.id">{{ getDepartmentName(dept) }} ({{ dept.code }})</mat-option>
-            }
-          </mat-select>
-          @if (loadingDepartments) {
-            <mat-hint>{{ 'common.loading' | translate }}</mat-hint>
-          }
-        </mat-form-field>
+        <app-async-select
+          formControlName="companyId"
+          label="admin.departments.company"
+          icon="apartment"
+          nullOptionLabel="admin.departments.noCompany"
+          [dataSource$]="companies$"
+          [optionMapper]="companyMapper"
+          [resetOnDataSourceChange]="false">
+        </app-async-select>
 
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'admin.departments.manager' | translate }}</mat-label>
-          <mat-icon matPrefix>supervisor_account</mat-icon>
-          <mat-select formControlName="managerId">
-            <mat-option [value]="null">{{ 'admin.departments.noManager' | translate }}</mat-option>
-            @for (emp of employees; track emp.id) {
-              <mat-option [value]="emp.id">{{ getEmployeeName(emp) }} ({{ emp.employeeCode }})</mat-option>
-            }
-          </mat-select>
-          @if (loadingEmployees) {
-            <mat-hint>{{ 'common.loading' | translate }}</mat-hint>
-          }
-        </mat-form-field>
+        <app-async-select
+          formControlName="parentDepartmentId"
+          label="admin.departments.parentDepartment"
+          icon="subdirectory_arrow_right"
+          nullOptionLabel="admin.departments.noParent"
+          [dataSource$]="departments$"
+          [optionMapper]="departmentMapper"
+          [filterFn]="departmentFilter"
+          [resetOnDataSourceChange]="false">
+        </app-async-select>
+
+        <app-async-select
+          formControlName="managerId"
+          label="admin.departments.manager"
+          icon="supervisor_account"
+          nullOptionLabel="admin.departments.noManager"
+          [dataSource$]="employees$"
+          [optionMapper]="employeeMapper"
+          [filterFn]="employeeFilter"
+          [resetOnDataSourceChange]="false">
+        </app-async-select>
 
         <mat-checkbox formControlName="isActive" color="primary">
           {{ 'admin.departments.isActive' | translate }}

@@ -1,12 +1,17 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DepartmentDto, DepartmentBasicDto, CreateDepartmentDto, UpdateDepartmentDto } from '../../../../models/department.model';
+import { Observable } from 'rxjs';
+import { DepartmentDto, CreateDepartmentDto, UpdateDepartmentDto } from '../../../../models/department.model';
 import { DepartmentsService } from '../../../../services/departments.service';
 import { EmployeesService } from '../../../../services/employees.service';
+import { CompaniesService } from '../../../../services/companies.service';
 import { SnackbarService } from '../../../../services/snackbar.service';
 import { TranslationService } from '../../../../services/translation.service';
 import { EmployeeDto } from '../../../../models/employee.model';
+import { CompanyDto } from '../../../../models/company.model';
+import { ApiResponse } from '../../../../models/api-response.model';
+import { SelectOption } from '../../../../shared/components/async-select/async-select.component';
 
 export type DepartmentDialogMode = 'create' | 'edit';
 
@@ -25,27 +30,50 @@ export class DepartmentDialogComponent implements OnInit {
   form!: FormGroup;
   mode: DepartmentDialogMode;
   loading = false;
-  loadingDepartments = false;
-  loadingEmployees = false;
 
-  departments: DepartmentDto[] = [];
-  employees: EmployeeDto[] = [];
+  // Data sources for async selects
+  companies$: Observable<ApiResponse<CompanyDto[]>>;
+  departments$: Observable<ApiResponse<DepartmentDto[]>>;
+  employees$: Observable<ApiResponse<EmployeeDto[]>>;
+
+  // Option mappers
+  companyMapper = (company: CompanyDto): SelectOption => ({
+    value: company.id,
+    label: `${this.isArabic ? company.nameAr : company.nameEn} (${company.code})`
+  });
+
+  departmentMapper = (dept: DepartmentDto): SelectOption => ({
+    value: dept.id,
+    label: `${this.isArabic ? dept.nameAr : dept.nameEn} (${dept.code})`
+  });
+
+  employeeMapper = (emp: EmployeeDto): SelectOption => ({
+    value: emp.id,
+    label: `${this.isArabic ? emp.fullNameAr : emp.fullNameEn} (${emp.employeeCode})`
+  });
+
+  // Filter functions
+  departmentFilter = (dept: DepartmentDto): boolean => dept.id !== this.data.department?.id;
+  employeeFilter = (emp: EmployeeDto): boolean => emp.isActive;
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<DepartmentDialogComponent>,
     private departmentsService: DepartmentsService,
     private employeesService: EmployeesService,
+    private companiesService: CompaniesService,
     private snackbar: SnackbarService,
     private translationService: TranslationService,
     @Inject(MAT_DIALOG_DATA) public data: DepartmentDialogData
   ) {
     this.mode = data.mode;
+    this.companies$ = this.companiesService.getActiveCompanies();
+    this.departments$ = this.departmentsService.getActiveDepartments();
+    this.employees$ = this.employeesService.getAll();
   }
 
   ngOnInit(): void {
     this.initForm();
-    this.loadDependencies();
   }
 
   get isArabic(): boolean {
@@ -79,7 +107,8 @@ export class DepartmentDialogComponent implements OnInit {
         descriptionAr: [dept.descriptionAr, [Validators.maxLength(500)]],
         isActive: [dept.isActive],
         parentDepartmentId: [dept.parentDepartmentId],
-        managerId: [dept.managerId]
+        managerId: [dept.managerId],
+        companyId: [dept.companyId]
       });
     } else {
       this.form = this.fb.group({
@@ -90,57 +119,14 @@ export class DepartmentDialogComponent implements OnInit {
         descriptionAr: ['', [Validators.maxLength(500)]],
         isActive: [true],
         parentDepartmentId: [null],
-        managerId: [null]
+        managerId: [null],
+        companyId: [null]
       });
     }
   }
 
-  private loadDependencies(): void {
-    this.loadDepartments();
-    this.loadEmployees();
-  }
-
-  private loadDepartments(): void {
-    this.loadingDepartments = true;
-    this.departmentsService.getActiveDepartments().subscribe({
-      next: (response) => {
-        if (response.success && response.data) {
-          // Exclude current department from parent list
-          this.departments = response.data.filter(d => d.id !== this.data.department?.id);
-        }
-        this.loadingDepartments = false;
-      },
-      error: () => {
-        this.loadingDepartments = false;
-      }
-    });
-  }
-
-  private loadEmployees(): void {
-    this.loadingEmployees = true;
-    this.employeesService.getAll().subscribe({
-      next: (response) => {
-        if (response.success && response.data) {
-          this.employees = response.data.filter(e => e.isActive);
-        }
-        this.loadingEmployees = false;
-      },
-      error: () => {
-        this.loadingEmployees = false;
-      }
-    });
-  }
-
   private translate(key: string): string {
     return this.translationService.translate(key);
-  }
-
-  getDepartmentName(dept: DepartmentDto | DepartmentBasicDto): string {
-    return this.isArabic ? dept.nameAr : dept.nameEn;
-  }
-
-  getEmployeeName(emp: EmployeeDto): string {
-    return this.isArabic ? emp.fullNameAr : emp.fullNameEn;
   }
 
   onSubmit(): void {
@@ -167,7 +153,8 @@ export class DepartmentDialogComponent implements OnInit {
       descriptionAr: this.form.value.descriptionAr || undefined,
       isActive: this.form.value.isActive,
       parentDepartmentId: this.form.value.parentDepartmentId || undefined,
-      managerId: this.form.value.managerId || undefined
+      managerId: this.form.value.managerId || undefined,
+      companyId: this.form.value.companyId || undefined
     };
 
     this.departmentsService.create(createDto).subscribe({
@@ -191,7 +178,8 @@ export class DepartmentDialogComponent implements OnInit {
       descriptionAr: this.form.value.descriptionAr || undefined,
       isActive: this.form.value.isActive,
       parentDepartmentId: this.form.value.parentDepartmentId || undefined,
-      managerId: this.form.value.managerId || undefined
+      managerId: this.form.value.managerId || undefined,
+      companyId: this.form.value.companyId || undefined
     };
 
     this.departmentsService.update(this.data.department!.id, updateDto).subscribe({

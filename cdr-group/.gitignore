@@ -112,3 +112,19 @@ coverage/
 # Backup
 *.bak
 *.orig
+
+# Publish profiles (user-specific)
+*.pubxml.user
+
+# wwwroot build output (Angular compiled assets)
+**/wwwroot/*.js
+**/wwwroot/*.css
+**/wwwroot/*.map
+**/wwwroot/media/
+!**/wwwroot/lib/
+
+# User uploads
+**/wwwroot/uploads/
+
+# NuGet cache
+**/project.nuget.cache

@@ -1,0 +1,78 @@
+<app-base-dialog
+  [title]="dialogTitle"
+  [saveLabel]="saveLabel"
+  [saveDisabled]="form.invalid"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <form [formGroup]="form" class="dialog-form">
+    <!-- Basic Info Section -->
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>apartment</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companies.basicInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'admin.companies.code' | translate }}</mat-label>
+          <mat-icon matPrefix>badge</mat-icon>
+          <input matInput formControlName="code" [placeholder]="'admin.companies.placeholders.code' | translate">
+          @if (form.get('code')?.hasError('required') && form.get('code')?.touched) {
+            <mat-error>{{ 'admin.companies.errors.codeRequired' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'admin.companies.nameEn' | translate }}</mat-label>
+            <mat-icon matPrefix>translate</mat-icon>
+            <input matInput formControlName="nameEn" [placeholder]="'admin.companies.placeholders.nameEn' | translate">
+            @if (form.get('nameEn')?.hasError('required') && form.get('nameEn')?.touched) {
+              <mat-error>{{ 'admin.companies.errors.nameEnRequired' | translate }}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'admin.companies.nameAr' | translate }}</mat-label>
+            <mat-icon matPrefix>translate</mat-icon>
+            <input matInput formControlName="nameAr" [placeholder]="'admin.companies.placeholders.nameAr' | translate" dir="rtl">
+            @if (form.get('nameAr')?.hasError('required') && form.get('nameAr')?.touched) {
+              <mat-error>{{ 'admin.companies.errors.nameArRequired' | translate }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description Section -->
+    <div class="form-section section-blue">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>description</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companies.descriptionSection' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'admin.companies.descriptionEn' | translate }}</mat-label>
+          <textarea matInput formControlName="descriptionEn" rows="3" [placeholder]="'admin.companies.placeholders.descriptionEn' | translate"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'admin.companies.descriptionAr' | translate }}</mat-label>
+          <textarea matInput formControlName="descriptionAr" rows="3" [placeholder]="'admin.companies.placeholders.descriptionAr' | translate" dir="rtl"></textarea>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="isActive" color="primary">
+          {{ 'admin.companies.isActive' | translate }}
+        </mat-checkbox>
+      </div>
+    </div>
+  </form>
+
+</app-base-dialog>

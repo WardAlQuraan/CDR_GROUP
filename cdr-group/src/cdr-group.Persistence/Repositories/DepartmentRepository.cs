@@ -76,6 +76,7 @@ namespace cdr_group.Persistence.Repositories
             var query = _dbSet
                 .Include(d => d.ParentDepartment)
                 .Include(d => d.Manager)
+                .Include(d=>d.Company)
                 .Where(d => !d.IsDeleted);
 
             query = QueryHelper.ApplySearch(query, request);

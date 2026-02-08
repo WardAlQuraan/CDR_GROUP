@@ -12,6 +12,10 @@ namespace cdr_group.Contracts.DTOs.Event
         public string? EventUrl { get; set; }
         public DateTime? EventDate { get; set; }
 
+        public Guid? CompanyId { get; set; }
+        public string? CompanyNameEn { get; set; }
+        public string? CompanyNameAr { get; set; }
+
         public Guid? DepartmentId { get; set; }
         public string? DepartmentNameEn { get; set; }
         public string? DepartmentNameAr { get; set; }
@@ -44,6 +48,7 @@ namespace cdr_group.Contracts.DTOs.Event
 
         public DateTime? EventDate { get; set; }
 
+        public Guid? CompanyId { get; set; }
         public Guid? DepartmentId { get; set; }
     }
 
@@ -67,6 +72,7 @@ namespace cdr_group.Contracts.DTOs.Event
 
         public DateTime? EventDate { get; set; }
 
+        public Guid? CompanyId { get; set; }
         public Guid? DepartmentId { get; set; }
     }
 }

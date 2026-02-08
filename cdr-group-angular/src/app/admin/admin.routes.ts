@@ -8,6 +8,7 @@ import { PositionsComponent } from './pages/positions/positions-component/positi
 import { DepartmentsComponent } from './pages/departments/departments-component/departments-component';
 import { DepartmentOrgChartPageComponent } from './pages/departments/department-org-chart-page/department-org-chart-page.component';
 import { EventsComponent } from './pages/events/events-component/events-component';
+import { CompaniesComponent } from './pages/companies/companies-component/companies-component';
 
 export const adminRoutes: Routes = [
   {
@@ -22,6 +23,7 @@ export const adminRoutes: Routes = [
       { path: 'departments', component: DepartmentsComponent },
       { path: 'departments/:id/org-chart', component: DepartmentOrgChartPageComponent },
       { path: 'events', component: EventsComponent },
+      { path: 'companies', component: CompaniesComponent },
       { path: 'settings', component: DashboardComponent }, // Placeholder
     ]
   }

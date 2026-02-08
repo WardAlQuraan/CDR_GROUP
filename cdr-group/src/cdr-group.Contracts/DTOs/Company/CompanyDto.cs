@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace cdr_group.Contracts.DTOs.Department
+namespace cdr_group.Contracts.DTOs.Company
 {
-    public class DepartmentDto
+    public class CompanyDto
     {
         public Guid Id { get; set; }
         public string Code { get; set; } = string.Empty;
@@ -12,21 +12,11 @@ namespace cdr_group.Contracts.DTOs.Department
         public string? DescriptionAr { get; set; }
         public bool IsActive { get; set; }
 
-        public Guid? ParentDepartmentId { get; set; }
-        public Guid? CompanyId { get; set; }
-        public DepartmentBasicDto? ParentDepartment { get; set; }
-
-        public Guid? ManagerId { get; set; }
-        public string? ManagerName { get; set; }
-        public string? ManagerNameAr { get; set; }
-
-        public string CompanyName { get; set; }
-        public string CompanyNameAr { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }
 
-    public class DepartmentBasicDto
+    public class CompanyBasicDto
     {
         public Guid Id { get; set; }
         public string Code { get; set; } = string.Empty;
@@ -34,17 +24,7 @@ namespace cdr_group.Contracts.DTOs.Department
         public string NameAr { get; set; } = string.Empty;
     }
 
-    public class DepartmentWithSubDepartmentsDto : DepartmentDto
-    {
-        public List<DepartmentBasicDto> SubDepartments { get; set; } = new();
-    }
-
-    public class DepartmentWithEmployeesDto : DepartmentDto
-    {
-        public int EmployeeCount { get; set; }
-    }
-
-    public class CreateDepartmentDto
+    public class CreateCompanyDto
     {
         [Required]
         [StringLength(50)]
@@ -65,13 +45,9 @@ namespace cdr_group.Contracts.DTOs.Department
         public string? DescriptionAr { get; set; }
 
         public bool IsActive { get; set; } = true;
-
-        public Guid? CompanyId { get; set; }
-        public Guid? ParentDepartmentId { get; set; }
-        public Guid? ManagerId { get; set; }
     }
 
-    public class UpdateDepartmentDto
+    public class UpdateCompanyDto
     {
         [StringLength(50)]
         public string? Code { get; set; }
@@ -89,9 +65,5 @@ namespace cdr_group.Contracts.DTOs.Department
         public string? DescriptionAr { get; set; }
 
         public bool? IsActive { get; set; }
-
-        public Guid? CompanyId { get; set; }
-        public Guid? ParentDepartmentId { get; set; }
-        public Guid? ManagerId { get; set; }
     }
 }

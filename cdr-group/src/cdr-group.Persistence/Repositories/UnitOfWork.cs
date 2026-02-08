@@ -17,6 +17,7 @@ namespace cdr_group.Persistence.Repositories
         private IPositionRepository? _positions;
         private IFileAttachmentRepository? _fileAttachments;
         private IEventRepository? _events;
+        private ICompanyRepository? _companies;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -31,6 +32,7 @@ namespace cdr_group.Persistence.Repositories
         public IPositionRepository Positions => _positions ??= new PositionRepository(_context);
         public IFileAttachmentRepository FileAttachments => _fileAttachments ??= new FileAttachmentRepository(_context);
         public IEventRepository Events => _events ??= new EventRepository(_context);
+        public ICompanyRepository Companies => _companies ??= new CompanyRepository(_context);
 
         public async Task<int> SaveChangesAsync()
         {

@@ -10,6 +10,10 @@ export interface DepartmentDto {
   parentDepartment?: DepartmentBasicDto;
   managerId?: string;
   managerName?: string;
+  managerNameAr?: string;
+  companyId?: string;
+  companyName?: string;
+  companyNameAr?: string;
   createdAt: Date;
   updatedAt?: Date;
 }
@@ -38,6 +42,7 @@ export interface CreateDepartmentDto {
   isActive?: boolean;
   parentDepartmentId?: string;
   managerId?: string;
+  companyId?: string;
 }
 
 export interface UpdateDepartmentDto {
@@ -49,4 +54,5 @@ export interface UpdateDepartmentDto {
   isActive?: boolean;
   parentDepartmentId?: string;
   managerId?: string;
+  companyId?: string;
 }

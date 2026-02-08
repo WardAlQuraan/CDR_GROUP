@@ -35,6 +35,8 @@ import { DepartmentOrgChartPageComponent } from './pages/departments/department-
 import { EventsComponent } from './pages/events/events-component/events-component';
 import { EventDialogComponent } from './pages/events/event-dialog/event-dialog.component';
 import { EventViewDialogComponent } from './pages/events/event-view-dialog/event-view-dialog.component';
+import { CompaniesComponent } from './pages/companies/companies-component/companies-component';
+import { CompanyDialogComponent } from './pages/companies/company-dialog/company-dialog.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { EventViewDialogComponent } from './pages/events/event-view-dialog/event
     DepartmentOrgChartPageComponent,
     EventsComponent,
     EventDialogComponent,
-    EventViewDialogComponent
+    EventViewDialogComponent,
+    CompaniesComponent,
+    CompanyDialogComponent
   ],
   imports: [
     SharedModule,

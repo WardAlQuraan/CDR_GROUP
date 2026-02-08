@@ -52,6 +52,14 @@ namespace cdr_group.Domain.Constants
             public const string Delete = "files.delete";
         }
 
+        public static class Companies
+        {
+            public const string Read = "companies.read";
+            public const string Create = "companies.create";
+            public const string Update = "companies.update";
+            public const string Delete = "companies.delete";
+        }
+
         public static class Events
         {
             public const string Read = "events.read";

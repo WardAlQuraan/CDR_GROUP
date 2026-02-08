@@ -10,6 +10,7 @@ namespace cdr_group.Contracts.Interfaces.Repositories
         IPositionRepository Positions { get; }
         IFileAttachmentRepository FileAttachments { get; }
         IEventRepository Events { get; }
+        ICompanyRepository Companies { get; }
         Task<int> SaveChangesAsync();
         Task BeginTransactionAsync();
         Task CommitTransactionAsync();

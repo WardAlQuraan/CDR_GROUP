@@ -16,6 +16,10 @@ namespace cdr_group.Domain.Entities
         public Department? ParentDepartment { get; set; }
         public virtual ICollection<Department> SubDepartments { get; set; } = new List<Department>();
 
+        // Company relationship
+        public Guid? CompanyId { get; set; }
+        public Company? Company { get; set; }
+
         // Manager of the department
         public Guid? ManagerId { get; set; }
         public Employee? Manager { get; set; }

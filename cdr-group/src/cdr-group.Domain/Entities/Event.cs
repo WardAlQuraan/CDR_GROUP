@@ -11,6 +11,10 @@ namespace cdr_group.Domain.Entities
         public string? EventUrl { get; set; }
         public DateTime? EventDate { get; set; }
 
+        // Optional relationship to Company
+        public Guid? CompanyId { get; set; }
+        public Company? Company { get; set; }
+
         // Optional relationship to Department
         public Guid? DepartmentId { get; set; }
         public Department? Department { get; set; }

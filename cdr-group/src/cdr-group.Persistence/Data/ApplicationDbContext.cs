@@ -96,6 +96,7 @@ namespace cdr_group.Persistence.Data
         public DbSet<Position> Positions { get; set; }
         public DbSet<FileAttachment> FileAttachments { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<Company> Companies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -223,6 +224,18 @@ namespace cdr_group.Persistence.Data
                     .OnDelete(DeleteBehavior.SetNull);
             });
 
+            // Company configuration
+            modelBuilder.Entity<Company>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasIndex(e => e.Code).IsUnique();
+                entity.Property(e => e.Code).IsRequired().HasMaxLength(50);
+                entity.Property(e => e.NameEn).IsRequired().HasMaxLength(200);
+                entity.Property(e => e.NameAr).IsRequired().HasMaxLength(200);
+                entity.Property(e => e.DescriptionEn).HasMaxLength(500);
+                entity.Property(e => e.DescriptionAr).HasMaxLength(500);
+            });
+
             // Department configuration
             modelBuilder.Entity<Department>(entity =>
             {
@@ -233,6 +246,12 @@ namespace cdr_group.Persistence.Data
                 entity.Property(e => e.NameAr).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.DescriptionEn).HasMaxLength(500);
                 entity.Property(e => e.DescriptionAr).HasMaxLength(500);
+
+                // Company relationship
+                entity.HasOne(e => e.Company)
+                    .WithMany(c => c.Departments)
+                    .HasForeignKey(e => e.CompanyId)
+                    .OnDelete(DeleteBehavior.SetNull);
 
                 // Self-referencing relationship for parent department
                 entity.HasOne(e => e.ParentDepartment)
@@ -291,6 +310,12 @@ namespace cdr_group.Persistence.Data
                 entity.Property(e => e.DescriptionAr).HasMaxLength(2000);
                 entity.Property(e => e.EventUrl).HasMaxLength(500);
 
+                // Company relationship (optional)
+                entity.HasOne(e => e.Company)
+                    .WithMany(c => c.Events)
+                    .HasForeignKey(e => e.CompanyId)
+                    .OnDelete(DeleteBehavior.SetNull);
+
                 // Department relationship (optional)
                 entity.HasOne(e => e.Department)
                     .WithMany()
@@ -343,6 +368,12 @@ namespace cdr_group.Persistence.Data
             var filesUploadId = Guid.Parse("77777777-bbbb-bbbb-bbbb-bbbbbbbbbbbb");
             var filesUpdateId = Guid.Parse("77777777-cccc-cccc-cccc-cccccccccccc");
             var filesDeleteId = Guid.Parse("77777777-dddd-dddd-dddd-dddddddddddd");
+
+            // Company Permission IDs
+            var companiesReadId = Guid.Parse("99999999-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
+            var companiesCreateId = Guid.Parse("99999999-bbbb-bbbb-bbbb-bbbbbbbbbbbb");
+            var companiesUpdateId = Guid.Parse("99999999-cccc-cccc-cccc-cccccccccccc");
+            var companiesDeleteId = Guid.Parse("99999999-dddd-dddd-dddd-dddddddddddd");
 
             // Event Permission IDs
             var eventsReadId = Guid.Parse("88888888-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
@@ -426,6 +457,11 @@ namespace cdr_group.Persistence.Data
                 new Permission { Id = filesUploadId, Name = PermissionConstants.Files.Upload, Description = "Upload files", Module = "Files", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = filesUpdateId, Name = PermissionConstants.Files.Update, Description = "Update files", Module = "Files", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = filesDeleteId, Name = PermissionConstants.Files.Delete, Description = "Delete files", Module = "Files", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                // Company permissions
+                new Permission { Id = companiesReadId, Name = PermissionConstants.Companies.Read, Description = "View companies", Module = "Companies", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companiesCreateId, Name = PermissionConstants.Companies.Create, Description = "Create companies", Module = "Companies", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companiesUpdateId, Name = PermissionConstants.Companies.Update, Description = "Update companies", Module = "Companies", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companiesDeleteId, Name = PermissionConstants.Companies.Delete, Description = "Delete companies", Module = "Companies", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 // Event permissions
                 new Permission { Id = eventsReadId, Name = PermissionConstants.Events.Read, Description = "View events", Module = "Events", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = eventsCreateId, Name = PermissionConstants.Events.Create, Description = "Create events", Module = "Events", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },

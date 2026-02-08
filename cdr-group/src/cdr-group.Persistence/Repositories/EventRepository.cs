@@ -16,6 +16,7 @@ namespace cdr_group.Persistence.Repositories
         public async Task<Event?> GetWithDepartmentAsync(Guid id)
         {
             return await _dbSet
+                .Include(e => e.Company)
                 .Include(e => e.Department)
                 .FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
         }
@@ -23,6 +24,7 @@ namespace cdr_group.Persistence.Repositories
         public async Task<IEnumerable<Event>> GetByDepartmentIdAsync(Guid departmentId)
         {
             return await _dbSet
+                .Include(e => e.Company)
                 .Include(e => e.Department)
                 .Where(e => e.DepartmentId == departmentId && !e.IsDeleted)
                 .OrderByDescending(e => e.CreatedAt)
@@ -32,6 +34,7 @@ namespace cdr_group.Persistence.Repositories
         public async Task<(IEnumerable<Event> Items, int TotalCount)> GetEventsPagedAsync(PagedRequest request)
         {
             var query = _dbSet
+                .Include(e => e.Company)
                 .Include(e => e.Department)
                 .Where(e => !e.IsDeleted);
 

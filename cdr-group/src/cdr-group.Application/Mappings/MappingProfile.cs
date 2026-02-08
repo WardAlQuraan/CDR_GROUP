@@ -1,4 +1,5 @@
 using AutoMapper;
+using cdr_group.Contracts.DTOs.Company;
 using cdr_group.Contracts.DTOs.Department;
 using cdr_group.Contracts.DTOs.Employee;
 using cdr_group.Contracts.DTOs.Event;
@@ -82,10 +83,33 @@ namespace cdr_group.Application.Mappings
             CreateMap<UpdateEmployeeDto, Employee>()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
+            // Company mappings
+            CreateMap<Company, CompanyDto>();
+
+            CreateMap<Company, CompanyBasicDto>();
+
+            CreateMap<CreateCompanyDto, Company>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()))
+                .ForMember(dest => dest.IsActive, opt => opt.MapFrom(_ => true));
+
+            CreateMap<UpdateCompanyDto, Company>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
             // Department mappings
             CreateMap<Department, DepartmentDto>()
-                .ForMember(dest => dest.ManagerName, opt => opt.MapFrom(src =>
-                    src.Manager != null ? $"{src.Manager.FirstNameEn} {src.Manager.LastNameEn}" : null));
+                .ForMember(dest => dest.ManagerName, opt => 
+                opt.MapFrom(src =>
+                    src.Manager != null ? $"{src.Manager.FirstNameEn} {src.Manager.LastNameEn}" : null))
+                .ForMember(dest => dest.ManagerNameAr, opt => 
+                opt.MapFrom(src =>
+                    src.Manager != null ? $"{src.Manager.FirstNameAr} {src.Manager.LastNameAr}" : null))
+                .ForMember(dest => dest.CompanyName, opt => 
+                opt.MapFrom(src =>
+                    src.Company != null ? $"{src.Company.NameEn}" : null))
+                .ForMember(dest => dest.CompanyNameAr, opt => 
+                opt.MapFrom(src =>
+                    src.Company != null ? $"{src.Company.NameAr}" : null))
+                ;
 
             CreateMap<Department, DepartmentBasicDto>();
 
@@ -140,6 +164,10 @@ namespace cdr_group.Application.Mappings
 
             // Event mappings
             CreateMap<Event, EventDto>()
+                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
+                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameAr : null))
                 .ForMember(dest => dest.DepartmentNameEn, opt => opt.MapFrom(src =>
                     src.Department != null ? src.Department.NameEn : null))
                 .ForMember(dest => dest.DepartmentNameAr, opt => opt.MapFrom(src =>

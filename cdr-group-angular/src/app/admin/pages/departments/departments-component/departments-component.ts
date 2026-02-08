@@ -90,6 +90,14 @@ export class DepartmentsComponent implements OnInit {
           cell: (row) => this.isArabic ? row.nameAr : row.nameEn
         },
         {
+          key: 'company',
+          header: 'admin.departments.company',
+          cell: (row) => {
+            if (!row.companyName) return '-';
+            return (this.isArabic ? row.companyNameAr : row.companyName) || '-';
+          }
+        },
+        {
           key: 'parentDepartment',
           header: 'admin.departments.parentDepartment',
           cell: (row) => {
