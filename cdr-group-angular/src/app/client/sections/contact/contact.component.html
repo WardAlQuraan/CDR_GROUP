@@ -4,20 +4,31 @@
       <div class="col-lg-6 col-12">
         <h2 class="mb-4">{{ 'contact.title' | translate }}</h2>
 
-        <form class="custom-form contact-form" (ngSubmit)="onSubmit()">
+        <form class="custom-form contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
           <div class="form-floating mb-4">
-            <input type="text" name="full-name" id="contact-full-name" class="form-control" [placeholder]="'common.fullName' | translate" [(ngModel)]="formData.fullName" required>
+            <input type="text" id="contact-full-name" class="form-control" [class.is-invalid]="contactForm.get('fullName')!.invalid && contactForm.get('fullName')!.touched" [placeholder]="'common.fullName' | translate" formControlName="fullName">
             <label for="contact-full-name">{{ 'common.fullName' | translate }}</label>
+            @if (contactForm.get('fullName')!.invalid && contactForm.get('fullName')!.touched) {
+              <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
+            }
           </div>
 
           <div class="form-floating mb-4">
-            <input type="email" name="email" id="contact-email" class="form-control" [placeholder]="'common.email' | translate" [(ngModel)]="formData.email" required>
+            <input type="email" id="contact-email" class="form-control" [class.is-invalid]="contactForm.get('email')!.invalid && contactForm.get('email')!.touched" [placeholder]="'common.email' | translate" formControlName="email">
             <label for="contact-email">{{ 'common.email' | translate }}</label>
+            @if (contactForm.get('email')!.hasError('required') && contactForm.get('email')!.touched) {
+              <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
+            } @else if (contactForm.get('email')!.hasError('email') && contactForm.get('email')!.touched) {
+              <div class="invalid-feedback">{{ 'validation.invalidEmail' | translate }}</div>
+            }
           </div>
 
           <div class="form-floating mb-4">
-            <textarea name="message" id="contact-message" class="form-control" [placeholder]="'common.message' | translate" [(ngModel)]="formData.message" required></textarea>
+            <textarea id="contact-message" class="form-control" [class.is-invalid]="contactForm.get('message')!.invalid && contactForm.get('message')!.touched" [placeholder]="'common.message' | translate" formControlName="message"></textarea>
             <label for="contact-message">{{ 'common.message' | translate }}</label>
+            @if (contactForm.get('message')!.invalid && contactForm.get('message')!.touched) {
+              <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
+            }
           </div>
 
           @if (submitSuccess) {

@@ -12,6 +12,7 @@ import { RoleDialogComponent, RoleDialogData } from '../role-dialog/role-dialog.
 import { PermissionsDialogComponent, PermissionsDialogData } from '../permissions-dialog/permissions-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
+import { formatDateTime } from '../../../../utils/date.utils';
 
 @Component({
   selector: 'app-roles-component',
@@ -94,10 +95,15 @@ export class RolesComponent implements OnInit {
           cell: (row) => row.permissions?.length?.toString() || '0'
         },
         {
+          key: 'createdBy',
+          header: 'admin.roles.createdBy',
+          cell: (row) => row.createdBy || '-'
+        },
+        {
           key: 'createdAt',
           header: 'admin.roles.created',
           sortable: true,
-          cell: (row) => new Date(row.createdAt).toLocaleDateString()
+          cell: (row) => formatDateTime(row.createdAt)
         }
       ],
       actions: [
@@ -107,7 +113,7 @@ export class RolesComponent implements OnInit {
           permission: Permissions.ROLES_MANAGE,
           color: 'info',
           onClick: (row) => this.openEditDialog(row),
-          visible: (row) => !row.isSystemRole
+          // visible: (row) => !row.isSystemRole
         },
         {
           icon: 'visibility',
@@ -115,7 +121,7 @@ export class RolesComponent implements OnInit {
           permission: Permissions.ROLES_READ,
           color: 'info',
           onClick: (row) => this.openViewDialog(row),
-          visible: (row) => row.isSystemRole
+          // visible: (row) => row.isSystemRole
         },
         {
           icon: 'security',
@@ -148,7 +154,8 @@ export class RolesComponent implements OnInit {
     const request: PagedRequest = {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
-      search: this.filterValues['search'] || undefined,
+      searchTerm: this.filterValues['searchTerm'] || undefined,
+      searchProperties: ['name', 'description'],
       sortBy: this.sortBy,
       sortDescending: this.sortDescending
     };
@@ -170,12 +177,11 @@ export class RolesComponent implements OnInit {
           this.totalCount = response.data.totalCount;
         }
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       },
       error: (error) => {
-        this.snackbar.error(error.message || this.translate('admin.roles.errors.loadFailed'));
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       }
     });
   }
@@ -275,7 +281,7 @@ export class RolesComponent implements OnInit {
             this.loadRoles();
           },
           error: (error) => {
-            this.snackbar.error(error.message || this.translate('admin.roles.errors.deleteFailed'));
+            this.cdr.markForCheck();
             this.loading = false;
           }
         });

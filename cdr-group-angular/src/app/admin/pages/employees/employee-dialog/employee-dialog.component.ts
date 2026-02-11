@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Observable, Subject } from 'rxjs';
@@ -68,7 +68,8 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
     public positionsService: PositionsService,
     private snackbar: SnackbarService,
     private translationService: TranslationService,
-    @Inject(MAT_DIALOG_DATA) public data: EmployeeDialogData
+    @Inject(MAT_DIALOG_DATA) public data: EmployeeDialogData,
+    private cdr: ChangeDetectorRef
   ) {
     this.mode = data.mode;
   }
@@ -200,7 +201,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
         this.dialogRef.close(true);
       },
       error: (error) => {
-        this.snackbar.error(error.message || this.translate('admin.employees.errors.createFailed'));
+        this.cdr.markForCheck();
         this.loading = false;
       }
     });
@@ -229,8 +230,9 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
         this.dialogRef.close(true);
       },
       error: (error) => {
-        this.snackbar.error(error.message || this.translate('admin.employees.errors.updateFailed'));
+        this.cdr.markForCheck();
         this.loading = false;
+
       }
     });
   }

@@ -45,9 +45,9 @@
 // Organization Tree
 .org-tree {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .tree-level {
@@ -297,6 +297,9 @@
 
   // Mobile tree - vertical list layout
   .org-tree {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
     padding: 0 0.5rem;
     overflow-x: visible;
   }

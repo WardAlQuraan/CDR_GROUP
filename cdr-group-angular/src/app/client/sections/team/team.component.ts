@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, effect } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, effect, ChangeDetectorRef } from '@angular/core';
 import { EmployeesService } from '../../../services/employees.service';
 import { TranslationService } from '../../../services/translation.service';
 import { EmployeeTreeNodeDto } from '../../../models/employee.model';
@@ -38,6 +38,7 @@ export class TeamComponent implements OnChanges {
   ];
 
   constructor(
+    private cdr: ChangeDetectorRef,
     private employeesService: EmployeesService,
     private translationService: TranslationService
   ) {
@@ -69,9 +70,11 @@ export class TeamComponent implements OnChanges {
           this.teamData = response.data.map(node => this.mapToTeamMember(node));
         }
         this.loading = false;
+        this.cdr.markForCheck();
       },
       error: () => {
         this.loading = false;
+        this.cdr.markForCheck();
         this.error = true;
       }
     });

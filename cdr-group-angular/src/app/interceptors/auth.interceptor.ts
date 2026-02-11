@@ -15,10 +15,12 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // Add ngrok header to bypass browser warning (required for ngrok free tier)
+    // Add ngrok header and Accept-Language header
+    const lang = localStorage.getItem('app_language') || 'en';
     request = request.clone({
       setHeaders: {
-        'ngrok-skip-browser-warning': 'true'
+        'ngrok-skip-browser-warning': 'true',
+        'Accept-Language': lang
       }
     });
 

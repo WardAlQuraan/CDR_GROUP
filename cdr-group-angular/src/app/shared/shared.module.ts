@@ -41,10 +41,13 @@ import { OrgChartComponent } from './components/org-chart/org-chart.component';
 import { BulkUploadDialogComponent } from './components/bulk-upload-dialog/bulk-upload-dialog.component';
 import { ImagePreviewDialogComponent } from './components/image-preview-dialog/image-preview-dialog.component';
 import { MatSortModule } from '@angular/material/sort';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { CustomPaginatorIntl } from './custom-paginator-intl';
 
 @NgModule({
-
+  providers: [
+    { provide: MatPaginatorIntl, useClass: CustomPaginatorIntl }
+  ],
   declarations: [
     SharedTableComponent,
     BaseDialogComponent,

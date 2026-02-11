@@ -38,6 +38,8 @@ import { CompanyDialogComponent } from './pages/companies/company-dialog/company
 import { CompanyOrgChartPageComponent } from './pages/companies/company-org-chart-page/company-org-chart-page.component';
 import { ContactUsAdminComponent } from './pages/contact-us/contact-us-component/contact-us-component';
 import { ContactUsViewDialogComponent } from './pages/contact-us/contact-us-view-dialog/contact-us-view-dialog.component';
+import { ChangePasswordDialogComponent } from './pages/users/change-password-dialog/change-password-dialog.component';
+import { ManageRolesDialogComponent } from './pages/users/manage-roles-dialog/manage-roles-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { ContactUsViewDialogComponent } from './pages/contact-us/contact-us-view
     DashboardComponent,
     UsersComponent,
     UserDialogComponent,
+    ChangePasswordDialogComponent,
+    ManageRolesDialogComponent,
     RolesComponent,
     RoleDialogComponent,
     PermissionsDialogComponent,

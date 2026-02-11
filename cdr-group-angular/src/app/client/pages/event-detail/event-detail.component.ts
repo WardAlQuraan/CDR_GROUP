@@ -85,7 +85,7 @@ export class EventDetailComponent implements OnInit {
       id: event.id,
       title: this.isArabic ? event.titleAr : event.titleEn,
       description: (this.isArabic ? event.descriptionAr : event.descriptionEn) || '',
-      company: (this.isArabic ? event.companyNameAr : event.companyName) || '',
+      company: (this.isArabic ? event.companyNameAr : event.companyNameEn) || '',
       eventUrl: event.eventUrl,
       eventDate: event.eventDate,
       primaryFileUrl: event.primaryFileUrl

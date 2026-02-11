@@ -128,7 +128,7 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
       error: () => {
         this.loading = false;
         this.error = true;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       }
     });
   }

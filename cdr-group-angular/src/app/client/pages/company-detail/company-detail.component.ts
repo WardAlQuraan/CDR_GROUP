@@ -67,12 +67,12 @@ export class CompanyDetailComponent implements OnInit {
           this.error = true;
         }
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       },
       error: () => {
         this.loading = false;
         this.error = true;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       }
     });
   }

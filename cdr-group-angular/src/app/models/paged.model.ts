@@ -3,7 +3,8 @@ export interface PagedRequest {
   pageSize?: number;
   sortBy?: string;
   sortDescending?: boolean;
-  search?: string;
+  searchTerm?: string;
+  searchProperties?: string[];
 }
 
 export interface PagedResult<T> {

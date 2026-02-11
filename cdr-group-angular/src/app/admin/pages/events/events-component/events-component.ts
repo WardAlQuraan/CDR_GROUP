@@ -80,7 +80,7 @@ export class EventsComponent implements OnInit {
           header: 'admin.eventsAdmin.company',
           cell: (row) => {
             if (!row.companyId) return '-';
-            return (this.isArabic ? row.companyNameAr : row.companyName) || '-';
+            return (this.isArabic ? row.companyNameAr : row.companyNameEn) || '-';
           }
         },
         {
@@ -140,7 +140,8 @@ export class EventsComponent implements OnInit {
     const request: PagedRequest = {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
-      search: this.filterValues['search'] || undefined,
+      searchTerm: this.filterValues['searchTerm'] || undefined,
+      searchProperties: ['titleEn', 'titleAr'],
       sortBy: this.sortBy,
       sortDescending: this.sortDescending
     };
@@ -152,11 +153,11 @@ export class EventsComponent implements OnInit {
           this.totalCount = response.data.totalCount;
         }
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       },
       error: () => {
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       }
     });
   }
@@ -257,7 +258,7 @@ export class EventsComponent implements OnInit {
             this.loadEvents();
           },
           error: (error) => {
-            this.snackbar.error(error.message || this.translate('admin.eventsAdmin.errors.deleteFailed'));
+            this.cdr.markForCheck();
             this.loading = false;
           }
         });

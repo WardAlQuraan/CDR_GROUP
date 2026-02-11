@@ -7,7 +7,7 @@ export interface EventDto {
   eventUrl?: string;
   eventDate?: Date;
   companyId?: string;
-  companyName?: string;
+  companyNameEn?: string;
   companyNameAr?: string;
   primaryFileUrl?: string;
 

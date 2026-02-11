@@ -38,7 +38,7 @@ export class DataGridComponent<T> implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
       this.dataSource.data = [...this.data];
-      this.cdr.detectChanges();
+      this.cdr.markForCheck();
     }
 
     if (changes['config'] && this.config) {
@@ -70,7 +70,7 @@ export class DataGridComponent<T> implements OnChanges {
   }
 
   applyFilters(): void {
-    this.filterChange.emit({ ...this.filterValues, search: this.searchTerm });
+    this.filterChange.emit({ ...this.filterValues, searchTerm: this.searchTerm });
   }
 
   onSearch(): void {
@@ -88,7 +88,7 @@ export class DataGridComponent<T> implements OnChanges {
     this.searchTerm = '';
     this.filterValues = {};
     this.initFilterDefaults();
-    this.filterChange.emit({ ...this.filterValues, search: '' });
+    this.filterChange.emit({ ...this.filterValues, searchTerm: '' });
   }
 
   onPageChange(event: PageEvent): void {

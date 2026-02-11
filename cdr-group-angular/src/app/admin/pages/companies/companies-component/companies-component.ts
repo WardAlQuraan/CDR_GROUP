@@ -142,7 +142,8 @@ export class CompaniesComponent implements OnInit {
     const request: PagedRequest = {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
-      search: this.filterValues['search'] || undefined,
+      searchTerm: this.filterValues['searchTerm'] || undefined,
+      searchProperties: ['code', 'nameEn', 'nameAr'],
       sortBy: this.sortBy,
       sortDescending: this.sortDescending
     };
@@ -164,11 +165,11 @@ export class CompaniesComponent implements OnInit {
           this.totalCount = response.data.totalCount;
         }
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       },
       error: () => {
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       }
     });
   }

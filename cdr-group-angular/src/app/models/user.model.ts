@@ -9,6 +9,7 @@ export interface UserDto {
   emailConfirmed: boolean;
   lastLoginAt?: Date;
   createdAt: Date;
+  createdBy?: string;
   roles: string[];
 }
 

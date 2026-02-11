@@ -19,7 +19,8 @@
       "Bash(npm uninstall:*)",
       "Bash(ng serve:*)",
       "Bash(timeout:*)",
-      "Bash(npm run start)"
+      "Bash(npm run start)",
+      "Bash(grep:*)"
     ]
   }
 }

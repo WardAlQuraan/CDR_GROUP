@@ -81,6 +81,7 @@
     "joinNow": "انضم الآن",
     "memberLogin": "تسجيل دخول الأعضاء",
     "membershipNo": "رقم العضوية",
+    "username": "اسم المستخدم",
     "password": "كلمة المرور",
     "rememberMe": "تذكرني",
     "forgotPassword": "نسيت كلمة المرور؟",
@@ -89,7 +90,9 @@
     "register": "التسجيل",
     "needHelp": "تحتاج مساعدة؟ اتصل بنا على",
     "eventListing": "قائمة الفعاليات",
-    "eventDetail": "تفاصيل الفعالية"
+    "eventDetail": "تفاصيل الفعالية",
+    "loginSuccess": "تم تسجيل الدخول بنجاح. أهلاً بعودتك!",
+    "loading": "جاري التحميل..."
   },
   "hero": {
     "welcomeTo": "أخبار CDR",
@@ -162,7 +165,7 @@
   },
   "team": {
     "title": "فريقنا",
-    "subtitle": "تعرف على الأشخاص وراء CDR Group",
+    "subtitle": "تعرّف على فريق عمل مجموعة CDR Group",
     "founder": "المؤسس",
     "coFounder": "الشريك المؤسس",
     "ceo": "الرئيس التنفيذي",
@@ -198,8 +201,8 @@
   },
   "footer": {
     "operatingHours": "ساعات العمل",
-    "monFri": "الإثنين - الجمعة",
-    "satSun": "السبت - الأحد",
+    "monFri": "الأحد - الخميس",
+    "monFriHours": "٩:٠٠ صباحاً - ٦:٠٠ مساءً",
     "connectWithUs": "تواصل معنا",
     "copyright": "جميع الحقوق محفوظة",
     "privacyPolicy": "سياسة الخصوصية",
@@ -211,6 +214,12 @@
   "companyDetail": {
     "notFound": "الشركة غير موجودة",
     "notFoundDesc": "الشركة التي تبحث عنها غير موجودة."
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "invalidEmail": "يرجى إدخال بريد إلكتروني صحيح",
+    "passwordMinLength": "يجب أن تكون كلمة المرور 4 أحرف على الأقل",
+    "phoneFormat": "رقم الهاتف يجب أن يبدأ بـ 00962 ويتكون من 14 رقم"
   },
   "errors": {
     "notFound": "الصفحة غير موجودة",
@@ -260,6 +269,7 @@
       "firstName": "الاسم الأول",
       "lastName": "الاسم الأخير",
       "password": "كلمة المرور",
+      "createdBy": "أنشئ بواسطة",
       "created": "تاريخ الإنشاء",
       "actions": "الإجراءات",
       "edit": "تعديل",
@@ -277,17 +287,25 @@
       "userDeleted": "تم حذف المستخدم بنجاح",
       "userActivated": "تم تفعيل المستخدم بنجاح",
       "userDeactivated": "تم إلغاء تفعيل المستخدم بنجاح",
+      "changePassword": "تغيير كلمة المرور",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "passwordChanged": "تم تغيير كلمة المرور بنجاح",
       "errors": {
         "loadFailed": "فشل في تحميل المستخدمين",
         "createFailed": "فشل في إنشاء المستخدم",
         "updateFailed": "فشل في تحديث المستخدم",
         "deleteFailed": "فشل في حذف المستخدم",
+        "changePasswordFailed": "فشل في تغيير كلمة المرور",
+        "passwordsMismatch": "كلمتا المرور غير متطابقتين",
         "usernameRequired": "اسم المستخدم مطلوب",
         "usernameMinLength": "يجب أن يكون اسم المستخدم 3 أحرف على الأقل",
         "emailRequired": "البريد الإلكتروني مطلوب",
         "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
         "passwordRequired": "كلمة المرور مطلوبة",
-        "passwordMinLength": "يجب أن تكون كلمة المرور 6 أحرف على الأقل"
+        "passwordMinLength": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+        "loadRolesFailed": "فشل في تحميل الأدوار",
+        "updateRolesFailed": "فشل في تحديث الأدوار"
       },
       "placeholders": {
         "username": "أدخل اسم المستخدم",
@@ -300,7 +318,10 @@
       "accountInfo": "معلومات الحساب",
       "contactInfo": "معلومات الاتصال",
       "personalInfo": "المعلومات الشخصية",
-      "deleteUser": "حذف المستخدم"
+      "deleteUser": "حذف المستخدم",
+      "manageRoles": "إدارة الأدوار",
+      "rolesUpdated": "تم تحديث الأدوار بنجاح",
+      "noRolesAvailable": "لا توجد أدوار متاحة"
     },
     "roles": {
       "title": "إدارة الأدوار",
@@ -321,6 +342,7 @@
       "system": "نظام",
       "custom": "مخصص",
       "permissions": "الصلاحيات",
+      "createdBy": "أنشئ بواسطة",
       "created": "تاريخ الإنشاء",
       "edit": "تعديل",
       "view": "عرض",

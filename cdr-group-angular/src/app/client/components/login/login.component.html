@@ -7,11 +7,11 @@
   <div class="offcanvas-body d-flex flex-column justify-content-center">
     <form [formGroup]="loginForm"  class="login-form">
       <mat-form-field appearance="outline" class="w-100 mb-3">
-        <mat-label>{{ 'header.membershipNo' | translate }}</mat-label>
+        <mat-label>{{ 'header.username' | translate }}</mat-label>
         <input matInput formControlName="username" type="text">
         <mat-icon matPrefix>person</mat-icon>
         @if (f['username'].touched && f['username'].errors?.['required']) {
-          <mat-error>{{ 'header.membershipNo' | translate }} is required</mat-error>
+          <mat-error>{{ 'validation.required' | translate }}</mat-error>
         }
       </mat-form-field>
 
@@ -23,16 +23,12 @@
           <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
         @if (f['password'].touched && f['password'].errors?.['required']) {
-          <mat-error>{{ 'header.password' | translate }} is required</mat-error>
+          <mat-error>{{ 'validation.required' | translate }}</mat-error>
         }
         @if (f['password'].touched && f['password'].errors?.['minlength']) {
-          <mat-error>Password must be at least 4 characters</mat-error>
+          <mat-error>{{ 'validation.passwordMinLength' | translate }}</mat-error>
         }
       </mat-form-field>
-
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <a href="#" class="text-white forgot-link">{{ 'header.forgotPassword' | translate }}</a>
-      </div>
 
       @if (loginError) {
         <div class="alert alert-danger mb-4">
@@ -42,7 +38,7 @@
 
       <button mat-flat-button type="button" (click)="onLogin()" class="w-100 login-btn" [disabled]="isLoading">
         <mat-icon [class.spin]="isLoading">{{ isLoading ? 'sync' : 'login' }}</mat-icon>
-        <span>{{ isLoading ? 'Loading...' : ('header.login' | translate) }}</span>
+        <span>{{ isLoading ? ('header.loading' | translate) : ('header.login' | translate) }}</span>
       </button>
     </form>
 

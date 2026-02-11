@@ -83,18 +83,19 @@ export class TranslationService {
   /**
    * Switch between languages
    */
-  async setLanguage(lang: Language): Promise<void> {
+  setLanguage(lang: Language): void {
     if (lang !== this.currentLanguage()) {
-      await this.loadTranslations(lang);
+      this.storeLanguage(lang);
+      window.location.reload();
     }
   }
 
   /**
    * Toggle between Arabic and English
    */
-  async toggleLanguage(): Promise<void> {
+  toggleLanguage(): void {
     const newLang: Language = this.currentLanguage() === 'en' ? 'ar' : 'en';
-    await this.setLanguage(newLang);
+    this.setLanguage(newLang);
   }
 
   /**
@@ -156,4 +157,5 @@ export class TranslationService {
   getOtherLanguageName(): string {
     return this.currentLanguage() === 'en' ? 'العربية' : 'English';
   }
+
 }

@@ -1,8 +1,9 @@
-import { Component, inject, Output, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { SnackbarService } from '../../../services/snackbar.service';
+import { TranslationService } from '../../../services/translation.service';
 import { LoginDto, Roles } from '../../../models/auth.model';
 
 @Component({
@@ -16,9 +17,11 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private snackbar: SnackbarService,
+    private translationService: TranslationService,
     private router: Router,
     private fb: FormBuilder,
-  ) {}
+    private cdr: ChangeDetectorRef
+  ) { }
 
   @Output() loginSuccess = new EventEmitter<void>();
 
@@ -54,13 +57,14 @@ export class LoginComponent implements OnInit {
         if (response.success) {
           this.loginForm.reset();
           this.loginSuccess.emit();
-          this.snackbar.success('Login successful. Welcome back!');
-
+          this.snackbar.success(this.translationService.t('header.loginSuccess'));
+          this.cdr.markForCheck();
           const isAdmin = this.authService.hasRole(Roles.SUPER_ADMIN) || this.authService.hasRole(Roles.ADMIN);
           this.closeOffcanvasAndNavigate(isAdmin);
         }
       },
       error: () => {
+        this.cdr.markForCheck();
         this.isLoading = false;
       }
     });

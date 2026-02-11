@@ -37,11 +37,6 @@ export class UsersService extends BaseService<UserDto, CreateUserDto, UpdateUser
     return this.post<AssignRolesDto, UserDto>(`/${id}/roles`, dto);
   }
 
-  removeRoles(id: string, roleIds: string[]): Observable<ApiResponse<UserDto>> {
-    return this.http.delete<ApiResponse<UserDto>>(`${this.getApiUrl()}/${id}/roles`, {
-      body: roleIds
-    }).pipe(catchError(error => this.handleError(error)));
-  }
 
   activate(id: string): Observable<ApiResponse<void>> {
     return this.post<void, void>(`/${id}/activate`);

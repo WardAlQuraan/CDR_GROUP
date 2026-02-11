@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -35,6 +35,7 @@ export class PositionAssignDepartmentDialogComponent implements OnInit {
     private departmentsService: DepartmentsService,
     private snackbar: SnackbarService,
     private translationService: TranslationService,
+    private cdr: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public position: PositionDto
   ) {}
 
@@ -67,8 +68,8 @@ export class PositionAssignDepartmentDialogComponent implements OnInit {
         this.dialogRef.close(true);
       },
       error: (error) => {
-        this.snackbar.error(error.message || this.translate('admin.positions.errors.assignDepartmentFailed'));
         this.loading = false;
+        this.cdr.markForCheck();
       }
     });
   }

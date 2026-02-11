@@ -83,23 +83,22 @@ export class PermissionsDialogComponent implements OnInit {
                 });
               }
               this.loadingPermissions = false;
-              this.cdr.detectChanges();
+              this.cdr.markForCheck();
             },
             error: (error) => {
-              this.snackbar.error(error.message || this.translate('admin.roles.errors.loadPermissionsFailed'));
               this.loadingPermissions = false;
-              this.cdr.detectChanges();
+              this.cdr.markForCheck();
             }
           });
         } else {
           this.loadingPermissions = false;
-          this.cdr.detectChanges();
+          this.cdr.markForCheck();
         }
       },
       error: (error) => {
         this.snackbar.error(error.message || this.translate('admin.roles.errors.loadPermissionsFailed'));
         this.loadingPermissions = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       }
     });
   }

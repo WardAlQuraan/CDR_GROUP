@@ -7,19 +7,15 @@
     <div class="row">
       @if (!isSmall) {
         <div class="col-lg-6 col-12">
-          <h1 class="text-white mb-4 pb-2 cd-headline rotate-1">{{ 'hero.welcomeTo' | translate }}
-            <span class="cd-words-wrapper">
-              <b [class.is-visible]="isVisible" [class.is-hidden]="!isVisible">{{ currentWord | translate }}</b>
-            </span>
-            {{ 'hero.golfClub' | translate }}
-          </h1>
+          <h1 class="text-white mb-2">{{ 'hero.title' | translate }}</h1>
+          <p class="mb-4 pb-2" style="color: #D9A93E; font-size: 1.1rem;">{{ 'hero.subtitle' | translate }}</p>
 
           @if (showMore) {
             <p class="hero-description text-white">{{ 'hero.description' | translate }}</p>
           }
 
-          <div class="custom-btn-group">
-            <a href="#section_2" class="link smoothscroll me-4">{{ 'hero.ourStory' | translate }}</a>
+          <div class="custom-btn-group d-flex align-items-center gap-4">
+            <a href="#section_2" class="link smoothscroll">{{ 'hero.ourStory' | translate }}</a>
             <a class="custom-btn custom-border-btn smoothscroll" href="javascript:void(0)" (click)="toggleMore()">
               {{ (showMore ? 'hero.showLess' : 'hero.becomeMember') | translate }}
             </a>

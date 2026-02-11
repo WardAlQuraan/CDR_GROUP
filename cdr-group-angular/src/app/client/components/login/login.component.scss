@@ -108,6 +108,12 @@ mat-icon.me-2 {
   vertical-align: middle;
 }
 
+// RTL: move close button to the left
+:host-context([dir="rtl"]) .offcanvas-header .btn-close {
+  margin-right: auto;
+  margin-left: 0;
+}
+
 // Alert styling for login error
 .alert-danger {
   background-color: rgba(244, 67, 54, 0.15);

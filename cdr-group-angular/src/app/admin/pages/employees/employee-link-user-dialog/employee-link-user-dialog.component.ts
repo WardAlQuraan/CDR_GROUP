@@ -1,12 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { EmployeeDto } from '../../../../models/employee.model';
 import { UserDto } from '../../../../models/user.model';
+import { ApiResponse } from '../../../../models/api-response.model';
 import { EmployeesService } from '../../../../services/employees.service';
 import { UsersService } from '../../../../services/users.service';
 import { SnackbarService } from '../../../../services/snackbar.service';
 import { TranslationService } from '../../../../services/translation.service';
+import { SelectOption } from '../../../../shared/components/async-select/async-select.component';
 
 @Component({
   selector: 'app-employee-link-user-dialog',
@@ -17,8 +20,12 @@ import { TranslationService } from '../../../../services/translation.service';
 export class EmployeeLinkUserDialogComponent implements OnInit {
   form!: FormGroup;
   loading = false;
-  loadingUsers = false;
-  availableUsers: UserDto[] = [];
+  usersSource$!: Observable<ApiResponse<UserDto[]>>;
+  userMapper = (user: UserDto): SelectOption => ({
+    value: user.id,
+    label: `${user.username} (${user.email})`
+  });
+  activeUserFilter = (user: UserDto): boolean => user.isActive;
 
   constructor(
     private fb: FormBuilder,
@@ -27,12 +34,13 @@ export class EmployeeLinkUserDialogComponent implements OnInit {
     private usersService: UsersService,
     private snackbar: SnackbarService,
     private translationService: TranslationService,
+    private cdr: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public employee: EmployeeDto
   ) {}
 
   ngOnInit(): void {
     this.initForm();
-    this.loadAvailableUsers();
+    this.usersSource$ = this.usersService.getAll();
   }
 
   get isArabic(): boolean {
@@ -42,21 +50,6 @@ export class EmployeeLinkUserDialogComponent implements OnInit {
   private initForm(): void {
     this.form = this.fb.group({
       userId: [this.employee.userId || null]
-    });
-  }
-
-  private loadAvailableUsers(): void {
-    this.loadingUsers = true;
-    this.usersService.getAll().subscribe({
-      next: (response) => {
-        if (response.success && response.data) {
-          this.availableUsers = response.data.filter(u => u.isActive);
-        }
-        this.loadingUsers = false;
-      },
-      error: () => {
-        this.loadingUsers = false;
-      }
     });
   }
 
@@ -74,8 +67,8 @@ export class EmployeeLinkUserDialogComponent implements OnInit {
         this.dialogRef.close(true);
       },
       error: (error) => {
-        this.snackbar.error(error.message || this.translate('admin.employees.errors.linkToUserFailed'));
         this.loading = false;
+        this.cdr.markForCheck();
       }
     });
   }

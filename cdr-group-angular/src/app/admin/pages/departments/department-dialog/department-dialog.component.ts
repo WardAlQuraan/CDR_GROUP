@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -64,7 +64,8 @@ export class DepartmentDialogComponent implements OnInit {
     private companiesService: CompaniesService,
     private snackbar: SnackbarService,
     private translationService: TranslationService,
-    @Inject(MAT_DIALOG_DATA) public data: DepartmentDialogData
+    @Inject(MAT_DIALOG_DATA) public data: DepartmentDialogData,
+    private cdr: ChangeDetectorRef
   ) {
     this.mode = data.mode;
     this.companies$ = this.companiesService.getActiveCompanies();
@@ -163,8 +164,8 @@ export class DepartmentDialogComponent implements OnInit {
         this.dialogRef.close(true);
       },
       error: (error) => {
-        this.snackbar.error(error.message || this.translate('admin.departments.errors.createFailed'));
         this.loading = false;
+        this.cdr.markForCheck();
       }
     });
   }
@@ -188,8 +189,8 @@ export class DepartmentDialogComponent implements OnInit {
         this.dialogRef.close(true);
       },
       error: (error) => {
-        this.snackbar.error(error.message || this.translate('admin.departments.errors.updateFailed'));
         this.loading = false;
+        this.cdr.markForCheck();
       }
     });
   }

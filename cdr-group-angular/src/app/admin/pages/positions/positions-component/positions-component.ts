@@ -161,7 +161,8 @@ export class PositionsComponent implements OnInit {
     const request: PagedRequest = {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
-      search: this.filterValues['search'] || undefined,
+      searchTerm: this.filterValues['searchTerm'] || undefined,
+      searchProperties: ['code', 'nameEn', 'nameAr'],
       sortBy: this.sortBy,
       sortDescending: this.sortDescending
     };
@@ -183,11 +184,11 @@ export class PositionsComponent implements OnInit {
           this.totalCount = response.data.totalCount;
         }
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       },
       error: (error) => {
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       }
     });
   }
@@ -281,8 +282,8 @@ export class PositionsComponent implements OnInit {
             this.loadPositions();
           },
           error: (error) => {
-            this.snackbar.error(error.message || this.translate('admin.positions.errors.deleteFailed'));
             this.loading = false;
+            this.cdr.markForCheck();
           }
         });
       }

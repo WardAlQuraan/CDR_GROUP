@@ -169,7 +169,8 @@ export class EmployeesComponent implements OnInit {
     const request: PagedRequest = {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
-      search: this.filterValues['search'] || undefined,
+      searchTerm: this.filterValues['searchTerm'] || undefined,
+      searchProperties: ['employeeCode', 'firstNameEn', 'lastNameEn', 'firstNameAr', 'lastNameAr', 'email'],
       sortBy: this.sortBy,
       sortDescending: this.sortDescending
     };
@@ -324,8 +325,8 @@ export class EmployeesComponent implements OnInit {
             this.loadEmployees();
           },
           error: (error) => {
-            this.snackbar.error(error.message || this.translate('admin.employees.errors.deleteFailed'));
             this.loading = false;
+            this.cdr.markForCheck();
           }
         });
       }

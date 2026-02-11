@@ -47,11 +47,11 @@ export class DepartmentOrgChartPageComponent implements OnInit {
           this.department = response.data;
         }
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       },
       error: () => {
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       }
     });
   }

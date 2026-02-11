@@ -9,8 +9,11 @@ import { UserDto } from '../../../../models/user.model';
 import { PagedRequest } from '../../../../models/paged.model';
 import { DataGridConfig, FilterValues } from '../../../../shared/components/data-grid/data-grid.models';
 import { UserDialogComponent, UserDialogData } from '../user-dialog/user-dialog.component';
+import { ChangePasswordDialogComponent, ChangePasswordDialogData } from '../change-password-dialog/change-password-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { ManageRolesDialogComponent, ManageRolesDialogData } from '../manage-roles-dialog/manage-roles-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
+import { formatDateTime } from '../../../../utils/date.utils';
 
 @Component({
   selector: 'app-users-component',
@@ -89,10 +92,15 @@ export class UsersComponent implements OnInit {
           cell: (row) => row.isActive ? this.translate('admin.active') : this.translate('admin.inactive')
         },
         {
+          key: 'createdBy',
+          header: 'admin.users.createdBy',
+          cell: (row) => row.createdBy || '-'
+        },
+        {
           key: 'createdAt',
           header: 'admin.users.created',
           sortable: true,
-          cell: (row) => new Date(row.createdAt).toLocaleDateString()
+          cell: (row) => formatDateTime(row.createdAt)
         }
       ],
       actions: [
@@ -102,6 +110,13 @@ export class UsersComponent implements OnInit {
           permission: Permissions.USERS_UPDATE,
           color: 'info',
           onClick: (row) => this.openEditDialog(row)
+        },
+        {
+          icon: 'lock_reset',
+          tooltip: 'admin.users.changePassword',
+          permission: Permissions.USERS_UPDATE,
+          color: 'accent',
+          onClick: (row) => this.openChangePasswordDialog(row)
         },
         {
           icon: 'toggle_on',
@@ -118,6 +133,13 @@ export class UsersComponent implements OnInit {
           color: 'warn',
           onClick: (row) => this.toggleUserStatus(row),
           visible: (row) => !row.isActive
+        },
+        {
+          icon: 'admin_panel_settings',
+          tooltip: 'admin.users.manageRoles',
+          permission: Permissions.USERS_UPDATE,
+          color: 'info',
+          onClick: (row) => this.openManageRolesDialog(row)
         },
         {
           icon: 'delete',
@@ -142,7 +164,8 @@ export class UsersComponent implements OnInit {
     const request: PagedRequest = {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
-      search: this.filterValues['search'] || undefined,
+      searchTerm: this.filterValues['searchTerm'] || undefined,
+      searchProperties: ['username', 'email', 'firstName', 'lastName'],
       sortBy: this.sortBy,
       sortDescending: this.sortDescending
     };
@@ -164,12 +187,11 @@ export class UsersComponent implements OnInit {
           this.totalCount = response.data.totalCount;
         }
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       },
       error: (error) => {
-        this.snackbar.error(error.message || this.translate('admin.users.errors.loadFailed'));
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       }
     });
   }
@@ -222,6 +244,15 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  openChangePasswordDialog(user: UserDto): void {
+    const dialogData: ChangePasswordDialogData = { userId: user.id, username: user.username };
+    this.dialog.open(ChangePasswordDialogComponent, {
+      width: '500px',
+      data: dialogData,
+      disableClose: true
+    });
+  }
+
   toggleUserStatus(user: UserDto): void {
     const action = user.isActive ? this.usersService.deactivate(user.id) : this.usersService.activate(user.id);
     const successMessage = user.isActive
@@ -235,8 +266,23 @@ export class UsersComponent implements OnInit {
         this.loadUsers();
       },
       error: (error) => {
-        this.snackbar.error(error.message);
         this.loading = false;
+        this.cdr.markForCheck();
+      }
+    });
+  }
+
+  openManageRolesDialog(user: UserDto): void {
+    const dialogData: ManageRolesDialogData = { user };
+    const dialogRef = this.dialog.open(ManageRolesDialogComponent, {
+      width: '500px',
+      data: dialogData,
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadUsers();
       }
     });
   }
@@ -265,8 +311,8 @@ export class UsersComponent implements OnInit {
             this.loadUsers();
           },
           error: (error) => {
-            this.snackbar.error(error.message || this.translate('admin.users.errors.deleteFailed'));
             this.loading = false;
+            this.cdr.markForCheck();
           }
         });
       }

@@ -1,0 +1,41 @@
+<app-base-dialog
+  [title]="'admin.users.manageRoles'"
+  [saveLabel]="'common.save'"
+  [saveDisabled]="loadingRoles"
+  [loading]="loading"
+  (save)="onSave()"
+  (cancel)="onCancel()">
+
+  <div class="roles-manager">
+    @if (loadingRoles) {
+      <div class="loading-container">
+        <mat-spinner diameter="40"></mat-spinner>
+        <span>{{ 'common.loading' | translate }}</span>
+      </div>
+    } @else {
+      <div class="user-info">
+        <mat-icon>person</mat-icon>
+        <span class="user-name">{{ data.user.username }}</span>
+        <span class="selected-count">({{ selectedRoleIds.size }} {{ 'admin.roles.selected' | translate }})</span>
+      </div>
+
+      <mat-selection-list (selectionChange)="onSelectionChange($event)">
+        @for (role of allRoles; track role.id) {
+          <mat-list-option [value]="role.id" [selected]="selectedRoleIds.has(role.id)">
+            <span matListItemTitle>{{ role.name }}</span>
+            @if (role.description) {
+              <span matListItemLine class="role-description">{{ role.description }}</span>
+            }
+          </mat-list-option>
+        }
+      </mat-selection-list>
+
+      @if (allRoles.length === 0) {
+        <div class="no-roles">
+          {{ 'admin.users.noRolesAvailable' | translate }}
+        </div>
+      }
+    }
+  </div>
+
+</app-base-dialog>

@@ -1,6 +1,7 @@
 .events-section {
   background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
   padding: 80px 0;
+  min-height: 600px;
 
   .section-title {
     font-size: 2.5rem;
@@ -71,6 +72,27 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
+  max-height: 700px;
+  overflow-y: auto;
+  padding-right: 4px;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+
+    &:hover {
+      background: #94a3b8;
+    }
+  }
 }
 
 // Event Card
@@ -275,7 +297,7 @@
         font-weight: 500;
         padding: 0.25rem 0.625rem;
         border-radius: 6px;
-        background: rgba(129, 178, 154, 0.1);
+        background: rgba(217, 169, 62, 0.1);
         transition: all 0.2s ease;
         cursor: pointer;
 
@@ -286,7 +308,7 @@
         }
 
         &:hover {
-          background: rgba(129, 178, 154, 0.2);
+          background: rgba(217, 169, 62, 0.2);
           color: #C4962E;
         }
       }
@@ -384,6 +406,7 @@
 @media (max-width: 992px) {
   .events-section {
     padding: 60px 0;
+    min-height: 500px;
 
     .section-title {
       font-size: 2rem;
@@ -392,12 +415,14 @@
 
   .events-grid {
     grid-template-columns: 1fr;
+    max-height: 600px;
   }
 }
 
 @media (max-width: 768px) {
   .events-section {
     padding: 40px 0;
+    min-height: 400px;
 
     .section-title {
       font-size: 1.75rem;
@@ -406,6 +431,10 @@
     .section-subtitle {
       font-size: 1rem;
     }
+  }
+
+  .events-grid {
+    max-height: 500px;
   }
 
   .event-card {

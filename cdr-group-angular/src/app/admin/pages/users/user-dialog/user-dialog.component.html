@@ -61,7 +61,7 @@
         <mat-form-field appearance="outline">
           <mat-label>{{ 'admin.users.email' | translate }}</mat-label>
           <mat-icon matPrefix>email</mat-icon>
-          <input matInput formControlName="email" type="email" [placeholder]="'admin.users.placeholders.email' | translate">
+          <input matInput formControlName="email" type="email" placeholder="example@email.com">
           @if (form.get('email')?.hasError('required') && form.get('email')?.touched) {
             <mat-error>{{ 'admin.users.errors.emailRequired' | translate }}</mat-error>
           }
@@ -73,7 +73,10 @@
         <mat-form-field appearance="outline">
           <mat-label>{{ 'admin.users.phoneNumber' | translate }}</mat-label>
           <mat-icon matPrefix>phone</mat-icon>
-          <input matInput formControlName="phoneNumber" [placeholder]="'admin.users.placeholders.phoneNumber' | translate">
+          <input matInput formControlName="phoneNumber" placeholder="00962XXXXXXXXX">
+          @if (form.get('phoneNumber')?.hasError('pattern') && form.get('phoneNumber')?.touched) {
+            <mat-error>{{ 'validation.phoneFormat' | translate }}</mat-error>
+          }
         </mat-form-field>
       </div>
     </div>

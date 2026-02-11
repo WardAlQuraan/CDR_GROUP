@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -43,6 +43,7 @@ export class EventDialogComponent implements OnInit {
     private companiesService: CompaniesService,
     private snackbar: SnackbarService,
     private translationService: TranslationService,
+    private cdr: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public data: EventDialogData
   ) {
     this.mode = data.mode;
@@ -134,8 +135,8 @@ export class EventDialogComponent implements OnInit {
         this.dialogRef.close(true);
       },
       error: (error) => {
-        this.snackbar.error(error.message || this.translate('admin.eventsAdmin.errors.createFailed'));
         this.loading = false;
+        this.cdr.markForCheck();
       }
     });
   }
@@ -157,8 +158,8 @@ export class EventDialogComponent implements OnInit {
         this.dialogRef.close(true);
       },
       error: (error) => {
-        this.snackbar.error(error.message || this.translate('admin.eventsAdmin.errors.updateFailed'));
         this.loading = false;
+        this.cdr.markForCheck();
       }
     });
   }

@@ -20,19 +20,16 @@
           <span class="value">{{ isArabic ? employee.fullNameAr : employee.fullNameEn }}</span>
         </div>
 
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'admin.employees.user' | translate }}</mat-label>
-          <mat-icon matPrefix>person</mat-icon>
-          <mat-select formControlName="userId">
-            <mat-option [value]="null">{{ 'admin.employees.noUser' | translate }}</mat-option>
-            @for (user of availableUsers; track user.id) {
-              <mat-option [value]="user.id">{{ user.username }} ({{ user.email }})</mat-option>
-            }
-          </mat-select>
-          @if (loadingUsers) {
-            <mat-hint>{{ 'common.loading' | translate }}</mat-hint>
-          }
-        </mat-form-field>
+        <app-async-select
+          formControlName="userId"
+          label="admin.employees.user"
+          icon="person"
+          nullOptionLabel="admin.employees.noUser"
+          [dataSource$]="usersSource$"
+          [optionMapper]="userMapper"
+          [filterFn]="activeUserFilter"
+          [resetOnDataSourceChange]="false">
+        </app-async-select>
       </div>
     </div>
   </form>

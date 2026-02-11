@@ -81,8 +81,13 @@ export abstract class BaseService<T, TCreate = T, TUpdate = Partial<T>> {
       if (request.sortDescending !== undefined) {
         params = params.set('sortDescending', request.sortDescending.toString());
       }
-      if (request.search) {
-        params = params.set('search', request.search);
+      if (request.searchTerm) {
+        params = params.set('searchTerm', request.searchTerm);
+      }
+      if (request.searchProperties?.length) {
+        for (const prop of request.searchProperties) {
+          params = params.append('searchProperties', prop);
+        }
       }
     }
     return params;

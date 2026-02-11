@@ -101,7 +101,8 @@ export class ContactUsAdminComponent implements OnInit {
     const request: PagedRequest = {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
-      search: this.filterValues['search'] || undefined,
+      searchTerm: this.filterValues['searchTerm'] || undefined,
+      searchProperties: ['fullName', 'email', 'message'],
       sortBy: this.sortBy,
       sortDescending: this.sortDescending
     };
@@ -113,11 +114,11 @@ export class ContactUsAdminComponent implements OnInit {
           this.totalCount = response.data.totalCount;
         }
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       },
       error: () => {
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       }
     });
   }
@@ -171,8 +172,8 @@ export class ContactUsAdminComponent implements OnInit {
             this.loadMessages();
           },
           error: (error) => {
-            this.snackbar.error(error.message || this.translate('admin.contactUs.errors.deleteFailed'));
             this.loading = false;
+            this.cdr.markForCheck();
           }
         });
       }

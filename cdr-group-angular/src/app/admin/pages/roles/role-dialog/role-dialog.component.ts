@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { RoleDto, CreateRoleDto, UpdateRoleDto } from '../../../../models/role.model';
@@ -28,6 +28,7 @@ export class RoleDialogComponent implements OnInit {
     private rolesService: RolesService,
     private snackbar: SnackbarService,
     private translationService: TranslationService,
+    private cdr: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public data: RoleDialogData
   ) {
     this.mode = data.mode;
@@ -113,6 +114,7 @@ export class RoleDialogComponent implements OnInit {
         error: (error) => {
           this.snackbar.error(error.message || this.translate('admin.roles.errors.updateFailed'));
           this.loading = false;
+          this.cdr.markForCheck();
         }
       });
     } else {
@@ -127,8 +129,8 @@ export class RoleDialogComponent implements OnInit {
           this.dialogRef.close(true);
         },
         error: (error) => {
-          this.snackbar.error(error.message || this.translate('admin.roles.errors.createFailed'));
           this.loading = false;
+          this.cdr.markForCheck();
         }
       });
     }

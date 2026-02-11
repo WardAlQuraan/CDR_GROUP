@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserDto, CreateUserDto, UpdateUserDto } from '../../../../models/user.model';
@@ -29,7 +29,8 @@ export class UserDialogComponent implements OnInit {
     private usersService: UsersService,
     private snackbar: SnackbarService,
     private translationService: TranslationService,
-    @Inject(MAT_DIALOG_DATA) public data: UserDialogData
+    @Inject(MAT_DIALOG_DATA) public data: UserDialogData,
+    private cdr: ChangeDetectorRef
   ) {
     this.isEditMode = data.mode === 'edit';
   }
@@ -44,7 +45,7 @@ export class UserDialogComponent implements OnInit {
         email: [this.data.user?.email, [Validators.required, Validators.email]],
         firstName: [this.data.user?.firstName],
         lastName: [this.data.user?.lastName],
-        phoneNumber: [this.data.user?.phoneNumber]
+        phoneNumber: [this.data.user?.phoneNumber, [Validators.pattern(/^00962\d{9}$/)]]
       });
     } else {
       this.form = this.fb.group({
@@ -53,7 +54,7 @@ export class UserDialogComponent implements OnInit {
         password: ['', [Validators.required, Validators.minLength(6)]],
         firstName: [''],
         lastName: [''],
-        phoneNumber: ['']
+        phoneNumber: ['', [Validators.pattern(/^00962\d{9}$/)]]
       });
     }
   }
@@ -84,7 +85,7 @@ export class UserDialogComponent implements OnInit {
           this.dialogRef.close(true);
         },
         error: (error) => {
-          this.snackbar.error(error.message || this.translate('admin.users.errors.updateFailed'));
+          this.cdr.markForCheck();
           this.loading = false;
         }
       });
@@ -104,7 +105,7 @@ export class UserDialogComponent implements OnInit {
           this.dialogRef.close(true);
         },
         error: (error) => {
-          this.snackbar.error(error.message || this.translate('admin.users.errors.createFailed'));
+          this.cdr.markForCheck();
           this.loading = false;
         }
       });

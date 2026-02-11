@@ -4,6 +4,7 @@ export interface RoleDto {
   description?: string;
   isSystemRole: boolean;
   createdAt: Date;
+  createdBy?: string;
   permissions: string[];
 }
 

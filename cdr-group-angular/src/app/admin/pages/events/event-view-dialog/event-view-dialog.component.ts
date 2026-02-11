@@ -22,7 +22,7 @@ export class EventViewDialogComponent {
 
   getCompanyName(): string {
     if (!this.event.companyId) return '-';
-    return this.isArabic ? this.event.companyNameAr || '-' : this.event.companyName || '-';
+    return this.isArabic ? this.event.companyNameAr || '-' : this.event.companyNameEn || '-';
   }
 
   onClose(): void {

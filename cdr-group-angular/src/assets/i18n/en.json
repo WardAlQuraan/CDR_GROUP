@@ -81,6 +81,7 @@
     "joinNow": "Join Now",
     "memberLogin": "Member Login",
     "membershipNo": "Membership No.",
+    "username": "Username",
     "password": "Password",
     "rememberMe": "Remember me",
     "forgotPassword": "Forgotten password?",
@@ -89,7 +90,9 @@
     "register": "Register",
     "needHelp": "Need help? Call us at",
     "eventListing": "Event Listing",
-    "eventDetail": "Event Detail"
+    "eventDetail": "Event Detail",
+    "loginSuccess": "Login successful. Welcome back!",
+    "loading": "Loading..."
   },
   "hero": {
     "welcomeTo": "CDR News",
@@ -162,7 +165,7 @@
   },
   "team": {
     "title": "Our Team",
-    "subtitle": "Meet the people behind CDR Group",
+    "subtitle": "Meet the People of CDR Group",
     "founder": "Founder",
     "coFounder": "Co-Founder",
     "ceo": "CEO",
@@ -198,8 +201,8 @@
   },
   "footer": {
     "operatingHours": "Operating Hours",
-    "monFri": "Mon - Fri",
-    "satSun": "Sat - Sun",
+    "monFri": "Sun - Thu",
+    "monFriHours": "9:00 AM - 6:00 PM",
     "connectWithUs": "Connect With Us",
     "copyright": "All Rights Reserved",
     "privacyPolicy": "Privacy Policy",
@@ -211,6 +214,12 @@
   "companyDetail": {
     "notFound": "Company Not Found",
     "notFoundDesc": "The company you're looking for doesn't exist."
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Please enter a valid email address",
+    "passwordMinLength": "Password must be at least 4 characters",
+    "phoneFormat": "Phone number must start with 00962 and be 14 digits"
   },
   "errors": {
     "notFound": "Page Not Found",
@@ -260,6 +269,7 @@
       "firstName": "First Name",
       "lastName": "Last Name",
       "password": "Password",
+      "createdBy": "Created By",
       "created": "Created",
       "actions": "Actions",
       "edit": "Edit",
@@ -277,17 +287,25 @@
       "userDeleted": "User deleted successfully",
       "userActivated": "User activated successfully",
       "userDeactivated": "User deactivated successfully",
+      "changePassword": "Change Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "passwordChanged": "Password changed successfully",
       "errors": {
         "loadFailed": "Failed to load users",
         "createFailed": "Failed to create user",
         "updateFailed": "Failed to update user",
         "deleteFailed": "Failed to delete user",
+        "changePasswordFailed": "Failed to change password",
+        "passwordsMismatch": "Passwords do not match",
         "usernameRequired": "Username is required",
         "usernameMinLength": "Username must be at least 3 characters",
         "emailRequired": "Email is required",
         "emailInvalid": "Please enter a valid email",
         "passwordRequired": "Password is required",
-        "passwordMinLength": "Password must be at least 6 characters"
+        "passwordMinLength": "Password must be at least 6 characters",
+        "loadRolesFailed": "Failed to load roles",
+        "updateRolesFailed": "Failed to update roles"
       },
       "placeholders": {
         "username": "Enter username",
@@ -300,7 +318,10 @@
       "accountInfo": "Account Information",
       "contactInfo": "Contact Information",
       "personalInfo": "Personal Information",
-      "deleteUser": "Delete User"
+      "deleteUser": "Delete User",
+      "manageRoles": "Manage Roles",
+      "rolesUpdated": "Roles updated successfully",
+      "noRolesAvailable": "No roles available"
     },
     "roles": {
       "title": "Roles Management",
@@ -321,6 +342,7 @@
       "system": "System",
       "custom": "Custom",
       "permissions": "Permissions",
+      "createdBy": "Created By",
       "created": "Created",
       "edit": "Edit",
       "view": "View",

@@ -47,11 +47,11 @@ export class CompanyOrgChartPageComponent implements OnInit {
           this.company = response.data;
         }
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       },
       error: () => {
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       }
     });
   }
