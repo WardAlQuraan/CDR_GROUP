@@ -12,6 +12,7 @@ namespace cdr_group.Contracts.DTOs.Identity
         public bool EmailConfirmed { get; set; }
         public DateTime? LastLoginAt { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string CreatedBy { get; set; } = string.Empty;
         public List<string> Roles { get; set; } = new();
     }
 

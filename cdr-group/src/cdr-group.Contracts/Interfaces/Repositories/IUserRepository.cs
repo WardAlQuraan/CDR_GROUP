@@ -12,5 +12,8 @@ namespace cdr_group.Contracts.Interfaces.Repositories
         Task<(IEnumerable<User> Users, int TotalCount)> GetUsersWithRolesPagedAsync(PagedRequest request);
         Task<bool> UsernameExistsAsync(string username);
         Task<bool> EmailExistsAsync(string email);
+        Task<List<UserRole>> GetAllUserRolesAsync(Guid userId);
+        Task AddUserRoleAsync(UserRole userRole);
+        Task DeleteUserRoleAsync(UserRole userRole);
     }
 }

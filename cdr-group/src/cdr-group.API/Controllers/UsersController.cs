@@ -99,18 +99,6 @@ namespace cdr_group.API.Controllers
             return Ok(ApiResponse<UserDto>.SuccessResponse(user, "Roles assigned successfully."));
         }
 
-        [HttpDelete("{id:guid}/roles")]
-        [HasPermission(Permissions.Users.Update)]
-        public async Task<ActionResult<ApiResponse<UserDto>>> RemoveRoles(Guid id, [FromBody] List<Guid> roleIds)
-        {
-            var user = await Service.RemoveRolesFromUserAsync(id, roleIds);
-            if (user == null)
-            {
-                return NotFound(ApiResponse<UserDto>.FailureResponse("User not found."));
-            }
-            return Ok(ApiResponse<UserDto>.SuccessResponse(user, "Roles removed successfully."));
-        }
-
         [HttpPost("{id:guid}/activate")]
         [HasPermission(Permissions.Users.Activate)]
         public async Task<ActionResult<ApiResponse>> Activate(Guid id)

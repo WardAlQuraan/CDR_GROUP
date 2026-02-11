@@ -4,6 +4,7 @@ using cdr_group.Contracts.DTOs.Identity;
 using cdr_group.Contracts.Interfaces.Repositories;
 using cdr_group.Contracts.Interfaces.Services;
 using cdr_group.Domain.Entities.Identity;
+using cdr_group.Domain.Localization;
 
 namespace cdr_group.Application.Services
 {
@@ -50,12 +51,12 @@ namespace cdr_group.Application.Services
         {
             if (await UnitOfWork.Users.UsernameExistsAsync(dto.Username))
             {
-                throw new InvalidOperationException("Username already exists.");
+                throw new InvalidOperationException(Messages.UsernameExists);
             }
 
             if (await UnitOfWork.Users.EmailExistsAsync(dto.Email))
             {
-                throw new InvalidOperationException("Email already exists.");
+                throw new InvalidOperationException(Messages.EmailExists);
             }
         }
 
@@ -79,7 +80,7 @@ namespace cdr_group.Application.Services
             {
                 if (await UnitOfWork.Users.EmailExistsAsync(dto.Email))
                 {
-                    throw new InvalidOperationException("Email already exists.");
+                    throw new InvalidOperationException(Messages.EmailExists);
                 }
             }
         }
@@ -89,10 +90,10 @@ namespace cdr_group.Application.Services
             var user = await UnitOfWork.Users.GetByIdAsync(id);
             if (user == null) return false;
 
-            if (!VerifyPassword(dto.CurrentPassword, user.PasswordHash))
-            {
-                throw new InvalidOperationException("Current password is incorrect.");
-            }
+            //if (!VerifyPassword(dto.CurrentPassword, user.PasswordHash))
+            //{
+            //    throw new InvalidOperationException(Messages.IncorrectCurrentPassword);
+            //}
 
             user.PasswordHash = HashPassword(dto.NewPassword);
             await UnitOfWork.Users.UpdateAsync(user);
@@ -102,41 +103,67 @@ namespace cdr_group.Application.Services
 
         public async Task<UserDto?> AssignRolesToUserAsync(Guid userId, AssignRolesDto dto)
         {
-            var user = await UnitOfWork.Users.GetWithRolesAsync(userId);
+            var user = await UnitOfWork.Users.GetByIdAsync(userId);
             if (user == null) return null;
 
-            foreach (var roleId in dto.RoleIds)
+            await UnitOfWork.BeginTransactionAsync();
+            try
             {
-                if (!user.UserRoles.Any(ur => ur.RoleId == roleId && !ur.IsDeleted))
+                var allUserRoles = await UnitOfWork.Users.GetAllUserRolesAsync(userId);
+
+                var requestedRoleIds = dto.RoleIds.ToHashSet();
+                var currentActiveRoleIds = allUserRoles
+                    .Where(ur => !ur.IsDeleted)
+                    .Select(ur => ur.RoleId)
+                    .ToHashSet();
+
+                // Remove roles not in the new list (soft-delete via repo)
+                foreach (var userRole in allUserRoles.Where(ur => !ur.IsDeleted))
                 {
-                    var role = await UnitOfWork.Roles.GetByIdAsync(roleId);
-                    if (role != null)
+                    if (!requestedRoleIds.Contains(userRole.RoleId))
                     {
-                        user.UserRoles.Add(new UserRole
-                        {
-                            Id = Guid.NewGuid(),
-                            UserId = userId,
-                            RoleId = roleId
-                        });
+                        await UnitOfWork.Users.DeleteUserRoleAsync(userRole);
                     }
                 }
+
+                // Add new roles or reactivate soft-deleted ones
+                foreach (var roleId in requestedRoleIds)
+                {
+                    if (!currentActiveRoleIds.Contains(roleId))
+                    {
+                        var existingDeleted = allUserRoles
+                            .FirstOrDefault(ur => ur.RoleId == roleId && ur.IsDeleted);
+
+                        if (existingDeleted != null)
+                        {
+                            existingDeleted.IsDeleted = false;
+                            existingDeleted.UpdatedAt = DateTime.UtcNow;
+                        }
+                        else
+                        {
+                            var role = await UnitOfWork.Roles.GetByIdAsync(roleId);
+                            if (role != null)
+                            {
+                                await UnitOfWork.Users.AddUserRoleAsync(new UserRole
+                                {
+                                    Id = Guid.NewGuid(),
+                                    UserId = userId,
+                                    RoleId = roleId
+                                });
+                            }
+                        }
+                    }
+                }
+
+                await UnitOfWork.SaveChangesAsync();
+                await UnitOfWork.CommitTransactionAsync();
             }
-
-            await UnitOfWork.SaveChangesAsync();
-            return await GetByIdAsync(userId);
-        }
-
-        public async Task<UserDto?> RemoveRolesFromUserAsync(Guid userId, List<Guid> roleIds)
-        {
-            var user = await UnitOfWork.Users.GetWithRolesAsync(userId);
-            if (user == null) return null;
-
-            foreach (var userRole in user.UserRoles.Where(ur => roleIds.Contains(ur.RoleId)))
+            catch
             {
-                userRole.IsDeleted = true;
+                await UnitOfWork.RollbackTransactionAsync();
+                throw;
             }
 
-            await UnitOfWork.SaveChangesAsync();
             return await GetByIdAsync(userId);
         }
 

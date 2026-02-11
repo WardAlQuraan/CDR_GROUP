@@ -6,10 +6,12 @@ namespace cdr_group.Infrastructure.Exceptions
     {
         public HttpStatusCode StatusCode { get; }
         public List<string>? Errors { get; }
+        public string MessageKey { get; }
 
-        public ApiException(string message, HttpStatusCode statusCode = HttpStatusCode.InternalServerError, List<string>? errors = null)
-            : base(message)
+        public ApiException(string messageKey, HttpStatusCode statusCode = HttpStatusCode.InternalServerError, List<string>? errors = null)
+            : base(messageKey)
         {
+            MessageKey = messageKey;
             StatusCode = statusCode;
             Errors = errors;
         }
@@ -17,45 +19,40 @@ namespace cdr_group.Infrastructure.Exceptions
 
     public class NotFoundException : ApiException
     {
-        public NotFoundException(string message)
-            : base(message, HttpStatusCode.NotFound)
-        {
-        }
-
-        public NotFoundException(string entityName, Guid id)
-            : base($"{entityName} with ID '{id}' was not found.", HttpStatusCode.NotFound)
+        public NotFoundException(string messageKey)
+            : base(messageKey, HttpStatusCode.NotFound)
         {
         }
     }
 
     public class BadRequestException : ApiException
     {
-        public BadRequestException(string message, List<string>? errors = null)
-            : base(message, HttpStatusCode.BadRequest, errors)
+        public BadRequestException(string messageKey, List<string>? errors = null)
+            : base(messageKey, HttpStatusCode.BadRequest, errors)
         {
         }
     }
 
     public class ConflictException : ApiException
     {
-        public ConflictException(string message)
-            : base(message, HttpStatusCode.Conflict)
+        public ConflictException(string messageKey)
+            : base(messageKey, HttpStatusCode.Conflict)
         {
         }
     }
 
     public class UnauthorizedException : ApiException
     {
-        public UnauthorizedException(string message = "Unauthorized access.")
-            : base(message, HttpStatusCode.Unauthorized)
+        public UnauthorizedException(string messageKey = "unauthorized")
+            : base(messageKey, HttpStatusCode.Unauthorized)
         {
         }
     }
 
     public class ForbiddenException : ApiException
     {
-        public ForbiddenException(string message = "Access forbidden.")
-            : base(message, HttpStatusCode.Forbidden)
+        public ForbiddenException(string messageKey = "forbidden")
+            : base(messageKey, HttpStatusCode.Forbidden)
         {
         }
     }
@@ -63,12 +60,12 @@ namespace cdr_group.Infrastructure.Exceptions
     public class ValidationException : ApiException
     {
         public ValidationException(List<string> errors)
-            : base("One or more validation errors occurred.", HttpStatusCode.BadRequest, errors)
+            : base("validation_error", HttpStatusCode.BadRequest, errors)
         {
         }
 
         public ValidationException(string error)
-            : base("Validation error occurred.", HttpStatusCode.BadRequest, new List<string> { error })
+            : base("validation_error", HttpStatusCode.BadRequest, new List<string> { error })
         {
         }
     }

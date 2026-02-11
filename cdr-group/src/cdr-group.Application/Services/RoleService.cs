@@ -4,6 +4,7 @@ using cdr_group.Contracts.DTOs.Identity;
 using cdr_group.Contracts.Interfaces.Repositories;
 using cdr_group.Contracts.Interfaces.Services;
 using cdr_group.Domain.Entities.Identity;
+using cdr_group.Domain.Localization;
 
 namespace cdr_group.Application.Services
 {
@@ -44,7 +45,7 @@ namespace cdr_group.Application.Services
         {
             if (await UnitOfWork.Roles.NameExistsAsync(dto.Name))
             {
-                throw new InvalidOperationException("Role name already exists.");
+                throw new InvalidOperationException(Messages.RoleNameExists);
             }
         }
 
@@ -60,14 +61,14 @@ namespace cdr_group.Application.Services
         {
             if (entity.IsSystemRole)
             {
-                throw new InvalidOperationException("System roles cannot be modified.");
+                throw new InvalidOperationException(Messages.SystemRoleCannotBeModified);
             }
 
             if (dto.Name != null && dto.Name != entity.Name)
             {
                 if (await UnitOfWork.Roles.NameExistsAsync(dto.Name))
                 {
-                    throw new InvalidOperationException("Role name already exists.");
+                    throw new InvalidOperationException(Messages.RoleNameExists);
                 }
             }
         }
@@ -76,7 +77,7 @@ namespace cdr_group.Application.Services
         {
             if (entity.IsSystemRole)
             {
-                throw new InvalidOperationException("System roles cannot be deleted.");
+                throw new InvalidOperationException(Messages.SystemRoleCannotBeDeleted);
             }
             return Task.CompletedTask;
         }
@@ -150,7 +151,7 @@ namespace cdr_group.Application.Services
 
             if (role.IsSystemRole)
             {
-                throw new InvalidOperationException("System role permissions cannot be modified.");
+                throw new InvalidOperationException(Messages.SystemRolePermissionsLocked);
             }
 
             foreach (var rolePermission in role.RolePermissions.Where(rp => permissionIds.Contains(rp.PermissionId)))

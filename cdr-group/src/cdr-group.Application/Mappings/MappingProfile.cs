@@ -81,9 +81,7 @@ namespace cdr_group.Application.Mappings
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()))
                 .ForMember(dest => dest.IsActive, opt => opt.MapFrom(_ => true));
 
-            CreateMap<UpdateEmployeeDto, Employee>()
-                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
-
+            CreateMap<UpdateEmployeeDto, Employee>();
             // Company mappings
             CreateMap<Company, CompanyDto>();
 

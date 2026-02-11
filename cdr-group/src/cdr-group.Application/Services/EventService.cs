@@ -7,6 +7,7 @@ using cdr_group.Contracts.Interfaces.Repositories;
 using cdr_group.Contracts.Interfaces.Services;
 using cdr_group.Domain.Constants;
 using cdr_group.Domain.Entities;
+using cdr_group.Domain.Localization;
 
 namespace cdr_group.Application.Services
 {
@@ -76,7 +77,7 @@ namespace cdr_group.Application.Services
         {
             if (!await UnitOfWork.Companies.ExistsAsync(dto.CompanyId))
             {
-                throw new InvalidOperationException("Company not found.");
+                throw new InvalidOperationException(Messages.CompanyNotFound);
             }
         }
 
@@ -86,7 +87,7 @@ namespace cdr_group.Application.Services
             {
                 if (!await UnitOfWork.Companies.ExistsAsync(dto.CompanyId.Value))
                 {
-                    throw new InvalidOperationException("Company not found.");
+                    throw new InvalidOperationException(Messages.CompanyNotFound);
                 }
             }
         }

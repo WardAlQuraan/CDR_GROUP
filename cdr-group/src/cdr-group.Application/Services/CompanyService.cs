@@ -4,6 +4,7 @@ using cdr_group.Contracts.DTOs.Company;
 using cdr_group.Contracts.Interfaces.Repositories;
 using cdr_group.Contracts.Interfaces.Services;
 using cdr_group.Domain.Entities;
+using cdr_group.Domain.Localization;
 
 namespace cdr_group.Application.Services
 {
@@ -44,7 +45,7 @@ namespace cdr_group.Application.Services
         {
             if (await UnitOfWork.Companies.CompanyCodeExistsAsync(dto.Code))
             {
-                throw new InvalidOperationException("Company code already exists.");
+                throw new InvalidOperationException(Messages.CompanyCodeExists);
             }
         }
 
@@ -54,7 +55,7 @@ namespace cdr_group.Application.Services
             {
                 if (await UnitOfWork.Companies.CompanyCodeExistsAsync(dto.Code, id))
                 {
-                    throw new InvalidOperationException("Company code already exists.");
+                    throw new InvalidOperationException(Messages.CompanyCodeExists);
                 }
             }
         }
@@ -63,7 +64,7 @@ namespace cdr_group.Application.Services
         {
             if (await UnitOfWork.Companies.HasDepartmentsAsync(id))
             {
-                throw new InvalidOperationException("Cannot delete company with departments. Please reassign departments first.");
+                throw new InvalidOperationException(Messages.CompanyHasDepartments);
             }
         }
     }

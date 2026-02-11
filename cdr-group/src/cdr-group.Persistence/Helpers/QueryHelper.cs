@@ -17,7 +17,7 @@ namespace cdr_group.Persistence.Helpers
 
             foreach (var propertyName in request.SearchProperties)
             {
-                var property = typeof(T).GetProperty(propertyName);
+                var property = typeof(T).GetProperties().FirstOrDefault(p=>p.Name.Equals(propertyName , StringComparison.OrdinalIgnoreCase));
                 if (property == null) continue;
 
                 var propertyAccess = Expression.Property(parameter, property);

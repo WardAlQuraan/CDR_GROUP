@@ -4,6 +4,7 @@ using cdr_group.Contracts.DTOs.Identity;
 using cdr_group.Contracts.Interfaces.Repositories;
 using cdr_group.Contracts.Interfaces.Services;
 using cdr_group.Domain.Entities.Identity;
+using cdr_group.Domain.Localization;
 
 namespace cdr_group.Application.Services
 {
@@ -50,7 +51,7 @@ namespace cdr_group.Application.Services
         {
             if (await UnitOfWork.Permissions.NameExistsAsync(dto.Name))
             {
-                throw new InvalidOperationException("Permission name already exists.");
+                throw new InvalidOperationException(Messages.PermissionNameExists);
             }
         }
 
@@ -60,7 +61,7 @@ namespace cdr_group.Application.Services
             {
                 if (await UnitOfWork.Permissions.NameExistsAsync(dto.Name))
                 {
-                    throw new InvalidOperationException("Permission name already exists.");
+                    throw new InvalidOperationException(Messages.PermissionNameExists);
                 }
             }
         }

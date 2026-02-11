@@ -9,6 +9,7 @@ using cdr_group.Application.Settings;
 using cdr_group.Contracts.DTOs.Auth;
 using cdr_group.Contracts.Interfaces.Services;
 using cdr_group.Domain.Entities.Identity;
+using cdr_group.Domain.Localization;
 using cdr_group.Persistence.Data;
 
 namespace cdr_group.Application.Services
@@ -35,17 +36,17 @@ namespace cdr_group.Application.Services
 
             if (user == null || !VerifyPassword(dto.Password, user.PasswordHash))
             {
-                throw new InvalidOperationException("Invalid username or password.");
+                throw new InvalidOperationException(Messages.InvalidCredentials);
             }
 
             if (!user.IsActive)
             {
-                throw new InvalidOperationException("User account is deactivated.");
+                throw new InvalidOperationException(Messages.AccountDeactivated);
             }
 
             if (user.LockoutEnd.HasValue && user.LockoutEnd > DateTime.UtcNow)
             {
-                throw new InvalidOperationException("User account is locked.");
+                throw new InvalidOperationException(Messages.AccountLocked);
             }
 
             // Update last login
@@ -60,12 +61,12 @@ namespace cdr_group.Application.Services
         {
             if (await _context.Users.AnyAsync(u => u.Username == dto.Username && !u.IsDeleted))
             {
-                throw new InvalidOperationException("Username already exists.");
+                throw new InvalidOperationException(Messages.UsernameExists);
             }
 
             if (await _context.Users.AnyAsync(u => u.Email == dto.Email && !u.IsDeleted))
             {
-                throw new InvalidOperationException("Email already exists.");
+                throw new InvalidOperationException(Messages.EmailExists);
             }
 
             var user = new User
@@ -119,17 +120,17 @@ namespace cdr_group.Application.Services
 
             if (token == null)
             {
-                throw new UnauthorizedAccessException("Invalid refresh token.");
+                throw new UnauthorizedAccessException(Messages.InvalidRefreshToken);
             }
 
             if (!token.IsActive)
             {
-                throw new UnauthorizedAccessException("Refresh token has expired or been revoked.");
+                throw new UnauthorizedAccessException(Messages.RefreshTokenExpired);
             }
 
             if (!token.User.IsActive)
             {
-                throw new UnauthorizedAccessException("User account is deactivated.");
+                throw new UnauthorizedAccessException(Messages.AccountDeactivated);
             }
 
             // Revoke old token
@@ -153,7 +154,7 @@ namespace cdr_group.Application.Services
 
             if (token == null)
             {
-                throw new KeyNotFoundException("Refresh token not found.");
+                throw new KeyNotFoundException(Messages.RefreshTokenNotFound);
             }
 
             if (!token.IsActive)
@@ -177,7 +178,7 @@ namespace cdr_group.Application.Services
 
             if (user == null)
             {
-                throw new KeyNotFoundException($"User with ID {userId} not found.");
+                throw new KeyNotFoundException(Messages.UserNotFound);
             }
 
             return MapToUserInfo(user);
@@ -189,12 +190,12 @@ namespace cdr_group.Application.Services
 
             if (user == null)
             {
-                throw new KeyNotFoundException($"User with ID {userId} not found.");
+                throw new KeyNotFoundException(Messages.UserNotFound);
             }
 
             if (!VerifyPassword(dto.CurrentPassword, user.PasswordHash))
             {
-                throw new InvalidOperationException("Current password is incorrect.");
+                throw new InvalidOperationException(Messages.IncorrectCurrentPassword);
             }
 
             user.PasswordHash = HashPassword(dto.NewPassword);

@@ -4,6 +4,7 @@ using cdr_group.Contracts.DTOs.Position;
 using cdr_group.Contracts.Interfaces.Repositories;
 using cdr_group.Contracts.Interfaces.Services;
 using cdr_group.Domain.Entities;
+using cdr_group.Domain.Localization;
 
 namespace cdr_group.Application.Services
 {
@@ -73,7 +74,7 @@ namespace cdr_group.Application.Services
             var position = await UnitOfWork.Positions.GetByIdAsync(positionId);
             if (position == null)
             {
-                throw new InvalidOperationException("Position Not Found");
+                throw new InvalidOperationException(Messages.PositionNotFound);
             }
 
             if (departmentId.HasValue)
@@ -81,7 +82,7 @@ namespace cdr_group.Application.Services
                 var department = await UnitOfWork.Departments.GetByIdAsync(departmentId.Value);
                 if (department == null)
                 {
-                    throw new InvalidOperationException("Department not found.");
+                    throw new InvalidOperationException(Messages.DepartmentNotFound);
                 }
             }
 
@@ -96,7 +97,7 @@ namespace cdr_group.Application.Services
         {
             if (await UnitOfWork.Positions.PositionCodeExistsAsync(dto.Code))
             {
-                throw new InvalidOperationException("Position code already exists.");
+                throw new InvalidOperationException(Messages.PositionCodeExists);
             }
 
             if (dto.DepartmentId.HasValue)
@@ -104,7 +105,7 @@ namespace cdr_group.Application.Services
                 var department = await UnitOfWork.Departments.GetByIdAsync(dto.DepartmentId.Value);
                 if (department == null)
                 {
-                    throw new InvalidOperationException("Department not found.");
+                    throw new InvalidOperationException(Messages.DepartmentNotFound);
                 }
             }
 
@@ -117,7 +118,7 @@ namespace cdr_group.Application.Services
             {
                 if (await UnitOfWork.Positions.PositionCodeExistsAsync(dto.Code, id))
                 {
-                    throw new InvalidOperationException("Position code already exists.");
+                    throw new InvalidOperationException(Messages.PositionCodeExists);
                 }
             }
 
@@ -126,7 +127,7 @@ namespace cdr_group.Application.Services
                 var department = await UnitOfWork.Departments.GetByIdAsync(dto.DepartmentId.Value);
                 if (department == null)
                 {
-                    throw new InvalidOperationException("Department not found.");
+                    throw new InvalidOperationException(Messages.DepartmentNotFound);
                 }
             }
 
@@ -139,7 +140,7 @@ namespace cdr_group.Application.Services
         {
             if (await UnitOfWork.Positions.HasEmployeesAsync(id))
             {
-                throw new InvalidOperationException("Cannot delete position with employees. Please reassign employees first.");
+                throw new InvalidOperationException(Messages.PositionHasEmployees);
             }
         }
 
@@ -147,7 +148,7 @@ namespace cdr_group.Application.Services
         {
             if (minSalary.HasValue && maxSalary.HasValue && minSalary > maxSalary)
             {
-                throw new InvalidOperationException("Minimum salary cannot be greater than maximum salary.");
+                throw new InvalidOperationException(Messages.MinSalaryGreaterThanMax);
             }
         }
     }

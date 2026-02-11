@@ -4,6 +4,7 @@ using cdr_group.Contracts.DTOs.Department;
 using cdr_group.Contracts.Interfaces.Repositories;
 using cdr_group.Contracts.Interfaces.Services;
 using cdr_group.Domain.Entities;
+using cdr_group.Domain.Localization;
 
 namespace cdr_group.Application.Services
 {
@@ -117,12 +118,12 @@ namespace cdr_group.Application.Services
         {
             if (await UnitOfWork.Departments.HasEmployeesAsync(id))
             {
-                throw new InvalidOperationException("Cannot delete department with employees. Please reassign employees first.");
+                throw new InvalidOperationException(Messages.DepartmentHasEmployees);
             }
 
             if (await UnitOfWork.Departments.HasSubDepartmentsAsync(id))
             {
-                throw new InvalidOperationException("Cannot delete department with sub-departments. Please delete or reassign sub-departments first.");
+                throw new InvalidOperationException(Messages.DepartmentHasSubDepartments);
             }
         }
 
@@ -131,7 +132,7 @@ namespace cdr_group.Application.Services
         {
             if (!await repository.ExistsAsync(id))
             {
-                throw new InvalidOperationException($"{entityName} not found.");
+                throw new InvalidOperationException(entityName == "Company" ? Messages.CompanyNotFound : Messages.ManagerNotFound);
             }
         }
 
@@ -139,7 +140,7 @@ namespace cdr_group.Application.Services
         {
             if (await UnitOfWork.Departments.DepartmentCodeExistsAsync(code, companyId, excludeId))
             {
-                throw new InvalidOperationException("Department code already exists in this company.");
+                throw new InvalidOperationException(Messages.DepartmentCodeExists);
             }
         }
 
@@ -149,23 +150,23 @@ namespace cdr_group.Application.Services
 
             if (parentDepartmentId == currentDepartmentId)
             {
-                throw new InvalidOperationException("A department cannot be its own parent.");
+                throw new InvalidOperationException(Messages.DepartmentCannotBeOwnParent);
             }
 
             var parentDepartment = await UnitOfWork.Departments.GetByIdAsync(parentDepartmentId.Value);
             if (parentDepartment == null)
             {
-                throw new InvalidOperationException("Parent department not found.");
+                throw new InvalidOperationException(Messages.ParentDepartmentNotFound);
             }
 
             if (parentDepartment.CompanyId != companyId)
             {
-                throw new InvalidOperationException("Parent department must belong to the same company.");
+                throw new InvalidOperationException(Messages.ParentDepartmentDifferentCompany);
             }
 
             if (currentDepartmentId.HasValue && await IsCircularReference(currentDepartmentId.Value, parentDepartmentId.Value))
             {
-                throw new InvalidOperationException("Cannot assign parent department: circular reference detected.");
+                throw new InvalidOperationException(Messages.DepartmentCircularReference);
             }
         }
 

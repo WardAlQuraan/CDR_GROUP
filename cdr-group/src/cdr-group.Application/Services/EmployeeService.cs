@@ -8,6 +8,7 @@ using cdr_group.Contracts.Interfaces.Repositories;
 using cdr_group.Contracts.Interfaces.Services;
 using cdr_group.Domain.Constants;
 using cdr_group.Domain.Entities;
+using cdr_group.Domain.Localization;
 
 namespace cdr_group.Application.Services
 {
@@ -191,7 +192,7 @@ namespace cdr_group.Application.Services
             // Prevent self-reference
             if (managerId == employeeId)
             {
-                throw new InvalidOperationException("An employee cannot be their own manager.");
+                throw new InvalidOperationException(Messages.EmployeeCannotBeOwnManager);
             }
 
             // Prevent circular reference
@@ -199,13 +200,13 @@ namespace cdr_group.Application.Services
             {
                 if (await IsCircularReference(employeeId, managerId.Value))
                 {
-                    throw new InvalidOperationException("Cannot assign manager: circular reference detected.");
+                    throw new InvalidOperationException(Messages.EmployeeCircularReference);
                 }
 
                 var manager = await UnitOfWork.Employees.GetByIdAsync(managerId.Value);
                 if (manager == null)
                 {
-                    throw new InvalidOperationException("Manager not found.");
+                    throw new InvalidOperationException(Messages.ManagerNotFound);
                 }
             }
 
@@ -226,14 +227,14 @@ namespace cdr_group.Application.Services
                 var user = await UnitOfWork.Users.GetByIdAsync(userId.Value);
                 if (user == null)
                 {
-                    throw new InvalidOperationException("User not found.");
+                    throw new InvalidOperationException(Messages.UserNotFound);
                 }
 
                 // Check if user is already linked to another employee
                 var existingEmployee = await UnitOfWork.Employees.GetByUserIdAsync(userId.Value);
                 if (existingEmployee != null && existingEmployee.Id != employeeId)
                 {
-                    throw new InvalidOperationException("User is already linked to another employee.");
+                    throw new InvalidOperationException(Messages.UserAlreadyLinked);
                 }
             }
 
@@ -251,13 +252,13 @@ namespace cdr_group.Application.Services
 
             if (!departmentId.HasValue)
             {
-                throw new InvalidOperationException("Department is required.");
+                throw new InvalidOperationException(Messages.DepartmentRequired);
             }
 
             var department = await UnitOfWork.Departments.GetByIdAsync(departmentId.Value);
             if (department == null)
             {
-                throw new InvalidOperationException("Department not found.");
+                throw new InvalidOperationException(Messages.DepartmentNotFound);
             }
 
             employee.DepartmentId = departmentId.Value;
@@ -276,7 +277,7 @@ namespace cdr_group.Application.Services
                 var manager = await UnitOfWork.Employees.GetByIdAsync(dto.ManagerId.Value);
                 if (manager == null)
                 {
-                    throw new InvalidOperationException("Manager not found.");
+                    throw new InvalidOperationException(Messages.ManagerNotFound);
                 }
             }
 
@@ -299,18 +300,18 @@ namespace cdr_group.Application.Services
             {
                 if (dto.ManagerId == id)
                 {
-                    throw new InvalidOperationException("An employee cannot be their own manager.");
+                    throw new InvalidOperationException(Messages.EmployeeCannotBeOwnManager);
                 }
 
                 if (await IsCircularReference(id, dto.ManagerId.Value))
                 {
-                    throw new InvalidOperationException("Cannot assign manager: circular reference detected.");
+                    throw new InvalidOperationException(Messages.EmployeeCircularReference);
                 }
 
                 var manager = await UnitOfWork.Employees.GetByIdAsync(dto.ManagerId.Value);
                 if (manager == null)
                 {
-                    throw new InvalidOperationException("Manager not found.");
+                    throw new InvalidOperationException(Messages.ManagerNotFound);
                 }
             }
 
@@ -327,14 +328,14 @@ namespace cdr_group.Application.Services
             var department = await UnitOfWork.Departments.GetByIdAsync(departmentId);
             if (department == null)
             {
-                throw new InvalidOperationException("Department not found.");
+                throw new InvalidOperationException(Messages.DepartmentNotFound);
             }
         }
         private async Task ValidateEmployeeCode(string code)
         {
             if (await UnitOfWork.Employees.EmployeeCodeExistsAsync(code))
             {
-                throw new InvalidOperationException("Employee code already exists.");
+                throw new InvalidOperationException(Messages.EmployeeCodeExists);
             }
         }
 
@@ -345,13 +346,13 @@ namespace cdr_group.Application.Services
                 var user = await UnitOfWork.Users.GetByIdAsync(newUserId.Value);
                 if (user == null)
                 {
-                    throw new InvalidOperationException("User not found.");
+                    throw new InvalidOperationException(Messages.UserNotFound);
                 }
 
                 var existingEmployee = await UnitOfWork.Employees.GetByUserIdAsync(newUserId.Value, execludedId);
                 if (existingEmployee != null)
                 {
-                    throw new InvalidOperationException("User is already linked to another employee.");
+                    throw new InvalidOperationException(Messages.UserAlreadyLinked);
                 }
             }
         }
@@ -363,17 +364,17 @@ namespace cdr_group.Application.Services
                 var position = await UnitOfWork.Positions.GetByIdAsync(positionId.Value);
                 if(position is null)
                 {
-                    throw new InvalidOperationException("Position Not Found");
+                    throw new InvalidOperationException(Messages.PositionNotFound);
                 }
                 if (salary.HasValue)
                 {
                     if (position.MinSalary.HasValue && salary < position.MinSalary)
                     {
-                        throw new InvalidOperationException("The salary of the employee is less than the minimum salary of this position");
+                        throw new InvalidOperationException(Messages.SalaryBelowMinimum);
                     }
                     if (position.MaxSalary.HasValue && salary > position.MaxSalary)
                     {
-                        throw new InvalidOperationException("The salary of the employee is greater than the maximum salary of this position");
+                        throw new InvalidOperationException(Messages.SalaryAboveMaximum);
                     }
                 }
             }

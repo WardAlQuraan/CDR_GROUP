@@ -89,5 +89,27 @@ namespace cdr_group.Persistence.Repositories
         {
             return await _dbSet.AnyAsync(u => u.Email == email && !u.IsDeleted);
         }
+
+        public async Task<List<UserRole>> GetAllUserRolesAsync(Guid userId)
+        {
+            return await _context.UserRoles
+                .IgnoreQueryFilters()
+                .Where(ur => ur.UserId == userId)
+                .ToListAsync();
+        }
+
+        public async Task AddUserRoleAsync(UserRole userRole)
+        {
+            userRole.CreatedAt = DateTime.UtcNow;
+            await _context.UserRoles.AddAsync(userRole);
+        }
+
+        public Task DeleteUserRoleAsync(UserRole userRole)
+        {
+            userRole.IsDeleted = true;
+            userRole.UpdatedAt = DateTime.UtcNow;
+            _context.UserRoles.Update(userRole);
+            return Task.CompletedTask;
+        }
     }
 }

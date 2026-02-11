@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using cdr_group.Contracts.DTOs.Common;
 using cdr_group.Infrastructure.Exceptions;
+using cdr_group.Domain.Localization;
 
 namespace cdr_group.Infrastructure.Middleware
 {
@@ -36,52 +37,55 @@ namespace cdr_group.Infrastructure.Middleware
 
         private async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
+            var language = GetLanguage(context);
             var statusCode = HttpStatusCode.InternalServerError;
-            var message = "An unexpected error occurred.";
+            var messageKey = Messages.UnexpectedError;
             List<string>? errors = null;
 
             switch (exception)
             {
                 case ApiException apiException:
                     statusCode = apiException.StatusCode;
-                    message = apiException.Message;
+                    messageKey = apiException.MessageKey;
                     errors = apiException.Errors;
-                    _logger.LogWarning(exception, "API Exception: {Message}", message);
+                    _logger.LogWarning(exception, "API Exception: {MessageKey}", messageKey);
                     break;
 
                 case UnauthorizedAccessException:
                     statusCode = HttpStatusCode.Unauthorized;
-                    message = exception.Message;
-                    _logger.LogWarning(exception, "Unauthorized: {Message}", message);
+                    messageKey = Messages.Unauthorized;
+                    _logger.LogWarning(exception, "Unauthorized: {Message}", exception.Message);
                     break;
 
                 case InvalidOperationException:
                     statusCode = HttpStatusCode.BadRequest;
-                    message = exception.Message;
-                    _logger.LogWarning(exception, "Invalid Operation: {Message}", message);
+                    messageKey = exception.Message;
+                    _logger.LogWarning(exception, "Invalid Operation: {Message}", exception.Message);
                     break;
 
                 case ArgumentException:
                     statusCode = HttpStatusCode.BadRequest;
-                    message = exception.Message;
-                    _logger.LogWarning(exception, "Argument Exception: {Message}", message);
+                    messageKey = exception.Message;
+                    _logger.LogWarning(exception, "Argument Exception: {Message}", exception.Message);
                     break;
 
                 case KeyNotFoundException:
                     statusCode = HttpStatusCode.NotFound;
-                    message = exception.Message;
-                    _logger.LogWarning(exception, "Not Found: {Message}", message);
+                    messageKey = Messages.NotFound;
+                    _logger.LogWarning(exception, "Not Found: {Message}", exception.Message);
                     break;
 
                 default:
                     _logger.LogError(exception, "Unhandled Exception: {Message}", exception.Message);
                     if (_environment.IsDevelopment())
                     {
-                        message = exception.Message;
+                        messageKey = exception.Message;
                         errors = new List<string> { exception.StackTrace ?? string.Empty };
                     }
                     break;
             }
+
+            var message = Messages.Get(messageKey, language);
 
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)statusCode;
@@ -94,6 +98,16 @@ namespace cdr_group.Infrastructure.Middleware
             };
 
             await context.Response.WriteAsync(JsonSerializer.Serialize(response, jsonOptions));
+        }
+
+        private static string GetLanguage(HttpContext context)
+        {
+            var acceptLanguage = context.Request.Headers["Accept-Language"].FirstOrDefault();
+
+            if (string.IsNullOrEmpty(acceptLanguage))
+                return "en";
+
+            return acceptLanguage.StartsWith("ar", StringComparison.OrdinalIgnoreCase) ? "ar" : "en";
         }
     }
 

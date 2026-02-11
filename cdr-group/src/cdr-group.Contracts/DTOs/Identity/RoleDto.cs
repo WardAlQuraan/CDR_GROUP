@@ -7,6 +7,7 @@ namespace cdr_group.Contracts.DTOs.Identity
         public string? Description { get; set; }
         public bool IsSystemRole { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string CreatedBy { get; set; } = string.Empty;
         public List<string> Permissions { get; set; } = new();
     }
 
