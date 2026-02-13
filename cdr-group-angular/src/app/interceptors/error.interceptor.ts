@@ -18,6 +18,15 @@ export class ErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
+        // Don't show error for refresh token failures (auth interceptor handles logout)
+        if (request.url.includes('/auth/refresh-token')) {
+          return throwError(() => ({
+            status: error.status,
+            message: 'Token refresh failed',
+            originalError: error
+          }));
+        }
+
         let errorMessage = 'An unexpected error occurred';
         if (error.error instanceof ErrorEvent) {
           // Client-side error
@@ -29,9 +38,12 @@ export class ErrorInterceptor implements HttpInterceptor {
               errorMessage = 'Unable to connect to server. Please check your internet connection.';
               break;
             case 401:
-              // AuthInterceptor handles logout, just show message
-              errorMessage = 'Session expired. Please login again.';
-              break;
+              // AuthInterceptor handles logout and redirect, skip showing error
+              return throwError(() => ({
+                status: error.status,
+                message: 'Session expired',
+                originalError: error
+              }));
             case 403:
               errorMessage = 'Access denied. You do not have permission to perform this action.';
               break;
