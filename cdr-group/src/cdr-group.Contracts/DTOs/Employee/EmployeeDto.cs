@@ -170,6 +170,9 @@ namespace cdr_group.Contracts.DTOs.Employee
         [Range(0, double.MaxValue)]
         public decimal? Salary { get; set; }
 
+        [StringLength(500)]
+        public string? SalaryChangeReason { get; set; }
+
         public bool? IsActive { get; set; }
 
         public Guid? DepartmentId { get; set; }

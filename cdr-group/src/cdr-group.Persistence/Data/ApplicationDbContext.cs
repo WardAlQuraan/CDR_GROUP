@@ -98,6 +98,7 @@ namespace cdr_group.Persistence.Data
         public DbSet<Event> Events { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<ContactUs> ContactUsMessages { get; set; }
+        public DbSet<SalaryHistory> SalaryHistories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -330,6 +331,22 @@ namespace cdr_group.Persistence.Data
                 entity.Property(e => e.Message).IsRequired().HasMaxLength(2000);
             });
 
+            // SalaryHistory configuration
+            modelBuilder.Entity<SalaryHistory>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasIndex(e => e.EmployeeId);
+                entity.Property(e => e.OldSalary).HasPrecision(18, 2);
+                entity.Property(e => e.NewSalary).HasPrecision(18, 2);
+                entity.Property(e => e.Reason).HasMaxLength(500);
+
+                entity.HasOne(e => e.Employee)
+                    .WithMany(e => e.SalaryHistories)
+                    .HasForeignKey(e => e.EmployeeId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
             // Seed default data
             SeedData(modelBuilder);
         }
@@ -393,6 +410,12 @@ namespace cdr_group.Persistence.Data
             var contactusReadId = Guid.Parse("aabbccdd-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
             var contactusUpdateId = Guid.Parse("aabbccdd-bbbb-bbbb-bbbb-bbbbbbbbbbbb");
             var contactusDeleteId = Guid.Parse("aabbccdd-cccc-cccc-cccc-cccccccccccc");
+
+            // SalaryHistory Permission IDs
+            var salaryHistoriesReadId = Guid.Parse("aabbccdd-1111-1111-1111-aaaaaaaaaaaa");
+            var salaryHistoriesCreateId = Guid.Parse("aabbccdd-1111-1111-1111-bbbbbbbbbbbb");
+            var salaryHistoriesUpdateId = Guid.Parse("aabbccdd-1111-1111-1111-cccccccccccc");
+            var salaryHistoriesDeleteId = Guid.Parse("aabbccdd-1111-1111-1111-dddddddddddd");
 
             // Department IDs
             var itDepartmentId = Guid.Parse("44444444-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
@@ -488,6 +511,11 @@ namespace cdr_group.Persistence.Data
                 new Permission { Id = contactusReadId, Name = PermissionConstants.ContactUs.Read, Description = "View contact us messages", Module = "ContactUs", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = contactusUpdateId, Name = PermissionConstants.ContactUs.Update, Description = "Update contact us messages", Module = "ContactUs", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = contactusDeleteId, Name = PermissionConstants.ContactUs.Delete, Description = "Delete contact us messages", Module = "ContactUs", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                // SalaryHistory permissions
+                new Permission { Id = salaryHistoriesReadId, Name = PermissionConstants.SalaryHistories.Read, Description = "View salary histories", Module = "SalaryHistories", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = salaryHistoriesCreateId, Name = PermissionConstants.SalaryHistories.Create, Description = "Create salary histories", Module = "SalaryHistories", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = salaryHistoriesUpdateId, Name = PermissionConstants.SalaryHistories.Update, Description = "Update salary histories", Module = "SalaryHistories", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = salaryHistoriesDeleteId, Name = PermissionConstants.SalaryHistories.Delete, Description = "Delete salary histories", Module = "SalaryHistories", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
             };
 
             modelBuilder.Entity<Permission>().HasData(permissions);

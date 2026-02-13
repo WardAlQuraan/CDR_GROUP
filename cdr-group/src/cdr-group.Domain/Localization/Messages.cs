@@ -62,6 +62,9 @@ namespace cdr_group.Domain.Localization
         public const string PositionHasEmployees = "position_has_employees";
         public const string MinSalaryGreaterThanMax = "min_salary_greater_than_max";
 
+        // SalaryHistory
+        public const string EmployeeNotFoundForSalaryHistory = "employee_not_found_for_salary_history";
+
         private static readonly Dictionary<string, Dictionary<string, string>> _messages = new()
         {
             ["en"] = new Dictionary<string, string>
@@ -125,6 +128,9 @@ namespace cdr_group.Domain.Localization
                 [PositionCodeExists] = "Position code already exists.",
                 [PositionHasEmployees] = "Cannot delete position with employees. Please reassign employees first.",
                 [MinSalaryGreaterThanMax] = "Minimum salary cannot be greater than maximum salary.",
+
+                // SalaryHistory
+                [EmployeeNotFoundForSalaryHistory] = "Employee not found for salary history record.",
             },
 
             ["ar"] = new Dictionary<string, string>
@@ -188,6 +194,9 @@ namespace cdr_group.Domain.Localization
                 [PositionCodeExists] = "رمز المنصب موجود بالفعل.",
                 [PositionHasEmployees] = "لا يمكن حذف منصب يحتوي على موظفين. يرجى إعادة تعيين الموظفين أولاً.",
                 [MinSalaryGreaterThanMax] = "لا يمكن أن يكون الحد الأدنى للراتب أكبر من الحد الأقصى.",
+
+                // SalaryHistory
+                [EmployeeNotFoundForSalaryHistory] = "الموظف غير موجود لسجل تاريخ الراتب.",
             }
         };
 

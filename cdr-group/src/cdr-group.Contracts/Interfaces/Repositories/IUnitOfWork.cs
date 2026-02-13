@@ -12,6 +12,7 @@ namespace cdr_group.Contracts.Interfaces.Repositories
         IEventRepository Events { get; }
         ICompanyRepository Companies { get; }
         IContactUsRepository ContactUs { get; }
+        ISalaryHistoryRepository SalaryHistories { get; }
         Task<int> SaveChangesAsync();
         Task BeginTransactionAsync();
         Task CommitTransactionAsync();

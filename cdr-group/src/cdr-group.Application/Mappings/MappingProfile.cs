@@ -7,6 +7,7 @@ using cdr_group.Contracts.DTOs.Event;
 using cdr_group.Contracts.DTOs.FileAttachment;
 using cdr_group.Contracts.DTOs.Identity;
 using cdr_group.Contracts.DTOs.Position;
+using cdr_group.Contracts.DTOs.SalaryHistory;
 using cdr_group.Domain.Entities;
 using cdr_group.Domain.Entities.Identity;
 
@@ -81,7 +82,9 @@ namespace cdr_group.Application.Mappings
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()))
                 .ForMember(dest => dest.IsActive, opt => opt.MapFrom(_ => true));
 
-            CreateMap<UpdateEmployeeDto, Employee>();
+            CreateMap<UpdateEmployeeDto, Employee>()
+                .ForMember(dest => dest.SalaryHistories, opt => opt.Ignore())
+                .ForSourceMember(src => src.SalaryChangeReason, opt => opt.DoNotValidate());
             // Company mappings
             CreateMap<Company, CompanyDto>();
 
@@ -181,6 +184,19 @@ namespace cdr_group.Application.Mappings
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
 
             CreateMap<UpdateContactUsDto, ContactUs>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            // SalaryHistory mappings
+            CreateMap<SalaryHistory, SalaryHistoryDto>()
+                .ForMember(dest => dest.EmployeeNameEn, opt => opt.MapFrom(src =>
+                    src.Employee != null ? $"{src.Employee.FirstNameEn} {src.Employee.LastNameEn}" : null))
+                .ForMember(dest => dest.EmployeeNameAr, opt => opt.MapFrom(src =>
+                    src.Employee != null ? $"{src.Employee.FirstNameAr} {src.Employee.LastNameAr}" : null));
+
+            CreateMap<CreateSalaryHistoryDto, SalaryHistory>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+            CreateMap<UpdateSalaryHistoryDto, SalaryHistory>()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
         }
     }

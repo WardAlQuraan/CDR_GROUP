@@ -286,7 +286,56 @@ namespace cdr_group.Application.Services
             await ValidatePosition(dto.PositionId, dto.Salary);
         }
 
-        
+
+
+        public override async Task<EmployeeDto?> UpdateAsync(Guid id, UpdateEmployeeDto dto)
+        {
+            var entity = await Repository.GetByIdAsync(id);
+            if (entity == null) return default;
+
+            await ValidateUpdateAsync(id, dto, entity);
+
+            await UnitOfWork.BeginTransactionAsync();
+            try
+            {
+                if (dto.Salary.HasValue && dto.Salary != entity.Salary)
+                {
+                    var salaryHistory = new SalaryHistory
+                    {
+                        Id = Guid.NewGuid(),
+                        EmployeeId = entity.Id,
+                        OldSalary = entity.Salary,
+                        NewSalary = dto.Salary.Value,
+                        EffectiveDate = DateTime.UtcNow,
+                        Reason = dto.SalaryChangeReason
+                    };
+
+                    await UnitOfWork.SalaryHistories.AddAsync(salaryHistory);
+                }
+                Mapper.Map(dto, entity);
+
+                await BeforeUpdateAsync(entity, dto);
+
+                await Repository.UpdateAsync(entity);
+                await UnitOfWork.SaveChangesAsync();
+
+                await AfterUpdateAsync(entity, dto);
+
+                await UnitOfWork.CommitTransactionAsync();
+
+                return await GetByIdAsync(id);
+            }
+            catch
+            {
+                await UnitOfWork.RollbackTransactionAsync();
+                throw;
+            }
+        }
+        protected override async Task BeforeUpdateAsync(Employee entity, UpdateEmployeeDto dto)
+        {
+            // Auto-track salary changes
+            await base.BeforeUpdateAsync(entity, dto);
+        }
 
 
         protected override async Task ValidateUpdateAsync(Guid id, UpdateEmployeeDto dto, Employee entity)

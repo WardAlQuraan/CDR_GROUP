@@ -74,5 +74,13 @@ namespace cdr_group.Domain.Constants
             public const string Update = "contactus.update";
             public const string Delete = "contactus.delete";
         }
+
+        public static class SalaryHistories
+        {
+            public const string Read = "salary-histories.read";
+            public const string Create = "salary-histories.create";
+            public const string Update = "salary-histories.update";
+            public const string Delete = "salary-histories.delete";
+        }
     }
 }

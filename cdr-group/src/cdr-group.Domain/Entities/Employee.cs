@@ -32,5 +32,8 @@ namespace cdr_group.Domain.Entities
         // Optional relationship to User (nullable)
         public Guid? UserId { get; set; }
         public User? User { get; set; }
+
+        // Salary history
+        public virtual ICollection<SalaryHistory> SalaryHistories { get; set; } = new List<SalaryHistory>();
     }
 }
