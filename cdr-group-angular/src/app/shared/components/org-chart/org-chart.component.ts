@@ -21,7 +21,7 @@ interface OrgNode {
   id: string;
   name: string;
   title: string;
-  department: string;
+  company: string;
   initials: string;
   filePath?: string;
   children?: OrgNode[];
@@ -37,8 +37,10 @@ interface OrgNode {
 })
 export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @ViewChild('chartContainer', { static: false }) chartContainer!: ElementRef;
-  @Input() departmentId?: string;
   @Input() companyCode?: string;
+
+  @Input() companyNameEn?: string;
+  @Input() companyNameAr?: string;
 
   loading = false;
   error = false;
@@ -72,8 +74,7 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ((changes['departmentId'] && !changes['departmentId'].firstChange) ||
-        (changes['companyCode'] && !changes['companyCode'].firstChange)) {
+    if (changes['companyCode'] && !changes['companyCode'].firstChange) {
       this.loadData();
     }
   }
@@ -94,10 +95,14 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
     return this.translationService.language() === 'ar';
   }
 
+  get companyDisplayName(): string {
+    return (this.isArabic ? this.companyNameAr : this.companyNameEn) || '';
+  }
+
   loadData(): void {
     this.loading = true;
     this.error = false;
-    this.employeesService.getTree(this.departmentId, this.companyCode).subscribe({
+    this.employeesService.getTree(this.companyCode).subscribe({
       next: (response) => {
         if (response.success && response.data && response.data.length > 0) {
           // Handle multiple root nodes by creating a virtual root
@@ -109,7 +114,7 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
               id: 'virtual-root',
               name: '',
               title: '',
-              department: '',
+              company: '',
               initials: '',
               isVirtualRoot: true,
               children: response.data.map(node => this.mapToOrgNode(node))
@@ -139,7 +144,7 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
       id: node.id,
       name: name || '',
       title: (this.isArabic ? node.positionNameAr : node.positionNameEn) || '',
-      department: (this.isArabic ? node.departmentNameAr : node.departmentNameEn) || '',
+      company: (this.isArabic ? node.companyNameAr : node.companyNameEn) || '',
       initials: this.getInitials(name),
       filePath: node.filePath,
       children: node.children?.map(child => this.mapToOrgNode(child))
@@ -338,8 +343,8 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
       .attr('transform', d => `translate(${d.x - cardWidth / 2}, ${d.y})`)
       .style('cursor', 'pointer')
       .on('mouseenter', (_event, d) => {
-        const titleLabel = self.isArabic ? 'المسمى الوظيفي' : 'Position';
-        const deptLabel = self.isArabic ? 'القسم' : 'Department';
+        const titleLabel = self.isArabic ? '\u0627\u0644\u0645\u0633\u0645\u0649 \u0627\u0644\u0648\u0638\u064A\u0641\u064A' : 'Position';
+        const companyLabel = self.isArabic ? '\u0627\u0644\u0634\u0631\u0643\u0629' : 'Company';
 
         let html = '';
         if (d.data.filePath) {
@@ -349,7 +354,7 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
         }
         html += `<div style="font-weight: 600; color: #D9A93E; margin-bottom: 4px; text-align: center;">${d.data.name}</div>`;
         if (d.data.title) html += `<div><span style="color: #94a3b8;">${titleLabel}:</span> ${d.data.title}</div>`;
-        if (d.data.department) html += `<div><span style="color: #94a3b8;">${deptLabel}:</span> ${d.data.department}</div>`;
+        if (d.data.company) html += `<div><span style="color: #94a3b8;">${companyLabel}:</span> ${d.data.company}</div>`;
 
         tooltip
           .html(html)
@@ -465,16 +470,16 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
       .style('font-weight', '600')
       .text(d => this.truncateText(d.data.title, 22));
 
-    // Department - centered at bottom
+    // Company - centered at bottom
     nodes.append('text')
-      .attr('class', 'node-department-text')
+      .attr('class', 'node-company-text')
       .attr('x', centerX)
       .attr('y', avatarCenterY + avatarRadius + 56)
       .attr('text-anchor', 'middle')
       .style('fill', '#64748b')
       .style('font-size', '10px')
       .style('font-weight', '500')
-      .text(d => this.truncateText(d.data.department, 24));
+      .text(d => this.truncateText(d.data.company, 24));
 
     // Bottom connector dot for nodes with children
     nodes.filter(d => !!(d.children && d.children.length > 0))

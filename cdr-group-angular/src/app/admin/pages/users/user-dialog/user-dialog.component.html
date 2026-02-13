@@ -1,34 +1,30 @@
-<app-base-dialog
-  [title]="isEditMode ? 'admin.users.editUser' : 'admin.users.createUser'"
-  [saveLabel]="isEditMode ? 'common.update' : 'common.create'"
-  [saveDisabled]="form.invalid"
-  [loading]="loading"
-  (save)="onSubmit()"
-  (cancel)="onCancel()">
+<app-base-dialog [title]="isEditMode ? 'admin.users.editUser' : 'admin.users.createUser'"
+  [saveLabel]="isEditMode ? 'common.update' : 'common.create'" [saveDisabled]="form.invalid" [loading]="loading"
+  (save)="onSubmit()" (cancel)="onCancel()">
 
   <form [formGroup]="form" class="dialog-form">
     <!-- Account Information Section -->
     @if (!isEditMode) {
-      <div class="form-section section-purple">
-        <div class="section-header">
-          <div class="section-icon">
-            <mat-icon>security</mat-icon>
-          </div>
-          <div class="section-title">{{ 'admin.users.accountInfo' | translate }}</div>
+    <div class="form-section section-purple">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>security</mat-icon>
         </div>
-
-        <div class="section-content">
-          <app-form-field formControlName="username" label="admin.users.username" icon="person"
-            placeholder="admin.users.placeholders.username"
-            [errors]="[{name: 'required', message: 'admin.users.errors.usernameRequired'}, {name: 'minlength', message: 'admin.users.errors.usernameMinLength'}]">
-          </app-form-field>
-
-          <app-form-field formControlName="password" type="password" label="admin.users.password" icon="lock"
-            placeholder="admin.users.placeholders.password"
-            [errors]="[{name: 'required', message: 'admin.users.errors.passwordRequired'}, {name: 'minlength', message: 'admin.users.errors.passwordMinLength'}]">
-          </app-form-field>
-        </div>
+        <div class="section-title">{{ 'admin.users.accountInfo' | translate }}</div>
       </div>
+
+      <div class="section-content">
+        <app-form-field formControlName="username" label="admin.users.username" icon="person"
+          placeholder="admin.users.placeholders.username"
+          [errors]="[{name: 'required', message: 'admin.users.errors.usernameRequired'}, {name: 'minlength', message: 'admin.users.errors.usernameMinLength'}]">
+        </app-form-field>
+
+        <app-form-field formControlName="password" type="password" label="admin.users.password" icon="lock"
+          placeholder="admin.users.placeholders.password"
+          [errors]="[{name: 'required', message: 'admin.users.errors.passwordRequired'}, {name: 'minlength', message: 'admin.users.errors.passwordMinLength'}]">
+        </app-form-field>
+      </div>
+    </div>
     }
 
     <!-- Contact Information Section -->
@@ -47,8 +43,7 @@
         </app-form-field>
 
         <app-form-field formControlName="phoneNumber" label="admin.users.phoneNumber" icon="phone"
-          placeholder="00962XXXXXXXXX"
-          [errors]="[{name: 'pattern', message: 'validation.phoneFormat'}]">
+          placeholder="00962XXXXXXXXX" [errors]="[{name: 'pattern', message: 'validation.phoneFormat'}]">
         </app-form-field>
       </div>
     </div>
@@ -67,7 +62,8 @@
           <app-form-field formControlName="firstName" label="admin.users.firstName" icon="person_outline"
             placeholder="admin.users.placeholders.firstName">
           </app-form-field>
-
+        </div>
+        <div class="form-row">
           <app-form-field formControlName="lastName" label="admin.users.lastName" icon="person"
             placeholder="admin.users.placeholders.lastName">
           </app-form-field>

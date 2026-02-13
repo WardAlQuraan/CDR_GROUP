@@ -10,9 +10,9 @@ import { PagedRequest } from '../../../../models/paged.model';
 import { DataGridConfig, FilterValues } from '../../../../shared/components/data-grid/data-grid.models';
 import { PositionDialogComponent, PositionDialogData } from '../position-dialog/position-dialog.component';
 import { PositionViewDialogComponent } from '../position-view-dialog/position-view-dialog.component';
-import { PositionAssignDepartmentDialogComponent } from '../position-assign-department-dialog/position-assign-department-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
+import { buildSearchPlaceholder } from '../../../../utils/search.utils';
 
 @Component({
   selector: 'app-positions-component',
@@ -30,6 +30,7 @@ export class PositionsComponent implements OnInit {
   pageSize = 10;
   sortBy?: string;
   sortDescending = false;
+  searchProperties: string[] = ['code', 'nameEn', 'nameAr'];
 
   // Filters
   filterValues: FilterValues = {};
@@ -42,7 +43,7 @@ export class PositionsComponent implements OnInit {
     private dialog: MatDialog,
     private translationService: TranslationService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initGridConfig();
@@ -67,7 +68,7 @@ export class PositionsComponent implements OnInit {
 
       // Filters
       showSearch: true,
-      searchPlaceholder: this.translate('admin.positions.searchPlaceholder'),
+      searchPlaceholder: buildSearchPlaceholder(this.translationService, this.searchProperties, 'admin.positions'),
       filters: [
         {
           key: 'status',
@@ -89,14 +90,6 @@ export class PositionsComponent implements OnInit {
           sortable: true,
           sortBy: this.isArabic ? 'nameAr' : 'nameEn',
           cell: (row) => this.isArabic ? row.nameAr : row.nameEn
-        },
-        {
-          key: 'department',
-          header: 'admin.positions.department',
-          cell: (row) => {
-            if (!row.departmentId) return '-';
-            return this.isArabic ? (row.departmentNameAr || '-') : (row.departmentNameEn || '-');
-          }
         },
         {
           key: 'salaryRange',
@@ -134,13 +127,6 @@ export class PositionsComponent implements OnInit {
           onClick: (row) => this.openEditDialog(row)
         },
         {
-          icon: 'business',
-          tooltip: 'admin.positions.assignDepartment',
-          permission: Permissions.POSITIONS_UPDATE,
-          color: 'primary',
-          onClick: (row) => this.openAssignDepartmentDialog(row)
-        },
-        {
           icon: 'delete',
           tooltip: 'admin.positions.delete',
           permission: Permissions.POSITIONS_DELETE,
@@ -164,7 +150,7 @@ export class PositionsComponent implements OnInit {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
       searchTerm: this.filterValues['searchTerm'] || undefined,
-      searchProperties: ['code', 'nameEn', 'nameAr'],
+      searchProperties: this.searchProperties,
       sortBy: this.sortBy,
       sortDescending: this.sortDescending
     };
@@ -245,19 +231,6 @@ export class PositionsComponent implements OnInit {
     this.dialog.open(PositionViewDialogComponent, {
       width: '700px',
       data: position
-    });
-  }
-
-  openAssignDepartmentDialog(position: PositionDto): void {
-    const dialogRef = this.dialog.open(PositionAssignDepartmentDialogComponent, {
-      data: position,
-      disableClose: true
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.loadPositions();
-      }
     });
   }
 

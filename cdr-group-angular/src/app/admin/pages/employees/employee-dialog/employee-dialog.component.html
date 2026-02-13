@@ -77,10 +77,11 @@
 
       <div class="section-content">
         <div class="form-row">
-          <app-async-select formControlName="departmentId" label="admin.employees.department" icon="business"
-            [showNullOption]="false" [required]="true" [dataSource$]="departmentsDataSource$"
-            [optionMapper]="departmentMapper" [resetOnDataSourceChange]="false"
-            (selectionChange)="onDepartmentChange($event)">
+          <app-async-select formControlName="companyId" label="admin.employees.company" icon="business"
+            [dataSource$]="companiesDataSource$"
+            [optionMapper]="companyMapper" [resetOnDataSourceChange]="false"
+            nullOptionLabel="admin.employees.noCompany"
+            (selectionChange)="onCompanyChange($event)">
           </app-async-select>
         </div>
         <div class="form-row">

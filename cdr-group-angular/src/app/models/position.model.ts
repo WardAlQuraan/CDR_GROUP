@@ -8,9 +8,6 @@ export interface PositionDto {
   minSalary?: number;
   maxSalary?: number;
   isActive: boolean;
-  departmentId?: string;
-  departmentNameEn?: string;
-  departmentNameAr?: string;
   createdAt: Date;
   updatedAt?: Date;
 }
@@ -35,7 +32,6 @@ export interface CreatePositionDto {
   minSalary?: number;
   maxSalary?: number;
   isActive?: boolean;
-  departmentId?: string;
 }
 
 export interface UpdatePositionDto {
@@ -47,5 +43,4 @@ export interface UpdatePositionDto {
   minSalary?: number;
   maxSalary?: number;
   isActive?: boolean;
-  departmentId?: string;
 }

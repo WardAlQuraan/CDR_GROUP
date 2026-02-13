@@ -26,11 +26,6 @@ import { SalaryHistoryDialogComponent } from './pages/employees/salary-history-d
 import { PositionsComponent } from './pages/positions/positions-component/positions-component';
 import { PositionDialogComponent } from './pages/positions/position-dialog/position-dialog.component';
 import { PositionViewDialogComponent } from './pages/positions/position-view-dialog/position-view-dialog.component';
-import { PositionAssignDepartmentDialogComponent } from './pages/positions/position-assign-department-dialog/position-assign-department-dialog.component';
-import { DepartmentsComponent } from './pages/departments/departments-component/departments-component';
-import { DepartmentDialogComponent } from './pages/departments/department-dialog/department-dialog.component';
-import { DepartmentViewDialogComponent } from './pages/departments/department-view-dialog/department-view-dialog.component';
-import { DepartmentOrgChartPageComponent } from './pages/departments/department-org-chart-page/department-org-chart-page.component';
 import { EventsComponent } from './pages/events/events-component/events-component';
 import { EventDialogComponent } from './pages/events/event-dialog/event-dialog.component';
 import { EventViewDialogComponent } from './pages/events/event-view-dialog/event-view-dialog.component';
@@ -61,11 +56,6 @@ import { ManageRolesDialogComponent } from './pages/users/manage-roles-dialog/ma
     PositionsComponent,
     PositionDialogComponent,
     PositionViewDialogComponent,
-    PositionAssignDepartmentDialogComponent,
-    DepartmentsComponent,
-    DepartmentDialogComponent,
-    DepartmentViewDialogComponent,
-    DepartmentOrgChartPageComponent,
     EventsComponent,
     EventDialogComponent,
     EventViewDialogComponent,

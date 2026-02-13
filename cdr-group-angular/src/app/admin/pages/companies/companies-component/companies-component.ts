@@ -11,6 +11,7 @@ import { DataGridConfig, FilterValues } from '../../../../shared/components/data
 import { CompanyDialogComponent, CompanyDialogData } from '../company-dialog/company-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
+import { buildSearchPlaceholder } from '../../../../utils/search.utils';
 
 @Component({
   selector: 'app-companies-component',
@@ -28,6 +29,7 @@ export class CompaniesComponent implements OnInit {
   pageSize = 10;
   sortBy?: string;
   sortDescending = false;
+  searchProperties: string[] = ['code', 'nameEn', 'nameAr'];
 
   // Filters
   filterValues: FilterValues = {};
@@ -65,7 +67,7 @@ export class CompaniesComponent implements OnInit {
 
       // Filters
       showSearch: true,
-      searchPlaceholder: this.translate('admin.companies.searchPlaceholder'),
+      searchPlaceholder: buildSearchPlaceholder(this.translationService, this.searchProperties, 'admin.companies'),
       filters: [
         {
           key: 'status',
@@ -144,7 +146,7 @@ export class CompaniesComponent implements OnInit {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
       searchTerm: this.filterValues['searchTerm'] || undefined,
-      searchProperties: ['code', 'nameEn', 'nameAr'],
+      searchProperties: this.searchProperties,
       sortBy: this.sortBy,
       sortDescending: this.sortDescending
     };

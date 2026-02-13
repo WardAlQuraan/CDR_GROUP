@@ -89,6 +89,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  onClose(): void {
+    this.loginForm.reset();
+    this.loginError = '';
+  }
+
   get f() {
     return this.loginForm.controls;
   }

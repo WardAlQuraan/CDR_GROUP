@@ -73,13 +73,7 @@ export class MembershipService {
       role: 'Founder AND Chairman',
       image: 'assets/images/members/cdr.jpg',
       socialLinks: {}
-    },
-    {
-      name: 'Majd A. Abbasi',
-      role: 'General Manager',
-      image: 'assets/images/members/majd.jpg',
-      socialLinks: {}
-    },
+    }
   ];
 
   getTiers(): MembershipTier[] {

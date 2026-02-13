@@ -1,0 +1,30 @@
+.contact-form {
+  .form-control.is-invalid {
+    background-image: none;
+  }
+
+  #contact-email:focus::placeholder {
+    color: #6c757d !important;
+    opacity: 1;
+  }
+}
+
+.contact-info {
+  margin-top: 70px;
+}
+
+:host-context([dir="rtl"]) {
+  .contact-form {
+    input,
+    textarea {
+      direction: rtl;
+      text-align: right;
+    }
+
+    .form-floating > label {
+      right: 0;
+      left: auto;
+      text-align: right;
+    }
+  }
+}

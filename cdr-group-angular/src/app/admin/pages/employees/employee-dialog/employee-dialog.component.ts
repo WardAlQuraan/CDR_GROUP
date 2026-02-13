@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { EmployeeDto, CreateEmployeeDto, UpdateEmployeeDto } from '../../../../models/employee.model';
-import { DepartmentDto } from '../../../../models/department.model';
+import { CompanyDto } from '../../../../models/company.model';
 import { PositionDto } from '../../../../models/position.model';
 import { EmployeesService } from '../../../../services/employees.service';
-import { DepartmentsService } from '../../../../services/departments.service';
+import { CompaniesService } from '../../../../services/companies.service';
 import { PositionsService } from '../../../../services/positions.service';
 import { SnackbarService } from '../../../../services/snackbar.service';
 import { TranslationService } from '../../../../services/translation.service';
@@ -33,16 +33,16 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
   salaryChanged = false;
 
   // Data sources for async-selects (cached to prevent infinite loops)
-  departmentsDataSource$!: Observable<ApiResponse<DepartmentDto[]>>;
+  companiesDataSource$!: Observable<ApiResponse<CompanyDto[]>>;
   positionsDataSource$!: Observable<ApiResponse<PositionDto[]>>;
   managersDataSource$!: Observable<ApiResponse<EmployeeDto[]>>;
 
   private destroy$ = new Subject<void>();
 
   // Mapper functions for async-select
-  departmentMapper = (dept: DepartmentDto): SelectOption => ({
-    value: dept.id,
-    label: `${this.isArabic ? dept.nameAr : dept.nameEn} (${(this.isArabic ? dept.companyNameAr : dept.companyName) || dept.code})`
+  companyMapper = (company: CompanyDto): SelectOption => ({
+    value: company.id,
+    label: `${this.isArabic ? company.nameAr : company.nameEn} (${company.code})`
   });
 
   positionMapper = (pos: PositionDto): SelectOption => ({
@@ -65,7 +65,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<EmployeeDialogComponent>,
     public employeesService: EmployeesService,
-    public departmentsService: DepartmentsService,
+    public companiesService: CompaniesService,
     public positionsService: PositionsService,
     private snackbar: SnackbarService,
     private translationService: TranslationService,
@@ -82,10 +82,9 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
 
   private initDataSources(): void {
     // Cache observables to prevent infinite loops from method calls in template
-    this.departmentsDataSource$ = this.departmentsService.getActiveDepartments();
-    this.managersDataSource$ = this.employeesService.getAll();
-    // Don't reset position on initial load (preserves existing value in edit mode)
-    this.onDepartmentChange(this.form.get('departmentId')?.value, false);
+    this.companiesDataSource$ = this.companiesService.getActiveCompanies();
+    this.positionsDataSource$ = this.positionsService.getActivePositions();
+    this.managersDataSource$ = this.employeesService.getByCompanyId(this.form.get('companyId')?.value);
   }
 
   ngOnDestroy(): void {
@@ -124,7 +123,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
         lastNameAr: [emp.lastNameAr, [Validators.required, Validators.maxLength(100)]],
         email: [emp.email, [Validators.email, Validators.maxLength(256)]],
         phone: [emp.phone, [Validators.maxLength(20)]],
-        departmentId: [emp.departmentId, [Validators.required]],
+        companyId: [emp.companyId],
         positionId: [emp.positionId],
         hireDate: [emp.hireDate ? new Date(emp.hireDate) : null],
         salary: [emp.salary, [Validators.min(0)]],
@@ -146,7 +145,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
         lastNameAr: ['', [Validators.required, Validators.maxLength(100)]],
         email: ['', [Validators.email, Validators.maxLength(256)]],
         phone: ['', [Validators.maxLength(20)]],
-        departmentId: [null, [Validators.required]],
+        companyId: [null],
         positionId: [null],
         hireDate: [null],
         salary: [null, [Validators.min(0)]],
@@ -156,14 +155,8 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
     }
   }
 
-  onDepartmentChange(departmentId: string | null, resetPosition = true): void {
-    // Reset position when department changes (but not on initial load)
-    if (resetPosition) {
-      this.form.get('positionId')?.setValue(null);
-    }
-    this.positionsDataSource$ = departmentId
-      ? this.positionsService.getByDepartmentId(departmentId)
-      : this.positionsService.getAll();
+  onCompanyChange(companyId: string | null): void {
+    this.managersDataSource$ = this.employeesService.getByCompanyId(companyId || undefined);
   }
 
   private translate(key: string): string {
@@ -194,7 +187,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
       lastNameAr: this.form.value.lastNameAr,
       email: this.form.value.email || undefined,
       phone: this.form.value.phone || undefined,
-      departmentId: this.form.value.departmentId || undefined,
+      companyId: this.form.value.companyId || undefined,
       positionId: this.form.value.positionId || undefined,
       hireDate: this.form.value.hireDate || undefined,
       salary: this.form.value.salary || undefined,
@@ -223,7 +216,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
       lastNameAr: this.form.value.lastNameAr,
       email: this.form.value.email || undefined,
       phone: this.form.value.phone || undefined,
-      departmentId: this.form.value.departmentId || undefined,
+      companyId: this.form.value.companyId || undefined,
       positionId: this.form.value.positionId || undefined,
       hireDate: this.form.value.hireDate || undefined,
       salary: this.form.value.salary || undefined,

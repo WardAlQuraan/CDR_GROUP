@@ -13,6 +13,7 @@ import { PermissionsDialogComponent, PermissionsDialogData } from '../permission
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 import { formatDateTime } from '../../../../utils/date.utils';
+import { buildSearchPlaceholder } from '../../../../utils/search.utils';
 
 @Component({
   selector: 'app-roles-component',
@@ -30,6 +31,7 @@ export class RolesComponent implements OnInit {
   pageSize = 10;
   sortBy?: string;
   sortDescending = false;
+  searchProperties: string[] = ['name', 'description'];
 
   // Filters
   filterValues: FilterValues = {};
@@ -63,7 +65,7 @@ export class RolesComponent implements OnInit {
 
       // Filters
       showSearch: true,
-      searchPlaceholder: this.translate('admin.roles.searchPlaceholder'),
+      searchPlaceholder: buildSearchPlaceholder(this.translationService, this.searchProperties, 'admin.roles'),
       filters: [
         {
           key: 'type',
@@ -155,7 +157,7 @@ export class RolesComponent implements OnInit {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
       searchTerm: this.filterValues['searchTerm'] || undefined,
-      searchProperties: ['name', 'description'],
+      searchProperties: this.searchProperties,
       sortBy: this.sortBy,
       sortDescending: this.sortDescending
     };

@@ -71,13 +71,6 @@ export const Permissions = {
   POSITIONS_UPDATE: 'positions.update',
   POSITIONS_DELETE: 'positions.delete',
 
-  // Departments
-  DEPARTMENTS_READ: 'departments.read',
-  DEPARTMENTS_CREATE: 'departments.create',
-  DEPARTMENTS_UPDATE: 'departments.update',
-  DEPARTMENTS_DELETE: 'departments.delete',
-  DEPARTMENTS_ASSIGN_MANAGER: 'departments.assign-manager',
-
   // Roles
   ROLES_READ: 'roles.read',
   ROLES_MANAGE: 'roles.manage',

@@ -13,6 +13,7 @@ import { EventViewDialogComponent } from '../event-view-dialog/event-view-dialog
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { BulkUploadDialogComponent, BulkUploadDialogData } from '../../../../shared/components/bulk-upload-dialog/bulk-upload-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
+import { buildSearchPlaceholder } from '../../../../utils/search.utils';
 
 @Component({
   selector: 'app-events-component',
@@ -30,6 +31,7 @@ export class EventsComponent implements OnInit {
   pageSize = 10;
   sortBy?: string;
   sortDescending = false;
+  searchProperties: string[] = ['titleEn', 'titleAr'];
 
   // Filters
   filterValues: FilterValues = {};
@@ -67,7 +69,7 @@ export class EventsComponent implements OnInit {
 
       // Filters
       showSearch: true,
-      searchPlaceholder: this.translate('admin.eventsAdmin.searchPlaceholder'),
+      searchPlaceholder: buildSearchPlaceholder(this.translationService, this.searchProperties, 'admin.eventsAdmin'),
       columns: [
         {
           key: 'title',
@@ -142,7 +144,7 @@ export class EventsComponent implements OnInit {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
       searchTerm: this.filterValues['searchTerm'] || undefined,
-      searchProperties: ['titleEn', 'titleAr'],
+      searchProperties: this.searchProperties,
       sortBy: this.sortBy,
       sortDescending: this.sortDescending
     };

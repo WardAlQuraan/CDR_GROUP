@@ -17,5 +17,8 @@
     <p>{{ 'admin.noEmployeesFound' | translate }}</p>
   </div>
 } @else {
+  @if (companyDisplayName) {
+    <h3 class="org-chart-company-name">{{ companyDisplayName }}</h3>
+  }
   <div #chartContainer class="org-chart-container"></div>
 }

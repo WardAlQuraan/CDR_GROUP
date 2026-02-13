@@ -14,6 +14,7 @@ import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/co
 import { ManageRolesDialogComponent, ManageRolesDialogData } from '../manage-roles-dialog/manage-roles-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 import { formatDateTime } from '../../../../utils/date.utils';
+import { buildSearchPlaceholder } from '../../../../utils/search.utils';
 
 @Component({
   selector: 'app-users-component',
@@ -31,6 +32,7 @@ export class UsersComponent implements OnInit {
   pageSize = 10;
   sortBy?: string;
   sortDescending = false;
+  searchProperties: string[] = ['username', 'email', 'firstName', 'lastName'];
 
   // Filters
   filterValues: FilterValues = {};
@@ -63,7 +65,7 @@ export class UsersComponent implements OnInit {
 
       // Filters
       showSearch: true,
-      searchPlaceholder: this.translate('admin.users.searchPlaceholder'),
+      searchPlaceholder: buildSearchPlaceholder(this.translationService, this.searchProperties, 'admin.users'),
       filters: [
         {
           key: 'status',
@@ -165,7 +167,7 @@ export class UsersComponent implements OnInit {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
       searchTerm: this.filterValues['searchTerm'] || undefined,
-      searchProperties: ['username', 'email', 'firstName', 'lastName'],
+      searchProperties: this.searchProperties,
       sortBy: this.sortBy,
       sortDescending: this.sortDescending
     };

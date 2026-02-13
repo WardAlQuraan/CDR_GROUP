@@ -16,6 +16,7 @@ import { SalaryHistoryDialogComponent } from '../salary-history-dialog/salary-hi
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 import { EntityTypes } from '../../../../constants/entity-types.constant';
+import { buildSearchPlaceholder } from '../../../../utils/search.utils';
 
 @Component({
   selector: 'app-employees-component',
@@ -35,6 +36,7 @@ export class EmployeesComponent implements OnInit {
   pageSize = 10;
   sortBy?: string;
   sortDescending = false;
+  searchProperties: string[] = ['employeeCode', 'firstNameEn', 'lastNameEn', 'firstNameAr', 'lastNameAr', 'email'];
 
   // Filters
   filterValues: FilterValues = {};
@@ -75,7 +77,7 @@ export class EmployeesComponent implements OnInit {
 
       // Filters
       showSearch: true,
-      searchPlaceholder: this.translate('admin.employees.searchPlaceholder'),
+      searchPlaceholder: buildSearchPlaceholder(this.translationService, ['code', 'firstNameEn', 'lastNameEn', 'firstNameAr', 'lastNameAr', 'email'], 'admin.employees'),
       filters: [
         {
           key: 'status',
@@ -99,7 +101,7 @@ export class EmployeesComponent implements OnInit {
           cell: (row) => this.isArabic ? row.fullNameAr : row.fullNameEn
         },
         { key: 'email', header: 'admin.employees.email', cell: (row) => row.email || '-' },
-        { key: 'department', header: 'admin.employees.department', sortable: true, cell: (row) => row.departmentName || '-' },
+        { key: 'company', header: 'admin.employees.company', sortable: true, cell: (row) => this.isArabic ? (row.companyNameAr || '-') : (row.companyName || '-') },
         { key: 'position', header: 'admin.employees.position', cell: (row) => row.positionName || '-' },
         {
           key: 'manager',
@@ -179,7 +181,7 @@ export class EmployeesComponent implements OnInit {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
       searchTerm: this.filterValues['searchTerm'] || undefined,
-      searchProperties: ['employeeCode', 'firstNameEn', 'lastNameEn', 'firstNameAr', 'lastNameAr', 'email'],
+      searchProperties: this.searchProperties,
       sortBy: this.sortBy,
       sortDescending: this.sortDescending
     };

@@ -29,8 +29,7 @@ export class AdminLayoutComponent implements OnInit {
     { label: 'admin.roles.title', icon: 'admin_panel_settings', route: '/admin/roles', permission: Permissions.ROLES_READ },
     { label: 'admin.employees.title', icon: 'badge', route: '/admin/employees', permission: Permissions.EMPLOYEES_READ },
     { label: 'admin.positions.title', icon: 'work_outline', route: '/admin/positions', permission: Permissions.POSITIONS_READ },
-    { label: 'admin.departments.title', icon: 'business', route: '/admin/departments', permission: Permissions.DEPARTMENTS_READ },
-    { label: 'admin.companies.title', icon: 'apartment', route: '/admin/companies', permission: Permissions.COMPANIES_READ },
+{ label: 'admin.companies.title', icon: 'apartment', route: '/admin/companies', permission: Permissions.COMPANIES_READ },
     { label: 'admin.eventsAdmin.title', icon: 'event', route: '/admin/events', permission: Permissions.EVENTS_READ },
     { label: 'admin.contactUs.title', icon: 'mail', route: '/admin/contact-us', permission: Permissions.CONTACTUS_READ },
   ];

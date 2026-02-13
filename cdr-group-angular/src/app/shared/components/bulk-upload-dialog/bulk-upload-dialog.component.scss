@@ -4,10 +4,12 @@
   max-width: 550px;
   max-height: 80vh;
   overflow-y: auto;
+  margin: 0 auto;
 
   .dialog-header {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
     margin-bottom: 24px;
 

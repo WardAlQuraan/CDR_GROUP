@@ -1323,3 +1323,20 @@ strong {
   }
 }
 
+/*---------------------------------------
+  MATERIAL TOOLTIP OVERRIDE
+-----------------------------------------*/
+.mat-mdc-tooltip .mdc-tooltip__surface {
+  background: var(--secondary-color) !important;
+  color: var(--white-color) !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.3px !important;
+  padding: 8px 16px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  max-width: 300px !important;
+  line-height: 1.4 !important;
+  white-space: pre-line !important;
+}
+

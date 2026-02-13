@@ -13,8 +13,9 @@ export interface EmployeeDto {
   salary?: number;
   isActive: boolean;
 
-  departmentId?: string;
-  departmentName?: string;
+  companyId?: string;
+  companyName?: string;
+  companyNameAr?: string;
 
   positionId?: string;
   positionName?: string;
@@ -40,8 +41,8 @@ export interface EmployeeBasicDto {
   fullNameAr: string;
   positionId?: string;
   positionName?: string;
-  departmentId?: string;
-  departmentName?: string;
+  companyId?: string;
+  companyName?: string;
 }
 
 export interface EmployeeWithSubordinatesDto extends EmployeeDto {
@@ -59,7 +60,7 @@ export interface CreateEmployeeDto {
   hireDate?: Date;
   salary?: number;
   isActive?: boolean;
-  departmentId?: string;
+  companyId?: string;
   positionId?: string;
   managerId?: string;
   userId?: string;
@@ -76,7 +77,7 @@ export interface UpdateEmployeeDto {
   hireDate?: Date;
   salary?: number;
   isActive?: boolean;
-  departmentId?: string;
+  companyId?: string;
   positionId?: string;
   managerId?: string;
   userId?: string;
@@ -96,9 +97,9 @@ export interface EmployeeTreeNodeDto {
   positionId?: string;
   positionNameEn?: string;
   positionNameAr?: string;
-  departmentId?: string;
-  departmentNameEn?: string;
-  departmentNameAr?: string;
+  companyId?: string;
+  companyNameEn?: string;
+  companyNameAr?: string;
   isActive: boolean;
   filePath?: string;
   children: EmployeeTreeNodeDto[];

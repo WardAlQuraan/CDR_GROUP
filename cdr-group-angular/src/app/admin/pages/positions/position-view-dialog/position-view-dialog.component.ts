@@ -20,11 +20,6 @@ export class PositionViewDialogComponent {
     return this.translationService.language() === 'ar';
   }
 
-  getDepartmentName(): string {
-    if (!this.position.departmentId) return '-';
-    return this.isArabic ? (this.position.departmentNameAr || '-') : (this.position.departmentNameEn || '-');
-  }
-
   getSalaryRange(): string {
     if (!this.position.minSalary && !this.position.maxSalary) return '-';
     const min = this.position.minSalary?.toLocaleString() || '0';

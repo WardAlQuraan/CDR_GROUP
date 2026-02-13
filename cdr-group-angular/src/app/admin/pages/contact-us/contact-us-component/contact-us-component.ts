@@ -11,6 +11,7 @@ import { DataGridConfig, FilterValues } from '../../../../shared/components/data
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { ContactUsViewDialogComponent } from '../contact-us-view-dialog/contact-us-view-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
+import { buildSearchPlaceholder } from '../../../../utils/search.utils';
 
 @Component({
   selector: 'app-contact-us-component',
@@ -27,6 +28,7 @@ export class ContactUsAdminComponent implements OnInit {
   pageSize = 10;
   sortBy?: string;
   sortDescending = false;
+  searchProperties: string[] = ['fullName', 'email', 'message'];
 
   filterValues: FilterValues = {};
 
@@ -55,7 +57,7 @@ export class ContactUsAdminComponent implements OnInit {
       subtitle: 'admin.contactUs.subtitle',
 
       showSearch: true,
-      searchPlaceholder: this.translate('admin.contactUs.searchPlaceholder'),
+      searchPlaceholder: buildSearchPlaceholder(this.translationService, this.searchProperties, 'admin.contactUs'),
 
       columns: [
         { key: 'fullName', header: 'admin.contactUs.fullName', sortable: true },
@@ -102,7 +104,7 @@ export class ContactUsAdminComponent implements OnInit {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
       searchTerm: this.filterValues['searchTerm'] || undefined,
-      searchProperties: ['fullName', 'email', 'message'],
+      searchProperties: this.searchProperties,
       sortBy: this.sortBy,
       sortDescending: this.sortDescending
     };

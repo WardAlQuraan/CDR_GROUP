@@ -14,12 +14,13 @@
           </div>
 
           <div class="form-floating mb-4">
-            <input type="email" id="contact-email" class="form-control" [class.is-invalid]="contactForm.get('email')!.invalid && contactForm.get('email')!.touched" [placeholder]="'common.email' | translate" formControlName="email">
+            <input type="email" id="contact-email" class="form-control" [class.is-invalid]="contactForm.get('email')!.invalid && contactForm.get('email')!.touched" placeholder="example@email.com" formControlName="email">
             <label for="contact-email">{{ 'common.email' | translate }}</label>
             @if (contactForm.get('email')!.hasError('required') && contactForm.get('email')!.touched) {
-              <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
-            } @else if (contactForm.get('email')!.hasError('email') && contactForm.get('email')!.touched) {
-              <div class="invalid-feedback">{{ 'validation.invalidEmail' | translate }}</div>
+              <div class="invalid-feedback d-block">{{ 'validation.required' | translate }}</div>
+            }
+            @if (!contactForm.get('email')!.hasError('required') && contactForm.get('email')!.hasError('email') && contactForm.get('email')!.touched) {
+              <div class="invalid-feedback d-block">{{ 'validation.invalidEmail' | translate }}</div>
             }
           </div>
 
@@ -66,7 +67,7 @@
               <strong>Abdoun, Amman, Jordan 11183</strong>
 
               <p class="mt-2 mb-1">
-                <a href="tel:+962798081801" class="text-white">
+                <a href="tel:+962798081801" class="text-white" dir="ltr">
                   <i class="bi-telephone me-2"></i>
                   +962 798 081 801
                 </a>

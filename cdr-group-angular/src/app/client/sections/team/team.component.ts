@@ -7,7 +7,7 @@ interface TeamMember {
   id: string;
   name: string;
   position: string;
-  department: string;
+  company: string;
   initials: string;
   image?: string;
   children: TeamMember[];
@@ -64,7 +64,7 @@ export class TeamComponent implements OnChanges {
     this.loading = true;
     this.error = false;
 
-    this.employeesService.getTree(undefined, this.companyCode || undefined).subscribe({
+    this.employeesService.getTree(this.companyCode || undefined).subscribe({
       next: (response) => {
         if (response.success && response.data) {
           this.teamData = response.data.map(node => this.mapToTeamMember(node));
@@ -86,7 +86,7 @@ export class TeamComponent implements OnChanges {
       id: node.id,
       name: name || '',
       position: (this.isArabic ? node.positionNameAr : node.positionNameEn) || '',
-      department: (this.isArabic ? node.departmentNameAr : node.departmentNameEn) || '',
+      company: (this.isArabic ? node.companyNameAr : node.companyNameEn) || '',
       initials: this.getInitials(name),
       image: node.filePath || undefined,
       children: node.children?.map(child => this.mapToTeamMember(child)) || []

@@ -37,10 +37,6 @@ export class EmployeesService extends BaseService<EmployeeDto, CreateEmployeeDto
     return this.get<EmployeeBasicDto[]>(`/${id}/subordinates`);
   }
 
-  getByDepartmentId(departmentId: string): Observable<ApiResponse<EmployeeDto[]>> {
-    return this.get<EmployeeDto[]>(`/by-department/${departmentId}`);
-  }
-
   assignManager(id: string, managerId: string | null): Observable<ApiResponse<EmployeeDto>> {
     return this.http.put<ApiResponse<EmployeeDto>>(`${this.getApiUrl()}/${id}/manager`, JSON.stringify(managerId), {
       headers: { 'Content-Type': 'application/json' }
@@ -53,15 +49,13 @@ export class EmployeesService extends BaseService<EmployeeDto, CreateEmployeeDto
     });
   }
 
-  assignDepartment(id: string, departmentId: string | null): Observable<ApiResponse<EmployeeDto>> {
-    return this.http.put<ApiResponse<EmployeeDto>>(`${this.getApiUrl()}/${id}/department`, JSON.stringify(departmentId), {
-      headers: { 'Content-Type': 'application/json' }
-    });
+  getByCompanyId(companyId?: string): Observable<ApiResponse<EmployeeDto[]>> {
+    const query = companyId ? `?companyId=${companyId}` : '';
+    return this.get<EmployeeDto[]>(`/by-company${query}`);
   }
 
-  getTree(departmentId?: string, companyCode?: string): Observable<ApiResponse<EmployeeTreeNodeDto[]>> {
+  getTree(companyCode?: string): Observable<ApiResponse<EmployeeTreeNodeDto[]>> {
     const queryParams: string[] = [];
-    if (departmentId) queryParams.push(`departmentId=${departmentId}`);
     if (companyCode) queryParams.push(`companyCode=${companyCode}`);
     const params = queryParams.length > 0 ? `?${queryParams.join('&')}` : '';
     return this.get<EmployeeTreeNodeDto[]>(`/tree${params}`);

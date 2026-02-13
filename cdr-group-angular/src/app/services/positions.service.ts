@@ -27,10 +27,6 @@ export class PositionsService extends BaseService<PositionDto, CreatePositionDto
     return this.get<PositionDto>(`/by-name/${name}`);
   }
 
-  getByDepartmentId(departmentId: string): Observable<ApiResponse<PositionDto[]>> {
-    return this.get<PositionDto[]>(`/by-department/${departmentId}`);
-  }
-
   getActivePositions(): Observable<ApiResponse<PositionDto[]>> {
     return this.get<PositionDto[]>('/active');
   }
@@ -39,11 +35,4 @@ export class PositionsService extends BaseService<PositionDto, CreatePositionDto
     return this.get<PositionWithEmployeesDto>(`/${id}/with-employee-count`);
   }
 
-  assignDepartment(id: string, departmentId: string | null): Observable<ApiResponse<PositionDto>> {
-    return this.http.put<ApiResponse<PositionDto>>(
-      `${this.getApiUrl()}/${id}/department`,
-      JSON.stringify(departmentId),
-      { headers: { 'Content-Type': 'application/json' } }
-    );
-  }
 }
