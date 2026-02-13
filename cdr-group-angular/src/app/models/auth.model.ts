@@ -96,7 +96,13 @@ export const Permissions = {
 
   // Contact Us
   CONTACTUS_READ: 'contactus.read',
-  CONTACTUS_DELETE: 'contactus.delete'
+  CONTACTUS_DELETE: 'contactus.delete',
+
+  // Salary Histories
+  SALARY_HISTORIES_READ: 'salary-histories.read',
+  SALARY_HISTORIES_CREATE: 'salary-histories.create',
+  SALARY_HISTORIES_UPDATE: 'salary-histories.update',
+  SALARY_HISTORIES_DELETE: 'salary-histories.delete'
 } as const;
 
 export type Permission = typeof Permissions[keyof typeof Permissions];

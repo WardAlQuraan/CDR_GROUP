@@ -17,33 +17,21 @@
       </div>
 
       <div class="section-content">
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'admin.positions.code' | translate }}</mat-label>
-          <mat-icon matPrefix>badge</mat-icon>
-          <input matInput formControlName="code" [placeholder]="'admin.positions.placeholders.code' | translate">
-          @if (form.get('code')?.hasError('required') && form.get('code')?.touched) {
-            <mat-error>{{ 'admin.positions.errors.codeRequired' | translate }}</mat-error>
-          }
-        </mat-form-field>
+        <app-form-field formControlName="code" label="admin.positions.code" icon="badge"
+          placeholder="admin.positions.placeholders.code"
+          [errors]="[{name: 'required', message: 'admin.positions.errors.codeRequired'}]">
+        </app-form-field>
 
         <div class="form-row">
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.positions.nameEn' | translate }}</mat-label>
-            <mat-icon matPrefix>translate</mat-icon>
-            <input matInput formControlName="nameEn" [placeholder]="'admin.positions.placeholders.nameEn' | translate">
-            @if (form.get('nameEn')?.hasError('required') && form.get('nameEn')?.touched) {
-              <mat-error>{{ 'admin.positions.errors.nameEnRequired' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="nameEn" label="admin.positions.nameEn" icon="translate"
+            placeholder="admin.positions.placeholders.nameEn"
+            [errors]="[{name: 'required', message: 'admin.positions.errors.nameEnRequired'}]">
+          </app-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.positions.nameAr' | translate }}</mat-label>
-            <mat-icon matPrefix>translate</mat-icon>
-            <input matInput formControlName="nameAr" [placeholder]="'admin.positions.placeholders.nameAr' | translate" dir="rtl">
-            @if (form.get('nameAr')?.hasError('required') && form.get('nameAr')?.touched) {
-              <mat-error>{{ 'admin.positions.errors.nameArRequired' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="nameAr" label="admin.positions.nameAr" icon="translate"
+            placeholder="admin.positions.placeholders.nameAr" dir="rtl"
+            [errors]="[{name: 'required', message: 'admin.positions.errors.nameArRequired'}]">
+          </app-form-field>
         </div>
       </div>
     </div>
@@ -58,15 +46,13 @@
       </div>
 
       <div class="section-content">
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'admin.positions.descriptionEn' | translate }}</mat-label>
-          <textarea matInput formControlName="descriptionEn" rows="3" [placeholder]="'admin.positions.placeholders.descriptionEn' | translate"></textarea>
-        </mat-form-field>
+        <app-form-field formControlName="descriptionEn" type="textarea" label="admin.positions.descriptionEn"
+          placeholder="admin.positions.placeholders.descriptionEn">
+        </app-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'admin.positions.descriptionAr' | translate }}</mat-label>
-          <textarea matInput formControlName="descriptionAr" rows="3" [placeholder]="'admin.positions.placeholders.descriptionAr' | translate" dir="rtl"></textarea>
-        </mat-form-field>
+        <app-form-field formControlName="descriptionAr" type="textarea" label="admin.positions.descriptionAr"
+          placeholder="admin.positions.placeholders.descriptionAr" dir="rtl">
+        </app-form-field>
       </div>
     </div>
 
@@ -81,23 +67,15 @@
 
       <div class="section-content">
         <div class="form-row">
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.positions.minSalary' | translate }}</mat-label>
-            <mat-icon matPrefix>money</mat-icon>
-            <input matInput type="number" formControlName="minSalary" [placeholder]="'admin.positions.placeholders.minSalary' | translate">
-            @if (form.get('minSalary')?.hasError('min') && form.get('minSalary')?.touched) {
-              <mat-error>{{ 'admin.positions.errors.salaryMin' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="minSalary" type="number" label="admin.positions.minSalary" icon="money"
+            placeholder="admin.positions.placeholders.minSalary"
+            [errors]="[{name: 'min', message: 'admin.positions.errors.salaryMin'}]">
+          </app-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.positions.maxSalary' | translate }}</mat-label>
-            <mat-icon matPrefix>money</mat-icon>
-            <input matInput type="number" formControlName="maxSalary" [placeholder]="'admin.positions.placeholders.maxSalary' | translate">
-            @if (form.get('maxSalary')?.hasError('min') && form.get('maxSalary')?.touched) {
-              <mat-error>{{ 'admin.positions.errors.salaryMin' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="maxSalary" type="number" label="admin.positions.maxSalary" icon="money"
+            placeholder="admin.positions.placeholders.maxSalary"
+            [errors]="[{name: 'min', message: 'admin.positions.errors.salaryMin'}]">
+          </app-form-field>
         </div>
 
         <mat-checkbox formControlName="isActive" color="primary">

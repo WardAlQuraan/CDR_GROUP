@@ -87,6 +87,7 @@ export class PositionsComponent implements OnInit {
           key: 'name',
           header: 'admin.positions.name',
           sortable: true,
+          sortBy: this.isArabic ? 'nameAr' : 'nameEn',
           cell: (row) => this.isArabic ? row.nameAr : row.nameEn
         },
         {
@@ -100,12 +101,13 @@ export class PositionsComponent implements OnInit {
         {
           key: 'salaryRange',
           header: 'admin.positions.salaryRange',
+          sortable: false,
           cell: (row) => {
             if (!row.minSalary && !row.maxSalary) return '-';
             const min = row.minSalary?.toLocaleString() || '0';
             const max = row.maxSalary?.toLocaleString() || '∞';
             return `${min} - ${max}`;
-          }
+          },
         },
         {
           key: 'isActive',

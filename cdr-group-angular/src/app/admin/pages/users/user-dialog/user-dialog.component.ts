@@ -20,7 +20,6 @@ export interface UserDialogData {
 export class UserDialogComponent implements OnInit {
   form!: FormGroup;
   isEditMode: boolean;
-  hidePassword = true;
   loading = false;
 
   constructor(

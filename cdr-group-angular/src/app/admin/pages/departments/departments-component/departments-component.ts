@@ -86,6 +86,7 @@ export class DepartmentsComponent implements OnInit {
           key: 'name',
           header: 'admin.departments.name',
           sortable: true,
+          sortBy: this.isArabic ? 'nameAr' : 'nameEn',
           cell: (row) => this.isArabic ? row.nameAr : row.nameEn
         },
         {
@@ -102,12 +103,14 @@ export class DepartmentsComponent implements OnInit {
           cell: (row) => {
             if (!row.parentDepartment) return '-';
             return this.isArabic ? row.parentDepartment.nameAr : row.parentDepartment.nameEn;
-          }
+          },
+          sortable: false
         },
         {
           key: 'manager',
           header: 'admin.departments.manager',
-          cell: (row) => row.managerName || '-'
+          cell: (row) => row.managerName || '-',
+          sortable: false
         },
         {
           key: 'isActive',

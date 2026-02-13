@@ -408,6 +408,7 @@
       "noPosition": "No Position",
       "hireDate": "Hire Date",
       "salary": "Salary",
+      "salaryChangeReason": "Salary Change Reason",
       "manager": "Manager",
       "status": "Status",
       "isActive": "Active Employee",
@@ -430,6 +431,15 @@
       "selectManager": "Select Manager",
       "selectUser": "Select User Account",
       "employee": "Employee",
+      "salaryHistory": "Salary History",
+      "noSalaryHistory": "No salary history records found",
+      "salaryHistoryFields": {
+        "effectiveDate": "Effective Date",
+        "oldSalary": "Old Salary",
+        "newSalary": "New Salary",
+        "reason": "Reason",
+        "createdAt": "Created At"
+      },
       "errors": {
         "loadFailed": "Failed to load employees",
         "createFailed": "Failed to create employee",
@@ -460,7 +470,8 @@
         "phone": "Enter phone number",
         "department": "Enter department",
         "position": "Enter position",
-        "salary": "Enter salary"
+        "salary": "Enter salary",
+        "salaryChangeReason": "Enter reason for salary change"
       }
     },
     "positions": {

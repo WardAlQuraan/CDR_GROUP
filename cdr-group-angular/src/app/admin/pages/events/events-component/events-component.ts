@@ -73,6 +73,7 @@ export class EventsComponent implements OnInit {
           key: 'title',
           header: 'admin.eventsAdmin.title',
           sortable: true,
+          sortBy: this.isArabic ? 'titleAr' : 'titleEn',
           cell: (row) => this.isArabic ? row.titleAr : row.titleEn
         },
         {

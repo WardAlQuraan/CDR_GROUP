@@ -1,0 +1,62 @@
+<app-base-dialog
+  title="admin.employees.salaryHistory"
+  [showActions]="false">
+
+  <div class="salary-history-content">
+    <div class="employee-header">
+      <mat-icon>person</mat-icon>
+      <span>{{ employeeName }} ({{ employee.employeeCode }})</span>
+    </div>
+
+    @if (loading) {
+      <div class="loading-container">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    } @else if (salaryHistories.length === 0) {
+      <div class="empty-state">
+        <mat-icon>history</mat-icon>
+        <span>{{ 'admin.employees.noSalaryHistory' | translate }}</span>
+      </div>
+    } @else {
+      <div class="table-wrapper">
+        <table mat-table [dataSource]="salaryHistories">
+
+          <ng-container matColumnDef="effectiveDate">
+            <th mat-header-cell *matHeaderCellDef>{{ 'admin.employees.salaryHistoryFields.effectiveDate' | translate }}</th>
+            <td mat-cell *matCellDef="let row">{{ row.effectiveDate | date:'mediumDate' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="oldSalary">
+            <th mat-header-cell *matHeaderCellDef>{{ 'admin.employees.salaryHistoryFields.oldSalary' | translate }}</th>
+            <td mat-cell *matCellDef="let row">{{ row.oldSalary != null ? (row.oldSalary | number) : '-' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="newSalary">
+            <th mat-header-cell *matHeaderCellDef>{{ 'admin.employees.salaryHistoryFields.newSalary' | translate }}</th>
+            <td mat-cell *matCellDef="let row">{{ row.newSalary | number }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="reason">
+            <th mat-header-cell *matHeaderCellDef>{{ 'admin.employees.salaryHistoryFields.reason' | translate }}</th>
+            <td mat-cell *matCellDef="let row">{{ row.reason || '-' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef>{{ 'admin.employees.salaryHistoryFields.createdAt' | translate }}</th>
+            <td mat-cell *matCellDef="let row">{{ row.createdAt | date:'medium' }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    }
+
+    <div class="dialog-actions">
+      <button mat-raised-button color="primary" (click)="onClose()">
+        {{ 'common.close' | translate }}
+      </button>
+    </div>
+  </div>
+
+</app-base-dialog>

@@ -3,6 +3,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DataGridConfig, FilterValues } from './data-grid.models';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-data-grid',
@@ -33,7 +34,7 @@ export class DataGridComponent<T> implements OnChanges {
   filterValues: FilterValues = {};
   searchTerm = '';
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef, private authService: AuthService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
@@ -96,10 +97,18 @@ export class DataGridComponent<T> implements OnChanges {
   }
 
   onSortChange(sortState: Sort): void {
-    this.sortChange.emit(sortState);
+    const col = this.config.columns.find(c => c.key === sortState.active);
+    const resolved: Sort = {
+      active: col?.sortBy || sortState.active,
+      direction: sortState.direction
+    };
+    this.sortChange.emit(resolved);
   }
 
   isActionVisible(action: any, row: T): boolean {
+    if (action.permission && !this.authService.hasPermission(action.permission)) {
+      return false;
+    }
     return action.visible ? action.visible(row) : true;
   }
 }

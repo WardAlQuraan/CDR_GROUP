@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { EmployeeDto, CreateEmployeeDto, UpdateEmployeeDto } from '../../../../models/employee.model';
 import { DepartmentDto } from '../../../../models/department.model';
 import { PositionDto } from '../../../../models/position.model';
@@ -30,6 +30,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
   form!: FormGroup;
   mode: EmployeeDialogMode;
   loading = false;
+  salaryChanged = false;
 
   // Data sources for async-selects (cached to prevent infinite loops)
   departmentsDataSource$!: Observable<ApiResponse<DepartmentDto[]>>;
@@ -128,7 +129,13 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
         hireDate: [emp.hireDate ? new Date(emp.hireDate) : null],
         salary: [emp.salary, [Validators.min(0)]],
         isActive: [emp.isActive],
-        managerId: [emp.managerId]
+        managerId: [emp.managerId],
+        salaryChangeReason: ['', [Validators.maxLength(500)]]
+      });
+
+      const originalSalary = emp.salary;
+      this.form.get('salary')!.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(value => {
+        this.salaryChanged = value !== originalSalary;
       });
     } else {
       this.form = this.fb.group({
@@ -221,7 +228,8 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
       hireDate: this.form.value.hireDate || undefined,
       salary: this.form.value.salary || undefined,
       isActive: this.form.value.isActive,
-      managerId: this.form.value.managerId || undefined
+      managerId: this.form.value.managerId || undefined,
+      salaryChangeReason: this.salaryChanged ? (this.form.value.salaryChangeReason || undefined) : undefined
     };
 
     this.employeesService.update(this.data.employee!.id, updateDto).subscribe({

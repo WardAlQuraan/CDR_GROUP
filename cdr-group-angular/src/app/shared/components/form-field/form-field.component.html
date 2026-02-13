@@ -1,0 +1,54 @@
+<mat-form-field appearance="outline">
+  <mat-label>{{ label | translate }}</mat-label>
+
+  @if (icon) {
+    <mat-icon matPrefix>{{ icon }}</mat-icon>
+  }
+  @if (textPrefix) {
+    <span matPrefix style="padding-left: 8px; font-weight: 500;">{{ textPrefix }}</span>
+  }
+
+  @if (type === 'textarea') {
+    <textarea matInput
+      [value]="value"
+      [placeholder]="placeholder | translate"
+      [attr.dir]="dir || null"
+      [rows]="rows"
+      [required]="required"
+      [disabled]="disabled"
+      (input)="onInput($event)"
+      (blur)="onTouched()">
+    </textarea>
+  } @else if (type === 'password') {
+    <input matInput
+      [value]="value"
+      [type]="hidePassword ? 'password' : 'text'"
+      [placeholder]="placeholder | translate"
+      [required]="required"
+      [disabled]="disabled"
+      (input)="onInput($event)"
+      (blur)="onTouched()">
+  } @else {
+    <input matInput
+      [value]="value"
+      [type]="type"
+      [placeholder]="placeholder | translate"
+      [attr.dir]="dir || null"
+      [required]="required"
+      [disabled]="disabled"
+      (input)="onInput($event)"
+      (blur)="onTouched()">
+  }
+
+  @if (type === 'password') {
+    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+      <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+  }
+
+  @for (error of errors; track error.name) {
+    @if (ngControl.control?.hasError(error.name) && ngControl.control?.touched) {
+      <mat-error>{{ error.message | translate }}</mat-error>
+    }
+  }
+</mat-form-field>

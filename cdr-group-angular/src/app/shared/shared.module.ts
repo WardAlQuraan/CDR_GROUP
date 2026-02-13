@@ -40,6 +40,7 @@ import { DatePickerComponent } from './components/date-picker/date-picker.compon
 import { OrgChartComponent } from './components/org-chart/org-chart.component';
 import { BulkUploadDialogComponent } from './components/bulk-upload-dialog/bulk-upload-dialog.component';
 import { ImagePreviewDialogComponent } from './components/image-preview-dialog/image-preview-dialog.component';
+import { FormFieldComponent } from './components/form-field/form-field.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { CustomPaginatorIntl } from './custom-paginator-intl';
@@ -57,7 +58,8 @@ import { CustomPaginatorIntl } from './custom-paginator-intl';
     DatePickerComponent,
     OrgChartComponent,
     BulkUploadDialogComponent,
-    ImagePreviewDialogComponent
+    ImagePreviewDialogComponent,
+    FormFieldComponent
   ],
   imports: [
     CommonModule,
@@ -135,7 +137,8 @@ import { CustomPaginatorIntl } from './custom-paginator-intl';
     DatePickerComponent,
     OrgChartComponent,
     BulkUploadDialogComponent,
-    ImagePreviewDialogComponent
+    ImagePreviewDialogComponent,
+    FormFieldComponent
   ]
 })
 export class SharedModule {}

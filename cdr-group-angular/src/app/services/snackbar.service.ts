@@ -15,19 +15,19 @@ export class SnackbarService {
     verticalPosition: 'top'
   };
 
-  success(message: string, action = 'Close', config?: MatSnackBarConfig): void {
+  success(message: string, action = '✕', config?: MatSnackBarConfig): void {
     this.show(message, action, 'success', config);
   }
 
-  error(message: string, action = 'Close', config?: MatSnackBarConfig): void {
+  error(message: string, action = '✕', config?: MatSnackBarConfig): void {
     this.show(message, action, 'error', { ...config, duration: config?.duration ?? 6000 });
   }
 
-  warning(message: string, action = 'Close', config?: MatSnackBarConfig): void {
+  warning(message: string, action = '✕', config?: MatSnackBarConfig): void {
     this.show(message, action, 'warning', config);
   }
 
-  info(message: string, action = 'Close', config?: MatSnackBarConfig): void {
+  info(message: string, action = '✕', config?: MatSnackBarConfig): void {
     this.show(message, action, 'info', config);
   }
 

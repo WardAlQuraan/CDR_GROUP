@@ -408,6 +408,7 @@
       "noPosition": "بدون منصب",
       "hireDate": "تاريخ التوظيف",
       "salary": "الراتب",
+      "salaryChangeReason": "سبب تغيير الراتب",
       "manager": "المدير",
       "status": "الحالة",
       "isActive": "موظف نشط",
@@ -430,6 +431,15 @@
       "selectManager": "اختر المدير",
       "selectUser": "اختر حساب المستخدم",
       "employee": "الموظف",
+      "salaryHistory": "سجل الرواتب",
+      "noSalaryHistory": "لا توجد سجلات لتغيير الراتب",
+      "salaryHistoryFields": {
+        "effectiveDate": "تاريخ السريان",
+        "oldSalary": "الراتب القديم",
+        "newSalary": "الراتب الجديد",
+        "reason": "السبب",
+        "createdAt": "تاريخ الإنشاء"
+      },
       "errors": {
         "loadFailed": "فشل في تحميل الموظفين",
         "createFailed": "فشل في إنشاء الموظف",
@@ -460,7 +470,8 @@
         "phone": "أدخل رقم الهاتف",
         "department": "أدخل القسم",
         "position": "أدخل المنصب",
-        "salary": "أدخل الراتب"
+        "salary": "أدخل الراتب",
+        "salaryChangeReason": "أدخل سبب تغيير الراتب"
       }
     },
     "positions": {

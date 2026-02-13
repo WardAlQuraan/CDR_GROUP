@@ -18,23 +18,15 @@
 
       <div class="section-content">
         <div class="form-row">
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.eventsAdmin.titleEn' | translate }}</mat-label>
-            <mat-icon matPrefix>title</mat-icon>
-            <input matInput formControlName="titleEn" [placeholder]="'admin.eventsAdmin.placeholders.titleEn' | translate">
-            @if (form.get('titleEn')?.hasError('required') && form.get('titleEn')?.touched) {
-              <mat-error>{{ 'admin.eventsAdmin.errors.titleEnRequired' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="titleEn" label="admin.eventsAdmin.titleEn" icon="title"
+            placeholder="admin.eventsAdmin.placeholders.titleEn"
+            [errors]="[{name: 'required', message: 'admin.eventsAdmin.errors.titleEnRequired'}]">
+          </app-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.eventsAdmin.titleAr' | translate }}</mat-label>
-            <mat-icon matPrefix>title</mat-icon>
-            <input matInput formControlName="titleAr" [placeholder]="'admin.eventsAdmin.placeholders.titleAr' | translate" dir="rtl">
-            @if (form.get('titleAr')?.hasError('required') && form.get('titleAr')?.touched) {
-              <mat-error>{{ 'admin.eventsAdmin.errors.titleArRequired' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="titleAr" label="admin.eventsAdmin.titleAr" icon="title"
+            placeholder="admin.eventsAdmin.placeholders.titleAr" dir="rtl"
+            [errors]="[{name: 'required', message: 'admin.eventsAdmin.errors.titleArRequired'}]">
+          </app-form-field>
         </div>
       </div>
     </div>
@@ -49,15 +41,13 @@
       </div>
 
       <div class="section-content">
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'admin.eventsAdmin.descriptionEn' | translate }}</mat-label>
-          <textarea matInput formControlName="descriptionEn" rows="3" [placeholder]="'admin.eventsAdmin.placeholders.descriptionEn' | translate"></textarea>
-        </mat-form-field>
+        <app-form-field formControlName="descriptionEn" type="textarea" label="admin.eventsAdmin.descriptionEn"
+          placeholder="admin.eventsAdmin.placeholders.descriptionEn">
+        </app-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'admin.eventsAdmin.descriptionAr' | translate }}</mat-label>
-          <textarea matInput formControlName="descriptionAr" rows="3" [placeholder]="'admin.eventsAdmin.placeholders.descriptionAr' | translate" dir="rtl"></textarea>
-        </mat-form-field>
+        <app-form-field formControlName="descriptionAr" type="textarea" label="admin.eventsAdmin.descriptionAr"
+          placeholder="admin.eventsAdmin.placeholders.descriptionAr" dir="rtl">
+        </app-form-field>
       </div>
     </div>
 
@@ -78,11 +68,9 @@
             icon="calendar_today">
           </app-date-picker>
 
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.eventsAdmin.eventUrl' | translate }}</mat-label>
-            <mat-icon matPrefix>link</mat-icon>
-            <input matInput formControlName="eventUrl" [placeholder]="'admin.eventsAdmin.placeholders.eventUrl' | translate">
-          </mat-form-field>
+          <app-form-field formControlName="eventUrl" label="admin.eventsAdmin.eventUrl" icon="link"
+            placeholder="admin.eventsAdmin.placeholders.eventUrl">
+          </app-form-field>
         </div>
 
         <app-async-select

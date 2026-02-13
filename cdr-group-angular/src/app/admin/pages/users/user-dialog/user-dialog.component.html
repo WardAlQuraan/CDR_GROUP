@@ -18,32 +18,15 @@
         </div>
 
         <div class="section-content">
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.users.username' | translate }}</mat-label>
-            <mat-icon matPrefix>person</mat-icon>
-            <input matInput formControlName="username" [placeholder]="'admin.users.placeholders.username' | translate">
-            @if (form.get('username')?.hasError('required') && form.get('username')?.touched) {
-              <mat-error>{{ 'admin.users.errors.usernameRequired' | translate }}</mat-error>
-            }
-            @if (form.get('username')?.hasError('minlength') && form.get('username')?.touched) {
-              <mat-error>{{ 'admin.users.errors.usernameMinLength' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="username" label="admin.users.username" icon="person"
+            placeholder="admin.users.placeholders.username"
+            [errors]="[{name: 'required', message: 'admin.users.errors.usernameRequired'}, {name: 'minlength', message: 'admin.users.errors.usernameMinLength'}]">
+          </app-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.users.password' | translate }}</mat-label>
-            <mat-icon matPrefix>lock</mat-icon>
-            <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'" [placeholder]="'admin.users.placeholders.password' | translate">
-            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
-              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-            </button>
-            @if (form.get('password')?.hasError('required') && form.get('password')?.touched) {
-              <mat-error>{{ 'admin.users.errors.passwordRequired' | translate }}</mat-error>
-            }
-            @if (form.get('password')?.hasError('minlength') && form.get('password')?.touched) {
-              <mat-error>{{ 'admin.users.errors.passwordMinLength' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="password" type="password" label="admin.users.password" icon="lock"
+            placeholder="admin.users.placeholders.password"
+            [errors]="[{name: 'required', message: 'admin.users.errors.passwordRequired'}, {name: 'minlength', message: 'admin.users.errors.passwordMinLength'}]">
+          </app-form-field>
         </div>
       </div>
     }
@@ -58,26 +41,15 @@
       </div>
 
       <div class="section-content">
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'admin.users.email' | translate }}</mat-label>
-          <mat-icon matPrefix>email</mat-icon>
-          <input matInput formControlName="email" type="email" placeholder="example@email.com">
-          @if (form.get('email')?.hasError('required') && form.get('email')?.touched) {
-            <mat-error>{{ 'admin.users.errors.emailRequired' | translate }}</mat-error>
-          }
-          @if (form.get('email')?.hasError('email') && form.get('email')?.touched) {
-            <mat-error>{{ 'admin.users.errors.emailInvalid' | translate }}</mat-error>
-          }
-        </mat-form-field>
+        <app-form-field formControlName="email" type="email" label="admin.users.email" icon="email"
+          placeholder="example@email.com"
+          [errors]="[{name: 'required', message: 'admin.users.errors.emailRequired'}, {name: 'email', message: 'admin.users.errors.emailInvalid'}]">
+        </app-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'admin.users.phoneNumber' | translate }}</mat-label>
-          <mat-icon matPrefix>phone</mat-icon>
-          <input matInput formControlName="phoneNumber" placeholder="00962XXXXXXXXX">
-          @if (form.get('phoneNumber')?.hasError('pattern') && form.get('phoneNumber')?.touched) {
-            <mat-error>{{ 'validation.phoneFormat' | translate }}</mat-error>
-          }
-        </mat-form-field>
+        <app-form-field formControlName="phoneNumber" label="admin.users.phoneNumber" icon="phone"
+          placeholder="00962XXXXXXXXX"
+          [errors]="[{name: 'pattern', message: 'validation.phoneFormat'}]">
+        </app-form-field>
       </div>
     </div>
 
@@ -92,17 +64,13 @@
 
       <div class="section-content">
         <div class="form-row">
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.users.firstName' | translate }}</mat-label>
-            <mat-icon matPrefix>person_outline</mat-icon>
-            <input matInput formControlName="firstName" [placeholder]="'admin.users.placeholders.firstName' | translate">
-          </mat-form-field>
+          <app-form-field formControlName="firstName" label="admin.users.firstName" icon="person_outline"
+            placeholder="admin.users.placeholders.firstName">
+          </app-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.users.lastName' | translate }}</mat-label>
-            <mat-icon matPrefix>person</mat-icon>
-            <input matInput formControlName="lastName" [placeholder]="'admin.users.placeholders.lastName' | translate">
-          </mat-form-field>
+          <app-form-field formControlName="lastName" label="admin.users.lastName" icon="person"
+            placeholder="admin.users.placeholders.lastName">
+          </app-form-field>
         </div>
       </div>
     </div>

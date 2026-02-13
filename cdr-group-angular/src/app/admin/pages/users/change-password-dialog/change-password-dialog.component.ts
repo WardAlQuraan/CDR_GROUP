@@ -19,8 +19,6 @@ export interface ChangePasswordDialogData {
 export class ChangePasswordDialogComponent {
   form: FormGroup;
   loading = false;
-  hideNewPassword = true;
-  hideConfirmPassword = true;
 
   constructor(
     private fb: FormBuilder,

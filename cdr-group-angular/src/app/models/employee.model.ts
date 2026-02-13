@@ -80,6 +80,7 @@ export interface UpdateEmployeeDto {
   positionId?: string;
   managerId?: string;
   userId?: string;
+  salaryChangeReason?: string;
 }
 
 export interface EmployeeTreeNodeDto {

@@ -85,6 +85,7 @@ export class CompaniesComponent implements OnInit {
           key: 'name',
           header: 'admin.companies.name',
           sortable: true,
+          sortBy: this.isArabic ? 'nameAr' : 'nameEn',
           cell: (row) => this.isArabic ? row.nameAr : row.nameEn
         },
         {

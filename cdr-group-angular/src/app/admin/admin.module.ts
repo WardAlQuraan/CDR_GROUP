@@ -22,6 +22,7 @@ import { EmployeesComponent } from './pages/employees/employees-component/employ
 import { EmployeeDialogComponent } from './pages/employees/employee-dialog/employee-dialog.component';
 import { EmployeeViewDialogComponent } from './pages/employees/employee-view-dialog/employee-view-dialog.component';
 import { EmployeeLinkUserDialogComponent } from './pages/employees/employee-link-user-dialog/employee-link-user-dialog.component';
+import { SalaryHistoryDialogComponent } from './pages/employees/salary-history-dialog/salary-history-dialog.component';
 import { PositionsComponent } from './pages/positions/positions-component/positions-component';
 import { PositionDialogComponent } from './pages/positions/position-dialog/position-dialog.component';
 import { PositionViewDialogComponent } from './pages/positions/position-view-dialog/position-view-dialog.component';
@@ -56,6 +57,7 @@ import { ManageRolesDialogComponent } from './pages/users/manage-roles-dialog/ma
     EmployeeDialogComponent,
     EmployeeViewDialogComponent,
     EmployeeLinkUserDialogComponent,
+    SalaryHistoryDialogComponent,
     PositionsComponent,
     PositionDialogComponent,
     PositionViewDialogComponent,

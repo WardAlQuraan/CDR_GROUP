@@ -17,33 +17,21 @@
       </div>
 
       <div class="section-content">
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'admin.companies.code' | translate }}</mat-label>
-          <mat-icon matPrefix>badge</mat-icon>
-          <input matInput formControlName="code" [placeholder]="'admin.companies.placeholders.code' | translate">
-          @if (form.get('code')?.hasError('required') && form.get('code')?.touched) {
-            <mat-error>{{ 'admin.companies.errors.codeRequired' | translate }}</mat-error>
-          }
-        </mat-form-field>
+        <app-form-field formControlName="code" label="admin.companies.code" icon="badge"
+          placeholder="admin.companies.placeholders.code"
+          [errors]="[{name: 'required', message: 'admin.companies.errors.codeRequired'}]">
+        </app-form-field>
 
         <div class="form-row">
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.companies.nameEn' | translate }}</mat-label>
-            <mat-icon matPrefix>translate</mat-icon>
-            <input matInput formControlName="nameEn" [placeholder]="'admin.companies.placeholders.nameEn' | translate">
-            @if (form.get('nameEn')?.hasError('required') && form.get('nameEn')?.touched) {
-              <mat-error>{{ 'admin.companies.errors.nameEnRequired' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="nameEn" label="admin.companies.nameEn" icon="translate"
+            placeholder="admin.companies.placeholders.nameEn"
+            [errors]="[{name: 'required', message: 'admin.companies.errors.nameEnRequired'}]">
+          </app-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.companies.nameAr' | translate }}</mat-label>
-            <mat-icon matPrefix>translate</mat-icon>
-            <input matInput formControlName="nameAr" [placeholder]="'admin.companies.placeholders.nameAr' | translate" dir="rtl">
-            @if (form.get('nameAr')?.hasError('required') && form.get('nameAr')?.touched) {
-              <mat-error>{{ 'admin.companies.errors.nameArRequired' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="nameAr" label="admin.companies.nameAr" icon="translate"
+            placeholder="admin.companies.placeholders.nameAr" dir="rtl"
+            [errors]="[{name: 'required', message: 'admin.companies.errors.nameArRequired'}]">
+          </app-form-field>
         </div>
       </div>
     </div>
@@ -58,15 +46,13 @@
       </div>
 
       <div class="section-content">
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'admin.companies.descriptionEn' | translate }}</mat-label>
-          <textarea matInput formControlName="descriptionEn" rows="3" [placeholder]="'admin.companies.placeholders.descriptionEn' | translate"></textarea>
-        </mat-form-field>
+        <app-form-field formControlName="descriptionEn" type="textarea" label="admin.companies.descriptionEn"
+          placeholder="admin.companies.placeholders.descriptionEn">
+        </app-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'admin.companies.descriptionAr' | translate }}</mat-label>
-          <textarea matInput formControlName="descriptionAr" rows="3" [placeholder]="'admin.companies.placeholders.descriptionAr' | translate" dir="rtl"></textarea>
-        </mat-form-field>
+        <app-form-field formControlName="descriptionAr" type="textarea" label="admin.companies.descriptionAr"
+          placeholder="admin.companies.placeholders.descriptionAr" dir="rtl">
+        </app-form-field>
 
         <mat-checkbox formControlName="isActive" color="primary">
           {{ 'admin.companies.isActive' | translate }}

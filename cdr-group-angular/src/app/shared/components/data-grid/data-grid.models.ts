@@ -58,6 +58,7 @@ export interface GridColumn<T = any> {
   key: string;
   header: string;
   sortable?: boolean;
+  sortBy?: string;
   width?: string;
   type?: 'text' | 'date' | 'icon' | 'badge' | 'custom';
   dateFormat?: string;

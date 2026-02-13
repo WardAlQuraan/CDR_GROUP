@@ -12,58 +12,33 @@
       </div>
 
       <div class="section-content">
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'admin.employees.code' | translate }}</mat-label>
-          <mat-icon matPrefix>badge</mat-icon>
-          <input matInput formControlName="employeeCode"
-            [placeholder]="'admin.employees.placeholders.code' | translate">
-          @if (form.get('employeeCode')?.hasError('required') && form.get('employeeCode')?.touched) {
-          <mat-error>{{ 'admin.employees.errors.codeRequired' | translate }}</mat-error>
-          }
-        </mat-form-field>
+        <app-form-field formControlName="employeeCode" label="admin.employees.code" icon="badge"
+          placeholder="admin.employees.placeholders.code"
+          [errors]="[{name: 'required', message: 'admin.employees.errors.codeRequired'}]">
+        </app-form-field>
 
         <div class="form-row">
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.employees.firstNameEn' | translate }}</mat-label>
-            <mat-icon matPrefix>person</mat-icon>
-            <input matInput formControlName="firstNameEn"
-              [placeholder]="'admin.employees.placeholders.firstNameEn' | translate">
-            @if (form.get('firstNameEn')?.hasError('required') && form.get('firstNameEn')?.touched) {
-            <mat-error>{{ 'admin.employees.errors.firstNameEnRequired' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="firstNameEn" label="admin.employees.firstNameEn" icon="person"
+            placeholder="admin.employees.placeholders.firstNameEn"
+            [errors]="[{name: 'required', message: 'admin.employees.errors.firstNameEnRequired'}]">
+          </app-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.employees.lastNameEn' | translate }}</mat-label>
-            <mat-icon matPrefix>person</mat-icon>
-            <input matInput formControlName="lastNameEn"
-              [placeholder]="'admin.employees.placeholders.lastNameEn' | translate">
-            @if (form.get('lastNameEn')?.hasError('required') && form.get('lastNameEn')?.touched) {
-            <mat-error>{{ 'admin.employees.errors.lastNameEnRequired' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="lastNameEn" label="admin.employees.lastNameEn" icon="person"
+            placeholder="admin.employees.placeholders.lastNameEn"
+            [errors]="[{name: 'required', message: 'admin.employees.errors.lastNameEnRequired'}]">
+          </app-form-field>
         </div>
 
         <div class="form-row">
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.employees.firstNameAr' | translate }}</mat-label>
-            <mat-icon matPrefix>person</mat-icon>
-            <input matInput formControlName="firstNameAr"
-              [placeholder]="'admin.employees.placeholders.firstNameAr' | translate" dir="rtl">
-            @if (form.get('firstNameAr')?.hasError('required') && form.get('firstNameAr')?.touched) {
-            <mat-error>{{ 'admin.employees.errors.firstNameArRequired' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="firstNameAr" label="admin.employees.firstNameAr" icon="person"
+            placeholder="admin.employees.placeholders.firstNameAr" dir="rtl"
+            [errors]="[{name: 'required', message: 'admin.employees.errors.firstNameArRequired'}]">
+          </app-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.employees.lastNameAr' | translate }}</mat-label>
-            <mat-icon matPrefix>person</mat-icon>
-            <input matInput formControlName="lastNameAr"
-              [placeholder]="'admin.employees.placeholders.lastNameAr' | translate" dir="rtl">
-            @if (form.get('lastNameAr')?.hasError('required') && form.get('lastNameAr')?.touched) {
-            <mat-error>{{ 'admin.employees.errors.lastNameArRequired' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="lastNameAr" label="admin.employees.lastNameAr" icon="person"
+            placeholder="admin.employees.placeholders.lastNameAr" dir="rtl"
+            [errors]="[{name: 'required', message: 'admin.employees.errors.lastNameArRequired'}]">
+          </app-form-field>
         </div>
       </div>
     </div>
@@ -79,21 +54,14 @@
 
       <div class="section-content">
         <div class="form-row">
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.employees.email' | translate }}</mat-label>
-            <mat-icon matPrefix>email</mat-icon>
-            <input matInput formControlName="email" type="email"
-              [placeholder]="'admin.employees.placeholders.email' | translate">
-            @if (form.get('email')?.hasError('email') && form.get('email')?.touched) {
-            <mat-error>{{ 'admin.employees.errors.emailInvalid' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="email" type="email" label="admin.employees.email" icon="email"
+            placeholder="admin.employees.placeholders.email"
+            [errors]="[{name: 'email', message: 'admin.employees.errors.emailInvalid'}]">
+          </app-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.employees.phone' | translate }}</mat-label>
-            <mat-icon matPrefix>phone</mat-icon>
-            <input matInput formControlName="phone" [placeholder]="'admin.employees.placeholders.phone' | translate">
-          </mat-form-field>
+          <app-form-field formControlName="phone" label="admin.employees.phone" icon="phone"
+            placeholder="admin.employees.placeholders.phone">
+          </app-form-field>
         </div>
       </div>
     </div>
@@ -125,16 +93,17 @@
           <app-date-picker formControlName="hireDate" label="admin.employees.hireDate" icon="event">
           </app-date-picker>
 
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.employees.salary' | translate }}</mat-label>
-            <span matPrefix style="padding-left: 8px; font-weight: 500;">JOD</span>
-            <input matInput type="number" formControlName="salary"
-              [placeholder]="'admin.employees.placeholders.salary' | translate">
-            @if (form.get('salary')?.hasError('min') && form.get('salary')?.touched) {
-            <mat-error>{{ 'admin.employees.errors.salaryMin' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="salary" type="number" label="admin.employees.salary" textPrefix="JOD"
+            placeholder="admin.employees.placeholders.salary"
+            [errors]="[{name: 'min', message: 'admin.employees.errors.salaryMin'}]">
+          </app-form-field>
         </div>
+
+        @if (isEditMode && salaryChanged) {
+          <app-form-field formControlName="salaryChangeReason" label="admin.employees.salaryChangeReason" icon="edit_note"
+            placeholder="admin.employees.placeholders.salaryChangeReason">
+          </app-form-field>
+        }
 
         <app-async-select formControlName="managerId" label="admin.employees.manager" icon="supervisor_account"
           nullOptionLabel="admin.employees.noManager" [dataSource$]="managersDataSource$" [optionMapper]="managerMapper"

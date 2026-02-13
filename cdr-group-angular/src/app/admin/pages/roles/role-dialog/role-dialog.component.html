@@ -18,23 +18,14 @@
         </div>
 
         <div class="section-content">
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.roles.name' | translate }}</mat-label>
-            <mat-icon matPrefix>label</mat-icon>
-            <input matInput formControlName="name" [placeholder]="'admin.roles.placeholders.name' | translate">
-            @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
-              <mat-error>{{ 'admin.roles.errors.nameRequired' | translate }}</mat-error>
-            }
-            @if (form.get('name')?.hasError('minlength') && form.get('name')?.touched) {
-              <mat-error>{{ 'admin.roles.errors.nameMinLength' | translate }}</mat-error>
-            }
-          </mat-form-field>
+          <app-form-field formControlName="name" label="admin.roles.name" icon="label"
+            placeholder="admin.roles.placeholders.name"
+            [errors]="[{name: 'required', message: 'admin.roles.errors.nameRequired'}, {name: 'minlength', message: 'admin.roles.errors.nameMinLength'}]">
+          </app-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'admin.roles.description' | translate }}</mat-label>
-            <mat-icon matPrefix>description</mat-icon>
-            <textarea matInput formControlName="description" rows="3" [placeholder]="'admin.roles.placeholders.description' | translate"></textarea>
-          </mat-form-field>
+          <app-form-field formControlName="description" type="textarea" label="admin.roles.description" icon="description"
+            placeholder="admin.roles.placeholders.description">
+          </app-form-field>
         </div>
       </div>
     </form>

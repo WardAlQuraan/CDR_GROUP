@@ -12,6 +12,7 @@ import { DataGridConfig, FilterValues } from '../../../../shared/components/data
 import { EmployeeDialogComponent, EmployeeDialogData } from '../employee-dialog/employee-dialog.component';
 import { EmployeeViewDialogComponent } from '../employee-view-dialog/employee-view-dialog.component';
 import { EmployeeLinkUserDialogComponent } from '../employee-link-user-dialog/employee-link-user-dialog.component';
+import { SalaryHistoryDialogComponent } from '../salary-history-dialog/salary-history-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 import { EntityTypes } from '../../../../constants/entity-types.constant';
@@ -94,6 +95,7 @@ export class EmployeesComponent implements OnInit {
           key: 'fullName',
           header: 'admin.employees.name',
           sortable: true,
+          sortBy: this.isArabic ? 'fullNameAr' : 'fullNameEn',
           cell: (row) => this.isArabic ? row.fullNameAr : row.fullNameEn
         },
         { key: 'email', header: 'admin.employees.email', cell: (row) => row.email || '-' },
@@ -138,6 +140,13 @@ export class EmployeesComponent implements OnInit {
           color: 'primary',
           onClick: (row) => this.openLinkToUserDialog(row),
           visible: (row) => !row.userId
+        },
+        {
+          icon: 'history',
+          tooltip: 'admin.employees.salaryHistory',
+          permission: Permissions.SALARY_HISTORIES_READ,
+          color: 'accent',
+          onClick: (row) => this.openSalaryHistoryDialog(row)
         },
         {
           icon: 'photo_camera',
@@ -249,6 +258,12 @@ export class EmployeesComponent implements OnInit {
 
   openViewDialog(employee: EmployeeDto): void {
     this.dialog.open(EmployeeViewDialogComponent, {
+      data: employee
+    });
+  }
+
+  openSalaryHistoryDialog(employee: EmployeeDto): void {
+    this.dialog.open(SalaryHistoryDialogComponent, {
       data: employee
     });
   }
