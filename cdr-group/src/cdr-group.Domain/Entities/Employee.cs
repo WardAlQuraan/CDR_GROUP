@@ -20,9 +20,9 @@ namespace cdr_group.Domain.Entities
         public decimal? Salary { get; set; }
         public bool IsActive { get; set; } = true;
 
-        // Department relationship
-        public Guid DepartmentId { get; set; }
-        public Department Department { get; set; } = null!;
+        // Company relationship (optional)
+        public Guid? CompanyId { get; set; }
+        public Company? Company { get; set; }
 
         // Self-referencing relationship for manager
         public Guid? ManagerId { get; set; }

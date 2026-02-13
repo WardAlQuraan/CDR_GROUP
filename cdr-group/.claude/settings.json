@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/w.alquraan/Desktop/cdr-group/**)"
+    ]
+  }
+}

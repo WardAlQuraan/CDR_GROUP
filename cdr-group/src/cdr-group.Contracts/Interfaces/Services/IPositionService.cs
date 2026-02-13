@@ -6,9 +6,7 @@ namespace cdr_group.Contracts.Interfaces.Services
     {
         Task<PositionDto?> GetByCodeAsync(string code);
         Task<PositionDto?> GetByNameAsync(string name);
-        Task<IEnumerable<PositionDto>> GetByDepartmentIdAsync(Guid departmentId);
         Task<IEnumerable<PositionDto>> GetActivePositionsAsync();
         Task<PositionWithEmployeesDto?> GetWithEmployeeCountAsync(Guid id);
-        Task<PositionDto?> AssignDepartmentAsync(Guid positionId, Guid? departmentId);
     }
 }

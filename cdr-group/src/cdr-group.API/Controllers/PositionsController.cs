@@ -54,14 +54,6 @@ namespace cdr_group.API.Controllers
             return Ok(ApiResponse<PositionDto>.SuccessResponse(position));
         }
 
-        [HttpGet("by-department/{departmentId:guid}")]
-        [HasPermission(Permissions.Positions.Read)]
-        public async Task<ActionResult<ApiResponse<IEnumerable<PositionDto>>>> GetByDepartmentId(Guid departmentId)
-        {
-            var positions = await Service.GetByDepartmentIdAsync(departmentId);
-            return Ok(ApiResponse<IEnumerable<PositionDto>>.SuccessResponse(positions));
-        }
-
         [HttpGet("active")]
         [HasPermission(Permissions.Positions.Read)]
         public async Task<ActionResult<ApiResponse<IEnumerable<PositionDto>>>> GetActivePositions()
@@ -103,16 +95,5 @@ namespace cdr_group.API.Controllers
             return await base.Delete(id);
         }
 
-        [HttpPut("{id:guid}/department")]
-        [HasPermission(Permissions.Positions.Update)]
-        public async Task<ActionResult<ApiResponse<PositionDto>>> AssignDepartment(Guid id, [FromBody] Guid? departmentId)
-        {
-            var position = await Service.AssignDepartmentAsync(id, departmentId);
-            if (position == null)
-            {
-                return NotFound(ApiResponse<PositionDto>.FailureResponse("Position not found."));
-            }
-            return Ok(ApiResponse<PositionDto>.SuccessResponse(position, "Department assigned successfully."));
-        }
     }
 }

@@ -1,7 +1,6 @@
 using AutoMapper;
 using cdr_group.Contracts.DTOs.ContactUs;
 using cdr_group.Contracts.DTOs.Company;
-using cdr_group.Contracts.DTOs.Department;
 using cdr_group.Contracts.DTOs.Employee;
 using cdr_group.Contracts.DTOs.Event;
 using cdr_group.Contracts.DTOs.FileAttachment;
@@ -57,22 +56,22 @@ namespace cdr_group.Application.Mappings
             CreateMap<Employee, EmployeeDto>()
                 .ForMember(dest => dest.Username, opt => opt.MapFrom(src =>
                     src.User != null ? src.User.Username : null))
-                .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src =>
-                    src.Department != null ? src.Department.NameEn : null))
+                .ForMember(dest => dest.CompanyName, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
                 .ForMember(dest => dest.PositionName, opt => opt.MapFrom(src =>
                     src.Position != null ? src.Position.NameEn : null));
 
             CreateMap<Employee, EmployeeBasicDto>()
-                .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src =>
-                    src.Department != null ? src.Department.NameEn : null))
+                .ForMember(dest => dest.CompanyName, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
                 .ForMember(dest => dest.PositionName, opt => opt.MapFrom(src =>
                     src.Position != null ? src.Position.NameEn : null));
 
             CreateMap<Employee, EmployeeWithSubordinatesDto>()
                 .ForMember(dest => dest.Username, opt => opt.MapFrom(src =>
                     src.User != null ? src.User.Username : null))
-                .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src =>
-                    src.Department != null ? src.Department.NameEn : null))
+                .ForMember(dest => dest.CompanyName, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
                 .ForMember(dest => dest.PositionName, opt => opt.MapFrom(src =>
                     src.Position != null ? src.Position.NameEn : null))
                 .ForMember(dest => dest.Subordinates, opt => opt.MapFrom(src =>
@@ -97,51 +96,12 @@ namespace cdr_group.Application.Mappings
             CreateMap<UpdateCompanyDto, Company>()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
-            // Department mappings
-            CreateMap<Department, DepartmentDto>()
-                .ForMember(dest => dest.ManagerName, opt => 
-                opt.MapFrom(src =>
-                    src.Manager != null ? $"{src.Manager.FirstNameEn} {src.Manager.LastNameEn}" : null))
-                .ForMember(dest => dest.ManagerNameAr, opt => 
-                opt.MapFrom(src =>
-                    src.Manager != null ? $"{src.Manager.FirstNameAr} {src.Manager.LastNameAr}" : null))
-                .ForMember(dest => dest.CompanyName, opt => 
-                opt.MapFrom(src =>
-                    src.Company != null ? $"{src.Company.NameEn}" : null))
-                .ForMember(dest => dest.CompanyNameAr, opt => 
-                opt.MapFrom(src =>
-                    src.Company != null ? $"{src.Company.NameAr}" : null))
-                ;
-
-            CreateMap<Department, DepartmentBasicDto>();
-
-            CreateMap<Department, DepartmentWithSubDepartmentsDto>()
-                .ForMember(dest => dest.ManagerName, opt => opt.MapFrom(src =>
-                    src.Manager != null ? $"{src.Manager.FirstNameEn} {src.Manager.LastNameEn}" : null))
-                .ForMember(dest => dest.SubDepartments, opt => opt.MapFrom(src =>
-                    src.SubDepartments.Where(s => !s.IsDeleted).ToList()));
-
-            CreateMap<CreateDepartmentDto, Department>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()))
-                .ForMember(dest => dest.IsActive, opt => opt.MapFrom(_ => true));
-
-            CreateMap<UpdateDepartmentDto, Department>()
-                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
-
             // Position mappings
-            CreateMap<Position, PositionDto>()
-                .ForMember(dest => dest.DepartmentNameEn, opt => opt.MapFrom(src =>
-                    src.Department != null ? src.Department.NameEn : null))
-                .ForMember(dest => dest.DepartmentNameAr, opt => opt.MapFrom(src =>
-                    src.Department != null ? src.Department.NameAr : null));
+            CreateMap<Position, PositionDto>();
 
             CreateMap<Position, PositionBasicDto>();
 
-            CreateMap<Position, PositionWithEmployeesDto>()
-                .ForMember(dest => dest.DepartmentNameEn, opt => opt.MapFrom(src =>
-                    src.Department != null ? src.Department.NameEn : null))
-                .ForMember(dest => dest.DepartmentNameAr, opt => opt.MapFrom(src =>
-                    src.Department != null ? src.Department.NameAr : null));
+            CreateMap<Position, PositionWithEmployeesDto>();
 
             CreateMap<CreatePositionDto, Position>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()))

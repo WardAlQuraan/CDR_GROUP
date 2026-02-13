@@ -91,9 +91,9 @@ namespace cdr_group.Application.Services
             return Mapper.Map<IEnumerable<EmployeeBasicDto>>(subordinates);
         }
 
-        public async Task<IEnumerable<EmployeeDto>> GetByDepartmentIdAsync(Guid departmentId)
+        public async Task<IEnumerable<EmployeeDto>> GetByCompanyIdAsync(Guid? companyId)
         {
-            var employees = await UnitOfWork.Employees.GetByDepartmentIdAsync(departmentId);
+            var employees = await UnitOfWork.Employees.GetByCompanyIdAsync(companyId);
             var employeeDtos = Mapper.Map<List<EmployeeDto>>(employees);
             await PopulateFilePathsAsync(employeeDtos);
             return employeeDtos;
@@ -101,61 +101,51 @@ namespace cdr_group.Application.Services
 
         public async Task<IEnumerable<EmployeeTreeNodeDto>> GetTreeAsync(GetTreeRequest request)
         {
-            var (allEmployees, _) = await UnitOfWork.Employees.GetEmployeesPagedAsync(new PagedRequest { PageSize = int.MaxValue });
-            IEnumerable<Domain.Entities.Employee> employees = allEmployees;
 
-            Guid? companyId = request.CompanyId;
+            IEnumerable<Employee> employees =  new List<Employee>();
 
-            if (!companyId.HasValue && !string.IsNullOrWhiteSpace(request.CompanyCode))
+            if (request.CompanyId.HasValue)
             {
-                var company = await UnitOfWork.Companies.GetByCodeAsync(request.CompanyCode);
-                companyId = company?.Id;
+                employees = await UnitOfWork.Employees.GetByCompanyIdAsync(request.CompanyId);
+            }else if (!string.IsNullOrEmpty(request.CompanyCode))
+            {
+                employees = await UnitOfWork.Employees.GetByCompanyCodeAsync(request.CompanyCode);
+            }
+            else
+            {
+                employees = await UnitOfWork.Employees.GetAllAsync();
             }
 
-            if (companyId.HasValue)
-            {
-                employees = employees.Where(e => e.Department.CompanyId == companyId.Value);
-            }
 
-            if (request.DepartmentId.HasValue)
-            {
-                employees = employees.Where(e => e.DepartmentId == request.DepartmentId.Value);
-            }
-
-            var employeeList = employees.ToList();
-
-            // Create a dictionary for quick lookup
-            var employeeDict = employeeList.ToDictionary(e => e.Id, e => new EmployeeTreeNodeDto
-            {
-                Id = e.Id,
-                EmployeeCode = e.EmployeeCode,
-                FirstNameEn = e.FirstNameEn,
-                LastNameEn = e.LastNameEn,
-                FirstNameAr = e.FirstNameAr,
-                LastNameAr = e.LastNameAr,
-                Email = e.Email,
-                Phone = e.Phone,
-                HireDate = e.HireDate,
-                Salary = e.Salary,
-                PositionId = e.PositionId,
-                PositionNameEn = e.Position?.NameEn,
-                PositionNameAr = e.Position?.NameAr,
-                DepartmentId = e.DepartmentId,
-                DepartmentNameEn = e.Department.NameEn,
-                DepartmentNameAr = e.Department.NameAr,
-                CompanyId = e.Department.CompanyId,
-                CompanyNameEn = e.Department.Company?.NameEn,
-                CompanyNameAr = e.Department.Company?.NameAr,
-                ManagerId = e.ManagerId,
-                UserId = e.UserId,
-                Username = e.User?.Username,
-                IsActive = e.IsActive,
-                CreatedAt = e.CreatedAt,
-                UpdatedAt = e.UpdatedAt
-            });
+                // Create a dictionary for quick lookup
+                var employeeDict = employees.ToDictionary(e => e.Id, e => new EmployeeTreeNodeDto
+                {
+                    Id = e.Id,
+                    EmployeeCode = e.EmployeeCode,
+                    FirstNameEn = e.FirstNameEn,
+                    LastNameEn = e.LastNameEn,
+                    FirstNameAr = e.FirstNameAr,
+                    LastNameAr = e.LastNameAr,
+                    Email = e.Email,
+                    Phone = e.Phone,
+                    HireDate = e.HireDate,
+                    Salary = e.Salary,
+                    PositionId = e.PositionId,
+                    PositionNameEn = e.Position?.NameEn,
+                    PositionNameAr = e.Position?.NameAr,
+                    CompanyId = e.CompanyId,
+                    CompanyNameEn = e.Company?.NameEn,
+                    CompanyNameAr = e.Company?.NameAr,
+                    ManagerId = e.ManagerId,
+                    UserId = e.UserId,
+                    Username = e.User?.Username,
+                    IsActive = e.IsActive,
+                    CreatedAt = e.CreatedAt,
+                    UpdatedAt = e.UpdatedAt
+                });
 
             // Populate file paths for all employees
-            foreach (var employee in employeeList)
+            foreach (var employee in employees)
             {
                 var files = await UnitOfWork.FileAttachments.GetByEntityAsync(employee.Id, EntityTypes.Employee);
                 var file = files.FirstOrDefault();
@@ -165,7 +155,7 @@ namespace cdr_group.Application.Services
             // Build tree structure
             var rootNodes = new List<EmployeeTreeNodeDto>();
 
-            foreach (var employee in employeeList)
+            foreach (var employee in employees)
             {
                 var node = employeeDict[employee.Id];
 
@@ -245,29 +235,6 @@ namespace cdr_group.Application.Services
             return await GetByIdAsync(employeeId);
         }
 
-        public async Task<EmployeeDto?> AssignDepartmentAsync(Guid employeeId, Guid? departmentId)
-        {
-            var employee = await UnitOfWork.Employees.GetByIdAsync(employeeId);
-            if (employee == null) return null;
-
-            if (!departmentId.HasValue)
-            {
-                throw new InvalidOperationException(Messages.DepartmentRequired);
-            }
-
-            var department = await UnitOfWork.Departments.GetByIdAsync(departmentId.Value);
-            if (department == null)
-            {
-                throw new InvalidOperationException(Messages.DepartmentNotFound);
-            }
-
-            employee.DepartmentId = departmentId.Value;
-            await UnitOfWork.Employees.UpdateAsync(employee);
-            await UnitOfWork.SaveChangesAsync();
-
-            return await GetByIdAsync(employeeId);
-        }
-
         protected override async Task ValidateCreateAsync(CreateEmployeeDto dto)
         {
             await ValidateEmployeeCode(dto.EmployeeCode);
@@ -282,7 +249,7 @@ namespace cdr_group.Application.Services
             }
 
             await ValidateUser(dto.UserId, null, null);
-            await ValidateDepartmentRequired(dto.DepartmentId);
+            await ValidateCompany(dto.CompanyId);
             await ValidatePosition(dto.PositionId, dto.Salary);
         }
 
@@ -365,19 +332,19 @@ namespace cdr_group.Application.Services
             }
 
             await ValidateUser(dto.UserId, entity.UserId, id);
-            if (dto.DepartmentId.HasValue)
-            {
-                await ValidateDepartmentRequired(dto.DepartmentId.Value);
-            }
+            await ValidateCompany(dto.CompanyId);
             await ValidatePosition(dto.PositionId, dto.Salary);
         }
 
-        private async Task ValidateDepartmentRequired(Guid departmentId)
+        private async Task ValidateCompany(Guid? companyId)
         {
-            var department = await UnitOfWork.Departments.GetByIdAsync(departmentId);
-            if (department == null)
+            if (companyId.HasValue)
             {
-                throw new InvalidOperationException(Messages.DepartmentNotFound);
+                var company = await UnitOfWork.Companies.GetByIdAsync(companyId.Value);
+                if (company == null)
+                {
+                    throw new InvalidOperationException(Messages.CompanyNotFound);
+                }
             }
         }
         private async Task ValidateEmployeeCode(string code)

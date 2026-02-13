@@ -18,8 +18,8 @@ namespace cdr_group.Contracts.DTOs.Employee
         public decimal? Salary { get; set; }
         public bool IsActive { get; set; }
 
-        public Guid DepartmentId { get; set; }
-        public string DepartmentName { get; set; } = string.Empty;
+        public Guid? CompanyId { get; set; }
+        public string? CompanyName { get; set; }
 
         public Guid? PositionId { get; set; }
         public string? PositionName { get; set; }
@@ -49,8 +49,8 @@ namespace cdr_group.Contracts.DTOs.Employee
         public string FullNameAr => $"{FirstNameAr} {LastNameAr}";
         public Guid? PositionId { get; set; }
         public string? PositionName { get; set; }
-        public Guid DepartmentId { get; set; }
-        public string DepartmentName { get; set; } = string.Empty;
+        public Guid? CompanyId { get; set; }
+        public string? CompanyName { get; set; }
     }
 
     public class EmployeeWithSubordinatesDto : EmployeeDto
@@ -75,9 +75,6 @@ namespace cdr_group.Contracts.DTOs.Employee
         public Guid? PositionId { get; set; }
         public string? PositionNameEn { get; set; }
         public string? PositionNameAr { get; set; }
-        public Guid DepartmentId { get; set; }
-        public string DepartmentNameEn { get; set; } = string.Empty;
-        public string DepartmentNameAr { get; set; } = string.Empty;
         public Guid? CompanyId { get; set; }
         public string? CompanyNameEn { get; set; }
         public string? CompanyNameAr { get; set; }
@@ -95,7 +92,6 @@ namespace cdr_group.Contracts.DTOs.Employee
     {
         public Guid? CompanyId { get; set; }
         public string? CompanyCode { get; set; }
-        public Guid? DepartmentId { get; set; }
     }
 
     public class CreateEmployeeDto
@@ -134,8 +130,7 @@ namespace cdr_group.Contracts.DTOs.Employee
 
         public bool IsActive { get; set; } = true;
 
-        [Required]
-        public Guid DepartmentId { get; set; }
+        public Guid? CompanyId { get; set; }
         public Guid? PositionId { get; set; }
         public Guid? ManagerId { get; set; }
         public Guid? UserId { get; set; }
@@ -175,7 +170,7 @@ namespace cdr_group.Contracts.DTOs.Employee
 
         public bool? IsActive { get; set; }
 
-        public Guid? DepartmentId { get; set; }
+        public Guid? CompanyId { get; set; }
         public Guid? PositionId { get; set; }
         public Guid? ManagerId { get; set; }
         public Guid? UserId { get; set; }

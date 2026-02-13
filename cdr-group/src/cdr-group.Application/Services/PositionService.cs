@@ -29,12 +29,6 @@ namespace cdr_group.Application.Services
             return new PagedResult<PositionDto>(positionDtos, totalCount, request.PageNumber, request.PageSize);
         }
 
-        public override async Task<PositionDto?> GetByIdAsync(Guid id)
-        {
-            var position = await UnitOfWork.Positions.GetWithDepartmentAsync(id);
-            return Mapper.Map<PositionDto>(position);
-        }
-
         public async Task<PositionDto?> GetByCodeAsync(string code)
         {
             var position = await UnitOfWork.Positions.GetByCodeAsync(code);
@@ -47,12 +41,6 @@ namespace cdr_group.Application.Services
             return Mapper.Map<PositionDto>(position);
         }
 
-        public async Task<IEnumerable<PositionDto>> GetByDepartmentIdAsync(Guid departmentId)
-        {
-            var positions = await UnitOfWork.Positions.GetByDepartmentIdAsync(departmentId);
-            return Mapper.Map<IEnumerable<PositionDto>>(positions);
-        }
-
         public async Task<IEnumerable<PositionDto>> GetActivePositionsAsync()
         {
             var positions = await UnitOfWork.Positions.GetActivePositionsAsync();
@@ -61,7 +49,7 @@ namespace cdr_group.Application.Services
 
         public async Task<PositionWithEmployeesDto?> GetWithEmployeeCountAsync(Guid id)
         {
-            var position = await UnitOfWork.Positions.GetWithDepartmentAsync(id);
+            var position = await UnitOfWork.Positions.GetByIdAsync(id);
             if (position == null) return null;
 
             var dto = Mapper.Map<PositionWithEmployeesDto>(position);
@@ -69,44 +57,11 @@ namespace cdr_group.Application.Services
             return dto;
         }
 
-        public async Task<PositionDto?> AssignDepartmentAsync(Guid positionId, Guid? departmentId)
-        {
-            var position = await UnitOfWork.Positions.GetByIdAsync(positionId);
-            if (position == null)
-            {
-                throw new InvalidOperationException(Messages.PositionNotFound);
-            }
-
-            if (departmentId.HasValue)
-            {
-                var department = await UnitOfWork.Departments.GetByIdAsync(departmentId.Value);
-                if (department == null)
-                {
-                    throw new InvalidOperationException(Messages.DepartmentNotFound);
-                }
-            }
-
-            position.DepartmentId = departmentId;
-            await UnitOfWork.Positions.UpdateAsync(position);
-            await UnitOfWork.SaveChangesAsync();
-
-            return await GetByIdAsync(positionId);
-        }
-
         protected override async Task ValidateCreateAsync(CreatePositionDto dto)
         {
             if (await UnitOfWork.Positions.PositionCodeExistsAsync(dto.Code))
             {
                 throw new InvalidOperationException(Messages.PositionCodeExists);
-            }
-
-            if (dto.DepartmentId.HasValue)
-            {
-                var department = await UnitOfWork.Departments.GetByIdAsync(dto.DepartmentId.Value);
-                if (department == null)
-                {
-                    throw new InvalidOperationException(Messages.DepartmentNotFound);
-                }
             }
 
             ValidateSalaryRange(dto.MinSalary, dto.MaxSalary);
@@ -119,15 +74,6 @@ namespace cdr_group.Application.Services
                 if (await UnitOfWork.Positions.PositionCodeExistsAsync(dto.Code, id))
                 {
                     throw new InvalidOperationException(Messages.PositionCodeExists);
-                }
-            }
-
-            if (dto.DepartmentId.HasValue)
-            {
-                var department = await UnitOfWork.Departments.GetByIdAsync(dto.DepartmentId.Value);
-                if (department == null)
-                {
-                    throw new InvalidOperationException(Messages.DepartmentNotFound);
                 }
             }
 

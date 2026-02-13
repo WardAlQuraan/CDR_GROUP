@@ -47,10 +47,10 @@ namespace cdr_group.Persistence.Repositories
                 (excludeId == null || c.Id != excludeId));
         }
 
-        public async Task<bool> HasDepartmentsAsync(Guid companyId)
+        public async Task<bool> HasEmployeesAsync(Guid companyId)
         {
-            return await _context.Departments.AnyAsync(d =>
-                d.CompanyId == companyId && !d.IsDeleted);
+            return await _context.Employees.AnyAsync(e =>
+                e.CompanyId == companyId && !e.IsDeleted);
         }
     }
 }

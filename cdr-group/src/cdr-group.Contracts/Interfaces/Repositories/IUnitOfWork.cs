@@ -6,8 +6,7 @@ namespace cdr_group.Contracts.Interfaces.Repositories
         IRoleRepository Roles { get; }
         IPermissionRepository Permissions { get; }
         IEmployeeRepository Employees { get; }
-        IDepartmentRepository Departments { get; }
-        IPositionRepository Positions { get; }
+IPositionRepository Positions { get; }
         IFileAttachmentRepository FileAttachments { get; }
         IEventRepository Events { get; }
         ICompanyRepository Companies { get; }

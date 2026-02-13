@@ -13,12 +13,20 @@ namespace cdr_group.Persistence.Repositories
         {
         }
 
+        public override async Task<IEnumerable<Employee>> GetAllAsync()
+        {
+            return await _dbSet
+                .Include(e => e.Manager)
+                .Include(e => e.User)
+                .Include(e => e.Company)
+                .Include(e => e.Position).ToListAsync();
+        }
         public async Task<Employee?> GetWithManagerAsync(Guid id)
         {
             return await _dbSet
                 .Include(e => e.Manager)
                 .Include(e => e.User)
-                .Include(e => e.Department)
+                .Include(e => e.Company)
                 .Include(e => e.Position)
                 .FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
         }
@@ -28,10 +36,10 @@ namespace cdr_group.Persistence.Repositories
             return await _dbSet
                 .Include(e => e.Manager)
                 .Include(e => e.User)
-                .Include(e => e.Department)
+                .Include(e => e.Company)
                 .Include(e => e.Position)
                 .Include(e => e.Subordinates.Where(s => !s.IsDeleted))
-                    .ThenInclude(s => s.Department)
+                    .ThenInclude(s => s.Company)
                 .Include(e => e.Subordinates.Where(s => !s.IsDeleted))
                     .ThenInclude(s => s.Position)
                 .FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
@@ -42,7 +50,7 @@ namespace cdr_group.Persistence.Repositories
             return await _dbSet
                 .Include(e => e.Manager)
                 .Include(e => e.User)
-                .Include(e => e.Department)
+                .Include(e => e.Company)
                 .Include(e => e.Position)
                 .FirstOrDefaultAsync(e => e.EmployeeCode == employeeCode && !e.IsDeleted);
         }
@@ -52,7 +60,7 @@ namespace cdr_group.Persistence.Repositories
             return await _dbSet
                 .Include(e => e.Manager)
                 .Include(e => e.User)
-                .Include(e => e.Department)
+                .Include(e => e.Company)
                 .Include(e => e.Position)
                 .FirstOrDefaultAsync(e => e.UserId == userId && (!execludedId.HasValue || e.Id != execludedId) && !e.IsDeleted);
         }
@@ -61,20 +69,30 @@ namespace cdr_group.Persistence.Repositories
         {
             return await _dbSet
                 .Include(e => e.User)
-                .Include(e => e.Department)
+                .Include(e => e.Company)
                 .Include(e => e.Position)
                 .Where(e => e.ManagerId == managerId && !e.IsDeleted)
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Employee>> GetByDepartmentIdAsync(Guid departmentId)
+        public async Task<IEnumerable<Employee>> GetByCompanyIdAsync(Guid? companyId)
         {
             return await _dbSet
                 .Include(e => e.Manager)
                 .Include(e => e.User)
-                .Include(e => e.Department)
+                .Include(e => e.Company)
                 .Include(e => e.Position)
-                .Where(e => e.DepartmentId == departmentId && !e.IsDeleted)
+                .Where(e => (e.CompanyId == companyId || !e.CompanyId.HasValue) && e.IsActive && !e.IsDeleted)
+                .ToListAsync();
+        }
+        public async Task<IEnumerable<Employee>> GetByCompanyCodeAsync(string? companyCode)
+        {
+            return await _dbSet
+                .Include(e => e.Manager)
+                .Include(e => e.User)
+                .Include(e => e.Company)
+                .Include(e => e.Position)
+                .Where(e => ((e.Company != null && e.Company.Code.ToLower() == companyCode.ToLower()) || !e.CompanyId.HasValue) && e.IsActive && !e.IsDeleted)
                 .ToListAsync();
         }
 
@@ -83,7 +101,7 @@ namespace cdr_group.Persistence.Repositories
             var query = _dbSet
                 .Include(e => e.Manager)
                 .Include(e => e.User)
-                .Include(e => e.Department)
+                .Include(e => e.Company)
                 .Include(e => e.Position)
                 .Where(e => !e.IsDeleted);
 
@@ -95,6 +113,7 @@ namespace cdr_group.Persistence.Repositories
 
             return (items, totalCount);
         }
+       
 
         public async Task<bool> EmployeeCodeExistsAsync(string employeeCode, Guid? excludeId = null)
         {

@@ -62,9 +62,11 @@ namespace cdr_group.Application.Services
 
         protected override async Task ValidateDeleteAsync(Guid id, Company entity)
         {
-            if (await UnitOfWork.Companies.HasDepartmentsAsync(id))
+            // Check for employees linked to this company
+            var employees = await UnitOfWork.Employees.GetByCompanyIdAsync(id);
+            if (employees.Any())
             {
-                throw new InvalidOperationException(Messages.CompanyHasDepartments);
+                throw new InvalidOperationException(Messages.CompanyHasEmployees);
             }
         }
     }

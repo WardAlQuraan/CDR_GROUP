@@ -25,18 +25,7 @@ namespace cdr_group.Domain.Localization
         // Company
         public const string CompanyCodeExists = "company_code_exists";
         public const string CompanyNotFound = "company_not_found";
-        public const string CompanyHasDepartments = "company_has_departments";
-
-        // Department
-        public const string DepartmentNotFound = "department_not_found";
-        public const string DepartmentCodeExists = "department_code_exists";
-        public const string DepartmentHasEmployees = "department_has_employees";
-        public const string DepartmentHasSubDepartments = "department_has_sub_departments";
-        public const string DepartmentCircularReference = "department_circular_reference";
-        public const string DepartmentCannotBeOwnParent = "department_cannot_be_own_parent";
-        public const string ParentDepartmentNotFound = "parent_department_not_found";
-        public const string ParentDepartmentDifferentCompany = "parent_department_different_company";
-        public const string DepartmentRequired = "department_required";
+        public const string CompanyHasEmployees = "company_has_employees";
 
         // Employee
         public const string EmployeeCannotBeOwnManager = "employee_cannot_be_own_manager";
@@ -92,18 +81,7 @@ namespace cdr_group.Domain.Localization
                 // Company
                 [CompanyCodeExists] = "Company code already exists.",
                 [CompanyNotFound] = "Company not found.",
-                [CompanyHasDepartments] = "Cannot delete company with departments. Please reassign departments first.",
-
-                // Department
-                [DepartmentNotFound] = "Department not found.",
-                [DepartmentCodeExists] = "Department code already exists in this company.",
-                [DepartmentHasEmployees] = "Cannot delete department with employees. Please reassign employees first.",
-                [DepartmentHasSubDepartments] = "Cannot delete department with sub-departments. Please delete or reassign sub-departments first.",
-                [DepartmentCircularReference] = "Cannot assign parent department: circular reference detected.",
-                [DepartmentCannotBeOwnParent] = "A department cannot be its own parent.",
-                [ParentDepartmentNotFound] = "Parent department not found.",
-                [ParentDepartmentDifferentCompany] = "Parent department must belong to the same company.",
-                [DepartmentRequired] = "Department is required.",
+                [CompanyHasEmployees] = "Cannot delete company with employees. Please reassign employees first.",
 
                 // Employee
                 [EmployeeCannotBeOwnManager] = "An employee cannot be their own manager.",
@@ -158,18 +136,7 @@ namespace cdr_group.Domain.Localization
                 // Company
                 [CompanyCodeExists] = "رمز الشركة موجود بالفعل.",
                 [CompanyNotFound] = "الشركة غير موجودة.",
-                [CompanyHasDepartments] = "لا يمكن حذف شركة تحتوي على أقسام. يرجى إعادة تعيين الأقسام أولاً.",
-
-                // Department
-                [DepartmentNotFound] = "القسم غير موجود.",
-                [DepartmentCodeExists] = "رمز القسم موجود بالفعل في هذه الشركة.",
-                [DepartmentHasEmployees] = "لا يمكن حذف قسم يحتوي على موظفين. يرجى إعادة تعيين الموظفين أولاً.",
-                [DepartmentHasSubDepartments] = "لا يمكن حذف قسم يحتوي على أقسام فرعية. يرجى حذف أو إعادة تعيين الأقسام الفرعية أولاً.",
-                [DepartmentCircularReference] = "لا يمكن تعيين القسم الأب: تم اكتشاف مرجع دائري.",
-                [DepartmentCannotBeOwnParent] = "لا يمكن للقسم أن يكون أباً لنفسه.",
-                [ParentDepartmentNotFound] = "القسم الأب غير موجود.",
-                [ParentDepartmentDifferentCompany] = "يجب أن ينتمي القسم الأب إلى نفس الشركة.",
-                [DepartmentRequired] = "القسم مطلوب.",
+                [CompanyHasEmployees] = "لا يمكن حذف شركة تحتوي على موظفين. يرجى إعادة تعيين الموظفين أولاً.",
 
                 // Employee
                 [EmployeeCannotBeOwnManager] = "لا يمكن للموظف أن يكون مديراً لنفسه.",

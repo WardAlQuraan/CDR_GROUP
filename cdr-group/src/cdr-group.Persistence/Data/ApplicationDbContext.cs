@@ -92,8 +92,7 @@ namespace cdr_group.Persistence.Data
         public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<Department> Departments { get; set; }
-        public DbSet<Position> Positions { get; set; }
+public DbSet<Position> Positions { get; set; }
         public DbSet<FileAttachment> FileAttachments { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Company> Companies { get; set; }
@@ -201,12 +200,11 @@ namespace cdr_group.Persistence.Data
                 entity.Property(e => e.Phone).HasMaxLength(20);
                 entity.Property(e => e.Salary).HasPrecision(18, 2);
 
-                // Department relationship (required)
-                entity.HasOne(e => e.Department)
-                    .WithMany(d => d.Employees)
-                    .HasForeignKey(e => e.DepartmentId)
-                    .IsRequired()
-                    .OnDelete(DeleteBehavior.Restrict);
+                // Company relationship (optional)
+                entity.HasOne(e => e.Company)
+                    .WithMany(c => c.Employees)
+                    .HasForeignKey(e => e.CompanyId)
+                    .OnDelete(DeleteBehavior.SetNull);
 
                 // Position relationship
                 entity.HasOne(e => e.Position)
@@ -239,37 +237,6 @@ namespace cdr_group.Persistence.Data
                 entity.Property(e => e.DescriptionAr).HasMaxLength(500);
             });
 
-            // Department configuration
-            modelBuilder.Entity<Department>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.HasIndex(e => new { e.Code, e.CompanyId }).IsUnique();
-                entity.Property(e => e.Code).IsRequired().HasMaxLength(50);
-                entity.Property(e => e.NameEn).IsRequired().HasMaxLength(200);
-                entity.Property(e => e.NameAr).IsRequired().HasMaxLength(200);
-                entity.Property(e => e.DescriptionEn).HasMaxLength(500);
-                entity.Property(e => e.DescriptionAr).HasMaxLength(500);
-
-                // Company relationship (required)
-                entity.HasOne(e => e.Company)
-                    .WithMany(c => c.Departments)
-                    .HasForeignKey(e => e.CompanyId)
-                    .IsRequired()
-                    .OnDelete(DeleteBehavior.Restrict);
-
-                // Self-referencing relationship for parent department
-                entity.HasOne(e => e.ParentDepartment)
-                    .WithMany(e => e.SubDepartments)
-                    .HasForeignKey(e => e.ParentDepartmentId)
-                    .OnDelete(DeleteBehavior.Restrict);
-
-                // Manager relationship
-                entity.HasOne(e => e.Manager)
-                    .WithMany()
-                    .HasForeignKey(e => e.ManagerId)
-                    .OnDelete(DeleteBehavior.SetNull);
-            });
-
             // Position configuration
             modelBuilder.Entity<Position>(entity =>
             {
@@ -282,12 +249,6 @@ namespace cdr_group.Persistence.Data
                 entity.Property(e => e.DescriptionAr).HasMaxLength(500);
                 entity.Property(e => e.MinSalary).HasPrecision(18, 2);
                 entity.Property(e => e.MaxSalary).HasPrecision(18, 2);
-
-                // Department relationship (optional)
-                entity.HasOne(e => e.Department)
-                    .WithMany()
-                    .HasForeignKey(e => e.DepartmentId)
-                    .OnDelete(DeleteBehavior.SetNull);
             });
 
             // FileAttachment configuration
@@ -375,13 +336,6 @@ namespace cdr_group.Persistence.Data
             var employeesAssignManagerId = Guid.Parse("22222222-eeee-eeee-eeee-eeeeeeeeeeee");
             var employeesLinkToUserId = Guid.Parse("22222222-ffff-ffff-ffff-ffffffffffff");
 
-            // Department Permission IDs
-            var departmentsReadId = Guid.Parse("33333333-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
-            var departmentsCreateId = Guid.Parse("33333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb");
-            var departmentsUpdateId = Guid.Parse("33333333-cccc-cccc-cccc-cccccccccccc");
-            var departmentsDeleteId = Guid.Parse("33333333-dddd-dddd-dddd-dddddddddddd");
-            var departmentsAssignManagerId = Guid.Parse("33333333-eeee-eeee-eeee-eeeeeeeeeeee");
-
             // Position Permission IDs
             var positionsReadId = Guid.Parse("55555555-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
             var positionsCreateId = Guid.Parse("55555555-bbbb-bbbb-bbbb-bbbbbbbbbbbb");
@@ -416,13 +370,6 @@ namespace cdr_group.Persistence.Data
             var salaryHistoriesCreateId = Guid.Parse("aabbccdd-1111-1111-1111-bbbbbbbbbbbb");
             var salaryHistoriesUpdateId = Guid.Parse("aabbccdd-1111-1111-1111-cccccccccccc");
             var salaryHistoriesDeleteId = Guid.Parse("aabbccdd-1111-1111-1111-dddddddddddd");
-
-            // Department IDs
-            var itDepartmentId = Guid.Parse("44444444-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
-            var hrDepartmentId = Guid.Parse("44444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb");
-            var financeDepartmentId = Guid.Parse("44444444-cccc-cccc-cccc-cccccccccccc");
-            var operationsDepartmentId = Guid.Parse("44444444-dddd-dddd-dddd-dddddddddddd");
-            var marketingDepartmentId = Guid.Parse("44444444-eeee-eeee-eeee-eeeeeeeeeeee");
 
             // Company IDs
             var cdrGroupCompanyId = Guid.Parse("aabbccdd-aabb-aabb-aabb-aabbccddeeff");
@@ -481,12 +428,6 @@ namespace cdr_group.Persistence.Data
                 new Permission { Id = employeesDeleteId, Name = PermissionConstants.Employees.Delete, Description = "Delete employees", Module = "Employees", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = employeesAssignManagerId, Name = PermissionConstants.Employees.AssignManager, Description = "Assign manager to employees", Module = "Employees", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = employeesLinkToUserId, Name = PermissionConstants.Employees.LinkToUser, Description = "Link employees to user accounts", Module = "Employees", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                // Department permissions
-                new Permission { Id = departmentsReadId, Name = PermissionConstants.Departments.Read, Description = "View departments", Module = "Departments", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                new Permission { Id = departmentsCreateId, Name = PermissionConstants.Departments.Create, Description = "Create departments", Module = "Departments", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                new Permission { Id = departmentsUpdateId, Name = PermissionConstants.Departments.Update, Description = "Update departments", Module = "Departments", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                new Permission { Id = departmentsDeleteId, Name = PermissionConstants.Departments.Delete, Description = "Delete departments", Module = "Departments", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                new Permission { Id = departmentsAssignManagerId, Name = PermissionConstants.Departments.AssignManager, Description = "Assign manager to departments", Module = "Departments", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 // Position permissions
                 new Permission { Id = positionsReadId, Name = PermissionConstants.Positions.Read, Description = "View positions", Module = "Positions", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = positionsCreateId, Name = PermissionConstants.Positions.Create, Description = "Create positions", Module = "Positions", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
@@ -570,7 +511,7 @@ namespace cdr_group.Persistence.Data
                 IsDeleted = false
             });
 
-            // Seed default departments
+            // Seed default company
             modelBuilder.Entity<Company>().HasData(
                 new Company
                 {
@@ -581,74 +522,6 @@ namespace cdr_group.Persistence.Data
                     DescriptionEn = "CDR Group Company",
                     DescriptionAr = "شركة مجموعة سي دي آر",
                     IsActive = true,
-                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    IsDeleted = false
-                }
-            );
-
-            modelBuilder.Entity<Department>().HasData(
-                new Department
-                {
-                    Id = itDepartmentId,
-                    Code = "IT",
-                    NameEn = "Information Technology",
-                    NameAr = "تكنولوجيا المعلومات",
-                    DescriptionEn = "IT and Software Development department",
-                    DescriptionAr = "قسم تكنولوجيا المعلومات وتطوير البرمجيات",
-                    IsActive = true,
-                    CompanyId = cdrGroupCompanyId,
-                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    IsDeleted = false
-                },
-                new Department
-                {
-                    Id = hrDepartmentId,
-                    Code = "HR",
-                    NameEn = "Human Resources",
-                    NameAr = "الموارد البشرية",
-                    DescriptionEn = "Human Resources and Personnel department",
-                    DescriptionAr = "قسم الموارد البشرية وشؤون الموظفين",
-                    IsActive = true,
-                    CompanyId = cdrGroupCompanyId,
-                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    IsDeleted = false
-                },
-                new Department
-                {
-                    Id = financeDepartmentId,
-                    Code = "FIN",
-                    NameEn = "Finance",
-                    NameAr = "المالية",
-                    DescriptionEn = "Finance and Accounting department",
-                    DescriptionAr = "قسم المالية والمحاسبة",
-                    IsActive = true,
-                    CompanyId = cdrGroupCompanyId,
-                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    IsDeleted = false
-                },
-                new Department
-                {
-                    Id = operationsDepartmentId,
-                    Code = "OPS",
-                    NameEn = "Operations",
-                    NameAr = "العمليات",
-                    DescriptionEn = "Operations and Logistics department",
-                    DescriptionAr = "قسم العمليات والخدمات اللوجستية",
-                    IsActive = true,
-                    CompanyId = cdrGroupCompanyId,
-                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    IsDeleted = false
-                },
-                new Department
-                {
-                    Id = marketingDepartmentId,
-                    Code = "MKT",
-                    NameEn = "Marketing",
-                    NameAr = "التسويق",
-                    DescriptionEn = "Marketing and Sales department",
-                    DescriptionAr = "قسم التسويق والمبيعات",
-                    IsActive = true,
-                    CompanyId = cdrGroupCompanyId,
                     CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     IsDeleted = false
                 }
@@ -667,7 +540,6 @@ namespace cdr_group.Persistence.Data
                     MinSalary = 8000,
                     MaxSalary = 15000,
                     IsActive = true,
-                    DepartmentId = itDepartmentId,
                     CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     IsDeleted = false
                 },
@@ -682,7 +554,6 @@ namespace cdr_group.Persistence.Data
                     MinSalary = 3000,
                     MaxSalary = 6000,
                     IsActive = true,
-                    DepartmentId = itDepartmentId,
                     CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     IsDeleted = false
                 },
@@ -697,7 +568,6 @@ namespace cdr_group.Persistence.Data
                     MinSalary = 10000,
                     MaxSalary = 18000,
                     IsActive = true,
-                    DepartmentId = hrDepartmentId,
                     CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     IsDeleted = false
                 },
@@ -712,7 +582,6 @@ namespace cdr_group.Persistence.Data
                     MinSalary = 4000,
                     MaxSalary = 8000,
                     IsActive = true,
-                    DepartmentId = hrDepartmentId,
                     CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     IsDeleted = false
                 },
@@ -727,7 +596,6 @@ namespace cdr_group.Persistence.Data
                     MinSalary = 5000,
                     MaxSalary = 10000,
                     IsActive = true,
-                    DepartmentId = financeDepartmentId,
                     CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     IsDeleted = false
                 },
@@ -742,7 +610,6 @@ namespace cdr_group.Persistence.Data
                     MinSalary = 9000,
                     MaxSalary = 16000,
                     IsActive = true,
-                    DepartmentId = null,
                     CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     IsDeleted = false
                 }

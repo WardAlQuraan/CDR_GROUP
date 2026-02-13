@@ -13,39 +13,21 @@ namespace cdr_group.Persistence.Repositories
         {
         }
 
-        public async Task<Position?> GetWithDepartmentAsync(Guid id)
-        {
-            return await _dbSet
-                .Include(p => p.Department)
-                .FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
-        }
-
         public async Task<Position?> GetByCodeAsync(string code)
         {
             return await _dbSet
-                .Include(p => p.Department)
                 .FirstOrDefaultAsync(p => p.Code == code && !p.IsDeleted);
         }
 
         public async Task<Position?> GetByNameAsync(string name)
         {
             return await _dbSet
-                .Include(p => p.Department)
                 .FirstOrDefaultAsync(p => (p.NameEn == name || p.NameAr == name) && !p.IsDeleted);
-        }
-
-        public async Task<IEnumerable<Position>> GetByDepartmentIdAsync(Guid departmentId)
-        {
-            return await _dbSet
-                .Include(p => p.Department)
-                .Where(p => p.DepartmentId == departmentId && !p.IsDeleted)
-                .ToListAsync();
         }
 
         public async Task<IEnumerable<Position>> GetActivePositionsAsync()
         {
             return await _dbSet
-                .Include(p => p.Department)
                 .Where(p => p.IsActive && !p.IsDeleted)
                 .ToListAsync();
         }
@@ -53,7 +35,6 @@ namespace cdr_group.Persistence.Repositories
         public async Task<(IEnumerable<Position> Items, int TotalCount)> GetPositionsPagedAsync(PagedRequest request)
         {
             var query = _dbSet
-                .Include(p => p.Department)
                 .Where(p => !p.IsDeleted);
 
             query = QueryHelper.ApplySearch(query, request);

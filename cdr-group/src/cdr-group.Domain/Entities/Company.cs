@@ -11,8 +11,8 @@ namespace cdr_group.Domain.Entities
         public string? DescriptionAr { get; set; }
         public bool IsActive { get; set; } = true;
 
-        // Departments in this company
-        public virtual ICollection<Department> Departments { get; set; } = new List<Department>();
+        // Employees in this company
+        public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
 
         // Events in this company
         public virtual ICollection<Event> Events { get; set; } = new List<Event>();

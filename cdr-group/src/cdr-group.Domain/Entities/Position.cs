@@ -13,10 +13,6 @@ namespace cdr_group.Domain.Entities
         public decimal? MaxSalary { get; set; }
         public bool IsActive { get; set; } = true;
 
-        // Department relationship (optional - position can be department-specific)
-        public Guid? DepartmentId { get; set; }
-        public Department? Department { get; set; }
-
         // Employees in this position
         public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
     }

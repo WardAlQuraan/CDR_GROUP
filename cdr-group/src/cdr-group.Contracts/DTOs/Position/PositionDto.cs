@@ -14,10 +14,6 @@ namespace cdr_group.Contracts.DTOs.Position
         public decimal? MaxSalary { get; set; }
         public bool IsActive { get; set; }
 
-        public Guid? DepartmentId { get; set; }
-        public string? DepartmentNameEn { get; set; }
-        public string? DepartmentNameAr { get; set; }
-
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }
@@ -59,8 +55,6 @@ namespace cdr_group.Contracts.DTOs.Position
         public decimal? MaxSalary { get; set; }
 
         public bool IsActive { get; set; } = true;
-
-        public Guid? DepartmentId { get; set; }
     }
 
     public class UpdatePositionDto
@@ -84,7 +78,5 @@ namespace cdr_group.Contracts.DTOs.Position
         public decimal? MaxSalary { get; set; }
 
         public bool? IsActive { get; set; }
-
-        public Guid? DepartmentId { get; set; }
     }
 }

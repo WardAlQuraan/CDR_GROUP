@@ -13,7 +13,6 @@ namespace cdr_group.Persistence.Repositories
         private IRoleRepository? _roles;
         private IPermissionRepository? _permissions;
         private IEmployeeRepository? _employees;
-        private IDepartmentRepository? _departments;
         private IPositionRepository? _positions;
         private IFileAttachmentRepository? _fileAttachments;
         private IEventRepository? _events;
@@ -30,7 +29,6 @@ namespace cdr_group.Persistence.Repositories
         public IRoleRepository Roles => _roles ??= new RoleRepository(_context);
         public IPermissionRepository Permissions => _permissions ??= new PermissionRepository(_context);
         public IEmployeeRepository Employees => _employees ??= new EmployeeRepository(_context);
-        public IDepartmentRepository Departments => _departments ??= new DepartmentRepository(_context);
         public IPositionRepository Positions => _positions ??= new PositionRepository(_context);
         public IFileAttachmentRepository FileAttachments => _fileAttachments ??= new FileAttachmentRepository(_context);
         public IEventRepository Events => _events ??= new EventRepository(_context);

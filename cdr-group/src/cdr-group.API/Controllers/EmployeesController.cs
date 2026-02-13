@@ -69,10 +69,10 @@ namespace cdr_group.API.Controllers
             return Ok(ApiResponse<IEnumerable<EmployeeBasicDto>>.SuccessResponse(subordinates));
         }
 
-        [HttpGet("by-department/{departmentId:guid}")]
-        public async Task<ActionResult<ApiResponse<IEnumerable<EmployeeDto>>>> GetByDepartmentId(Guid departmentId)
+        [HttpGet("by-company")]
+        public async Task<ActionResult<ApiResponse<IEnumerable<EmployeeDto>>>> GetByCompanyId([FromQuery]Guid? companyId)
         {
-            var employees = await Service.GetByDepartmentIdAsync(departmentId);
+            var employees = await Service.GetByCompanyIdAsync(companyId);
             return Ok(ApiResponse<IEnumerable<EmployeeDto>>.SuccessResponse(employees));
         }
 
@@ -129,16 +129,5 @@ namespace cdr_group.API.Controllers
             return Ok(ApiResponse<EmployeeDto>.SuccessResponse(employee, "Employee linked to user successfully."));
         }
 
-        [HttpPut("{id:guid}/department")]
-        [HasPermission(Permissions.Employees.Update)]
-        public async Task<ActionResult<ApiResponse<EmployeeDto>>> AssignDepartment(Guid id, [FromBody] Guid? departmentId)
-        {
-            var employee = await Service.AssignDepartmentAsync(id, departmentId);
-            if (employee == null)
-            {
-                return NotFound(ApiResponse<EmployeeDto>.FailureResponse("Employee not found."));
-            }
-            return Ok(ApiResponse<EmployeeDto>.SuccessResponse(employee, "Department assigned successfully."));
-        }
     }
 }

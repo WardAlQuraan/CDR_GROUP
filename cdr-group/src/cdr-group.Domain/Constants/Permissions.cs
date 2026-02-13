@@ -27,16 +27,7 @@ namespace cdr_group.Domain.Constants
             public const string LinkToUser = "employees.link-to-user";
         }
 
-        public static class Departments
-        {
-            public const string Read = "departments.read";
-            public const string Create = "departments.create";
-            public const string Update = "departments.update";
-            public const string Delete = "departments.delete";
-            public const string AssignManager = "departments.assign-manager";
-        }
-
-        public static class Positions
+public static class Positions
         {
             public const string Read = "positions.read";
             public const string Create = "positions.create";
