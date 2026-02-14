@@ -48,7 +48,7 @@ namespace cdr_group.Persistence.Data
         private void SetAuditFields()
         {
             var entries = ChangeTracker.Entries<BaseEntity>();
-            var currentTime = DateTime.UtcNow;
+            var currentTime = DateTime.Now;
             var currentUser = _currentUserService?.Username;
 
             foreach (var entry in entries)

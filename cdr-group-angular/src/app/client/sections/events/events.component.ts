@@ -160,9 +160,7 @@ export class EventsComponent implements OnChanges {
     return new Date(date).getFullYear().toString();
   }
 
-  openEventDetail(event: DisplayEvent): void {
-    window.open(`/events/${event.id}`, '_blank');
-  }
+ 
 
   openExternalLink(event: DisplayEvent, e: Event): void {
     e.stopPropagation();

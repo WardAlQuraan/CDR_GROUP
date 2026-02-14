@@ -40,9 +40,9 @@
             <mat-selection-list (selectionChange)="onSelectionChange($event, group)">
               @for (permission of group.permissions; track permission.id) {
                 <mat-list-option [value]="permission.id" [selected]="selectedPermissionIds.has(permission.id)">
-                  <span matListItemTitle>{{ permission.name }}</span>
+                  <span matListItemTitle>{{ permission.description }}</span>
                   @if (permission.description) {
-                    <span matListItemLine class="permission-description">{{ permission.description }}</span>
+                    <!-- <span matListItemLine class="permission-description">{{ permission.name }}</span> -->
                   }
                 </mat-list-option>
               }

@@ -30,11 +30,13 @@ namespace cdr_group.API.Controllers
         }
 
         [HttpGet("by-entity/{entityId:guid}")]
+        [AllowAnonymous]
         public async Task<ActionResult<ApiResponse<IEnumerable<FileAttachmentDto>>>> GetByEntityId(Guid entityId)
         {
             var files = await Service.GetByEntityIdAsync(entityId);
             return Ok(ApiResponse<IEnumerable<FileAttachmentDto>>.SuccessResponse(files));
         }
+        [AllowAnonymous]
 
         [HttpGet("by-type/{entityType}")]
         public async Task<ActionResult<ApiResponse<IEnumerable<FileAttachmentDto>>>> GetByEntityType(string entityType)

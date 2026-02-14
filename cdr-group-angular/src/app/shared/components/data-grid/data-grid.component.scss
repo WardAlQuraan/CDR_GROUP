@@ -1,10 +1,8 @@
 @use 'sass:color';
 
-// Variables
 $primary-color: #D9A93E;
 $primary-dark: #C4962E;
 $primary-light: rgba(217, 169, 62, 0.1);
-$primary-lighter: rgba(217, 169, 62, 0.05);
 $dark-color: #3E423D;
 $text-secondary: #6c757d;
 $text-muted: #9ca3af;
@@ -39,7 +37,6 @@ $transition: 200ms ease;
   overflow: hidden;
 }
 
-// ==================== CONTAINER ====================
 .data-grid-container {
   background: $white;
   border-radius: $radius-lg;
@@ -49,7 +46,6 @@ $transition: 200ms ease;
   overflow: hidden;
 }
 
-// ==================== HEADER ====================
 .grid-header {
   display: flex;
   justify-content: space-between;
@@ -107,7 +103,6 @@ $transition: 200ms ease;
   }
 }
 
-// ==================== FILTERS ====================
 .filters-section {
   margin-bottom: 1.5rem;
   padding: 1rem;
@@ -262,45 +257,18 @@ $transition: 200ms ease;
           border-width: 2px;
         }
       }
-
-      // Select dropdown panel
-      .mat-mdc-select-panel {
-        background: $white;
-        border: 1px solid $border-color;
-        border-radius: $radius-md;
-        box-shadow: $shadow-lg;
-
-        .mat-mdc-option {
-          background: $white;
-
-          &:hover:not(.mat-mdc-option-disabled) {
-            background: $background-hover;
-          }
-
-          &.mat-mdc-option-active {
-            background: $primary-light;
-          }
-
-          &.mdc-list-item--selected {
-            background: $primary-light;
-          }
-        }
-      }
     }
   }
 }
 
-// Global tooltip styles (rendered outside component)
 ::ng-deep .action-tooltip {
   background: $dark-color !important;
   color: $white !important;
   font-size: 0.75rem;
   padding: 0.5rem 0.75rem;
   border-radius: $radius-sm;
-  box-shadow: $shadow-md;
 }
 
-// Global select panel styles (rendered outside component)
 ::ng-deep .mat-mdc-select-panel {
   background: $white !important;
   border: 1px solid $border-color;
@@ -308,19 +276,9 @@ $transition: 200ms ease;
   box-shadow: $shadow-lg;
 
   .mat-mdc-option {
-    background: $white;
-
-    &:hover:not(.mat-mdc-option-disabled) {
-      background: $background-hover;
-    }
-
-    &.mat-mdc-option-active {
-      background: $primary-light;
-    }
-
-    &.mdc-list-item--selected {
-      background: $primary-light;
-    }
+    &:hover:not(.mat-mdc-option-disabled) { background: $background-hover; }
+    &.mat-mdc-option-active,
+    &.mdc-list-item--selected { background: $primary-light; }
   }
 }
 
@@ -381,7 +339,6 @@ $transition: 200ms ease;
   }
 }
 
-// ==================== LOADING ====================
 .loading-overlay {
   position: absolute;
   inset: 0;
@@ -415,7 +372,6 @@ $transition: 200ms ease;
   }
 }
 
-// ==================== TABLE ====================
 .table-wrapper {
   position: relative;
   border: 1px solid $border-color;
@@ -506,43 +462,15 @@ $transition: 200ms ease;
       }
     }
 
-    &.primary:hover {
-      background: $primary-light;
-
-      mat-icon {
-        color: $primary-color;
-      }
-    }
-
-    &.warn:hover {
-      background: $warn-light;
-
-      mat-icon {
-        color: $warn-color;
-      }
-    }
-
-    &.success:hover {
-      background: $success-light;
-
-      mat-icon {
-        color: $success-color;
-      }
-    }
-
-    &.info:hover {
-      background: $info-light;
-
-      mat-icon {
-        color: $info-color;
-      }
-    }
-
-    &.accent:hover {
-      background: $accent-light;
-
-      mat-icon {
-        color: $accent-color;
+    @each $name, $bg, $fg in
+      (primary, $primary-light, $primary-color),
+      (warn, $warn-light, $warn-color),
+      (success, $success-light, $success-color),
+      (info, $info-light, $info-color),
+      (accent, $accent-light, $accent-color) {
+      &.#{$name}:hover {
+        background: $bg;
+        mat-icon { color: $fg; }
       }
     }
   }
@@ -558,29 +486,16 @@ $transition: 200ms ease;
     text-transform: uppercase;
     letter-spacing: 0.025em;
 
-    &.badge-success {
-      background: $success-light;
-      color: $success-color;
-    }
-
-    &.badge-warn {
-      background: $warn-light;
-      color: $warn-color;
-    }
-
-    &.badge-accent {
-      background: $accent-light;
-      color: $accent-color;
-    }
-
-    &.badge-info {
-      background: $info-light;
-      color: $info-color;
-    }
-
-    &.badge-primary {
-      background: $primary-light;
-      color: $primary-color;
+    @each $name, $bg, $fg in
+      (success, $success-light, $success-color),
+      (warn, $warn-light, $warn-color),
+      (accent, $accent-light, $accent-color),
+      (info, $info-light, $info-color),
+      (primary, $primary-light, $primary-color) {
+      &.badge-#{$name} {
+        background: $bg;
+        color: $fg;
+      }
     }
   }
 
@@ -813,10 +728,7 @@ $transition: 200ms ease;
         gap: 0.25rem;
       }
 
-      .mat-mdc-paginator-navigation-previous,
-      .mat-mdc-paginator-navigation-next,
-      .mat-mdc-paginator-navigation-first,
-      .mat-mdc-paginator-navigation-last {
+      [class*="mat-mdc-paginator-navigation"] {
         width: 36px;
         height: 36px;
         background: $white;
@@ -824,17 +736,11 @@ $transition: 200ms ease;
         border-radius: $radius-sm;
         transition: $transition;
 
-        .mat-mdc-button-persistent-ripple {
-          border-radius: $radius-sm;
-        }
-
         &:hover:not(:disabled) {
           background: $primary-light;
           border-color: $primary-color;
 
-          .mat-mdc-paginator-icon {
-            fill: $primary-color;
-          }
+          .mat-mdc-paginator-icon { fill: $primary-color; }
         }
 
         &:disabled {
@@ -851,7 +757,6 @@ $transition: 200ms ease;
   }
 }
 
-// ==================== RTL SUPPORT ====================
 :host-context([dir="rtl"]) {
   .grid-header button {
     flex-direction: row-reverse;
@@ -897,7 +802,6 @@ $transition: 200ms ease;
   }
 }
 
-// ==================== RESPONSIVE ====================
 @media (max-width: 1024px) {
   .search-wrapper {
     max-width: 320px;

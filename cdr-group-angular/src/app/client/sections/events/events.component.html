@@ -33,7 +33,7 @@
         }
         <div class="events-grid">
         @for (event of events; track event.id; let i = $index) {
-          <div class="event-card clickable" [class.no-date]="!event.eventDate" [class.has-image]="event.primaryFileUrl" (click)="openEventDetail(event)">
+          <div class="event-card clickable" [class.no-date]="!event.eventDate" [class.has-image]="event.primaryFileUrl" [routerLink]="'events/' + event.id">
             @if (event.primaryFileUrl) {
               <div class="event-image">
                 <img [src]="event.primaryFileUrl" [alt]="event.title">
