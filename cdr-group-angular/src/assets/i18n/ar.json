@@ -548,6 +548,19 @@
       "descriptionSection": "الوصف",
       "descriptionEn": "الوصف (إنجليزي)",
       "descriptionAr": "الوصف (عربي)",
+      "storySection": "القصة",
+      "storyEn": "القصة (إنجليزي)",
+      "storyAr": "القصة (عربي)",
+      "missionVisionSection": "الرسالة والرؤية",
+      "missionEn": "الرسالة (إنجليزي)",
+      "missionAr": "الرسالة (عربي)",
+      "visionEn": "الرؤية (إنجليزي)",
+      "visionAr": "الرؤية (عربي)",
+      "titleEn": "العنوان (إنجليزي)",
+      "titleAr": "العنوان (عربي)",
+      "colorsSection": "الألوان والحالة",
+      "primaryColor": "اللون الأساسي",
+      "secondaryColor": "اللون الثانوي",
       "status": "الحالة",
       "isActive": "شركة نشطة",
       "edit": "تعديل",
@@ -571,7 +584,57 @@
         "nameEn": "أدخل الاسم بالإنجليزية",
         "nameAr": "أدخل الاسم بالعربية",
         "descriptionEn": "أدخل الوصف بالإنجليزية",
-        "descriptionAr": "أدخل الوصف بالعربية"
+        "descriptionAr": "أدخل الوصف بالعربية",
+        "storyEn": "أدخل القصة بالإنجليزية",
+        "storyAr": "أدخل القصة بالعربية",
+        "missionEn": "أدخل الرسالة بالإنجليزية",
+        "missionAr": "أدخل الرسالة بالعربية",
+        "visionEn": "أدخل الرؤية بالإنجليزية",
+        "visionAr": "أدخل الرؤية بالعربية",
+        "titleEn": "أدخل العنوان بالإنجليزية",
+        "titleAr": "أدخل العنوان بالعربية",
+        "primaryColor": "مثال: #D9A93E",
+        "secondaryColor": "مثال: #3E423D"
+      }
+    },
+    "branches": {
+      "title": "إدارة الفروع",
+      "subtitle": "إدارة فروع الشركات والمواقع",
+      "addBranch": "إضافة فرع",
+      "createBranch": "إنشاء فرع",
+      "editBranch": "تعديل الفرع",
+      "deleteBranch": "حذف الفرع",
+      "searchPlaceholder": "البحث بالرمز أو العنوان...",
+      "statusFilter": "الحالة",
+      "all": "الكل",
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "code": "رمز الفرع",
+      "address": "العنوان",
+      "company": "الشركة",
+      "companyAndSettings": "الشركة والإعدادات",
+      "isPrimary": "فرع رئيسي",
+      "status": "الحالة",
+      "isActive": "فرع نشط",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "confirmDelete": "هل أنت متأكد من حذف هذا الفرع؟",
+      "branchCreated": "تم إنشاء الفرع بنجاح",
+      "branchUpdated": "تم تحديث الفرع بنجاح",
+      "branchDeleted": "تم حذف الفرع بنجاح",
+      "basicInfo": "المعلومات الأساسية",
+      "locationSection": "موقع الفرع",
+      "errors": {
+        "loadFailed": "فشل في تحميل الفروع",
+        "createFailed": "فشل في إنشاء الفرع",
+        "updateFailed": "فشل في تحديث الفرع",
+        "deleteFailed": "فشل في حذف الفرع",
+        "codeRequired": "رمز الفرع مطلوب",
+        "companyRequired": "الشركة مطلوبة"
+      },
+      "placeholders": {
+        "code": "أدخل رمز الفرع",
+        "address": "أدخل عنوان الفرع"
       }
     },
     "eventsAdmin": {
@@ -637,5 +700,9 @@
         "deleteFailed": "فشل في حذف الرسالة"
       }
     }
+  },
+  "mapPicker": {
+    "label": "الموقع",
+    "searchPlaceholder": "ابحث عن موقع..."
   }
 }

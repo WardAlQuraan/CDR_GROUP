@@ -7,6 +7,13 @@
   @if (textPrefix) {
     <span matPrefix style="padding-left: 8px; font-weight: 500;">{{ textPrefix }}</span>
   }
+  @if (type === 'color') {
+    <input type="color" matPrefix class="color-swatch"
+      [value]="value || '#000000'"
+      [disabled]="disabled"
+      (input)="onInput($event)"
+      (blur)="onTouched()">
+  }
 
   @if (type === 'textarea') {
     <textarea matInput
@@ -19,6 +26,15 @@
       (input)="onInput($event)"
       (blur)="onTouched()">
     </textarea>
+  } @else if (type === 'color') {
+    <input matInput
+      [value]="value"
+      type="text"
+      [placeholder]="placeholder | translate"
+      [required]="required"
+      [disabled]="disabled"
+      (input)="onInput($event)"
+      (blur)="onTouched()">
   } @else if (type === 'password') {
     <input matInput
       [value]="value"

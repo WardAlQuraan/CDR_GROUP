@@ -87,6 +87,12 @@ export const Permissions = {
   COMPANIES_UPDATE: 'companies.update',
   COMPANIES_DELETE: 'companies.delete',
 
+  // Branches
+  BRANCHES_READ: 'branches.read',
+  BRANCHES_CREATE: 'branches.create',
+  BRANCHES_UPDATE: 'branches.update',
+  BRANCHES_DELETE: 'branches.delete',
+
   // Contact Us
   CONTACTUS_READ: 'contactus.read',
   CONTACTUS_DELETE: 'contactus.delete',

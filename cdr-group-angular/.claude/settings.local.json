@@ -20,7 +20,8 @@
       "Bash(ng serve:*)",
       "Bash(timeout:*)",
       "Bash(npm run start)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(git -C \"c:/Users/w.alquraan/Desktop/cdr-group/cdr-group-angular\" diff HEAD~5..HEAD --name-only)"
     ]
   }
 }

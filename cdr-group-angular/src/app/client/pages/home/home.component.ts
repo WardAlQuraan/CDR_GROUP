@@ -26,9 +26,14 @@ export class HomeComponent implements OnInit {
       const company = params['company'];
       if (company) {
         this.selectedCompanyCode = company;
+        this.applyCompanyColors();
       }
     });
     this.loadCompanies();
+  }
+
+  get selectedCompany(): CompanyDto | undefined {
+    return this.companies.find(c => c.code === this.selectedCompanyCode);
   }
 
   get isArabic(): boolean {
@@ -41,6 +46,7 @@ export class HomeComponent implements OnInit {
 
   onCompanyChange(companyCode: string): void {
     this.selectedCompanyCode = companyCode;
+    this.applyCompanyColors();
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { company: companyCode },
@@ -53,8 +59,24 @@ export class HomeComponent implements OnInit {
       next: (response) => {
         if (response.success && response.data) {
           this.companies = response.data;
+          this.applyCompanyColors();
         }
       }
     });
+  }
+
+  private applyCompanyColors(): void {
+    const company = this.selectedCompany;
+    if (company) {
+      const root = document.documentElement;
+      if (company.primaryColor) {
+        root.style.setProperty('--primary-color', company.primaryColor);
+        root.style.setProperty('--custom-btn-bg-color', company.primaryColor);
+        root.style.setProperty('--link-hover-color', company.primaryColor);
+      }
+      if (company.secondaryColor) {
+        root.style.setProperty('--secondary-color', company.secondaryColor);
+      }
+    }
   }
 }

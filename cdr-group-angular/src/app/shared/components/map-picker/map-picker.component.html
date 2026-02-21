@@ -1,0 +1,56 @@
+<div class="map-picker-container">
+  <!-- Search input -->
+  <div class="map-search-wrapper">
+    <mat-form-field appearance="outline" class="map-search-field">
+      <mat-label>{{ placeholder | translate }}</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput
+        type="text"
+        [disabled]="disabled"
+        (input)="onSearchInput($event)"
+        (blur)="onTouched()"
+        autocomplete="off">
+      @if (searchLoading) {
+        <mat-spinner matSuffix diameter="20"></mat-spinner>
+      }
+    </mat-form-field>
+
+    <!-- Search results dropdown -->
+    @if (showResults && searchResults.length > 0) {
+      <div class="search-results-dropdown">
+        @for (result of searchResults; track result.display_name) {
+          <div class="search-result-item" (mousedown)="selectSearchResult(result)">
+            <mat-icon>place</mat-icon>
+            <span>{{ result.display_name }}</span>
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Map container -->
+  <div #mapContainer
+    class="map-container"
+    [style.height]="mapHeight"
+    [class.disabled]="disabled">
+  </div>
+
+  <!-- Selected location info -->
+  @if (value) {
+    <div class="location-info">
+      <div class="location-address">
+        <mat-icon>place</mat-icon>
+        <span class="address-text">{{ currentAddress }}</span>
+      </div>
+      <div class="location-coords">
+        <span>{{ value.latitude.toFixed(6) }}, {{ value.longitude.toFixed(6) }}</span>
+        @if (!disabled) {
+          <button mat-icon-button type="button" (click)="clearLocation()"
+            [matTooltip]="'common.clear' | translate">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </div>
+    </div>
+  }
+</div>

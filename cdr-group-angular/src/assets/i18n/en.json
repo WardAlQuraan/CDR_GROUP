@@ -548,6 +548,19 @@
       "descriptionSection": "Description",
       "descriptionEn": "Description (English)",
       "descriptionAr": "Description (Arabic)",
+      "storySection": "Story",
+      "storyEn": "Story (English)",
+      "storyAr": "Story (Arabic)",
+      "missionVisionSection": "Mission & Vision",
+      "missionEn": "Mission (English)",
+      "missionAr": "Mission (Arabic)",
+      "visionEn": "Vision (English)",
+      "visionAr": "Vision (Arabic)",
+      "titleEn": "Title (English)",
+      "titleAr": "Title (Arabic)",
+      "colorsSection": "Colors & Status",
+      "primaryColor": "Primary Color",
+      "secondaryColor": "Secondary Color",
       "status": "Status",
       "isActive": "Active Company",
       "edit": "Edit",
@@ -571,7 +584,57 @@
         "nameEn": "Enter name in English",
         "nameAr": "Enter name in Arabic",
         "descriptionEn": "Enter description in English",
-        "descriptionAr": "Enter description in Arabic"
+        "descriptionAr": "Enter description in Arabic",
+        "storyEn": "Enter story in English",
+        "storyAr": "Enter story in Arabic",
+        "missionEn": "Enter mission in English",
+        "missionAr": "Enter mission in Arabic",
+        "visionEn": "Enter vision in English",
+        "visionAr": "Enter vision in Arabic",
+        "titleEn": "Enter title in English",
+        "titleAr": "Enter title in Arabic",
+        "primaryColor": "e.g. #D9A93E",
+        "secondaryColor": "e.g. #3E423D"
+      }
+    },
+    "branches": {
+      "title": "Branches Management",
+      "subtitle": "Manage company branches and locations",
+      "addBranch": "Add Branch",
+      "createBranch": "Create Branch",
+      "editBranch": "Edit Branch",
+      "deleteBranch": "Delete Branch",
+      "searchPlaceholder": "Search by code, address...",
+      "statusFilter": "Status",
+      "all": "All",
+      "active": "Active",
+      "inactive": "Inactive",
+      "code": "Branch Code",
+      "address": "Address",
+      "company": "Company",
+      "companyAndSettings": "Company & Settings",
+      "isPrimary": "Primary Branch",
+      "status": "Status",
+      "isActive": "Active Branch",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this branch?",
+      "branchCreated": "Branch created successfully",
+      "branchUpdated": "Branch updated successfully",
+      "branchDeleted": "Branch deleted successfully",
+      "basicInfo": "Basic Information",
+      "locationSection": "Branch Location",
+      "errors": {
+        "loadFailed": "Failed to load branches",
+        "createFailed": "Failed to create branch",
+        "updateFailed": "Failed to update branch",
+        "deleteFailed": "Failed to delete branch",
+        "codeRequired": "Branch code is required",
+        "companyRequired": "Company is required"
+      },
+      "placeholders": {
+        "code": "Enter branch code",
+        "address": "Enter branch address"
       }
     },
     "eventsAdmin": {
@@ -637,5 +700,9 @@
         "deleteFailed": "Failed to delete message"
       }
     }
+  },
+  "mapPicker": {
+    "label": "Location",
+    "searchPlaceholder": "Search for a location..."
   }
 }

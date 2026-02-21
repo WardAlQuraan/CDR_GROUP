@@ -177,6 +177,31 @@ mat-dialog-content {
       }
     }
 
+    // Green theme section
+    .section-green {
+      .section-header {
+        background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+
+        .section-icon {
+          background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        }
+
+        .section-title {
+          color: #15803d;
+        }
+      }
+
+      mat-form-field {
+        --mdc-outlined-text-field-hover-outline-color: #22c55e;
+        --mdc-outlined-text-field-focus-outline-color: #22c55e;
+        --mdc-outlined-text-field-focus-label-text-color: #22c55e;
+
+        .mat-mdc-form-field-icon-prefix {
+          color: #22c55e;
+        }
+      }
+    }
+
     // Blue theme section
     .section-blue {
       .section-header {

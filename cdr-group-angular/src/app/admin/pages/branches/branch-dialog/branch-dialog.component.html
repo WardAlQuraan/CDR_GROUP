@@ -1,0 +1,73 @@
+<app-base-dialog
+  [title]="dialogTitle"
+  [saveLabel]="saveLabel"
+  [saveDisabled]="form.invalid"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <form [formGroup]="form" class="dialog-form">
+    <!-- Basic Info Section -->
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>location_on</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.branches.basicInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <app-form-field formControlName="code" label="admin.branches.code" icon="badge"
+          placeholder="admin.branches.placeholders.code"
+          [errors]="[{name: 'required', message: 'admin.branches.errors.codeRequired'}]">
+        </app-form-field>
+      </div>
+    </div>
+
+    <!-- Location Section -->
+    <div class="form-section section-green">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>map</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.branches.locationSection' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <app-map-picker formControlName="location"
+          placeholder="mapPicker.searchPlaceholder"
+          mapHeight="280px">
+        </app-map-picker>
+      </div>
+    </div>
+
+    <!-- Company & Settings Section -->
+    <div class="form-section section-blue">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>apartment</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.branches.companyAndSettings' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <app-async-select formControlName="companyId"
+          label="admin.branches.company" icon="business"
+          [showNullOption]="false"
+          [required]="true"
+          [dataSource$]="companiesDataSource$"
+          [optionMapper]="companyMapper">
+        </app-async-select>
+
+        <mat-checkbox formControlName="isPrimary" color="primary">
+          {{ 'admin.branches.isPrimary' | translate }}
+        </mat-checkbox>
+
+        <mat-checkbox formControlName="isActive" color="primary">
+          {{ 'admin.branches.isActive' | translate }}
+        </mat-checkbox>
+      </div>
+    </div>
+  </form>
+
+</app-base-dialog>

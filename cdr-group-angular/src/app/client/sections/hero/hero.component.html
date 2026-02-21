@@ -7,11 +7,11 @@
     <div class="row">
       @if (!isSmall) {
         <div class="col-lg-6 col-12">
-          <h1 class="text-white mb-2">{{ 'hero.title' | translate }}</h1>
-          <p class="mb-4 pb-2" style="color: #D9A93E; font-size: 1.1rem;">{{ 'hero.subtitle' | translate }}</p>
+          <h1 class="text-white mb-2">{{ companyName }}</h1>
+          <p class="mb-4 pb-2" style="color: var(--primary-color); font-size: 1.1rem;">{{ heroTitle }}</p>
 
           @if (showMore) {
-            <p class="hero-description text-white">{{ 'hero.description' | translate }}</p>
+            <p class="hero-description text-white">{{ heroSubtitle }}</p>
           }
 
           <div class="custom-btn-group d-flex align-items-center gap-4">

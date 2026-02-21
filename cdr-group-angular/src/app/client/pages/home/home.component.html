@@ -1,7 +1,7 @@
-<app-hero></app-hero>
-<app-about></app-about>
+<app-hero [company]="selectedCompany"></app-hero>
+<app-about [company]="selectedCompany"></app-about>
 
-@if (companies.length > 1) {
+<!-- @if (companies.length > 1) {
   <div class="company-filter-section">
     <div class="container">
       <div class="company-filter">
@@ -16,7 +16,7 @@
       </div>
     </div>
   </div>
-}
+} -->
 
 <app-events [companyCode]="selectedCompanyCode"></app-events>
 <app-team [companyCode]="selectedCompanyCode"></app-team>

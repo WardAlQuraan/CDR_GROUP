@@ -69,6 +69,16 @@ export class CompanyDialogComponent implements OnInit {
         nameAr: [company.nameAr, [Validators.required, Validators.maxLength(200)]],
         descriptionEn: [company.descriptionEn, [Validators.maxLength(500)]],
         descriptionAr: [company.descriptionAr, [Validators.maxLength(500)]],
+        storyEn: [company.storyEn, [Validators.required]],
+        storyAr: [company.storyAr, [Validators.required]],
+        missionEn: [company.missionEn, [Validators.required]],
+        missionAr: [company.missionAr, [Validators.required]],
+        visionEn: [company.visionEn, [Validators.required]],
+        visionAr: [company.visionAr, [Validators.required]],
+        titleEn: [company.titleEn, [Validators.required]],
+        titleAr: [company.titleAr, [Validators.required]],
+        primaryColor: [company.primaryColor],
+        secondaryColor: [company.secondaryColor],
         isActive: [company.isActive]
       });
     } else {
@@ -78,6 +88,16 @@ export class CompanyDialogComponent implements OnInit {
         nameAr: ['', [Validators.required, Validators.maxLength(200)]],
         descriptionEn: ['', [Validators.maxLength(500)]],
         descriptionAr: ['', [Validators.maxLength(500)]],
+        storyEn: ['', [Validators.required]],
+        storyAr: ['', [Validators.required]],
+        missionEn: ['', [Validators.required]],
+        missionAr: ['', [Validators.required]],
+        visionEn: ['', [Validators.required]],
+        visionAr: ['', [Validators.required]],
+        titleEn: ['', [Validators.required]],
+        titleAr: ['', [Validators.required]],
+        primaryColor: [''],
+        secondaryColor: [''],
         isActive: [true]
       });
     }
@@ -109,6 +129,16 @@ export class CompanyDialogComponent implements OnInit {
       nameAr: this.form.value.nameAr,
       descriptionEn: this.form.value.descriptionEn || undefined,
       descriptionAr: this.form.value.descriptionAr || undefined,
+      storyEn: this.form.value.storyEn || undefined,
+      storyAr: this.form.value.storyAr || undefined,
+      missionEn: this.form.value.missionEn || undefined,
+      missionAr: this.form.value.missionAr || undefined,
+      visionEn: this.form.value.visionEn || undefined,
+      visionAr: this.form.value.visionAr || undefined,
+      titleEn: this.form.value.titleEn || undefined,
+      titleAr: this.form.value.titleAr || undefined,
+      primaryColor: this.form.value.primaryColor || undefined,
+      secondaryColor: this.form.value.secondaryColor || undefined,
       isActive: this.form.value.isActive
     };
 
@@ -131,6 +161,16 @@ export class CompanyDialogComponent implements OnInit {
       nameAr: this.form.value.nameAr,
       descriptionEn: this.form.value.descriptionEn || undefined,
       descriptionAr: this.form.value.descriptionAr || undefined,
+      storyEn: this.form.value.storyEn || undefined,
+      storyAr: this.form.value.storyAr || undefined,
+      missionEn: this.form.value.missionEn || undefined,
+      missionAr: this.form.value.missionAr || undefined,
+      visionEn: this.form.value.visionEn || undefined,
+      visionAr: this.form.value.visionAr || undefined,
+      titleEn: this.form.value.titleEn || undefined,
+      titleAr: this.form.value.titleAr || undefined,
+      primaryColor: this.form.value.primaryColor || undefined,
+      secondaryColor: this.form.value.secondaryColor || undefined,
       isActive: this.form.value.isActive
     };
 

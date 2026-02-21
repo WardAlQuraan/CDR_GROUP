@@ -8,6 +8,7 @@ import { PositionsComponent } from './pages/positions/positions-component/positi
 import { EventsComponent } from './pages/events/events-component/events-component';
 import { CompaniesComponent } from './pages/companies/companies-component/companies-component';
 import { CompanyOrgChartPageComponent } from './pages/companies/company-org-chart-page/company-org-chart-page.component';
+import { BranchesComponent } from './pages/branches/branches-component/branches-component';
 import { ContactUsAdminComponent } from './pages/contact-us/contact-us-component/contact-us-component';
 
 export const adminRoutes: Routes = [
@@ -23,6 +24,7 @@ export const adminRoutes: Routes = [
 { path: 'events', component: EventsComponent },
       { path: 'companies', component: CompaniesComponent },
       { path: 'companies/:id/org-chart', component: CompanyOrgChartPageComponent },
+      { path: 'branches', component: BranchesComponent },
       { path: 'contact-us', component: ContactUsAdminComponent },
       { path: 'settings', component: DashboardComponent }, // Placeholder
     ]

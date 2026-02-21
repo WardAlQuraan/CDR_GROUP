@@ -23,16 +23,25 @@
         </app-form-field>
 
         <div class="form-row">
-          <app-form-field formControlName="nameEn" label="admin.companies.nameEn" 
+          <app-form-field formControlName="nameEn" label="admin.companies.nameEn"
             placeholder="admin.companies.placeholders.nameEn"
             [errors]="[{name: 'required', message: 'admin.companies.errors.nameEnRequired'}]">
           </app-form-field>
 
-          <app-form-field formControlName="nameAr" label="admin.companies.nameAr" 
+          <app-form-field formControlName="nameAr" label="admin.companies.nameAr"
             placeholder="admin.companies.placeholders.nameAr" dir="rtl"
             [errors]="[{name: 'required', message: 'admin.companies.errors.nameArRequired'}]">
           </app-form-field>
         </div>
+
+        <app-form-field formControlName="titleEn" type="textarea" label="admin.companies.titleEn"
+          placeholder="admin.companies.placeholders.titleEn">
+        </app-form-field>
+
+        <app-form-field formControlName="titleAr" type="textarea" label="admin.companies.titleAr"
+          placeholder="admin.companies.placeholders.titleAr" dir="rtl">
+        </app-form-field>
+
       </div>
     </div>
 
@@ -53,6 +62,76 @@
         <app-form-field formControlName="descriptionAr" type="textarea" label="admin.companies.descriptionAr"
           placeholder="admin.companies.placeholders.descriptionAr" dir="rtl">
         </app-form-field>
+      </div>
+    </div>
+
+    <!-- Story Section -->
+    <div class="form-section section-green">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>auto_stories</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companies.storySection' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <app-form-field formControlName="storyEn" type="textarea" label="admin.companies.storyEn"
+          placeholder="admin.companies.placeholders.storyEn">
+        </app-form-field>
+
+        <app-form-field formControlName="storyAr" type="textarea" label="admin.companies.storyAr"
+          placeholder="admin.companies.placeholders.storyAr" dir="rtl">
+        </app-form-field>
+      </div>
+    </div>
+
+    <!-- Mission & Vision Section -->
+    <div class="form-section section-purple">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>flag</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companies.missionVisionSection' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <app-form-field formControlName="missionEn" type="textarea" label="admin.companies.missionEn"
+          placeholder="admin.companies.placeholders.missionEn">
+        </app-form-field>
+
+        <app-form-field formControlName="missionAr" type="textarea" label="admin.companies.missionAr"
+          placeholder="admin.companies.placeholders.missionAr" dir="rtl">
+        </app-form-field>
+
+        <app-form-field formControlName="visionEn" type="textarea" label="admin.companies.visionEn"
+          placeholder="admin.companies.placeholders.visionEn">
+        </app-form-field>
+
+        <app-form-field formControlName="visionAr" type="textarea" label="admin.companies.visionAr"
+          placeholder="admin.companies.placeholders.visionAr" dir="rtl">
+        </app-form-field>
+      </div>
+    </div>
+
+    <!-- Colors & Status Section -->
+    <div class="form-section section-orange">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>palette</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companies.colorsSection' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <div class="form-row">
+          <app-form-field formControlName="primaryColor" type="color" label="admin.companies.primaryColor"
+            placeholder="admin.companies.placeholders.primaryColor">
+          </app-form-field>
+
+          <app-form-field formControlName="secondaryColor" type="color" label="admin.companies.secondaryColor"
+            placeholder="admin.companies.placeholders.secondaryColor">
+          </app-form-field>
+        </div>
 
         <mat-checkbox formControlName="isActive" color="primary">
           {{ 'admin.companies.isActive' | translate }}

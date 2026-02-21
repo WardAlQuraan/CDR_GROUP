@@ -18,7 +18,7 @@ export class FormFieldComponent implements ControlValueAccessor {
   @Input() placeholder = '';
   @Input() icon = '';
   @Input() textPrefix = '';
-  @Input() type: 'text' | 'number' | 'email' | 'password' | 'textarea' = 'text';
+  @Input() type: 'text' | 'number' | 'email' | 'password' | 'textarea' | 'color' = 'text';
   @Input() dir = '';
   @Input() rows = 3;
   @Input() errors: FieldError[] = [];
