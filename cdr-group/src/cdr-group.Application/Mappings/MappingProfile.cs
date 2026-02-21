@@ -1,4 +1,5 @@
 using AutoMapper;
+using cdr_group.Contracts.DTOs.Branch;
 using cdr_group.Contracts.DTOs.ContactUs;
 using cdr_group.Contracts.DTOs.Company;
 using cdr_group.Contracts.DTOs.Employee;
@@ -144,6 +145,17 @@ namespace cdr_group.Application.Mappings
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
 
             CreateMap<UpdateContactUsDto, ContactUs>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            // Branch mappings
+            CreateMap<Branch, BranchDto>()
+                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src => src.Company.NameEn))
+                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src => src.Company.NameAr));
+
+            CreateMap<CreateBranchDto, Branch>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+            CreateMap<UpdateBranchDto, Branch>()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
             // SalaryHistory mappings

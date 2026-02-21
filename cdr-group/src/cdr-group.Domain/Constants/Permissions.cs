@@ -66,6 +66,14 @@ public static class Positions
             public const string Delete = "contactus.delete";
         }
 
+        public static class Branches
+        {
+            public const string Read = "branches.read";
+            public const string Create = "branches.create";
+            public const string Update = "branches.update";
+            public const string Delete = "branches.delete";
+        }
+
         public static class SalaryHistories
         {
             public const string Read = "salary-histories.read";

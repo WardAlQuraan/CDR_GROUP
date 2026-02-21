@@ -4,6 +4,7 @@ using cdr_group.Domain.Entities;
 using cdr_group.Domain.Entities.Base;
 using cdr_group.Domain.Entities.Identity;
 using cdr_group.Contracts.Interfaces.Services;
+using cdr_group.Domain.Constants;
 using PermissionConstants = cdr_group.Domain.Constants.Permissions;
 
 namespace cdr_group.Persistence.Data
@@ -24,25 +25,37 @@ namespace cdr_group.Persistence.Data
         public override int SaveChanges()
         {
             SetAuditFields();
-            return base.SaveChanges();
+            var auditEntries = OnBeforeSaveChanges();
+            var result = base.SaveChanges();
+            OnAfterSaveChanges(auditEntries, default).GetAwaiter().GetResult();
+            return result;
         }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             SetAuditFields();
-            return base.SaveChanges(acceptAllChangesOnSuccess);
+            var auditEntries = OnBeforeSaveChanges();
+            var result = base.SaveChanges(acceptAllChangesOnSuccess);
+            OnAfterSaveChanges(auditEntries, default).GetAwaiter().GetResult();
+            return result;
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             SetAuditFields();
-            return base.SaveChangesAsync(cancellationToken);
+            var auditEntries = OnBeforeSaveChanges();
+            var result = await base.SaveChangesAsync(cancellationToken);
+            await OnAfterSaveChanges(auditEntries, cancellationToken);
+            return result;
         }
 
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
             SetAuditFields();
-            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+            var auditEntries = OnBeforeSaveChanges();
+            var result = await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+            await OnAfterSaveChanges(auditEntries, cancellationToken);
+            return result;
         }
 
         private void SetAuditFields()
@@ -66,6 +79,97 @@ namespace cdr_group.Persistence.Data
                         break;
                 }
             }
+        }
+
+        private List<AuditEntry> OnBeforeSaveChanges()
+        {
+            ChangeTracker.DetectChanges();
+            var auditEntries = new List<AuditEntry>();
+            var currentTime = DateTime.UtcNow;
+            var currentUser = _currentUserService?.Username;
+
+            foreach (var entry in ChangeTracker.Entries<BaseEntity>())
+            {
+                if (entry.State == EntityState.Detached || entry.State == EntityState.Unchanged)
+                    continue;
+
+                var auditEntry = new AuditEntry(entry)
+                {
+                    EntityName = entry.Entity.GetType().Name,
+                    PerformedBy = currentUser,
+                    Timestamp = currentTime
+                };
+
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        auditEntry.ActionType = AuditActionTypes.Insert;
+                        foreach (var property in entry.Properties)
+                        {
+                            if (property.IsTemporary)
+                            {
+                                auditEntry.TemporaryProperties.Add(property);
+                                continue;
+                            }
+                            auditEntry.NewValues[property.Metadata.Name] = property.CurrentValue;
+                        }
+                        break;
+
+                    case EntityState.Modified:
+                        var isDeletedProp = entry.Property(nameof(BaseEntity.IsDeleted));
+                        bool isSoftDelete = isDeletedProp.IsModified
+                            && (bool)(isDeletedProp.OriginalValue ?? false) == false
+                            && (bool)(isDeletedProp.CurrentValue ?? false) == true;
+
+                        auditEntry.ActionType = isSoftDelete
+                            ? AuditActionTypes.Delete
+                            : AuditActionTypes.Update;
+
+                        foreach (var property in entry.Properties)
+                        {
+                            if (!property.IsModified)
+                                continue;
+
+                            auditEntry.AffectedColumns.Add(property.Metadata.Name);
+                            auditEntry.OldValues[property.Metadata.Name] = property.OriginalValue;
+                            auditEntry.NewValues[property.Metadata.Name] = property.CurrentValue;
+                        }
+                        break;
+
+                    case EntityState.Deleted:
+                        auditEntry.ActionType = AuditActionTypes.Delete;
+                        foreach (var property in entry.Properties)
+                        {
+                            auditEntry.OldValues[property.Metadata.Name] = property.OriginalValue;
+                        }
+                        break;
+                }
+
+                auditEntries.Add(auditEntry);
+            }
+
+            return auditEntries;
+        }
+
+        private async Task OnAfterSaveChanges(List<AuditEntry> auditEntries, CancellationToken cancellationToken)
+        {
+            if (auditEntries.Count == 0)
+                return;
+
+            foreach (var auditEntry in auditEntries)
+            {
+                foreach (var temporaryProperty in auditEntry.TemporaryProperties)
+                {
+                    auditEntry.NewValues[temporaryProperty.Metadata.Name] = temporaryProperty.CurrentValue;
+                }
+            }
+
+            foreach (var auditEntry in auditEntries)
+            {
+                AuditLogs.Add(auditEntry.ToAuditLog());
+            }
+
+            await base.SaveChangesAsync(cancellationToken);
         }
 
         private static void ApplyGlobalFilters(ModelBuilder modelBuilder)
@@ -92,12 +196,14 @@ namespace cdr_group.Persistence.Data
         public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Employee> Employees { get; set; }
-public DbSet<Position> Positions { get; set; }
+        public DbSet<Position> Positions { get; set; }
         public DbSet<FileAttachment> FileAttachments { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<ContactUs> ContactUsMessages { get; set; }
+        public DbSet<Branch> Branches { get; set; }
         public DbSet<SalaryHistory> SalaryHistories { get; set; }
+        public DbSet<AuditLog> AuditLogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -235,6 +341,16 @@ public DbSet<Position> Positions { get; set; }
                 entity.Property(e => e.NameAr).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.DescriptionEn).HasMaxLength(500);
                 entity.Property(e => e.DescriptionAr).HasMaxLength(500);
+                entity.Property(e => e.StoryEn).HasMaxLength(2000);
+                entity.Property(e => e.StoryAr).HasMaxLength(2000);
+                entity.Property(e => e.MissionEn).HasMaxLength(1000);
+                entity.Property(e => e.MissionAr).HasMaxLength(1000);
+                entity.Property(e => e.TitleEn).HasMaxLength(500);
+                entity.Property(e => e.TitleAr).HasMaxLength(500);
+                entity.Property(e => e.VisionEn).HasMaxLength(1000);
+                entity.Property(e => e.VisionAr).HasMaxLength(1000);
+                entity.Property(e => e.PrimaryColor).HasMaxLength(20);
+                entity.Property(e => e.SecondaryColor).HasMaxLength(20);
             });
 
             // Position configuration
@@ -292,6 +408,21 @@ public DbSet<Position> Positions { get; set; }
                 entity.Property(e => e.Message).IsRequired().HasMaxLength(2000);
             });
 
+            // Branch configuration
+            modelBuilder.Entity<Branch>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasIndex(e => e.Code).IsUnique();
+                entity.Property(e => e.Code).IsRequired().HasMaxLength(50);
+                entity.Property(e => e.Address).HasMaxLength(500);
+
+                entity.HasOne(e => e.Company)
+                    .WithMany(c => c.Branches)
+                    .HasForeignKey(e => e.CompanyId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
             // SalaryHistory configuration
             modelBuilder.Entity<SalaryHistory>(entity =>
             {
@@ -306,6 +437,25 @@ public DbSet<Position> Positions { get; set; }
                     .HasForeignKey(e => e.EmployeeId)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // AuditLog configuration
+            modelBuilder.Entity<AuditLog>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.EntityName).IsRequired().HasMaxLength(200);
+                entity.Property(e => e.EntityId).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.ActionType).IsRequired().HasMaxLength(20);
+                entity.Property(e => e.OldValues).HasColumnType("longtext");
+                entity.Property(e => e.NewValues).HasColumnType("longtext");
+                entity.Property(e => e.AffectedColumns).HasColumnType("longtext");
+                entity.Property(e => e.PerformedBy).HasMaxLength(200);
+                entity.Property(e => e.Timestamp).IsRequired();
+
+                entity.HasIndex(e => e.EntityName);
+                entity.HasIndex(e => e.EntityId);
+                entity.HasIndex(e => e.Timestamp);
+                entity.HasIndex(e => e.PerformedBy);
             });
 
             // Seed default data
@@ -364,6 +514,12 @@ public DbSet<Position> Positions { get; set; }
             var contactusReadId = Guid.Parse("aabbccdd-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
             var contactusUpdateId = Guid.Parse("aabbccdd-bbbb-bbbb-bbbb-bbbbbbbbbbbb");
             var contactusDeleteId = Guid.Parse("aabbccdd-cccc-cccc-cccc-cccccccccccc");
+
+            // Branch Permission IDs
+            var branchesReadId = Guid.Parse("aabbccdd-2222-2222-2222-aaaaaaaaaaaa");
+            var branchesCreateId = Guid.Parse("aabbccdd-2222-2222-2222-bbbbbbbbbbbb");
+            var branchesUpdateId = Guid.Parse("aabbccdd-2222-2222-2222-cccccccccccc");
+            var branchesDeleteId = Guid.Parse("aabbccdd-2222-2222-2222-dddddddddddd");
 
             // SalaryHistory Permission IDs
             var salaryHistoriesReadId = Guid.Parse("aabbccdd-1111-1111-1111-aaaaaaaaaaaa");
@@ -452,6 +608,11 @@ public DbSet<Position> Positions { get; set; }
                 new Permission { Id = contactusReadId, Name = PermissionConstants.ContactUs.Read, Description = "View contact us messages", Module = "ContactUs", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = contactusUpdateId, Name = PermissionConstants.ContactUs.Update, Description = "Update contact us messages", Module = "ContactUs", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = contactusDeleteId, Name = PermissionConstants.ContactUs.Delete, Description = "Delete contact us messages", Module = "ContactUs", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                // Branch permissions
+                new Permission { Id = branchesReadId, Name = PermissionConstants.Branches.Read, Description = "View branches", Module = "Branches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = branchesCreateId, Name = PermissionConstants.Branches.Create, Description = "Create branches", Module = "Branches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = branchesUpdateId, Name = PermissionConstants.Branches.Update, Description = "Update branches", Module = "Branches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = branchesDeleteId, Name = PermissionConstants.Branches.Delete, Description = "Delete branches", Module = "Branches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 // SalaryHistory permissions
                 new Permission { Id = salaryHistoriesReadId, Name = PermissionConstants.SalaryHistories.Read, Description = "View salary histories", Module = "SalaryHistories", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = salaryHistoriesCreateId, Name = PermissionConstants.SalaryHistories.Create, Description = "Create salary histories", Module = "SalaryHistories", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
@@ -527,93 +688,6 @@ public DbSet<Position> Positions { get; set; }
                 }
             );
 
-            // Seed default positions
-            modelBuilder.Entity<Position>().HasData(
-                new Position
-                {
-                    Id = seniorDeveloperId,
-                    Code = "SR-DEV",
-                    NameEn = "Senior Developer",
-                    NameAr = "مطور أول",
-                    DescriptionEn = "Senior software developer responsible for complex technical tasks",
-                    DescriptionAr = "مطور برمجيات أول مسؤول عن المهام التقنية المعقدة",
-                    MinSalary = 8000,
-                    MaxSalary = 15000,
-                    IsActive = true,
-                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    IsDeleted = false
-                },
-                new Position
-                {
-                    Id = juniorDeveloperId,
-                    Code = "JR-DEV",
-                    NameEn = "Junior Developer",
-                    NameAr = "مطور مبتدئ",
-                    DescriptionEn = "Junior software developer learning and growing skills",
-                    DescriptionAr = "مطور برمجيات مبتدئ يتعلم ويطور مهاراته",
-                    MinSalary = 3000,
-                    MaxSalary = 6000,
-                    IsActive = true,
-                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    IsDeleted = false
-                },
-                new Position
-                {
-                    Id = hrManagerId,
-                    Code = "HR-MGR",
-                    NameEn = "HR Manager",
-                    NameAr = "مدير الموارد البشرية",
-                    DescriptionEn = "Human resources department manager",
-                    DescriptionAr = "مدير قسم الموارد البشرية",
-                    MinSalary = 10000,
-                    MaxSalary = 18000,
-                    IsActive = true,
-                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    IsDeleted = false
-                },
-                new Position
-                {
-                    Id = hrSpecialistId,
-                    Code = "HR-SPEC",
-                    NameEn = "HR Specialist",
-                    NameAr = "أخصائي موارد بشرية",
-                    DescriptionEn = "Human resources specialist handling recruitment and employee relations",
-                    DescriptionAr = "أخصائي موارد بشرية يتعامل مع التوظيف وعلاقات الموظفين",
-                    MinSalary = 4000,
-                    MaxSalary = 8000,
-                    IsActive = true,
-                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    IsDeleted = false
-                },
-                new Position
-                {
-                    Id = accountantId,
-                    Code = "ACCT",
-                    NameEn = "Accountant",
-                    NameAr = "محاسب",
-                    DescriptionEn = "Financial accountant responsible for financial records",
-                    DescriptionAr = "محاسب مالي مسؤول عن السجلات المالية",
-                    MinSalary = 5000,
-                    MaxSalary = 10000,
-                    IsActive = true,
-                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    IsDeleted = false
-                },
-                new Position
-                {
-                    Id = projectManagerId,
-                    Code = "PM",
-                    NameEn = "Project Manager",
-                    NameAr = "مدير مشروع",
-                    DescriptionEn = "Project manager responsible for project planning and execution",
-                    DescriptionAr = "مدير مشروع مسؤول عن تخطيط وتنفيذ المشاريع",
-                    MinSalary = 9000,
-                    MaxSalary = 16000,
-                    IsActive = true,
-                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                    IsDeleted = false
-                }
-            );
         }
     }
 }

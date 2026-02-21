@@ -22,6 +22,10 @@ namespace cdr_group.Domain.Localization
         public const string IncorrectCurrentPassword = "incorrect_current_password";
         public const string UserNotFound = "user_not_found";
 
+        // Branch
+        public const string BranchCodeExists = "branch_code_exists";
+        public const string CompanyHasBranches = "company_has_branches";
+
         // Company
         public const string CompanyCodeExists = "company_code_exists";
         public const string CompanyNotFound = "company_not_found";
@@ -78,6 +82,10 @@ namespace cdr_group.Domain.Localization
                 [IncorrectCurrentPassword] = "Current password is incorrect.",
                 [UserNotFound] = "User not found.",
 
+                // Branch
+                [BranchCodeExists] = "Branch code already exists.",
+                [CompanyHasBranches] = "Cannot delete company with branches. Please remove branches first.",
+
                 // Company
                 [CompanyCodeExists] = "Company code already exists.",
                 [CompanyNotFound] = "Company not found.",
@@ -132,6 +140,10 @@ namespace cdr_group.Domain.Localization
                 [RefreshTokenNotFound] = "رمز التحديث غير موجود.",
                 [IncorrectCurrentPassword] = "كلمة المرور الحالية غير صحيحة.",
                 [UserNotFound] = "المستخدم غير موجود.",
+
+                // Branch
+                [BranchCodeExists] = "رمز الفرع موجود بالفعل.",
+                [CompanyHasBranches] = "لا يمكن حذف شركة تحتوي على فروع. يرجى إزالة الفروع أولاً.",
 
                 // Company
                 [CompanyCodeExists] = "رمز الشركة موجود بالفعل.",

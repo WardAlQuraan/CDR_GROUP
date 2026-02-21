@@ -18,6 +18,7 @@ namespace cdr_group.Persistence.Repositories
         private IEventRepository? _events;
         private ICompanyRepository? _companies;
         private IContactUsRepository? _contactUs;
+        private IBranchRepository? _branches;
         private ISalaryHistoryRepository? _salaryHistories;
 
         public UnitOfWork(ApplicationDbContext context)
@@ -34,6 +35,7 @@ namespace cdr_group.Persistence.Repositories
         public IEventRepository Events => _events ??= new EventRepository(_context);
         public ICompanyRepository Companies => _companies ??= new CompanyRepository(_context);
         public IContactUsRepository ContactUs => _contactUs ??= new ContactUsRepository(_context);
+        public IBranchRepository Branches => _branches ??= new BranchRepository(_context);
         public ISalaryHistoryRepository SalaryHistories => _salaryHistories ??= new SalaryHistoryRepository(_context);
 
         public async Task<int> SaveChangesAsync()

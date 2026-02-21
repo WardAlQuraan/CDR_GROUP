@@ -11,6 +11,7 @@ IPositionRepository Positions { get; }
         IEventRepository Events { get; }
         ICompanyRepository Companies { get; }
         IContactUsRepository ContactUs { get; }
+        IBranchRepository Branches { get; }
         ISalaryHistoryRepository SalaryHistories { get; }
         Task<int> SaveChangesAsync();
         Task BeginTransactionAsync();
