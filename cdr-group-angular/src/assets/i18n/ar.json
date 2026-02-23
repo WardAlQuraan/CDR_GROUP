@@ -214,7 +214,10 @@
   },
   "companyDetail": {
     "notFound": "الشركة غير موجودة",
-    "notFoundDesc": "الشركة التي تبحث عنها غير موجودة."
+    "notFoundDesc": "الشركة التي تبحث عنها غير موجودة.",
+    "story": "قصتنا",
+    "mission": "مهمتنا",
+    "vision": "رؤيتنا"
   },
   "validation": {
     "required": "هذا الحقل مطلوب",
@@ -548,6 +551,21 @@
       "descriptionSection": "الوصف",
       "descriptionEn": "الوصف (إنجليزي)",
       "descriptionAr": "الوصف (عربي)",
+      "storySection": "القصة",
+      "storyEn": "القصة (إنجليزي)",
+      "storyAr": "القصة (عربي)",
+      "missionSection": "المهمة",
+      "missionEn": "المهمة (إنجليزي)",
+      "missionAr": "المهمة (عربي)",
+      "visionSection": "الرؤية",
+      "visionEn": "الرؤية (إنجليزي)",
+      "visionAr": "الرؤية (عربي)",
+      "titleSection": "العنوان",
+      "titleEn": "العنوان (إنجليزي)",
+      "titleAr": "العنوان (عربي)",
+      "parentCompany": "الشركة الأم",
+      "noParentCompany": "بدون شركة أم",
+      "settingsSection": "الإعدادات",
       "status": "الحالة",
       "isActive": "شركة نشطة",
       "edit": "تعديل",
@@ -564,14 +582,32 @@
         "deleteFailed": "فشل في حذف الشركة",
         "codeRequired": "رمز الشركة مطلوب",
         "nameEnRequired": "الاسم الإنجليزي مطلوب",
-        "nameArRequired": "الاسم العربي مطلوب"
+        "nameArRequired": "الاسم العربي مطلوب",
+        "titleEnRequired": "العنوان الإنجليزي مطلوب",
+        "titleArRequired": "العنوان العربي مطلوب",
+        "descriptionEnRequired": "الوصف الإنجليزي مطلوب",
+        "descriptionArRequired": "الوصف العربي مطلوب",
+        "storyEnRequired": "القصة بالإنجليزية مطلوبة",
+        "storyArRequired": "القصة بالعربية مطلوبة",
+        "missionEnRequired": "المهمة بالإنجليزية مطلوبة",
+        "missionArRequired": "المهمة بالعربية مطلوبة",
+        "visionEnRequired": "الرؤية بالإنجليزية مطلوبة",
+        "visionArRequired": "الرؤية بالعربية مطلوبة"
       },
       "placeholders": {
         "code": "أدخل رمز الشركة",
         "nameEn": "أدخل الاسم بالإنجليزية",
         "nameAr": "أدخل الاسم بالعربية",
         "descriptionEn": "أدخل الوصف بالإنجليزية",
-        "descriptionAr": "أدخل الوصف بالعربية"
+        "descriptionAr": "أدخل الوصف بالعربية",
+        "storyEn": "أدخل القصة بالإنجليزية",
+        "storyAr": "أدخل القصة بالعربية",
+        "missionEn": "أدخل المهمة بالإنجليزية",
+        "missionAr": "أدخل المهمة بالعربية",
+        "visionEn": "أدخل الرؤية بالإنجليزية",
+        "visionAr": "أدخل الرؤية بالعربية",
+        "titleEn": "أدخل العنوان بالإنجليزية",
+        "titleAr": "أدخل العنوان بالعربية"
       }
     },
     "eventsAdmin": {
@@ -635,6 +671,46 @@
       "messageDeleted": "تم حذف الرسالة بنجاح",
       "errors": {
         "deleteFailed": "فشل في حذف الرسالة"
+      }
+    },
+    "auditLogs": {
+      "title": "سجل التدقيق",
+      "subtitle": "تتبع التغييرات والنشاطات عبر النظام",
+      "searchDescription": "اختر نوع الكيان وأدخل معرّفه لعرض سجلات التدقيق",
+      "entityType": "نوع الكيان",
+      "entityId": "معرّف الكيان",
+      "entityName": "اسم الكيان",
+      "search": "بحث",
+      "actionType": "نوع الإجراء",
+      "performedBy": "تم بواسطة",
+      "affectedColumns": "الحقول المتأثرة",
+      "timestamp": "التوقيت",
+      "viewDetails": "عرض التفاصيل",
+      "generalInfo": "معلومات عامة",
+      "changes": "التغييرات",
+      "property": "الخاصية",
+      "oldValues": "القيمة القديمة",
+      "newValues": "القيمة الجديدة",
+      "history": "السجل",
+      "entityTypes": {
+        "company": "شركة",
+        "employee": "موظف",
+        "position": "منصب",
+        "event": "فعالية",
+        "user": "مستخدم",
+        "role": "دور"
+      },
+      "actions": {
+        "create": "إنشاء",
+        "insert": "إدراج",
+        "update": "تعديل",
+        "delete": "حذف"
+      },
+      "placeholders": {
+        "entityId": "أدخل معرّف الكيان (GUID)"
+      },
+      "errors": {
+        "loadFailed": "فشل في تحميل سجلات التدقيق"
       }
     }
   }

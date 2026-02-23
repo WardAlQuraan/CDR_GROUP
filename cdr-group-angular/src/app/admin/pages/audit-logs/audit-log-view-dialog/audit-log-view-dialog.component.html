@@ -1,0 +1,71 @@
+<app-base-dialog
+  [showActions]="false">
+
+  <div class="view-content">
+    <!-- General Info -->
+    <div class="form-section section-primary">
+
+      <div class="section-content view-fields">
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.auditLogs.actionType' | translate }} : </span>
+          <span class="field-value">{{ log.actionType }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.auditLogs.performedBy' | translate }} : </span>
+          <span class="field-value">{{ log.performedBy || '-' }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.auditLogs.timestamp' | translate }} : </span>
+          <span class="field-value">{{ log.timestamp | date:'medium' }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.auditLogs.entityName' | translate }} : </span>
+          <span class="field-value">{{ log.entityName }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.auditLogs.entityId' | translate }} : </span>
+          <span class="field-value monospace">{{ log.entityId }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Changes Table -->
+    @if (changes.length > 0) {
+      <div class="form-section section-blue">
+        <!-- <div class="section-header">
+          <div class="section-title">{{ 'admin.auditLogs.changes' | translate }}</div>
+        </div> -->
+
+        <div class="section-content">
+          <div class="changes-table-wrapper">
+            <table class="changes-table">
+              <thead>
+                <tr>
+                  <th>{{ 'admin.auditLogs.property' | translate }}</th>
+                  <th>{{ 'admin.auditLogs.oldValues' | translate }}</th>
+                  <th>{{ 'admin.auditLogs.newValues' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (change of changes; track change.key) {
+                  <tr [class.changed]="change.changed">
+                    <td class="property-name">{{ change.key }}</td>
+                    <td class="old-value">{{ change.oldValue }}</td>
+                    <td class="new-value">{{ change.newValue }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    }
+
+    <div class="dialog-actions">
+      <button mat-raised-button color="primary" (click)="onClose()">
+        {{ 'common.close' | translate }}
+      </button>
+    </div>
+  </div>
+
+</app-base-dialog>

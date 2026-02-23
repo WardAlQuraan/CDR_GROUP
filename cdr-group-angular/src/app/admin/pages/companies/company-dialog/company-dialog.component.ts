@@ -1,7 +1,10 @@
 import { Component, Inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { CompanyDto, CreateCompanyDto, UpdateCompanyDto } from '../../../../models/company.model';
+import { ApiResponse } from '../../../../models/api-response.model';
+import { SelectOption } from '../../../../shared/components/async-select/async-select.component';
 import { CompaniesService } from '../../../../services/companies.service';
 import { SnackbarService } from '../../../../services/snackbar.service';
 import { TranslationService } from '../../../../services/translation.service';
@@ -23,6 +26,19 @@ export class CompanyDialogComponent implements OnInit {
   form!: FormGroup;
   mode: CompanyDialogMode;
   loading = false;
+  companiesDataSource$!: Observable<ApiResponse<CompanyDto[]>>;
+
+  companyMapper = (company: CompanyDto): SelectOption => ({
+    value: company.id,
+    label: `${this.isArabic ? company.nameAr : company.nameEn} (${company.code})`
+  });
+
+  parentFilter = (company: CompanyDto): boolean => {
+    if (this.isEditMode && this.data.company) {
+      return company.id !== this.data.company.id;
+    }
+    return true;
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -37,6 +53,7 @@ export class CompanyDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.companiesDataSource$ = this.companiesService.getActiveCompanies();
     this.initForm();
   }
 
@@ -67,8 +84,17 @@ export class CompanyDialogComponent implements OnInit {
         code: [company.code, [Validators.required, Validators.maxLength(50)]],
         nameEn: [company.nameEn, [Validators.required, Validators.maxLength(200)]],
         nameAr: [company.nameAr, [Validators.required, Validators.maxLength(200)]],
-        descriptionEn: [company.descriptionEn, [Validators.maxLength(500)]],
-        descriptionAr: [company.descriptionAr, [Validators.maxLength(500)]],
+        descriptionEn: [company.descriptionEn, [Validators.required, Validators.maxLength(500)]],
+        descriptionAr: [company.descriptionAr, [Validators.required, Validators.maxLength(500)]],
+        storyEn: [company.storyEn, [Validators.required, Validators.maxLength(2000)]],
+        storyAr: [company.storyAr, [Validators.required, Validators.maxLength(2000)]],
+        missionEn: [company.missionEn, [Validators.required, Validators.maxLength(1000)]],
+        missionAr: [company.missionAr, [Validators.required, Validators.maxLength(1000)]],
+        visionEn: [company.visionEn, [Validators.required, Validators.maxLength(1000)]],
+        visionAr: [company.visionAr, [Validators.required, Validators.maxLength(1000)]],
+        titleEn: [company.titleEn, [Validators.required, Validators.maxLength(500)]],
+        titleAr: [company.titleAr, [Validators.required, Validators.maxLength(500)]],
+        parentId: [company.parentId],
         isActive: [company.isActive]
       });
     } else {
@@ -76,8 +102,17 @@ export class CompanyDialogComponent implements OnInit {
         code: ['', [Validators.required, Validators.maxLength(50)]],
         nameEn: ['', [Validators.required, Validators.maxLength(200)]],
         nameAr: ['', [Validators.required, Validators.maxLength(200)]],
-        descriptionEn: ['', [Validators.maxLength(500)]],
-        descriptionAr: ['', [Validators.maxLength(500)]],
+        descriptionEn: ['', [Validators.required, Validators.maxLength(500)]],
+        descriptionAr: ['', [Validators.required, Validators.maxLength(500)]],
+        storyEn: ['', [Validators.required, Validators.maxLength(2000)]],
+        storyAr: ['', [Validators.required, Validators.maxLength(2000)]],
+        missionEn: ['', [Validators.required, Validators.maxLength(1000)]],
+        missionAr: ['', [Validators.required, Validators.maxLength(1000)]],
+        visionEn: ['', [Validators.required, Validators.maxLength(1000)]],
+        visionAr: ['', [Validators.required, Validators.maxLength(1000)]],
+        titleEn: ['', [Validators.required, Validators.maxLength(500)]],
+        titleAr: ['', [Validators.required, Validators.maxLength(500)]],
+        parentId: [null],
         isActive: [true]
       });
     }
@@ -109,6 +144,15 @@ export class CompanyDialogComponent implements OnInit {
       nameAr: this.form.value.nameAr,
       descriptionEn: this.form.value.descriptionEn || undefined,
       descriptionAr: this.form.value.descriptionAr || undefined,
+      storyEn: this.form.value.storyEn || undefined,
+      storyAr: this.form.value.storyAr || undefined,
+      missionEn: this.form.value.missionEn || undefined,
+      missionAr: this.form.value.missionAr || undefined,
+      visionEn: this.form.value.visionEn || undefined,
+      visionAr: this.form.value.visionAr || undefined,
+      titleEn: this.form.value.titleEn || undefined,
+      titleAr: this.form.value.titleAr || undefined,
+      parentId: this.form.value.parentId || undefined,
       isActive: this.form.value.isActive
     };
 
@@ -131,6 +175,15 @@ export class CompanyDialogComponent implements OnInit {
       nameAr: this.form.value.nameAr,
       descriptionEn: this.form.value.descriptionEn || undefined,
       descriptionAr: this.form.value.descriptionAr || undefined,
+      storyEn: this.form.value.storyEn || undefined,
+      storyAr: this.form.value.storyAr || undefined,
+      missionEn: this.form.value.missionEn || undefined,
+      missionAr: this.form.value.missionAr || undefined,
+      visionEn: this.form.value.visionEn || undefined,
+      visionAr: this.form.value.visionAr || undefined,
+      titleEn: this.form.value.titleEn || undefined,
+      titleAr: this.form.value.titleAr || undefined,
+      parentId: this.form.value.parentId || undefined,
       isActive: this.form.value.isActive
     };
 

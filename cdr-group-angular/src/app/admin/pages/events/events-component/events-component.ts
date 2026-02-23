@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 import { EventsService } from '../../../../services/events.service';
 import { SnackbarService } from '../../../../services/snackbar.service';
 import { TranslationService } from '../../../../services/translation.service';
@@ -43,7 +44,8 @@ export class EventsComponent implements OnInit {
     private snackbar: SnackbarService,
     private dialog: MatDialog,
     private translationService: TranslationService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -126,6 +128,13 @@ export class EventsComponent implements OnInit {
           permission: Permissions.EVENTS_UPDATE,
           color: 'primary',
           onClick: (row) => this.openBulkUploadDialog(row)
+        },
+        {
+          icon: 'history',
+          tooltip: 'admin.auditLogs.history',
+          permission: Permissions.AUDIT_LOGS_READ,
+          color: 'accent',
+          onClick: (row) => this.router.navigate(['/admin/audit-logs', 'Event', row.id])
         }
       ],
       serverSide: true,

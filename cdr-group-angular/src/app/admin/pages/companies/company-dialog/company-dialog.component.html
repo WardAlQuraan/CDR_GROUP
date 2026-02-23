@@ -23,14 +23,49 @@
         </app-form-field>
 
         <div class="form-row">
-          <app-form-field formControlName="nameEn" label="admin.companies.nameEn" 
+          <app-form-field formControlName="nameEn" label="admin.companies.nameEn"
             placeholder="admin.companies.placeholders.nameEn"
             [errors]="[{name: 'required', message: 'admin.companies.errors.nameEnRequired'}]">
           </app-form-field>
 
-          <app-form-field formControlName="nameAr" label="admin.companies.nameAr" 
+          <app-form-field formControlName="nameAr" label="admin.companies.nameAr"
             placeholder="admin.companies.placeholders.nameAr" dir="rtl"
             [errors]="[{name: 'required', message: 'admin.companies.errors.nameArRequired'}]">
+          </app-form-field>
+        </div>
+
+        <app-async-select
+          formControlName="parentId"
+          label="admin.companies.parentCompany"
+          icon="account_tree"
+          nullOptionLabel="admin.companies.noParentCompany"
+          [dataSource$]="companiesDataSource$"
+          [optionMapper]="companyMapper"
+          [filterFn]="parentFilter"
+          [resetOnDataSourceChange]="false">
+        </app-async-select>
+      </div>
+    </div>
+
+    <!-- Title Section -->
+    <div class="form-section section-blue">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>title</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companies.titleSection' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <div class="form-row">
+          <app-form-field formControlName="titleEn" label="admin.companies.titleEn"
+            placeholder="admin.companies.placeholders.titleEn"
+            [errors]="[{name: 'required', message: 'admin.companies.errors.titleEnRequired'}]">
+          </app-form-field>
+
+          <app-form-field formControlName="titleAr" label="admin.companies.titleAr"
+            placeholder="admin.companies.placeholders.titleAr" dir="rtl"
+            [errors]="[{name: 'required', message: 'admin.companies.errors.titleArRequired'}]">
           </app-form-field>
         </div>
       </div>
@@ -47,13 +82,93 @@
 
       <div class="section-content">
         <app-form-field formControlName="descriptionEn" type="textarea" label="admin.companies.descriptionEn"
-          placeholder="admin.companies.placeholders.descriptionEn">
+          placeholder="admin.companies.placeholders.descriptionEn"
+          [errors]="[{name: 'required', message: 'admin.companies.errors.descriptionEnRequired'}]">
         </app-form-field>
 
         <app-form-field formControlName="descriptionAr" type="textarea" label="admin.companies.descriptionAr"
-          placeholder="admin.companies.placeholders.descriptionAr" dir="rtl">
+          placeholder="admin.companies.placeholders.descriptionAr" dir="rtl"
+          [errors]="[{name: 'required', message: 'admin.companies.errors.descriptionArRequired'}]">
+        </app-form-field>
+      </div>
+    </div>
+
+    <!-- Story Section -->
+    <div class="form-section section-blue">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>auto_stories</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companies.storySection' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <app-form-field formControlName="storyEn" type="textarea" label="admin.companies.storyEn"
+          placeholder="admin.companies.placeholders.storyEn"
+          [errors]="[{name: 'required', message: 'admin.companies.errors.storyEnRequired'}]">
         </app-form-field>
 
+        <app-form-field formControlName="storyAr" type="textarea" label="admin.companies.storyAr"
+          placeholder="admin.companies.placeholders.storyAr" dir="rtl"
+          [errors]="[{name: 'required', message: 'admin.companies.errors.storyArRequired'}]">
+        </app-form-field>
+      </div>
+    </div>
+
+    <!-- Mission Section -->
+    <div class="form-section section-blue">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>flag</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companies.missionSection' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <app-form-field formControlName="missionEn" type="textarea" label="admin.companies.missionEn"
+          placeholder="admin.companies.placeholders.missionEn"
+          [errors]="[{name: 'required', message: 'admin.companies.errors.missionEnRequired'}]">
+        </app-form-field>
+
+        <app-form-field formControlName="missionAr" type="textarea" label="admin.companies.missionAr"
+          placeholder="admin.companies.placeholders.missionAr" dir="rtl"
+          [errors]="[{name: 'required', message: 'admin.companies.errors.missionArRequired'}]">
+        </app-form-field>
+      </div>
+    </div>
+
+    <!-- Vision Section -->
+    <div class="form-section section-blue">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>visibility</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companies.visionSection' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <app-form-field formControlName="visionEn" type="textarea" label="admin.companies.visionEn"
+          placeholder="admin.companies.placeholders.visionEn"
+          [errors]="[{name: 'required', message: 'admin.companies.errors.visionEnRequired'}]">
+        </app-form-field>
+
+        <app-form-field formControlName="visionAr" type="textarea" label="admin.companies.visionAr"
+          placeholder="admin.companies.placeholders.visionAr" dir="rtl"
+          [errors]="[{name: 'required', message: 'admin.companies.errors.visionArRequired'}]">
+        </app-form-field>
+      </div>
+    </div>
+
+    <!-- Settings Section -->
+    <div class="form-section section-blue">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>settings</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companies.settingsSection' | translate }}</div>
+      </div>
+
+      <div class="section-content">
         <mat-checkbox formControlName="isActive" color="primary">
           {{ 'admin.companies.isActive' | translate }}
         </mat-checkbox>

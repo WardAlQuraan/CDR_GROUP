@@ -214,7 +214,10 @@
   },
   "companyDetail": {
     "notFound": "Company Not Found",
-    "notFoundDesc": "The company you're looking for doesn't exist."
+    "notFoundDesc": "The company you're looking for doesn't exist.",
+    "story": "Our Story",
+    "mission": "Our Mission",
+    "vision": "Our Vision"
   },
   "validation": {
     "required": "This field is required",
@@ -548,6 +551,21 @@
       "descriptionSection": "Description",
       "descriptionEn": "Description (English)",
       "descriptionAr": "Description (Arabic)",
+      "storySection": "Story",
+      "storyEn": "Story (English)",
+      "storyAr": "Story (Arabic)",
+      "missionSection": "Mission",
+      "missionEn": "Mission (English)",
+      "missionAr": "Mission (Arabic)",
+      "visionSection": "Vision",
+      "visionEn": "Vision (English)",
+      "visionAr": "Vision (Arabic)",
+      "titleSection": "Title",
+      "titleEn": "Title (English)",
+      "titleAr": "Title (Arabic)",
+      "parentCompany": "Parent Company",
+      "noParentCompany": "No Parent Company",
+      "settingsSection": "Settings",
       "status": "Status",
       "isActive": "Active Company",
       "edit": "Edit",
@@ -564,14 +582,32 @@
         "deleteFailed": "Failed to delete company",
         "codeRequired": "Company code is required",
         "nameEnRequired": "English name is required",
-        "nameArRequired": "Arabic name is required"
+        "nameArRequired": "Arabic name is required",
+        "titleEnRequired": "English title is required",
+        "titleArRequired": "Arabic title is required",
+        "descriptionEnRequired": "English description is required",
+        "descriptionArRequired": "Arabic description is required",
+        "storyEnRequired": "English story is required",
+        "storyArRequired": "Arabic story is required",
+        "missionEnRequired": "English mission is required",
+        "missionArRequired": "Arabic mission is required",
+        "visionEnRequired": "English vision is required",
+        "visionArRequired": "Arabic vision is required"
       },
       "placeholders": {
         "code": "Enter company code",
         "nameEn": "Enter name in English",
         "nameAr": "Enter name in Arabic",
         "descriptionEn": "Enter description in English",
-        "descriptionAr": "Enter description in Arabic"
+        "descriptionAr": "Enter description in Arabic",
+        "storyEn": "Enter story in English",
+        "storyAr": "Enter story in Arabic",
+        "missionEn": "Enter mission in English",
+        "missionAr": "Enter mission in Arabic",
+        "visionEn": "Enter vision in English",
+        "visionAr": "Enter vision in Arabic",
+        "titleEn": "Enter title in English",
+        "titleAr": "Enter title in Arabic"
       }
     },
     "eventsAdmin": {
@@ -635,6 +671,46 @@
       "messageDeleted": "Message deleted successfully",
       "errors": {
         "deleteFailed": "Failed to delete message"
+      }
+    },
+    "auditLogs": {
+      "title": "Audit Logs",
+      "subtitle": "Track changes and activity across the system",
+      "searchDescription": "Select an entity type and enter its ID to view audit logs",
+      "entityType": "Entity Type",
+      "entityId": "Entity ID",
+      "entityName": "Entity Name",
+      "search": "Search",
+      "actionType": "Action Type",
+      "performedBy": "Performed By",
+      "affectedColumns": "Affected Columns",
+      "timestamp": "Timestamp",
+      "viewDetails": "View Details",
+      "generalInfo": "General Information",
+      "changes": "Changes",
+      "property": "Property",
+      "oldValues": "Old Value",
+      "newValues": "New Value",
+      "history": "History",
+      "entityTypes": {
+        "company": "Company",
+        "employee": "Employee",
+        "position": "Position",
+        "event": "Event",
+        "user": "User",
+        "role": "Role"
+      },
+      "actions": {
+        "create": "Create",
+        "insert": "Insert",
+        "update": "Update",
+        "delete": "Delete"
+      },
+      "placeholders": {
+        "entityId": "Enter entity ID (GUID)"
+      },
+      "errors": {
+        "loadFailed": "Failed to load audit logs"
       }
     }
   }

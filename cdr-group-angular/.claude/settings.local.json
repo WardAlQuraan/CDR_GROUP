@@ -20,7 +20,8 @@
       "Bash(ng serve:*)",
       "Bash(timeout:*)",
       "Bash(npm run start)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(node -e:*)"
     ]
   }
 }

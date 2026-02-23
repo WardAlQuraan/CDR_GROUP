@@ -22,6 +22,9 @@
           </div>
           <div class="company-text">
             <h1>{{ companyName }}</h1>
+            @if (companyTitle) {
+              <p class="company-title">{{ companyTitle }}</p>
+            }
             @if (companyDescription) {
               <p class="company-description">{{ companyDescription }}</p>
             }
@@ -32,6 +35,29 @@
           {{ 'common.backToHome' | translate }}
         </a>
       </div>
+
+      @if (companyStory || companyMission || companyVision) {
+        <div class="company-details-cards">
+          @if (companyStory) {
+            <div class="detail-card">
+              <h3><mat-icon>auto_stories</mat-icon> {{ 'companyDetail.story' | translate }}</h3>
+              <p>{{ companyStory }}</p>
+            </div>
+          }
+          @if (companyMission) {
+            <div class="detail-card">
+              <h3><mat-icon>flag</mat-icon> {{ 'companyDetail.mission' | translate }}</h3>
+              <p>{{ companyMission }}</p>
+            </div>
+          }
+          @if (companyVision) {
+            <div class="detail-card">
+              <h3><mat-icon>visibility</mat-icon> {{ 'companyDetail.vision' | translate }}</h3>
+              <p>{{ companyVision }}</p>
+            </div>
+          }
+        </div>
+      }
 
       <div class="org-chart-container">
         <app-org-chart [companyCode]="companyCode!" [companyNameEn]="company.nameEn" [companyNameAr]="company.nameAr"></app-org-chart>

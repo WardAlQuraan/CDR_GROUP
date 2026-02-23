@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@an
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 import { EmployeesService } from '../../../../services/employees.service';
 import { FilesService } from '../../../../services/files.service';
 import { SnackbarService } from '../../../../services/snackbar.service';
@@ -51,7 +52,8 @@ export class EmployeesComponent implements OnInit {
     private snackbar: SnackbarService,
     private dialog: MatDialog,
     private translationService: TranslationService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -156,6 +158,13 @@ export class EmployeesComponent implements OnInit {
           permission: Permissions.EMPLOYEES_UPDATE,
           color: 'primary',
           onClick: (row) => this.triggerFileUpload(row)
+        },
+        {
+          icon: 'history',
+          tooltip: 'admin.auditLogs.history',
+          permission: Permissions.AUDIT_LOGS_READ,
+          color: 'accent',
+          onClick: (row) => this.router.navigate(['/admin/audit-logs', 'Employee', row.id])
         },
         {
           icon: 'delete',

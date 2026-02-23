@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 import { CompaniesService } from '../../../../services/companies.service';
 import { SnackbarService } from '../../../../services/snackbar.service';
 import { TranslationService } from '../../../../services/translation.service';
@@ -41,7 +42,8 @@ export class CompaniesComponent implements OnInit {
     private snackbar: SnackbarService,
     private dialog: MatDialog,
     private translationService: TranslationService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -99,6 +101,14 @@ export class CompaniesComponent implements OnInit {
           }
         },
         {
+          key: 'parent',
+          header: 'admin.companies.parentCompany',
+          cell: (row) => {
+            if (!row.parentId) return '-';
+            return (this.isArabic ? row.parentNameAr : row.parentNameEn) || '-';
+          }
+        },
+        {
           key: 'isActive',
           header: 'admin.companies.status',
           type: 'badge',
@@ -121,6 +131,13 @@ export class CompaniesComponent implements OnInit {
           permission: Permissions.COMPANIES_UPDATE,
           color: 'info',
           onClick: (row) => this.openEditDialog(row)
+        },
+        {
+          icon: 'history',
+          tooltip: 'admin.auditLogs.history',
+          permission: Permissions.AUDIT_LOGS_READ,
+          color: 'accent',
+          onClick: (row) => this.router.navigate(['/admin/audit-logs', 'Company', row.id])
         },
         {
           icon: 'delete',
@@ -198,7 +215,7 @@ export class CompaniesComponent implements OnInit {
   openCreateDialog(): void {
     const dialogData: CompanyDialogData = { mode: 'create' };
     const dialogRef = this.dialog.open(CompanyDialogComponent, {
-      width: '600px',
+      width: '700px',
       data: dialogData,
       disableClose: true
     });
@@ -213,7 +230,7 @@ export class CompaniesComponent implements OnInit {
   openEditDialog(company: CompanyDto): void {
     const dialogData: CompanyDialogData = { mode: 'edit', company };
     const dialogRef = this.dialog.open(CompanyDialogComponent, {
-      width: '600px',
+      width: '700px',
       data: dialogData,
       disableClose: true
     });

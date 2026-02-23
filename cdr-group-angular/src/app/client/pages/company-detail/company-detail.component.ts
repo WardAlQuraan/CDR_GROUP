@@ -58,6 +58,26 @@ export class CompanyDetailComponent implements OnInit {
     return (this.isArabic ? this.company.descriptionAr : this.company.descriptionEn) || '';
   }
 
+  get companyTitle(): string {
+    if (!this.company) return '';
+    return (this.isArabic ? this.company.titleAr : this.company.titleEn) || '';
+  }
+
+  get companyStory(): string {
+    if (!this.company) return '';
+    return (this.isArabic ? this.company.storyAr : this.company.storyEn) || '';
+  }
+
+  get companyMission(): string {
+    if (!this.company) return '';
+    return (this.isArabic ? this.company.missionAr : this.company.missionEn) || '';
+  }
+
+  get companyVision(): string {
+    if (!this.company) return '';
+    return (this.isArabic ? this.company.visionAr : this.company.visionEn) || '';
+  }
+
   private loadCompany(): void {
     this.companiesService.getByCode(this.companyCode!).subscribe({
       next: (response) => {

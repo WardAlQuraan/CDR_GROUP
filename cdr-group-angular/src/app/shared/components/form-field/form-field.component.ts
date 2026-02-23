@@ -28,6 +28,14 @@ export class FormFieldComponent implements ControlValueAccessor {
   disabled = false;
   hidePassword = true;
 
+  get isRequired(): boolean {
+    if (this.required) return true;
+    const control = this.ngControl?.control;
+    if (!control || !control.validator) return false;
+    const result = control.validator({} as any);
+    return result?.['required'] === true;
+  }
+
   private onChange: (value: any) => void = () => {};
   onTouched: () => void = () => {};
 

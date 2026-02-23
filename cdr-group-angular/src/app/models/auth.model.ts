@@ -95,7 +95,10 @@ export const Permissions = {
   SALARY_HISTORIES_READ: 'salary-histories.read',
   SALARY_HISTORIES_CREATE: 'salary-histories.create',
   SALARY_HISTORIES_UPDATE: 'salary-histories.update',
-  SALARY_HISTORIES_DELETE: 'salary-histories.delete'
+  SALARY_HISTORIES_DELETE: 'salary-histories.delete',
+
+  // Audit Logs
+  AUDIT_LOGS_READ: 'audit-logs.read'
 } as const;
 
 export type Permission = typeof Permissions[keyof typeof Permissions];

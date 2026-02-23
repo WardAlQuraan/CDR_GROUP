@@ -5,7 +5,19 @@ export interface CompanyDto {
   nameAr: string;
   descriptionEn?: string;
   descriptionAr?: string;
+  storyEn?: string;
+  storyAr?: string;
+  missionEn?: string;
+  missionAr?: string;
+  visionEn?: string;
+  visionAr?: string;
+  titleEn?: string;
+  titleAr?: string;
+  parentId?: string;
+  parentNameEn?: string;
+  parentNameAr?: string;
   isActive: boolean;
+  children: CompanyDto[];
   createdAt: Date;
   updatedAt?: Date;
 }
@@ -23,6 +35,15 @@ export interface CreateCompanyDto {
   nameAr: string;
   descriptionEn?: string;
   descriptionAr?: string;
+  storyEn?: string;
+  storyAr?: string;
+  missionEn?: string;
+  missionAr?: string;
+  visionEn?: string;
+  visionAr?: string;
+  titleEn?: string;
+  titleAr?: string;
+  parentId?: string;
   isActive?: boolean;
 }
 
@@ -32,5 +53,14 @@ export interface UpdateCompanyDto {
   nameAr?: string;
   descriptionEn?: string;
   descriptionAr?: string;
+  storyEn?: string;
+  storyAr?: string;
+  missionEn?: string;
+  missionAr?: string;
+  visionEn?: string;
+  visionAr?: string;
+  titleEn?: string;
+  titleAr?: string;
+  parentId?: string;
   isActive?: boolean;
 }
