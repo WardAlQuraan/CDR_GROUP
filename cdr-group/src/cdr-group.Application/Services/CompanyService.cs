@@ -41,11 +41,43 @@ namespace cdr_group.Application.Services
             return Mapper.Map<IEnumerable<CompanyDto>>(companies);
         }
 
+        public async Task<IEnumerable<CompanyDto>> GetTreeAsync()
+        {
+            var companies = await UnitOfWork.Companies.GetActiveCompaniesAsync();
+            var allDtos = Mapper.Map<List<CompanyDto>>(companies);
+
+            var lookup = allDtos.ToDictionary(c => c.Id);
+
+            foreach (var dto in allDtos)
+            {
+                dto.Children = new List<CompanyDto>();
+            }
+
+            foreach (var dto in allDtos)
+            {
+                if (dto.ParentId.HasValue && lookup.TryGetValue(dto.ParentId.Value, out var parent))
+                {
+                    parent.Children.Add(dto);
+                }
+            }
+
+            return allDtos.Where(c => !c.ParentId.HasValue).ToList();
+        }
+
         protected override async Task ValidateCreateAsync(CreateCompanyDto dto)
         {
             if (await UnitOfWork.Companies.CompanyCodeExistsAsync(dto.Code))
             {
                 throw new InvalidOperationException(Messages.CompanyCodeExists);
+            }
+
+            if (dto.ParentId.HasValue)
+            {
+                var parent = await UnitOfWork.Companies.GetByIdAsync(dto.ParentId.Value);
+                if (parent == null)
+                {
+                    throw new InvalidOperationException(Messages.ParentCompanyNotFound);
+                }
             }
         }
 
@@ -58,15 +90,49 @@ namespace cdr_group.Application.Services
                     throw new InvalidOperationException(Messages.CompanyCodeExists);
                 }
             }
+
+            // Check if deactivating a company with active children
+            if (dto.IsActive == false && entity.IsActive)
+            {
+                if (await UnitOfWork.Companies.HasActiveChildrenAsync(id))
+                {
+                    throw new InvalidOperationException(Messages.CompanyHasActiveChildren);
+                }
+            }
+
+            if (dto.ParentId.HasValue)
+            {
+                if (dto.ParentId.Value == id)
+                {
+                    throw new InvalidOperationException(Messages.CompanyCannotBeOwnParent);
+                }
+
+                var parent = await UnitOfWork.Companies.GetByIdAsync(dto.ParentId.Value);
+                if (parent == null)
+                {
+                    throw new InvalidOperationException(Messages.ParentCompanyNotFound);
+                }
+
+                // Check for circular reference: walk up the parent chain
+                var currentParent = parent;
+                while (currentParent.ParentId.HasValue)
+                {
+                    if (currentParent.ParentId.Value == id)
+                    {
+                        throw new InvalidOperationException(Messages.CompanyCircularReference);
+                    }
+                    currentParent = await UnitOfWork.Companies.GetByIdAsync(currentParent.ParentId.Value);
+                    if (currentParent == null) break;
+                }
+            }
         }
 
         protected override async Task ValidateDeleteAsync(Guid id, Company entity)
         {
-            // Check for branches linked to this company
-            var branches = await UnitOfWork.Branches.GetByCompanyIdAsync(id);
-            if (branches.Any())
+            // Check for child companies
+            if (await UnitOfWork.Companies.HasChildrenAsync(id))
             {
-                throw new InvalidOperationException(Messages.CompanyHasBranches);
+                throw new InvalidOperationException(Messages.CompanyHasChildren);
             }
 
             // Check for employees linked to this company

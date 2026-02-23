@@ -16,11 +16,13 @@ namespace cdr_group.Contracts.DTOs.Company
         public string? MissionAr { get; set; }
         public string? VisionEn { get; set; }
         public string? VisionAr { get; set; }
-        public string? PrimaryColor { get; set; }
-        public string? SecondaryColor { get; set; }
         public string? TitleEn { get; set; }
         public string? TitleAr { get; set; }
+        public Guid? ParentId { get; set; }
+        public string? ParentNameEn { get; set; }
+        public string? ParentNameAr { get; set; }
         public bool IsActive { get; set; }
+        public List<CompanyDto> Children { get; set; } = new();
 
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
@@ -72,17 +74,13 @@ namespace cdr_group.Contracts.DTOs.Company
         [StringLength(1000)]
         public string? VisionAr { get; set; }
 
-        [StringLength(20)]
-        public string? PrimaryColor { get; set; }
-
-        [StringLength(20)]
-        public string? SecondaryColor { get; set; }
-
         [StringLength(500)]
         public string? TitleEn { get; set; }
 
         [StringLength(500)]
         public string? TitleAr { get; set; }
+
+        public Guid? ParentId { get; set; }
 
         public bool IsActive { get; set; } = true;
     }
@@ -122,17 +120,13 @@ namespace cdr_group.Contracts.DTOs.Company
         [StringLength(1000)]
         public string? VisionAr { get; set; }
 
-        [StringLength(20)]
-        public string? PrimaryColor { get; set; }
-
-        [StringLength(20)]
-        public string? SecondaryColor { get; set; }
-
         [StringLength(500)]
         public string? TitleEn { get; set; }
 
         [StringLength(500)]
         public string? TitleAr { get; set; }
+
+        public Guid? ParentId { get; set; }
 
         public bool? IsActive { get; set; }
     }

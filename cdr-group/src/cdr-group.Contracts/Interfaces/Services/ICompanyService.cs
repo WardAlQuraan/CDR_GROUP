@@ -6,5 +6,6 @@ namespace cdr_group.Contracts.Interfaces.Services
     {
         Task<CompanyDto?> GetByCodeAsync(string code);
         Task<IEnumerable<CompanyDto>> GetActiveCompaniesAsync();
+        Task<IEnumerable<CompanyDto>> GetTreeAsync();
     }
 }

@@ -15,17 +15,17 @@ namespace cdr_group.Domain.Entities
         public string? MissionAr { get; set; }
         public string? VisionEn { get; set; }
         public string? VisionAr { get; set; }
-        public string? PrimaryColor { get; set; }
-        public string? SecondaryColor { get; set; }
         public string? TitleEn { get; set; }
         public string? TitleAr { get; set; }
         public bool IsActive { get; set; } = true;
 
+        // Self-referencing parent
+        public Guid? ParentId { get; set; }
+        public Company? Parent { get; set; }
+        public virtual ICollection<Company> Children { get; set; } = new List<Company>();
+
         // Employees in this company
         public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
-
-        // Branches of this company
-        public virtual ICollection<Branch> Branches { get; set; } = new List<Branch>();
 
         // Events in this company
         public virtual ICollection<Event> Events { get; set; } = new List<Event>();

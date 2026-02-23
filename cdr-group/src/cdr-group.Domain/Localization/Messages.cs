@@ -22,14 +22,15 @@ namespace cdr_group.Domain.Localization
         public const string IncorrectCurrentPassword = "incorrect_current_password";
         public const string UserNotFound = "user_not_found";
 
-        // Branch
-        public const string BranchCodeExists = "branch_code_exists";
-        public const string CompanyHasBranches = "company_has_branches";
-
         // Company
         public const string CompanyCodeExists = "company_code_exists";
         public const string CompanyNotFound = "company_not_found";
         public const string CompanyHasEmployees = "company_has_employees";
+        public const string ParentCompanyNotFound = "parent_company_not_found";
+        public const string CompanyCannotBeOwnParent = "company_cannot_be_own_parent";
+        public const string CompanyCircularReference = "company_circular_reference";
+        public const string CompanyHasChildren = "company_has_children";
+        public const string CompanyHasActiveChildren = "company_has_active_children";
 
         // Employee
         public const string EmployeeCannotBeOwnManager = "employee_cannot_be_own_manager";
@@ -82,14 +83,15 @@ namespace cdr_group.Domain.Localization
                 [IncorrectCurrentPassword] = "Current password is incorrect.",
                 [UserNotFound] = "User not found.",
 
-                // Branch
-                [BranchCodeExists] = "Branch code already exists.",
-                [CompanyHasBranches] = "Cannot delete company with branches. Please remove branches first.",
-
                 // Company
                 [CompanyCodeExists] = "Company code already exists.",
                 [CompanyNotFound] = "Company not found.",
                 [CompanyHasEmployees] = "Cannot delete company with employees. Please reassign employees first.",
+                [ParentCompanyNotFound] = "Parent company not found.",
+                [CompanyCannotBeOwnParent] = "A company cannot be its own parent.",
+                [CompanyCircularReference] = "Cannot assign parent: circular reference detected.",
+                [CompanyHasChildren] = "Cannot delete company with child companies. Please reassign or delete child companies first.",
+                [CompanyHasActiveChildren] = "Cannot deactivate company with active child companies. Please deactivate child companies first.",
 
                 // Employee
                 [EmployeeCannotBeOwnManager] = "An employee cannot be their own manager.",
@@ -141,14 +143,15 @@ namespace cdr_group.Domain.Localization
                 [IncorrectCurrentPassword] = "كلمة المرور الحالية غير صحيحة.",
                 [UserNotFound] = "المستخدم غير موجود.",
 
-                // Branch
-                [BranchCodeExists] = "رمز الفرع موجود بالفعل.",
-                [CompanyHasBranches] = "لا يمكن حذف شركة تحتوي على فروع. يرجى إزالة الفروع أولاً.",
-
                 // Company
                 [CompanyCodeExists] = "رمز الشركة موجود بالفعل.",
                 [CompanyNotFound] = "الشركة غير موجودة.",
                 [CompanyHasEmployees] = "لا يمكن حذف شركة تحتوي على موظفين. يرجى إعادة تعيين الموظفين أولاً.",
+                [ParentCompanyNotFound] = "الشركة الأم غير موجودة.",
+                [CompanyCannotBeOwnParent] = "لا يمكن للشركة أن تكون الشركة الأم لنفسها.",
+                [CompanyCircularReference] = "لا يمكن تعيين الشركة الأم: تم اكتشاف مرجع دائري.",
+                [CompanyHasChildren] = "لا يمكن حذف شركة تحتوي على شركات فرعية. يرجى إعادة تعيين أو حذف الشركات الفرعية أولاً.",
+                [CompanyHasActiveChildren] = "لا يمكن تعطيل شركة تحتوي على شركات فرعية نشطة. يرجى تعطيل الشركات الفرعية أولاً.",
 
                 // Employee
                 [EmployeeCannotBeOwnManager] = "لا يمكن للموظف أن يكون مديراً لنفسه.",

@@ -12,8 +12,8 @@ using cdr_group.Persistence.Data;
 namespace cdr_group.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260221141435_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260223213224_audit")]
+    partial class audit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,64 +64,15 @@ namespace cdr_group.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EntityId");
-
-                    b.HasIndex("EntityName");
+                    b.HasIndex("ActionType");
 
                     b.HasIndex("PerformedBy");
 
                     b.HasIndex("Timestamp");
 
+                    b.HasIndex("EntityName", "EntityId");
+
                     b.ToTable("AuditLogs");
-                });
-
-            modelBuilder.Entity("cdr_group.Domain.Entities.Branch", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Address")
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("IsPrimary")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Code")
-                        .IsUnique();
-
-                    b.HasIndex("CompanyId");
-
-                    b.ToTable("Branches");
                 });
 
             modelBuilder.Entity("cdr_group.Domain.Entities.Company", b =>
@@ -173,13 +124,8 @@ namespace cdr_group.Persistence.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
-                    b.Property<string>("PrimaryColor")
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
-
-                    b.Property<string>("SecondaryColor")
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("StoryAr")
                         .HasMaxLength(2000)
@@ -188,14 +134,6 @@ namespace cdr_group.Persistence.Migrations
                     b.Property<string>("StoryEn")
                         .HasMaxLength(2000)
                         .HasColumnType("varchar(2000)");
-
-                    b.Property<string>("SubTitleAr")
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
-
-                    b.Property<string>("SubTitleEn")
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
 
                     b.Property<string>("TitleAr")
                         .HasMaxLength(500)
@@ -223,6 +161,8 @@ namespace cdr_group.Persistence.Migrations
 
                     b.HasIndex("Code")
                         .IsUnique();
+
+                    b.HasIndex("ParentId");
 
                     b.ToTable("Companies");
 
@@ -830,42 +770,6 @@ namespace cdr_group.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("aabbccdd-2222-2222-2222-aaaaaaaaaaaa"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "View branches",
-                            IsDeleted = false,
-                            Module = "Branches",
-                            Name = "branches.read"
-                        },
-                        new
-                        {
-                            Id = new Guid("aabbccdd-2222-2222-2222-bbbbbbbbbbbb"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Create branches",
-                            IsDeleted = false,
-                            Module = "Branches",
-                            Name = "branches.create"
-                        },
-                        new
-                        {
-                            Id = new Guid("aabbccdd-2222-2222-2222-cccccccccccc"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Update branches",
-                            IsDeleted = false,
-                            Module = "Branches",
-                            Name = "branches.update"
-                        },
-                        new
-                        {
-                            Id = new Guid("aabbccdd-2222-2222-2222-dddddddddddd"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Delete branches",
-                            IsDeleted = false,
-                            Module = "Branches",
-                            Name = "branches.delete"
-                        },
-                        new
-                        {
                             Id = new Guid("aabbccdd-1111-1111-1111-aaaaaaaaaaaa"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "View salary histories",
@@ -899,6 +803,15 @@ namespace cdr_group.Persistence.Migrations
                             IsDeleted = false,
                             Module = "SalaryHistories",
                             Name = "salary-histories.delete"
+                        },
+                        new
+                        {
+                            Id = new Guid("aabbccdd-2222-2222-2222-aaaaaaaaaaaa"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "View audit logs",
+                            IsDeleted = false,
+                            Module = "AuditLogs",
+                            Name = "audit-logs.read"
                         });
                 });
 
@@ -1321,7 +1234,7 @@ namespace cdr_group.Persistence.Migrations
                             Id = new Guid("00000000-0000-0000-0000-000000000033"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-2222-2222-2222-aaaaaaaaaaaa"),
+                            PermissionId = new Guid("aabbccdd-1111-1111-1111-aaaaaaaaaaaa"),
                             RoleId = new Guid("11111111-1111-1111-1111-111111111111")
                         },
                         new
@@ -1329,7 +1242,7 @@ namespace cdr_group.Persistence.Migrations
                             Id = new Guid("00000000-0000-0000-0000-000000000034"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-2222-2222-2222-bbbbbbbbbbbb"),
+                            PermissionId = new Guid("aabbccdd-1111-1111-1111-bbbbbbbbbbbb"),
                             RoleId = new Guid("11111111-1111-1111-1111-111111111111")
                         },
                         new
@@ -1337,7 +1250,7 @@ namespace cdr_group.Persistence.Migrations
                             Id = new Guid("00000000-0000-0000-0000-000000000035"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-2222-2222-2222-cccccccccccc"),
+                            PermissionId = new Guid("aabbccdd-1111-1111-1111-cccccccccccc"),
                             RoleId = new Guid("11111111-1111-1111-1111-111111111111")
                         },
                         new
@@ -1345,7 +1258,7 @@ namespace cdr_group.Persistence.Migrations
                             Id = new Guid("00000000-0000-0000-0000-000000000036"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-2222-2222-2222-dddddddddddd"),
+                            PermissionId = new Guid("aabbccdd-1111-1111-1111-dddddddddddd"),
                             RoleId = new Guid("11111111-1111-1111-1111-111111111111")
                         },
                         new
@@ -1353,31 +1266,7 @@ namespace cdr_group.Persistence.Migrations
                             Id = new Guid("00000000-0000-0000-0000-000000000037"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-1111-1111-1111-aaaaaaaaaaaa"),
-                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000038"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-1111-1111-1111-bbbbbbbbbbbb"),
-                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000039"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-1111-1111-1111-cccccccccccc"),
-                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000040"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-1111-1111-1111-dddddddddddd"),
+                            PermissionId = new Guid("aabbccdd-2222-2222-2222-aaaaaaaaaaaa"),
                             RoleId = new Guid("11111111-1111-1111-1111-111111111111")
                         },
                         new
@@ -1617,7 +1506,7 @@ namespace cdr_group.Persistence.Migrations
                             Id = new Guid("00000000-0000-0000-1111-000000000030"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-2222-2222-2222-aaaaaaaaaaaa"),
+                            PermissionId = new Guid("aabbccdd-1111-1111-1111-aaaaaaaaaaaa"),
                             RoleId = new Guid("55555555-5555-5555-5555-555555555555")
                         },
                         new
@@ -1625,7 +1514,7 @@ namespace cdr_group.Persistence.Migrations
                             Id = new Guid("00000000-0000-0000-1111-000000000031"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-2222-2222-2222-bbbbbbbbbbbb"),
+                            PermissionId = new Guid("aabbccdd-1111-1111-1111-bbbbbbbbbbbb"),
                             RoleId = new Guid("55555555-5555-5555-5555-555555555555")
                         },
                         new
@@ -1633,7 +1522,7 @@ namespace cdr_group.Persistence.Migrations
                             Id = new Guid("00000000-0000-0000-1111-000000000032"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-2222-2222-2222-cccccccccccc"),
+                            PermissionId = new Guid("aabbccdd-1111-1111-1111-cccccccccccc"),
                             RoleId = new Guid("55555555-5555-5555-5555-555555555555")
                         },
                         new
@@ -1641,7 +1530,7 @@ namespace cdr_group.Persistence.Migrations
                             Id = new Guid("00000000-0000-0000-1111-000000000033"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-2222-2222-2222-dddddddddddd"),
+                            PermissionId = new Guid("aabbccdd-1111-1111-1111-dddddddddddd"),
                             RoleId = new Guid("55555555-5555-5555-5555-555555555555")
                         },
                         new
@@ -1649,31 +1538,7 @@ namespace cdr_group.Persistence.Migrations
                             Id = new Guid("00000000-0000-0000-1111-000000000034"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-1111-1111-1111-aaaaaaaaaaaa"),
-                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-1111-000000000035"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-1111-1111-1111-bbbbbbbbbbbb"),
-                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-1111-000000000036"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-1111-1111-1111-cccccccccccc"),
-                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-1111-000000000037"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-1111-1111-1111-dddddddddddd"),
+                            PermissionId = new Guid("aabbccdd-2222-2222-2222-aaaaaaaaaaaa"),
                             RoleId = new Guid("55555555-5555-5555-5555-555555555555")
                         });
                 });
@@ -1923,15 +1788,14 @@ namespace cdr_group.Persistence.Migrations
                     b.ToTable("SalaryHistories");
                 });
 
-            modelBuilder.Entity("cdr_group.Domain.Entities.Branch", b =>
+            modelBuilder.Entity("cdr_group.Domain.Entities.Company", b =>
                 {
-                    b.HasOne("cdr_group.Domain.Entities.Company", "Company")
-                        .WithMany("Branches")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("cdr_group.Domain.Entities.Company", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Navigation("Company");
+                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("cdr_group.Domain.Entities.Employee", b =>
@@ -2038,7 +1902,7 @@ namespace cdr_group.Persistence.Migrations
 
             modelBuilder.Entity("cdr_group.Domain.Entities.Company", b =>
                 {
-                    b.Navigation("Branches");
+                    b.Navigation("Children");
 
                     b.Navigation("Employees");
 

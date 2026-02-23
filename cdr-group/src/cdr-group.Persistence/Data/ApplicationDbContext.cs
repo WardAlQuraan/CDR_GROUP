@@ -22,30 +22,12 @@ namespace cdr_group.Persistence.Data
             _currentUserService = currentUserService;
         }
 
-        public override int SaveChanges()
-        {
-            SetAuditFields();
-            var auditEntries = OnBeforeSaveChanges();
-            var result = base.SaveChanges();
-            OnAfterSaveChanges(auditEntries, default).GetAwaiter().GetResult();
-            return result;
-        }
-
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             SetAuditFields();
             var auditEntries = OnBeforeSaveChanges();
             var result = base.SaveChanges(acceptAllChangesOnSuccess);
             OnAfterSaveChanges(auditEntries, default).GetAwaiter().GetResult();
-            return result;
-        }
-
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            SetAuditFields();
-            var auditEntries = OnBeforeSaveChanges();
-            var result = await base.SaveChangesAsync(cancellationToken);
-            await OnAfterSaveChanges(auditEntries, cancellationToken);
             return result;
         }
 
@@ -100,18 +82,24 @@ namespace cdr_group.Persistence.Data
                     Timestamp = currentTime
                 };
 
+                var baseEntityProperties = typeof(BaseEntity).GetProperties()
+                    .Select(p => p.Name)
+                    .ToHashSet();
+
                 switch (entry.State)
                 {
                     case EntityState.Added:
                         auditEntry.ActionType = AuditActionTypes.Insert;
                         foreach (var property in entry.Properties)
                         {
+                            if (baseEntityProperties.Contains(property.Metadata.Name))
+                                continue;
                             if (property.IsTemporary)
                             {
                                 auditEntry.TemporaryProperties.Add(property);
                                 continue;
                             }
-                            auditEntry.NewValues[property.Metadata.Name] = property.CurrentValue;
+                            auditEntry.NewValues[property.Metadata.Name] = FormatAuditValue(property.CurrentValue);
                         }
                         break;
 
@@ -127,12 +115,19 @@ namespace cdr_group.Persistence.Data
 
                         foreach (var property in entry.Properties)
                         {
+                            if (baseEntityProperties.Contains(property.Metadata.Name))
+                                continue;
                             if (!property.IsModified)
                                 continue;
 
-                            auditEntry.AffectedColumns.Add(property.Metadata.Name);
-                            auditEntry.OldValues[property.Metadata.Name] = property.OriginalValue;
-                            auditEntry.NewValues[property.Metadata.Name] = property.CurrentValue;
+                            var oldValue = property.OriginalValue;
+                            var newValue = property.CurrentValue;
+                            if (!Equals(oldValue, newValue))
+                            {
+                                auditEntry.AffectedColumns.Add(property.Metadata.Name);
+                                auditEntry.OldValues[property.Metadata.Name] = FormatAuditValue(oldValue);
+                                auditEntry.NewValues[property.Metadata.Name] = FormatAuditValue(newValue);
+                            }
                         }
                         break;
 
@@ -140,7 +135,9 @@ namespace cdr_group.Persistence.Data
                         auditEntry.ActionType = AuditActionTypes.Delete;
                         foreach (var property in entry.Properties)
                         {
-                            auditEntry.OldValues[property.Metadata.Name] = property.OriginalValue;
+                            if (baseEntityProperties.Contains(property.Metadata.Name))
+                                continue;
+                            auditEntry.OldValues[property.Metadata.Name] = FormatAuditValue(property.OriginalValue);
                         }
                         break;
                 }
@@ -169,7 +166,17 @@ namespace cdr_group.Persistence.Data
                 AuditLogs.Add(auditEntry.ToAuditLog());
             }
 
-            await base.SaveChangesAsync(cancellationToken);
+            await base.SaveChangesAsync(true, cancellationToken);
+        }
+
+        private static object? FormatAuditValue(object? value)
+        {
+            return value switch
+            {
+                DateTime dt => dt.ToString("yyyy/MM/dd hh:mm:ss"),
+                DateTimeOffset dto => dto.ToString("yyyy/MM/dd hh:mm:ss"),
+                _ => value
+            };
         }
 
         private static void ApplyGlobalFilters(ModelBuilder modelBuilder)
@@ -201,7 +208,6 @@ namespace cdr_group.Persistence.Data
         public DbSet<Event> Events { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<ContactUs> ContactUsMessages { get; set; }
-        public DbSet<Branch> Branches { get; set; }
         public DbSet<SalaryHistory> SalaryHistories { get; set; }
         public DbSet<AuditLog> AuditLogs { get; set; }
 
@@ -349,8 +355,12 @@ namespace cdr_group.Persistence.Data
                 entity.Property(e => e.TitleAr).HasMaxLength(500);
                 entity.Property(e => e.VisionEn).HasMaxLength(1000);
                 entity.Property(e => e.VisionAr).HasMaxLength(1000);
-                entity.Property(e => e.PrimaryColor).HasMaxLength(20);
-                entity.Property(e => e.SecondaryColor).HasMaxLength(20);
+
+                entity.HasOne(e => e.Parent)
+                    .WithMany(e => e.Children)
+                    .HasForeignKey(e => e.ParentId)
+                    .IsRequired(false)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             // Position configuration
@@ -408,20 +418,6 @@ namespace cdr_group.Persistence.Data
                 entity.Property(e => e.Message).IsRequired().HasMaxLength(2000);
             });
 
-            // Branch configuration
-            modelBuilder.Entity<Branch>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.HasIndex(e => e.Code).IsUnique();
-                entity.Property(e => e.Code).IsRequired().HasMaxLength(50);
-                entity.Property(e => e.Address).HasMaxLength(500);
-
-                entity.HasOne(e => e.Company)
-                    .WithMany(c => c.Branches)
-                    .HasForeignKey(e => e.CompanyId)
-                    .IsRequired()
-                    .OnDelete(DeleteBehavior.Restrict);
-            });
 
             // SalaryHistory configuration
             modelBuilder.Entity<SalaryHistory>(entity =>
@@ -452,10 +448,10 @@ namespace cdr_group.Persistence.Data
                 entity.Property(e => e.PerformedBy).HasMaxLength(200);
                 entity.Property(e => e.Timestamp).IsRequired();
 
-                entity.HasIndex(e => e.EntityName);
-                entity.HasIndex(e => e.EntityId);
+                entity.HasIndex(e => new { e.EntityName, e.EntityId });
                 entity.HasIndex(e => e.Timestamp);
                 entity.HasIndex(e => e.PerformedBy);
+                entity.HasIndex(e => e.ActionType);
             });
 
             // Seed default data
@@ -515,17 +511,15 @@ namespace cdr_group.Persistence.Data
             var contactusUpdateId = Guid.Parse("aabbccdd-bbbb-bbbb-bbbb-bbbbbbbbbbbb");
             var contactusDeleteId = Guid.Parse("aabbccdd-cccc-cccc-cccc-cccccccccccc");
 
-            // Branch Permission IDs
-            var branchesReadId = Guid.Parse("aabbccdd-2222-2222-2222-aaaaaaaaaaaa");
-            var branchesCreateId = Guid.Parse("aabbccdd-2222-2222-2222-bbbbbbbbbbbb");
-            var branchesUpdateId = Guid.Parse("aabbccdd-2222-2222-2222-cccccccccccc");
-            var branchesDeleteId = Guid.Parse("aabbccdd-2222-2222-2222-dddddddddddd");
 
             // SalaryHistory Permission IDs
             var salaryHistoriesReadId = Guid.Parse("aabbccdd-1111-1111-1111-aaaaaaaaaaaa");
             var salaryHistoriesCreateId = Guid.Parse("aabbccdd-1111-1111-1111-bbbbbbbbbbbb");
             var salaryHistoriesUpdateId = Guid.Parse("aabbccdd-1111-1111-1111-cccccccccccc");
             var salaryHistoriesDeleteId = Guid.Parse("aabbccdd-1111-1111-1111-dddddddddddd");
+
+            // AuditLog Permission IDs
+            var auditLogsReadId = Guid.Parse("aabbccdd-2222-2222-2222-aaaaaaaaaaaa");
 
             // Company IDs
             var cdrGroupCompanyId = Guid.Parse("aabbccdd-aabb-aabb-aabb-aabbccddeeff");
@@ -608,16 +602,13 @@ namespace cdr_group.Persistence.Data
                 new Permission { Id = contactusReadId, Name = PermissionConstants.ContactUs.Read, Description = "View contact us messages", Module = "ContactUs", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = contactusUpdateId, Name = PermissionConstants.ContactUs.Update, Description = "Update contact us messages", Module = "ContactUs", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = contactusDeleteId, Name = PermissionConstants.ContactUs.Delete, Description = "Delete contact us messages", Module = "ContactUs", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                // Branch permissions
-                new Permission { Id = branchesReadId, Name = PermissionConstants.Branches.Read, Description = "View branches", Module = "Branches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                new Permission { Id = branchesCreateId, Name = PermissionConstants.Branches.Create, Description = "Create branches", Module = "Branches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                new Permission { Id = branchesUpdateId, Name = PermissionConstants.Branches.Update, Description = "Update branches", Module = "Branches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                new Permission { Id = branchesDeleteId, Name = PermissionConstants.Branches.Delete, Description = "Delete branches", Module = "Branches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 // SalaryHistory permissions
                 new Permission { Id = salaryHistoriesReadId, Name = PermissionConstants.SalaryHistories.Read, Description = "View salary histories", Module = "SalaryHistories", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = salaryHistoriesCreateId, Name = PermissionConstants.SalaryHistories.Create, Description = "Create salary histories", Module = "SalaryHistories", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = salaryHistoriesUpdateId, Name = PermissionConstants.SalaryHistories.Update, Description = "Update salary histories", Module = "SalaryHistories", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = salaryHistoriesDeleteId, Name = PermissionConstants.SalaryHistories.Delete, Description = "Delete salary histories", Module = "SalaryHistories", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                // AuditLog permissions
+                new Permission { Id = auditLogsReadId, Name = PermissionConstants.AuditLogs.Read, Description = "View audit logs", Module = "AuditLogs", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
             };
 
             modelBuilder.Entity<Permission>().HasData(permissions);

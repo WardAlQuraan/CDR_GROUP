@@ -43,6 +43,14 @@ namespace cdr_group.API.Controllers
             return Ok(ApiResponse<CompanyDto>.SuccessResponse(company));
         }
 
+        [HttpGet("tree")]
+        [HasPermission(Permissions.Companies.Read)]
+        public async Task<ActionResult<ApiResponse<IEnumerable<CompanyDto>>>> GetTree()
+        {
+            var tree = await Service.GetTreeAsync();
+            return Ok(ApiResponse<IEnumerable<CompanyDto>>.SuccessResponse(tree));
+        }
+
         [HttpGet("active")]
         [AllowAnonymous]
         public async Task<ActionResult<ApiResponse<IEnumerable<CompanyDto>>>> GetActiveCompanies()

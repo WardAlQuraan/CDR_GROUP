@@ -70,19 +70,12 @@ namespace cdr_group.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     VisionAr = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    PrimaryColor = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    SecondaryColor = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     TitleEn = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     TitleAr = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    SubTitleEn = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    SubTitleAr = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ParentId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     CreatedBy = table.Column<string>(type: "longtext", nullable: true)
@@ -94,6 +87,12 @@ namespace cdr_group.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Companies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Companies_Companies_ParentId",
+                        column: x => x.ParentId,
+                        principalTable: "Companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -270,38 +269,6 @@ namespace cdr_group.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Branches",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    Code = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Address = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsPrimary = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CompanyId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    CreatedBy = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    UpdatedBy = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Branches", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Branches_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -538,8 +505,8 @@ namespace cdr_group.Persistence.Migrations
 
             migrationBuilder.InsertData(
                 table: "Companies",
-                columns: new[] { "Id", "Code", "CreatedAt", "CreatedBy", "DescriptionAr", "DescriptionEn", "IsActive", "IsDeleted", "MissionAr", "MissionEn", "NameAr", "NameEn", "PrimaryColor", "SecondaryColor", "StoryAr", "StoryEn", "SubTitleAr", "SubTitleEn", "TitleAr", "TitleEn", "UpdatedAt", "UpdatedBy", "VisionAr", "VisionEn" },
-                values: new object[] { new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"), "CDR", new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "شركة مجموعة سي دي آر", "CDR Group Company", true, false, null, null, "مجموعة سي دي آر", "CDR Group", null, null, null, null, null, null, null, null, null, null, null, null });
+                columns: new[] { "Id", "Code", "CreatedAt", "CreatedBy", "DescriptionAr", "DescriptionEn", "IsActive", "IsDeleted", "MissionAr", "MissionEn", "NameAr", "NameEn", "ParentId", "StoryAr", "StoryEn", "TitleAr", "TitleEn", "UpdatedAt", "UpdatedBy", "VisionAr", "VisionEn" },
+                values: new object[] { new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"), "CDR", new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "شركة مجموعة سي دي آر", "CDR Group Company", true, false, null, null, "مجموعة سي دي آر", "CDR Group", null, null, null, null, null, null, null, null, null });
 
             migrationBuilder.InsertData(
                 table: "Permissions",
@@ -574,10 +541,6 @@ namespace cdr_group.Persistence.Migrations
                     { new Guid("aabbccdd-1111-1111-1111-bbbbbbbbbbbb"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "Create salary histories", false, "SalaryHistories", "salary-histories.create", null, null },
                     { new Guid("aabbccdd-1111-1111-1111-cccccccccccc"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "Update salary histories", false, "SalaryHistories", "salary-histories.update", null, null },
                     { new Guid("aabbccdd-1111-1111-1111-dddddddddddd"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "Delete salary histories", false, "SalaryHistories", "salary-histories.delete", null, null },
-                    { new Guid("aabbccdd-2222-2222-2222-aaaaaaaaaaaa"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "View branches", false, "Branches", "branches.read", null, null },
-                    { new Guid("aabbccdd-2222-2222-2222-bbbbbbbbbbbb"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "Create branches", false, "Branches", "branches.create", null, null },
-                    { new Guid("aabbccdd-2222-2222-2222-cccccccccccc"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "Update branches", false, "Branches", "branches.update", null, null },
-                    { new Guid("aabbccdd-2222-2222-2222-dddddddddddd"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "Delete branches", false, "Branches", "branches.delete", null, null },
                     { new Guid("aabbccdd-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "View contact us messages", false, "ContactUs", "contactus.read", null, null },
                     { new Guid("aabbccdd-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "Update contact us messages", false, "ContactUs", "contactus.update", null, null },
                     { new Guid("aabbccdd-cccc-cccc-cccc-cccccccccccc"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "Delete contact us messages", false, "ContactUs", "contactus.delete", null, null },
@@ -640,14 +603,10 @@ namespace cdr_group.Persistence.Migrations
                     { new Guid("00000000-0000-0000-0000-000000000030"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
                     { new Guid("00000000-0000-0000-0000-000000000031"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
                     { new Guid("00000000-0000-0000-0000-000000000032"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-cccc-cccc-cccc-cccccccccccc"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000033"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-2222-2222-2222-aaaaaaaaaaaa"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000034"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-2222-2222-2222-bbbbbbbbbbbb"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000035"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-2222-2222-2222-cccccccccccc"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000036"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-2222-2222-2222-dddddddddddd"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000037"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-1111-1111-1111-aaaaaaaaaaaa"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000038"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-1111-1111-1111-bbbbbbbbbbbb"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000039"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-1111-1111-1111-cccccccccccc"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
-                    { new Guid("00000000-0000-0000-0000-000000000040"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-1111-1111-1111-dddddddddddd"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000033"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-1111-1111-1111-aaaaaaaaaaaa"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000034"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-1111-1111-1111-bbbbbbbbbbbb"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000035"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-1111-1111-1111-cccccccccccc"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
+                    { new Guid("00000000-0000-0000-0000-000000000036"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-1111-1111-1111-dddddddddddd"), new Guid("11111111-1111-1111-1111-111111111111"), null, null },
                     { new Guid("00000000-0000-0000-1111-000000000001"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
                     { new Guid("00000000-0000-0000-1111-000000000002"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
                     { new Guid("00000000-0000-0000-1111-000000000003"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
@@ -677,14 +636,10 @@ namespace cdr_group.Persistence.Migrations
                     { new Guid("00000000-0000-0000-1111-000000000027"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
                     { new Guid("00000000-0000-0000-1111-000000000028"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
                     { new Guid("00000000-0000-0000-1111-000000000029"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-cccc-cccc-cccc-cccccccccccc"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000030"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-2222-2222-2222-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000031"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-2222-2222-2222-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000032"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-2222-2222-2222-cccccccccccc"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000033"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-2222-2222-2222-dddddddddddd"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000034"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-1111-1111-1111-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000035"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-1111-1111-1111-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000036"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-1111-1111-1111-cccccccccccc"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
-                    { new Guid("00000000-0000-0000-1111-000000000037"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-1111-1111-1111-dddddddddddd"), new Guid("55555555-5555-5555-5555-555555555555"), null, null }
+                    { new Guid("00000000-0000-0000-1111-000000000030"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-1111-1111-1111-aaaaaaaaaaaa"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000031"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-1111-1111-1111-bbbbbbbbbbbb"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000032"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-1111-1111-1111-cccccccccccc"), new Guid("55555555-5555-5555-5555-555555555555"), null, null },
+                    { new Guid("00000000-0000-0000-1111-000000000033"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, false, new Guid("aabbccdd-1111-1111-1111-dddddddddddd"), new Guid("55555555-5555-5555-5555-555555555555"), null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -713,21 +668,15 @@ namespace cdr_group.Persistence.Migrations
                 column: "Timestamp");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Branches_Code",
-                table: "Branches",
-                column: "Code",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Branches_CompanyId",
-                table: "Branches",
-                column: "CompanyId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Companies_Code",
                 table: "Companies",
                 column: "Code",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Companies_ParentId",
+                table: "Companies",
+                column: "ParentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_CompanyId",
@@ -845,9 +794,6 @@ namespace cdr_group.Persistence.Migrations
         {
             migrationBuilder.DropTable(
                 name: "AuditLogs");
-
-            migrationBuilder.DropTable(
-                name: "Branches");
 
             migrationBuilder.DropTable(
                 name: "ContactUsMessages");

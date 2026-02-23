@@ -10,5 +10,7 @@ namespace cdr_group.Contracts.Interfaces.Repositories
         Task<(IEnumerable<Company> Items, int TotalCount)> GetCompaniesPagedAsync(PagedRequest request);
         Task<bool> CompanyCodeExistsAsync(string code, Guid? excludeId = null);
         Task<bool> HasEmployeesAsync(Guid companyId);
+        Task<bool> HasChildrenAsync(Guid companyId);
+        Task<bool> HasActiveChildrenAsync(Guid companyId);
     }
 }

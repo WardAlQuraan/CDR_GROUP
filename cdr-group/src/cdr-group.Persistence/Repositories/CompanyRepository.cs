@@ -13,22 +13,35 @@ namespace cdr_group.Persistence.Repositories
         {
         }
 
+        public override async Task<Company?> GetByIdAsync(Guid id)
+        {
+            return await _dbSet
+                .Include(c => c.Parent)
+                .FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
+        }
+
         public async Task<Company?> GetByCodeAsync(string code)
         {
             return await _dbSet
+                .Include(c => c.Parent)
                 .FirstOrDefaultAsync(c => c.Code == code && !c.IsDeleted);
         }
 
         public async Task<IEnumerable<Company>> GetActiveCompaniesAsync()
         {
             return await _dbSet
+                .Include(c => c.Parent)
+                .Include(c => c.Children.Where(ch => !ch.IsDeleted))
                 .Where(c => c.IsActive && !c.IsDeleted)
                 .ToListAsync();
         }
 
         public async Task<(IEnumerable<Company> Items, int TotalCount)> GetCompaniesPagedAsync(PagedRequest request)
         {
-            var query = _dbSet.Where(c => !c.IsDeleted);
+            var query = _dbSet
+            .Include(c => c.Parent)
+            .Include(c => c.Children.Where(ch => !ch.IsDeleted))
+            .Where(c => !c.IsDeleted);
 
             query = QueryHelper.ApplySearch(query, request);
             query = QueryHelper.ApplySort(query, request, c => c.CreatedAt);
@@ -51,6 +64,18 @@ namespace cdr_group.Persistence.Repositories
         {
             return await _context.Employees.AnyAsync(e =>
                 e.CompanyId == companyId && !e.IsDeleted);
+        }
+
+        public async Task<bool> HasChildrenAsync(Guid companyId)
+        {
+            return await _dbSet.AnyAsync(c =>
+                c.ParentId == companyId && !c.IsDeleted);
+        }
+
+        public async Task<bool> HasActiveChildrenAsync(Guid companyId)
+        {
+            return await _dbSet.AnyAsync(c =>
+                c.ParentId == companyId && c.IsActive && !c.IsDeleted);
         }
     }
 }
