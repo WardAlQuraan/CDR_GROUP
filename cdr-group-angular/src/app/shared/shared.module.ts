@@ -41,7 +41,6 @@ import { OrgChartComponent } from './components/org-chart/org-chart.component';
 import { BulkUploadDialogComponent } from './components/bulk-upload-dialog/bulk-upload-dialog.component';
 import { ImagePreviewDialogComponent } from './components/image-preview-dialog/image-preview-dialog.component';
 import { FormFieldComponent } from './components/form-field/form-field.component';
-import { MapPickerComponent } from './components/map-picker/map-picker.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { CustomPaginatorIntl } from './custom-paginator-intl';
@@ -60,8 +59,7 @@ import { CustomPaginatorIntl } from './custom-paginator-intl';
     OrgChartComponent,
     BulkUploadDialogComponent,
     ImagePreviewDialogComponent,
-    FormFieldComponent,
-    MapPickerComponent
+    FormFieldComponent
   ],
   imports: [
     CommonModule,
@@ -140,8 +138,7 @@ import { CustomPaginatorIntl } from './custom-paginator-intl';
     OrgChartComponent,
     BulkUploadDialogComponent,
     ImagePreviewDialogComponent,
-    FormFieldComponent,
-    MapPickerComponent
+    FormFieldComponent
   ]
 })
 export class SharedModule {}

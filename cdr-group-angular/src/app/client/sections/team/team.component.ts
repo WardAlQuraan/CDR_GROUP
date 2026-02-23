@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, effect, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, effect, ChangeDetectorRef } from '@angular/core';
 import { EmployeesService } from '../../../services/employees.service';
 import { TranslationService } from '../../../services/translation.service';
 import { EmployeeTreeNodeDto } from '../../../models/employee.model';
@@ -19,7 +19,7 @@ interface TeamMember {
   templateUrl: './team.component.html',
   styleUrl: './team.component.scss',
 })
-export class TeamComponent implements OnInit {
+export class TeamComponent implements OnChanges {
   @Input() companyCode = 'CDR';
 
   loading = false;
@@ -50,8 +50,10 @@ export class TeamComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.loadData();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['companyCode']) {
+      this.loadData();
+    }
   }
 
   get isArabic(): boolean {
@@ -62,7 +64,7 @@ export class TeamComponent implements OnInit {
     this.loading = true;
     this.error = false;
 
-    this.employeesService.getTree().subscribe({
+    this.employeesService.getTree(this.companyCode || undefined).subscribe({
       next: (response) => {
         if (response.success && response.data) {
           this.teamData = response.data.map(node => this.mapToTeamMember(node));
