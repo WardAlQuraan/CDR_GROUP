@@ -159,6 +159,36 @@
       </div>
     </div>
 
+    <!-- Colors Section -->
+    <div class="form-section section-blue">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>palette</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companies.colorsSection' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <div class="form-row">
+          <div class="color-field">
+            <label>{{ 'admin.companies.primaryColor' | translate }}</label>
+            <div class="color-input-wrapper">
+              <input type="color" [value]="form.get('primaryColor')?.value" (input)="form.get('primaryColor')?.setValue($any($event.target).value)" class="color-input">
+              <input type="text" formControlName="primaryColor" class="color-text-input" placeholder="#000000">
+            </div>
+          </div>
+
+          <div class="color-field">
+            <label>{{ 'admin.companies.secondaryColor' | translate }}</label>
+            <div class="color-input-wrapper">
+              <input type="color" [value]="form.get('secondaryColor')?.value" (input)="form.get('secondaryColor')?.setValue($any($event.target).value)" class="color-input">
+              <input type="text" formControlName="secondaryColor" class="color-text-input" placeholder="#000000">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Settings Section -->
     <div class="form-section section-blue">
       <div class="section-header">

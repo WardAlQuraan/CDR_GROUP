@@ -25,4 +25,8 @@ export class CompaniesService extends BaseService<CompanyDto, CreateCompanyDto, 
   getActiveCompanies(): Observable<ApiResponse<CompanyDto[]>> {
     return this.cacheService.get('active-companies', () => this.get<CompanyDto[]>('/active'));
   }
+
+  getTree(): Observable<ApiResponse<CompanyDto[]>> {
+    return this.get<CompanyDto[]>('/tree');
+  }
 }

@@ -38,11 +38,22 @@ export class HeaderComponent implements OnInit {
   }
 
   get selectedCompanyName(): string {
-    const company = this.companies.find(c => c.code === this.selectedCompanyCode);
+    const company = this.findCompany(this.companies, this.selectedCompanyCode);
     if (company) {
       return this.getCompanyName(company);
     }
     return this.selectedCompanyCode;
+  }
+
+  private findCompany(companies: CompanyDto[], code: string): CompanyDto | undefined {
+    for (const company of companies) {
+      if (company.code === code) return company;
+      if (company.children?.length) {
+        const found = this.findCompany(company.children, code);
+        if (found) return found;
+      }
+    }
+    return undefined;
   }
 
   ngOnInit() {
@@ -56,7 +67,7 @@ export class HeaderComponent implements OnInit {
   }
 
   private loadCompanies(): void {
-    this.companiesService.getActiveCompanies().subscribe({
+    this.companiesService.getTree().subscribe({
       next: (response) => {
         if (response.success && response.data) {
           this.companies = response.data;
@@ -67,6 +78,10 @@ export class HeaderComponent implements OnInit {
 
   getCompanyName(company: CompanyDto): string {
     return this.isArabic ? company.nameAr : company.nameEn;
+  }
+
+  hasChildren(company: CompanyDto): boolean {
+    return company.children && company.children.length > 0;
   }
 
   @HostListener('window:scroll', [])

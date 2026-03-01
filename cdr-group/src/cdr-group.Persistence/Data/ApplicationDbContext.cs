@@ -355,6 +355,8 @@ namespace cdr_group.Persistence.Data
                 entity.Property(e => e.TitleAr).HasMaxLength(500);
                 entity.Property(e => e.VisionEn).HasMaxLength(1000);
                 entity.Property(e => e.VisionAr).HasMaxLength(1000);
+                entity.Property(e => e.PrimaryColor).HasMaxLength(20);
+                entity.Property(e => e.SecondaryColor).HasMaxLength(20);
 
                 entity.HasOne(e => e.Parent)
                     .WithMany(e => e.Children)

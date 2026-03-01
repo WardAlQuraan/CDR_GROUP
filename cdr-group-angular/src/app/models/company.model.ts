@@ -13,6 +13,8 @@ export interface CompanyDto {
   visionAr?: string;
   titleEn?: string;
   titleAr?: string;
+  primaryColor?: string;
+  secondaryColor?: string;
   parentId?: string;
   parentNameEn?: string;
   parentNameAr?: string;
@@ -43,6 +45,8 @@ export interface CreateCompanyDto {
   visionAr?: string;
   titleEn?: string;
   titleAr?: string;
+  primaryColor?: string;
+  secondaryColor?: string;
   parentId?: string;
   isActive?: boolean;
 }
@@ -61,6 +65,8 @@ export interface UpdateCompanyDto {
   visionAr?: string;
   titleEn?: string;
   titleAr?: string;
+  primaryColor?: string;
+  secondaryColor?: string;
   parentId?: string;
   isActive?: boolean;
 }

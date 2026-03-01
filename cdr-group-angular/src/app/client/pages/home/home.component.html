@@ -1,5 +1,5 @@
-<app-hero></app-hero>
-<app-about></app-about>
+<app-hero [company]="selectedCompany"></app-hero>
+<app-about [company]="selectedCompany"></app-about>
 
 @if (companies.length > 1) {
   <div class="company-filter-section">

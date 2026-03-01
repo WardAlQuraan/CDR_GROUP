@@ -1,3 +1,59 @@
 :host {
   display: block;
 }
+
+.color-field {
+  flex: 1;
+
+  label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 8px;
+  }
+}
+
+.color-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 6px 12px;
+  background: #fff;
+  transition: border-color 0.2s;
+
+  &:focus-within {
+    border-color: var(--custom-btn-bg-color);
+  }
+}
+
+.color-input {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+
+  &::-webkit-color-swatch-wrapper {
+    padding: 2px;
+  }
+
+  &::-webkit-color-swatch {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+}
+
+.color-text-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: monospace;
+  font-size: 0.95rem;
+  color: #333;
+  background: transparent;
+}

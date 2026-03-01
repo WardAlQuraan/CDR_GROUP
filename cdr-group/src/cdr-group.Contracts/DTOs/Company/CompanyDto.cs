@@ -18,6 +18,8 @@ namespace cdr_group.Contracts.DTOs.Company
         public string? VisionAr { get; set; }
         public string? TitleEn { get; set; }
         public string? TitleAr { get; set; }
+        public string? PrimaryColor { get; set; }
+        public string? SecondaryColor { get; set; }
         public Guid? ParentId { get; set; }
         public string? ParentNameEn { get; set; }
         public string? ParentNameAr { get; set; }
@@ -80,6 +82,12 @@ namespace cdr_group.Contracts.DTOs.Company
         [StringLength(500)]
         public string? TitleAr { get; set; }
 
+        [StringLength(20)]
+        public string? PrimaryColor { get; set; }
+
+        [StringLength(20)]
+        public string? SecondaryColor { get; set; }
+
         public Guid? ParentId { get; set; }
 
         public bool IsActive { get; set; } = true;
@@ -125,6 +133,12 @@ namespace cdr_group.Contracts.DTOs.Company
 
         [StringLength(500)]
         public string? TitleAr { get; set; }
+
+        [StringLength(20)]
+        public string? PrimaryColor { get; set; }
+
+        [StringLength(20)]
+        public string? SecondaryColor { get; set; }
 
         public Guid? ParentId { get; set; }
 

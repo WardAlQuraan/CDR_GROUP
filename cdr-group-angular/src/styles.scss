@@ -325,11 +325,11 @@ strong {
 }
 
 .sticky-wrapper.is-sticky .navbar {
-  background-color: #3E423D;
+  background-color: var(--secondary-color);
 }
 
 .navbar {
-  background: #3E423D;
+  background: var(--secondary-color);
   z-index: 99;
   padding-top: 15px;
   padding-bottom: 15px;
@@ -542,7 +542,7 @@ strong {
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: center center;
-  background-color: #3E423D;
+  background-color: var(--secondary-color);
   position: relative;
   padding-top: 100px;
   padding-bottom: 100px;

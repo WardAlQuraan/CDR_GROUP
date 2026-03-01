@@ -17,6 +17,8 @@ namespace cdr_group.Domain.Entities
         public string? VisionAr { get; set; }
         public string? TitleEn { get; set; }
         public string? TitleAr { get; set; }
+        public string? PrimaryColor { get; set; }
+        public string? SecondaryColor { get; set; }
         public bool IsActive { get; set; } = true;
 
         // Self-referencing parent

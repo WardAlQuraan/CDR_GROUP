@@ -5,8 +5,10 @@
         <span class="about-label">{{ 'about.subtitle' | translate }}</span>
         <h2 class="about-title">{{ 'about.title' | translate }}</h2>
 
-        <p class="about-text">{{ 'about.description' | translate }}</p>
-        <p class="about-text">{{ 'about.passion' | translate }}</p>
+        <p class="about-text">{{ companyStory || ('about.description' | translate) }}</p>
+        @if (!companyStory) {
+          <p class="about-text">{{ 'about.passion' | translate }}</p>
+        }
 
         <div class="about-highlights">
           <div class="highlight-item">
@@ -15,7 +17,7 @@
             </div>
             <div>
               <h5>{{ 'about.mission' | translate }}</h5>
-              <p>{{ 'about.missionText' | translate }}</p>
+              <p>{{ companyMission || ('about.missionText' | translate) }}</p>
             </div>
           </div>
 
@@ -25,7 +27,7 @@
             </div>
             <div>
               <h5>{{ 'about.vision' | translate }}</h5>
-              <p>{{ 'about.visionText' | translate }}</p>
+              <p>{{ companyVision || ('about.visionText' | translate) }}</p>
             </div>
           </div>
         </div>

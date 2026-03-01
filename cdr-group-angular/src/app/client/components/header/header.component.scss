@@ -1,3 +1,12 @@
 .navbar-nav .nav-link {
   cursor: pointer;
 }
+
+.dropdown-menu .parent-item {
+  font-weight: 600;
+}
+
+.dropdown-menu .child-item {
+  padding-inline-start: 2rem;
+  font-size: 0.9em;
+}

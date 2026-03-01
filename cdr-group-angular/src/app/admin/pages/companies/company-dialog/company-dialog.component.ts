@@ -94,6 +94,8 @@ export class CompanyDialogComponent implements OnInit {
         visionAr: [company.visionAr, [Validators.required, Validators.maxLength(1000)]],
         titleEn: [company.titleEn, [Validators.required, Validators.maxLength(500)]],
         titleAr: [company.titleAr, [Validators.required, Validators.maxLength(500)]],
+        primaryColor: [company.primaryColor || '#000000', [Validators.required]],
+        secondaryColor: [company.secondaryColor || '#000000', [Validators.required]],
         parentId: [company.parentId],
         isActive: [company.isActive]
       });
@@ -112,6 +114,8 @@ export class CompanyDialogComponent implements OnInit {
         visionAr: ['', [Validators.required, Validators.maxLength(1000)]],
         titleEn: ['', [Validators.required, Validators.maxLength(500)]],
         titleAr: ['', [Validators.required, Validators.maxLength(500)]],
+        primaryColor: ['#000000', [Validators.required]],
+        secondaryColor: ['#000000', [Validators.required]],
         parentId: [null],
         isActive: [true]
       });
@@ -152,6 +156,8 @@ export class CompanyDialogComponent implements OnInit {
       visionAr: this.form.value.visionAr || undefined,
       titleEn: this.form.value.titleEn || undefined,
       titleAr: this.form.value.titleAr || undefined,
+      primaryColor: this.form.value.primaryColor || undefined,
+      secondaryColor: this.form.value.secondaryColor || undefined,
       parentId: this.form.value.parentId || undefined,
       isActive: this.form.value.isActive
     };
@@ -183,6 +189,8 @@ export class CompanyDialogComponent implements OnInit {
       visionAr: this.form.value.visionAr || undefined,
       titleEn: this.form.value.titleEn || undefined,
       titleAr: this.form.value.titleAr || undefined,
+      primaryColor: this.form.value.primaryColor || undefined,
+      secondaryColor: this.form.value.secondaryColor || undefined,
       parentId: this.form.value.parentId || undefined,
       isActive: this.form.value.isActive
     };

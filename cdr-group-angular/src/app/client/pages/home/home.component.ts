@@ -12,6 +12,7 @@ import { CompanyDto } from '../../../models/company.model';
 })
 export class HomeComponent implements OnInit {
   companies: CompanyDto[] = [];
+  selectedCompany?: CompanyDto;
   selectedCompanyCode = 'CDR';
 
   constructor(
@@ -27,8 +28,19 @@ export class HomeComponent implements OnInit {
       if (company) {
         this.selectedCompanyCode = company;
       }
+      this.loadSelectedCompany();
     });
     this.loadCompanies();
+  }
+
+  private loadSelectedCompany(): void {
+    this.companiesService.getByCode(this.selectedCompanyCode).subscribe({
+      next: (response) => {
+        if (response.success && response.data) {
+          this.selectedCompany = response.data;
+        }
+      }
+    });
   }
 
   get isArabic(): boolean {
