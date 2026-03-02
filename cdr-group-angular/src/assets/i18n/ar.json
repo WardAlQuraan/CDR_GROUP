@@ -565,6 +565,13 @@
       "titleAr": "العنوان (عربي)",
       "parentCompany": "الشركة الأم",
       "noParentCompany": "بدون شركة أم",
+      "openingHoursSection": "ساعات العمل",
+      "openingStartDay": "يوم البداية",
+      "openingEndDay": "يوم النهاية",
+      "openingStartTime": "وقت البداية",
+      "openingEndTime": "وقت النهاية",
+      "openingHoursNoteEn": "ملاحظة ساعات العمل (إنجليزي)",
+      "openingHoursNoteAr": "ملاحظة ساعات العمل (عربي)",
       "colorsSection": "الألوان",
       "primaryColor": "اللون الأساسي",
       "secondaryColor": "اللون الثانوي",
@@ -595,7 +602,11 @@
         "missionEnRequired": "المهمة بالإنجليزية مطلوبة",
         "missionArRequired": "المهمة بالعربية مطلوبة",
         "visionEnRequired": "الرؤية بالإنجليزية مطلوبة",
-        "visionArRequired": "الرؤية بالعربية مطلوبة"
+        "visionArRequired": "الرؤية بالعربية مطلوبة",
+        "openingStartDayRequired": "يوم البداية مطلوب",
+        "openingEndDayRequired": "يوم النهاية مطلوب",
+        "openingStartTimeRequired": "وقت البداية مطلوب",
+        "openingEndTimeRequired": "وقت النهاية مطلوب"
       },
       "placeholders": {
         "code": "أدخل رمز الشركة",
@@ -610,7 +621,44 @@
         "visionEn": "أدخل الرؤية بالإنجليزية",
         "visionAr": "أدخل الرؤية بالعربية",
         "titleEn": "أدخل العنوان بالإنجليزية",
-        "titleAr": "أدخل العنوان بالعربية"
+        "titleAr": "أدخل العنوان بالعربية",
+        "openingHoursNoteEn": "أدخل الملاحظة بالإنجليزية",
+        "openingHoursNoteAr": "أدخل الملاحظة بالعربية"
+      }
+    },
+    "companyContacts": {
+      "title": "جهات اتصال الشركة",
+      "subtitle": "إدارة معلومات الاتصال بالشركة",
+      "addContact": "إضافة جهة اتصال",
+      "createContact": "إنشاء جهة اتصال",
+      "editContact": "تعديل جهة اتصال",
+      "deleteContact": "حذف جهة اتصال",
+      "contactInfo": "معلومات الاتصال",
+      "icon": "الأيقونة",
+      "name": "الاسم",
+      "value": "القيمة",
+      "company": "الشركة",
+      "created": "تاريخ الإنشاء",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "confirmDelete": "هل أنت متأكد من حذف جهة الاتصال هذه؟",
+      "contactCreated": "تم إنشاء جهة الاتصال بنجاح",
+      "contactUpdated": "تم تحديث جهة الاتصال بنجاح",
+      "contactDeleted": "تم حذف جهة الاتصال بنجاح",
+      "contacts": "جهات الاتصال",
+      "errors": {
+        "loadFailed": "فشل تحميل جهات الاتصال",
+        "createFailed": "فشل إنشاء جهة الاتصال",
+        "updateFailed": "فشل تحديث جهة الاتصال",
+        "deleteFailed": "فشل حذف جهة الاتصال",
+        "iconRequired": "الأيقونة مطلوبة",
+        "nameRequired": "الاسم مطلوب",
+        "valueRequired": "القيمة مطلوبة"
+      },
+      "placeholders": {
+        "icon": "أدخل اسم الأيقونة (مثل phone, email)",
+        "name": "أدخل اسم جهة الاتصال",
+        "value": "أدخل قيمة جهة الاتصال"
       }
     },
     "eventsAdmin": {

@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
       }
       this.loadSelectedCompany();
     });
-    this.loadCompanies();
+    // this.loadCompanies();
   }
 
   private loadSelectedCompany(): void {
@@ -60,13 +60,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  private loadCompanies(): void {
-    this.companiesService.getActiveCompanies().subscribe({
-      next: (response) => {
-        if (response.success && response.data) {
-          this.companies = response.data;
-        }
-      }
-    });
-  }
+  // private loadCompanies(): void {
+  //   this.companiesService.getActiveCompanies().subscribe({
+  //     next: (response) => {
+  //       if (response.success && response.data) {
+  //         this.companies = response.data;
+  //       }
+  //     }
+  //   });
+  // }
 }

@@ -159,6 +159,74 @@
       </div>
     </div>
 
+    <!-- Opening Hours Section -->
+    <div class="form-section section-blue">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>schedule</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companies.openingHoursSection' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'admin.companies.openingStartDay' | translate }}</mat-label>
+            <mat-icon matPrefix>today</mat-icon>
+            <mat-select formControlName="openingStartDay">
+              @for (day of weekDays; track day.value) {
+                <mat-option [value]="day.value">{{ isArabic ? day.labelAr : day.labelEn }}</mat-option>
+              }
+            </mat-select>
+            @if (form.get('openingStartDay')?.hasError('required') && form.get('openingStartDay')?.touched) {
+              <mat-error>{{ 'admin.companies.errors.openingStartDayRequired' | translate }}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'admin.companies.openingEndDay' | translate }}</mat-label>
+            <mat-icon matPrefix>event</mat-icon>
+            <mat-select formControlName="openingEndDay">
+              @for (day of weekDays; track day.value) {
+                <mat-option [value]="day.value">{{ isArabic ? day.labelAr : day.labelEn }}</mat-option>
+              }
+            </mat-select>
+            @if (form.get('openingEndDay')?.hasError('required') && form.get('openingEndDay')?.touched) {
+              <mat-error>{{ 'admin.companies.errors.openingEndDayRequired' | translate }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'admin.companies.openingStartTime' | translate }}</mat-label>
+            <mat-icon matPrefix>access_time</mat-icon>
+            <input matInput type="time" formControlName="openingStartTime">
+            @if (form.get('openingStartTime')?.hasError('required') && form.get('openingStartTime')?.touched) {
+              <mat-error>{{ 'admin.companies.errors.openingStartTimeRequired' | translate }}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'admin.companies.openingEndTime' | translate }}</mat-label>
+            <mat-icon matPrefix>access_time</mat-icon>
+            <input matInput type="time" formControlName="openingEndTime">
+            @if (form.get('openingEndTime')?.hasError('required') && form.get('openingEndTime')?.touched) {
+              <mat-error>{{ 'admin.companies.errors.openingEndTimeRequired' | translate }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <app-form-field formControlName="openingHoursNoteEn" label="admin.companies.openingHoursNoteEn"
+          placeholder="admin.companies.placeholders.openingHoursNoteEn">
+        </app-form-field>
+
+        <app-form-field formControlName="openingHoursNoteAr" label="admin.companies.openingHoursNoteAr"
+          placeholder="admin.companies.placeholders.openingHoursNoteAr" dir="rtl">
+        </app-form-field>
+      </div>
+    </div>
+
     <!-- Colors Section -->
     <div class="form-section section-blue">
       <div class="section-header">

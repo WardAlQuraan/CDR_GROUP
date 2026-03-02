@@ -28,6 +28,16 @@ export class CompanyDialogComponent implements OnInit {
   loading = false;
   companiesDataSource$!: Observable<ApiResponse<CompanyDto[]>>;
 
+  weekDays = [
+    { value: 'Sunday', labelEn: 'Sunday', labelAr: 'الأحد' },
+    { value: 'Monday', labelEn: 'Monday', labelAr: 'الاثنين' },
+    { value: 'Tuesday', labelEn: 'Tuesday', labelAr: 'الثلاثاء' },
+    { value: 'Wednesday', labelEn: 'Wednesday', labelAr: 'الأربعاء' },
+    { value: 'Thursday', labelEn: 'Thursday', labelAr: 'الخميس' },
+    { value: 'Friday', labelEn: 'Friday', labelAr: 'الجمعة' },
+    { value: 'Saturday', labelEn: 'Saturday', labelAr: 'السبت' }
+  ];
+
   companyMapper = (company: CompanyDto): SelectOption => ({
     value: company.id,
     label: `${this.isArabic ? company.nameAr : company.nameEn} (${company.code})`
@@ -96,6 +106,12 @@ export class CompanyDialogComponent implements OnInit {
         titleAr: [company.titleAr, [Validators.required, Validators.maxLength(500)]],
         primaryColor: [company.primaryColor || '#000000', [Validators.required]],
         secondaryColor: [company.secondaryColor || '#000000', [Validators.required]],
+        openingStartDay: [company.openingStartDay, [Validators.required]],
+        openingEndDay: [company.openingEndDay, [Validators.required]],
+        openingStartTime: [company.openingStartTime, [Validators.required]],
+        openingEndTime: [company.openingEndTime, [Validators.required]],
+        openingHoursNoteEn: [company.openingHoursNoteEn],
+        openingHoursNoteAr: [company.openingHoursNoteAr],
         parentId: [company.parentId],
         isActive: [company.isActive]
       });
@@ -116,6 +132,12 @@ export class CompanyDialogComponent implements OnInit {
         titleAr: ['', [Validators.required, Validators.maxLength(500)]],
         primaryColor: ['#000000', [Validators.required]],
         secondaryColor: ['#000000', [Validators.required]],
+        openingStartDay: ['', [Validators.required]],
+        openingEndDay: ['', [Validators.required]],
+        openingStartTime: ['', [Validators.required]],
+        openingEndTime: ['', [Validators.required]],
+        openingHoursNoteEn: [''],
+        openingHoursNoteAr: [''],
         parentId: [null],
         isActive: [true]
       });
@@ -158,6 +180,12 @@ export class CompanyDialogComponent implements OnInit {
       titleAr: this.form.value.titleAr || undefined,
       primaryColor: this.form.value.primaryColor || undefined,
       secondaryColor: this.form.value.secondaryColor || undefined,
+      openingStartDay: this.form.value.openingStartDay,
+      openingEndDay: this.form.value.openingEndDay,
+      openingStartTime: this.form.value.openingStartTime,
+      openingEndTime: this.form.value.openingEndTime,
+      openingHoursNoteEn: this.form.value.openingHoursNoteEn || undefined,
+      openingHoursNoteAr: this.form.value.openingHoursNoteAr || undefined,
       parentId: this.form.value.parentId || undefined,
       isActive: this.form.value.isActive
     };
@@ -191,6 +219,12 @@ export class CompanyDialogComponent implements OnInit {
       titleAr: this.form.value.titleAr || undefined,
       primaryColor: this.form.value.primaryColor || undefined,
       secondaryColor: this.form.value.secondaryColor || undefined,
+      openingStartDay: this.form.value.openingStartDay,
+      openingEndDay: this.form.value.openingEndDay,
+      openingStartTime: this.form.value.openingStartTime,
+      openingEndTime: this.form.value.openingEndTime,
+      openingHoursNoteEn: this.form.value.openingHoursNoteEn || undefined,
+      openingHoursNoteAr: this.form.value.openingHoursNoteAr || undefined,
       parentId: this.form.value.parentId || undefined,
       isActive: this.form.value.isActive
     };

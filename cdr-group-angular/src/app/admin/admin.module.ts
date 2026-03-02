@@ -38,6 +38,8 @@ import { ChangePasswordDialogComponent } from './pages/users/change-password-dia
 import { ManageRolesDialogComponent } from './pages/users/manage-roles-dialog/manage-roles-dialog.component';
 import { AuditLogsComponent } from './pages/audit-logs/audit-logs-component/audit-logs-component';
 import { AuditLogViewDialogComponent } from './pages/audit-logs/audit-log-view-dialog/audit-log-view-dialog.component';
+import { CompanyContactsComponent } from './pages/company-contacts/company-contacts-component/company-contacts-component';
+import { CompanyContactDialogComponent } from './pages/company-contacts/company-contact-dialog/company-contact-dialog.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { AuditLogViewDialogComponent } from './pages/audit-logs/audit-log-view-d
     ContactUsAdminComponent,
     ContactUsViewDialogComponent,
     AuditLogsComponent,
-    AuditLogViewDialogComponent
+    AuditLogViewDialogComponent,
+    CompanyContactsComponent,
+    CompanyContactDialogComponent
   ],
   imports: [
     SharedModule,

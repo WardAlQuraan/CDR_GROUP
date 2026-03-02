@@ -10,6 +10,7 @@ import { CompaniesComponent } from './pages/companies/companies-component/compan
 import { CompanyOrgChartPageComponent } from './pages/companies/company-org-chart-page/company-org-chart-page.component';
 import { ContactUsAdminComponent } from './pages/contact-us/contact-us-component/contact-us-component';
 import { AuditLogsComponent } from './pages/audit-logs/audit-logs-component/audit-logs-component';
+import { CompanyContactsComponent } from './pages/company-contacts/company-contacts-component/company-contacts-component';
 
 export const adminRoutes: Routes = [
   {
@@ -24,6 +25,7 @@ export const adminRoutes: Routes = [
 { path: 'events', component: EventsComponent },
       { path: 'companies', component: CompaniesComponent },
       { path: 'companies/:id/org-chart', component: CompanyOrgChartPageComponent },
+      { path: 'companies/:companyId/contacts', component: CompanyContactsComponent },
       { path: 'contact-us', component: ContactUsAdminComponent },
       { path: 'audit-logs', component: AuditLogsComponent },
       { path: 'audit-logs/:entityName/:entityId', component: AuditLogsComponent },

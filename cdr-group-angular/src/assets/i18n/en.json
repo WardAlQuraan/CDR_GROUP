@@ -565,6 +565,13 @@
       "titleAr": "Title (Arabic)",
       "parentCompany": "Parent Company",
       "noParentCompany": "No Parent Company",
+      "openingHoursSection": "Opening Hours",
+      "openingStartDay": "Start Day",
+      "openingEndDay": "End Day",
+      "openingStartTime": "Start Time",
+      "openingEndTime": "End Time",
+      "openingHoursNoteEn": "Opening Hours Note (English)",
+      "openingHoursNoteAr": "Opening Hours Note (Arabic)",
       "colorsSection": "Colors",
       "primaryColor": "Primary Color",
       "secondaryColor": "Secondary Color",
@@ -595,7 +602,11 @@
         "missionEnRequired": "English mission is required",
         "missionArRequired": "Arabic mission is required",
         "visionEnRequired": "English vision is required",
-        "visionArRequired": "Arabic vision is required"
+        "visionArRequired": "Arabic vision is required",
+        "openingStartDayRequired": "Start day is required",
+        "openingEndDayRequired": "End day is required",
+        "openingStartTimeRequired": "Start time is required",
+        "openingEndTimeRequired": "End time is required"
       },
       "placeholders": {
         "code": "Enter company code",
@@ -610,7 +621,44 @@
         "visionEn": "Enter vision in English",
         "visionAr": "Enter vision in Arabic",
         "titleEn": "Enter title in English",
-        "titleAr": "Enter title in Arabic"
+        "titleAr": "Enter title in Arabic",
+        "openingHoursNoteEn": "Enter note in English",
+        "openingHoursNoteAr": "Enter note in Arabic"
+      }
+    },
+    "companyContacts": {
+      "title": "Company Contacts",
+      "subtitle": "Manage company contact information",
+      "addContact": "Add Contact",
+      "createContact": "Create Contact",
+      "editContact": "Edit Contact",
+      "deleteContact": "Delete Contact",
+      "contactInfo": "Contact Information",
+      "icon": "Icon",
+      "name": "Name",
+      "value": "Value",
+      "company": "Company",
+      "created": "Created",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this contact?",
+      "contactCreated": "Contact created successfully",
+      "contactUpdated": "Contact updated successfully",
+      "contactDeleted": "Contact deleted successfully",
+      "contacts": "Contacts",
+      "errors": {
+        "loadFailed": "Failed to load contacts",
+        "createFailed": "Failed to create contact",
+        "updateFailed": "Failed to update contact",
+        "deleteFailed": "Failed to delete contact",
+        "iconRequired": "Icon is required",
+        "nameRequired": "Name is required",
+        "valueRequired": "Value is required"
+      },
+      "placeholders": {
+        "icon": "Enter icon name (e.g. phone, email)",
+        "name": "Enter contact name",
+        "value": "Enter contact value"
       }
     },
     "eventsAdmin": {

@@ -1,0 +1,48 @@
+<app-base-dialog
+  [title]="dialogTitle"
+  [saveLabel]="saveLabel"
+  [saveDisabled]="form.invalid"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <form [formGroup]="form" class="dialog-form">
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>contacts</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companyContacts.contactInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'admin.companyContacts.icon' | translate }}</mat-label>
+          <mat-icon matPrefix>insert_emoticon</mat-icon>
+          <mat-select formControlName="icon">
+            @for (icon of contactIcons; track icon.value) {
+              <mat-option [value]="icon.value">
+                <i [class]="icon.value + ' icon-option-icon'"></i>
+                <span class="icon-option-label">{{ icon.label }}</span>
+              </mat-option>
+            }
+          </mat-select>
+          @if (form.get('icon')?.hasError('required') && form.get('icon')?.touched) {
+            <mat-error>{{ 'admin.companyContacts.errors.iconRequired' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <app-form-field formControlName="name" label="admin.companyContacts.name" icon="label"
+          placeholder="admin.companyContacts.placeholders.name"
+          [errors]="[{name: 'required', message: 'admin.companyContacts.errors.nameRequired'}]">
+        </app-form-field>
+
+        <app-form-field formControlName="value" label="admin.companyContacts.value" icon="link"
+          placeholder="admin.companyContacts.placeholders.value"
+          [errors]="[{name: 'required', message: 'admin.companyContacts.errors.valueRequired'}]">
+        </app-form-field>
+      </div>
+    </div>
+  </form>
+
+</app-base-dialog>

@@ -97,6 +97,12 @@ export const Permissions = {
   SALARY_HISTORIES_UPDATE: 'salary-histories.update',
   SALARY_HISTORIES_DELETE: 'salary-histories.delete',
 
+  // Company Contacts
+  COMPANY_CONTACTS_READ: 'company-contacts.read',
+  COMPANY_CONTACTS_CREATE: 'company-contacts.create',
+  COMPANY_CONTACTS_UPDATE: 'company-contacts.update',
+  COMPANY_CONTACTS_DELETE: 'company-contacts.delete',
+
   // Audit Logs
   AUDIT_LOGS_READ: 'audit-logs.read'
 } as const;

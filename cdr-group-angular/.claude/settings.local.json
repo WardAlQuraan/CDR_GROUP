@@ -21,7 +21,8 @@
       "Bash(timeout:*)",
       "Bash(npm run start)",
       "Bash(grep:*)",
-      "Bash(node -e:*)"
+      "Bash(node -e:*)",
+      "Bash(wc -l *.service.ts)"
     ]
   }
 }

@@ -15,6 +15,12 @@ export interface CompanyDto {
   titleAr?: string;
   primaryColor?: string;
   secondaryColor?: string;
+  openingStartDay: string;
+  openingEndDay: string;
+  openingStartTime: string;
+  openingEndTime: string;
+  openingHoursNoteEn?: string;
+  openingHoursNoteAr?: string;
   parentId?: string;
   parentNameEn?: string;
   parentNameAr?: string;
@@ -47,6 +53,12 @@ export interface CreateCompanyDto {
   titleAr?: string;
   primaryColor?: string;
   secondaryColor?: string;
+  openingStartDay?: string;
+  openingEndDay?: string;
+  openingStartTime?: string;
+  openingEndTime?: string;
+  openingHoursNoteEn?: string;
+  openingHoursNoteAr?: string;
   parentId?: string;
   isActive?: boolean;
 }
@@ -67,6 +79,12 @@ export interface UpdateCompanyDto {
   titleAr?: string;
   primaryColor?: string;
   secondaryColor?: string;
+  openingStartDay?: string;
+  openingEndDay?: string;
+  openingStartTime?: string;
+  openingEndTime?: string;
+  openingHoursNoteEn?: string;
+  openingHoursNoteAr?: string;
   parentId?: string;
   isActive?: boolean;
 }

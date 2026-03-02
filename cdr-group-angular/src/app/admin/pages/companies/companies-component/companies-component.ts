@@ -126,6 +126,13 @@ export class CompaniesComponent implements OnInit {
           onClick: (row) => this.openOrgChart(row)
         },
         {
+          icon: 'contacts',
+          tooltip: 'admin.companyContacts.contacts',
+          permission: Permissions.COMPANY_CONTACTS_READ,
+          color: 'primary',
+          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'contacts'])
+        },
+        {
           icon: 'edit',
           tooltip: 'admin.companies.edit',
           permission: Permissions.COMPANIES_UPDATE,
