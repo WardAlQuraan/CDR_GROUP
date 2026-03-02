@@ -32,7 +32,7 @@ namespace cdr_group.API.Controllers
         }
 
         [HttpGet("by-code/{code}")]
-        [HasPermission(Permissions.Companies.Read)]
+        [AllowAnonymous]
         public async Task<ActionResult<ApiResponse<CompanyDto>>> GetByCode(string code)
         {
             var company = await Service.GetByCodeAsync(code);
@@ -44,7 +44,7 @@ namespace cdr_group.API.Controllers
         }
 
         [HttpGet("tree")]
-        [HasPermission(Permissions.Companies.Read)]
+        [AllowAnonymous]
         public async Task<ActionResult<ApiResponse<IEnumerable<CompanyDto>>>> GetTree()
         {
             var tree = await Service.GetTreeAsync();

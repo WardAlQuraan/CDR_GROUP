@@ -12,8 +12,8 @@ using cdr_group.Persistence.Data;
 namespace cdr_group.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260223213224_audit")]
-    partial class audit
+    [Migration("20260302191149_AddOpeningHoursToCompany")]
+    partial class AddOpeningHoursToCompany
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -124,8 +124,34 @@ namespace cdr_group.Persistence.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
+                    b.Property<string>("OpeningEndDay")
+                        .HasColumnType("longtext");
+
+                    b.Property<TimeSpan?>("OpeningEndTime")
+                        .HasColumnType("time(6)");
+
+                    b.Property<string>("OpeningHoursNoteAr")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("OpeningHoursNoteEn")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("OpeningStartDay")
+                        .HasColumnType("longtext");
+
+                    b.Property<TimeSpan?>("OpeningStartTime")
+                        .HasColumnType("time(6)");
+
                     b.Property<Guid?>("ParentId")
                         .HasColumnType("char(36)");
+
+                    b.Property<string>("PrimaryColor")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("SecondaryColor")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("StoryAr")
                         .HasMaxLength(2000)
@@ -172,13 +198,73 @@ namespace cdr_group.Persistence.Migrations
                             Id = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
                             Code = "CDR",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            DescriptionAr = "شركة مجموعة سي دي آر",
-                            DescriptionEn = "CDR Group Company",
+                            DescriptionAr = "نحن متخصصون في التطوير الإبداعي والتنفيذ، والإنتاج الاستراتيجي، ونمو العلامة التجارية، حيث نحوّل الأفكار إلى واقع مؤثر. من ابتكار المفاهيم إلى التنفيذ الشامل، نصمم حلولاً استراتيجية ترتقي بالعلامات التجارية وتعزز الحضور في السوق وتدفع النمو المستدام. يجمع نهجنا بين الإبداع والدقة، مما يضمن تحقيق نتائج قابلة للقياس وقيمة طويلة الأمد.",
+                            DescriptionEn = "We specialize in Creative Development & Realization, Strategic Production, and Brand Growth, transforming ideas into impactful realities. From concept creation to full-scale execution, we design strategic solutions that elevate brands, strengthen market presence, and drive sustainable growth. Our approach blends creativity with precision, ensuring every project delivers measurable results and long-term value.",
                             IsActive = true,
                             IsDeleted = false,
+                            MissionAr = "تقديم حلول إبداعية مبتكرة تمكّن العلامات التجارية من النمو والنجاح في سوق تنافسي.",
+                            MissionEn = "To deliver innovative creative solutions that empower brands to grow and succeed in a competitive market.",
                             NameAr = "مجموعة سي دي آر",
-                            NameEn = "CDR Group"
+                            NameEn = "CDR Group",
+                            OpeningEndDay = "Thursday",
+                            OpeningEndTime = new TimeSpan(0, 17, 0, 0, 0),
+                            OpeningStartDay = "Sunday",
+                            OpeningStartTime = new TimeSpan(0, 9, 0, 0, 0),
+                            PrimaryColor = "#D9A93E",
+                            SecondaryColor = "#3E423D",
+                            StoryAr = "كانت مجموعة سي دي آر شريكاً موثوقاً في التطوير الإبداعي والإنتاج الاستراتيجي ونمو العلامة التجارية، حيث تقدم حلولاً مبتكرة تحقق النتائج.",
+                            StoryEn = "CDR Group has been a trusted partner in creative development, strategic production, and brand growth, delivering innovative solutions that drive results.",
+                            TitleAr = "التطوير الإبداعي والتنفيذ | الإنتاج الاستراتيجي | نمو العلامة التجارية",
+                            TitleEn = "Creative Development & Realization | Strategic Production | Brand Growth",
+                            VisionAr = "أن نكون الوكالة الإبداعية الرائدة في المنطقة، والمعروفة بالتميز في التطوير والتنفيذ والإنتاج الاستراتيجي.",
+                            VisionEn = "To be the leading creative agency in the region, recognized for excellence in development, realization, and strategic production."
                         });
+                });
+
+            modelBuilder.Entity("cdr_group.Domain.Entities.CompanyContact", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("CompanyContacts");
                 });
 
             modelBuilder.Entity("cdr_group.Domain.Entities.ContactUs", b =>
@@ -806,6 +892,42 @@ namespace cdr_group.Persistence.Migrations
                         },
                         new
                         {
+                            Id = new Guid("aabbccdd-3333-3333-3333-aaaaaaaaaaaa"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "View company contacts",
+                            IsDeleted = false,
+                            Module = "CompanyContacts",
+                            Name = "company-contacts.read"
+                        },
+                        new
+                        {
+                            Id = new Guid("aabbccdd-3333-3333-3333-bbbbbbbbbbbb"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Create company contacts",
+                            IsDeleted = false,
+                            Module = "CompanyContacts",
+                            Name = "company-contacts.create"
+                        },
+                        new
+                        {
+                            Id = new Guid("aabbccdd-3333-3333-3333-cccccccccccc"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Update company contacts",
+                            IsDeleted = false,
+                            Module = "CompanyContacts",
+                            Name = "company-contacts.update"
+                        },
+                        new
+                        {
+                            Id = new Guid("aabbccdd-3333-3333-3333-dddddddddddd"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Delete company contacts",
+                            IsDeleted = false,
+                            Module = "CompanyContacts",
+                            Name = "company-contacts.delete"
+                        },
+                        new
+                        {
                             Id = new Guid("aabbccdd-2222-2222-2222-aaaaaaaaaaaa"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "View audit logs",
@@ -1266,6 +1388,38 @@ namespace cdr_group.Persistence.Migrations
                             Id = new Guid("00000000-0000-0000-0000-000000000037"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
+                            PermissionId = new Guid("aabbccdd-3333-3333-3333-aaaaaaaaaaaa"),
+                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000038"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            PermissionId = new Guid("aabbccdd-3333-3333-3333-bbbbbbbbbbbb"),
+                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000039"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            PermissionId = new Guid("aabbccdd-3333-3333-3333-cccccccccccc"),
+                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000040"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            PermissionId = new Guid("aabbccdd-3333-3333-3333-dddddddddddd"),
+                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000041"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
                             PermissionId = new Guid("aabbccdd-2222-2222-2222-aaaaaaaaaaaa"),
                             RoleId = new Guid("11111111-1111-1111-1111-111111111111")
                         },
@@ -1538,6 +1692,38 @@ namespace cdr_group.Persistence.Migrations
                             Id = new Guid("00000000-0000-0000-1111-000000000034"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
+                            PermissionId = new Guid("aabbccdd-3333-3333-3333-aaaaaaaaaaaa"),
+                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-1111-000000000035"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            PermissionId = new Guid("aabbccdd-3333-3333-3333-bbbbbbbbbbbb"),
+                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-1111-000000000036"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            PermissionId = new Guid("aabbccdd-3333-3333-3333-cccccccccccc"),
+                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-1111-000000000037"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            PermissionId = new Guid("aabbccdd-3333-3333-3333-dddddddddddd"),
+                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-1111-000000000038"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
                             PermissionId = new Guid("aabbccdd-2222-2222-2222-aaaaaaaaaaaa"),
                             RoleId = new Guid("55555555-5555-5555-5555-555555555555")
                         });
@@ -1798,6 +1984,17 @@ namespace cdr_group.Persistence.Migrations
                     b.Navigation("Parent");
                 });
 
+            modelBuilder.Entity("cdr_group.Domain.Entities.CompanyContact", b =>
+                {
+                    b.HasOne("cdr_group.Domain.Entities.Company", "Company")
+                        .WithMany("CompanyContacts")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
             modelBuilder.Entity("cdr_group.Domain.Entities.Employee", b =>
                 {
                     b.HasOne("cdr_group.Domain.Entities.Company", "Company")
@@ -1903,6 +2100,8 @@ namespace cdr_group.Persistence.Migrations
             modelBuilder.Entity("cdr_group.Domain.Entities.Company", b =>
                 {
                     b.Navigation("Children");
+
+                    b.Navigation("CompanyContacts");
 
                     b.Navigation("Employees");
 

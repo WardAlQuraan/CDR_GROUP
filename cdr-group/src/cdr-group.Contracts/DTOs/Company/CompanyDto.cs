@@ -20,6 +20,12 @@ namespace cdr_group.Contracts.DTOs.Company
         public string? TitleAr { get; set; }
         public string? PrimaryColor { get; set; }
         public string? SecondaryColor { get; set; }
+        public string? OpeningStartDay { get; set; }
+        public string? OpeningEndDay { get; set; }
+        public TimeSpan? OpeningStartTime { get; set; }
+        public TimeSpan? OpeningEndTime { get; set; }
+        public string? OpeningHoursNoteEn { get; set; }
+        public string? OpeningHoursNoteAr { get; set; }
         public Guid? ParentId { get; set; }
         public string? ParentNameEn { get; set; }
         public string? ParentNameAr { get; set; }
@@ -88,6 +94,21 @@ namespace cdr_group.Contracts.DTOs.Company
         [StringLength(20)]
         public string? SecondaryColor { get; set; }
 
+        [StringLength(20)]
+        public string? OpeningStartDay { get; set; }
+
+        [StringLength(20)]
+        public string? OpeningEndDay { get; set; }
+
+        public TimeSpan? OpeningStartTime { get; set; }
+        public TimeSpan? OpeningEndTime { get; set; }
+
+        [StringLength(500)]
+        public string? OpeningHoursNoteEn { get; set; }
+
+        [StringLength(500)]
+        public string? OpeningHoursNoteAr { get; set; }
+
         public Guid? ParentId { get; set; }
 
         public bool IsActive { get; set; } = true;
@@ -139,6 +160,21 @@ namespace cdr_group.Contracts.DTOs.Company
 
         [StringLength(20)]
         public string? SecondaryColor { get; set; }
+
+        [StringLength(20)]
+        public string? OpeningStartDay { get; set; }
+
+        [StringLength(20)]
+        public string? OpeningEndDay { get; set; }
+
+        public TimeSpan? OpeningStartTime { get; set; }
+        public TimeSpan? OpeningEndTime { get; set; }
+
+        [StringLength(500)]
+        public string? OpeningHoursNoteEn { get; set; }
+
+        [StringLength(500)]
+        public string? OpeningHoursNoteAr { get; set; }
 
         public Guid? ParentId { get; set; }
 

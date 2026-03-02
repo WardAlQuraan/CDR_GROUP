@@ -19,6 +19,12 @@ namespace cdr_group.Domain.Entities
         public string? TitleAr { get; set; }
         public string? PrimaryColor { get; set; }
         public string? SecondaryColor { get; set; }
+        public string? OpeningStartDay { get; set; }
+        public string? OpeningEndDay { get; set; }
+        public TimeSpan? OpeningStartTime { get; set; }
+        public TimeSpan? OpeningEndTime { get; set; }
+        public string? OpeningHoursNoteEn { get; set; }
+        public string? OpeningHoursNoteAr { get; set; }
         public bool IsActive { get; set; } = true;
 
         // Self-referencing parent
@@ -31,5 +37,8 @@ namespace cdr_group.Domain.Entities
 
         // Events in this company
         public virtual ICollection<Event> Events { get; set; } = new List<Event>();
+
+        // Contacts for this company
+        public virtual ICollection<CompanyContact> CompanyContacts { get; set; } = new List<CompanyContact>();
     }
 }

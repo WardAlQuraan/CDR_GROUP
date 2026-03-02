@@ -126,6 +126,7 @@ builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<IContactUsRepository, ContactUsRepository>();
 builder.Services.AddScoped<ISalaryHistoryRepository, SalaryHistoryRepository>();
+builder.Services.AddScoped<ICompanyContactRepository, CompanyContactRepository>();
 builder.Services.AddScoped<IAuditLogRepository, AuditLogRepository>();
 
 // Services
@@ -140,6 +141,7 @@ builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<ICompanyService, CompanyService>();
 builder.Services.AddScoped<IContactUsService, ContactUsService>();
 builder.Services.AddScoped<ISalaryHistoryService, SalaryHistoryService>();
+builder.Services.AddScoped<ICompanyContactService, CompanyContactService>();
 builder.Services.AddScoped<IAuditLogService, AuditLogService>();
 
 builder.Services.AddControllers();

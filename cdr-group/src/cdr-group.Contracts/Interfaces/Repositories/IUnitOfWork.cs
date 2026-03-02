@@ -12,6 +12,7 @@ IPositionRepository Positions { get; }
         ICompanyRepository Companies { get; }
         IContactUsRepository ContactUs { get; }
         ISalaryHistoryRepository SalaryHistories { get; }
+        ICompanyContactRepository CompanyContacts { get; }
         IAuditLogRepository AuditLogs { get; }
         Task<int> SaveChangesAsync();
         Task BeginTransactionAsync();

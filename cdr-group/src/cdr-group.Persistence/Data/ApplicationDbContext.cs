@@ -210,6 +210,7 @@ namespace cdr_group.Persistence.Data
         public DbSet<ContactUs> ContactUsMessages { get; set; }
         public DbSet<SalaryHistory> SalaryHistories { get; set; }
         public DbSet<AuditLog> AuditLogs { get; set; }
+        public DbSet<CompanyContact> CompanyContacts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -362,6 +363,21 @@ namespace cdr_group.Persistence.Data
                     .WithMany(e => e.Children)
                     .HasForeignKey(e => e.ParentId)
                     .IsRequired(false)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // CompanyContact configuration
+            modelBuilder.Entity<CompanyContact>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Icon).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
+                entity.Property(e => e.Value).IsRequired().HasMaxLength(500);
+
+                entity.HasOne(e => e.Company)
+                    .WithMany(e => e.CompanyContacts)
+                    .HasForeignKey(e => e.CompanyId)
+                    .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);
             });
 
@@ -520,6 +536,12 @@ namespace cdr_group.Persistence.Data
             var salaryHistoriesUpdateId = Guid.Parse("aabbccdd-1111-1111-1111-cccccccccccc");
             var salaryHistoriesDeleteId = Guid.Parse("aabbccdd-1111-1111-1111-dddddddddddd");
 
+            // CompanyContact Permission IDs
+            var companyContactsReadId = Guid.Parse("aabbccdd-3333-3333-3333-aaaaaaaaaaaa");
+            var companyContactsCreateId = Guid.Parse("aabbccdd-3333-3333-3333-bbbbbbbbbbbb");
+            var companyContactsUpdateId = Guid.Parse("aabbccdd-3333-3333-3333-cccccccccccc");
+            var companyContactsDeleteId = Guid.Parse("aabbccdd-3333-3333-3333-dddddddddddd");
+
             // AuditLog Permission IDs
             var auditLogsReadId = Guid.Parse("aabbccdd-2222-2222-2222-aaaaaaaaaaaa");
 
@@ -609,6 +631,11 @@ namespace cdr_group.Persistence.Data
                 new Permission { Id = salaryHistoriesCreateId, Name = PermissionConstants.SalaryHistories.Create, Description = "Create salary histories", Module = "SalaryHistories", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = salaryHistoriesUpdateId, Name = PermissionConstants.SalaryHistories.Update, Description = "Update salary histories", Module = "SalaryHistories", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = salaryHistoriesDeleteId, Name = PermissionConstants.SalaryHistories.Delete, Description = "Delete salary histories", Module = "SalaryHistories", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                // CompanyContact permissions
+                new Permission { Id = companyContactsReadId, Name = PermissionConstants.CompanyContacts.Read, Description = "View company contacts", Module = "CompanyContacts", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companyContactsCreateId, Name = PermissionConstants.CompanyContacts.Create, Description = "Create company contacts", Module = "CompanyContacts", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companyContactsUpdateId, Name = PermissionConstants.CompanyContacts.Update, Description = "Update company contacts", Module = "CompanyContacts", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companyContactsDeleteId, Name = PermissionConstants.CompanyContacts.Delete, Description = "Delete company contacts", Module = "CompanyContacts", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 // AuditLog permissions
                 new Permission { Id = auditLogsReadId, Name = PermissionConstants.AuditLogs.Read, Description = "View audit logs", Module = "AuditLogs", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
             };
@@ -673,8 +700,22 @@ namespace cdr_group.Persistence.Data
                     Code = "CDR",
                     NameEn = "CDR Group",
                     NameAr = "مجموعة سي دي آر",
-                    DescriptionEn = "CDR Group Company",
-                    DescriptionAr = "شركة مجموعة سي دي آر",
+                    TitleEn = "Creative Development & Realization | Strategic Production | Brand Growth",
+                    TitleAr = "التطوير الإبداعي والتنفيذ | الإنتاج الاستراتيجي | نمو العلامة التجارية",
+                    DescriptionEn = "We specialize in Creative Development & Realization, Strategic Production, and Brand Growth, transforming ideas into impactful realities. From concept creation to full-scale execution, we design strategic solutions that elevate brands, strengthen market presence, and drive sustainable growth. Our approach blends creativity with precision, ensuring every project delivers measurable results and long-term value.",
+                    DescriptionAr = "نحن متخصصون في التطوير الإبداعي والتنفيذ، والإنتاج الاستراتيجي، ونمو العلامة التجارية، حيث نحوّل الأفكار إلى واقع مؤثر. من ابتكار المفاهيم إلى التنفيذ الشامل، نصمم حلولاً استراتيجية ترتقي بالعلامات التجارية وتعزز الحضور في السوق وتدفع النمو المستدام. يجمع نهجنا بين الإبداع والدقة، مما يضمن تحقيق نتائج قابلة للقياس وقيمة طويلة الأمد.",
+                    StoryEn = "CDR Group has been a trusted partner in creative development, strategic production, and brand growth, delivering innovative solutions that drive results.",
+                    StoryAr = "كانت مجموعة سي دي آر شريكاً موثوقاً في التطوير الإبداعي والإنتاج الاستراتيجي ونمو العلامة التجارية، حيث تقدم حلولاً مبتكرة تحقق النتائج.",
+                    MissionEn = "To deliver innovative creative solutions that empower brands to grow and succeed in a competitive market.",
+                    MissionAr = "تقديم حلول إبداعية مبتكرة تمكّن العلامات التجارية من النمو والنجاح في سوق تنافسي.",
+                    VisionEn = "To be the leading creative agency in the region, recognized for excellence in development, realization, and strategic production.",
+                    VisionAr = "أن نكون الوكالة الإبداعية الرائدة في المنطقة، والمعروفة بالتميز في التطوير والتنفيذ والإنتاج الاستراتيجي.",
+                    PrimaryColor = "#D9A93E",
+                    SecondaryColor = "#3E423D",
+                    OpeningStartDay = "Sunday",
+                    OpeningEndDay = "Thursday",
+                    OpeningStartTime = new TimeSpan(9, 0, 0),   // 9:00 AM
+                    OpeningEndTime = new TimeSpan(17, 0, 0),    // 5:00 PM
                     IsActive = true,
                     CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     IsDeleted = false

@@ -1,6 +1,7 @@
 using AutoMapper;
 using cdr_group.Contracts.DTOs.ContactUs;
 using cdr_group.Contracts.DTOs.Company;
+using cdr_group.Contracts.DTOs.CompanyContact;
 using cdr_group.Contracts.DTOs.Employee;
 using cdr_group.Contracts.DTOs.Event;
 using cdr_group.Contracts.DTOs.FileAttachment;
@@ -162,6 +163,19 @@ namespace cdr_group.Application.Mappings
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
 
             CreateMap<UpdateSalaryHistoryDto, SalaryHistory>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            // CompanyContact mappings
+            CreateMap<CompanyContact, CompanyContactDto>()
+                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
+                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameAr : null));
+
+            CreateMap<CreateCompanyContactDto, CompanyContact>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+            CreateMap<UpdateCompanyContactDto, CompanyContact>()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
             // AuditLog mappings
