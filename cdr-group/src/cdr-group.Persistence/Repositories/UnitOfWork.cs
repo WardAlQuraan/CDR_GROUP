@@ -21,6 +21,8 @@ namespace cdr_group.Persistence.Repositories
         private ISalaryHistoryRepository? _salaryHistories;
         private ICompanyContactRepository? _companyContacts;
         private IAuditLogRepository? _auditLogs;
+        private IReviewRepository? _reviews;
+        private IComplaintRepository? _complaints;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -39,6 +41,8 @@ namespace cdr_group.Persistence.Repositories
         public ISalaryHistoryRepository SalaryHistories => _salaryHistories ??= new SalaryHistoryRepository(_context);
         public ICompanyContactRepository CompanyContacts => _companyContacts ??= new CompanyContactRepository(_context);
         public IAuditLogRepository AuditLogs => _auditLogs ??= new AuditLogRepository(_context);
+        public IReviewRepository Reviews => _reviews ??= new ReviewRepository(_context);
+        public IComplaintRepository Complaints => _complaints ??= new ComplaintRepository(_context);
 
         public async Task<int> SaveChangesAsync()
         {

@@ -192,6 +192,40 @@
     "getInTouch": "تواصل معنا",
     "successMessage": "شكراً لرسالتك! سنتواصل معك قريباً."
   },
+  "review": {
+    "title": "اترك تقييماً",
+    "subtitle": "نقدّر ملاحظاتك! شاركنا تجربتك معنا.",
+    "rating": "تقييمك",
+    "comment": "تعليقك",
+    "commentPlaceholder": "أخبرنا عن تجربتك...",
+    "ratingRequired": "يرجى اختيار تقييم",
+    "submit": "إرسال التقييم",
+    "successMessage": "شكراً لتقييمك! نقدّر ملاحظاتك.",
+    "errorMessage": "فشل في إرسال التقييم. يرجى المحاولة مرة أخرى."
+  },
+  "complaint": {
+    "title": "تقديم شكوى",
+    "subtitle": "نأخذ مخاوفك على محمل الجد. يرجى مشاركة شكواك معنا.",
+    "subject": "الموضوع",
+    "subjectPlaceholder": "أدخل موضوع الشكوى",
+    "successMessage": "شكراً لملاحظاتك. تم تقديم شكواك بنجاح.",
+    "errorMessage": "فشل في تقديم الشكوى. يرجى المحاولة مرة أخرى."
+  },
+  "reviewsDisplay": {
+    "title": "ماذا يقول عملاؤنا",
+    "subtitle": "اقرأ تقييمات عملائنا الكرام",
+    "anonymous": "عميل",
+    "loadMore": "تحميل المزيد من التقييمات",
+    "today": "اليوم",
+    "yesterday": "أمس",
+    "daysAgo": "أيام مضت",
+    "weekAgo": "أسبوع مضى",
+    "weeksAgo": "أسابيع مضت",
+    "monthAgo": "شهر مضى",
+    "monthsAgo": "أشهر مضت",
+    "yearAgo": "سنة مضت",
+    "yearsAgo": "سنوات مضت"
+  },
   "newsletter": {
     "title": "احصل على آخر الأخبار",
     "subtitle": "اشترك لتلقي أحدث الأخبار والفعاليات والعروض الحصرية من CDR Group.",
@@ -712,6 +746,7 @@
       "fullName": "الاسم الكامل",
       "email": "البريد الإلكتروني",
       "message": "الرسالة",
+      "company": "الشركة",
       "date": "التاريخ",
       "view": "عرض",
       "viewMessage": "عرض الرسالة",
@@ -722,6 +757,60 @@
       "messageDeleted": "تم حذف الرسالة بنجاح",
       "errors": {
         "deleteFailed": "فشل في حذف الرسالة"
+      }
+    },
+    "reviews": {
+      "title": "إدارة التقييمات",
+      "subtitle": "إدارة تقييمات وآراء العملاء",
+      "numberOfStars": "التقييم",
+      "comment": "التعليق",
+      "isVisible": "مرئي",
+      "visible": "مرئي",
+      "hidden": "مخفي",
+      "all": "الكل",
+      "visibilityFilter": "الظهور",
+      "company": "الشركة",
+      "createdAt": "التاريخ",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "editReview": "تعديل التقييم",
+      "deleteReview": "حذف التقييم",
+      "confirmDelete": "هل أنت متأكد من حذف هذا التقييم؟",
+      "reviewUpdated": "تم تحديث التقييم بنجاح",
+      "reviewDeleted": "تم حذف التقييم بنجاح",
+      "reviewInfo": "معلومات التقييم",
+      "visibilitySection": "الظهور",
+      "errors": {
+        "loadFailed": "فشل في تحميل التقييمات",
+        "updateFailed": "فشل في تحديث التقييم",
+        "deleteFailed": "فشل في حذف التقييم",
+        "numberOfStarsRequired": "التقييم مطلوب",
+        "commentRequired": "التعليق مطلوب"
+      },
+      "placeholders": {
+        "comment": "أدخل تعليق التقييم"
+      }
+    },
+    "complaints": {
+      "title": "فزعات وشكاوي",
+      "subtitle": "عرض وإدارة الشكاوى",
+      "fullName": "الاسم الكامل",
+      "email": "البريد الإلكتروني",
+      "subject": "الموضوع",
+      "message": "الرسالة",
+      "company": "الشركة",
+      "date": "التاريخ",
+      "view": "عرض",
+      "viewComplaint": "عرض الشكوى",
+      "senderInfo": "معلومات المرسل",
+      "complaintDetails": "تفاصيل الشكوى",
+      "delete": "حذف",
+      "deleteComplaint": "حذف الشكوى",
+      "confirmDelete": "هل أنت متأكد من حذف هذه الشكوى؟",
+      "complaintDeleted": "تم حذف الشكوى بنجاح",
+      "errors": {
+        "loadFailed": "فشل في تحميل الشكاوى",
+        "deleteFailed": "فشل في حذف الشكوى"
       }
     },
     "auditLogs": {

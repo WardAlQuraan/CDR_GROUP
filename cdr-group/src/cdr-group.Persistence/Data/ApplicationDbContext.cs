@@ -211,6 +211,8 @@ namespace cdr_group.Persistence.Data
         public DbSet<SalaryHistory> SalaryHistories { get; set; }
         public DbSet<AuditLog> AuditLogs { get; set; }
         public DbSet<CompanyContact> CompanyContacts { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Complaint> Complaints { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -434,6 +436,41 @@ namespace cdr_group.Persistence.Data
                 entity.Property(e => e.FullName).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.Email).IsRequired().HasMaxLength(256);
                 entity.Property(e => e.Message).IsRequired().HasMaxLength(2000);
+
+                entity.HasOne(e => e.Company)
+                    .WithMany()
+                    .HasForeignKey(e => e.CompanyId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // Review configuration
+            modelBuilder.Entity<Review>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Comment).IsRequired().HasMaxLength(2000);
+
+                entity.HasOne(e => e.Company)
+                    .WithMany()
+                    .HasForeignKey(e => e.CompanyId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // Complaint configuration
+            modelBuilder.Entity<Complaint>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.FullName).IsRequired().HasMaxLength(200);
+                entity.Property(e => e.Email).IsRequired().HasMaxLength(256);
+                entity.Property(e => e.Subject).IsRequired().HasMaxLength(500);
+                entity.Property(e => e.Message).IsRequired().HasMaxLength(2000);
+
+                entity.HasOne(e => e.Company)
+                    .WithMany()
+                    .HasForeignKey(e => e.CompanyId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
 
@@ -545,6 +582,18 @@ namespace cdr_group.Persistence.Data
             // AuditLog Permission IDs
             var auditLogsReadId = Guid.Parse("aabbccdd-2222-2222-2222-aaaaaaaaaaaa");
 
+            // Review Permission IDs
+            var reviewsReadId = Guid.Parse("aabbccdd-4444-4444-4444-aaaaaaaaaaaa");
+            var reviewsCreateId = Guid.Parse("aabbccdd-4444-4444-4444-bbbbbbbbbbbb");
+            var reviewsUpdateId = Guid.Parse("aabbccdd-4444-4444-4444-cccccccccccc");
+            var reviewsDeleteId = Guid.Parse("aabbccdd-4444-4444-4444-dddddddddddd");
+
+            // Complaint Permission IDs
+            var complaintsReadId = Guid.Parse("aabbccdd-5555-5555-5555-aaaaaaaaaaaa");
+            var complaintsCreateId = Guid.Parse("aabbccdd-5555-5555-5555-bbbbbbbbbbbb");
+            var complaintsUpdateId = Guid.Parse("aabbccdd-5555-5555-5555-cccccccccccc");
+            var complaintsDeleteId = Guid.Parse("aabbccdd-5555-5555-5555-dddddddddddd");
+
             // Company IDs
             var cdrGroupCompanyId = Guid.Parse("aabbccdd-aabb-aabb-aabb-aabbccddeeff");
 
@@ -638,6 +687,16 @@ namespace cdr_group.Persistence.Data
                 new Permission { Id = companyContactsDeleteId, Name = PermissionConstants.CompanyContacts.Delete, Description = "Delete company contacts", Module = "CompanyContacts", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 // AuditLog permissions
                 new Permission { Id = auditLogsReadId, Name = PermissionConstants.AuditLogs.Read, Description = "View audit logs", Module = "AuditLogs", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                // Review permissions
+                new Permission { Id = reviewsReadId, Name = PermissionConstants.Reviews.Read, Description = "View reviews", Module = "Reviews", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = reviewsCreateId, Name = PermissionConstants.Reviews.Create, Description = "Create reviews", Module = "Reviews", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = reviewsUpdateId, Name = PermissionConstants.Reviews.Update, Description = "Update reviews", Module = "Reviews", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = reviewsDeleteId, Name = PermissionConstants.Reviews.Delete, Description = "Delete reviews", Module = "Reviews", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                // Complaint permissions
+                new Permission { Id = complaintsReadId, Name = PermissionConstants.Complaints.Read, Description = "View complaints", Module = "Complaints", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = complaintsCreateId, Name = PermissionConstants.Complaints.Create, Description = "Create complaints", Module = "Complaints", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = complaintsUpdateId, Name = PermissionConstants.Complaints.Update, Description = "Update complaints", Module = "Complaints", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = complaintsDeleteId, Name = PermissionConstants.Complaints.Delete, Description = "Delete complaints", Module = "Complaints", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
             };
 
             modelBuilder.Entity<Permission>().HasData(permissions);

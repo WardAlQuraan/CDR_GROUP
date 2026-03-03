@@ -1,0 +1,43 @@
+<section class="reviews-display-section" *ngIf="reviews.length > 0 || loading">
+  <div class="container">
+    <div class="section-header">
+      <h3>{{ 'reviewsDisplay.title' | translate }}</h3>
+    </div>
+
+    <div class="reviews-feed">
+      @for (review of reviews; track review.id; let i = $index) {
+        <div class="review-item">
+          <div class="review-avatar" [style.background]="getAvatarColor(i)">
+            <i class="bi-person-fill"></i>
+          </div>
+          <div class="review-body">
+            <div class="review-content">
+              <span class="review-comment">{{ review.comment }}</span>
+            </div>
+            <div class="review-meta">
+              <div class="review-stars">
+                @for (star of getStarsArray(review.numberOfStars); track star) {
+                  <i class="bi-star-fill" [class.active]="star <= review.numberOfStars"></i>
+                }
+              </div>
+              <span class="review-time">{{ getTimeAgo(review.createdAt) }}</span>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (loading) {
+        <div class="loading-indicator">
+          <span class="spinner-border spinner-border-sm me-2"></span>
+          {{ 'common.loading' | translate }}
+        </div>
+      }
+
+      @if (hasMore && !loading) {
+        <button class="load-more-btn" (click)="loadMore()">
+          {{ 'reviewsDisplay.loadMore' | translate }}
+        </button>
+      }
+    </div>
+  </div>
+</section>

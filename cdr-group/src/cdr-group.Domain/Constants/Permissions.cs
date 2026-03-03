@@ -86,5 +86,21 @@ public static class Positions
         {
             public const string Read = "audit-logs.read";
         }
+
+        public static class Reviews
+        {
+            public const string Read = "reviews.read";
+            public const string Create = "reviews.create";
+            public const string Update = "reviews.update";
+            public const string Delete = "reviews.delete";
+        }
+
+        public static class Complaints
+        {
+            public const string Read = "complaints.read";
+            public const string Create = "complaints.create";
+            public const string Update = "complaints.update";
+            public const string Delete = "complaints.delete";
+        }
     }
 }

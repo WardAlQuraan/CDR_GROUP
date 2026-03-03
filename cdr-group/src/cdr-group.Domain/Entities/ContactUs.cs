@@ -7,5 +7,8 @@ namespace cdr_group.Domain.Entities
         public string FullName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Message { get; set; } = string.Empty;
+
+        public Guid CompanyId { get; set; }
+        public Company? Company { get; set; }
     }
 }

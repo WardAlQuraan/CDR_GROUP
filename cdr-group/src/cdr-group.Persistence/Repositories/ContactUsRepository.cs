@@ -15,7 +15,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<(IEnumerable<ContactUs> Items, int TotalCount)> GetContactUsPagedAsync(PagedRequest request)
         {
-            var query = _dbSet.Where(e => !e.IsDeleted);
+            var query = _dbSet.Include(e => e.Company).Where(e => !e.IsDeleted);
 
             query = QueryHelper.ApplySearch(query, request);
             query = QueryHelper.ApplySort(query, request, e => e.CreatedAt);

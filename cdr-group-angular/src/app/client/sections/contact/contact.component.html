@@ -1,92 +1,42 @@
-<section class="contact-section section-padding" id="section_5">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 col-12">
-        <h2 class="mb-4">{{ 'contact.title' | translate }}</h2>
-
-        <form class="custom-form contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-          <div class="form-floating mb-4">
-            <input type="text" id="contact-full-name" class="form-control" [class.is-invalid]="contactForm.get('fullName')!.invalid && contactForm.get('fullName')!.touched" [placeholder]="'common.fullName' | translate" formControlName="fullName">
-            <label for="contact-full-name">{{ 'common.fullName' | translate }}</label>
-            @if (contactForm.get('fullName')!.invalid && contactForm.get('fullName')!.touched) {
-              <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
-            }
-          </div>
-
-          <div class="form-floating mb-4">
-            <input type="email" id="contact-email" class="form-control" [class.is-invalid]="contactForm.get('email')!.invalid && contactForm.get('email')!.touched" placeholder="example@email.com" formControlName="email">
-            <label for="contact-email">{{ 'common.email' | translate }}</label>
-            @if (contactForm.get('email')!.hasError('required') && contactForm.get('email')!.touched) {
-              <div class="invalid-feedback d-block">{{ 'validation.required' | translate }}</div>
-            }
-            @if (!contactForm.get('email')!.hasError('required') && contactForm.get('email')!.hasError('email') && contactForm.get('email')!.touched) {
-              <div class="invalid-feedback d-block">{{ 'validation.invalidEmail' | translate }}</div>
-            }
-          </div>
-
-          <div class="form-floating mb-4">
-            <textarea id="contact-message" class="form-control" [class.is-invalid]="contactForm.get('message')!.invalid && contactForm.get('message')!.touched" [placeholder]="'common.message' | translate" formControlName="message"></textarea>
-            <label for="contact-message">{{ 'common.message' | translate }}</label>
-            @if (contactForm.get('message')!.invalid && contactForm.get('message')!.touched) {
-              <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
-            }
-          </div>
-
-          @if (submitSuccess) {
-            <div class="alert alert-success">{{ 'contact.successMessage' | translate }}</div>
-          }
-          @if (submitError) {
-            <div class="alert alert-danger">{{ submitError }}</div>
-          }
-
-          <button type="submit" class="form-control" [disabled]="submitting">
-            @if (submitting) {
-              <span class="spinner-border spinner-border-sm me-2"></span>
-            }
-            {{ 'common.submit' | translate }}
-          </button>
-        </form>
-      </div>
-
-      <div class="col-lg-6 col-12 mt-5 mt-lg-0">
-        <div class="contact-info">
-          <div class="map-container">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.5!2d35.87!3d31.95!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDU3JzAwLjAiTiAzNcKwNTInMDAuMCJF!5e0!3m2!1sen!2sjo!4v1700000000000"
-              width="100%"
-              height="250"
-              style="border:0; border-radius: 12px;"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-          </div>
-
-          <div class="contact-info-item">
-            <div class="contact-info-body">
-              <strong>Abdoun, Amman, Jordan 11183</strong>
-
-              <p class="mt-2 mb-1">
-                <a href="tel:+962798081801" class="text-white" dir="ltr">
-                  <i class="bi-telephone me-2"></i>
-                  +962 798 081 801
-                </a>
-              </p>
-
-              <p class="mb-0">
-                <a href="https://wa.me/962798081801" target="_blank" rel="noopener" class="text-white">
-                  <i class="bi-whatsapp me-2"></i>
-                  WhatsApp
-                </a>
-              </p>
-            </div>
-
-            <div class="contact-info-footer">
-              <a href="https://www.bing.com/maps/search?q=abdon+amman%2C+Jordan%2C+amman%2C+11183%2C+JO" target="_blank" rel="noopener">{{ 'contact.getInTouch' | translate }}</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<form class="custom-form contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+  <div class="form-floating mb-4">
+    <input type="text" id="contact-full-name" class="form-control" [class.is-invalid]="contactForm.get('fullName')!.invalid && contactForm.get('fullName')!.touched" [placeholder]="'common.fullName' | translate" formControlName="fullName">
+    <label for="contact-full-name">{{ 'common.fullName' | translate }}</label>
+    @if (contactForm.get('fullName')!.invalid && contactForm.get('fullName')!.touched) {
+      <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
+    }
   </div>
-</section>
+
+  <div class="form-floating mb-4">
+    <input type="email" id="contact-email" class="form-control" [class.is-invalid]="contactForm.get('email')!.invalid && contactForm.get('email')!.touched" placeholder="example@email.com" formControlName="email">
+    <label for="contact-email">{{ 'common.email' | translate }}</label>
+    @if (contactForm.get('email')!.hasError('required') && contactForm.get('email')!.touched) {
+      <div class="invalid-feedback d-block">{{ 'validation.required' | translate }}</div>
+    }
+    @if (!contactForm.get('email')!.hasError('required') && contactForm.get('email')!.hasError('email') && contactForm.get('email')!.touched) {
+      <div class="invalid-feedback d-block">{{ 'validation.invalidEmail' | translate }}</div>
+    }
+  </div>
+
+  <div class="form-floating mb-4">
+    <textarea id="contact-message" class="form-control" [class.is-invalid]="contactForm.get('message')!.invalid && contactForm.get('message')!.touched" [placeholder]="'common.message' | translate" formControlName="message"></textarea>
+    <label for="contact-message">{{ 'common.message' | translate }}</label>
+    @if (contactForm.get('message')!.invalid && contactForm.get('message')!.touched) {
+      <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
+    }
+  </div>
+
+  @if (submitSuccess) {
+    <div class="alert alert-success">{{ 'contact.successMessage' | translate }}</div>
+  }
+  @if (submitError) {
+    <div class="alert alert-danger">{{ submitError }}</div>
+  }
+
+  <button type="submit" class="form-control" [disabled]="submitting">
+    @if (submitting) {
+      <span class="spinner-border spinner-border-sm me-2"></span>
+    }
+    {{ 'common.submit' | translate }}
+  </button>
+</form>

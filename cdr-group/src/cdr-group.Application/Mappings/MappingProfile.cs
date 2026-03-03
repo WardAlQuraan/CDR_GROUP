@@ -8,6 +8,8 @@ using cdr_group.Contracts.DTOs.FileAttachment;
 using cdr_group.Contracts.DTOs.Identity;
 using cdr_group.Contracts.DTOs.Position;
 using cdr_group.Contracts.DTOs.AuditLog;
+using cdr_group.Contracts.DTOs.Complaint;
+using cdr_group.Contracts.DTOs.Review;
 using cdr_group.Contracts.DTOs.SalaryHistory;
 using cdr_group.Domain.Entities;
 using cdr_group.Domain.Entities.Identity;
@@ -144,7 +146,11 @@ namespace cdr_group.Application.Mappings
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
             // ContactUs mappings
-            CreateMap<ContactUs, ContactUsDto>();
+            CreateMap<ContactUs, ContactUsDto>()
+                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
+                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameAr : null));
 
             CreateMap<CreateContactUsDto, ContactUs>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
@@ -180,6 +186,32 @@ namespace cdr_group.Application.Mappings
 
             // AuditLog mappings
             CreateMap<AuditLog, AuditLogDto>();
+
+            // Review mappings
+            CreateMap<Review, ReviewDto>()
+                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
+                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameAr : null));
+
+            CreateMap<CreateReviewDto, Review>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+            CreateMap<UpdateReviewDto, Review>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            // Complaint mappings
+            CreateMap<Complaint, ComplaintDto>()
+                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
+                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameAr : null));
+
+            CreateMap<CreateComplaintDto, Complaint>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+            CreateMap<UpdateComplaintDto, Complaint>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
         }
     }
 }

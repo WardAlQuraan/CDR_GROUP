@@ -40,6 +40,10 @@ import { AuditLogsComponent } from './pages/audit-logs/audit-logs-component/audi
 import { AuditLogViewDialogComponent } from './pages/audit-logs/audit-log-view-dialog/audit-log-view-dialog.component';
 import { CompanyContactsComponent } from './pages/company-contacts/company-contacts-component/company-contacts-component';
 import { CompanyContactDialogComponent } from './pages/company-contacts/company-contact-dialog/company-contact-dialog.component';
+import { ReviewsComponent } from './pages/reviews/reviews-component/reviews-component';
+import { ReviewDialogComponent } from './pages/reviews/review-dialog/review-dialog.component';
+import { ComplaintsComponent } from './pages/complaints/complaints-component/complaints-component';
+import { ComplaintViewDialogComponent } from './pages/complaints/complaint-view-dialog/complaint-view-dialog.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +75,11 @@ import { CompanyContactDialogComponent } from './pages/company-contacts/company-
     AuditLogsComponent,
     AuditLogViewDialogComponent,
     CompanyContactsComponent,
-    CompanyContactDialogComponent
+    CompanyContactDialogComponent,
+    ReviewsComponent,
+    ReviewDialogComponent,
+    ComplaintsComponent,
+    ComplaintViewDialogComponent
   ],
   imports: [
     SharedModule,

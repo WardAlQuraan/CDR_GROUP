@@ -8,6 +8,9 @@ namespace cdr_group.Contracts.DTOs.ContactUs
         public string FullName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Message { get; set; } = string.Empty;
+        public Guid CompanyId { get; set; }
+        public string? CompanyNameEn { get; set; }
+        public string? CompanyNameAr { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 
@@ -25,6 +28,9 @@ namespace cdr_group.Contracts.DTOs.ContactUs
         [Required]
         [StringLength(2000)]
         public string Message { get; set; } = string.Empty;
+
+        [Required]
+        public Guid CompanyId { get; set; }
     }
 
     public class UpdateContactUsDto
@@ -38,5 +44,7 @@ namespace cdr_group.Contracts.DTOs.ContactUs
 
         [StringLength(2000)]
         public string? Message { get; set; }
+
+        public Guid? CompanyId { get; set; }
     }
 }

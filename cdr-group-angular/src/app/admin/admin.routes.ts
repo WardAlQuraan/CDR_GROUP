@@ -11,6 +11,8 @@ import { CompanyOrgChartPageComponent } from './pages/companies/company-org-char
 import { ContactUsAdminComponent } from './pages/contact-us/contact-us-component/contact-us-component';
 import { AuditLogsComponent } from './pages/audit-logs/audit-logs-component/audit-logs-component';
 import { CompanyContactsComponent } from './pages/company-contacts/company-contacts-component/company-contacts-component';
+import { ReviewsComponent } from './pages/reviews/reviews-component/reviews-component';
+import { ComplaintsComponent } from './pages/complaints/complaints-component/complaints-component';
 
 export const adminRoutes: Routes = [
   {
@@ -27,6 +29,8 @@ export const adminRoutes: Routes = [
       { path: 'companies/:id/org-chart', component: CompanyOrgChartPageComponent },
       { path: 'companies/:companyId/contacts', component: CompanyContactsComponent },
       { path: 'contact-us', component: ContactUsAdminComponent },
+      { path: 'reviews', component: ReviewsComponent },
+      { path: 'complaints', component: ComplaintsComponent },
       { path: 'audit-logs', component: AuditLogsComponent },
       { path: 'audit-logs/:entityName/:entityId', component: AuditLogsComponent },
       { path: 'settings', component: DashboardComponent }, // Placeholder

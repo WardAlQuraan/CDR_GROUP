@@ -1,0 +1,61 @@
+<app-base-dialog
+  title="admin.complaints.viewComplaint"
+  [showActions]="false">
+
+  <div class="view-content">
+    <!-- Sender Info -->
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>person</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.complaints.senderInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content view-fields">
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.complaints.fullName' | translate }}</span>
+          <span class="field-value">{{ complaint.fullName }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.complaints.email' | translate }}</span>
+          <span class="field-value">
+            <a href="mailto:{{ complaint.email }}">{{ complaint.email }}</a>
+          </span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.complaints.date' | translate }}</span>
+          <span class="field-value">{{ complaint.createdAt | date:'medium' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Complaint Details -->
+    <div class="form-section section-blue">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>report_problem</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.complaints.complaintDetails' | translate }}</div>
+      </div>
+
+      <div class="section-content view-fields">
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.complaints.subject' | translate }}</span>
+          <span class="field-value">{{ complaint.subject }}</span>
+        </div>
+        <div class="view-field">
+          <span class="field-label">{{ 'admin.complaints.message' | translate }}</span>
+          <span class="field-value message-body">{{ complaint.message }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dialog-actions">
+      <button mat-raised-button color="primary" (click)="onClose()">
+        {{ 'common.close' | translate }}
+      </button>
+    </div>
+  </div>
+
+</app-base-dialog>

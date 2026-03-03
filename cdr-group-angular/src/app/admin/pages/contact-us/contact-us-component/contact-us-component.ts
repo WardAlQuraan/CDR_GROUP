@@ -34,6 +34,10 @@ export class ContactUsAdminComponent implements OnInit {
 
   gridConfig!: DataGridConfig<ContactUsDto>;
 
+  private get isArabic(): boolean {
+    return this.translationService.language() === 'ar';
+  }
+
   constructor(
     private contactUsService: ContactUsService,
     private snackbar: SnackbarService,
@@ -66,6 +70,11 @@ export class ContactUsAdminComponent implements OnInit {
           key: 'message',
           header: 'admin.contactUs.message',
           cell: (row) => row.message.length > 80 ? row.message.substring(0, 80) + '...' : row.message
+        },
+        {
+          key: 'companyName',
+          header: 'admin.contactUs.company',
+          cell: (row) => (this.isArabic ? row.companyNameAr : row.companyNameEn) || '-'
         },
         {
           key: 'createdAt',

@@ -1,0 +1,57 @@
+<app-base-dialog
+  title="admin.reviews.editReview"
+  saveLabel="common.update"
+  [saveDisabled]="form.invalid"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <form [formGroup]="form" class="dialog-form">
+    <!-- Review Info Section -->
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>star</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.reviews.reviewInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'admin.reviews.numberOfStars' | translate }}</mat-label>
+          <mat-icon matPrefix>star_rate</mat-icon>
+          <mat-select formControlName="numberOfStars">
+            @for (star of [1, 2, 3, 4, 5]; track star) {
+              <mat-option [value]="star">{{ '★'.repeat(star) + '☆'.repeat(5 - star) }}</mat-option>
+            }
+          </mat-select>
+          @if (form.get('numberOfStars')?.hasError('required') && form.get('numberOfStars')?.touched) {
+            <mat-error>{{ 'admin.reviews.errors.numberOfStarsRequired' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <app-form-field formControlName="comment" type="textarea" label="admin.reviews.comment"
+          placeholder="admin.reviews.placeholders.comment"
+          [errors]="[{name: 'required', message: 'admin.reviews.errors.commentRequired'}]">
+        </app-form-field>
+      </div>
+    </div>
+
+    <!-- Visibility Section -->
+    <div class="form-section section-blue">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>visibility</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.reviews.visibilitySection' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <mat-checkbox formControlName="isVisible" color="primary">
+          {{ 'admin.reviews.isVisible' | translate }}
+        </mat-checkbox>
+      </div>
+    </div>
+  </form>
+
+</app-base-dialog>

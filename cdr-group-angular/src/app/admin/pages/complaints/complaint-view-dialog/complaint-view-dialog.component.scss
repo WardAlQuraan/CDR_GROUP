@@ -1,0 +1,39 @@
+.view-content {
+  .view-fields {
+    .view-field {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 16px;
+
+      .field-label {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 4px;
+      }
+
+      .field-value {
+        font-size: 1rem;
+
+        a {
+          color: #64b5f6;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        &.message-body {
+          white-space: pre-wrap;
+          line-height: 1.6;
+        }
+      }
+    }
+  }
+
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+}

@@ -1,0 +1,63 @@
+<form class="custom-form complaint-form" [formGroup]="complaintForm" (ngSubmit)="onSubmit()">
+  <div class="form-floating mb-4">
+    <input type="text" id="complaint-full-name" class="form-control"
+      [class.is-invalid]="complaintForm.get('fullName')!.invalid && complaintForm.get('fullName')!.touched"
+      [placeholder]="'common.fullName' | translate"
+      formControlName="fullName">
+    <label for="complaint-full-name">{{ 'common.fullName' | translate }}</label>
+    @if (complaintForm.get('fullName')!.invalid && complaintForm.get('fullName')!.touched) {
+      <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
+    }
+  </div>
+
+  <div class="form-floating mb-4">
+    <input type="email" id="complaint-email" class="form-control"
+      [class.is-invalid]="complaintForm.get('email')!.invalid && complaintForm.get('email')!.touched"
+      placeholder="example@email.com"
+      formControlName="email">
+    <label for="complaint-email">{{ 'common.email' | translate }}</label>
+    @if (complaintForm.get('email')!.hasError('required') && complaintForm.get('email')!.touched) {
+      <div class="invalid-feedback d-block">{{ 'validation.required' | translate }}</div>
+    }
+    @if (!complaintForm.get('email')!.hasError('required') && complaintForm.get('email')!.hasError('email') && complaintForm.get('email')!.touched) {
+      <div class="invalid-feedback d-block">{{ 'validation.invalidEmail' | translate }}</div>
+    }
+  </div>
+
+  <div class="form-floating mb-4">
+    <input type="text" id="complaint-subject" class="form-control"
+      [class.is-invalid]="complaintForm.get('subject')!.invalid && complaintForm.get('subject')!.touched"
+      [placeholder]="'complaint.subject' | translate"
+      formControlName="subject">
+    <label for="complaint-subject">{{ 'complaint.subject' | translate }}</label>
+    @if (complaintForm.get('subject')!.invalid && complaintForm.get('subject')!.touched) {
+      <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
+    }
+  </div>
+
+  <div class="form-floating mb-4">
+    <textarea id="complaint-message" class="form-control"
+      [class.is-invalid]="complaintForm.get('message')!.invalid && complaintForm.get('message')!.touched"
+      [placeholder]="'common.message' | translate"
+      formControlName="message"
+      rows="4"></textarea>
+    <label for="complaint-message">{{ 'common.message' | translate }}</label>
+    @if (complaintForm.get('message')!.invalid && complaintForm.get('message')!.touched) {
+      <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
+    }
+  </div>
+
+  @if (submitSuccess) {
+    <div class="alert alert-success">{{ 'complaint.successMessage' | translate }}</div>
+  }
+  @if (submitError) {
+    <div class="alert alert-danger">{{ submitError }}</div>
+  }
+
+  <button type="submit" class="form-control" [disabled]="submitting">
+    @if (submitting) {
+      <span class="spinner-border spinner-border-sm me-2"></span>
+    }
+    {{ 'common.submit' | translate }}
+  </button>
+</form>

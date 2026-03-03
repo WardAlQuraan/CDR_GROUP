@@ -1,0 +1,34 @@
+.section-tabs {
+  display: flex;
+  gap: 8px;
+
+  .section-tab {
+    padding: 10px 24px;
+    border: 2px solid var(--secondary-color, #6c757d);
+    border-radius: 30px;
+    background: var(--secondary-color, #6c757d);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    i {
+      font-size: 0.9rem;
+    }
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &.active {
+      background: var(--primary-color, #007bff);
+      border-color: var(--primary-color, #007bff);
+      color: #fff;
+    }
+  }
+}
+
+.contact-info {
+  margin-top: 70px;
+}

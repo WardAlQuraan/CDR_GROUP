@@ -128,6 +128,8 @@ builder.Services.AddScoped<IContactUsRepository, ContactUsRepository>();
 builder.Services.AddScoped<ISalaryHistoryRepository, SalaryHistoryRepository>();
 builder.Services.AddScoped<ICompanyContactRepository, CompanyContactRepository>();
 builder.Services.AddScoped<IAuditLogRepository, AuditLogRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<IComplaintRepository, ComplaintRepository>();
 
 // Services
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -143,6 +145,8 @@ builder.Services.AddScoped<IContactUsService, ContactUsService>();
 builder.Services.AddScoped<ISalaryHistoryService, SalaryHistoryService>();
 builder.Services.AddScoped<ICompanyContactService, CompanyContactService>();
 builder.Services.AddScoped<IAuditLogService, AuditLogService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<IComplaintService, ComplaintService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

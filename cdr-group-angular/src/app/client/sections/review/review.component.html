@@ -1,0 +1,52 @@
+<div class="review-form-wrapper">
+  <h2 class="mb-4">{{ 'review.title' | translate }}</h2>
+  <p class="mb-4 text-white-50">{{ 'review.subtitle' | translate }}</p>
+
+  <form class="custom-form review-form" [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+    <!-- Star Rating -->
+    <div class="mb-4">
+      <label class="form-label text-white">{{ 'review.rating' | translate }}</label>
+      <div class="star-rating">
+        @for (star of [1, 2, 3, 4, 5]; track star) {
+          <span class="star"
+            [class.filled]="star <= (hoveredStar || selectedStars)"
+            (click)="setRating(star)"
+            (mouseenter)="hoveredStar = star"
+            (mouseleave)="hoveredStar = 0">
+            ★
+          </span>
+        }
+      </div>
+      @if (reviewForm.get('numberOfStars')!.hasError('min') && reviewForm.get('numberOfStars')!.touched) {
+        <div class="text-danger mt-1" style="font-size: 0.85rem;">{{ 'review.ratingRequired' | translate }}</div>
+      }
+    </div>
+
+    <!-- Comment -->
+    <div class="form-floating mb-4">
+      <textarea id="review-comment" class="form-control"
+        [class.is-invalid]="reviewForm.get('comment')!.invalid && reviewForm.get('comment')!.touched"
+        [placeholder]="'review.commentPlaceholder' | translate"
+        formControlName="comment"
+        rows="4"></textarea>
+      <label for="review-comment">{{ 'review.comment' | translate }}</label>
+      @if (reviewForm.get('comment')!.hasError('required') && reviewForm.get('comment')!.touched) {
+        <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
+      }
+    </div>
+
+    @if (submitSuccess) {
+      <div class="alert alert-success">{{ 'review.successMessage' | translate }}</div>
+    }
+    @if (submitError) {
+      <div class="alert alert-danger">{{ submitError }}</div>
+    }
+
+    <button type="submit" class="form-control" [disabled]="submitting">
+      @if (submitting) {
+        <span class="spinner-border spinner-border-sm me-2"></span>
+      }
+      {{ 'review.submit' | translate }}
+    </button>
+  </form>
+</div>

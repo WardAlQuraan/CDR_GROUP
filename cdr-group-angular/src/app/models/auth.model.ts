@@ -103,6 +103,18 @@ export const Permissions = {
   COMPANY_CONTACTS_UPDATE: 'company-contacts.update',
   COMPANY_CONTACTS_DELETE: 'company-contacts.delete',
 
+  // Reviews
+  REVIEWS_READ: 'reviews.read',
+  REVIEWS_CREATE: 'reviews.create',
+  REVIEWS_UPDATE: 'reviews.update',
+  REVIEWS_DELETE: 'reviews.delete',
+
+  // Complaints
+  COMPLAINTS_READ: 'complaints.read',
+  COMPLAINTS_CREATE: 'complaints.create',
+  COMPLAINTS_UPDATE: 'complaints.update',
+  COMPLAINTS_DELETE: 'complaints.delete',
+
   // Audit Logs
   AUDIT_LOGS_READ: 'audit-logs.read'
 } as const;

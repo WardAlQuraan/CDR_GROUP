@@ -1,0 +1,41 @@
+.review-form {
+  .form-control.is-invalid {
+    background-image: none;
+  }
+}
+
+.star-rating {
+  display: flex;
+  gap: 4px;
+
+  .star {
+    font-size: 2rem;
+    cursor: pointer;
+    color: #555;
+    transition: color 0.2s, transform 0.15s;
+    user-select: none;
+
+    &.filled {
+      color: #ffc107;
+    }
+
+    &:hover {
+      transform: scale(1.15);
+    }
+  }
+}
+
+:host-context([dir="rtl"]) {
+  .review-form {
+    textarea {
+      direction: rtl;
+      text-align: right;
+    }
+
+    .form-floating > label {
+      right: 0;
+      left: auto;
+      text-align: right;
+    }
+  }
+}

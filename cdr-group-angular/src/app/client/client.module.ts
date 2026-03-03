@@ -18,6 +18,10 @@ import { AboutComponent } from './sections/about/about.component';
 import { EventsComponent } from './sections/events/events.component';
 import { ContactComponent } from './sections/contact/contact.component';
 import { TeamComponent } from './sections/team/team.component';
+import { ReviewComponent } from './sections/review/review.component';
+import { ContactReviewComponent } from './sections/contact-review/contact-review.component';
+import { ComplaintComponent } from './sections/complaint/complaint.component';
+import { ReviewsDisplayComponent } from './sections/reviews-display/reviews-display.component';
 
 // Pages
 import { HomeComponent } from './pages/home/home.component';
@@ -42,6 +46,10 @@ import { clientRoutes } from './client.routes';
     EventsComponent,
     ContactComponent,
     TeamComponent,
+    ReviewComponent,
+    ContactReviewComponent,
+    ComplaintComponent,
+    ReviewsDisplayComponent,
     // Pages
     HomeComponent,
     EventListingComponent,

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContactUsService } from '../../../services/contact-us.service';
 
@@ -9,6 +9,8 @@ import { ContactUsService } from '../../../services/contact-us.service';
   styleUrl: './contact.component.scss',
 })
 export class ContactComponent {
+  @Input() companyId?: string;
+
   contactForm: FormGroup;
   submitting = false;
   submitSuccess = false;
@@ -37,7 +39,8 @@ export class ContactComponent {
     this.submitSuccess = false;
     this.submitError = '';
 
-    this.contactUsService.create(this.contactForm.value).subscribe({
+    const payload = { ...this.contactForm.value, companyId: this.companyId };
+    this.contactUsService.create(payload).subscribe({
       next: (response) => {
         if (response.success) {
           this.submitSuccess = true;

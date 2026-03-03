@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompaniesService } from '../../../services/companies.service';
 import { TranslationService } from '../../../services/translation.service';
@@ -19,7 +19,8 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private companiesService: CompaniesService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -36,8 +37,10 @@ export class HomeComponent implements OnInit {
   private loadSelectedCompany(): void {
     this.companiesService.getByCode(this.selectedCompanyCode).subscribe({
       next: (response) => {
+        debugger;
         if (response.success && response.data) {
           this.selectedCompany = response.data;
+          this.cdr.markForCheck();
         }
       }
     });

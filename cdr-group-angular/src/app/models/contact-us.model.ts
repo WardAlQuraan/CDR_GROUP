@@ -3,6 +3,9 @@ export interface ContactUsDto {
   fullName: string;
   email: string;
   message: string;
+  companyId?: string;
+  companyNameEn?: string;
+  companyNameAr?: string;
   createdAt: Date;
 }
 
@@ -10,6 +13,7 @@ export interface CreateContactUsDto {
   fullName: string;
   email: string;
   message: string;
+  companyId?: string;
 }
 
 export interface UpdateContactUsDto {
