@@ -94,6 +94,11 @@ namespace cdr_group.Contracts.DTOs.Employee
         public string? CompanyCode { get; set; }
     }
 
+    public class EmployeePagedRequest : Common.PagedRequest
+    {
+        public Guid? CompanyId { get; set; }
+    }
+
     public class CreateEmployeeDto
     {
         [Required]

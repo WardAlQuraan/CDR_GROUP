@@ -17,6 +17,22 @@ namespace cdr_group.Application.Services
 
         public override async Task<PagedResult<ContactUsDto>> GetPagedAsync(PagedRequest request)
         {
+            var contactUsRequest = request as ContactUsPagedRequest ?? new ContactUsPagedRequest
+            {
+                PageNumber = request.PageNumber,
+                PageSize = request.PageSize,
+                SearchTerm = request.SearchTerm,
+                SortBy = request.SortBy,
+                SortDescending = request.SortDescending,
+                SearchProperties = request.SearchProperties
+            };
+            var (items, totalCount) = await UnitOfWork.ContactUs.GetContactUsPagedAsync(contactUsRequest);
+            var dtos = Mapper.Map<List<ContactUsDto>>(items);
+            return new PagedResult<ContactUsDto>(dtos, totalCount, request.PageNumber, request.PageSize);
+        }
+
+        public async Task<PagedResult<ContactUsDto>> GetContactUsPagedAsync(ContactUsPagedRequest request)
+        {
             var (items, totalCount) = await UnitOfWork.ContactUs.GetContactUsPagedAsync(request);
             var dtos = Mapper.Map<List<ContactUsDto>>(items);
             return new PagedResult<ContactUsDto>(dtos, totalCount, request.PageNumber, request.PageSize);

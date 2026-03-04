@@ -33,6 +33,11 @@ namespace cdr_group.Contracts.DTOs.ContactUs
         public Guid CompanyId { get; set; }
     }
 
+    public class ContactUsPagedRequest : Common.PagedRequest
+    {
+        public Guid? CompanyId { get; set; }
+    }
+
     public class UpdateContactUsDto
     {
         [StringLength(200)]

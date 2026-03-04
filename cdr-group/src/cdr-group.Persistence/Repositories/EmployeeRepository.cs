@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using cdr_group.Contracts.DTOs.Common;
+using cdr_group.Contracts.DTOs.Employee;
 using cdr_group.Contracts.Interfaces.Repositories;
 using cdr_group.Domain.Entities;
 using cdr_group.Persistence.Data;
@@ -96,7 +97,7 @@ namespace cdr_group.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public async Task<(IEnumerable<Employee> Items, int TotalCount)> GetEmployeesPagedAsync(PagedRequest request)
+        public async Task<(IEnumerable<Employee> Items, int TotalCount)> GetEmployeesPagedAsync(EmployeePagedRequest request)
         {
             var query = _dbSet
                 .Include(e => e.Manager)
@@ -104,6 +105,11 @@ namespace cdr_group.Persistence.Repositories
                 .Include(e => e.Company)
                 .Include(e => e.Position)
                 .Where(e => !e.IsDeleted);
+
+            if (request.CompanyId.HasValue)
+            {
+                query = query.Where(e => e.CompanyId == request.CompanyId.Value);
+            }
 
             query = QueryHelper.ApplySearch(query, request);
             query = QueryHelper.ApplySort(query, request, e => e.CreatedAt);

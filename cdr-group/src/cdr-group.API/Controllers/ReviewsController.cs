@@ -24,7 +24,7 @@ namespace cdr_group.API.Controllers
         }
 
         [HttpGet]
-        [HasPermission(Permissions.Reviews.Read)]
+        [AllowAnonymous]
         public async Task<ActionResult<ApiResponse<PagedResult<ReviewDto>>>> GetReviewsPaged([FromQuery] ReviewPagedRequest request)
         {
             var result = await Service.GetPagedAsync(request);

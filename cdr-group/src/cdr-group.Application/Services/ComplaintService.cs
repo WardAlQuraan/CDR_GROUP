@@ -17,6 +17,22 @@ namespace cdr_group.Application.Services
 
         public override async Task<PagedResult<ComplaintDto>> GetPagedAsync(PagedRequest request)
         {
+            var complaintRequest = request as ComplaintPagedRequest ?? new ComplaintPagedRequest
+            {
+                PageNumber = request.PageNumber,
+                PageSize = request.PageSize,
+                SearchTerm = request.SearchTerm,
+                SortBy = request.SortBy,
+                SortDescending = request.SortDescending,
+                SearchProperties = request.SearchProperties
+            };
+            var (items, totalCount) = await UnitOfWork.Complaints.GetComplaintsPagedAsync(complaintRequest);
+            var dtos = Mapper.Map<List<ComplaintDto>>(items);
+            return new PagedResult<ComplaintDto>(dtos, totalCount, request.PageNumber, request.PageSize);
+        }
+
+        public async Task<PagedResult<ComplaintDto>> GetComplaintsPagedAsync(ComplaintPagedRequest request)
+        {
             var (items, totalCount) = await UnitOfWork.Complaints.GetComplaintsPagedAsync(request);
             var dtos = Mapper.Map<List<ComplaintDto>>(items);
             return new PagedResult<ComplaintDto>(dtos, totalCount, request.PageNumber, request.PageSize);

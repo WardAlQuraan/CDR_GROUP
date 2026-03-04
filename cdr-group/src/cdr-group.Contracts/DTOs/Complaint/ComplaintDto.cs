@@ -38,6 +38,11 @@ namespace cdr_group.Contracts.DTOs.Complaint
         public Guid CompanyId { get; set; }
     }
 
+    public class ComplaintPagedRequest : Common.PagedRequest
+    {
+        public Guid? CompanyId { get; set; }
+    }
+
     public class UpdateComplaintDto
     {
         [StringLength(200)]

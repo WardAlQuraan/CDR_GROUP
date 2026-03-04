@@ -6,8 +6,9 @@ import { Router } from '@angular/router';
 import { ComplaintsService } from '../../../../services/complaints.service';
 import { SnackbarService } from '../../../../services/snackbar.service';
 import { TranslationService } from '../../../../services/translation.service';
-import { ComplaintDto } from '../../../../models/complaint.model';
-import { PagedRequest } from '../../../../models/paged.model';
+import { ComplaintDto, ComplaintPagedRequest } from '../../../../models/complaint.model';
+import { CompanyDto } from '../../../../models/company.model';
+import { CompaniesService } from '../../../../services/companies.service';
 import { DataGridConfig, FilterValues } from '../../../../shared/components/data-grid/data-grid.models';
 import { ComplaintViewDialogComponent } from '../complaint-view-dialog/complaint-view-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
@@ -36,9 +37,11 @@ export class ComplaintsComponent implements OnInit {
   filterValues: FilterValues = {};
 
   gridConfig!: DataGridConfig<ComplaintDto>;
+  companies: CompanyDto[] = [];
 
   constructor(
     private complaintsService: ComplaintsService,
+    private companiesService: CompaniesService,
     private snackbar: SnackbarService,
     private dialog: MatDialog,
     private translationService: TranslationService,
@@ -47,6 +50,7 @@ export class ComplaintsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loadCompanies();
     this.initGridConfig();
     this.loadComplaints();
   }
@@ -66,6 +70,21 @@ export class ComplaintsComponent implements OnInit {
 
       showSearch: true,
       searchPlaceholder: buildSearchPlaceholder(this.translationService, this.searchProperties, 'admin.complaints'),
+      filters: [
+        {
+          key: 'companyId',
+          label: 'admin.complaints.companyFilter',
+          type: 'select',
+          defaultValue: 'all',
+          options: [
+            { value: 'all', label: 'admin.complaints.allCompanies' },
+            ...this.companies.map(c => ({
+              value: c.id,
+              label: this.isArabic ? c.nameAr : c.nameEn
+            }))
+          ]
+        }
+      ],
 
       columns: [
         { key: 'fullName', header: 'admin.complaints.fullName', sortable: true },
@@ -120,18 +139,32 @@ export class ComplaintsComponent implements OnInit {
     };
   }
 
+  loadCompanies(): void {
+    this.companiesService.getAll().subscribe({
+      next: (response) => {
+        if (response.success && response.data) {
+          this.companies = response.data;
+          this.initGridConfig();
+          this.cdr.markForCheck();
+        }
+      }
+    });
+  }
+
   loadComplaints(): void {
     this.loading = true;
-    const request: PagedRequest = {
+    const companyFilter = this.filterValues['companyId'];
+    const request: ComplaintPagedRequest = {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
       searchTerm: this.filterValues['searchTerm'] || undefined,
       searchProperties: this.searchProperties,
       sortBy: this.sortBy,
-      sortDescending: this.sortDescending
+      sortDescending: this.sortDescending,
+      companyId: companyFilter && companyFilter !== 'all' ? companyFilter : undefined
     };
 
-    this.complaintsService.getPaged(request).subscribe({
+    this.complaintsService.getComplaintsPaged(request).subscribe({
       next: (response) => {
         if (response.success && response.data) {
           this.complaints = response.data.data;

@@ -7,6 +7,8 @@ import { ReviewsService } from '../../../../services/reviews.service';
 import { SnackbarService } from '../../../../services/snackbar.service';
 import { TranslationService } from '../../../../services/translation.service';
 import { ReviewDto, ReviewPagedRequest } from '../../../../models/review.model';
+import { CompanyDto } from '../../../../models/company.model';
+import { CompaniesService } from '../../../../services/companies.service';
 import { DataGridConfig, FilterValues } from '../../../../shared/components/data-grid/data-grid.models';
 import { ReviewDialogComponent, ReviewDialogData } from '../review-dialog/review-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
@@ -35,9 +37,11 @@ export class ReviewsComponent implements OnInit {
   filterValues: FilterValues = {};
 
   gridConfig!: DataGridConfig<ReviewDto>;
+  companies: CompanyDto[] = [];
 
   constructor(
     private reviewsService: ReviewsService,
+    private companiesService: CompaniesService,
     private snackbar: SnackbarService,
     private dialog: MatDialog,
     private translationService: TranslationService,
@@ -46,6 +50,7 @@ export class ReviewsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loadCompanies();
     this.initGridConfig();
     this.loadReviews();
   }
@@ -75,6 +80,19 @@ export class ReviewsComponent implements OnInit {
             { value: 'all', label: 'admin.reviews.all' },
             { value: 'true', label: 'admin.reviews.visible' },
             { value: 'false', label: 'admin.reviews.hidden' }
+          ]
+        },
+        {
+          key: 'companyId',
+          label: 'admin.reviews.companyFilter',
+          type: 'select',
+          defaultValue: 'all',
+          options: [
+            { value: 'all', label: 'admin.reviews.allCompanies' },
+            ...this.companies.map(c => ({
+              value: c.id,
+              label: this.isArabic ? c.nameAr : c.nameEn
+            }))
           ]
         }
       ],
@@ -145,9 +163,22 @@ export class ReviewsComponent implements OnInit {
     };
   }
 
+  loadCompanies(): void {
+    this.companiesService.getActiveCompanies().subscribe({
+      next: (response) => {
+        if (response.success && response.data) {
+          this.companies = response.data;
+          this.initGridConfig();
+          this.cdr.markForCheck();
+        }
+      }
+    });
+  }
+
   loadReviews(): void {
     this.loading = true;
     const visibilityFilter = this.filterValues['isVisible'];
+    const companyFilter = this.filterValues['companyId'];
     const request: ReviewPagedRequest = {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
@@ -155,7 +186,8 @@ export class ReviewsComponent implements OnInit {
       searchProperties: this.searchProperties,
       sortBy: this.sortBy,
       sortDescending: this.sortDescending,
-      isVisible: visibilityFilter && visibilityFilter !== 'all' ? visibilityFilter === 'true' : undefined
+      isVisible: visibilityFilter && visibilityFilter !== 'all' ? visibilityFilter === 'true' : undefined,
+      companyId: companyFilter && companyFilter !== 'all' ? companyFilter : undefined
     };
 
     this.reviewsService.getReviewsPaged(request).subscribe({

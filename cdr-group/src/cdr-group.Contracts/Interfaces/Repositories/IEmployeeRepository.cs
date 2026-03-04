@@ -1,4 +1,5 @@
 using cdr_group.Contracts.DTOs.Common;
+using cdr_group.Contracts.DTOs.Employee;
 using cdr_group.Domain.Entities;
 
 namespace cdr_group.Contracts.Interfaces.Repositories
@@ -12,7 +13,7 @@ namespace cdr_group.Contracts.Interfaces.Repositories
         Task<IEnumerable<Employee>> GetByManagerIdAsync(Guid managerId);
         Task<IEnumerable<Employee>> GetByCompanyIdAsync(Guid? companyId);
         Task<IEnumerable<Employee>> GetByCompanyCodeAsync(string? companyCode);
-        Task<(IEnumerable<Employee> Items, int TotalCount)> GetEmployeesPagedAsync(PagedRequest request);
+        Task<(IEnumerable<Employee> Items, int TotalCount)> GetEmployeesPagedAsync(EmployeePagedRequest request);
         Task<bool> EmployeeCodeExistsAsync(string employeeCode, Guid? excludeId = null);
     }
 }

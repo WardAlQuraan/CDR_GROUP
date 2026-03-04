@@ -17,10 +17,17 @@ namespace cdr_group.API.Controllers
         {
         }
 
-        [HttpGet]
+        [NonAction]
         public override async Task<ActionResult<ApiResponse<PagedResult<EmployeeDto>>>> GetPaged([FromQuery] PagedRequest request)
         {
             return await base.GetPaged(request);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<ApiResponse<PagedResult<EmployeeDto>>>> GetEmployeesPaged([FromQuery] EmployeePagedRequest request)
+        {
+            var result = await Service.GetEmployeesPagedAsync(request);
+            return Ok(ApiResponse<PagedResult<EmployeeDto>>.SuccessResponse(result));
         }
 
         [HttpGet("{id:guid}")]

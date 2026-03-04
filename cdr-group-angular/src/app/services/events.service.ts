@@ -7,6 +7,7 @@ import { ApiResponse } from '../models/api-response.model';
 import { PagedRequest, PagedResult } from '../models/paged.model';
 import {
   EventDto,
+  EventPagedRequest,
   CreateEventDto,
   UpdateEventDto
 } from '../models/event.model';
@@ -19,11 +20,18 @@ export class EventsService extends BaseService<EventDto, CreateEventDto, UpdateE
     super(http, 'events');
   }
 
-  getPagedByCompany(companyCode: string, request?: PagedRequest): Observable<ApiResponse<PagedResult<EventDto>>> {
+  getEventsPaged(request?: EventPagedRequest): Observable<ApiResponse<PagedResult<EventDto>>> {
     let params = this.buildPagedParams(request);
-    params = params.set('companyCode', companyCode);
+    if (request?.companyId) {
+      params = params.set('companyId', request.companyId);
+    }
+    if(request?.companyCode) {
+      params = params.set('companyCode', request.companyCode);
+    }
     return this.http.get<ApiResponse<PagedResult<EventDto>>>(this.getApiUrl(), { params }).pipe(
       catchError(error => this.handleError(error))
     );
   }
+
+
 }

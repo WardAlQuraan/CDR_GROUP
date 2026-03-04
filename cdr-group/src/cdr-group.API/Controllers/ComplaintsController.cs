@@ -17,11 +17,18 @@ namespace cdr_group.API.Controllers
         {
         }
 
-        [HttpGet]
-        [HasPermission(Permissions.Complaints.Read)]
+        [NonAction]
         public override async Task<ActionResult<ApiResponse<PagedResult<ComplaintDto>>>> GetPaged([FromQuery] PagedRequest request)
         {
             return await base.GetPaged(request);
+        }
+
+        [HttpGet]
+        [HasPermission(Permissions.Complaints.Read)]
+        public async Task<ActionResult<ApiResponse<PagedResult<ComplaintDto>>>> GetComplaintsPaged([FromQuery] ComplaintPagedRequest request)
+        {
+            var result = await Service.GetComplaintsPagedAsync(request);
+            return Ok(ApiResponse<PagedResult<ComplaintDto>>.SuccessResponse(result));
         }
 
         [HttpGet("{id:guid}")]

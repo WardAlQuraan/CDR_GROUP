@@ -17,11 +17,18 @@ namespace cdr_group.API.Controllers
         {
         }
 
-        [HttpGet]
-        [HasPermission(Permissions.ContactUs.Read)]
+        [NonAction]
         public override async Task<ActionResult<ApiResponse<PagedResult<ContactUsDto>>>> GetPaged([FromQuery] PagedRequest request)
         {
             return await base.GetPaged(request);
+        }
+
+        [HttpGet]
+        [HasPermission(Permissions.ContactUs.Read)]
+        public async Task<ActionResult<ApiResponse<PagedResult<ContactUsDto>>>> GetContactUsPaged([FromQuery] ContactUsPagedRequest request)
+        {
+            var result = await Service.GetContactUsPagedAsync(request);
+            return Ok(ApiResponse<PagedResult<ContactUsDto>>.SuccessResponse(result));
         }
 
         [HttpGet("{id:guid}")]

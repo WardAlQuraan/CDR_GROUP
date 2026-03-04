@@ -3,14 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BaseService } from './base.service';
 import { ApiResponse } from '../models/api-response.model';
+import { catchError } from 'rxjs/operators';
 import {
   EmployeeDto,
   EmployeeBasicDto,
   EmployeeWithSubordinatesDto,
   EmployeeTreeNodeDto,
+  EmployeePagedRequest,
   CreateEmployeeDto,
   UpdateEmployeeDto
 } from '../models/employee.model';
+import { PagedResult } from '../models/paged.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +22,16 @@ export class EmployeesService extends BaseService<EmployeeDto, CreateEmployeeDto
 
   constructor(http: HttpClient) {
     super(http, 'employees');
+  }
+
+  getEmployeesPaged(request?: EmployeePagedRequest): Observable<ApiResponse<PagedResult<EmployeeDto>>> {
+    let params = this.buildPagedParams(request);
+    if (request?.companyId) {
+      params = params.set('companyId', request.companyId);
+    }
+    return this.http.get<ApiResponse<PagedResult<EmployeeDto>>>(this.getApiUrl(), { params }).pipe(
+      catchError(error => this.handleError(error))
+    );
   }
 
   getWithSubordinates(id: string): Observable<ApiResponse<EmployeeWithSubordinatesDto>> {

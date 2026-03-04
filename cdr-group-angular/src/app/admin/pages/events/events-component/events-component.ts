@@ -6,8 +6,9 @@ import { Router } from '@angular/router';
 import { EventsService } from '../../../../services/events.service';
 import { SnackbarService } from '../../../../services/snackbar.service';
 import { TranslationService } from '../../../../services/translation.service';
-import { EventDto } from '../../../../models/event.model';
-import { PagedRequest } from '../../../../models/paged.model';
+import { EventDto, EventPagedRequest } from '../../../../models/event.model';
+import { CompanyDto } from '../../../../models/company.model';
+import { CompaniesService } from '../../../../services/companies.service';
 import { DataGridConfig, FilterValues } from '../../../../shared/components/data-grid/data-grid.models';
 import { EventDialogComponent, EventDialogData } from '../event-dialog/event-dialog.component';
 import { EventViewDialogComponent } from '../event-view-dialog/event-view-dialog.component';
@@ -40,9 +41,11 @@ export class EventsComponent implements OnInit {
   filterValues: FilterValues = {};
 
   gridConfig!: DataGridConfig<EventDto>;
+  companies: CompanyDto[] = [];
 
   constructor(
     private eventsService: EventsService,
+    private companiesService: CompaniesService,
     private snackbar: SnackbarService,
     private dialog: MatDialog,
     private translationService: TranslationService,
@@ -51,6 +54,7 @@ export class EventsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loadCompanies();
     this.initGridConfig();
     this.loadEvents();
   }
@@ -74,6 +78,21 @@ export class EventsComponent implements OnInit {
       // Filters
       showSearch: true,
       searchPlaceholder: buildSearchPlaceholder(this.translationService, this.searchProperties, 'admin.eventsAdmin'),
+      filters: [
+        {
+          key: 'companyId',
+          label: 'admin.eventsAdmin.companyFilter',
+          type: 'select',
+          defaultValue: 'all',
+          options: [
+            { value: 'all', label: 'admin.eventsAdmin.allCompanies' },
+            ...this.companies.map(c => ({
+              value: c.id,
+              label: this.isArabic ? c.nameAr : c.nameEn
+            }))
+          ]
+        }
+      ],
       columns: [
         {
           key: 'title',
@@ -150,18 +169,32 @@ export class EventsComponent implements OnInit {
     return this.translationService.translate(key);
   }
 
+  loadCompanies(): void {
+    this.companiesService.getAll().subscribe({
+      next: (response) => {
+        if (response.success && response.data) {
+          this.companies = response.data;
+          this.initGridConfig();
+          this.cdr.markForCheck();
+        }
+      }
+    });
+  }
+
   loadEvents(): void {
     this.loading = true;
-    const request: PagedRequest = {
+    const companyFilter = this.filterValues['companyId'];
+    const request: EventPagedRequest = {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
       searchTerm: this.filterValues['searchTerm'] || undefined,
       searchProperties: this.searchProperties,
       sortBy: this.sortBy,
-      sortDescending: this.sortDescending
+      sortDescending: this.sortDescending,
+      companyId: companyFilter && companyFilter !== 'all' ? companyFilter : undefined
     };
 
-    this.eventsService.getPaged(request).subscribe({
+    this.eventsService.getEventsPaged(request).subscribe({
       next: (response) => {
         if (response.success && response.data) {
           this.events = response.data.data;

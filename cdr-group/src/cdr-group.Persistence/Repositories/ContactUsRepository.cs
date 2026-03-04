@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using cdr_group.Contracts.DTOs.Common;
+using cdr_group.Contracts.DTOs.ContactUs;
 using cdr_group.Contracts.Interfaces.Repositories;
 using cdr_group.Domain.Entities;
 using cdr_group.Persistence.Data;
@@ -18,9 +18,14 @@ namespace cdr_group.Persistence.Repositories
             return await _dbSet.Include(e => e.Company).Where(e => !e.IsDeleted).ToListAsync();
         }
 
-        public async Task<(IEnumerable<ContactUs> Items, int TotalCount)> GetContactUsPagedAsync(PagedRequest request)
+        public async Task<(IEnumerable<ContactUs> Items, int TotalCount)> GetContactUsPagedAsync(ContactUsPagedRequest request)
         {
             var query = _dbSet.Include(e => e.Company).Where(e => !e.IsDeleted);
+
+            if (request.CompanyId.HasValue)
+            {
+                query = query.Where(e => e.CompanyId == request.CompanyId.Value);
+            }
 
             query = QueryHelper.ApplySearch(query, request);
             query = QueryHelper.ApplySort(query, request, e => e.CreatedAt);

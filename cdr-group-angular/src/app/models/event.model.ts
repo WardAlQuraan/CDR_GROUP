@@ -31,6 +31,17 @@ export interface CreateEventDto {
   companyId?: string;
 }
 
+export interface EventPagedRequest {
+  pageNumber?: number;
+  pageSize?: number;
+  sortBy?: string;
+  sortDescending?: boolean;
+  searchTerm?: string;
+  searchProperties?: string[];
+  companyId?: string;
+  companyCode?: string;
+}
+
 export interface UpdateEventDto {
   titleEn?: string;
   titleAr?: string;

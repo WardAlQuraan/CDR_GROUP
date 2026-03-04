@@ -5,8 +5,9 @@ import { Sort } from '@angular/material/sort';
 import { ContactUsService } from '../../../../services/contact-us.service';
 import { SnackbarService } from '../../../../services/snackbar.service';
 import { TranslationService } from '../../../../services/translation.service';
-import { ContactUsDto } from '../../../../models/contact-us.model';
-import { PagedRequest } from '../../../../models/paged.model';
+import { ContactUsDto, ContactUsPagedRequest } from '../../../../models/contact-us.model';
+import { CompanyDto } from '../../../../models/company.model';
+import { CompaniesService } from '../../../../services/companies.service';
 import { DataGridConfig, FilterValues } from '../../../../shared/components/data-grid/data-grid.models';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { ContactUsViewDialogComponent } from '../contact-us-view-dialog/contact-us-view-dialog.component';
@@ -35,6 +36,7 @@ export class ContactUsAdminComponent implements OnInit {
   filterValues: FilterValues = {};
 
   gridConfig!: DataGridConfig<ContactUsDto>;
+  companies: CompanyDto[] = [];
 
   private get isArabic(): boolean {
     return this.translationService.language() === 'ar';
@@ -42,6 +44,7 @@ export class ContactUsAdminComponent implements OnInit {
 
   constructor(
     private contactUsService: ContactUsService,
+    private companiesService: CompaniesService,
     private snackbar: SnackbarService,
     private dialog: MatDialog,
     private translationService: TranslationService,
@@ -49,6 +52,7 @@ export class ContactUsAdminComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loadCompanies();
     this.initGridConfig();
     this.loadMessages();
   }
@@ -64,6 +68,21 @@ export class ContactUsAdminComponent implements OnInit {
 
       showSearch: true,
       searchPlaceholder: buildSearchPlaceholder(this.translationService, this.searchProperties, 'admin.contactUs'),
+      filters: [
+        {
+          key: 'companyId',
+          label: 'admin.contactUs.companyFilter',
+          type: 'select',
+          defaultValue: 'all',
+          options: [
+            { value: 'all', label: 'admin.contactUs.allCompanies' },
+            ...this.companies.map(c => ({
+              value: c.id,
+              label: this.isArabic ? c.nameAr : c.nameEn
+            }))
+          ]
+        }
+      ],
 
       columns: [
         { key: 'fullName', header: 'admin.contactUs.fullName', sortable: true },
@@ -110,18 +129,32 @@ export class ContactUsAdminComponent implements OnInit {
     };
   }
 
+  loadCompanies(): void {
+    this.companiesService.getAll().subscribe({
+      next: (response) => {
+        if (response.success && response.data) {
+          this.companies = response.data;
+          this.initGridConfig();
+          this.cdr.markForCheck();
+        }
+      }
+    });
+  }
+
   loadMessages(): void {
     this.loading = true;
-    const request: PagedRequest = {
+    const companyFilter = this.filterValues['companyId'];
+    const request: ContactUsPagedRequest = {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
       searchTerm: this.filterValues['searchTerm'] || undefined,
       searchProperties: this.searchProperties,
       sortBy: this.sortBy,
-      sortDescending: this.sortDescending
+      sortDescending: this.sortDescending,
+      companyId: companyFilter && companyFilter !== 'all' ? companyFilter : undefined
     };
 
-    this.contactUsService.getPaged(request).subscribe({
+    this.contactUsService.getContactUsPaged(request).subscribe({
       next: (response) => {
         if (response.success && response.data) {
           this.messages = response.data.data;

@@ -16,6 +16,16 @@ export interface CreateContactUsDto {
   companyId?: string;
 }
 
+export interface ContactUsPagedRequest {
+  pageNumber?: number;
+  pageSize?: number;
+  sortBy?: string;
+  sortDescending?: boolean;
+  searchTerm?: string;
+  searchProperties?: string[];
+  companyId?: string;
+}
+
 export interface UpdateContactUsDto {
   fullName?: string;
   email?: string;

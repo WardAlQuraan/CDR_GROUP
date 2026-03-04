@@ -7,8 +7,9 @@ import { EmployeesService } from '../../../../services/employees.service';
 import { FilesService } from '../../../../services/files.service';
 import { SnackbarService } from '../../../../services/snackbar.service';
 import { TranslationService } from '../../../../services/translation.service';
-import { EmployeeDto } from '../../../../models/employee.model';
-import { PagedRequest } from '../../../../models/paged.model';
+import { EmployeeDto, EmployeePagedRequest } from '../../../../models/employee.model';
+import { CompanyDto } from '../../../../models/company.model';
+import { CompaniesService } from '../../../../services/companies.service';
 import { DataGridConfig, FilterValues } from '../../../../shared/components/data-grid/data-grid.models';
 import { EmployeeDialogComponent, EmployeeDialogData } from '../employee-dialog/employee-dialog.component';
 import { EmployeeViewDialogComponent } from '../employee-view-dialog/employee-view-dialog.component';
@@ -45,11 +46,13 @@ export class EmployeesComponent implements OnInit {
   filterValues: FilterValues = {};
 
   gridConfig!: DataGridConfig<EmployeeDto>;
+  companies: CompanyDto[] = [];
 
   private selectedEmployeeForUpload: EmployeeDto | null = null;
 
   constructor(
     private employeesService: EmployeesService,
+    private companiesService: CompaniesService,
     private filesService: FilesService,
     private snackbar: SnackbarService,
     private dialog: MatDialog,
@@ -59,6 +62,7 @@ export class EmployeesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loadCompanies();
     this.initGridConfig();
     this.loadEmployees();
   }
@@ -92,6 +96,19 @@ export class EmployeesComponent implements OnInit {
             { value: 'all', label: 'admin.employees.all' },
             { value: 'active', label: 'admin.employees.active' },
             { value: 'inactive', label: 'admin.employees.inactive' }
+          ]
+        },
+        {
+          key: 'companyId',
+          label: 'admin.employees.companyFilter',
+          type: 'select',
+          defaultValue: 'all',
+          options: [
+            { value: 'all', label: 'admin.employees.allCompanies' },
+            ...this.companies.map(c => ({
+              value: c.id,
+              label: this.isArabic ? c.nameAr : c.nameEn
+            }))
           ]
         }
       ],
@@ -187,18 +204,32 @@ export class EmployeesComponent implements OnInit {
     return this.translationService.translate(key);
   }
 
+  loadCompanies(): void {
+    this.companiesService.getAll().subscribe({
+      next: (response) => {
+        if (response.success && response.data) {
+          this.companies = response.data;
+          this.initGridConfig();
+          this.cdr.markForCheck();
+        }
+      }
+    });
+  }
+
   loadEmployees(): void {
     this.loading = true;
-    const request: PagedRequest = {
+    const companyFilter = this.filterValues['companyId'];
+    const request: EmployeePagedRequest = {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
       searchTerm: this.filterValues['searchTerm'] || undefined,
       searchProperties: this.searchProperties,
       sortBy: this.sortBy,
-      sortDescending: this.sortDescending
+      sortDescending: this.sortDescending,
+      companyId: companyFilter && companyFilter !== 'all' ? companyFilter : undefined
     };
 
-    this.employeesService.getPaged(request).subscribe({
+    this.employeesService.getEmployeesPaged(request).subscribe({
       next: (response) => {
         if (response.success && response.data) {
           let items = response.data.data;

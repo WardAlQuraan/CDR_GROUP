@@ -78,12 +78,12 @@ export class EventsComponent implements OnChanges {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
       sortBy: 'eventDate',
-      sortDescending: true
+      sortDescending: true,
+      companyCode: this.companyCode
     };
 
-    const source$ = this.companyCode
-      ? this.eventsService.getPagedByCompany(this.companyCode, request)
-      : this.eventsService.getPaged(request);
+    const source$ =  this.eventsService.getEventsPaged(request)
+      
 
     source$.subscribe({
       next: (response) => {

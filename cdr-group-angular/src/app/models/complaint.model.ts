@@ -25,3 +25,13 @@ export interface UpdateComplaintDto {
   message?: string;
   companyId?: string;
 }
+
+export interface ComplaintPagedRequest {
+  pageNumber?: number;
+  pageSize?: number;
+  sortBy?: string;
+  sortDescending?: boolean;
+  searchTerm?: string;
+  searchProperties?: string[];
+  companyId?: string;
+}

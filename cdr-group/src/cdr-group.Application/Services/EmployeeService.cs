@@ -27,13 +27,30 @@ namespace cdr_group.Application.Services
 
         public override async Task<IEnumerable<EmployeeDto>> GetAllAsync()
         {
-            var (employees, _) = await UnitOfWork.Employees.GetEmployeesPagedAsync(new PagedRequest { PageSize = int.MaxValue });
+            var (employees, _) = await UnitOfWork.Employees.GetEmployeesPagedAsync(new EmployeePagedRequest { PageSize = int.MaxValue });
             var employeeDtos = Mapper.Map<List<EmployeeDto>>(employees);
             await PopulateFilePathsAsync(employeeDtos);
             return employeeDtos;
         }
 
         public override async Task<PagedResult<EmployeeDto>> GetPagedAsync(PagedRequest request)
+        {
+            var employeeRequest = request as EmployeePagedRequest ?? new EmployeePagedRequest
+            {
+                PageNumber = request.PageNumber,
+                PageSize = request.PageSize,
+                SearchTerm = request.SearchTerm,
+                SortBy = request.SortBy,
+                SortDescending = request.SortDescending,
+                SearchProperties = request.SearchProperties
+            };
+            var (employees, totalCount) = await UnitOfWork.Employees.GetEmployeesPagedAsync(employeeRequest);
+            var employeeDtos = Mapper.Map<List<EmployeeDto>>(employees);
+            await PopulateFilePathsAsync(employeeDtos);
+            return new PagedResult<EmployeeDto>(employeeDtos, totalCount, request.PageNumber, request.PageSize);
+        }
+
+        public async Task<PagedResult<EmployeeDto>> GetEmployeesPagedAsync(EmployeePagedRequest request)
         {
             var (employees, totalCount) = await UnitOfWork.Employees.GetEmployeesPagedAsync(request);
             var employeeDtos = Mapper.Map<List<EmployeeDto>>(employees);

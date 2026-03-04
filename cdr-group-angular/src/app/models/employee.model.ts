@@ -84,6 +84,16 @@ export interface UpdateEmployeeDto {
   salaryChangeReason?: string;
 }
 
+export interface EmployeePagedRequest {
+  pageNumber?: number;
+  pageSize?: number;
+  sortBy?: string;
+  sortDescending?: boolean;
+  searchTerm?: string;
+  searchProperties?: string[];
+  companyId?: string;
+}
+
 export interface EmployeeTreeNodeDto {
   id: string;
   employeeCode: string;
