@@ -14,6 +14,7 @@ import { PositionViewDialogComponent } from '../position-view-dialog/position-vi
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 import { buildSearchPlaceholder } from '../../../../utils/search.utils';
+import { downloadExcelBlob } from '../../../../utils/export.utils';
 
 @Component({
   selector: 'app-positions-component',
@@ -25,6 +26,7 @@ export class PositionsComponent implements OnInit {
   positions: PositionDto[] = [];
   totalCount = 0;
   loading = false;
+  exporting = false;
 
   // Pagination & Sorting
   pageNumber = 1;
@@ -143,6 +145,7 @@ export class PositionsComponent implements OnInit {
           onClick: (row) => this.deletePosition(row)
         }
       ],
+      showExport: true,
       serverSide: true,
       pageSizeOptions: [5, 10, 25, 50],
       defaultPageSize: 10
@@ -240,6 +243,21 @@ export class PositionsComponent implements OnInit {
     this.dialog.open(PositionViewDialogComponent, {
       width: '700px',
       data: position
+    });
+  }
+
+  exportToExcel(): void {
+    this.exporting = true;
+    this.positionsService.export().subscribe({
+      next: (blob) => {
+        downloadExcelBlob(blob, 'Positions');
+        this.exporting = false;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.exporting = false;
+        this.cdr.markForCheck();
+      }
     });
   }
 

@@ -13,6 +13,11 @@ namespace cdr_group.Persistence.Repositories
         {
         }
 
+        public override async Task<IEnumerable<ContactUs>> GetAllAsync()
+        {
+            return await _dbSet.Include(e => e.Company).Where(e => !e.IsDeleted).ToListAsync();
+        }
+
         public async Task<(IEnumerable<ContactUs> Items, int TotalCount)> GetContactUsPagedAsync(PagedRequest request)
         {
             var query = _dbSet.Include(e => e.Company).Where(e => !e.IsDeleted);

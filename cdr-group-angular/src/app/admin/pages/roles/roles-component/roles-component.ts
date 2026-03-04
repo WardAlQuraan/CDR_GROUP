@@ -14,6 +14,7 @@ import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/co
 import { Permissions } from '../../../../models/auth.model';
 import { formatDateTime } from '../../../../utils/date.utils';
 import { buildSearchPlaceholder } from '../../../../utils/search.utils';
+import { downloadExcelBlob } from '../../../../utils/export.utils';
 
 @Component({
   selector: 'app-roles-component',
@@ -25,6 +26,7 @@ export class RolesComponent implements OnInit {
   roles: RoleDto[] = [];
   totalCount = 0;
   loading = false;
+  exporting = false;
 
   // Pagination & Sorting
   pageNumber = 1;
@@ -141,6 +143,7 @@ export class RolesComponent implements OnInit {
           visible: (row) => !row.isSystemRole
         }
       ],
+      showExport: true,
       serverSide: true,
       pageSizeOptions: [5, 10, 25, 50],
       defaultPageSize: 10
@@ -255,6 +258,21 @@ export class RolesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.loadRoles();
+      }
+    });
+  }
+
+  exportToExcel(): void {
+    this.exporting = true;
+    this.rolesService.export().subscribe({
+      next: (blob) => {
+        downloadExcelBlob(blob, 'Roles');
+        this.exporting = false;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.exporting = false;
+        this.cdr.markForCheck();
       }
     });
   }

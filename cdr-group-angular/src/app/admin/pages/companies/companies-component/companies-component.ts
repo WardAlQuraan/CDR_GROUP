@@ -13,6 +13,7 @@ import { CompanyDialogComponent, CompanyDialogData } from '../company-dialog/com
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 import { buildSearchPlaceholder } from '../../../../utils/search.utils';
+import { downloadExcelBlob } from '../../../../utils/export.utils';
 
 @Component({
   selector: 'app-companies-component',
@@ -24,6 +25,7 @@ export class CompaniesComponent implements OnInit {
   companies: CompanyDto[] = [];
   totalCount = 0;
   loading = false;
+  exporting = false;
 
   // Pagination & Sorting
   pageNumber = 1;
@@ -154,6 +156,7 @@ export class CompaniesComponent implements OnInit {
           onClick: (row) => this.deleteCompany(row)
         }
       ],
+      showExport: true,
       serverSide: true,
       pageSizeOptions: [5, 10, 25, 50],
       defaultPageSize: 10
@@ -252,6 +255,21 @@ export class CompaniesComponent implements OnInit {
   openOrgChart(company: CompanyDto): void {
     const url = `/admin/companies/${company.code}/org-chart`;
     window.open(url, '_blank');
+  }
+
+  exportToExcel(): void {
+    this.exporting = true;
+    this.companiesService.export().subscribe({
+      next: (blob) => {
+        downloadExcelBlob(blob, 'Companies');
+        this.exporting = false;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.exporting = false;
+        this.cdr.markForCheck();
+      }
+    });
   }
 
   deleteCompany(company: CompanyDto): void {

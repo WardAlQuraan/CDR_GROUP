@@ -13,6 +13,7 @@ import { ComplaintViewDialogComponent } from '../complaint-view-dialog/complaint
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 import { buildSearchPlaceholder } from '../../../../utils/search.utils';
+import { downloadExcelBlob } from '../../../../utils/export.utils';
 
 @Component({
   selector: 'app-complaints-component',
@@ -24,6 +25,7 @@ export class ComplaintsComponent implements OnInit {
   complaints: ComplaintDto[] = [];
   totalCount = 0;
   loading = false;
+  exporting = false;
 
   pageNumber = 1;
   pageSize = 10;
@@ -111,6 +113,7 @@ export class ComplaintsComponent implements OnInit {
         }
       ],
 
+      showExport: true,
       serverSide: true,
       pageSizeOptions: [5, 10, 25, 50],
       defaultPageSize: 10
@@ -166,6 +169,21 @@ export class ComplaintsComponent implements OnInit {
     this.dialog.open(ComplaintViewDialogComponent, {
       width: '600px',
       data: complaint
+    });
+  }
+
+  exportToExcel(): void {
+    this.exporting = true;
+    this.complaintsService.export().subscribe({
+      next: (blob) => {
+        downloadExcelBlob(blob, 'Complaints');
+        this.exporting = false;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.exporting = false;
+        this.cdr.markForCheck();
+      }
     });
   }
 

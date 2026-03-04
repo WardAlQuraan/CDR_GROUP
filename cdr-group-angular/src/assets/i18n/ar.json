@@ -73,7 +73,8 @@
     "failed": "فشل",
     "retryFailed": "إعادة المحاولة",
     "view": "عرض",
-    "download": "تحميل"
+    "download": "تحميل",
+    "exportExcel": "تصدير Excel"
   },
   "header": {
     "logo": "CDR",

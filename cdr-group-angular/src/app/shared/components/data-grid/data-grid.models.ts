@@ -33,6 +33,9 @@ export interface DataGridConfig<T = any> {
   subtitle?: string;
   addButton?: HeaderAction;
 
+  // Export
+  showExport?: boolean;
+
   // Filters
   filters?: FilterConfig[];
   showSearch?: boolean;

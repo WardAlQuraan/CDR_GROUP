@@ -71,6 +71,17 @@ $transition: 200ms ease;
     }
   }
 
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .export-spinner {
+      display: inline-flex;
+      margin-inline-end: 4px;
+    }
+  }
+
   button {
     display: inline-flex;
     align-items: center;

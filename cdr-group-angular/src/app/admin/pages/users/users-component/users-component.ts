@@ -15,6 +15,7 @@ import { ManageRolesDialogComponent, ManageRolesDialogData } from '../manage-rol
 import { Permissions } from '../../../../models/auth.model';
 import { formatDateTime } from '../../../../utils/date.utils';
 import { buildSearchPlaceholder } from '../../../../utils/search.utils';
+import { downloadExcelBlob } from '../../../../utils/export.utils';
 
 @Component({
   selector: 'app-users-component',
@@ -26,6 +27,7 @@ export class UsersComponent implements OnInit {
   users: UserDto[] = [];
   totalCount = 0;
   loading = false;
+  exporting = false;
 
   // Pagination & Sorting
   pageNumber = 1;
@@ -151,6 +153,7 @@ export class UsersComponent implements OnInit {
           onClick: (row) => this.deleteUser(row)
         }
       ],
+      showExport: true,
       serverSide: true,
       pageSizeOptions: [5, 10, 25, 50],
       defaultPageSize: 10
@@ -285,6 +288,21 @@ export class UsersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.loadUsers();
+      }
+    });
+  }
+
+  exportToExcel(): void {
+    this.exporting = true;
+    this.usersService.export().subscribe({
+      next: (blob) => {
+        downloadExcelBlob(blob, 'Users');
+        this.exporting = false;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.exporting = false;
+        this.cdr.markForCheck();
       }
     });
   }

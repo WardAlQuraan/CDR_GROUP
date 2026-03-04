@@ -13,6 +13,11 @@ namespace cdr_group.Persistence.Repositories
         {
         }
 
+        public override async Task<IEnumerable<Complaint>> GetAllAsync()
+        {
+            return await _dbSet.Include(e => e.Company).Where(e => !e.IsDeleted).ToListAsync();
+        }
+
         public async Task<(IEnumerable<Complaint> Items, int TotalCount)> GetComplaintsPagedAsync(PagedRequest request)
         {
             var query = _dbSet.Include(e => e.Company).Where(e => !e.IsDeleted);

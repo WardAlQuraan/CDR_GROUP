@@ -13,6 +13,11 @@ namespace cdr_group.Persistence.Repositories
         {
         }
 
+        public override async Task<IEnumerable<CompanyContact>> GetAllAsync()
+        {
+            return await _dbSet.Include(e => e.Company).Where(e => !e.IsDeleted).ToListAsync();
+        }
+
         public async Task<CompanyContact?> GetWithCompanyAsync(Guid id)
         {
             return await _dbSet

@@ -12,6 +12,7 @@ import { CompanyContactDialogComponent, CompanyContactDialogData } from '../comp
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 import { buildSearchPlaceholder } from '../../../../utils/search.utils';
+import { downloadExcelBlob } from '../../../../utils/export.utils';
 
 @Component({
   selector: 'app-company-contacts-component',
@@ -23,6 +24,7 @@ export class CompanyContactsComponent implements OnInit {
   contacts: CompanyContactDto[] = [];
   totalCount = 0;
   loading = false;
+  exporting = false;
   companyId!: string;
 
   // Pagination & Sorting
@@ -124,6 +126,7 @@ export class CompanyContactsComponent implements OnInit {
           onClick: (row) => this.deleteContact(row)
         }
       ],
+      showExport: true,
       serverSide: true,
       pageSizeOptions: [5, 10, 25, 50],
       defaultPageSize: 10
@@ -208,6 +211,10 @@ export class CompanyContactsComponent implements OnInit {
         this.loadContacts();
       }
     });
+  }
+
+  exportToExcel(): void {
+    this.companyContactsService.export().subscribe(blob => downloadExcelBlob(blob, 'CompanyContacts'));
   }
 
   deleteContact(contact: CompanyContactDto): void {

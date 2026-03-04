@@ -15,6 +15,7 @@ import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/co
 import { BulkUploadDialogComponent, BulkUploadDialogData } from '../../../../shared/components/bulk-upload-dialog/bulk-upload-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 import { buildSearchPlaceholder } from '../../../../utils/search.utils';
+import { downloadExcelBlob } from '../../../../utils/export.utils';
 
 @Component({
   selector: 'app-events-component',
@@ -26,6 +27,7 @@ export class EventsComponent implements OnInit {
   events: EventDto[] = [];
   totalCount = 0;
   loading = false;
+  exporting = false;
 
   // Pagination & Sorting
   pageNumber = 1;
@@ -137,6 +139,7 @@ export class EventsComponent implements OnInit {
           onClick: (row) => this.router.navigate(['/admin/audit-logs', 'Event', row.id])
         }
       ],
+      showExport: true,
       serverSide: true,
       pageSizeOptions: [5, 10, 25, 50],
       defaultPageSize: 10
@@ -240,6 +243,21 @@ export class EventsComponent implements OnInit {
     this.dialog.open(BulkUploadDialogComponent, {
       width: '550px',
       data: dialogData,
+    });
+  }
+
+  exportToExcel(): void {
+    this.exporting = true;
+    this.eventsService.export().subscribe({
+      next: (blob) => {
+        downloadExcelBlob(blob, 'Events');
+        this.exporting = false;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.exporting = false;
+        this.cdr.markForCheck();
+      }
     });
   }
 

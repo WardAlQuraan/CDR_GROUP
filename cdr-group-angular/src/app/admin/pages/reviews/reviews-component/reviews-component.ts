@@ -12,6 +12,7 @@ import { ReviewDialogComponent, ReviewDialogData } from '../review-dialog/review
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 import { buildSearchPlaceholder } from '../../../../utils/search.utils';
+import { downloadExcelBlob } from '../../../../utils/export.utils';
 
 @Component({
   selector: 'app-reviews-component',
@@ -23,6 +24,7 @@ export class ReviewsComponent implements OnInit {
   reviews: ReviewDto[] = [];
   totalCount = 0;
   loading = false;
+  exporting = false;
 
   pageNumber = 1;
   pageSize = 10;
@@ -136,6 +138,7 @@ export class ReviewsComponent implements OnInit {
         }
       ],
 
+      showExport: true,
       serverSide: true,
       pageSizeOptions: [5, 10, 25, 50],
       defaultPageSize: 10
@@ -200,6 +203,21 @@ export class ReviewsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.loadReviews();
+      }
+    });
+  }
+
+  exportToExcel(): void {
+    this.exporting = true;
+    this.reviewsService.export().subscribe({
+      next: (blob) => {
+        downloadExcelBlob(blob, 'Reviews');
+        this.exporting = false;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.exporting = false;
+        this.cdr.markForCheck();
       }
     });
   }

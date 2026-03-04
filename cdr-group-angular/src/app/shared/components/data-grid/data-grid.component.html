@@ -10,14 +10,26 @@
           <p>{{ config.subtitle | translate }}</p>
         }
       </div>
-      @if (config.addButton) {
-        <button mat-raised-button [color]="config.addButton.color || 'primary'" (click)="addClick.emit()">
-          @if (config.addButton.icon) {
-            <mat-icon>{{ config.addButton.icon }}</mat-icon>
-          }
-          {{ config.addButton.label | translate }}
-        </button>
-      }
+      <div class="header-actions">
+        @if (config.showExport) {
+          <button mat-stroked-button color="primary" (click)="exportClick.emit()" [disabled]="exporting" matTooltip="{{ 'common.exportExcel' | translate }}">
+            @if (exporting) {
+              <mat-spinner diameter="18" class="export-spinner"></mat-spinner>
+            } @else {
+              <mat-icon>download</mat-icon>
+            }
+            {{ 'common.exportExcel' | translate }}
+          </button>
+        }
+        @if (config.addButton) {
+          <button mat-raised-button [color]="config.addButton.color || 'primary'" (click)="addClick.emit()">
+            @if (config.addButton.icon) {
+              <mat-icon>{{ config.addButton.icon }}</mat-icon>
+            }
+            {{ config.addButton.label | translate }}
+          </button>
+        }
+      </div>
     </div>
   }
 

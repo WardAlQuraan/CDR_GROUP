@@ -12,6 +12,7 @@ import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/co
 import { ContactUsViewDialogComponent } from '../contact-us-view-dialog/contact-us-view-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 import { buildSearchPlaceholder } from '../../../../utils/search.utils';
+import { downloadExcelBlob } from '../../../../utils/export.utils';
 
 @Component({
   selector: 'app-contact-us-component',
@@ -23,6 +24,7 @@ export class ContactUsAdminComponent implements OnInit {
   messages: ContactUsDto[] = [];
   totalCount = 0;
   loading = false;
+  exporting = false;
 
   pageNumber = 1;
   pageSize = 10;
@@ -101,6 +103,7 @@ export class ContactUsAdminComponent implements OnInit {
         }
       ],
 
+      showExport: true,
       serverSide: true,
       pageSizeOptions: [5, 10, 25, 50],
       defaultPageSize: 10
@@ -156,6 +159,21 @@ export class ContactUsAdminComponent implements OnInit {
     this.dialog.open(ContactUsViewDialogComponent, {
       width: '600px',
       data: message
+    });
+  }
+
+  exportToExcel(): void {
+    this.exporting = true;
+    this.contactUsService.export().subscribe({
+      next: (blob) => {
+        downloadExcelBlob(blob, 'ContactUs');
+        this.exporting = false;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.exporting = false;
+        this.cdr.markForCheck();
+      }
     });
   }
 

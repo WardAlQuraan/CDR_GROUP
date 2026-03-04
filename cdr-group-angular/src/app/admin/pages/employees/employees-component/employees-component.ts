@@ -18,6 +18,7 @@ import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/co
 import { Permissions } from '../../../../models/auth.model';
 import { EntityTypes } from '../../../../constants/entity-types.constant';
 import { buildSearchPlaceholder } from '../../../../utils/search.utils';
+import { downloadExcelBlob } from '../../../../utils/export.utils';
 
 @Component({
   selector: 'app-employees-component',
@@ -31,6 +32,7 @@ export class EmployeesComponent implements OnInit {
   employees: EmployeeDto[] = [];
   totalCount = 0;
   loading = false;
+  exporting = false;
 
   // Pagination & Sorting
   pageNumber = 1;
@@ -174,10 +176,11 @@ export class EmployeesComponent implements OnInit {
           onClick: (row) => this.deleteEmployee(row)
         }
       ],
+      showExport: true,
       serverSide: true,
       pageSizeOptions: [5, 10, 25, 50],
       defaultPageSize: 10
-    }; 
+    };
   }
 
   private translate(key: string): string {
@@ -323,6 +326,21 @@ export class EmployeesComponent implements OnInit {
         this.loading = false;
         this.selectedEmployeeForUpload = null;
         input.value = '';
+      }
+    });
+  }
+
+  exportToExcel(): void {
+    this.exporting = true;
+    this.employeesService.export().subscribe({
+      next: (blob) => {
+        downloadExcelBlob(blob, 'Employees');
+        this.exporting = false;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.exporting = false;
+        this.cdr.markForCheck();
       }
     });
   }

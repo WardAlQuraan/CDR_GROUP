@@ -3,6 +3,7 @@ using cdr_group.Contracts.DTOs.Position;
 using cdr_group.Contracts.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using static cdr_group.Domain.Constants.Permissions;
 
 namespace cdr_group.API.Controllers.Base
@@ -83,6 +84,15 @@ namespace cdr_group.API.Controllers.Base
         {
             var exists = await Service.ExistsAsync(id);
             return Ok(ApiResponse<bool>.SuccessResponse(exists));
+        }
+
+        [HttpGet("export")]
+        public virtual async Task<IActionResult> Export()
+        {
+            var excelService = HttpContext.RequestServices.GetRequiredService<IExcelExportService>();
+            var data = await Service.GetAllAsync();
+            var bytes = excelService.ExportToExcel(data.ToList(), EntityName);
+            return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{EntityName}.xlsx");
         }
 
         protected virtual Guid GetEntityId(TDto entity)

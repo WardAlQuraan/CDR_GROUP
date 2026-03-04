@@ -48,6 +48,14 @@ export abstract class BaseService<T, TCreate = T, TUpdate = Partial<T>> {
     );
   }
 
+  export(): Observable<Blob> {
+    return this.http.get(`${this.getApiUrl()}/export`, {
+      responseType: 'blob'
+    }).pipe(
+      catchError(error => this.handleError(error))
+    );
+  }
+
   delete(id: string): Observable<ApiResponse<void>> {
     return this.http.delete<ApiResponse<void>>(`${this.getApiUrl()}/${id}`).pipe(
       catchError(error => this.handleError(error))

@@ -73,7 +73,8 @@
     "failed": "Failed",
     "retryFailed": "Retry Failed",
     "view": "View",
-    "download": "Download"
+    "download": "Download",
+    "exportExcel": "Export Excel"
   },
   "header": {
     "logo": "CDR",

@@ -3,9 +3,11 @@
   [config]="gridConfig"
   [totalCount]="totalCount"
   [loading]="loading"
+  [exporting]="exporting"
   [pageIndex]="pageNumber - 1"
   [pageSize]="pageSize"
   (pageChange)="onPageChange($event)"
   (sortChange)="onSortChange($event)"
-  (filterChange)="onFilterChange($event)">
+  (filterChange)="onFilterChange($event)"
+  (exportClick)="exportToExcel()">
 </app-data-grid>

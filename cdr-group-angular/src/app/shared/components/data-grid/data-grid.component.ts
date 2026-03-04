@@ -19,12 +19,14 @@ export class DataGridComponent<T> implements OnChanges {
   @Input() loading = false;
   @Input() pageSize = 10;
   @Input() pageIndex = 0;
+  @Input() exporting = false;
 
   @Output() pageChange = new EventEmitter<PageEvent>();
   @Output() sortChange = new EventEmitter<Sort>();
   @Output() filterChange = new EventEmitter<FilterValues>();
   @Output() searchChange = new EventEmitter<string>();
   @Output() addClick = new EventEmitter<void>();
+  @Output() exportClick = new EventEmitter<void>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
