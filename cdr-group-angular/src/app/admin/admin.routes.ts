@@ -13,6 +13,7 @@ import { AuditLogsComponent } from './pages/audit-logs/audit-logs-component/audi
 import { CompanyContactsComponent } from './pages/company-contacts/company-contacts-component/company-contacts-component';
 import { ReviewsComponent } from './pages/reviews/reviews-component/reviews-component';
 import { ComplaintsComponent } from './pages/complaints/complaints-component/complaints-component';
+import { PartnersComponent } from './pages/partners/partners-component/partners-component';
 
 export const adminRoutes: Routes = [
   {
@@ -24,10 +25,11 @@ export const adminRoutes: Routes = [
       { path: 'roles', component: RolesComponent },
       { path: 'employees', component: EmployeesComponent },
       { path: 'positions', component: PositionsComponent },
-{ path: 'events', component: EventsComponent },
+      { path: 'events', component: EventsComponent },
       { path: 'companies', component: CompaniesComponent },
       { path: 'companies/:id/org-chart', component: CompanyOrgChartPageComponent },
       { path: 'companies/:companyId/contacts', component: CompanyContactsComponent },
+      { path: 'partners', component: PartnersComponent },
       { path: 'contact-us', component: ContactUsAdminComponent },
       { path: 'reviews', component: ReviewsComponent },
       { path: 'complaints', component: ComplaintsComponent },

@@ -23,6 +23,9 @@ namespace cdr_group.Persistence.Repositories
         private IAuditLogRepository? _auditLogs;
         private IReviewRepository? _reviews;
         private IComplaintRepository? _complaints;
+        private ICountryRepository? _countries;
+        private ICityRepository? _cities;
+        private IPartnerRepository? _partners;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -43,6 +46,9 @@ namespace cdr_group.Persistence.Repositories
         public IAuditLogRepository AuditLogs => _auditLogs ??= new AuditLogRepository(_context);
         public IReviewRepository Reviews => _reviews ??= new ReviewRepository(_context);
         public IComplaintRepository Complaints => _complaints ??= new ComplaintRepository(_context);
+        public ICountryRepository Countries => _countries ??= new CountryRepository(_context);
+        public ICityRepository Cities => _cities ??= new CityRepository(_context);
+        public IPartnerRepository Partners => _partners ??= new PartnerRepository(_context);
 
         public async Task<int> SaveChangesAsync()
         {

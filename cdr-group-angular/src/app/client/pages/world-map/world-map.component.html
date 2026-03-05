@@ -1,0 +1,21 @@
+<div class="world-map-page m-1">
+  <div class="map-header">
+    <h2>{{ 'client.worldMap.title' | translate }}</h2>
+    <p>{{ 'client.worldMap.subtitle' | translate }}</p>
+  </div>
+
+  <div class="legend">
+    <span class="legend-item"><span class="dot green"></span> {{ 'admin.partners.present' | translate }}</span>
+    <span class="legend-item"><span class="dot red"></span> {{ 'admin.partners.notAvailable' | translate }}</span>
+    <span class="legend-item"><span class="dot blue"></span> {{ 'admin.partners.available' | translate }}</span>
+  </div>
+
+  <div class="map-container">
+    @if (loading) {
+      <div class="loading-overlay">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    }
+    <div id="world-map" class="map-wrapper"></div>
+  </div>
+</div>

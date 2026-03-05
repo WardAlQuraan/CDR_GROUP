@@ -44,6 +44,8 @@ import { ReviewsComponent } from './pages/reviews/reviews-component/reviews-comp
 import { ReviewDialogComponent } from './pages/reviews/review-dialog/review-dialog.component';
 import { ComplaintsComponent } from './pages/complaints/complaints-component/complaints-component';
 import { ComplaintViewDialogComponent } from './pages/complaints/complaint-view-dialog/complaint-view-dialog.component';
+import { PartnersComponent } from './pages/partners/partners-component/partners-component';
+import { PartnerDialogComponent } from './pages/partners/partner-dialog/partner-dialog.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,9 @@ import { ComplaintViewDialogComponent } from './pages/complaints/complaint-view-
     ReviewsComponent,
     ReviewDialogComponent,
     ComplaintsComponent,
-    ComplaintViewDialogComponent
+    ComplaintViewDialogComponent,
+    PartnersComponent,
+    PartnerDialogComponent
   ],
   imports: [
     SharedModule,

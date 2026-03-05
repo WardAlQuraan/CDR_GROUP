@@ -1,0 +1,70 @@
+<app-base-dialog
+  [title]="dialogTitle"
+  [saveLabel]="saveLabel"
+  [saveDisabled]="form.invalid"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <form [formGroup]="form" class="dialog-form">
+    <!-- Basic Info Section -->
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>handshake</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.partners.basicInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <app-async-select
+          formControlName="companyId"
+          label="admin.partners.company"
+          icon="business"
+          [dataSource$]="companiesDataSource$"
+          [optionMapper]="companyMapper"
+          [showNullOption]="false"
+          [resetOnDataSourceChange]="false">
+        </app-async-select>
+
+        <app-async-select
+          formControlName="countryId"
+          label="admin.partners.country"
+          icon="public"
+          nullOptionLabel="admin.partners.allCountries"
+          [dataSource$]="countriesDataSource$"
+          [optionMapper]="countryMapper"
+          [resetOnDataSourceChange]="false"
+          [showNullOption]="false"
+          (selectionChange)="onCountryChange($event)">
+        </app-async-select>
+
+        @if(showCityFilter) {
+        <app-async-select
+          formControlName="cityId"
+          label="admin.partners.city"
+          icon="location_city"
+          [dataSource$]="citiesDataSource$"
+          [optionMapper]="cityMapper"
+          [filterFn]="cityFilter"
+          [showNullOption]="false"
+          [resetOnDataSourceChange]="false">
+        </app-async-select>
+      }
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'admin.partners.status' | translate }}</mat-label>
+          <mat-icon matPrefix>flag</mat-icon>
+          <mat-select formControlName="status">
+            @for (s of statusOptions; track s.value) {
+              <mat-option [value]="s.value">{{ s.label | translate }}</mat-option>
+            }
+          </mat-select>
+          @if (form.get('status')?.hasError('required') && form.get('status')?.touched) {
+            <mat-error>{{ 'admin.partners.errors.statusRequired' | translate }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+</app-base-dialog>

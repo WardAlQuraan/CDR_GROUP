@@ -77,7 +77,7 @@
                   @case ('select') {
                     <mat-form-field appearance="outline" [style.width]="filter.width || '180px'">
                       <mat-label>{{ filter.label | translate }}</mat-label>
-                      <mat-select [(value)]="filterValues[filter.key]">
+                      <mat-select [(value)]="filterValues[filter.key]" (selectionChange)="onSelectChange(filter, $event.value)">
                         @for (option of filter.options; track option.value) {
                           <mat-option [value]="option.value">{{ option.label | translate }}</mat-option>
                         }

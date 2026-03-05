@@ -130,6 +130,9 @@ builder.Services.AddScoped<ICompanyContactRepository, CompanyContactRepository>(
 builder.Services.AddScoped<IAuditLogRepository, AuditLogRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IComplaintRepository, ComplaintRepository>();
+builder.Services.AddScoped<ICountryRepository, CountryRepository>();
+builder.Services.AddScoped<ICityRepository, CityRepository>();
+builder.Services.AddScoped<IPartnerRepository, PartnerRepository>();
 
 // Services
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -147,6 +150,9 @@ builder.Services.AddScoped<ICompanyContactService, CompanyContactService>();
 builder.Services.AddScoped<IAuditLogService, AuditLogService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IComplaintService, ComplaintService>();
+builder.Services.AddScoped<ICountryService, CountryService>();
+builder.Services.AddScoped<ICityService, CityService>();
+builder.Services.AddScoped<IPartnerService, PartnerService>();
 builder.Services.AddScoped<IExcelExportService, ExcelExportService>();
 
 builder.Services.AddControllers();

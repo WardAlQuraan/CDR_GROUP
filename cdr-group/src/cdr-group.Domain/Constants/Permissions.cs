@@ -102,5 +102,29 @@ public static class Positions
             public const string Update = "complaints.update";
             public const string Delete = "complaints.delete";
         }
+
+        public static class Countries
+        {
+            public const string Read = "countries.read";
+            public const string Create = "countries.create";
+            public const string Update = "countries.update";
+            public const string Delete = "countries.delete";
+        }
+
+        public static class Cities
+        {
+            public const string Read = "cities.read";
+            public const string Create = "cities.create";
+            public const string Update = "cities.update";
+            public const string Delete = "cities.delete";
+        }
+
+        public static class Partners
+        {
+            public const string Read = "partners.read";
+            public const string Create = "partners.create";
+            public const string Update = "partners.update";
+            public const string Delete = "partners.delete";
+        }
     }
 }

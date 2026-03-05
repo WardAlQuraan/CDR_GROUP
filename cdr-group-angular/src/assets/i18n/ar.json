@@ -74,7 +74,8 @@
     "retryFailed": "إعادة المحاولة",
     "view": "عرض",
     "download": "تحميل",
-    "exportExcel": "تصدير Excel"
+    "exportExcel": "تصدير Excel",
+    "seeOurPartners": "شركاؤنا"
   },
   "header": {
     "logo": "CDR",
@@ -824,6 +825,45 @@
         "deleteFailed": "فشل في حذف الشكوى"
       }
     },
+    "partners": {
+      "title": "إدارة الشركاء",
+      "subtitle": "إدارة الشركاء ومواقعهم",
+      "addPartner": "إضافة شريك",
+      "createPartner": "إنشاء شريك",
+      "editPartner": "تعديل الشريك",
+      "deletePartner": "حذف الشريك",
+      "company": "الشركة",
+      "country": "الدولة",
+      "allCountries": "جميع الدول",
+      "city": "المدينة",
+      "status": "الحالة",
+      "statusFilter": "الحالة",
+      "companyFilter": "الشركة",
+      "countryFilter": "الدولة",
+      "cityFilter": "المدينة",
+      "allCompanies": "جميع الشركات",
+      "allCities": "جميع المدن",
+      "all": "الكل",
+      "present": "حاضر",
+      "available": "متاح",
+      "notAvailable": "غير متاح",
+      "basicInfo": "المعلومات الأساسية",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "confirmDelete": "هل أنت متأكد من حذف هذا الشريك؟",
+      "partnerCreated": "تم إنشاء الشريك بنجاح",
+      "partnerUpdated": "تم تحديث الشريك بنجاح",
+      "partnerDeleted": "تم حذف الشريك بنجاح",
+      "errors": {
+        "loadFailed": "فشل في تحميل الشركاء",
+        "createFailed": "فشل في إنشاء الشريك",
+        "updateFailed": "فشل في تحديث الشريك",
+        "deleteFailed": "فشل في حذف الشريك",
+        "companyRequired": "الشركة مطلوبة",
+        "cityRequired": "المدينة مطلوبة",
+        "statusRequired": "الحالة مطلوبة"
+      }
+    },
     "auditLogs": {
       "title": "سجل التدقيق",
       "subtitle": "تتبع التغييرات والنشاطات عبر النظام",
@@ -863,6 +903,12 @@
       "errors": {
         "loadFailed": "فشل في تحميل سجلات التدقيق"
       }
+    }
+  },
+  "client": {
+    "worldMap": {
+      "title": "تواجدنا العالمي",
+      "subtitle": "اكتشف شركاءنا في المنطقة"
     }
   }
 }

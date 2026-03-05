@@ -14,6 +14,7 @@ export interface FilterConfig {
   icon?: string;             // Optional icon suffix
   defaultValue?: any;
   width?: string;            // CSS width (e.g., '200px', '25%')
+  selectionChange?: (value: any) => void;  // Callback fired immediately on selection
 }
 
 export interface FilterValues {

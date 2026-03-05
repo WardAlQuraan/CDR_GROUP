@@ -115,6 +115,21 @@ export const Permissions = {
   COMPLAINTS_UPDATE: 'complaints.update',
   COMPLAINTS_DELETE: 'complaints.delete',
 
+  // Countries
+  COUNTRIES_CREATE: 'countries.create',
+  COUNTRIES_UPDATE: 'countries.update',
+  COUNTRIES_DELETE: 'countries.delete',
+
+  // Cities
+  CITIES_CREATE: 'cities.create',
+  CITIES_UPDATE: 'cities.update',
+  CITIES_DELETE: 'cities.delete',
+
+  // Partners
+  PARTNERS_CREATE: 'partners.create',
+  PARTNERS_UPDATE: 'partners.update',
+  PARTNERS_DELETE: 'partners.delete',
+
   // Audit Logs
   AUDIT_LOGS_READ: 'audit-logs.read'
 } as const;

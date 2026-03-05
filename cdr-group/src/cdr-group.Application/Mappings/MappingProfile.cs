@@ -11,6 +11,9 @@ using cdr_group.Contracts.DTOs.AuditLog;
 using cdr_group.Contracts.DTOs.Complaint;
 using cdr_group.Contracts.DTOs.Review;
 using cdr_group.Contracts.DTOs.SalaryHistory;
+using cdr_group.Contracts.DTOs.Country;
+using cdr_group.Contracts.DTOs.City;
+using cdr_group.Contracts.DTOs.Partner;
 using cdr_group.Domain.Entities;
 using cdr_group.Domain.Entities.Identity;
 
@@ -211,6 +214,57 @@ namespace cdr_group.Application.Mappings
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
 
             CreateMap<UpdateComplaintDto, Complaint>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            // Country mappings
+            CreateMap<Country, CountryDto>();
+
+            CreateMap<CreateCountryDto, Country>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+            CreateMap<UpdateCountryDto, Country>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            // City mappings
+            CreateMap<City, CityDto>()
+                .ForMember(dest => dest.CountryNameEn, opt => opt.MapFrom(src =>
+                    src.Country != null ? src.Country.NameEn : null))
+                .ForMember(dest => dest.CountryNameAr, opt => opt.MapFrom(src =>
+                    src.Country != null ? src.Country.NameAr : null));
+
+            CreateMap<CreateCityDto, City>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+            CreateMap<UpdateCityDto, City>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            // Partner mappings
+            CreateMap<Partner, PartnerDto>()
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
+                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
+                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameAr : null))
+                .ForMember(dest => dest.CityNameEn, opt => opt.MapFrom(src =>
+                    src.City != null ? src.City.NameEn : null))
+                .ForMember(dest => dest.CityNameAr, opt => opt.MapFrom(src =>
+                    src.City != null ? src.City.NameAr : null))
+                .ForMember(dest => dest.CityLatitude, opt => opt.MapFrom(src =>
+                    src.City != null ? (double?)src.City.Latitude : null))
+                .ForMember(dest => dest.CityLongitude, opt => opt.MapFrom(src =>
+                    src.City != null ? (double?)src.City.Longitude : null));
+
+            CreateMap<CreatePartnerDto, Partner>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src =>
+                    Enum.Parse<Domain.Enums.PartnerStatus>(src.Status, true)));
+
+            CreateMap<UpdatePartnerDto, Partner>()
+                .ForMember(dest => dest.Status, opt =>
+                {
+                    opt.PreCondition(src => src.Status != null);
+                    opt.MapFrom(src => Enum.Parse<Domain.Enums.PartnerStatus>(src.Status!, true));
+                })
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
         }
     }

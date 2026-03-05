@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewC
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { DataGridConfig, FilterValues } from './data-grid.models';
+import { DataGridConfig, FilterConfig, FilterValues } from './data-grid.models';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -70,6 +70,17 @@ export class DataGridComponent<T> implements OnChanges {
 
   onFilterChange(key: string, value: any): void {
     this.filterValues[key] = value;
+  }
+
+  setFilterValue(key: string, value: any): void {
+    this.filterValues[key] = value;
+  }
+
+  onSelectChange(filter: FilterConfig, value: any): void {
+    this.filterValues[filter.key] = value;
+    if (filter.selectionChange) {
+      filter.selectionChange(value);
+    }
   }
 
   applyFilters(): void {

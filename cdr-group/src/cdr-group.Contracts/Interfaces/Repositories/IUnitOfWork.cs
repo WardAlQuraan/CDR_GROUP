@@ -16,6 +16,9 @@ IPositionRepository Positions { get; }
         IAuditLogRepository AuditLogs { get; }
         IReviewRepository Reviews { get; }
         IComplaintRepository Complaints { get; }
+        ICountryRepository Countries { get; }
+        ICityRepository Cities { get; }
+        IPartnerRepository Partners { get; }
         Task<int> SaveChangesAsync();
         Task BeginTransactionAsync();
         Task CommitTransactionAsync();

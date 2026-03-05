@@ -74,7 +74,8 @@
     "retryFailed": "Retry Failed",
     "view": "View",
     "download": "Download",
-    "exportExcel": "Export Excel"
+    "exportExcel": "Export Excel",
+    "seeOurPartners": "Our Partners"
   },
   "header": {
     "logo": "CDR",
@@ -824,6 +825,45 @@
         "deleteFailed": "Failed to delete complaint"
       }
     },
+    "partners": {
+      "title": "Partners Management",
+      "subtitle": "Manage partners and their locations",
+      "addPartner": "Add Partner",
+      "createPartner": "Create Partner",
+      "editPartner": "Edit Partner",
+      "deletePartner": "Delete Partner",
+      "company": "Company",
+      "country": "Country",
+      "allCountries": "All Countries",
+      "city": "City",
+      "status": "Status",
+      "statusFilter": "Status",
+      "companyFilter": "Company",
+      "countryFilter": "Country",
+      "cityFilter": "City",
+      "allCompanies": "All Companies",
+      "allCities": "All Cities",
+      "all": "All",
+      "present": "Present",
+      "available": "Available",
+      "notAvailable": "Not Available",
+      "basicInfo": "Basic Information",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this partner?",
+      "partnerCreated": "Partner created successfully",
+      "partnerUpdated": "Partner updated successfully",
+      "partnerDeleted": "Partner deleted successfully",
+      "errors": {
+        "loadFailed": "Failed to load partners",
+        "createFailed": "Failed to create partner",
+        "updateFailed": "Failed to update partner",
+        "deleteFailed": "Failed to delete partner",
+        "companyRequired": "Company is required",
+        "cityRequired": "City is required",
+        "statusRequired": "Status is required"
+      }
+    },
     "auditLogs": {
       "title": "Audit Logs",
       "subtitle": "Track changes and activity across the system",
@@ -863,6 +903,12 @@
       "errors": {
         "loadFailed": "Failed to load audit logs"
       }
+    }
+  },
+  "client": {
+    "worldMap": {
+      "title": "Our Global Presence",
+      "subtitle": "Discover our partners across the region"
     }
   }
 }
