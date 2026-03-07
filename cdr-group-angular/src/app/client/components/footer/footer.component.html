@@ -10,11 +10,11 @@
           </span>
         </a>
 
-        @if (companies.length > 1) {
+        @if (companyState.companies.length > 1) {
           <div class="company-tabs mt-3">
-            @for (company of companies; track company.id) {
+            @for (company of companyState.companies; track company.id) {
               <button class="company-tab"
-                [class.active]="selectedCompanyId === company.id"
+                [class.active]="selectedCompany?.id === company.id"
                 (click)="selectCompany(company.id)">
                 {{ getCompanyName(company) }}
               </button>

@@ -26,6 +26,8 @@ export interface CompanyDto {
   parentNameAr?: string;
   isActive: boolean;
   children: CompanyDto[];
+  partnersCount: number;
+  employeesCount: number;
   createdAt: Date;
   updatedAt?: Date;
 }

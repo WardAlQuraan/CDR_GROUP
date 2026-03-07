@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, inject, OnInit } from '@angular/core';
 import { TranslationService } from '../../../services/translation.service';
 import { CompanyDto } from '../../../models/company.model';
 
@@ -8,13 +8,20 @@ import { CompanyDto } from '../../../models/company.model';
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })
-export class HeroComponent {
-  translationService = inject(TranslationService);
+export class HeroComponent implements OnInit {
   @Input() isSmall = false;
   @Input() title = '';
   @Input() company?: CompanyDto;
 
   showMore = false;
+
+  constructor(private translationService: TranslationService) 
+  {
+  }
+
+  ngOnInit(): void {
+    console.log('HeroComponent initialized with company:', this.company);
+  }
 
   get isArabic(): boolean {
     return this.translationService.language() === 'ar';

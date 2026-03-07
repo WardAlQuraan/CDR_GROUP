@@ -96,7 +96,9 @@ namespace cdr_group.Application.Mappings
                 .ForMember(dest => dest.ParentNameEn, opt => opt.MapFrom(src =>
                     src.Parent != null ? src.Parent.NameEn : null))
                 .ForMember(dest => dest.ParentNameAr, opt => opt.MapFrom(src =>
-                    src.Parent != null ? src.Parent.NameAr : null));
+                    src.Parent != null ? src.Parent.NameAr : null))
+                .ForMember(dest => dest.PartnersCount, opt => opt.Ignore())
+                .ForMember(dest => dest.EmployeesCount, opt => opt.Ignore());
 
             CreateMap<Company, CompanyBasicDto>();
 

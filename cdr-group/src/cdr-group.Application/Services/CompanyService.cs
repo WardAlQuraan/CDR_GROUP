@@ -19,32 +19,41 @@ namespace cdr_group.Application.Services
         public override async Task<IEnumerable<CompanyDto>> GetAllAsync()
         {
             var (companies, _) = await UnitOfWork.Companies.GetCompaniesPagedAsync(new PagedRequest { PageSize = int.MaxValue });
-            return Mapper.Map<IEnumerable<CompanyDto>>(companies);
+            var dtos = Mapper.Map<List<CompanyDto>>(companies);
+            await PopulateCountsAsync(dtos);
+            return dtos;
         }
 
         public override async Task<PagedResult<CompanyDto>> GetPagedAsync(PagedRequest request)
         {
             var (companies, totalCount) = await UnitOfWork.Companies.GetCompaniesPagedAsync(request);
             var companyDtos = Mapper.Map<List<CompanyDto>>(companies);
+            await PopulateCountsAsync(companyDtos);
             return new PagedResult<CompanyDto>(companyDtos, totalCount, request.PageNumber, request.PageSize);
         }
 
         public async Task<CompanyDto?> GetByCodeAsync(string code)
         {
             var company = await UnitOfWork.Companies.GetByCodeAsync(code);
-            return Mapper.Map<CompanyDto>(company);
+            if (company == null) return null;
+            var dto = Mapper.Map<CompanyDto>(company);
+            await PopulateCountsAsync(new List<CompanyDto> { dto });
+            return dto;
         }
 
         public async Task<IEnumerable<CompanyDto>> GetActiveCompaniesAsync()
         {
             var companies = await UnitOfWork.Companies.GetActiveCompaniesAsync();
-            return Mapper.Map<IEnumerable<CompanyDto>>(companies);
+            var dtos = Mapper.Map<List<CompanyDto>>(companies);
+            await PopulateCountsAsync(dtos);
+            return dtos;
         }
 
         public async Task<IEnumerable<CompanyDto>> GetTreeAsync()
         {
             var companies = await UnitOfWork.Companies.GetActiveCompaniesAsync();
             var allDtos = Mapper.Map<List<CompanyDto>>(companies);
+            await PopulateCountsAsync(allDtos);
 
             var lookup = allDtos.ToDictionary(c => c.Id);
 
@@ -62,6 +71,19 @@ namespace cdr_group.Application.Services
             }
 
             return allDtos.Where(c => !c.ParentId.HasValue).ToList();
+        }
+
+        private async Task PopulateCountsAsync(List<CompanyDto> dtos)
+        {
+            var ids = dtos.Select(d => d.Id).ToList();
+            var partnersCounts = await UnitOfWork.Companies.GetPartnersCountAsync(ids);
+            var employeesCounts = await UnitOfWork.Companies.GetEmployeesCountAsync(ids);
+
+            foreach (var dto in dtos)
+            {
+                dto.PartnersCount = partnersCounts.TryGetValue(dto.Id, out var pc) ? pc : 0;
+                dto.EmployeesCount = employeesCounts.TryGetValue(dto.Id, out var ec) ? ec : 0;
+            }
         }
 
         protected override async Task ValidateCreateAsync(CreateCompanyDto dto)

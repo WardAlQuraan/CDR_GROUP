@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CompaniesService } from '../../../services/companies.service';
 import { TranslationService } from '../../../services/translation.service';
+import { CompanyStateService } from '../../../services/company-state.service';
 import { CompanyDto } from '../../../models/company.model';
 
 @Component({
@@ -10,40 +10,18 @@ import { CompanyDto } from '../../../models/company.model';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnInit {
-  companies: CompanyDto[] = [];
-  selectedCompany?: CompanyDto;
-  selectedCompanyCode = 'CDR';
+export class HomeComponent {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private translationService = inject(TranslationService);
+  companyState = inject(CompanyStateService);
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private companiesService: CompaniesService,
-    private translationService: TranslationService,
-    private cdr: ChangeDetectorRef
-  ) {}
-
-  ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      const company = params['company'];
-      if (company) {
-        this.selectedCompanyCode = company;
-      }
-      this.loadSelectedCompany();
-    });
-    // this.loadCompanies();
+  get selectedCompany(): CompanyDto | undefined {
+    return this.companyState.selectedCompany;
   }
 
-  private loadSelectedCompany(): void {
-    this.companiesService.getByCode(this.selectedCompanyCode).subscribe({
-      next: (response) => {
-        debugger;
-        if (response.success && response.data) {
-          this.selectedCompany = response.data;
-          this.cdr.markForCheck();
-        }
-      }
-    });
+  get selectedCompanyCode(): string {
+    return this.companyState.selectedCompany?.code || 'CDR';
   }
 
   get isArabic(): boolean {
@@ -55,21 +33,10 @@ export class HomeComponent implements OnInit {
   }
 
   onCompanyChange(companyCode: string): void {
-    this.selectedCompanyCode = companyCode;
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { company: companyCode },
       queryParamsHandling: 'merge'
     });
   }
-
-  // private loadCompanies(): void {
-  //   this.companiesService.getActiveCompanies().subscribe({
-  //     next: (response) => {
-  //       if (response.success && response.data) {
-  //         this.companies = response.data;
-  //       }
-  //     }
-  //   });
-  // }
 }

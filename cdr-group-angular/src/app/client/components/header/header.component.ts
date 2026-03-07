@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit, signal, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslationService } from '../../../services/translation.service';
 import { AuthService } from '../../../services/auth.service';
-import { CompaniesService } from '../../../services/companies.service';
+import { CompanyStateService } from '../../../services/company-state.service';
 import { CompanyDto } from '../../../models/company.model';
 
 @Component({
@@ -16,17 +16,19 @@ export class HeaderComponent implements OnInit {
   private route = inject(ActivatedRoute);
   translationService = inject(TranslationService);
   authService = inject(AuthService);
-  private companiesService = inject(CompaniesService);
-
+  companyState = inject(CompanyStateService);
   isSticky = signal(false);
   activeSection = signal('home');
-  companies: CompanyDto[] = [];
   selectedCompanyCode = 'CDR';
 
   private sections = ['section_2', 'section_events', 'section_team', 'section_5'];
 
   get isArabic(): boolean {
     return this.translationService.language() === 'ar';
+  }
+
+  get isHomePage(): boolean {
+    return this.router.url === '/' || this.router.url.startsWith('/?') || this.router.url.startsWith('/#');
   }
 
   get isCompanyRoute(): boolean {
@@ -38,40 +40,18 @@ export class HeaderComponent implements OnInit {
   }
 
   get selectedCompanyName(): string {
-    const company = this.findCompany(this.companies, this.selectedCompanyCode);
+    const company = this.companyState.findCompany(this.companyState.companies, this.selectedCompanyCode);
     if (company) {
       return this.getCompanyName(company);
     }
     return this.selectedCompanyCode;
   }
 
-  private findCompany(companies: CompanyDto[], code: string): CompanyDto | undefined {
-    for (const company of companies) {
-      if (company.code === code) return company;
-      if (company.children?.length) {
-        const found = this.findCompany(company.children, code);
-        if (found) return found;
-      }
-    }
-    return undefined;
-  }
-
   ngOnInit() {
     this.updateActiveSection();
-    this.loadCompanies();
     this.route.queryParams.subscribe(params => {
       if (params['company']) {
         this.selectedCompanyCode = params['company'];
-      }
-    });
-  }
-
-  private loadCompanies(): void {
-    this.companiesService.getTree().subscribe({
-      next: (response) => {
-        if (response.success && response.data) {
-          this.companies = response.data;
-        }
       }
     });
   }
@@ -106,8 +86,8 @@ export class HeaderComponent implements OnInit {
       }
     }
 
-    // Default to home when at the top or no section is active
-    this.activeSection.set('home');
+    // Default to home only when on the home page
+    this.activeSection.set(this.isHomePage ? 'home' : '');
   }
 
   scrollToTop() {

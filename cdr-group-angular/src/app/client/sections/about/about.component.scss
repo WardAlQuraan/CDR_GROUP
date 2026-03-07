@@ -60,6 +60,58 @@
   font-size: 1.2rem;
 }
 
+.stats-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.stats-strip {
+  display: inline-flex;
+  align-items: center;
+  background: #f8f9fa;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 0.25rem 0;
+}
+
+.stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.5rem;
+  cursor: default;
+  transition: background 0.2s;
+
+  i {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+  }
+
+  .stat-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #191919;
+  }
+
+  .stat-text {
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 400;
+  }
+
+  &:hover {
+    background: #ebebeb;
+  }
+}
+
+.stat-divider {
+  width: 1px;
+  height: 24px;
+  background: #d0d0d0 !important;
+  flex-shrink: 0;
+}
+
 .team-cards {
   display: flex;
   gap: 1.5rem;
@@ -120,6 +172,10 @@
 @media (max-width: 768px) {
   .about-title {
     font-size: 1.75rem;
+  }
+
+  .stats-strip {
+    margin-top: 2rem;
   }
 
   .team-cards {

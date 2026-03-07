@@ -31,6 +31,8 @@ namespace cdr_group.Contracts.DTOs.Company
         public string? ParentNameAr { get; set; }
         public bool IsActive { get; set; }
         public List<CompanyDto> Children { get; set; } = new();
+        public int PartnersCount { get; set; }
+        public int EmployeesCount { get; set; }
 
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

@@ -31,6 +31,7 @@
             </div>
           </div>
         </div>
+
       </div>
 
       <div class="col-lg-7 col-12">
@@ -49,5 +50,29 @@
         </div>
       </div>
     </div>
+
+    @if (company && (company.partnersCount > 0 || company.employeesCount > 0)) {
+      <div class="stats-wrapper">
+        <div class="stats-strip">
+          @if (company.partnersCount > 0) {
+            <div class="stat-pill">
+              <i class="bi bi-handshake"></i>
+              <span class="stat-value">{{ company.partnersCount | number }}</span>
+              <span class="stat-text">{{ 'about.trustedPartners' | translate }}</span>
+            </div>
+          }
+          @if (company.partnersCount > 0 && company.employeesCount > 0) {
+            <div class="stat-divider"></div>
+          }
+          @if (company.employeesCount > 0) {
+            <div class="stat-pill">
+              <i class="bi bi-people-fill"></i>
+              <span class="stat-value">{{ company.employeesCount | number }}</span>
+              <span class="stat-text">{{ 'about.teamMembers' | translate }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
   </div>
 </section>

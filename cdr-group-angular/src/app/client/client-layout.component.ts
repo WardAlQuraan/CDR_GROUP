@@ -1,8 +1,8 @@
-import { Component, OnDestroy, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 import { CompaniesService } from '../services/companies.service';
+import { CompanyStateService } from '../services/company-state.service';
 
 @Component({
   selector: 'app-client-layout',
@@ -10,20 +10,40 @@ import { CompaniesService } from '../services/companies.service';
   templateUrl: './client-layout.component.html',
   styleUrl: './client-layout.component.scss',
 })
-export class ClientLayoutComponent implements OnDestroy {
-  private route = inject(ActivatedRoute);
-  private companiesService = inject(CompaniesService);
-  private sub: Subscription;
+export class ClientLayoutComponent implements OnInit, OnDestroy {
 
-  constructor() {
-    this.sub = this.route.queryParams.pipe(
-      switchMap(params => {
-        const code = params['company'] || 'CDR';
-        return this.companiesService.getByCode(code);
-      })
-    ).subscribe(response => {
-      if (response.success && response.data) {
-        this.applyColors(response.data.primaryColor, response.data.secondaryColor);
+  constructor(
+    private route: ActivatedRoute,
+    private companiesService: CompaniesService,
+    private companyState: CompanyStateService,
+    private cdr: ChangeDetectorRef) {}
+
+  private sub?: Subscription;
+  loading = true;
+
+  ngOnInit(): void {
+    this.companiesService.getTree().subscribe({
+      next: (response) => {
+        if (response.success && response.data) {
+          this.companyState.setCompanies(response.data);
+        }
+        this.loading = false;
+        this.cdr.markForCheck();
+        this.subscribeToQueryParams();
+      },
+      error: () => {
+        this.loading = false;
+      }
+    });
+  }
+
+  private subscribeToQueryParams(): void {
+    this.sub = this.route.queryParams.subscribe(params => {
+      const code = params['company'] || 'CDR';
+      this.companyState.selectByCode(code);
+      const company = this.companyState.selectedCompany;
+      if (company) {
+        this.applyColors(company.primaryColor, company.secondaryColor);
       }
     });
   }
@@ -50,7 +70,7 @@ export class ClientLayoutComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.sub?.unsubscribe();
     const root = document.documentElement;
     root.style.removeProperty('--primary-color');
     root.style.removeProperty('--custom-btn-bg-color');

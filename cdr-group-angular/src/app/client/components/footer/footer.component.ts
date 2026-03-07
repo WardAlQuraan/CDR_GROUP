@@ -1,10 +1,8 @@
 import { Component, inject, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 import { TranslationService } from '../../../services/translation.service';
-import { CompaniesService } from '../../../services/companies.service';
 import { CompanyContactsService } from '../../../services/company-contacts.service';
+import { CompanyStateService } from '../../../services/company-state.service';
 import { CompanyContactDto } from '../../../models/company-contact.model';
 import { CompanyDto } from '../../../models/company.model';
 
@@ -16,16 +14,12 @@ import { CompanyDto } from '../../../models/company.model';
 })
 export class FooterComponent implements OnDestroy {
   translationService = inject(TranslationService);
-  private route = inject(ActivatedRoute);
-  private companiesService = inject(CompaniesService);
+  companyState = inject(CompanyStateService);
   private companyContactsService = inject(CompanyContactsService);
   private cdr = inject(ChangeDetectorRef);
 
   currentYear = new Date().getFullYear();
-  companies: CompanyDto[] = [];
   contacts: CompanyContactDto[] = [];
-  selectedCompanyId?: string;
-  selectedCompany?: CompanyDto;
   loadingContacts = false;
   private sub: Subscription;
 
@@ -33,23 +27,14 @@ export class FooterComponent implements OnDestroy {
     return this.translationService.language() === 'ar';
   }
 
-  constructor() {
-    this.companiesService.getActiveCompanies().subscribe(response => {
-      if (response.success && response.data) {
-        this.companies = response.data;
-      }
-    });
+  get selectedCompany(): CompanyDto | undefined {
+    return this.companyState.selectedCompany;
+  }
 
-    this.sub = this.route.queryParams.pipe(
-      switchMap(params => {
-        const code = params['company'] || 'CDR';
-        return this.companiesService.getByCode(code);
-      })
-    ).subscribe(response => {
-      if (response.success && response.data) {
-        this.selectedCompanyId = response.data.id;
-        this.selectedCompany = response.data;
-        this.loadContacts(response.data.id);
+  constructor() {
+    this.sub = this.companyState.selectedCompany$.subscribe(company => {
+      if (company) {
+        this.loadContacts(company.id);
       }
     });
   }
@@ -88,9 +73,22 @@ export class FooterComponent implements OnDestroy {
   }
 
   selectCompany(companyId: string): void {
-    this.selectedCompanyId = companyId;
-    this.selectedCompany = this.companies.find(c => c.id === companyId);
-    this.loadContacts(companyId);
+    const companies = this.companyState.companies;
+    const found = this.findInList(companies, companyId);
+    if (found) {
+      this.companyState.setSelectedCompany(found);
+    }
+  }
+
+  private findInList(companies: CompanyDto[], id: string): CompanyDto | undefined {
+    for (const company of companies) {
+      if (company.id === id) return company;
+      if (company.children?.length) {
+        const found = this.findInList(company.children, id);
+        if (found) return found;
+      }
+    }
+    return undefined;
   }
 
   private formatTime(time: string): string {

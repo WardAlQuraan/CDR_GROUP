@@ -77,5 +77,23 @@ namespace cdr_group.Persistence.Repositories
             return await _dbSet.AnyAsync(c =>
                 c.ParentId == companyId && c.IsActive && !c.IsDeleted);
         }
+
+        public async Task<Dictionary<Guid, int>> GetPartnersCountAsync(IEnumerable<Guid> companyIds)
+        {
+            var ids = companyIds.ToList();
+            return await _context.Partners
+                .Where(p => ids.Contains(p.CompanyId) && !p.IsDeleted)
+                .GroupBy(p => p.CompanyId)
+                .ToDictionaryAsync(g => g.Key, g => g.Count());
+        }
+
+        public async Task<Dictionary<Guid, int>> GetEmployeesCountAsync(IEnumerable<Guid> companyIds)
+        {
+            var ids = companyIds.ToList();
+            return await _context.Employees
+                .Where(e => e.CompanyId.HasValue && ids.Contains(e.CompanyId.Value) && !e.IsDeleted)
+                .GroupBy(e => e.CompanyId!.Value)
+                .ToDictionaryAsync(g => g.Key, g => g.Count());
+        }
     }
 }

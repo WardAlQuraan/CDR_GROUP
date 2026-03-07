@@ -40,5 +40,8 @@ namespace cdr_group.Domain.Entities
 
         // Contacts for this company
         public virtual ICollection<CompanyContact> CompanyContacts { get; set; } = new List<CompanyContact>();
+
+        // Partners for this company
+        public virtual ICollection<Partner> Partners { get; set; } = new List<Partner>();
     }
 }
