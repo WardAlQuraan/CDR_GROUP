@@ -37,5 +37,11 @@ namespace cdr_group.Application.Services
             var dtos = Mapper.Map<List<PartnerDto>>(items);
             return new PagedResult<PartnerDto>(dtos, totalCount, request.PageNumber, request.PageSize);
         }
+
+        public async Task<IEnumerable<PartnerDto>> GetAllByCompanyCodeAsync(string companyCode)
+        {
+            var items = await UnitOfWork.Partners.GetAllByCompanyCodeAsync(companyCode);
+            return Mapper.Map<IEnumerable<PartnerDto>>(items);
+        }
     }
 }

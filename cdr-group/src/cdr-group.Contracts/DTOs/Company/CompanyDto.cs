@@ -26,6 +26,7 @@ namespace cdr_group.Contracts.DTOs.Company
         public TimeSpan? OpeningEndTime { get; set; }
         public string? OpeningHoursNoteEn { get; set; }
         public string? OpeningHoursNoteAr { get; set; }
+        public string? PartnershipFormUrl { get; set; }
         public Guid? ParentId { get; set; }
         public string? ParentNameEn { get; set; }
         public string? ParentNameAr { get; set; }
@@ -111,6 +112,9 @@ namespace cdr_group.Contracts.DTOs.Company
         [StringLength(500)]
         public string? OpeningHoursNoteAr { get; set; }
 
+        [StringLength(500)]
+        public string? PartnershipFormUrl { get; set; }
+
         public Guid? ParentId { get; set; }
 
         public bool IsActive { get; set; } = true;
@@ -177,6 +181,9 @@ namespace cdr_group.Contracts.DTOs.Company
 
         [StringLength(500)]
         public string? OpeningHoursNoteAr { get; set; }
+
+        [StringLength(500)]
+        public string? PartnershipFormUrl { get; set; }
 
         public Guid? ParentId { get; set; }
 

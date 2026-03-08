@@ -10,6 +10,36 @@
     <span class="legend-item"><span class="dot blue"></span> {{ 'admin.partners.available' | translate }}</span>
   </div>
 
+  <div class="search-container">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput [(ngModel)]="searchTerm" (input)="onSearch()" [placeholder]="'common.search' | translate">
+      @if (searchTerm) {
+        <button matSuffix mat-icon-button (click)="searchTerm = ''; onSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </mat-form-field>
+  </div>
+
+  @if (searchTerm && filteredCities.length > 0) {
+    <div class="search-results">
+      @for (city of filteredCities; track city.name + city.companyName) {
+        <div class="result-item">
+          <span class="dot" [style.background]="city.color"></span>
+          <span class="result-name">{{ city.companyName }} - {{ city.name }}</span>
+          <span class="result-status" [style.color]="city.color">{{ getStatusLabel(city.status) }}</span>
+        </div>
+      }
+    </div>
+  }
+
+  @if (searchTerm && filteredCities.length === 0) {
+    <div class="no-results">
+      <p>{{ 'common.noData' | translate }}</p>
+    </div>
+  }
+
   <div class="map-container">
     @if (loading) {
       <div class="loading-overlay">

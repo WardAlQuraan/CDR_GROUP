@@ -26,6 +26,7 @@ export interface CompanyDto {
   parentNameAr?: string;
   isActive: boolean;
   children: CompanyDto[];
+  partnershipFormUrl?: string;
   partnersCount: number;
   employeesCount: number;
   createdAt: Date;
@@ -61,6 +62,7 @@ export interface CreateCompanyDto {
   openingEndTime?: string;
   openingHoursNoteEn?: string;
   openingHoursNoteAr?: string;
+  partnershipFormUrl?: string;
   parentId?: string;
   isActive?: boolean;
 }
@@ -87,6 +89,7 @@ export interface UpdateCompanyDto {
   openingEndTime?: string;
   openingHoursNoteEn?: string;
   openingHoursNoteAr?: string;
+  partnershipFormUrl?: string;
   parentId?: string;
   isActive?: boolean;
 }

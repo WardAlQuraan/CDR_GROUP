@@ -123,9 +123,10 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<bool> EmployeeCodeExistsAsync(string employeeCode, Guid? excludeId = null)
         {
-            return await _dbSet.AnyAsync(e =>
+            return await _dbSet
+                .IgnoreQueryFilters()
+                .AnyAsync(e =>
                 e.EmployeeCode == employeeCode &&
-                !e.IsDeleted &&
                 (excludeId == null || e.Id != excludeId));
         }
     }

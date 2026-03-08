@@ -48,7 +48,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<bool> PositionCodeExistsAsync(string code, Guid? excludeId = null)
         {
-            return await _dbSet.AnyAsync(p =>
+            return await _dbSet.IgnoreQueryFilters().AnyAsync(p =>
                 p.Code == code &&
                 !p.IsDeleted &&
                 (excludeId == null || p.Id != excludeId));

@@ -111,6 +111,7 @@
     "secondaryCta": "عرض الفعاليات",
     "description": "مجموعة CDR هي وكالة إبداعية رائدة متخصصة في التطوير والتحقيق والإنتاج الاستراتيجي. نقدم حلولاً مبتكرة تدفع نمو العلامة التجارية، من خلال الجمع بين الإبداع والاستراتيجية لمساعدة الشركات على تحقيق إمكاناتها الكاملة.",
     "showLess": "عرض أقل",
+    "partnershipForm": "كن شريكاً",
     "partners": "شركاء",
     "employees": "موظفون"
   },
@@ -129,7 +130,7 @@
   },
   "events": {
     "title": "الفعاليات القادمة",
-    "latestEvents": "أحدث الفعاليات",
+    "latestEvents": "أحدث الأخبار",
     "subtitle": "انضم إلى فعالياتنا المثيرة",
     "viewDetails": "عرض التفاصيل",
     "viewAllEvents": "عرض جميع الفعاليات",
@@ -614,6 +615,7 @@
       "openingEndTime": "وقت النهاية",
       "openingHoursNoteEn": "ملاحظة ساعات العمل (إنجليزي)",
       "openingHoursNoteAr": "ملاحظة ساعات العمل (عربي)",
+      "partnershipFormUrl": "رابط نموذج الشراكة",
       "colorsSection": "الألوان",
       "primaryColor": "اللون الأساسي",
       "secondaryColor": "اللون الثانوي",
@@ -665,7 +667,8 @@
         "titleEn": "أدخل العنوان بالإنجليزية",
         "titleAr": "أدخل العنوان بالعربية",
         "openingHoursNoteEn": "أدخل الملاحظة بالإنجليزية",
-        "openingHoursNoteAr": "أدخل الملاحظة بالعربية"
+        "openingHoursNoteAr": "أدخل الملاحظة بالعربية",
+        "partnershipFormUrl": "أدخل رابط نموذج الشراكة"
       }
     },
     "companyContacts": {

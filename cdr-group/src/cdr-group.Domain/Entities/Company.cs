@@ -25,6 +25,7 @@ namespace cdr_group.Domain.Entities
         public TimeSpan? OpeningEndTime { get; set; }
         public string? OpeningHoursNoteEn { get; set; }
         public string? OpeningHoursNoteAr { get; set; }
+        public string? PartnershipFormUrl { get; set; }
         public bool IsActive { get; set; } = true;
 
         // Self-referencing parent

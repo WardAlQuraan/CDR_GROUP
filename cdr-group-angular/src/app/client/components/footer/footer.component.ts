@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TranslationService } from '../../../services/translation.service';
 import { CompanyContactsService } from '../../../services/company-contacts.service';
@@ -12,7 +12,7 @@ import { CompanyDto } from '../../../models/company.model';
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
 })
-export class FooterComponent implements OnDestroy {
+export class FooterComponent implements OnInit, OnDestroy {
   translationService = inject(TranslationService);
   companyState = inject(CompanyStateService);
   private companyContactsService = inject(CompanyContactsService);
@@ -21,7 +21,7 @@ export class FooterComponent implements OnDestroy {
   currentYear = new Date().getFullYear();
   contacts: CompanyContactDto[] = [];
   loadingContacts = false;
-  private sub: Subscription;
+  private sub!: Subscription;
 
   get isArabic(): boolean {
     return this.translationService.language() === 'ar';
@@ -31,7 +31,7 @@ export class FooterComponent implements OnDestroy {
     return this.companyState.selectedCompany;
   }
 
-  constructor() {
+  ngOnInit(): void {
     this.sub = this.companyState.selectedCompany$.subscribe(company => {
       if (company) {
         this.loadContacts(company.id);

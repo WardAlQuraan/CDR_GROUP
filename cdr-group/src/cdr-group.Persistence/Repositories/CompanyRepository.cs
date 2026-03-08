@@ -54,9 +54,10 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<bool> CompanyCodeExistsAsync(string code, Guid? excludeId = null)
         {
-            return await _dbSet.AnyAsync(c =>
+            return await _dbSet
+                .IgnoreQueryFilters()
+                .AnyAsync(c =>
                 c.Code == code &&
-                !c.IsDeleted &&
                 (excludeId == null || c.Id != excludeId));
         }
 
@@ -82,7 +83,7 @@ namespace cdr_group.Persistence.Repositories
         {
             var ids = companyIds.ToList();
             return await _context.Partners
-                .Where(p => ids.Contains(p.CompanyId) && !p.IsDeleted)
+                .Where(p => ids.Contains(p.CompanyId) && p.Status == Domain.Enums.PartnerStatus.Present && !p.IsDeleted)
                 .GroupBy(p => p.CompanyId)
                 .ToDictionaryAsync(g => g.Key, g => g.Count());
         }

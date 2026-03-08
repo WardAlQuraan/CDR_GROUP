@@ -23,11 +23,12 @@
         }
       </div>
 
-      <div class="col-lg-3 col-md-3 col-12 mb-3">
+      @if (openingDays || openingNote) {
+      <div class="col-lg-3 col-md-3 col-12 mb-3 text-white">
         <h6 class="site-footer-title">{{ 'footer.operatingHours' | translate }}</h6>
 
         @if (openingDays) {
-          <p class="mb-2">
+          <p class="mb-2 text-white">
             <span>{{ openingDays }}</span>
             {{ openingTimes }}
           </p>
@@ -37,6 +38,7 @@
           <p class="mb-0 text-white" style="font-size: 0.85rem;">{{ openingNote }}</p>
         }
       </div>
+      }
 
       <div class="col-lg-4 col-md-4 col-12 ms-auto">
         @if(contacts.length > 0) {

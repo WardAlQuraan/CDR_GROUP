@@ -111,6 +111,7 @@
     "secondaryCta": "View Events",
     "description": "CDR Group is a leading creative agency specializing in development, realization, and strategic production. We deliver innovative solutions that drive brand growth, combining creativity with strategy to help businesses achieve their full potential.",
     "showLess": "Show Less",
+    "partnershipForm": "Be Partner",
     "partners": "Partners",
     "employees": "Employees"
   },
@@ -129,7 +130,7 @@
   },
   "events": {
     "title": "Upcoming Events",
-    "latestEvents": "Latest Events",
+    "latestEvents": "Latest News",
     "subtitle": "Join our exciting events",
     "viewDetails": "View Details",
     "viewAllEvents": "View All Events",
@@ -614,6 +615,7 @@
       "openingEndTime": "End Time",
       "openingHoursNoteEn": "Opening Hours Note (English)",
       "openingHoursNoteAr": "Opening Hours Note (Arabic)",
+      "partnershipFormUrl": "Partnership Form URL",
       "colorsSection": "Colors",
       "primaryColor": "Primary Color",
       "secondaryColor": "Secondary Color",
@@ -665,7 +667,8 @@
         "titleEn": "Enter title in English",
         "titleAr": "Enter title in Arabic",
         "openingHoursNoteEn": "Enter note in English",
-        "openingHoursNoteAr": "Enter note in Arabic"
+        "openingHoursNoteAr": "Enter note in Arabic",
+        "partnershipFormUrl": "Enter partnership form URL"
       }
     },
     "companyContacts": {

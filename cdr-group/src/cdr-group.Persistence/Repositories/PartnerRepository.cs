@@ -24,6 +24,15 @@ namespace cdr_group.Persistence.Repositories
             return await _dbSet.Include(e => e.Company).Include(e => e.City).FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
         }
 
+        public async Task<IEnumerable<Partner>> GetAllByCompanyCodeAsync(string companyCode)
+        {
+            return await _dbSet
+                .Include(e => e.Company)
+                .Include(e => e.City)
+                .Where(e => !e.IsDeleted && e.Company != null && e.Company.Code == companyCode)
+                .ToListAsync();
+        }
+
         public async Task<(IEnumerable<Partner> Items, int TotalCount)> GetPartnersPagedAsync(PartnerPagedRequest request)
         {
             var query = _dbSet.Include(e => e.Company).Include(e => e.City).Where(e => !e.IsDeleted);

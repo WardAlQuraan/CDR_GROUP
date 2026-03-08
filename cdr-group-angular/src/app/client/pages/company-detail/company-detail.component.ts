@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit, effect } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CompaniesService } from '../../../services/companies.service';
+import { ChangeDetectorRef, Component, OnInit, OnDestroy, effect } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { CompanyStateService } from '../../../services/company-state.service';
 import { TranslationService } from '../../../services/translation.service';
 import { CompanyDto } from '../../../models/company.model';
 
@@ -10,15 +10,15 @@ import { CompanyDto } from '../../../models/company.model';
   templateUrl: './company-detail.component.html',
   styleUrl: './company-detail.component.scss',
 })
-export class CompanyDetailComponent implements OnInit {
+export class CompanyDetailComponent implements OnInit, OnDestroy {
   loading = true;
   error = false;
   company: CompanyDto | null = null;
   companyCode: string | null = null;
+  private sub!: Subscription;
 
   constructor(
-    private route: ActivatedRoute,
-    private companiesService: CompaniesService,
+    private companyStateService: CompanyStateService,
     private translationService: TranslationService,
     private cdr: ChangeDetectorRef
   ) {
@@ -29,19 +29,23 @@ export class CompanyDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const code = params.get('code');
-      if (code && code !== this.companyCode) {
-        this.companyCode = code;
-        this.company = null;
-        this.loading = true;
+    this.sub = this.companyStateService.selectedCompany$.subscribe(company => {
+      if (company) {
+        this.companyCode = company.code;
+        this.company = company;
+        this.loading = false;
         this.error = false;
-        this.loadCompany();
-      } else if (!code) {
+        this.cdr.markForCheck();
+      } else {
         this.loading = false;
         this.error = true;
+        this.cdr.markForCheck();
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
   }
 
   get isArabic(): boolean {
@@ -78,22 +82,4 @@ export class CompanyDetailComponent implements OnInit {
     return (this.isArabic ? this.company.visionAr : this.company.visionEn) || '';
   }
 
-  private loadCompany(): void {
-    this.companiesService.getByCode(this.companyCode!).subscribe({
-      next: (response) => {
-        if (response.success && response.data) {
-          this.company = response.data;
-        } else {
-          this.error = true;
-        }
-        this.loading = false;
-        this.cdr.markForCheck();
-      },
-      error: () => {
-        this.loading = false;
-        this.error = true;
-        this.cdr.markForCheck();
-      }
-    });
-  }
 }

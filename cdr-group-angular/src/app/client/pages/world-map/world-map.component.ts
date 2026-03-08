@@ -1,4 +1,5 @@
 import { Component, AfterViewInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import * as L from 'leaflet';
 import { CountriesService } from '../../../services/countries.service';
 import { PartnersService } from '../../../services/partners.service';
@@ -26,18 +27,25 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
   private map!: L.Map;
   private countries: CountryDto[] = [];
 
+  private companyCode?: string;
+
   constructor(
+    private route: ActivatedRoute,
     private countriesService: CountriesService,
     private partnersService: PartnersService,
     private translationService: TranslationService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) {
+    this.companyCode = this.route.snapshot.queryParams['company'];
+  }
 
   private get isArabic(): boolean {
     return this.translationService.language() === 'ar';
   }
 
   loading = true;
+  searchTerm = '';
+  filteredCities: City[] = [];
   private partners: PartnerDto[] = [];
   private cities: City[] = [];
   private pendingRequests = 2;
@@ -82,7 +90,7 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
   }
 
   private loadPartners(): void {
-    this.partnersService.getAll().subscribe({
+    this.partnersService.getAllByCompanyCode(this.companyCode).subscribe({
       next: (response) => {
         if (response.success && response.data) {
           this.partners = response.data;
@@ -96,12 +104,40 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
               lng: p.cityLongitude!,
               color: this.statusColorMap[p.status] || '#2196f3'
             }));
+          this.filteredCities = [...this.cities];
           this.addCities();
         }
         this.onRequestComplete();
       },
       error: () => this.onRequestComplete()
     });
+  }
+
+  onSearch(): void {
+    const term = this.searchTerm.toLowerCase().trim();
+    if (!term) {
+      this.filteredCities = [...this.cities];
+    } else {
+      this.filteredCities = this.cities.filter(c =>
+        c.name.toLowerCase().includes(term) ||
+        c.companyName.toLowerCase().includes(term)
+      );
+    }
+    // Show/hide markers based on filter
+    for (const city of this.cities) {
+      if (city.marker) {
+        const isVisible = this.filteredCities.includes(city);
+        if (isVisible) {
+          city.marker.addTo(this.map);
+        } else {
+          city.marker.removeFrom(this.map);
+        }
+      }
+    }
+  }
+
+  getStatusLabel(status: string): string {
+    return this.translationService.translate(this.statusTranslationMap[status] || status);
   }
 
   ngOnDestroy(): void {

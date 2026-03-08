@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { BaseService } from './base.service';
@@ -14,6 +14,16 @@ export class PartnersService extends BaseService<PartnerDto, CreatePartnerDto, U
 
   constructor(http: HttpClient) {
     super(http, 'partners');
+  }
+
+  getAllByCompanyCode(companyCode?: string): Observable<ApiResponse<PartnerDto[]>> {
+    let params = new HttpParams();
+    if (companyCode) {
+      params = params.set('companyCode', companyCode);
+    }
+    return this.http.get<ApiResponse<PartnerDto[]>>(`${this.getApiUrl()}/all`, { params }).pipe(
+      catchError(error => this.handleError(error))
+    );
   }
 
   getPartnersPaged(request?: PartnerPagedRequest): Observable<ApiResponse<PagedResult<PartnerDto>>> {

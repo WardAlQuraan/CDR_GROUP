@@ -18,6 +18,11 @@
             <button class="custom-btn" (click)="toggleMore()">
               {{ (showMore ? 'hero.showLess' : 'hero.ourStory') | translate }}
             </button>
+            @if (company?.partnershipFormUrl) {
+              <a class="custom-btn custom-btn-secondary" [href]="company!.partnershipFormUrl" target="_blank" rel="noopener noreferrer">
+                {{ 'hero.partnershipForm' | translate }}
+              </a>
+            }
           </div>
 
         </div>

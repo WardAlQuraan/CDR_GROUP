@@ -972,6 +972,9 @@ namespace cdr_group.Persistence.Migrations
                     b.Property<Guid?>("ParentId")
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("PartnershipFormUrl")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("PrimaryColor")
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
@@ -1033,10 +1036,10 @@ namespace cdr_group.Persistence.Migrations
                             MissionEn = "To deliver innovative creative solutions that empower brands to grow and succeed in a competitive market.",
                             NameAr = "مجموعة سي دي آر",
                             NameEn = "CDR Group",
-                            OpeningEndDay = "Thursday",
-                            OpeningEndTime = new TimeSpan(0, 17, 0, 0, 0),
-                            OpeningStartDay = "Sunday",
-                            OpeningStartTime = new TimeSpan(0, 9, 0, 0, 0),
+                            OpeningEndDay = "Friday",
+                            OpeningEndTime = new TimeSpan(0, 20, 0, 0, 0),
+                            OpeningStartDay = "Saturday",
+                            OpeningStartTime = new TimeSpan(0, 11, 0, 0, 0),
                             PrimaryColor = "#D9A93E",
                             SecondaryColor = "#3E423D",
                             StoryAr = "كانت مجموعة سي دي آر شريكاً موثوقاً في التطوير الإبداعي والإنتاج الاستراتيجي ونمو العلامة التجارية، حيث تقدم حلولاً مبتكرة تحقق النتائج.",
@@ -1045,6 +1048,104 @@ namespace cdr_group.Persistence.Migrations
                             TitleEn = "Creative Development & Realization | Strategic Production | Brand Growth",
                             VisionAr = "أن نكون الوكالة الإبداعية الرائدة في المنطقة، والمعروفة بالتميز في التطوير والتنفيذ والإنتاج الاستراتيجي.",
                             VisionEn = "To be the leading creative agency in the region, recognized for excellence in development, realization, and strategic production."
+                        },
+                        new
+                        {
+                            Id = new Guid("aabbccdd-aabb-aabb-aabb-000000000001"),
+                            Code = "QBT",
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            IsDeleted = false,
+                            NameAr = "قبطان",
+                            NameEn = "Qubtan",
+                            OpeningEndDay = "Friday",
+                            OpeningEndTime = new TimeSpan(0, 18, 0, 0, 0),
+                            OpeningStartDay = "Saturday",
+                            OpeningStartTime = new TimeSpan(0, 9, 0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = new Guid("aabbccdd-aabb-aabb-aabb-000000000002"),
+                            Code = "GBR",
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            IsDeleted = false,
+                            NameAr = "غمس بلدي أحمر",
+                            NameEn = "Ghmas Baladi Red",
+                            OpeningEndDay = "Friday",
+                            OpeningEndTime = new TimeSpan(0, 18, 0, 0, 0),
+                            OpeningStartDay = "Saturday",
+                            OpeningStartTime = new TimeSpan(0, 9, 0, 0, 0),
+                            ParentId = new Guid("aabbccdd-aabb-aabb-aabb-000000000001"),
+                            PrimaryColor = "#FD3E48",
+                            SecondaryColor = "#461F1A"
+                        },
+                        new
+                        {
+                            Id = new Guid("aabbccdd-aabb-aabb-aabb-000000000003"),
+                            Code = "GBY",
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            IsDeleted = false,
+                            NameAr = "غمس بلدي أصفر",
+                            NameEn = "Ghmas Baladi Yellow",
+                            OpeningEndDay = "Friday",
+                            OpeningEndTime = new TimeSpan(0, 18, 0, 0, 0),
+                            OpeningStartDay = "Saturday",
+                            OpeningStartTime = new TimeSpan(0, 9, 0, 0, 0),
+                            ParentId = new Guid("aabbccdd-aabb-aabb-aabb-000000000001"),
+                            PrimaryColor = "#F7941D",
+                            SecondaryColor = "#080E42"
+                        },
+                        new
+                        {
+                            Id = new Guid("aabbccdd-aabb-aabb-aabb-000000000004"),
+                            Code = "AQV",
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            IsDeleted = false,
+                            NameAr = "طلة القدس",
+                            NameEn = "Al Quds View",
+                            OpeningEndDay = "Friday",
+                            OpeningEndTime = new TimeSpan(0, 18, 0, 0, 0),
+                            OpeningStartDay = "Saturday",
+                            OpeningStartTime = new TimeSpan(0, 9, 0, 0, 0),
+                            ParentId = new Guid("aabbccdd-aabb-aabb-aabb-000000000001"),
+                            PrimaryColor = "#B7442E",
+                            SecondaryColor = "#C18C5E"
+                        },
+                        new
+                        {
+                            Id = new Guid("aabbccdd-aabb-aabb-aabb-000000000005"),
+                            Code = "SHR",
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            IsDeleted = false,
+                            NameAr = "شراكة++",
+                            NameEn = "Sharakeh++",
+                            OpeningEndDay = "Friday",
+                            OpeningEndTime = new TimeSpan(0, 0, 0, 0, 0),
+                            OpeningStartDay = "Saturday",
+                            OpeningStartTime = new TimeSpan(0, 9, 0, 0, 0),
+                            PartnershipFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSf9gG6rlpDK_sBNbQ-AAxThIGMz61WIdQWEimtY9oc9AMcQFg/viewform?usp=header",
+                            PrimaryColor = "#07B3DE",
+                            SecondaryColor = "#080E42"
+                        },
+                        new
+                        {
+                            Id = new Guid("aabbccdd-aabb-aabb-aabb-000000000006"),
+                            Code = "CNR",
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            IsDeleted = false,
+                            NameAr = "سينما ريلز",
+                            NameEn = "Cinema Reels",
+                            OpeningEndDay = "Friday",
+                            OpeningEndTime = new TimeSpan(0, 20, 0, 0, 0),
+                            OpeningStartDay = "Saturday",
+                            OpeningStartTime = new TimeSpan(0, 11, 0, 0, 0),
+                            PrimaryColor = "#FE662F",
+                            SecondaryColor = "#B52EA5"
                         });
                 });
 
@@ -3576,6 +3677,647 @@ namespace cdr_group.Persistence.Migrations
                     b.HasIndex("CompanyId1");
 
                     b.ToTable("Partners");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000001"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000013"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Present"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000002"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000033"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Present"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000003"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000043"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Present"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000004"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000001"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Present"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000005"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000002"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000006"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000003"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000007"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000004"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000008"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000005"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000009"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000006"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000010"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000007"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000011"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000008"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000012"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000009"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000013"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000010"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000014"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000011"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000015"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000012"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000016"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000014"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000017"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000015"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000018"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000016"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000019"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000017"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000020"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000018"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000021"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000019"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000022"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000020"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000023"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000021"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000024"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000022"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000025"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000023"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000026"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000024"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000027"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000025"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000028"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000026"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000029"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000027"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000030"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000028"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000031"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000029"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000032"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000030"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000033"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000031"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000034"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000032"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000035"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000034"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000036"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000035"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000037"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000036"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000038"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000037"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000039"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000038"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000040"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000039"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000041"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000040"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000042"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000041"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000043"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000042"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000044"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000044"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000045"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000045"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000046"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000046"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000047"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000047"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000048"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000048"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000049"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000049"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000050"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000050"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000051"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000051"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000052"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000052"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000053"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000053"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000054"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000054"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000055"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000055"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000056"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000056"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000057"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000057"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000058"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000058"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000059"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000059"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000060"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000060"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000061"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000061"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000062"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000062"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000063"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000063"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000064"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000064"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000065"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000065"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000066"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000066"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000067"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000067"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000068"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000068"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000069"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000069"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000070"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000070"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0000000-0000-0000-0000-000000000071"),
+                            CityId = new Guid("d0000000-0000-0000-0000-000000000071"),
+                            CompanyId = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Status = "Available"
+                        });
                 });
 
             modelBuilder.Entity("cdr_group.Domain.Entities.Position", b =>

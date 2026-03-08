@@ -31,11 +31,20 @@ namespace cdr_group.API.Controllers
             return Ok(ApiResponse<PagedResult<PartnerDto>>.SuccessResponse(result));
         }
 
-        [HttpGet("all")]
-        [AllowAnonymous]
+        [NonAction]
         public override async Task<ActionResult<ApiResponse<IEnumerable<PartnerDto>>>> GetAll()
         {
             return await base.GetAll();
+        }
+
+        [HttpGet("all")]
+        [AllowAnonymous]
+        public async Task<ActionResult<ApiResponse<IEnumerable<PartnerDto>>>> GetAllByCompanyCode([FromQuery] string? companyCode)
+        {
+            var result = string.IsNullOrEmpty(companyCode)
+                ? await Service.GetAllAsync()
+                : await Service.GetAllByCompanyCodeAsync(companyCode);
+            return Ok(ApiResponse<IEnumerable<PartnerDto>>.SuccessResponse(result));
         }
 
         [HttpGet("{id:guid}")]

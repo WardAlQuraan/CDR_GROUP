@@ -25,6 +25,7 @@ export class TeamComponent implements OnChanges {
   loading = false;
   error = false;
   teamData: TeamMember[] = [];
+  flatMembers: TeamMember[] = [];
 
   private colors = [
     '#D9A93E',
@@ -68,6 +69,7 @@ export class TeamComponent implements OnChanges {
       next: (response) => {
         if (response.success && response.data) {
           this.teamData = response.data.map(node => this.mapToTeamMember(node));
+          this.flatMembers = this.flattenMembers(this.teamData);
         }
         this.loading = false;
         this.cdr.markForCheck();
@@ -109,5 +111,16 @@ export class TeamComponent implements OnChanges {
 
   hasChildren(member: TeamMember): boolean {
     return member.children && member.children.length > 0;
+  }
+
+  private flattenMembers(members: TeamMember[]): TeamMember[] {
+    const result: TeamMember[] = [];
+    for (const member of members) {
+      result.push(member);
+      if (member.children?.length) {
+        result.push(...this.flattenMembers(member.children));
+      }
+    }
+    return result;
   }
 }

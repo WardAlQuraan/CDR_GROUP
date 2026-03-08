@@ -50,15 +50,13 @@ export class ClientLayoutComponent implements OnInit, OnDestroy {
 
   private applyColors(primary?: string, secondary?: string): void {
     const root = document.documentElement;
-    if (primary) {
-      root.style.setProperty('--primary-color', primary);
-      root.style.setProperty('--custom-btn-bg-color', primary);
-      root.style.setProperty('--custom-btn-bg-hover-color', this.darkenColor(primary, 15));
-      root.style.setProperty('--link-hover-color', primary);
-    }
-    if (secondary) {
-      root.style.setProperty('--secondary-color', secondary);
-    }
+    const p = primary || '#D9A93E';
+    const s = secondary || '#3E423D';
+    root.style.setProperty('--primary-color', p);
+    root.style.setProperty('--custom-btn-bg-color', p);
+    root.style.setProperty('--custom-btn-bg-hover-color', this.darkenColor(p, 15));
+    root.style.setProperty('--link-hover-color', p);
+    root.style.setProperty('--secondary-color', s);
   }
 
   private darkenColor(hex: string, percent: number): string {

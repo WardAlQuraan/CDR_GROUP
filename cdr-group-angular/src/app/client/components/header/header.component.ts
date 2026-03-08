@@ -52,6 +52,11 @@ export class HeaderComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['company']) {
         this.selectedCompanyCode = params['company'];
+      } else {
+        this.router.navigate([], {
+          queryParams: { company: this.selectedCompanyCode },
+          queryParamsHandling: 'merge'
+        });
       }
     });
   }
