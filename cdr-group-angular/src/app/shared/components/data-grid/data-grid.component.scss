@@ -160,8 +160,13 @@ $transition: 200ms ease;
     outline: none;
     transition: $transition;
 
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
     &::placeholder {
       color: $text-muted;
+      text-overflow: ellipsis;
     }
 
     &:hover {

@@ -9,6 +9,8 @@ export interface PartnerDto {
   cityNameAr?: string;
   cityLatitude?: number;
   cityLongitude?: number;
+  countryNameEn?: string;
+  countryNameAr?: string;
   createdAt: Date;
 }
 

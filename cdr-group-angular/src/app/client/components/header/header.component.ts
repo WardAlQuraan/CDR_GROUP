@@ -69,6 +69,28 @@ export class HeaderComponent implements OnInit {
     return company.children && company.children.length > 0;
   }
 
+  private openSubmenus = new Set<string>();
+
+  openSubmenu(companyId: string): void {
+    this.openSubmenus.add(companyId);
+  }
+
+  closeSubmenu(companyId: string): void {
+    this.openSubmenus.delete(companyId);
+  }
+
+  toggleSubmenu(companyId: string): void {
+    if (this.openSubmenus.has(companyId)) {
+      this.openSubmenus.delete(companyId);
+    } else {
+      this.openSubmenus.add(companyId);
+    }
+  }
+
+  isSubmenuOpen(companyId: string): boolean {
+    return this.openSubmenus.has(companyId);
+  }
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.isSticky.set(window.scrollY > 100);

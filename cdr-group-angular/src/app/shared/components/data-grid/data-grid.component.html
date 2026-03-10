@@ -45,9 +45,7 @@
               class="search-input"
               [(ngModel)]="searchTerm"
               (keyup)="onSearchKeyup($event)"
-              [placeholder]="'common.searchPlaceholder' | translate"
-              [matTooltip]="(config.searchPlaceholder || 'common.searchPlaceholder') | translate"
-              matTooltipPosition="above">
+              [placeholder]="(config.searchPlaceholder || 'common.searchPlaceholder') | translate">
             @if (searchTerm) {
               <button class="clear-search" (click)="searchTerm = ''; onSearch()">
                 <mat-icon>close</mat-icon>

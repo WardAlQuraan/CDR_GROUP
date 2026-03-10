@@ -4,9 +4,22 @@
 
 .dropdown-menu .parent-item {
   font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .dropdown-menu .child-item {
   padding-inline-start: 2rem;
   font-size: 0.9em;
+}
+
+.submenu-arrow {
+  font-size: 0.7em;
+  margin-inline-start: 0.5rem;
+  transition: transform 0.2s;
+
+  &.open {
+    transform: rotate(180deg);
+  }
 }

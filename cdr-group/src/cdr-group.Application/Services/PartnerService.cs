@@ -41,7 +41,29 @@ namespace cdr_group.Application.Services
         public async Task<IEnumerable<PartnerDto>> GetAllByCompanyCodeAsync(string companyCode)
         {
             var items = await UnitOfWork.Partners.GetAllByCompanyCodeAsync(companyCode);
-            return Mapper.Map<IEnumerable<PartnerDto>>(items);
+            var itemDtos = Mapper.Map<IEnumerable<PartnerDto>>(items);
+            foreach (var item in items)
+            {
+                var x = itemDtos.FirstOrDefault(x => x.Id == item.Id);
+
+                itemDtos.FirstOrDefault(x => x.Id == item.Id).CountryNameAr = item.City.Country.NameAr ;
+                itemDtos.FirstOrDefault(x => x.Id == item.Id).CountryNameEn = item.City.Country.NameEn ;
+            }
+
+            return itemDtos;
+        }
+
+        public override async Task<IEnumerable<PartnerDto>> GetAllAsync()
+        {
+            var items = await UnitOfWork.Partners.GetAllAsync();
+            var itemDtos = Mapper.Map<IEnumerable<PartnerDto>>(items);
+            foreach (var item in items)
+            {
+                itemDtos.FirstOrDefault(x => x.Id == item.Id).CountryNameAr = item.City.Country.NameAr;
+                itemDtos.FirstOrDefault(x => x.Id == item.Id).CountryNameEn = item.City.Country.NameEn;
+            }
+
+            return itemDtos;
         }
     }
 }

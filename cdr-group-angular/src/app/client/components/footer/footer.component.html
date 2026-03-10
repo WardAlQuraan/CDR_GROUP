@@ -28,9 +28,8 @@
         <h6 class="site-footer-title">{{ 'footer.operatingHours' | translate }}</h6>
 
         @if (openingDays) {
-          <p class="mb-2 text-white">
-            <span>{{ openingDays }}</span>
-            {{ openingTimes }}
+          <p class="mb-2 text-white" style="font-size: 0.85rem;">
+            <span>{{ openingDays }}</span> - {{ openingTimes }}
           </p>
         }
 

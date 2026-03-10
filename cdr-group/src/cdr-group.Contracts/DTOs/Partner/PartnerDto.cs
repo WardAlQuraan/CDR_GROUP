@@ -14,6 +14,8 @@ namespace cdr_group.Contracts.DTOs.Partner
         public string? CityNameAr { get; set; }
         public double? CityLatitude { get; set; }
         public double? CityLongitude { get; set; }
+        public string? CountryNameEn { get; set; }
+        public string? CountryNameAr { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 

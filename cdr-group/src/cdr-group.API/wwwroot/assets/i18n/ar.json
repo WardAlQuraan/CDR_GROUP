@@ -73,7 +73,9 @@
     "failed": "فشل",
     "retryFailed": "إعادة المحاولة",
     "view": "عرض",
-    "download": "تحميل"
+    "download": "تحميل",
+    "exportExcel": "تصدير Excel",
+    "seeOurPartners": "شركاؤنا"
   },
   "header": {
     "logo": "CDR",
@@ -108,7 +110,10 @@
     "cta": "اعرف المزيد",
     "secondaryCta": "عرض الفعاليات",
     "description": "مجموعة CDR هي وكالة إبداعية رائدة متخصصة في التطوير والتحقيق والإنتاج الاستراتيجي. نقدم حلولاً مبتكرة تدفع نمو العلامة التجارية، من خلال الجمع بين الإبداع والاستراتيجية لمساعدة الشركات على تحقيق إمكاناتها الكاملة.",
-    "showLess": "عرض أقل"
+    "showLess": "عرض أقل",
+    "partnershipForm": "كن شريكاً",
+    "partners": "شركاء",
+    "employees": "موظفون"
   },
   "about": {
     "title": "قصتنا",
@@ -119,11 +124,13 @@
     "mission": "رسالتنا",
     "missionText": "تقديم حلول إبداعية مبتكرة تمكّن العلامات التجارية من النمو والنجاح في سوق تنافسي.",
     "vision": "رؤيتنا",
-    "visionText": "أن نكون الوكالة الإبداعية الرائدة في المنطقة، معروفين بالتميز في التطوير والتحقيق والإنتاج الاستراتيجي."
+    "visionText": "أن نكون الوكالة الإبداعية الرائدة في المنطقة، معروفين بالتميز في التطوير والتحقيق والإنتاج الاستراتيجي.",
+    "trustedPartners": "شركاء موثوقون حول العالم",
+    "teamMembers": "أعضاء فريق متفانون"
   },
   "events": {
     "title": "الفعاليات القادمة",
-    "latestEvents": "أحدث الفعاليات",
+    "latestEvents": "أحدث الأخبار",
     "subtitle": "انضم إلى فعالياتنا المثيرة",
     "viewDetails": "عرض التفاصيل",
     "viewAllEvents": "عرض جميع الفعاليات",
@@ -192,6 +199,40 @@
     "getInTouch": "تواصل معنا",
     "successMessage": "شكراً لرسالتك! سنتواصل معك قريباً."
   },
+  "review": {
+    "title": "اترك تقييماً",
+    "subtitle": "نقدّر ملاحظاتك! شاركنا تجربتك معنا.",
+    "rating": "تقييمك",
+    "comment": "تعليقك",
+    "commentPlaceholder": "أخبرنا عن تجربتك...",
+    "ratingRequired": "يرجى اختيار تقييم",
+    "submit": "إرسال التقييم",
+    "successMessage": "شكراً لتقييمك! نقدّر ملاحظاتك.",
+    "errorMessage": "فشل في إرسال التقييم. يرجى المحاولة مرة أخرى."
+  },
+  "complaint": {
+    "title": "تقديم شكوى",
+    "subtitle": "نأخذ مخاوفك على محمل الجد. يرجى مشاركة شكواك معنا.",
+    "subject": "الموضوع",
+    "subjectPlaceholder": "أدخل موضوع الشكوى",
+    "successMessage": "شكراً لملاحظاتك. تم تقديم شكواك بنجاح.",
+    "errorMessage": "فشل في تقديم الشكوى. يرجى المحاولة مرة أخرى."
+  },
+  "reviewsDisplay": {
+    "title": "ماذا يقول عملاؤنا",
+    "subtitle": "اقرأ تقييمات عملائنا الكرام",
+    "anonymous": "عميل",
+    "loadMore": "تحميل المزيد من التقييمات",
+    "today": "اليوم",
+    "yesterday": "أمس",
+    "daysAgo": "أيام مضت",
+    "weekAgo": "أسبوع مضى",
+    "weeksAgo": "أسابيع مضت",
+    "monthAgo": "شهر مضى",
+    "monthsAgo": "أشهر مضت",
+    "yearAgo": "سنة مضت",
+    "yearsAgo": "سنوات مضت"
+  },
   "newsletter": {
     "title": "احصل على آخر الأخبار",
     "subtitle": "اشترك لتلقي أحدث الأخبار والفعاليات والعروض الحصرية من CDR Group.",
@@ -214,7 +255,10 @@
   },
   "companyDetail": {
     "notFound": "الشركة غير موجودة",
-    "notFoundDesc": "الشركة التي تبحث عنها غير موجودة."
+    "notFoundDesc": "الشركة التي تبحث عنها غير موجودة.",
+    "story": "قصتنا",
+    "mission": "مهمتنا",
+    "vision": "رؤيتنا"
   },
   "validation": {
     "required": "هذا الحقل مطلوب",
@@ -386,6 +430,8 @@
       "photoUploaded": "تم رفع الصورة بنجاح",
       "searchPlaceholder": "البحث بالاسم أو الرمز أو البريد...",
       "statusFilter": "الحالة",
+      "companyFilter": "الشركة",
+      "allCompanies": "جميع الشركات",
       "all": "الكل",
       "active": "نشط",
       "inactive": "غير نشط",
@@ -548,6 +594,32 @@
       "descriptionSection": "الوصف",
       "descriptionEn": "الوصف (إنجليزي)",
       "descriptionAr": "الوصف (عربي)",
+      "storySection": "القصة",
+      "storyEn": "القصة (إنجليزي)",
+      "storyAr": "القصة (عربي)",
+      "missionSection": "المهمة",
+      "missionEn": "المهمة (إنجليزي)",
+      "missionAr": "المهمة (عربي)",
+      "visionSection": "الرؤية",
+      "visionEn": "الرؤية (إنجليزي)",
+      "visionAr": "الرؤية (عربي)",
+      "titleSection": "العنوان",
+      "titleEn": "العنوان (إنجليزي)",
+      "titleAr": "العنوان (عربي)",
+      "parentCompany": "الشركة الأم",
+      "noParentCompany": "بدون شركة أم",
+      "openingHoursSection": "ساعات العمل",
+      "openingStartDay": "يوم البداية",
+      "openingEndDay": "يوم النهاية",
+      "openingStartTime": "وقت البداية",
+      "openingEndTime": "وقت النهاية",
+      "openingHoursNoteEn": "ملاحظة ساعات العمل (إنجليزي)",
+      "openingHoursNoteAr": "ملاحظة ساعات العمل (عربي)",
+      "partnershipFormUrl": "رابط نموذج الشراكة",
+      "colorsSection": "الألوان",
+      "primaryColor": "اللون الأساسي",
+      "secondaryColor": "اللون الثانوي",
+      "settingsSection": "الإعدادات",
       "status": "الحالة",
       "isActive": "شركة نشطة",
       "edit": "تعديل",
@@ -564,14 +636,74 @@
         "deleteFailed": "فشل في حذف الشركة",
         "codeRequired": "رمز الشركة مطلوب",
         "nameEnRequired": "الاسم الإنجليزي مطلوب",
-        "nameArRequired": "الاسم العربي مطلوب"
+        "nameArRequired": "الاسم العربي مطلوب",
+        "titleEnRequired": "العنوان الإنجليزي مطلوب",
+        "titleArRequired": "العنوان العربي مطلوب",
+        "descriptionEnRequired": "الوصف الإنجليزي مطلوب",
+        "descriptionArRequired": "الوصف العربي مطلوب",
+        "storyEnRequired": "القصة بالإنجليزية مطلوبة",
+        "storyArRequired": "القصة بالعربية مطلوبة",
+        "missionEnRequired": "المهمة بالإنجليزية مطلوبة",
+        "missionArRequired": "المهمة بالعربية مطلوبة",
+        "visionEnRequired": "الرؤية بالإنجليزية مطلوبة",
+        "visionArRequired": "الرؤية بالعربية مطلوبة",
+        "openingStartDayRequired": "يوم البداية مطلوب",
+        "openingEndDayRequired": "يوم النهاية مطلوب",
+        "openingStartTimeRequired": "وقت البداية مطلوب",
+        "openingEndTimeRequired": "وقت النهاية مطلوب"
       },
       "placeholders": {
         "code": "أدخل رمز الشركة",
         "nameEn": "أدخل الاسم بالإنجليزية",
         "nameAr": "أدخل الاسم بالعربية",
         "descriptionEn": "أدخل الوصف بالإنجليزية",
-        "descriptionAr": "أدخل الوصف بالعربية"
+        "descriptionAr": "أدخل الوصف بالعربية",
+        "storyEn": "أدخل القصة بالإنجليزية",
+        "storyAr": "أدخل القصة بالعربية",
+        "missionEn": "أدخل المهمة بالإنجليزية",
+        "missionAr": "أدخل المهمة بالعربية",
+        "visionEn": "أدخل الرؤية بالإنجليزية",
+        "visionAr": "أدخل الرؤية بالعربية",
+        "titleEn": "أدخل العنوان بالإنجليزية",
+        "titleAr": "أدخل العنوان بالعربية",
+        "openingHoursNoteEn": "أدخل الملاحظة بالإنجليزية",
+        "openingHoursNoteAr": "أدخل الملاحظة بالعربية",
+        "partnershipFormUrl": "أدخل رابط نموذج الشراكة"
+      }
+    },
+    "companyContacts": {
+      "title": "جهات اتصال الشركة",
+      "subtitle": "إدارة معلومات الاتصال بالشركة",
+      "addContact": "إضافة جهة اتصال",
+      "createContact": "إنشاء جهة اتصال",
+      "editContact": "تعديل جهة اتصال",
+      "deleteContact": "حذف جهة اتصال",
+      "contactInfo": "معلومات الاتصال",
+      "icon": "الأيقونة",
+      "name": "الاسم",
+      "value": "القيمة",
+      "company": "الشركة",
+      "created": "تاريخ الإنشاء",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "confirmDelete": "هل أنت متأكد من حذف جهة الاتصال هذه؟",
+      "contactCreated": "تم إنشاء جهة الاتصال بنجاح",
+      "contactUpdated": "تم تحديث جهة الاتصال بنجاح",
+      "contactDeleted": "تم حذف جهة الاتصال بنجاح",
+      "contacts": "جهات الاتصال",
+      "errors": {
+        "loadFailed": "فشل تحميل جهات الاتصال",
+        "createFailed": "فشل إنشاء جهة الاتصال",
+        "updateFailed": "فشل تحديث جهة الاتصال",
+        "deleteFailed": "فشل حذف جهة الاتصال",
+        "iconRequired": "الأيقونة مطلوبة",
+        "nameRequired": "الاسم مطلوب",
+        "valueRequired": "القيمة مطلوبة"
+      },
+      "placeholders": {
+        "icon": "أدخل اسم الأيقونة (مثل phone, email)",
+        "name": "أدخل اسم جهة الاتصال",
+        "value": "أدخل قيمة جهة الاتصال"
       }
     },
     "eventsAdmin": {
@@ -583,6 +715,8 @@
       "viewEvent": "عرض الفعالية",
       "deleteEvent": "حذف الفعالية",
       "searchPlaceholder": "البحث بالعنوان...",
+      "companyFilter": "الشركة",
+      "allCompanies": "جميع الشركات",
       "titleEn": "العنوان (إنجليزي)",
       "titleAr": "العنوان (عربي)",
       "descriptionSection": "الوصف",
@@ -622,9 +756,12 @@
       "title": "رسائل التواصل",
       "subtitle": "عرض الرسائل من نموذج التواصل",
       "searchPlaceholder": "البحث بالاسم أو البريد الإلكتروني...",
+      "companyFilter": "الشركة",
+      "allCompanies": "جميع الشركات",
       "fullName": "الاسم الكامل",
       "email": "البريد الإلكتروني",
       "message": "الرسالة",
+      "company": "الشركة",
       "date": "التاريخ",
       "view": "عرض",
       "viewMessage": "عرض الرسالة",
@@ -636,6 +773,149 @@
       "errors": {
         "deleteFailed": "فشل في حذف الرسالة"
       }
+    },
+    "reviews": {
+      "title": "إدارة التقييمات",
+      "subtitle": "إدارة تقييمات وآراء العملاء",
+      "numberOfStars": "التقييم",
+      "comment": "التعليق",
+      "isVisible": "مرئي",
+      "visible": "مرئي",
+      "hidden": "مخفي",
+      "all": "الكل",
+      "visibilityFilter": "الظهور",
+      "companyFilter": "الشركة",
+      "allCompanies": "جميع الشركات",
+      "company": "الشركة",
+      "createdAt": "التاريخ",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "editReview": "تعديل التقييم",
+      "deleteReview": "حذف التقييم",
+      "confirmDelete": "هل أنت متأكد من حذف هذا التقييم؟",
+      "reviewUpdated": "تم تحديث التقييم بنجاح",
+      "reviewDeleted": "تم حذف التقييم بنجاح",
+      "reviewInfo": "معلومات التقييم",
+      "visibilitySection": "الظهور",
+      "errors": {
+        "loadFailed": "فشل في تحميل التقييمات",
+        "updateFailed": "فشل في تحديث التقييم",
+        "deleteFailed": "فشل في حذف التقييم",
+        "numberOfStarsRequired": "التقييم مطلوب",
+        "commentRequired": "التعليق مطلوب"
+      },
+      "placeholders": {
+        "comment": "أدخل تعليق التقييم"
+      }
+    },
+    "complaints": {
+      "title": "فزعات وشكاوي",
+      "subtitle": "عرض وإدارة الشكاوى",
+      "fullName": "الاسم الكامل",
+      "email": "البريد الإلكتروني",
+      "subject": "الموضوع",
+      "message": "الرسالة",
+      "company": "الشركة",
+      "companyFilter": "الشركة",
+      "allCompanies": "جميع الشركات",
+      "date": "التاريخ",
+      "view": "عرض",
+      "viewComplaint": "عرض الشكوى",
+      "senderInfo": "معلومات المرسل",
+      "complaintDetails": "تفاصيل الشكوى",
+      "delete": "حذف",
+      "deleteComplaint": "حذف الشكوى",
+      "confirmDelete": "هل أنت متأكد من حذف هذه الشكوى؟",
+      "complaintDeleted": "تم حذف الشكوى بنجاح",
+      "errors": {
+        "loadFailed": "فشل في تحميل الشكاوى",
+        "deleteFailed": "فشل في حذف الشكوى"
+      }
+    },
+    "partners": {
+      "title": "إدارة الشركاء",
+      "subtitle": "إدارة الشركاء ومواقعهم",
+      "addPartner": "إضافة شريك",
+      "createPartner": "إنشاء شريك",
+      "editPartner": "تعديل الشريك",
+      "deletePartner": "حذف الشريك",
+      "company": "الشركة",
+      "country": "الدولة",
+      "allCountries": "جميع الدول",
+      "city": "المدينة",
+      "status": "الحالة",
+      "statusFilter": "الحالة",
+      "companyFilter": "الشركة",
+      "countryFilter": "الدولة",
+      "cityFilter": "المدينة",
+      "allCompanies": "جميع الشركات",
+      "allCities": "جميع المدن",
+      "all": "الكل",
+      "present": "حاضر",
+      "available": "متاح",
+      "notAvailable": "غير متاح",
+      "basicInfo": "المعلومات الأساسية",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "confirmDelete": "هل أنت متأكد من حذف هذا الشريك؟",
+      "partnerCreated": "تم إنشاء الشريك بنجاح",
+      "partnerUpdated": "تم تحديث الشريك بنجاح",
+      "partnerDeleted": "تم حذف الشريك بنجاح",
+      "errors": {
+        "loadFailed": "فشل في تحميل الشركاء",
+        "createFailed": "فشل في إنشاء الشريك",
+        "updateFailed": "فشل في تحديث الشريك",
+        "deleteFailed": "فشل في حذف الشريك",
+        "companyRequired": "الشركة مطلوبة",
+        "cityRequired": "المدينة مطلوبة",
+        "statusRequired": "الحالة مطلوبة"
+      }
+    },
+    "auditLogs": {
+      "title": "سجل التدقيق",
+      "subtitle": "تتبع التغييرات والنشاطات عبر النظام",
+      "searchDescription": "اختر نوع الكيان وأدخل معرّفه لعرض سجلات التدقيق",
+      "entityType": "نوع الكيان",
+      "entityId": "معرّف الكيان",
+      "entityName": "اسم الكيان",
+      "search": "بحث",
+      "actionType": "نوع الإجراء",
+      "performedBy": "تم بواسطة",
+      "affectedColumns": "الحقول المتأثرة",
+      "timestamp": "التوقيت",
+      "viewDetails": "عرض التفاصيل",
+      "generalInfo": "معلومات عامة",
+      "changes": "التغييرات",
+      "property": "الخاصية",
+      "oldValues": "القيمة القديمة",
+      "newValues": "القيمة الجديدة",
+      "history": "السجل",
+      "entityTypes": {
+        "company": "شركة",
+        "employee": "موظف",
+        "position": "منصب",
+        "event": "فعالية",
+        "user": "مستخدم",
+        "role": "دور"
+      },
+      "actions": {
+        "create": "إنشاء",
+        "insert": "إدراج",
+        "update": "تعديل",
+        "delete": "حذف"
+      },
+      "placeholders": {
+        "entityId": "أدخل معرّف الكيان (GUID)"
+      },
+      "errors": {
+        "loadFailed": "فشل في تحميل سجلات التدقيق"
+      }
+    }
+  },
+  "client": {
+    "worldMap": {
+      "title": "تواجدنا العالمي",
+      "subtitle": "اكتشف شركاءنا في المنطقة"
     }
   }
 }

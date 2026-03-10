@@ -16,7 +16,7 @@ namespace cdr_group.Persistence.Repositories
 
         public override async Task<IEnumerable<Partner>> GetAllAsync()
         {
-            return await _dbSet.Include(e => e.Company).Include(e => e.City).Where(e => !e.IsDeleted).ToListAsync();
+            return await _dbSet.Include(e => e.Company).Include(e => e.City).ThenInclude(c=>c.Country).Where(e => !e.IsDeleted).ToListAsync();
         }
 
         public override async Task<Partner?> GetByIdAsync(Guid id)
@@ -28,7 +28,7 @@ namespace cdr_group.Persistence.Repositories
         {
             return await _dbSet
                 .Include(e => e.Company)
-                .Include(e => e.City)
+                .Include(e => e.City).ThenInclude(x=>x.Country)
                 .Where(e => !e.IsDeleted && e.Company != null && e.Company.Code == companyCode)
                 .ToListAsync();
         }

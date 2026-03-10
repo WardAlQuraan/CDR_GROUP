@@ -10,6 +10,7 @@ import { PartnerDto } from '../../../models/partner.model';
 interface City {
   name: string;
   companyName: string;
+  countryName: string;
   status: string;
   lat: number;
   lng: number;
@@ -99,6 +100,7 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
             .map(p => ({
               name: (this.isArabic ? p.cityNameAr : p.cityNameEn) || '-',
               companyName: (this.isArabic ? p.companyNameAr : p.companyNameEn) || '-',
+              countryName: (this.isArabic ? p.countryNameAr : p.countryNameEn) || '-',
               status: p.status,
               lat: p.cityLatitude!,
               lng: p.cityLongitude!,
@@ -120,7 +122,8 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
     } else {
       this.filteredCities = this.cities.filter(c =>
         c.name.toLowerCase().includes(term) ||
-        c.companyName.toLowerCase().includes(term)
+        c.companyName.toLowerCase().includes(term) ||
+        c.countryName.toLowerCase().includes(term)
       );
     }
     // Show/hide markers based on filter
@@ -146,14 +149,14 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
 
   private initMap(): void {
     const middleEastBounds = L.latLngBounds(
-      L.latLng(12, 25),   // Southwest (Yemen, Egypt)
+      L.latLng(12, -18),  // Southwest (Morocco, Yemen)
       L.latLng(42, 60),   // Northeast (Turkey, Iran)
     );
 
     this.map = L.map('world-map', {
-      center: [29, 44],
-      zoom: 6,
-      minZoom: 5,
+      center: [29, 20],
+      zoom: 4,
+      minZoom: 3,
       maxZoom: 12,
       maxBounds: middleEastBounds.pad(0.1),
       maxBoundsViscosity: 1.0,
