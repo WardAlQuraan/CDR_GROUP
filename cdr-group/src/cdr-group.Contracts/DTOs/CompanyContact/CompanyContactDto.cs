@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using cdr_group.Contracts.Attributes;
 
 namespace cdr_group.Contracts.DTOs.CompanyContact
 {
@@ -9,6 +10,7 @@ namespace cdr_group.Contracts.DTOs.CompanyContact
         public string Name { get; set; } = string.Empty;
         public string Value { get; set; } = string.Empty;
 
+        [ExcelIgnore]
         public Guid CompanyId { get; set; }
         public string CompanyNameEn { get; set; } = string.Empty;
         public string CompanyNameAr { get; set; } = string.Empty;

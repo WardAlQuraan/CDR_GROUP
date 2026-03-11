@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using cdr_group.Contracts.Attributes;
 
 namespace cdr_group.Contracts.DTOs.City
 {
@@ -9,6 +10,7 @@ namespace cdr_group.Contracts.DTOs.City
         public string NameAr { get; set; } = string.Empty;
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        [ExcelIgnore]
         public Guid CountryId { get; set; }
         public string? CountryNameEn { get; set; }
         public string? CountryNameAr { get; set; }

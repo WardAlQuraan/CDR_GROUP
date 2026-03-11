@@ -14,6 +14,7 @@ using cdr_group.Infrastructure.Middleware;
 using cdr_group.Infrastructure.Services;
 using cdr_group.Persistence.Data;
 using cdr_group.Persistence.Repositories;
+using cdr_group.Persistence.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -135,6 +136,7 @@ builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<IPartnerRepository, PartnerRepository>();
 
 // Services
+builder.Services.AddScoped<IAuditDisplayNameResolver, AuditDisplayNameResolver>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();

@@ -66,7 +66,7 @@ namespace cdr_group.Persistence.Data
         {
             ChangeTracker.DetectChanges();
             var auditEntries = new List<AuditEntry>();
-            var currentTime = DateTime.UtcNow;
+            var currentTime = DateTime.Now;
             var currentUser = _currentUserService?.Username;
 
             foreach (var entry in ChangeTracker.Entries<BaseEntity>())

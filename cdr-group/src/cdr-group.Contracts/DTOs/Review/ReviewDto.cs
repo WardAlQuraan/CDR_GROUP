@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using cdr_group.Contracts.Attributes;
 
 namespace cdr_group.Contracts.DTOs.Review
 {
@@ -8,6 +9,7 @@ namespace cdr_group.Contracts.DTOs.Review
         public int NumberOfStars { get; set; }
         public string Comment { get; set; } = string.Empty;
         public bool IsVisible { get; set; }
+        [ExcelIgnore]
         public Guid CompanyId { get; set; }
         public string? CompanyNameEn { get; set; }
         public string? CompanyNameAr { get; set; }

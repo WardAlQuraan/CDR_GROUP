@@ -1,3 +1,4 @@
+using cdr_group.Domain.Attributes;
 using cdr_group.Domain.Entities.Base;
 
 namespace cdr_group.Domain.Entities
@@ -9,6 +10,7 @@ namespace cdr_group.Domain.Entities
         public double Latitude { get; set; }
         public double Longitude { get; set; }
 
+        [AuditDisplayName(typeof(Country), nameof(Country.NameEn), nameof(Country.NameAr))]
         public Guid CountryId { get; set; }
         public Country? Country { get; set; }
     }

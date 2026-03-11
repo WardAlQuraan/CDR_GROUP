@@ -1,10 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using cdr_group.Contracts.Attributes;
 
 namespace cdr_group.Contracts.DTOs.SalaryHistory
 {
     public class SalaryHistoryDto
     {
         public Guid Id { get; set; }
+        [ExcelIgnore]
         public Guid EmployeeId { get; set; }
         public string EmployeeNameEn { get; set; } = string.Empty;
         public string EmployeeNameAr { get; set; } = string.Empty;

@@ -88,3 +88,14 @@
     color: #64748b;
   }
 }
+
+.dialog-actions {
+  display: flex;
+  padding-top: 16px;
+
+  .close-btn {
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(217, 169, 62, 0.4);
+  }
+}

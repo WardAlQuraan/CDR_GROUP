@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using cdr_group.Contracts.Attributes;
 
 namespace cdr_group.Contracts.DTOs.Event
 {
@@ -12,6 +13,7 @@ namespace cdr_group.Contracts.DTOs.Event
         public string? EventUrl { get; set; }
         public DateTime? EventDate { get; set; }
 
+        [ExcelIgnore]
         public Guid CompanyId { get; set; }
         public string CompanyNameEn { get; set; } = string.Empty;
         public string CompanyNameAr { get; set; } = string.Empty;

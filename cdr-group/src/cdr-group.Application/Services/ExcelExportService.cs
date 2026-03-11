@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Reflection;
 using ClosedXML.Excel;
+using cdr_group.Contracts.Attributes;
 using cdr_group.Contracts.Interfaces.Services;
 
 namespace cdr_group.Application.Services
@@ -14,10 +15,15 @@ namespace cdr_group.Application.Services
 
             var properties = GetExportableProperties(typeof(T));
 
-            // Headers
+            // Headers - first column is sequential number
+            var noHeader = worksheet.Cell(1, 1);
+            noHeader.Value = "#";
+            noHeader.Style.Font.Bold = true;
+            noHeader.Style.Fill.BackgroundColor = XLColor.LightGray;
+
             for (int i = 0; i < properties.Count; i++)
             {
-                var headerCell = worksheet.Cell(1, i + 1);
+                var headerCell = worksheet.Cell(1, i + 2);
                 headerCell.Value = FormatHeaderName(properties[i].Name);
                 headerCell.Style.Font.Bold = true;
                 headerCell.Style.Fill.BackgroundColor = XLColor.LightGray;
@@ -27,10 +33,12 @@ namespace cdr_group.Application.Services
             var items = data.ToList();
             for (int row = 0; row < items.Count; row++)
             {
+                worksheet.Cell(row + 2, 1).Value = row + 1;
+
                 for (int col = 0; col < properties.Count; col++)
                 {
                     var value = properties[col].GetValue(items[row]);
-                    var cell = worksheet.Cell(row + 2, col + 1);
+                    var cell = worksheet.Cell(row + 2, col + 2);
                     SetCellValue(cell, value);
                 }
             }
@@ -47,6 +55,14 @@ namespace cdr_group.Application.Services
             return type.GetProperties()
                 .Where(p =>
                 {
+                    // Skip properties marked with [ExcelIgnore]
+                    if (p.GetCustomAttribute<ExcelIgnoreAttribute>() != null)
+                        return false;
+
+                    // Skip primary key Id properties
+                    if (p.Name == "Id" && (p.PropertyType == typeof(Guid) || p.PropertyType == typeof(Guid?)))
+                        return false;
+
                     var propType = p.PropertyType;
 
                     // Skip collections of complex objects (e.g. List<CompanyDto>, List<PermissionDto>)

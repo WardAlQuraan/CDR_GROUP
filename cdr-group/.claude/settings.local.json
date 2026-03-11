@@ -21,7 +21,8 @@
       "Bash(dotnet ef:*)",
       "Bash(git status:*)",
       "Bash(git rm:*)",
-      "Bash(xargs grep -l \"EPPlus\\\\|ClosedXML\\\\|Excel\")"
+      "Bash(xargs grep -l \"EPPlus\\\\|ClosedXML\\\\|Excel\")",
+      "Bash(xargs grep:*)"
     ]
   }
 }

@@ -5,6 +5,8 @@ export interface AuditLogDto {
   actionType: string;
   oldValues?: string;
   newValues?: string;
+  oldDisplayValues?: string;
+  newDisplayValues?: string;
   affectedColumns?: string;
   performedBy?: string;
   timestamp: Date;

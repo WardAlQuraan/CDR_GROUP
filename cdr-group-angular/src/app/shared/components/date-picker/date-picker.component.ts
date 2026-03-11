@@ -32,6 +32,9 @@ export class DatePickerComponent implements ControlValueAccessor {
   private onTouched: () => void = () => {};
 
   onDateChange(date: Date | null): void {
+    if (date) {
+      date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0, 0));
+    }
     this.value = date;
     this.onChange(date);
     this.onTouched();

@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AuditLogDto } from '../../../../models/audit-log.model';
+import { TranslationService } from '../../../../services/translation.service';
 
 export interface ChangedProperty {
   key: string;
@@ -20,15 +21,33 @@ export class AuditLogViewDialogComponent {
 
   constructor(
     private dialogRef: MatDialogRef<AuditLogViewDialogComponent>,
+    private translationService: TranslationService,
     @Inject(MAT_DIALOG_DATA) public log: AuditLogDto
   ) {
     this.changes = this.buildChanges();
+  }
+
+  get lang(): 'en' | 'ar' {
+    return this.translationService.language() === 'ar' ? 'ar' : 'en';
   }
 
 
   private buildChanges(): ChangedProperty[] {
     const oldObj = this.parseJson(this.log.oldValues);
     const newObj = this.parseJson(this.log.newValues);
+    const oldDisplay = this.parseJson(this.log.oldDisplayValues);
+    const newDisplay = this.parseJson(this.log.newDisplayValues);
+
+    // Build a map from raw key (e.g. CompanyId) to display key (e.g. Company)
+    const displayKeyMap = new Map<string, string>();
+    for (const displayKey of [...Object.keys(oldDisplay), ...Object.keys(newDisplay)]) {
+      // Find the matching raw key: exact match or with "Id" suffix
+      const rawKey = Object.keys(oldObj).concat(Object.keys(newObj))
+        .find(k => k === displayKey || k === displayKey + 'Id');
+      if (rawKey) {
+        displayKeyMap.set(rawKey, displayKey);
+      }
+    }
 
     const allKeys = new Set<string>([
       ...Object.keys(oldObj),
@@ -36,15 +55,25 @@ export class AuditLogViewDialogComponent {
     ]);
 
     return Array.from(allKeys).map(key => {
-      const oldVal = this.formatValue(oldObj[key]);
-      const newVal = this.formatValue(newObj[key]);
+      const displayKey = displayKeyMap.get(key);
+      const oldVal = this.getDisplayValue(oldDisplay, displayKey) ?? this.formatValue(oldObj[key]);
+      const newVal = this.getDisplayValue(newDisplay, displayKey) ?? this.formatValue(newObj[key]);
       return {
-        key,
+        key: displayKey || key,
         oldValue: oldVal,
         newValue: newVal,
         changed: oldVal !== newVal
       };
     });
+  }
+
+  private getDisplayValue(displayObj: Record<string, any>, key?: string): string | null {
+    if (!key) return null;
+    const display = displayObj[key];
+    if (display && typeof display === 'object' && display[this.lang]) {
+      return display[this.lang];
+    }
+    return null;
   }
 
   private parseJson(value?: string): Record<string, any> {

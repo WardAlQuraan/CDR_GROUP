@@ -18,14 +18,6 @@
           <span class="field-label">{{ 'admin.auditLogs.timestamp' | translate }} : </span>
           <span class="field-value">{{ log.timestamp | date:'medium' }}</span>
         </div>
-        <div class="view-field">
-          <span class="field-label">{{ 'admin.auditLogs.entityName' | translate }} : </span>
-          <span class="field-value">{{ log.entityName }}</span>
-        </div>
-        <div class="view-field">
-          <span class="field-label">{{ 'admin.auditLogs.entityId' | translate }} : </span>
-          <span class="field-value monospace">{{ log.entityId }}</span>
-        </div>
       </div>
     </div>
 
@@ -61,8 +53,8 @@
       </div>
     }
 
-    <div class="dialog-actions">
-      <button mat-raised-button color="primary" (click)="onClose()">
+    <div class="dialog-actions" [style.justify-content]="lang === 'ar' ? 'flex-start' : 'flex-end'">
+      <button mat-raised-button (click)="onClose()" class="close-btn">
         {{ 'common.close' | translate }}
       </button>
     </div>

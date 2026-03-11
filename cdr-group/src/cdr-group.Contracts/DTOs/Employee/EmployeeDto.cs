@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using cdr_group.Contracts.Attributes;
 
 namespace cdr_group.Contracts.DTOs.Employee
 {
@@ -18,15 +19,19 @@ namespace cdr_group.Contracts.DTOs.Employee
         public decimal? Salary { get; set; }
         public bool IsActive { get; set; }
 
+        [ExcelIgnore]
         public Guid? CompanyId { get; set; }
         public string? CompanyName { get; set; }
 
+        [ExcelIgnore]
         public Guid? PositionId { get; set; }
         public string? PositionName { get; set; }
 
+        [ExcelIgnore]
         public Guid? ManagerId { get; set; }
         public EmployeeBasicDto? Manager { get; set; }
 
+        [ExcelIgnore]
         public Guid? UserId { get; set; }
         public string? Username { get; set; }
 

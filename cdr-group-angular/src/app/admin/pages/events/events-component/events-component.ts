@@ -170,10 +170,12 @@ export class EventsComponent implements OnInit {
   }
 
   loadCompanies(): void {
-    this.companiesService.getAll().subscribe({
+    this.companiesService.getTree().subscribe({
       next: (response) => {
         if (response.success && response.data) {
-          this.companies = response.data;
+          this.companies = response.data.flatMap(c =>
+            c.children && c.children.length > 0 ? c.children : [c]
+          );
           this.initGridConfig();
           this.cdr.markForCheck();
         }

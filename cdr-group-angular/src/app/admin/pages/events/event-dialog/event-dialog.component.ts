@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { EventDto, CreateEventDto, UpdateEventDto } from '../../../../models/event.model';
 import { CompanyDto } from '../../../../models/company.model';
 import { ApiResponse } from '../../../../models/api-response.model';
@@ -51,7 +51,14 @@ export class EventDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.companiesDataSource$ = this.companiesService.getActiveCompanies();
+    this.companiesDataSource$ = this.companiesService.getTree().pipe(
+      map(response => ({
+        ...response,
+        data: response.data?.flatMap(c =>
+          c.children && c.children.length > 0 ? c.children : [c]
+        )
+      }))
+    );
   }
 
   get isArabic(): boolean {

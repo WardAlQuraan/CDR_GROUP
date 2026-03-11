@@ -1,3 +1,4 @@
+using cdr_group.Domain.Attributes;
 using cdr_group.Domain.Entities.Base;
 
 namespace cdr_group.Domain.Entities
@@ -29,6 +30,7 @@ namespace cdr_group.Domain.Entities
         public bool IsActive { get; set; } = true;
 
         // Self-referencing parent
+        [AuditDisplayName(typeof(Company), nameof(NameEn), nameof(NameAr))]
         public Guid? ParentId { get; set; }
         public Company? Parent { get; set; }
         public virtual ICollection<Company> Children { get; set; } = new List<Company>();
