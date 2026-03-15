@@ -8,8 +8,8 @@
         @for (company of companies; track company.id) {
           <button
             class="company-filter-btn"
-            [class.active]="selectedCompanyCode === company.code"
-            (click)="onCompanyChange(company.code)">
+            [class.active]="selectedCompanyId === company.id"
+            (click)="onCompanyChange(company.id)">
             {{ getCompanyName(company) }}
           </button>
         }
@@ -18,7 +18,7 @@
   </div>
 } -->
 
-<app-events [companyCode]="selectedCompanyCode"></app-events>
-<app-team [companyCode]="selectedCompanyCode"></app-team>
+<app-events [companyId]="selectedCompanyId"></app-events>
+<app-team [companyId]="selectedCompanyId"></app-team>
 <app-reviews-display [companyId]="selectedCompany?.id"></app-reviews-display>
 <app-contact-review [companyId]="selectedCompany?.id"></app-contact-review>

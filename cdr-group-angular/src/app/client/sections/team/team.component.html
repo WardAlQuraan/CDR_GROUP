@@ -25,29 +25,62 @@
         <p>{{ 'members.noMembers' | translate }}</p>
       </div>
     } @else {
-      <div class="team-grid">
-        @for (member of flatMembers; track member.id; let i = $index) {
-          <div class="member-card">
-            <div class="card-inner">
-              <div class="avatar" [style.background-color]="getColor(i)">
-                @if (member.image) {
-                  <img [src]="member.image" [alt]="member.name">
-                } @else {
-                  <span>{{ member.initials }}</span>
-                }
-              </div>
-              <div class="info">
-                <h4 class="name">{{ member.name | titlecase }}</h4>
-                @if (member.position) {
-                  <p class="position">{{ member.position }}</p>
-                }
-                @if (member.company) {
-                  <span class="department">{{ member.company }}</span>
-                }
+      <div class="team-scroll-wrapper" #scrollWrapper
+           (mouseenter)="onMouseEnter()"
+           (mouseleave)="onMouseLeave()"
+           (mousedown)="onMouseDown($event)"
+           (mousemove)="onMouseMove($event)"
+           (mouseup)="onMouseUp()"
+           (touchstart)="onTouchStart($event)"
+           (touchmove)="onTouchMove($event)"
+           (touchend)="onTouchEnd()">
+        <div class="team-grid">
+          @for (member of flatMembers; track member.id; let i = $index) {
+            <div class="member-card">
+              <div class="card-inner">
+                <div class="avatar" [style.background-color]="getColor(i)">
+                  @if (member.image && !member.imageError) {
+                    <img [src]="member.image" [alt]="member.name" (error)="member.imageError = true">
+                  } @else {
+                    <span>{{ member.initials }}</span>
+                  }
+                </div>
+                <div class="info">
+                  <h4 class="name">{{ member.name | titlecase }}</h4>
+                  @if (member.position) {
+                    <p class="position">{{ member.position }}</p>
+                  }
+                  @if (member.company) {
+                    <span class="department">{{ member.company }}</span>
+                  }
+                </div>
               </div>
             </div>
-          </div>
-        }
+          }
+          <!-- Duplicate for seamless loop -->
+          @for (member of flatMembers; track $index; let i = $index) {
+            <div class="member-card" aria-hidden="true">
+              <div class="card-inner">
+                <div class="avatar" [style.background-color]="getColor(i)">
+                  @if (member.image && !member.imageError) {
+                    <img [src]="member.image" [alt]="member.name" (error)="member.imageError = true">
+                  } @else {
+                    <span>{{ member.initials }}</span>
+                  }
+                </div>
+                <div class="info">
+                  <h4 class="name">{{ member.name | titlecase }}</h4>
+                  @if (member.position) {
+                    <p class="position">{{ member.position }}</p>
+                  }
+                  @if (member.company) {
+                    <span class="department">{{ member.company }}</span>
+                  }
+                </div>
+              </div>
+            </div>
+          }
+        </div>
       </div>
     }
   </div>

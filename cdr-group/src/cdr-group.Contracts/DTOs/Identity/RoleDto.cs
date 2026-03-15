@@ -1,7 +1,10 @@
+using cdr_group.Contracts.Attributes;
+
 namespace cdr_group.Contracts.DTOs.Identity
 {
     public class RoleDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }

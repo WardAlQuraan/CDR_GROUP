@@ -29,12 +29,6 @@ namespace cdr_group.Application.Services
             return new PagedResult<PositionDto>(positionDtos, totalCount, request.PageNumber, request.PageSize);
         }
 
-        public async Task<PositionDto?> GetByCodeAsync(string code)
-        {
-            var position = await UnitOfWork.Positions.GetByCodeAsync(code);
-            return Mapper.Map<PositionDto>(position);
-        }
-
         public async Task<PositionDto?> GetByNameAsync(string name)
         {
             var position = await UnitOfWork.Positions.GetByNameAsync(name);
@@ -59,24 +53,11 @@ namespace cdr_group.Application.Services
 
         protected override async Task ValidateCreateAsync(CreatePositionDto dto)
         {
-            if (await UnitOfWork.Positions.PositionCodeExistsAsync(dto.Code))
-            {
-                throw new InvalidOperationException(Messages.PositionCodeExists);
-            }
-
             ValidateSalaryRange(dto.MinSalary, dto.MaxSalary);
         }
 
         protected override async Task ValidateUpdateAsync(Guid id, UpdatePositionDto dto, Position entity)
         {
-            if (dto.Code != null && dto.Code != entity.Code)
-            {
-                if (await UnitOfWork.Positions.PositionCodeExistsAsync(dto.Code, id))
-                {
-                    throw new InvalidOperationException(Messages.PositionCodeExists);
-                }
-            }
-
             var minSalary = dto.MinSalary ?? entity.MinSalary;
             var maxSalary = dto.MaxSalary ?? entity.MaxSalary;
             ValidateSalaryRange(minSalary, maxSalary);

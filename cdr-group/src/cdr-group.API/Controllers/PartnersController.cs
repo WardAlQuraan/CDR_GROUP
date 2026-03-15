@@ -39,11 +39,11 @@ namespace cdr_group.API.Controllers
 
         [HttpGet("all")]
         [AllowAnonymous]
-        public async Task<ActionResult<ApiResponse<IEnumerable<PartnerDto>>>> GetAllByCompanyCode([FromQuery] string? companyCode)
+        public async Task<ActionResult<ApiResponse<IEnumerable<PartnerDto>>>> GetAllPartners([FromQuery] Guid? companyId)
         {
-            var result = string.IsNullOrEmpty(companyCode)
-                ? await Service.GetAllAsync()
-                : await Service.GetAllByCompanyCodeAsync(companyCode);
+            var result = companyId.HasValue
+                ? await Service.GetAllByCompanyIdAsync(companyId.Value)
+                : await Service.GetAllAsync();
             return Ok(ApiResponse<IEnumerable<PartnerDto>>.SuccessResponse(result));
         }
 

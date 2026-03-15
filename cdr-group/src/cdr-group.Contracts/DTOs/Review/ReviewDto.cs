@@ -5,6 +5,7 @@ namespace cdr_group.Contracts.DTOs.Review
 {
     public class ReviewDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
         public int NumberOfStars { get; set; }
         public string Comment { get; set; } = string.Empty;
@@ -13,6 +14,7 @@ namespace cdr_group.Contracts.DTOs.Review
         public Guid CompanyId { get; set; }
         public string? CompanyNameEn { get; set; }
         public string? CompanyNameAr { get; set; }
+        [ExcelColumnName("CreatedDate")]
         public DateTime CreatedAt { get; set; }
     }
 

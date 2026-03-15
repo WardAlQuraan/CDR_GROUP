@@ -33,7 +33,7 @@ export class EventDialogComponent implements OnInit {
 
   companyMapper = (company: CompanyDto): SelectOption => ({
     value: company.id,
-    label: `${this.isArabic ? company.nameAr : company.nameEn} (${company.code})`
+    label: this.isArabic ? company.nameAr : company.nameEn
   });
 
   constructor(

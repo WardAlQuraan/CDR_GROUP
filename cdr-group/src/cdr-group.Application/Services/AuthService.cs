@@ -260,7 +260,7 @@ namespace cdr_group.Application.Services
                 Id = Guid.NewGuid(),
                 Token = GenerateSecureToken(),
                 UserId = userId,
-                ExpiresAt = DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenExpirationDays),
+                ExpiresAt = DateTime.UtcNow.AddMinutes(_jwtSettings.RefreshTokenExpirationMinutes),
                 CreatedAt = DateTime.UtcNow
             };
 

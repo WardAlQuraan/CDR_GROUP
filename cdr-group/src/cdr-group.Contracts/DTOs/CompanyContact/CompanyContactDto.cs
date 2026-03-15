@@ -5,6 +5,7 @@ namespace cdr_group.Contracts.DTOs.CompanyContact
 {
     public class CompanyContactDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
         public string Icon { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
@@ -14,8 +15,9 @@ namespace cdr_group.Contracts.DTOs.CompanyContact
         public Guid CompanyId { get; set; }
         public string CompanyNameEn { get; set; } = string.Empty;
         public string CompanyNameAr { get; set; } = string.Empty;
-
+        [ExcelColumnName("CreatedDate")]
         public DateTime CreatedAt { get; set; }
+        [ExcelColumnName("ModifiedDate")]
         public DateTime? UpdatedAt { get; set; }
     }
 

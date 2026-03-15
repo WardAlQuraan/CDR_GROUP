@@ -17,11 +17,6 @@
       </div>
 
       <div class="section-content">
-        <app-form-field formControlName="code" label="admin.companies.code" icon="badge"
-          placeholder="admin.companies.placeholders.code"
-          [errors]="[{name: 'required', message: 'admin.companies.errors.codeRequired'}]">
-        </app-form-field>
-
         <div class="form-row">
           <app-form-field formControlName="nameEn" label="admin.companies.nameEn"
             placeholder="admin.companies.placeholders.nameEn"
@@ -198,23 +193,17 @@
         </div>
 
         <div class="form-row">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>{{ 'admin.companies.openingStartTime' | translate }}</mat-label>
-            <mat-icon matPrefix>access_time</mat-icon>
-            <input matInput type="time" formControlName="openingStartTime">
+          <app-time-picker formControlName="openingStartTime" label="admin.companies.openingStartTime">
             @if (form.get('openingStartTime')?.hasError('required') && form.get('openingStartTime')?.touched) {
               <mat-error>{{ 'admin.companies.errors.openingStartTimeRequired' | translate }}</mat-error>
             }
-          </mat-form-field>
+          </app-time-picker>
 
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>{{ 'admin.companies.openingEndTime' | translate }}</mat-label>
-            <mat-icon matPrefix>access_time</mat-icon>
-            <input matInput type="time" formControlName="openingEndTime">
+          <app-time-picker formControlName="openingEndTime" label="admin.companies.openingEndTime">
             @if (form.get('openingEndTime')?.hasError('required') && form.get('openingEndTime')?.touched) {
               <mat-error>{{ 'admin.companies.errors.openingEndTimeRequired' | translate }}</mat-error>
             }
-          </mat-form-field>
+          </app-time-picker>
         </div>
 
         <app-form-field formControlName="openingHoursNoteEn" label="admin.companies.openingHoursNoteEn"

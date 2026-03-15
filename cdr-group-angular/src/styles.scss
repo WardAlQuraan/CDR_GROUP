@@ -929,23 +929,23 @@ strong {
   SITE FOOTER
 -----------------------------------------*/
 .site-footer {
-  position: relative;
-  padding-bottom: 200px;
+  display: flex;
+  flex-direction: column;
   background-color: var(--primary-color);
   color: var(--white-color);
+  padding-bottom: 0 !important;
 }
 
 .site-footer .container {
-  position: relative;
-  z-index: 2;
+  flex: 1;
 }
 
 .site-footer svg {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  display: block;
+  width: 100%;
+  height: auto;
   pointer-events: none;
+  flex-shrink: 0;
 }
 
 .site-footer-title {
@@ -1140,7 +1140,6 @@ strong {
 
   .site-footer {
     padding-top: 20px;
-    padding-bottom: 100px;
   }
 }
 
@@ -1339,4 +1338,5 @@ strong {
   line-height: 1.4 !important;
   white-space: pre-line !important;
 }
+
 

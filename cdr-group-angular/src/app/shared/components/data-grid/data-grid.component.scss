@@ -484,9 +484,11 @@ $transition: 200ms ease;
       (success, $success-light, $success-color),
       (info, $info-light, $info-color),
       (accent, $accent-light, $accent-color) {
-      &.#{$name}:hover {
-        background: $bg;
+      &.#{$name} {
         mat-icon { color: $fg; }
+        &:hover {
+          background: $bg;
+        }
       }
     }
   }

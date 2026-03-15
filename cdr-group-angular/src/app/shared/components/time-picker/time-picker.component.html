@@ -1,0 +1,56 @@
+<mat-form-field appearance="outline" class="full-width" #trigger>
+  <mat-label>{{ label | translate }}</mat-label>
+  <mat-icon matPrefix>access_time</mat-icon>
+  <input matInput
+         [value]="displayValue"
+         readonly
+         [disabled]="disabled"
+         placeholder="hh:mm AM"
+         (click)="toggleDropdown()">
+  <button mat-icon-button matSuffix (click)="toggleDropdown()" [disabled]="disabled" type="button">
+    <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+  <ng-content></ng-content>
+</mat-form-field>
+
+<ng-template #dropdownTpl>
+  <div class="time-dropdown">
+    <div class="time-columns">
+      <div class="time-column">
+        <div class="column-header">{{ 'common.hour' | translate }}</div>
+        <div class="column-list">
+          @for (h of hours; track h) {
+            <button type="button" class="time-option" [class.selected]="h === selectedHour" (click)="selectHour(h)">
+              {{ h }}
+            </button>
+          }
+        </div>
+      </div>
+      <div class="time-column">
+        <div class="column-header">{{ 'common.minute' | translate }}</div>
+        <div class="column-list">
+          @for (m of minutes; track m) {
+            <button type="button" class="time-option" [class.selected]="m === selectedMinute" (click)="selectMinute(m)">
+              {{ m }}
+            </button>
+          }
+        </div>
+      </div>
+      <div class="time-column ampm-column">
+        <div class="column-header">&nbsp;</div>
+        <div class="column-list ampm-list">
+          <button type="button" class="time-option ampm-option" [class.selected]="selectedPeriod === 'AM'" (click)="selectPeriod('AM')">
+            AM
+          </button>
+          <button type="button" class="time-option ampm-option" [class.selected]="selectedPeriod === 'PM'" (click)="selectPeriod('PM')">
+            PM
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="time-actions">
+      <button type="button" class="cancel-btn" (click)="cancel()">{{ 'common.cancel' | translate }}</button>
+      <button type="button" class="confirm-btn" (click)="confirm()">{{ 'common.ok' | translate }}</button>
+    </div>
+  </div>
+</ng-template>

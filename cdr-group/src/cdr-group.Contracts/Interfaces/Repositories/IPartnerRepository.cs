@@ -6,6 +6,6 @@ namespace cdr_group.Contracts.Interfaces.Repositories
     public interface IPartnerRepository : IRepository<Partner>
     {
         Task<(IEnumerable<Partner> Items, int TotalCount)> GetPartnersPagedAsync(PartnerPagedRequest request);
-        Task<IEnumerable<Partner>> GetAllByCompanyCodeAsync(string companyCode);
+        Task<IEnumerable<Partner>> GetAllByCompanyIdAsync(Guid companyId);
     }
 }

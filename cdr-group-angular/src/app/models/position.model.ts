@@ -1,6 +1,5 @@
 export interface PositionDto {
   id: string;
-  code: string;
   nameEn: string;
   nameAr: string;
   descriptionEn?: string;
@@ -14,7 +13,6 @@ export interface PositionDto {
 
 export interface PositionBasicDto {
   id: string;
-  code: string;
   nameEn: string;
   nameAr: string;
 }
@@ -24,7 +22,6 @@ export interface PositionWithEmployeesDto extends PositionDto {
 }
 
 export interface CreatePositionDto {
-  code: string;
   nameEn: string;
   nameAr: string;
   descriptionEn?: string;
@@ -35,7 +32,6 @@ export interface CreatePositionDto {
 }
 
 export interface UpdatePositionDto {
-  code?: string;
   nameEn?: string;
   nameAr?: string;
   descriptionEn?: string;

@@ -32,7 +32,7 @@ export class CompaniesComponent implements OnInit {
   pageSize = 10;
   sortBy?: string;
   sortDescending = false;
-  searchProperties: string[] = ['code', 'nameEn', 'nameAr'];
+  searchProperties: string[] = ['nameEn', 'nameAr'];
 
   // Filters
   filterValues: FilterValues = {};
@@ -86,7 +86,6 @@ export class CompaniesComponent implements OnInit {
         }
       ],
       columns: [
-        { key: 'code', header: 'admin.companies.code', sortable: true },
         {
           key: 'name',
           header: 'admin.companies.name',
@@ -253,7 +252,7 @@ export class CompaniesComponent implements OnInit {
   }
 
   openOrgChart(company: CompanyDto): void {
-    const url = `/admin/companies/${company.code}/org-chart`;
+    const url = `/admin/companies/${company.id}/org-chart`;
     window.open(url, '_blank');
   }
 

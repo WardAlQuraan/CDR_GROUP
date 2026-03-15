@@ -1,11 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using cdr_group.Contracts.Attributes;
 
 namespace cdr_group.Contracts.DTOs.Position
 {
     public class PositionDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
-        public string Code { get; set; } = string.Empty;
         public string NameEn { get; set; } = string.Empty;
         public string NameAr { get; set; } = string.Empty;
         public string? DescriptionEn { get; set; }
@@ -14,14 +15,16 @@ namespace cdr_group.Contracts.DTOs.Position
         public decimal? MaxSalary { get; set; }
         public bool IsActive { get; set; }
 
+        [ExcelColumnName("CreatedDate")]
         public DateTime CreatedAt { get; set; }
+        [ExcelColumnName("ModifiedDate")]
         public DateTime? UpdatedAt { get; set; }
     }
 
     public class PositionBasicDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
-        public string Code { get; set; } = string.Empty;
         public string NameEn { get; set; } = string.Empty;
         public string NameAr { get; set; } = string.Empty;
     }
@@ -33,10 +36,6 @@ namespace cdr_group.Contracts.DTOs.Position
 
     public class CreatePositionDto
     {
-        [Required]
-        [StringLength(50)]
-        public string Code { get; set; } = string.Empty;
-
         [Required]
         [StringLength(200)]
         public string NameEn { get; set; } = string.Empty;
@@ -59,9 +58,6 @@ namespace cdr_group.Contracts.DTOs.Position
 
     public class UpdatePositionDto
     {
-        [StringLength(50)]
-        public string? Code { get; set; }
-
         [StringLength(200)]
         public string? NameEn { get; set; }
 

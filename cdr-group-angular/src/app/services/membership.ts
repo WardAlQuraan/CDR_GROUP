@@ -14,8 +14,10 @@ export interface MembershipTier {
 }
 
 export interface TeamMember {
-  name: string;
-  role: string;
+  nameEn: string;
+  nameAr: string;
+  roleEn: string;
+  roleAr: string;
   image: string;
   socialLinks: {
     instagram?: string;
@@ -69,8 +71,10 @@ export class MembershipService {
 
   private teamMembers: TeamMember[] = [
     {
-      name: 'Mahmmoud Rahahleh',
-      role: 'Founder AND Chairman',
+      nameEn: 'Mahmmoud Rahahleh',
+      nameAr: 'محمود رحاحله',
+      roleEn: 'Founder & Chairman',
+      roleAr: 'المؤسس ورئيس مجلس الإدارة',
       image: 'assets/images/members/cdr.jpg',
       socialLinks: {}
     }

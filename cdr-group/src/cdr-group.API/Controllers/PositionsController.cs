@@ -30,18 +30,6 @@ namespace cdr_group.API.Controllers
             return await base.GetById(id);
         }
 
-        [HttpGet("by-code/{code}")]
-        [HasPermission(Permissions.Positions.Read)]
-        public async Task<ActionResult<ApiResponse<PositionDto>>> GetByCode(string code)
-        {
-            var position = await Service.GetByCodeAsync(code);
-            if (position == null)
-            {
-                return NotFound(ApiResponse<PositionDto>.FailureResponse("Position not found."));
-            }
-            return Ok(ApiResponse<PositionDto>.SuccessResponse(position));
-        }
-
         [HttpGet("by-name/{name}")]
         [HasPermission(Permissions.Positions.Read)]
         public async Task<ActionResult<ApiResponse<PositionDto>>> GetByName(string name)

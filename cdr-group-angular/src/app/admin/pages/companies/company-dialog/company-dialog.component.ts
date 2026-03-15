@@ -40,7 +40,7 @@ export class CompanyDialogComponent implements OnInit {
 
   companyMapper = (company: CompanyDto): SelectOption => ({
     value: company.id,
-    label: `${this.isArabic ? company.nameAr : company.nameEn} (${company.code})`
+    label: this.isArabic ? company.nameAr : company.nameEn
   });
 
   parentFilter = (company: CompanyDto): boolean => {
@@ -91,7 +91,6 @@ export class CompanyDialogComponent implements OnInit {
     if (this.isEditMode) {
       const company = this.data.company!;
       this.form = this.fb.group({
-        code: [company.code, [Validators.required, Validators.maxLength(50)]],
         nameEn: [company.nameEn, [Validators.required, Validators.maxLength(200)]],
         nameAr: [company.nameAr, [Validators.required, Validators.maxLength(200)]],
         descriptionEn: [company.descriptionEn, [Validators.required, Validators.maxLength(500)]],
@@ -118,7 +117,6 @@ export class CompanyDialogComponent implements OnInit {
       });
     } else {
       this.form = this.fb.group({
-        code: ['', [Validators.required, Validators.maxLength(50)]],
         nameEn: ['', [Validators.required, Validators.maxLength(200)]],
         nameAr: ['', [Validators.required, Validators.maxLength(200)]],
         descriptionEn: ['', [Validators.required, Validators.maxLength(500)]],
@@ -167,7 +165,6 @@ export class CompanyDialogComponent implements OnInit {
 
   private createCompany(): void {
     const createDto: CreateCompanyDto = {
-      code: this.form.value.code,
       nameEn: this.form.value.nameEn,
       nameAr: this.form.value.nameAr,
       descriptionEn: this.form.value.descriptionEn || undefined,
@@ -207,7 +204,6 @@ export class CompanyDialogComponent implements OnInit {
 
   private updateCompany(): void {
     const updateDto: UpdateCompanyDto = {
-      code: this.form.value.code,
       nameEn: this.form.value.nameEn,
       nameAr: this.form.value.nameAr,
       descriptionEn: this.form.value.descriptionEn || undefined,

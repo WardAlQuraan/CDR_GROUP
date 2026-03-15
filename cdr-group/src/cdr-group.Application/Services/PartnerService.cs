@@ -38,18 +38,19 @@ namespace cdr_group.Application.Services
             return new PagedResult<PartnerDto>(dtos, totalCount, request.PageNumber, request.PageSize);
         }
 
-        public async Task<IEnumerable<PartnerDto>> GetAllByCompanyCodeAsync(string companyCode)
+        public async Task<IEnumerable<PartnerDto>> GetAllByCompanyIdAsync(Guid companyId)
         {
-            var items = await UnitOfWork.Partners.GetAllByCompanyCodeAsync(companyCode);
+            var items = await UnitOfWork.Partners.GetAllByCompanyIdAsync(companyId);
             var itemDtos = Mapper.Map<IEnumerable<PartnerDto>>(items);
             foreach (var item in items)
             {
-                var x = itemDtos.FirstOrDefault(x => x.Id == item.Id);
-
-                itemDtos.FirstOrDefault(x => x.Id == item.Id).CountryNameAr = item.City.Country.NameAr ;
-                itemDtos.FirstOrDefault(x => x.Id == item.Id).CountryNameEn = item.City.Country.NameEn ;
+                var dto = itemDtos.FirstOrDefault(x => x.Id == item.Id);
+                if (dto != null && item.City?.Country != null)
+                {
+                    dto.CountryNameAr = item.City.Country.NameAr;
+                    dto.CountryNameEn = item.City.Country.NameEn;
+                }
             }
-
             return itemDtos;
         }
 

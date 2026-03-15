@@ -6,7 +6,6 @@ namespace cdr_group.Domain.Entities
 {
     public class Employee : BaseEntity
     {
-        public string EmployeeCode { get; set; } = string.Empty;
         public string FirstNameEn { get; set; } = string.Empty;
         public string LastNameEn { get; set; } = string.Empty;
         public string FirstNameAr { get; set; } = string.Empty;

@@ -1,7 +1,10 @@
+using cdr_group.Contracts.Attributes;
+
 namespace cdr_group.Contracts.DTOs.AuditLog
 {
     public class AuditLogDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
         public string EntityName { get; set; } = string.Empty;
         public string EntityId { get; set; } = string.Empty;

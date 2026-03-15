@@ -5,6 +5,7 @@ namespace cdr_group.Contracts.DTOs.Complaint
 {
     public class ComplaintDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
         public string FullName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
@@ -14,6 +15,7 @@ namespace cdr_group.Contracts.DTOs.Complaint
         public Guid CompanyId { get; set; }
         public string? CompanyNameEn { get; set; }
         public string? CompanyNameAr { get; set; }
+        [ExcelColumnName("CreatedDate")]
         public DateTime CreatedAt { get; set; }
     }
 

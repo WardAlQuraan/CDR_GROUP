@@ -32,15 +32,6 @@ namespace cdr_group.Application.Services
             return new PagedResult<CompanyDto>(companyDtos, totalCount, request.PageNumber, request.PageSize);
         }
 
-        public async Task<CompanyDto?> GetByCodeAsync(string code)
-        {
-            var company = await UnitOfWork.Companies.GetByCodeAsync(code);
-            if (company == null) return null;
-            var dto = Mapper.Map<CompanyDto>(company);
-            await PopulateCountsAsync(new List<CompanyDto> { dto });
-            return dto;
-        }
-
         public async Task<IEnumerable<CompanyDto>> GetActiveCompaniesAsync()
         {
             var companies = await UnitOfWork.Companies.GetActiveCompaniesAsync();
@@ -88,11 +79,6 @@ namespace cdr_group.Application.Services
 
         protected override async Task ValidateCreateAsync(CreateCompanyDto dto)
         {
-            if (await UnitOfWork.Companies.CompanyCodeExistsAsync(dto.Code))
-            {
-                throw new InvalidOperationException(Messages.CompanyCodeExists);
-            }
-
             if (dto.ParentId.HasValue)
             {
                 var parent = await UnitOfWork.Companies.GetByIdAsync(dto.ParentId.Value);
@@ -105,14 +91,6 @@ namespace cdr_group.Application.Services
 
         protected override async Task ValidateUpdateAsync(Guid id, UpdateCompanyDto dto, Company entity)
         {
-            if (dto.Code != null && dto.Code != entity.Code)
-            {
-                if (await UnitOfWork.Companies.CompanyCodeExistsAsync(dto.Code, id))
-                {
-                    throw new InvalidOperationException(Messages.CompanyCodeExists);
-                }
-            }
-
             // Check if deactivating a company with active children
             if (dto.IsActive == false && entity.IsActive)
             {

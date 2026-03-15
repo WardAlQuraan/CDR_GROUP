@@ -5,6 +5,7 @@ namespace cdr_group.Contracts.DTOs.Event
 {
     public class EventDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
         public string TitleEn { get; set; } = string.Empty;
         public string TitleAr { get; set; } = string.Empty;
@@ -20,7 +21,9 @@ namespace cdr_group.Contracts.DTOs.Event
 
         public string? PrimaryFileUrl { get; set; }
 
+        [ExcelColumnName("CreatedDate")]
         public DateTime CreatedAt { get; set; }
+        [ExcelColumnName("ModifiedDate")]
         public DateTime? UpdatedAt { get; set; }
     }
 
@@ -53,7 +56,6 @@ namespace cdr_group.Contracts.DTOs.Event
     public class EventPagedRequest : Common.PagedRequest
     {
         public Guid? CompanyId { get; set; }
-        public string? CompanyCode { get; set; }
     }
 
     public class UpdateEventDto

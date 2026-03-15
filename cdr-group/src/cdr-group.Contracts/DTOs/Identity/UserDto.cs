@@ -1,7 +1,10 @@
+using cdr_group.Contracts.Attributes;
+
 namespace cdr_group.Contracts.DTOs.Identity
 {
     public class UserDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
         public string Username { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;

@@ -14,7 +14,7 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
   loading = true;
   error = false;
   company: CompanyDto | null = null;
-  companyCode: string | null = null;
+  companyId: string | null = null;
   private sub!: Subscription;
 
   constructor(
@@ -31,7 +31,7 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = this.companyStateService.selectedCompany$.subscribe(company => {
       if (company) {
-        this.companyCode = company.code;
+        this.companyId = company.id;
         this.company = company;
         this.loading = false;
         this.error = false;

@@ -38,10 +38,6 @@ export class EmployeesService extends BaseService<EmployeeDto, CreateEmployeeDto
     return this.get<EmployeeWithSubordinatesDto>(`/${id}/with-subordinates`);
   }
 
-  getByEmployeeCode(employeeCode: string): Observable<ApiResponse<EmployeeDto>> {
-    return this.get<EmployeeDto>(`/by-code/${encodeURIComponent(employeeCode)}`);
-  }
-
   getByUserId(userId: string): Observable<ApiResponse<EmployeeDto>> {
     return this.get<EmployeeDto>(`/by-user/${userId}`);
   }
@@ -67,9 +63,9 @@ export class EmployeesService extends BaseService<EmployeeDto, CreateEmployeeDto
     return this.get<EmployeeDto[]>(`/by-company${query}`);
   }
 
-  getTree(companyCode?: string): Observable<ApiResponse<EmployeeTreeNodeDto[]>> {
+  getTree(companyId?: string): Observable<ApiResponse<EmployeeTreeNodeDto[]>> {
     const queryParams: string[] = [];
-    if (companyCode) queryParams.push(`companyCode=${companyCode}`);
+    if (companyId) queryParams.push(`companyId=${companyId}`);
     const params = queryParams.length > 0 ? `?${queryParams.join('&')}` : '';
     return this.get<EmployeeTreeNodeDto[]>(`/tree${params}`);
   }

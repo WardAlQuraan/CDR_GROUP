@@ -1,4 +1,5 @@
 import { Component, inject, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TranslationService } from '../../../services/translation.service';
 import { CompanyContactsService } from '../../../services/company-contacts.service';
@@ -17,6 +18,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   companyState = inject(CompanyStateService);
   private companyContactsService = inject(CompanyContactsService);
   private cdr = inject(ChangeDetectorRef);
+  private router = inject(Router);
 
   currentYear = new Date().getFullYear();
   contacts: CompanyContactDto[] = [];
@@ -73,29 +75,14 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   selectCompany(companyId: string): void {
-    const companies = this.companyState.companies;
-    const found = this.findInList(companies, companyId);
-    if (found) {
-      this.companyState.setSelectedCompany(found);
-    }
-  }
-
-  private findInList(companies: CompanyDto[], id: string): CompanyDto | undefined {
-    for (const company of companies) {
-      if (company.id === id) return company;
-      if (company.children?.length) {
-        const found = this.findInList(company.children, id);
-        if (found) return found;
-      }
-    }
-    return undefined;
+    this.router.navigate(['/'], { queryParams: { company: companyId } });
   }
 
   private formatTime(time: string): string {
     if (!time) return '';
     const [hours, minutes] = time.split(':');
     const h = parseInt(hours, 10);
-    const suffix = h >= 12 ? 'PM' : 'AM';
+    const suffix = h >= 12 ? (this.isArabic ? 'م' : 'PM') : (this.isArabic ? 'ص' : 'AM');
     const h12 = h % 12 || 12;
     return `${h12}:${minutes} ${suffix}`;
   }

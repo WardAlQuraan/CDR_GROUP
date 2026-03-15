@@ -6,7 +6,6 @@ namespace cdr_group.Contracts.Interfaces.Services
     public interface IEmployeeService : IBaseService<EmployeeDto, CreateEmployeeDto, UpdateEmployeeDto>
     {
         Task<PagedResult<EmployeeDto>> GetEmployeesPagedAsync(EmployeePagedRequest request);
-        Task<EmployeeDto?> GetByEmployeeCodeAsync(string employeeCode);
         Task<EmployeeDto?> GetByUserIdAsync(Guid userId);
         Task<EmployeeWithSubordinatesDto?> GetWithSubordinatesAsync(Guid id);
         Task<IEnumerable<EmployeeBasicDto>> GetSubordinatesAsync(Guid managerId);

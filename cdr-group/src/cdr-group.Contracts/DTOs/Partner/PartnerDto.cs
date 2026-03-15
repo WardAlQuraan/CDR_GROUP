@@ -5,6 +5,7 @@ namespace cdr_group.Contracts.DTOs.Partner
 {
     public class PartnerDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
         public string Status { get; set; } = string.Empty;
         [ExcelIgnore]
@@ -19,7 +20,9 @@ namespace cdr_group.Contracts.DTOs.Partner
         public double? CityLongitude { get; set; }
         public string? CountryNameEn { get; set; }
         public string? CountryNameAr { get; set; }
+        [ExcelColumnName("CreatedDate")]
         public DateTime CreatedAt { get; set; }
+
     }
 
     public class CreatePartnerDto

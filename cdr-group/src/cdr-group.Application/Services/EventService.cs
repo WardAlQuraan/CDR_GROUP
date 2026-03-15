@@ -42,12 +42,6 @@ namespace cdr_group.Application.Services
                 SearchProperties = request.SearchProperties
             };
 
-            if (!eventRequest.CompanyId.HasValue && !string.IsNullOrWhiteSpace(eventRequest.CompanyCode))
-            {
-                var company = await UnitOfWork.Companies.GetByCodeAsync(eventRequest.CompanyCode);
-                eventRequest.CompanyId = company?.Id;
-            }
-
             var (events, totalCount) = await UnitOfWork.Events.GetEventsPagedAsync(eventRequest);
             var eventDtos = Mapper.Map<List<EventDto>>(events);
             await PopulatePrimaryFileUrlsAsync(eventDtos);

@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using cdr_group.Contracts.Attributes;
 
 namespace cdr_group.Contracts.DTOs.Country
 {
     public class CountryDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
         public string NameEn { get; set; } = string.Empty;
         public string NameAr { get; set; } = string.Empty;

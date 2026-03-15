@@ -37,7 +37,7 @@ interface OrgNode {
 })
 export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @ViewChild('chartContainer', { static: false }) chartContainer!: ElementRef;
-  @Input() companyCode?: string;
+  @Input() companyId?: string;
 
   @Input() companyNameEn?: string;
   @Input() companyNameAr?: string;
@@ -74,7 +74,7 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['companyCode'] && !changes['companyCode'].firstChange) {
+    if (changes['companyId'] && !changes['companyId'].firstChange) {
       this.loadData();
     }
   }
@@ -102,7 +102,7 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
   loadData(): void {
     this.loading = true;
     this.error = false;
-    this.employeesService.getTree(this.companyCode).subscribe({
+    this.employeesService.getTree(this.companyId).subscribe({
       next: (response) => {
         if (response.success && response.data && response.data.length > 0) {
           // Handle multiple root nodes by creating a virtual root

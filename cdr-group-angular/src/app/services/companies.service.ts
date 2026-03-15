@@ -18,10 +18,6 @@ export class CompaniesService extends BaseService<CompanyDto, CreateCompanyDto, 
     super(http, 'companies');
   }
 
-  getByCode(code: string): Observable<ApiResponse<CompanyDto>> {
-    return this.get<CompanyDto>(`/by-code/${code}`);
-  }
-
   getActiveCompanies(): Observable<ApiResponse<CompanyDto[]>> {
     return this.cacheService.get('active-companies', () => this.get<CompanyDto[]>('/active'));
   }

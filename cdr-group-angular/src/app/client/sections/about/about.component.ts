@@ -21,6 +21,14 @@ export class AboutComponent {
     return this.translationService.language() === 'ar';
   }
 
+  getMemberName(member: TeamMember): string {
+    return this.isArabic ? member.nameAr : member.nameEn;
+  }
+
+  getMemberRole(member: TeamMember): string {
+    return this.isArabic ? member.roleAr : member.roleEn;
+  }
+
   get companyStory(): string {
     if (!this.company) return '';
     return (this.isArabic ? this.company.storyAr : this.company.storyEn) || '';

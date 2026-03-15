@@ -24,7 +24,8 @@ namespace cdr_group.Application.Services
             for (int i = 0; i < properties.Count; i++)
             {
                 var headerCell = worksheet.Cell(1, i + 2);
-                headerCell.Value = FormatHeaderName(properties[i].Name);
+                var columnNameAttr = properties[i].GetCustomAttribute<ExcelColumnNameAttribute>();
+                headerCell.Value = columnNameAttr?.Name ?? FormatHeaderName(properties[i].Name);
                 headerCell.Style.Font.Bold = true;
                 headerCell.Style.Fill.BackgroundColor = XLColor.LightGray;
             }
@@ -57,10 +58,6 @@ namespace cdr_group.Application.Services
                 {
                     // Skip properties marked with [ExcelIgnore]
                     if (p.GetCustomAttribute<ExcelIgnoreAttribute>() != null)
-                        return false;
-
-                    // Skip primary key Id properties
-                    if (p.Name == "Id" && (p.PropertyType == typeof(Guid) || p.PropertyType == typeof(Guid?)))
                         return false;
 
                     var propType = p.PropertyType;

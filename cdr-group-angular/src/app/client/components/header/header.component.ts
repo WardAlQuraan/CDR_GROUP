@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   companyState = inject(CompanyStateService);
   isSticky = signal(false);
   activeSection = signal('home');
-  selectedCompanyCode = 'CDR';
+  selectedCompanyId = '';
 
   private sections = ['section_2', 'section_events', 'section_team', 'section_5'];
 
@@ -35,26 +35,27 @@ export class HeaderComponent implements OnInit {
     return this.router.url.includes('company=');
   }
 
-  navigateToCompany(companyCode: string): void {
-    this.router.navigate(['/'], { queryParams: { company: companyCode } });
+  navigateToCompany(companyId: string): void {
+    this.router.navigate(['/'], { queryParams: { company: companyId } });
   }
 
   get selectedCompanyName(): string {
-    const company = this.companyState.findCompany(this.companyState.companies, this.selectedCompanyCode);
+    const company = this.companyState.findCompany(this.companyState.companies, this.selectedCompanyId);
     if (company) {
       return this.getCompanyName(company);
     }
-    return this.selectedCompanyCode;
+    return '';
   }
 
   ngOnInit() {
     this.updateActiveSection();
     this.route.queryParams.subscribe(params => {
       if (params['company']) {
-        this.selectedCompanyCode = params['company'];
-      } else {
+        this.selectedCompanyId = params['company'];
+      } else if (this.companyState.companies.length > 0) {
+        this.selectedCompanyId = this.companyState.companies[0].id;
         this.router.navigate([], {
-          queryParams: { company: this.selectedCompanyCode },
+          queryParams: { company: this.selectedCompanyId },
           queryParamsHandling: 'merge'
         });
       }

@@ -307,8 +307,6 @@ namespace cdr_group.Persistence.Data
             modelBuilder.Entity<Employee>(entity =>
             {
                 entity.HasKey(e => e.Id);
-                entity.HasIndex(e => e.EmployeeCode).IsUnique();
-                entity.Property(e => e.EmployeeCode).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.FirstNameEn).IsRequired().HasMaxLength(100);
                 entity.Property(e => e.LastNameEn).IsRequired().HasMaxLength(100);
                 entity.Property(e => e.FirstNameAr).IsRequired().HasMaxLength(100);
@@ -346,8 +344,6 @@ namespace cdr_group.Persistence.Data
             modelBuilder.Entity<Company>(entity =>
             {
                 entity.HasKey(e => e.Id);
-                entity.HasIndex(e => e.Code).IsUnique();
-                entity.Property(e => e.Code).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.NameEn).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.NameAr).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.DescriptionEn).HasMaxLength(500);
@@ -389,8 +385,6 @@ namespace cdr_group.Persistence.Data
             modelBuilder.Entity<Position>(entity =>
             {
                 entity.HasKey(e => e.Id);
-                entity.HasIndex(e => e.Code).IsUnique();
-                entity.Property(e => e.Code).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.NameEn).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.NameAr).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.DescriptionEn).HasMaxLength(500);

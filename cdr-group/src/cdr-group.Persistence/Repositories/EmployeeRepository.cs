@@ -46,16 +46,6 @@ namespace cdr_group.Persistence.Repositories
                 .FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
         }
 
-        public async Task<Employee?> GetByEmployeeCodeAsync(string employeeCode)
-        {
-            return await _dbSet
-                .Include(e => e.Manager)
-                .Include(e => e.User)
-                .Include(e => e.Company)
-                .Include(e => e.Position)
-                .FirstOrDefaultAsync(e => e.EmployeeCode == employeeCode && !e.IsDeleted);
-        }
-
         public async Task<Employee?> GetByUserIdAsync(Guid userId, Guid? execludedId = null)
         {
             return await _dbSet
@@ -86,17 +76,6 @@ namespace cdr_group.Persistence.Repositories
                 .Where(e => (e.CompanyId == companyId || !e.CompanyId.HasValue) && e.IsActive && !e.IsDeleted)
                 .ToListAsync();
         }
-        public async Task<IEnumerable<Employee>> GetByCompanyCodeAsync(string? companyCode)
-        {
-            return await _dbSet
-                .Include(e => e.Manager)
-                .Include(e => e.User)
-                .Include(e => e.Company)
-                .Include(e => e.Position)
-                .Where(e => ((e.Company != null && e.Company.Code.ToLower() == companyCode.ToLower()) || !e.CompanyId.HasValue) && e.IsActive && !e.IsDeleted)
-                .ToListAsync();
-        }
-
         public async Task<(IEnumerable<Employee> Items, int TotalCount)> GetEmployeesPagedAsync(EmployeePagedRequest request)
         {
             var query = _dbSet
@@ -121,13 +100,6 @@ namespace cdr_group.Persistence.Repositories
         }
        
 
-        public async Task<bool> EmployeeCodeExistsAsync(string employeeCode, Guid? excludeId = null)
-        {
-            return await _dbSet
-                .IgnoreQueryFilters()
-                .AnyAsync(e =>
-                e.EmployeeCode == employeeCode &&
-                (excludeId == null || e.Id != excludeId));
-        }
+
     }
 }

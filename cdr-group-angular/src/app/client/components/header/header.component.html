@@ -51,7 +51,7 @@
               <ul class="dropdown-menu">
                 @for (company of companyState.companies; track company.id) {
                   <li>
-                    <a class="dropdown-item parent-item" href="javascript:void(0)" (click)="hasChildren(company) ? toggleSubmenu(company.id) : navigateToCompany(company.code)">
+                    <a class="dropdown-item parent-item" href="javascript:void(0)" (click)="hasChildren(company) ? toggleSubmenu(company.id) : navigateToCompany(company.id)">
                       {{ getCompanyName(company) }}
                       @if (hasChildren(company)) {
                         <i class="bi bi-chevron-down submenu-arrow" [class.open]="isSubmenuOpen(company.id)"></i>
@@ -61,7 +61,7 @@
                   @if (hasChildren(company) && isSubmenuOpen(company.id)) {
                     @for (child of company.children; track child.id) {
                       <li>
-                        <a class="dropdown-item child-item" href="javascript:void(0)" (click)="navigateToCompany(child.code)">
+                        <a class="dropdown-item child-item" href="javascript:void(0)" (click)="navigateToCompany(child.id)">
                           {{ getCompanyName(child) }}
                         </a>
                       </li>
@@ -93,7 +93,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" routerLink="/world-map" [queryParams]="{ company: selectedCompanyCode }" routerLinkActive="active">{{ 'common.seeOurPartners' | translate }}</a>
+            <a class="nav-link" routerLink="/world-map" [queryParams]="{ company: selectedCompanyId }" routerLinkActive="active">{{ 'common.seeOurPartners' | translate }}</a>
           </li>
 
           <li class="nav-item">

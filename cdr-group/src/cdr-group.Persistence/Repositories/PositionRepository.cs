@@ -13,12 +13,6 @@ namespace cdr_group.Persistence.Repositories
         {
         }
 
-        public async Task<Position?> GetByCodeAsync(string code)
-        {
-            return await _dbSet
-                .FirstOrDefaultAsync(p => p.Code == code && !p.IsDeleted);
-        }
-
         public async Task<Position?> GetByNameAsync(string name)
         {
             return await _dbSet
@@ -44,14 +38,6 @@ namespace cdr_group.Persistence.Repositories
             var items = await QueryHelper.ApplyPaging(query, request).ToListAsync();
 
             return (items, totalCount);
-        }
-
-        public async Task<bool> PositionCodeExistsAsync(string code, Guid? excludeId = null)
-        {
-            return await _dbSet.IgnoreQueryFilters().AnyAsync(p =>
-                p.Code == code &&
-                !p.IsDeleted &&
-                (excludeId == null || p.Id != excludeId));
         }
 
         public async Task<bool> HasEmployeesAsync(Guid positionId)

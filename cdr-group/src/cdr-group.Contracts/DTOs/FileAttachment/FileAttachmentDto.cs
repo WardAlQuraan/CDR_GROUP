@@ -1,10 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using cdr_group.Contracts.Attributes;
 using Microsoft.AspNetCore.Http;
 
 namespace cdr_group.Contracts.DTOs.FileAttachment
 {
     public class FileAttachmentDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
         public string FileName { get; set; } = string.Empty;
         public string StoredFileName { get; set; } = string.Empty;

@@ -69,17 +69,6 @@ namespace cdr_group.Application.Services
             return dto;
         }
 
-        public async Task<EmployeeDto?> GetByEmployeeCodeAsync(string employeeCode)
-        {
-            var employee = await UnitOfWork.Employees.GetByEmployeeCodeAsync(employeeCode);
-            var dto = Mapper.Map<EmployeeDto>(employee);
-            if (dto != null)
-            {
-                await PopulateFilePathAsync(dto);
-            }
-            return dto;
-        }
-
         public async Task<EmployeeDto?> GetByUserIdAsync(Guid userId)
         {
             var employee = await UnitOfWork.Employees.GetByUserIdAsync(userId);
@@ -124,9 +113,6 @@ namespace cdr_group.Application.Services
             if (request.CompanyId.HasValue)
             {
                 employees = await UnitOfWork.Employees.GetByCompanyIdAsync(request.CompanyId);
-            }else if (!string.IsNullOrEmpty(request.CompanyCode))
-            {
-                employees = await UnitOfWork.Employees.GetByCompanyCodeAsync(request.CompanyCode);
             }
             else
             {
@@ -138,7 +124,6 @@ namespace cdr_group.Application.Services
                 var employeeDict = employees.ToDictionary(e => e.Id, e => new EmployeeTreeNodeDto
                 {
                     Id = e.Id,
-                    EmployeeCode = e.EmployeeCode,
                     FirstNameEn = e.FirstNameEn,
                     LastNameEn = e.LastNameEn,
                     FirstNameAr = e.FirstNameAr,
@@ -254,8 +239,6 @@ namespace cdr_group.Application.Services
 
         protected override async Task ValidateCreateAsync(CreateEmployeeDto dto)
         {
-            await ValidateEmployeeCode(dto.EmployeeCode);
-
             if (dto.ManagerId.HasValue)
             {
                 var manager = await UnitOfWork.Employees.GetByIdAsync(dto.ManagerId.Value);
@@ -324,11 +307,6 @@ namespace cdr_group.Application.Services
 
         protected override async Task ValidateUpdateAsync(Guid id, UpdateEmployeeDto dto, Employee entity)
         {
-            if (dto.EmployeeCode != null && dto.EmployeeCode != entity.EmployeeCode)
-            {
-                await ValidateEmployeeCode(dto.EmployeeCode);
-            }
-
             if (dto.ManagerId.HasValue)
             {
                 if (dto.ManagerId == id)
@@ -364,14 +342,6 @@ namespace cdr_group.Application.Services
                 }
             }
         }
-        private async Task ValidateEmployeeCode(string code)
-        {
-            if (await UnitOfWork.Employees.EmployeeCodeExistsAsync(code))
-            {
-                throw new InvalidOperationException(Messages.EmployeeCodeExists);
-            }
-        }
-
         private async Task ValidateUser(Guid? newUserId, Guid? oldUserId, Guid? execludedId)
         {
             if (newUserId.HasValue && newUserId != oldUserId)

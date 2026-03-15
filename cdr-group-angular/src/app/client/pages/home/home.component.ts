@@ -20,8 +20,8 @@ export class HomeComponent {
     return this.companyState.selectedCompany;
   }
 
-  get selectedCompanyCode(): string {
-    return this.companyState.selectedCompany?.code || 'CDR';
+  get selectedCompanyId(): string {
+    return this.companyState.selectedCompany?.id || '';
   }
 
   get isArabic(): boolean {
@@ -32,10 +32,10 @@ export class HomeComponent {
     return this.isArabic ? company.nameAr : company.nameEn;
   }
 
-  onCompanyChange(companyCode: string): void {
+  onCompanyChange(companyId: string): void {
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { company: companyCode },
+      queryParams: { company: companyId },
       queryParamsHandling: 'merge'
     });
   }

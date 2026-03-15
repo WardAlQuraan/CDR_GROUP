@@ -3,6 +3,9 @@
   gap: 8px;
 
   .section-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     padding: 10px 24px;
     border: 2px solid var(--secondary-color, #6c757d);
     border-radius: 30px;

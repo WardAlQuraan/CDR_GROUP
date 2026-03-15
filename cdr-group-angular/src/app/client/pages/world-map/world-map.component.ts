@@ -28,7 +28,7 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
   private map!: L.Map;
   private countries: CountryDto[] = [];
 
-  private companyCode?: string;
+  private companyId?: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,7 +37,7 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
     private translationService: TranslationService,
     private cdr: ChangeDetectorRef
   ) {
-    this.companyCode = this.route.snapshot.queryParams['company'];
+    this.companyId = this.route.snapshot.queryParams['company'];
   }
 
   private get isArabic(): boolean {
@@ -91,7 +91,7 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
   }
 
   private loadPartners(): void {
-    this.partnersService.getAllByCompanyCode(this.companyCode).subscribe({
+    this.partnersService.getAllByCompanyId().subscribe({
       next: (response) => {
         if (response.success && response.data) {
           this.partners = response.data;

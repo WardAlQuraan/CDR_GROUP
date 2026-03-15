@@ -31,18 +31,6 @@ namespace cdr_group.API.Controllers
             return await base.GetById(id);
         }
 
-        [HttpGet("by-code/{code}")]
-        [AllowAnonymous]
-        public async Task<ActionResult<ApiResponse<CompanyDto>>> GetByCode(string code)
-        {
-            var company = await Service.GetByCodeAsync(code);
-            if (company == null)
-            {
-                return NotFound(ApiResponse<CompanyDto>.FailureResponse("Company not found."));
-            }
-            return Ok(ApiResponse<CompanyDto>.SuccessResponse(company));
-        }
-
         [HttpGet("tree")]
         [AllowAnonymous]
         public async Task<ActionResult<ApiResponse<IEnumerable<CompanyDto>>>> GetTree()

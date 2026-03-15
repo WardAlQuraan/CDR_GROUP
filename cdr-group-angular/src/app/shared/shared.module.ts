@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 // Angular Material
 import { MatInputModule } from '@angular/material/input';
@@ -41,6 +42,8 @@ import { OrgChartComponent } from './components/org-chart/org-chart.component';
 import { BulkUploadDialogComponent } from './components/bulk-upload-dialog/bulk-upload-dialog.component';
 import { ImagePreviewDialogComponent } from './components/image-preview-dialog/image-preview-dialog.component';
 import { FormFieldComponent } from './components/form-field/form-field.component';
+import { BackButtonComponent } from './components/back-button/back-button.component';
+import { TimePickerComponent } from './components/time-picker/time-picker.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { CustomPaginatorIntl } from './custom-paginator-intl';
@@ -59,13 +62,16 @@ import { CustomPaginatorIntl } from './custom-paginator-intl';
     OrgChartComponent,
     BulkUploadDialogComponent,
     ImagePreviewDialogComponent,
-    FormFieldComponent
+    FormFieldComponent,
+    BackButtonComponent,
+    TimePickerComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    OverlayModule,
     TranslatePipe,
     // Angular Material
     MatInputModule,
@@ -138,7 +144,9 @@ import { CustomPaginatorIntl } from './custom-paginator-intl';
     OrgChartComponent,
     BulkUploadDialogComponent,
     ImagePreviewDialogComponent,
-    FormFieldComponent
+    FormFieldComponent,
+    BackButtonComponent,
+    TimePickerComponent
   ]
 })
 export class SharedModule {}

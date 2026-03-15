@@ -60,7 +60,6 @@ export class PositionDialogComponent implements OnInit {
     if (this.isEditMode) {
       const pos = this.data.position!;
       this.form = this.fb.group({
-        code: [pos.code, [Validators.required, Validators.maxLength(50)]],
         nameEn: [pos.nameEn, [Validators.required, Validators.maxLength(200)]],
         nameAr: [pos.nameAr, [Validators.required, Validators.maxLength(200)]],
         descriptionEn: [pos.descriptionEn, [Validators.maxLength(500)]],
@@ -71,7 +70,6 @@ export class PositionDialogComponent implements OnInit {
       });
     } else {
       this.form = this.fb.group({
-        code: ['', [Validators.required, Validators.maxLength(50)]],
         nameEn: ['', [Validators.required, Validators.maxLength(200)]],
         nameAr: ['', [Validators.required, Validators.maxLength(200)]],
         descriptionEn: ['', [Validators.maxLength(500)]],
@@ -104,7 +102,6 @@ export class PositionDialogComponent implements OnInit {
 
   private createPosition(): void {
     const createDto: CreatePositionDto = {
-      code: this.form.value.code,
       nameEn: this.form.value.nameEn,
       nameAr: this.form.value.nameAr,
       descriptionEn: this.form.value.descriptionEn || undefined,
@@ -128,7 +125,6 @@ export class PositionDialogComponent implements OnInit {
 
   private updatePosition(): void {
     const updateDto: UpdatePositionDto = {
-      code: this.form.value.code,
       nameEn: this.form.value.nameEn,
       nameAr: this.form.value.nameAr,
       descriptionEn: this.form.value.descriptionEn || undefined,

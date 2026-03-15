@@ -39,7 +39,6 @@ export interface EventPagedRequest {
   searchTerm?: string;
   searchProperties?: string[];
   companyId?: string;
-  companyCode?: string;
 }
 
 export interface UpdateEventDto {

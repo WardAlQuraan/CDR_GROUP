@@ -40,7 +40,7 @@ export class EmployeesComponent implements OnInit {
   pageSize = 10;
   sortBy?: string;
   sortDescending = false;
-  searchProperties: string[] = ['employeeCode', 'firstNameEn', 'lastNameEn', 'firstNameAr', 'lastNameAr', 'email'];
+  searchProperties: string[] = ['firstNameEn', 'lastNameEn', 'firstNameAr', 'lastNameAr', 'email'];
 
   // Filters
   filterValues: FilterValues = {};
@@ -113,7 +113,6 @@ export class EmployeesComponent implements OnInit {
         }
       ],
       columns: [
-        { key: 'employeeCode', header: 'admin.employees.code', sortable: true },
         {
           key: 'fullName',
           header: 'admin.employees.name',

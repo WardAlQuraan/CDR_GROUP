@@ -5,8 +5,8 @@ namespace cdr_group.Contracts.DTOs.Company
 {
     public class CompanyDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
-        public string Code { get; set; } = string.Empty;
         public string NameEn { get; set; } = string.Empty;
         public string NameAr { get; set; } = string.Empty;
         public string? DescriptionEn { get; set; }
@@ -36,25 +36,22 @@ namespace cdr_group.Contracts.DTOs.Company
         public List<CompanyDto> Children { get; set; } = new();
         public int PartnersCount { get; set; }
         public int EmployeesCount { get; set; }
-
+        [ExcelColumnName("CreatedDate")]
         public DateTime CreatedAt { get; set; }
+        [ExcelColumnName("ModifiedDate")]
         public DateTime? UpdatedAt { get; set; }
     }
 
     public class CompanyBasicDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
-        public string Code { get; set; } = string.Empty;
         public string NameEn { get; set; } = string.Empty;
         public string NameAr { get; set; } = string.Empty;
     }
 
     public class CreateCompanyDto
     {
-        [Required]
-        [StringLength(50)]
-        public string Code { get; set; } = string.Empty;
-
         [Required]
         [StringLength(200)]
         public string NameEn { get; set; } = string.Empty;
@@ -124,9 +121,6 @@ namespace cdr_group.Contracts.DTOs.Company
 
     public class UpdateCompanyDto
     {
-        [StringLength(50)]
-        public string? Code { get; set; }
-
         [StringLength(200)]
         public string? NameEn { get; set; }
 

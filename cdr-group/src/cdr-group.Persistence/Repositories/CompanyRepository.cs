@@ -20,13 +20,6 @@ namespace cdr_group.Persistence.Repositories
                 .FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
         }
 
-        public async Task<Company?> GetByCodeAsync(string code)
-        {
-            return await _dbSet
-                .Include(c => c.Parent)
-                .FirstOrDefaultAsync(c => c.Code == code && !c.IsDeleted);
-        }
-
         public async Task<IEnumerable<Company>> GetActiveCompaniesAsync()
         {
             return await _dbSet
@@ -50,15 +43,6 @@ namespace cdr_group.Persistence.Repositories
             var items = await QueryHelper.ApplyPaging(query, request).ToListAsync();
 
             return (items, totalCount);
-        }
-
-        public async Task<bool> CompanyCodeExistsAsync(string code, Guid? excludeId = null)
-        {
-            return await _dbSet
-                .IgnoreQueryFilters()
-                .AnyAsync(c =>
-                c.Code == code &&
-                (excludeId == null || c.Id != excludeId));
         }
 
         public async Task<bool> HasEmployeesAsync(Guid companyId)

@@ -23,7 +23,7 @@ namespace cdr_group.Domain.Localization
         public const string UserNotFound = "user_not_found";
 
         // Company
-        public const string CompanyCodeExists = "company_code_exists";
+
         public const string CompanyNotFound = "company_not_found";
         public const string CompanyHasEmployees = "company_has_employees";
         public const string ParentCompanyNotFound = "parent_company_not_found";
@@ -37,7 +37,7 @@ namespace cdr_group.Domain.Localization
         public const string EmployeeCircularReference = "employee_circular_reference";
         public const string ManagerNotFound = "manager_not_found";
         public const string UserAlreadyLinked = "user_already_linked";
-        public const string EmployeeCodeExists = "employee_code_exists";
+
         public const string PositionNotFound = "position_not_found";
         public const string SalaryBelowMinimum = "salary_below_minimum";
         public const string SalaryAboveMaximum = "salary_above_maximum";
@@ -52,7 +52,7 @@ namespace cdr_group.Domain.Localization
         public const string PermissionNameExists = "permission_name_exists";
 
         // Position
-        public const string PositionCodeExists = "position_code_exists";
+
         public const string PositionHasEmployees = "position_has_employees";
         public const string MinSalaryGreaterThanMax = "min_salary_greater_than_max";
 
@@ -84,7 +84,7 @@ namespace cdr_group.Domain.Localization
                 [UserNotFound] = "User not found.",
 
                 // Company
-                [CompanyCodeExists] = "Company code already exists.",
+
                 [CompanyNotFound] = "Company not found.",
                 [CompanyHasEmployees] = "Cannot delete company with employees. Please reassign employees first.",
                 [ParentCompanyNotFound] = "Parent company not found.",
@@ -98,7 +98,7 @@ namespace cdr_group.Domain.Localization
                 [EmployeeCircularReference] = "Cannot assign manager: circular reference detected.",
                 [ManagerNotFound] = "Manager not found.",
                 [UserAlreadyLinked] = "User is already linked to another employee.",
-                [EmployeeCodeExists] = "Employee code already exists.",
+
                 [PositionNotFound] = "Position not found.",
                 [SalaryBelowMinimum] = "The salary of the employee is less than the minimum salary of this position.",
                 [SalaryAboveMaximum] = "The salary of the employee is greater than the maximum salary of this position.",
@@ -113,7 +113,7 @@ namespace cdr_group.Domain.Localization
                 [PermissionNameExists] = "Permission name already exists.",
 
                 // Position
-                [PositionCodeExists] = "Position code already exists.",
+
                 [PositionHasEmployees] = "Cannot delete position with employees. Please reassign employees first.",
                 [MinSalaryGreaterThanMax] = "Minimum salary cannot be greater than maximum salary.",
 
@@ -144,7 +144,7 @@ namespace cdr_group.Domain.Localization
                 [UserNotFound] = "المستخدم غير موجود.",
 
                 // Company
-                [CompanyCodeExists] = "رمز الشركة موجود بالفعل.",
+
                 [CompanyNotFound] = "الشركة غير موجودة.",
                 [CompanyHasEmployees] = "لا يمكن حذف شركة تحتوي على موظفين. يرجى إعادة تعيين الموظفين أولاً.",
                 [ParentCompanyNotFound] = "الشركة الأم غير موجودة.",
@@ -158,7 +158,7 @@ namespace cdr_group.Domain.Localization
                 [EmployeeCircularReference] = "لا يمكن تعيين المدير: تم اكتشاف مرجع دائري.",
                 [ManagerNotFound] = "المدير غير موجود.",
                 [UserAlreadyLinked] = "المستخدم مرتبط بالفعل بموظف آخر.",
-                [EmployeeCodeExists] = "رمز الموظف موجود بالفعل.",
+
                 [PositionNotFound] = "المنصب غير موجود.",
                 [SalaryBelowMinimum] = "راتب الموظف أقل من الحد الأدنى لراتب هذا المنصب.",
                 [SalaryAboveMaximum] = "راتب الموظف أكبر من الحد الأقصى لراتب هذا المنصب.",
@@ -173,7 +173,7 @@ namespace cdr_group.Domain.Localization
                 [PermissionNameExists] = "اسم الصلاحية موجود بالفعل.",
 
                 // Position
-                [PositionCodeExists] = "رمز المنصب موجود بالفعل.",
+
                 [PositionHasEmployees] = "لا يمكن حذف منصب يحتوي على موظفين. يرجى إعادة تعيين الموظفين أولاً.",
                 [MinSalaryGreaterThanMax] = "لا يمكن أن يكون الحد الأدنى للراتب أكبر من الحد الأقصى.",
 

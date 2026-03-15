@@ -26,19 +26,19 @@ export class CompanyStateService {
     this.selectedCompanySubject.next(company);
   }
 
-  findCompany(companies: CompanyDto[], code: string): CompanyDto | undefined {
+  findCompany(companies: CompanyDto[], id: string): CompanyDto | undefined {
     for (const company of companies) {
-      if (company.code === code) return company;
+      if (company.id === id) return company;
       if (company.children?.length) {
-        const found = this.findCompany(company.children, code);
+        const found = this.findCompany(company.children, id);
         if (found) return found;
       }
     }
     return undefined;
   }
 
-  selectByCode(code: string): void {
-    const company = this.findCompany(this.companies, code);
+  selectById(id: string): void {
+    const company = this.findCompany(this.companies, id);
     this.setSelectedCompany(company);
   }
 }

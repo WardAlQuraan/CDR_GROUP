@@ -33,7 +33,7 @@ export class PositionsComponent implements OnInit {
   pageSize = 10;
   sortBy?: string;
   sortDescending = false;
-  searchProperties: string[] = ['code', 'nameEn', 'nameAr'];
+  searchProperties: string[] = ['nameEn', 'nameAr'];
 
   // Filters
   filterValues: FilterValues = {};
@@ -87,7 +87,6 @@ export class PositionsComponent implements OnInit {
         }
       ],
       columns: [
-        { key: 'code', header: 'admin.positions.code', sortable: true },
         {
           key: 'name',
           header: 'admin.positions.name',

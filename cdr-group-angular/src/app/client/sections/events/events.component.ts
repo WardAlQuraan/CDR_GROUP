@@ -20,7 +20,7 @@ interface DisplayEvent {
   styleUrl: './events.component.scss',
 })
 export class EventsComponent implements OnChanges {
-  @Input() companyCode = 'CDR';
+  @Input() companyId = '';
 
   loading = false;
   paginationLoading = false;
@@ -56,7 +56,7 @@ export class EventsComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['companyCode']) {
+    if (changes['companyId']) {
       this.pageNumber = 1;
       this.loadEvents();
     }
@@ -79,7 +79,7 @@ export class EventsComponent implements OnChanges {
       pageSize: this.pageSize,
       sortBy: 'eventDate',
       sortDescending: true,
-      companyCode: this.companyCode
+      companyId: this.companyId
     };
 
     const source$ =  this.eventsService.getEventsPaged(request)

@@ -16,10 +16,10 @@ export class PartnersService extends BaseService<PartnerDto, CreatePartnerDto, U
     super(http, 'partners');
   }
 
-  getAllByCompanyCode(companyCode?: string): Observable<ApiResponse<PartnerDto[]>> {
+  getAllByCompanyId(companyId?: string): Observable<ApiResponse<PartnerDto[]>> {
     let params = new HttpParams();
-    if (companyCode) {
-      params = params.set('companyCode', companyCode);
+    if (companyId) {
+      params = params.set('companyId', companyId);
     }
     return this.http.get<ApiResponse<PartnerDto[]>>(`${this.getApiUrl()}/all`, { params }).pipe(
       catchError(error => this.handleError(error))

@@ -25,9 +25,6 @@ export class EventsService extends BaseService<EventDto, CreateEventDto, UpdateE
     if (request?.companyId) {
       params = params.set('companyId', request.companyId);
     }
-    if(request?.companyCode) {
-      params = params.set('companyCode', request.companyCode);
-    }
     return this.http.get<ApiResponse<PagedResult<EventDto>>>(this.getApiUrl(), { params }).pipe(
       catchError(error => this.handleError(error))
     );

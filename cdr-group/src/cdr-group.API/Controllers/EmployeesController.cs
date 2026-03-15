@@ -47,17 +47,6 @@ namespace cdr_group.API.Controllers
             return Ok(ApiResponse<EmployeeWithSubordinatesDto>.SuccessResponse(employee));
         }
 
-        [HttpGet("by-code/{employeeCode}")]
-        public async Task<ActionResult<ApiResponse<EmployeeDto>>> GetByEmployeeCode(string employeeCode)
-        {
-            var employee = await Service.GetByEmployeeCodeAsync(employeeCode);
-            if (employee == null)
-            {
-                return NotFound(ApiResponse<EmployeeDto>.FailureResponse("Employee not found."));
-            }
-            return Ok(ApiResponse<EmployeeDto>.SuccessResponse(employee));
-        }
-
         [HttpGet("by-user/{userId:guid}")]
         public async Task<ActionResult<ApiResponse<EmployeeDto>>> GetByUserId(Guid userId)
         {

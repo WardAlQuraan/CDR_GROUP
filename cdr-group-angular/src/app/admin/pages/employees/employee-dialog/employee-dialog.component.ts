@@ -42,19 +42,19 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
   // Mapper functions for async-select
   companyMapper = (company: CompanyDto): SelectOption => ({
     value: company.id,
-    label: `${this.isArabic ? company.nameAr : company.nameEn} (${company.code})`
+    label: this.isArabic ? company.nameAr : company.nameEn
   });
 
   positionMapper = (pos: PositionDto): SelectOption => ({
     value: pos.id,
-    label: `${this.isArabic ? pos.nameAr : pos.nameEn} (${pos.code})`
+    label: this.isArabic ? pos.nameAr : pos.nameEn
   });
 
   positionFilter = (pos: PositionDto): boolean => pos.isActive;
 
   managerMapper = (emp: EmployeeDto): SelectOption => ({
     value: emp.id,
-    label: `${this.isArabic ? emp.fullNameAr : emp.fullNameEn} (${emp.employeeCode})`
+    label: this.isArabic ? emp.fullNameAr : emp.fullNameEn
   });
 
   // Filter function for managers
@@ -116,7 +116,6 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
     if (this.isEditMode) {
       const emp = this.data.employee!;
       this.form = this.fb.group({
-        employeeCode: [emp.employeeCode, [Validators.required, Validators.maxLength(50)]],
         firstNameEn: [emp.firstNameEn, [Validators.required, Validators.maxLength(100)]],
         lastNameEn: [emp.lastNameEn, [Validators.required, Validators.maxLength(100)]],
         firstNameAr: [emp.firstNameAr, [Validators.required, Validators.maxLength(100)]],
@@ -138,7 +137,6 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
       });
     } else {
       this.form = this.fb.group({
-        employeeCode: ['', [Validators.required, Validators.maxLength(50)]],
         firstNameEn: ['', [Validators.required, Validators.maxLength(100)]],
         lastNameEn: ['', [Validators.required, Validators.maxLength(100)]],
         firstNameAr: ['', [Validators.required, Validators.maxLength(100)]],
@@ -180,7 +178,6 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
 
   private createEmployee(): void {
     const createDto: CreateEmployeeDto = {
-      employeeCode: this.form.value.employeeCode,
       firstNameEn: this.form.value.firstNameEn,
       lastNameEn: this.form.value.lastNameEn,
       firstNameAr: this.form.value.firstNameAr,
@@ -209,7 +206,6 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
 
   private updateEmployee(): void {
     const updateDto: UpdateEmployeeDto = {
-      employeeCode: this.form.value.employeeCode,
       firstNameEn: this.form.value.firstNameEn,
       lastNameEn: this.form.value.lastNameEn,
       firstNameAr: this.form.value.firstNameAr,

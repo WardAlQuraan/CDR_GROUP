@@ -11,7 +11,7 @@ import { CompanyDto } from '../../../../models/company.model';
   styleUrl: './company-org-chart-page.component.scss'
 })
 export class CompanyOrgChartPageComponent implements OnInit {
-  companyCode: string | null = null;
+  companyId: string | null = null;
   company: CompanyDto | null = null;
   loading = true;
 
@@ -23,8 +23,8 @@ export class CompanyOrgChartPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.companyCode = this.route.snapshot.paramMap.get('id');
-    if (this.companyCode) {
+    this.companyId = this.route.snapshot.paramMap.get('id');
+    if (this.companyId) {
       this.loadCompany();
     } else {
       this.loading = false;
@@ -41,7 +41,7 @@ export class CompanyOrgChartPageComponent implements OnInit {
   }
 
   private loadCompany(): void {
-    this.companiesService.getByCode(this.companyCode!).subscribe({
+    this.companiesService.getById(this.companyId!).subscribe({
       next: (response) => {
         if (response.success && response.data) {
           this.company = response.data;

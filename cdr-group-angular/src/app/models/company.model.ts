@@ -1,6 +1,5 @@
 export interface CompanyDto {
   id: string;
-  code: string;
   nameEn: string;
   nameAr: string;
   descriptionEn?: string;
@@ -35,13 +34,11 @@ export interface CompanyDto {
 
 export interface CompanyBasicDto {
   id: string;
-  code: string;
   nameEn: string;
   nameAr: string;
 }
 
 export interface CreateCompanyDto {
-  code: string;
   nameEn: string;
   nameAr: string;
   descriptionEn?: string;
@@ -68,7 +65,6 @@ export interface CreateCompanyDto {
 }
 
 export interface UpdateCompanyDto {
-  code?: string;
   nameEn?: string;
   nameAr?: string;
   descriptionEn?: string;

@@ -5,11 +5,15 @@ namespace cdr_group.Contracts.DTOs.Employee
 {
     public class EmployeeDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
-        public string EmployeeCode { get; set; } = string.Empty;
+        [ExcelIgnore]
         public string FirstNameEn { get; set; } = string.Empty;
+        [ExcelIgnore]
         public string LastNameEn { get; set; } = string.Empty;
+        [ExcelIgnore]
         public string FirstNameAr { get; set; } = string.Empty;
+        [ExcelIgnore]
         public string LastNameAr { get; set; } = string.Empty;
         public string FullNameEn => $"{FirstNameEn} {LastNameEn}";
         public string FullNameAr => $"{FirstNameAr} {LastNameAr}";
@@ -35,7 +39,9 @@ namespace cdr_group.Contracts.DTOs.Employee
         public Guid? UserId { get; set; }
         public string? Username { get; set; }
 
+        [ExcelColumnName("CreatedDate")]
         public DateTime CreatedAt { get; set; }
+        [ExcelColumnName("ModifiedDate")]
         public DateTime? UpdatedAt { get; set; }
 
         // File attachment path (e.g., profile photo)
@@ -44,8 +50,8 @@ namespace cdr_group.Contracts.DTOs.Employee
 
     public class EmployeeBasicDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
-        public string EmployeeCode { get; set; } = string.Empty;
         public string FirstNameEn { get; set; } = string.Empty;
         public string LastNameEn { get; set; } = string.Empty;
         public string FirstNameAr { get; set; } = string.Empty;
@@ -65,8 +71,8 @@ namespace cdr_group.Contracts.DTOs.Employee
 
     public class EmployeeTreeNodeDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
-        public string EmployeeCode { get; set; } = string.Empty;
         public string FirstNameEn { get; set; } = string.Empty;
         public string LastNameEn { get; set; } = string.Empty;
         public string FirstNameAr { get; set; } = string.Empty;
@@ -96,7 +102,6 @@ namespace cdr_group.Contracts.DTOs.Employee
     public class GetTreeRequest
     {
         public Guid? CompanyId { get; set; }
-        public string? CompanyCode { get; set; }
     }
 
     public class EmployeePagedRequest : Common.PagedRequest
@@ -106,10 +111,6 @@ namespace cdr_group.Contracts.DTOs.Employee
 
     public class CreateEmployeeDto
     {
-        [Required]
-        [StringLength(50)]
-        public string EmployeeCode { get; set; } = string.Empty;
-
         [Required]
         [StringLength(100)]
         public string FirstNameEn { get; set; } = string.Empty;
@@ -148,9 +149,6 @@ namespace cdr_group.Contracts.DTOs.Employee
 
     public class UpdateEmployeeDto
     {
-        [StringLength(50)]
-        public string? EmployeeCode { get; set; }
-
         [StringLength(100)]
         public string? FirstNameEn { get; set; }
 

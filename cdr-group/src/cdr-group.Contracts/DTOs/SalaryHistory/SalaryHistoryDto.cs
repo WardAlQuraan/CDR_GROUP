@@ -5,6 +5,7 @@ namespace cdr_group.Contracts.DTOs.SalaryHistory
 {
     public class SalaryHistoryDto
     {
+        [ExcelIgnore]
         public Guid Id { get; set; }
         [ExcelIgnore]
         public Guid EmployeeId { get; set; }
@@ -14,7 +15,9 @@ namespace cdr_group.Contracts.DTOs.SalaryHistory
         public decimal NewSalary { get; set; }
         public DateTime EffectiveDate { get; set; }
         public string? Reason { get; set; }
+        [ExcelColumnName("CreatedDate")]
         public DateTime CreatedAt { get; set; }
+        [ExcelColumnName("ModifiedDate")]
         public DateTime? UpdatedAt { get; set; }
     }
 

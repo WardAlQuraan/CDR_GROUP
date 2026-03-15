@@ -36,14 +36,14 @@
 
       <div class="col-lg-7 col-12">
         <div class="team-cards">
-          @for (member of teamMembers; track member.name) {
+          @for (member of teamMembers; track member.nameEn) {
             <div class="team-card">
               <div class="team-card-image">
-                <img [src]="member.image" [alt]="member.name">
+                <img [src]="member.image" [alt]="getMemberName(member)">
               </div>
               <div class="team-card-info">
-                <h4>{{ member.name }}</h4>
-                <span>{{ member.role }}</span>
+                <h4>{{ getMemberName(member) }}</h4>
+                <span>{{ getMemberRole(member) }}</span>
               </div>
             </div>
           }

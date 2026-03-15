@@ -908,11 +908,6 @@ namespace cdr_group.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -1015,9 +1010,6 @@ namespace cdr_group.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Code")
-                        .IsUnique();
-
                     b.HasIndex("ParentId");
 
                     b.ToTable("Companies");
@@ -1026,7 +1018,6 @@ namespace cdr_group.Persistence.Migrations
                         new
                         {
                             Id = new Guid("aabbccdd-aabb-aabb-aabb-aabbccddeeff"),
-                            Code = "CDR",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             DescriptionAr = "نحن متخصصون في التطوير الإبداعي والتنفيذ، والإنتاج الاستراتيجي، ونمو العلامة التجارية، حيث نحوّل الأفكار إلى واقع مؤثر. من ابتكار المفاهيم إلى التنفيذ الشامل، نصمم حلولاً استراتيجية ترتقي بالعلامات التجارية وتعزز الحضور في السوق وتدفع النمو المستدام. يجمع نهجنا بين الإبداع والدقة، مما يضمن تحقيق نتائج قابلة للقياس وقيمة طويلة الأمد.",
                             DescriptionEn = "We specialize in Creative Development & Realization, Strategic Production, and Brand Growth, transforming ideas into impactful realities. From concept creation to full-scale execution, we design strategic solutions that elevate brands, strengthen market presence, and drive sustainable growth. Our approach blends creativity with precision, ensuring every project delivers measurable results and long-term value.",
@@ -1052,7 +1043,6 @@ namespace cdr_group.Persistence.Migrations
                         new
                         {
                             Id = new Guid("aabbccdd-aabb-aabb-aabb-000000000001"),
-                            Code = "QBT",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsActive = true,
                             IsDeleted = false,
@@ -1066,7 +1056,6 @@ namespace cdr_group.Persistence.Migrations
                         new
                         {
                             Id = new Guid("aabbccdd-aabb-aabb-aabb-000000000002"),
-                            Code = "GBR",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsActive = true,
                             IsDeleted = false,
@@ -1083,7 +1072,6 @@ namespace cdr_group.Persistence.Migrations
                         new
                         {
                             Id = new Guid("aabbccdd-aabb-aabb-aabb-000000000003"),
-                            Code = "GBY",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsActive = true,
                             IsDeleted = false,
@@ -1100,7 +1088,6 @@ namespace cdr_group.Persistence.Migrations
                         new
                         {
                             Id = new Guid("aabbccdd-aabb-aabb-aabb-000000000004"),
-                            Code = "AQV",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsActive = true,
                             IsDeleted = false,
@@ -1117,7 +1104,6 @@ namespace cdr_group.Persistence.Migrations
                         new
                         {
                             Id = new Guid("aabbccdd-aabb-aabb-aabb-000000000005"),
-                            Code = "SHR",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsActive = true,
                             IsDeleted = false,
@@ -1134,7 +1120,6 @@ namespace cdr_group.Persistence.Migrations
                         new
                         {
                             Id = new Guid("aabbccdd-aabb-aabb-aabb-000000000006"),
-                            Code = "CNR",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsActive = true,
                             IsDeleted = false,
@@ -1573,6 +1558,1736 @@ namespace cdr_group.Persistence.Migrations
                             Longitude = 43.869999999999997,
                             NameAr = "جزر القمر",
                             NameEn = "Comoros"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000025"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 41.149999999999999,
+                            Longitude = 20.170000000000002,
+                            NameAr = "ألبانيا",
+                            NameEn = "Albania"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000026"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 42.549999999999997,
+                            Longitude = 1.52,
+                            NameAr = "أندورا",
+                            NameEn = "Andorra"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000027"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 47.520000000000003,
+                            Longitude = 14.550000000000001,
+                            NameAr = "النمسا",
+                            NameEn = "Austria"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000028"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 53.710000000000001,
+                            Longitude = 27.949999999999999,
+                            NameAr = "بيلاروسيا",
+                            NameEn = "Belarus"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000029"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 50.850000000000001,
+                            Longitude = 4.3499999999999996,
+                            NameAr = "بلجيكا",
+                            NameEn = "Belgium"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000030"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 43.920000000000002,
+                            Longitude = 17.68,
+                            NameAr = "البوسنة والهرسك",
+                            NameEn = "Bosnia and Herzegovina"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000031"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 42.729999999999997,
+                            Longitude = 25.489999999999998,
+                            NameAr = "بلغاريا",
+                            NameEn = "Bulgaria"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000032"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 45.100000000000001,
+                            Longitude = 15.199999999999999,
+                            NameAr = "كرواتيا",
+                            NameEn = "Croatia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000033"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 35.130000000000003,
+                            Longitude = 33.43,
+                            NameAr = "قبرص",
+                            NameEn = "Cyprus"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000034"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 49.82,
+                            Longitude = 15.470000000000001,
+                            NameAr = "التشيك",
+                            NameEn = "Czech Republic"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000035"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 56.259999999999998,
+                            Longitude = 9.5,
+                            NameAr = "الدنمارك",
+                            NameEn = "Denmark"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000036"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 58.600000000000001,
+                            Longitude = 25.010000000000002,
+                            NameAr = "إستونيا",
+                            NameEn = "Estonia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000037"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 61.920000000000002,
+                            Longitude = 25.75,
+                            NameAr = "فنلندا",
+                            NameEn = "Finland"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000038"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 46.229999999999997,
+                            Longitude = 2.21,
+                            NameAr = "فرنسا",
+                            NameEn = "France"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000039"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 51.170000000000002,
+                            Longitude = 10.449999999999999,
+                            NameAr = "ألمانيا",
+                            NameEn = "Germany"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000040"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 39.07,
+                            Longitude = 21.82,
+                            NameAr = "اليونان",
+                            NameEn = "Greece"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000041"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 47.159999999999997,
+                            Longitude = 19.5,
+                            NameAr = "المجر",
+                            NameEn = "Hungary"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000042"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 64.959999999999994,
+                            Longitude = -19.02,
+                            NameAr = "آيسلندا",
+                            NameEn = "Iceland"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000043"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 53.140000000000001,
+                            Longitude = -7.6900000000000004,
+                            NameAr = "أيرلندا",
+                            NameEn = "Ireland"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000044"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 41.869999999999997,
+                            Longitude = 12.57,
+                            NameAr = "إيطاليا",
+                            NameEn = "Italy"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000045"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 42.600000000000001,
+                            Longitude = 20.899999999999999,
+                            NameAr = "كوسوفو",
+                            NameEn = "Kosovo"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000046"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 56.880000000000003,
+                            Longitude = 24.600000000000001,
+                            NameAr = "لاتفيا",
+                            NameEn = "Latvia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000047"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 47.170000000000002,
+                            Longitude = 9.5600000000000005,
+                            NameAr = "ليختنشتاين",
+                            NameEn = "Liechtenstein"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000048"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 55.170000000000002,
+                            Longitude = 23.879999999999999,
+                            NameAr = "ليتوانيا",
+                            NameEn = "Lithuania"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000049"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 49.82,
+                            Longitude = 6.1299999999999999,
+                            NameAr = "لوكسمبورغ",
+                            NameEn = "Luxembourg"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000050"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 35.939999999999998,
+                            Longitude = 14.380000000000001,
+                            NameAr = "مالطا",
+                            NameEn = "Malta"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000051"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 47.409999999999997,
+                            Longitude = 28.370000000000001,
+                            NameAr = "مولدوفا",
+                            NameEn = "Moldova"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000052"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 43.75,
+                            Longitude = 7.4199999999999999,
+                            NameAr = "موناكو",
+                            NameEn = "Monaco"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000053"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 42.710000000000001,
+                            Longitude = 19.370000000000001,
+                            NameAr = "الجبل الأسود",
+                            NameEn = "Montenegro"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000054"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 52.130000000000003,
+                            Longitude = 5.29,
+                            NameAr = "هولندا",
+                            NameEn = "Netherlands"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000055"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 41.509999999999998,
+                            Longitude = 21.75,
+                            NameAr = "مقدونيا الشمالية",
+                            NameEn = "North Macedonia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000056"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 60.469999999999999,
+                            Longitude = 8.4700000000000006,
+                            NameAr = "النرويج",
+                            NameEn = "Norway"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000057"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 51.920000000000002,
+                            Longitude = 19.149999999999999,
+                            NameAr = "بولندا",
+                            NameEn = "Poland"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000058"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 39.399999999999999,
+                            Longitude = -8.2200000000000006,
+                            NameAr = "البرتغال",
+                            NameEn = "Portugal"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000059"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 45.939999999999998,
+                            Longitude = 24.969999999999999,
+                            NameAr = "رومانيا",
+                            NameEn = "Romania"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000060"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 61.520000000000003,
+                            Longitude = 105.31999999999999,
+                            NameAr = "روسيا",
+                            NameEn = "Russia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000061"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 43.939999999999998,
+                            Longitude = 12.460000000000001,
+                            NameAr = "سان مارينو",
+                            NameEn = "San Marino"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000062"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 44.020000000000003,
+                            Longitude = 21.010000000000002,
+                            NameAr = "صربيا",
+                            NameEn = "Serbia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000063"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 48.670000000000002,
+                            Longitude = 19.699999999999999,
+                            NameAr = "سلوفاكيا",
+                            NameEn = "Slovakia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000064"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 46.149999999999999,
+                            Longitude = 15.0,
+                            NameAr = "سلوفينيا",
+                            NameEn = "Slovenia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000065"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 40.460000000000001,
+                            Longitude = -3.75,
+                            NameAr = "إسبانيا",
+                            NameEn = "Spain"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000066"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 60.130000000000003,
+                            Longitude = 18.640000000000001,
+                            NameAr = "السويد",
+                            NameEn = "Sweden"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000067"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 46.82,
+                            Longitude = 8.2300000000000004,
+                            NameAr = "سويسرا",
+                            NameEn = "Switzerland"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000068"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 48.380000000000003,
+                            Longitude = 31.170000000000002,
+                            NameAr = "أوكرانيا",
+                            NameEn = "Ukraine"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000069"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 55.380000000000003,
+                            Longitude = -3.4399999999999999,
+                            NameAr = "المملكة المتحدة",
+                            NameEn = "United Kingdom"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000070"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 41.899999999999999,
+                            Longitude = 12.449999999999999,
+                            NameAr = "الفاتيكان",
+                            NameEn = "Vatican City"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000071"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 33.939999999999998,
+                            Longitude = 67.709999999999994,
+                            NameAr = "أفغانستان",
+                            NameEn = "Afghanistan"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000072"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 40.07,
+                            Longitude = 45.039999999999999,
+                            NameAr = "أرمينيا",
+                            NameEn = "Armenia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000073"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 40.140000000000001,
+                            Longitude = 47.579999999999998,
+                            NameAr = "أذربيجان",
+                            NameEn = "Azerbaijan"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000074"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 23.68,
+                            Longitude = 90.359999999999999,
+                            NameAr = "بنغلاديش",
+                            NameEn = "Bangladesh"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000075"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 27.510000000000002,
+                            Longitude = 90.430000000000007,
+                            NameAr = "بوتان",
+                            NameEn = "Bhutan"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000076"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 4.54,
+                            Longitude = 114.73,
+                            NameAr = "بروناي",
+                            NameEn = "Brunei"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000077"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 12.57,
+                            Longitude = 104.98999999999999,
+                            NameAr = "كمبوديا",
+                            NameEn = "Cambodia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000078"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 35.859999999999999,
+                            Longitude = 104.2,
+                            NameAr = "الصين",
+                            NameEn = "China"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000079"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 42.32,
+                            Longitude = 43.359999999999999,
+                            NameAr = "جورجيا",
+                            NameEn = "Georgia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000080"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 20.59,
+                            Longitude = 78.959999999999994,
+                            NameAr = "الهند",
+                            NameEn = "India"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000081"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -0.79000000000000004,
+                            Longitude = 113.92,
+                            NameAr = "إندونيسيا",
+                            NameEn = "Indonesia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000082"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 36.200000000000003,
+                            Longitude = 138.25,
+                            NameAr = "اليابان",
+                            NameEn = "Japan"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000083"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 48.020000000000003,
+                            Longitude = 66.920000000000002,
+                            NameAr = "كازاخستان",
+                            NameEn = "Kazakhstan"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000084"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 41.200000000000003,
+                            Longitude = 74.769999999999996,
+                            NameAr = "قيرغيزستان",
+                            NameEn = "Kyrgyzstan"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000085"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 19.859999999999999,
+                            Longitude = 102.5,
+                            NameAr = "لاوس",
+                            NameEn = "Laos"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000086"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 4.21,
+                            Longitude = 101.98,
+                            NameAr = "ماليزيا",
+                            NameEn = "Malaysia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000087"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 3.2000000000000002,
+                            Longitude = 73.219999999999999,
+                            NameAr = "المالديف",
+                            NameEn = "Maldives"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000088"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 46.859999999999999,
+                            Longitude = 103.84999999999999,
+                            NameAr = "منغوليا",
+                            NameEn = "Mongolia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000089"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 21.91,
+                            Longitude = 95.959999999999994,
+                            NameAr = "ميانمار",
+                            NameEn = "Myanmar"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000090"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 28.390000000000001,
+                            Longitude = 84.120000000000005,
+                            NameAr = "نيبال",
+                            NameEn = "Nepal"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000091"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 40.340000000000003,
+                            Longitude = 127.51000000000001,
+                            NameAr = "كوريا الشمالية",
+                            NameEn = "North Korea"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000092"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 30.379999999999999,
+                            Longitude = 69.349999999999994,
+                            NameAr = "باكستان",
+                            NameEn = "Pakistan"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000093"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 12.880000000000001,
+                            Longitude = 121.77,
+                            NameAr = "الفلبين",
+                            NameEn = "Philippines"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000094"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 1.3500000000000001,
+                            Longitude = 103.81999999999999,
+                            NameAr = "سنغافورة",
+                            NameEn = "Singapore"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000095"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 35.909999999999997,
+                            Longitude = 127.77,
+                            NameAr = "كوريا الجنوبية",
+                            NameEn = "South Korea"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000096"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 7.8700000000000001,
+                            Longitude = 80.769999999999996,
+                            NameAr = "سريلانكا",
+                            NameEn = "Sri Lanka"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000097"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 38.859999999999999,
+                            Longitude = 71.280000000000001,
+                            NameAr = "طاجيكستان",
+                            NameEn = "Tajikistan"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000098"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 15.869999999999999,
+                            Longitude = 100.98999999999999,
+                            NameAr = "تايلاند",
+                            NameEn = "Thailand"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000099"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -8.8699999999999992,
+                            Longitude = 125.73,
+                            NameAr = "تيمور الشرقية",
+                            NameEn = "Timor-Leste"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000100"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 38.969999999999999,
+                            Longitude = 59.560000000000002,
+                            NameAr = "تركمانستان",
+                            NameEn = "Turkmenistan"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000101"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 41.380000000000003,
+                            Longitude = 64.590000000000003,
+                            NameAr = "أوزبكستان",
+                            NameEn = "Uzbekistan"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000102"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 14.06,
+                            Longitude = 108.28,
+                            NameAr = "فيتنام",
+                            NameEn = "Vietnam"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000103"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 31.050000000000001,
+                            Longitude = 34.850000000000001,
+                            NameAr = "إسرائيل",
+                            NameEn = "Israel"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000104"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -11.199999999999999,
+                            Longitude = 17.870000000000001,
+                            NameAr = "أنغولا",
+                            NameEn = "Angola"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000105"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 9.3100000000000005,
+                            Longitude = 2.3199999999999998,
+                            NameAr = "بنين",
+                            NameEn = "Benin"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000106"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -22.329999999999998,
+                            Longitude = 24.68,
+                            NameAr = "بوتسوانا",
+                            NameEn = "Botswana"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000107"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 12.24,
+                            Longitude = -1.5600000000000001,
+                            NameAr = "بوركينا فاسو",
+                            NameEn = "Burkina Faso"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000108"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -3.3700000000000001,
+                            Longitude = 29.920000000000002,
+                            NameAr = "بوروندي",
+                            NameEn = "Burundi"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000109"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 16.0,
+                            Longitude = -24.010000000000002,
+                            NameAr = "الرأس الأخضر",
+                            NameEn = "Cabo Verde"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000110"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 7.3700000000000001,
+                            Longitude = 12.35,
+                            NameAr = "الكاميرون",
+                            NameEn = "Cameroon"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000111"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 6.6100000000000003,
+                            Longitude = 20.940000000000001,
+                            NameAr = "جمهورية أفريقيا الوسطى",
+                            NameEn = "Central African Republic"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000112"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 15.449999999999999,
+                            Longitude = 18.73,
+                            NameAr = "تشاد",
+                            NameEn = "Chad"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000113"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -0.23000000000000001,
+                            Longitude = 15.83,
+                            NameAr = "الكونغو",
+                            NameEn = "Congo (Brazzaville)"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000114"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -4.04,
+                            Longitude = 21.760000000000002,
+                            NameAr = "الكونغو الديمقراطية",
+                            NameEn = "Congo (Kinshasa)"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000115"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 7.54,
+                            Longitude = -5.5499999999999998,
+                            NameAr = "ساحل العاج",
+                            NameEn = "Côte d'Ivoire"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000116"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 1.6499999999999999,
+                            Longitude = 10.27,
+                            NameAr = "غينيا الاستوائية",
+                            NameEn = "Equatorial Guinea"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000117"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 15.18,
+                            Longitude = 39.780000000000001,
+                            NameAr = "إريتريا",
+                            NameEn = "Eritrea"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000118"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -26.52,
+                            Longitude = 31.469999999999999,
+                            NameAr = "إسواتيني",
+                            NameEn = "Eswatini"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000119"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 9.1500000000000004,
+                            Longitude = 40.490000000000002,
+                            NameAr = "إثيوبيا",
+                            NameEn = "Ethiopia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000120"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -0.80000000000000004,
+                            Longitude = 11.609999999999999,
+                            NameAr = "الغابون",
+                            NameEn = "Gabon"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000121"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 13.44,
+                            Longitude = -15.31,
+                            NameAr = "غامبيا",
+                            NameEn = "Gambia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000122"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 7.9500000000000002,
+                            Longitude = -1.02,
+                            NameAr = "غانا",
+                            NameEn = "Ghana"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000123"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 9.9499999999999993,
+                            Longitude = -9.6999999999999993,
+                            NameAr = "غينيا",
+                            NameEn = "Guinea"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000124"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 11.800000000000001,
+                            Longitude = -15.18,
+                            NameAr = "غينيا بيساو",
+                            NameEn = "Guinea-Bissau"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000125"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -0.02,
+                            Longitude = 37.909999999999997,
+                            NameAr = "كينيا",
+                            NameEn = "Kenya"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000126"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -29.609999999999999,
+                            Longitude = 28.23,
+                            NameAr = "ليسوتو",
+                            NameEn = "Lesotho"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000127"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 6.4299999999999997,
+                            Longitude = -9.4299999999999997,
+                            NameAr = "ليبيريا",
+                            NameEn = "Liberia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000128"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -18.77,
+                            Longitude = 46.869999999999997,
+                            NameAr = "مدغشقر",
+                            NameEn = "Madagascar"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000129"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -13.25,
+                            Longitude = 34.299999999999997,
+                            NameAr = "مالاوي",
+                            NameEn = "Malawi"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000130"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 17.57,
+                            Longitude = -4.0,
+                            NameAr = "مالي",
+                            NameEn = "Mali"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000131"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -20.350000000000001,
+                            Longitude = 57.549999999999997,
+                            NameAr = "موريشيوس",
+                            NameEn = "Mauritius"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000132"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -18.670000000000002,
+                            Longitude = 35.530000000000001,
+                            NameAr = "موزمبيق",
+                            NameEn = "Mozambique"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000133"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -22.960000000000001,
+                            Longitude = 18.489999999999998,
+                            NameAr = "ناميبيا",
+                            NameEn = "Namibia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000134"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 17.609999999999999,
+                            Longitude = 8.0800000000000001,
+                            NameAr = "النيجر",
+                            NameEn = "Niger"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000135"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 9.0800000000000001,
+                            Longitude = 8.6799999999999997,
+                            NameAr = "نيجيريا",
+                            NameEn = "Nigeria"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000136"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -1.9399999999999999,
+                            Longitude = 29.870000000000001,
+                            NameAr = "رواندا",
+                            NameEn = "Rwanda"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000137"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 0.19,
+                            Longitude = 6.6100000000000003,
+                            NameAr = "ساو تومي وبرينسيبي",
+                            NameEn = "São Tomé and Príncipe"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000138"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 14.5,
+                            Longitude = -14.449999999999999,
+                            NameAr = "السنغال",
+                            NameEn = "Senegal"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000139"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -4.6799999999999997,
+                            Longitude = 55.490000000000002,
+                            NameAr = "سيشل",
+                            NameEn = "Seychelles"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000140"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 8.4600000000000009,
+                            Longitude = -11.779999999999999,
+                            NameAr = "سيراليون",
+                            NameEn = "Sierra Leone"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000141"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -30.559999999999999,
+                            Longitude = 22.940000000000001,
+                            NameAr = "جنوب أفريقيا",
+                            NameEn = "South Africa"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000142"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 6.8799999999999999,
+                            Longitude = 31.309999999999999,
+                            NameAr = "جنوب السودان",
+                            NameEn = "South Sudan"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000143"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -6.3700000000000001,
+                            Longitude = 34.890000000000001,
+                            NameAr = "تنزانيا",
+                            NameEn = "Tanzania"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000144"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 8.6199999999999992,
+                            Longitude = 0.81999999999999995,
+                            NameAr = "توغو",
+                            NameEn = "Togo"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000145"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 1.3700000000000001,
+                            Longitude = 32.289999999999999,
+                            NameAr = "أوغندا",
+                            NameEn = "Uganda"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000146"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -13.130000000000001,
+                            Longitude = 27.850000000000001,
+                            NameAr = "زامبيا",
+                            NameEn = "Zambia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000147"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -19.02,
+                            Longitude = 29.149999999999999,
+                            NameAr = "زيمبابوي",
+                            NameEn = "Zimbabwe"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000148"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 17.059999999999999,
+                            Longitude = -61.799999999999997,
+                            NameAr = "أنتيغوا وباربودا",
+                            NameEn = "Antigua and Barbuda"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000149"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -38.420000000000002,
+                            Longitude = -63.619999999999997,
+                            NameAr = "الأرجنتين",
+                            NameEn = "Argentina"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000150"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 25.030000000000001,
+                            Longitude = -77.400000000000006,
+                            NameAr = "الباهاماس",
+                            NameEn = "Bahamas"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000151"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 13.19,
+                            Longitude = -59.539999999999999,
+                            NameAr = "باربادوس",
+                            NameEn = "Barbados"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000152"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 17.190000000000001,
+                            Longitude = -88.5,
+                            NameAr = "بليز",
+                            NameEn = "Belize"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000153"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -16.289999999999999,
+                            Longitude = -63.590000000000003,
+                            NameAr = "بوليفيا",
+                            NameEn = "Bolivia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000154"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -14.24,
+                            Longitude = -51.93,
+                            NameAr = "البرازيل",
+                            NameEn = "Brazil"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000155"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 56.130000000000003,
+                            Longitude = -106.34999999999999,
+                            NameAr = "كندا",
+                            NameEn = "Canada"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000156"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -35.68,
+                            Longitude = -71.540000000000006,
+                            NameAr = "تشيلي",
+                            NameEn = "Chile"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000157"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 4.5700000000000003,
+                            Longitude = -74.299999999999997,
+                            NameAr = "كولومبيا",
+                            NameEn = "Colombia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000158"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 9.75,
+                            Longitude = -83.75,
+                            NameAr = "كوستاريكا",
+                            NameEn = "Costa Rica"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000159"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 21.52,
+                            Longitude = -77.780000000000001,
+                            NameAr = "كوبا",
+                            NameEn = "Cuba"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000160"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 15.41,
+                            Longitude = -61.369999999999997,
+                            NameAr = "دومينيكا",
+                            NameEn = "Dominica"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000161"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 18.739999999999998,
+                            Longitude = -70.159999999999997,
+                            NameAr = "جمهورية الدومينيكان",
+                            NameEn = "Dominican Republic"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000162"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -1.8300000000000001,
+                            Longitude = -78.180000000000007,
+                            NameAr = "الإكوادور",
+                            NameEn = "Ecuador"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000163"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 13.789999999999999,
+                            Longitude = -88.900000000000006,
+                            NameAr = "السلفادور",
+                            NameEn = "El Salvador"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000164"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 12.26,
+                            Longitude = -61.600000000000001,
+                            NameAr = "غرينادا",
+                            NameEn = "Grenada"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000165"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 15.779999999999999,
+                            Longitude = -90.230000000000004,
+                            NameAr = "غواتيمالا",
+                            NameEn = "Guatemala"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000166"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 4.8600000000000003,
+                            Longitude = -58.93,
+                            NameAr = "غيانا",
+                            NameEn = "Guyana"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000167"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 18.969999999999999,
+                            Longitude = -72.290000000000006,
+                            NameAr = "هايتي",
+                            NameEn = "Haiti"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000168"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 15.199999999999999,
+                            Longitude = -86.239999999999995,
+                            NameAr = "هندوراس",
+                            NameEn = "Honduras"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000169"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 18.109999999999999,
+                            Longitude = -77.299999999999997,
+                            NameAr = "جامايكا",
+                            NameEn = "Jamaica"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000170"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 23.629999999999999,
+                            Longitude = -102.55,
+                            NameAr = "المكسيك",
+                            NameEn = "Mexico"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000171"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 12.869999999999999,
+                            Longitude = -85.209999999999994,
+                            NameAr = "نيكاراغوا",
+                            NameEn = "Nicaragua"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000172"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 8.5399999999999991,
+                            Longitude = -80.780000000000001,
+                            NameAr = "بنما",
+                            NameEn = "Panama"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000173"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -23.440000000000001,
+                            Longitude = -58.439999999999998,
+                            NameAr = "باراغواي",
+                            NameEn = "Paraguay"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000174"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -9.1899999999999995,
+                            Longitude = -75.019999999999996,
+                            NameAr = "بيرو",
+                            NameEn = "Peru"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000175"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 17.359999999999999,
+                            Longitude = -62.780000000000001,
+                            NameAr = "سانت كيتس ونيفيس",
+                            NameEn = "Saint Kitts and Nevis"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000176"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 13.91,
+                            Longitude = -60.979999999999997,
+                            NameAr = "سانت لوسيا",
+                            NameEn = "Saint Lucia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000177"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 12.98,
+                            Longitude = -61.289999999999999,
+                            NameAr = "سانت فينسنت والغرينادين",
+                            NameEn = "Saint Vincent and the Grenadines"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000178"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 3.9199999999999999,
+                            Longitude = -56.030000000000001,
+                            NameAr = "سورينام",
+                            NameEn = "Suriname"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000179"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 10.69,
+                            Longitude = -61.219999999999999,
+                            NameAr = "ترينيداد وتوباغو",
+                            NameEn = "Trinidad and Tobago"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000180"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 37.090000000000003,
+                            Longitude = -95.709999999999994,
+                            NameAr = "الولايات المتحدة",
+                            NameEn = "United States"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000181"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -32.520000000000003,
+                            Longitude = -55.770000000000003,
+                            NameAr = "أوروغواي",
+                            NameEn = "Uruguay"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000182"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 6.4199999999999999,
+                            Longitude = -66.590000000000003,
+                            NameAr = "فنزويلا",
+                            NameEn = "Venezuela"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000183"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -25.27,
+                            Longitude = 133.78,
+                            NameAr = "أستراليا",
+                            NameEn = "Australia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000184"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -17.710000000000001,
+                            Longitude = 178.06999999999999,
+                            NameAr = "فيجي",
+                            NameEn = "Fiji"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000185"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -3.3700000000000001,
+                            Longitude = -168.72999999999999,
+                            NameAr = "كيريباتي",
+                            NameEn = "Kiribati"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000186"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 7.1299999999999999,
+                            Longitude = 171.18000000000001,
+                            NameAr = "جزر مارشال",
+                            NameEn = "Marshall Islands"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000187"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 7.4299999999999997,
+                            Longitude = 150.55000000000001,
+                            NameAr = "ميكرونيزيا",
+                            NameEn = "Micronesia"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000188"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -0.52000000000000002,
+                            Longitude = 166.93000000000001,
+                            NameAr = "ناورو",
+                            NameEn = "Nauru"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000189"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -40.899999999999999,
+                            Longitude = 174.88999999999999,
+                            NameAr = "نيوزيلندا",
+                            NameEn = "New Zealand"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000190"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 7.5099999999999998,
+                            Longitude = 134.58000000000001,
+                            NameAr = "بالاو",
+                            NameEn = "Palau"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000191"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -6.3099999999999996,
+                            Longitude = 143.96000000000001,
+                            NameAr = "بابوا غينيا الجديدة",
+                            NameEn = "Papua New Guinea"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000192"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -13.76,
+                            Longitude = -172.09999999999999,
+                            NameAr = "ساموا",
+                            NameEn = "Samoa"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000193"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -9.6500000000000004,
+                            Longitude = 160.16,
+                            NameAr = "جزر سليمان",
+                            NameEn = "Solomon Islands"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000194"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -21.18,
+                            Longitude = -175.19999999999999,
+                            NameAr = "تونغا",
+                            NameEn = "Tonga"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000195"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -7.1100000000000003,
+                            Longitude = 177.65000000000001,
+                            NameAr = "توفالو",
+                            NameEn = "Tuvalu"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000196"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = -15.380000000000001,
+                            Longitude = 166.96000000000001,
+                            NameAr = "فانواتو",
+                            NameEn = "Vanuatu"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000197"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Latitude = 23.699999999999999,
+                            Longitude = 120.95999999999999,
+                            NameAr = "تايوان",
+                            NameEn = "Taiwan"
                         });
                 });
 
@@ -1594,11 +3309,6 @@ namespace cdr_group.Persistence.Migrations
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
-
-                    b.Property<string>("EmployeeCode")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("FirstNameAr")
                         .IsRequired()
@@ -1655,9 +3365,6 @@ namespace cdr_group.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
-
-                    b.HasIndex("EmployeeCode")
-                        .IsUnique();
 
                     b.HasIndex("ManagerId");
 
@@ -4326,11 +6033,6 @@ namespace cdr_group.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -4376,9 +6078,6 @@ namespace cdr_group.Persistence.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Code")
-                        .IsUnique();
 
                     b.ToTable("Positions");
                 });

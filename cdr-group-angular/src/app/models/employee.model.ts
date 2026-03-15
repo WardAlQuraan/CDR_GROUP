@@ -1,6 +1,5 @@
 export interface EmployeeDto {
   id: string;
-  employeeCode: string;
   firstNameEn: string;
   lastNameEn: string;
   firstNameAr: string;
@@ -32,7 +31,6 @@ export interface EmployeeDto {
 
 export interface EmployeeBasicDto {
   id: string;
-  employeeCode: string;
   firstNameEn: string;
   lastNameEn: string;
   firstNameAr: string;
@@ -50,7 +48,6 @@ export interface EmployeeWithSubordinatesDto extends EmployeeDto {
 }
 
 export interface CreateEmployeeDto {
-  employeeCode: string;
   firstNameEn: string;
   lastNameEn: string;
   firstNameAr: string;
@@ -67,7 +64,6 @@ export interface CreateEmployeeDto {
 }
 
 export interface UpdateEmployeeDto {
-  employeeCode?: string;
   firstNameEn?: string;
   lastNameEn?: string;
   firstNameAr?: string;
@@ -96,7 +92,6 @@ export interface EmployeePagedRequest {
 
 export interface EmployeeTreeNodeDto {
   id: string;
-  employeeCode: string;
   firstNameEn: string;
   lastNameEn: string;
   firstNameAr: string;

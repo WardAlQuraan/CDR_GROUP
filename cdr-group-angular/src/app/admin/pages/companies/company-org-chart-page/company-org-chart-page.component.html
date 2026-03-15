@@ -15,8 +15,8 @@
     </div>
 
     <app-org-chart
-      *ngIf="!loading && companyCode"
-      [companyCode]="companyCode"
+      *ngIf="!loading && companyId"
+      [companyId]="companyId"
       [companyNameEn]="company?.nameEn"
       [companyNameAr]="company?.nameAr">
     </app-org-chart>
