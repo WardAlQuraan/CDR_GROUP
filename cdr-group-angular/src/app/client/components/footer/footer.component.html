@@ -52,8 +52,9 @@
         <ul class="social-icon">
           @for (contact of contacts; track contact.id) {
           <li class="social-icon-item">
-            <a [href]="contact.value" target="_blank" rel="noopener" [class]="'social-icon-link ' + contact.icon"
-              [title]="contact.name"></a>
+            <a [href]="getContactHref(contact)" [target]="isExternalLink(contact) ? '_blank' : '_self'" rel="noopener"
+              [class]="'social-icon-link ' + contact.icon" [title]="contact.name"
+              (click)="onContactClick($event, contact)"></a>
           </li>
           }
         </ul>

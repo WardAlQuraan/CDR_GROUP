@@ -56,6 +56,9 @@ namespace cdr_group.Domain.Localization
         public const string PositionHasEmployees = "position_has_employees";
         public const string MinSalaryGreaterThanMax = "min_salary_greater_than_max";
 
+        // Partner
+        public const string PartnerAlreadyExists = "partner_already_exists";
+
         // SalaryHistory
         public const string EmployeeNotFoundForSalaryHistory = "employee_not_found_for_salary_history";
 
@@ -117,6 +120,9 @@ namespace cdr_group.Domain.Localization
                 [PositionHasEmployees] = "Cannot delete position with employees. Please reassign employees first.",
                 [MinSalaryGreaterThanMax] = "Minimum salary cannot be greater than maximum salary.",
 
+                // Partner
+                [PartnerAlreadyExists] = "A partner already exists with the same company and city.",
+
                 // SalaryHistory
                 [EmployeeNotFoundForSalaryHistory] = "Employee not found for salary history record.",
             },
@@ -176,6 +182,9 @@ namespace cdr_group.Domain.Localization
 
                 [PositionHasEmployees] = "لا يمكن حذف منصب يحتوي على موظفين. يرجى إعادة تعيين الموظفين أولاً.",
                 [MinSalaryGreaterThanMax] = "لا يمكن أن يكون الحد الأدنى للراتب أكبر من الحد الأقصى.",
+
+                // Partner
+                [PartnerAlreadyExists] = "يوجد شريك بالفعل بنفس الشركة والمدينة.",
 
                 // SalaryHistory
                 [EmployeeNotFoundForSalaryHistory] = "الموظف غير موجود لسجل تاريخ الراتب.",

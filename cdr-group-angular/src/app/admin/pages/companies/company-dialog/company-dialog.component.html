@@ -29,6 +29,12 @@
           </app-form-field>
         </div>
 
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'admin.companies.numberOfEmployees' | translate }}</mat-label>
+          <mat-icon matPrefix>groups</mat-icon>
+          <input matInput type="number" formControlName="numberOfEmployees" min="0">
+        </mat-form-field>
+
         <app-async-select
           formControlName="parentId"
           label="admin.companies.parentCompany"

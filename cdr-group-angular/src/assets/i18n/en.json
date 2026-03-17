@@ -254,7 +254,8 @@
     "termsOfService": "Terms of Service",
     "quickLinks": "Quick Links",
     "socialMedia": "Social Media",
-    "contactInfo": "Contact Information"
+    "contactInfo": "Contact Information",
+    "copied": "Copied to clipboard"
   },
   "companyDetail": {
     "notFound": "Company Not Found",
@@ -618,6 +619,7 @@
       "openingEndTime": "End Time",
       "openingHoursNoteEn": "Opening Hours Note (English)",
       "openingHoursNoteAr": "Opening Hours Note (Arabic)",
+      "numberOfEmployees": "Number of Employees",
       "partnershipFormUrl": "Partnership Form URL",
       "colorsSection": "Colors",
       "primaryColor": "Primary Color",

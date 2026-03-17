@@ -111,6 +111,7 @@ export class CompanyDialogComponent implements OnInit {
         openingEndTime: [company.openingEndTime, [Validators.required]],
         openingHoursNoteEn: [company.openingHoursNoteEn],
         openingHoursNoteAr: [company.openingHoursNoteAr],
+        numberOfEmployees: [company.numberOfEmployees],
         partnershipFormUrl: [company.partnershipFormUrl],
         parentId: [company.parentId],
         isActive: [company.isActive]
@@ -137,6 +138,7 @@ export class CompanyDialogComponent implements OnInit {
         openingEndTime: ['', [Validators.required]],
         openingHoursNoteEn: [''],
         openingHoursNoteAr: [''],
+        numberOfEmployees: [null],
         partnershipFormUrl: [''],
         parentId: [null],
         isActive: [true]
@@ -185,6 +187,7 @@ export class CompanyDialogComponent implements OnInit {
       openingEndTime: this.form.value.openingEndTime,
       openingHoursNoteEn: this.form.value.openingHoursNoteEn || undefined,
       openingHoursNoteAr: this.form.value.openingHoursNoteAr || undefined,
+      numberOfEmployees: this.form.value.numberOfEmployees || undefined,
       partnershipFormUrl: this.form.value.partnershipFormUrl || undefined,
       parentId: this.form.value.parentId || undefined,
       isActive: this.form.value.isActive
@@ -224,6 +227,7 @@ export class CompanyDialogComponent implements OnInit {
       openingEndTime: this.form.value.openingEndTime,
       openingHoursNoteEn: this.form.value.openingHoursNoteEn || undefined,
       openingHoursNoteAr: this.form.value.openingHoursNoteAr || undefined,
+      numberOfEmployees: this.form.value.numberOfEmployees || undefined,
       partnershipFormUrl: this.form.value.partnershipFormUrl || undefined,
       parentId: this.form.value.parentId || undefined,
       isActive: this.form.value.isActive

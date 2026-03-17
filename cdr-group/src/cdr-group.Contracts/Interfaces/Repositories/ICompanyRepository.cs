@@ -11,6 +11,5 @@ namespace cdr_group.Contracts.Interfaces.Repositories
         Task<bool> HasChildrenAsync(Guid companyId);
         Task<bool> HasActiveChildrenAsync(Guid companyId);
         Task<Dictionary<Guid, int>> GetPartnersCountAsync(IEnumerable<Guid> companyIds);
-        Task<Dictionary<Guid, int>> GetEmployeesCountAsync(IEnumerable<Guid> companyIds);
     }
 }

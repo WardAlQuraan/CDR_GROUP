@@ -96,7 +96,7 @@
         </button>
 
         <!-- Back to Site -->
-        <button mat-menu-item routerLink="/">
+        <button mat-menu-item (click)="goToSite()">
           <mat-icon class="menu-icon home">home</mat-icon>
           <span>{{ 'admin.backToSite' | translate }}</span>
         </button>

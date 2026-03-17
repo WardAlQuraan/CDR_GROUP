@@ -68,12 +68,10 @@ namespace cdr_group.Application.Services
         {
             var ids = dtos.Select(d => d.Id).ToList();
             var partnersCounts = await UnitOfWork.Companies.GetPartnersCountAsync(ids);
-            var employeesCounts = await UnitOfWork.Companies.GetEmployeesCountAsync(ids);
 
             foreach (var dto in dtos)
             {
                 dto.PartnersCount = partnersCounts.TryGetValue(dto.Id, out var pc) ? pc : 0;
-                dto.EmployeesCount = employeesCounts.TryGetValue(dto.Id, out var ec) ? ec : 0;
             }
         }
 

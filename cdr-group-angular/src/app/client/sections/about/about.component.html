@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    @if (company && (company.partnersCount > 0 || company.employeesCount > 0)) {
+    @if (company && (company.partnersCount > 0 || (company.numberOfEmployees && company.numberOfEmployees > 0))) {
       <div class="stats-wrapper">
         <div class="stats-strip">
           @if (company.partnersCount > 0) {
@@ -61,13 +61,13 @@
               <span class="stat-text">{{ 'about.trustedPartners' | translate }}</span>
             </div>
           }
-          @if (company.partnersCount > 0 && company.employeesCount > 0) {
+          @if (company.partnersCount > 0 && (company.numberOfEmployees && company.numberOfEmployees > 0)) {
             <div class="stat-divider"></div>
           }
-          @if (company.employeesCount > 0) {
+          @if (company.numberOfEmployees && company.numberOfEmployees > 0) {
             <div class="stat-pill">
               <i class="bi bi-people-fill"></i>
-              <span class="stat-value">{{ company.employeesCount | number }}</span>
+              <span class="stat-value">{{ company.numberOfEmployees | number }}</span>
               <span class="stat-text">{{ 'about.teamMembers' | translate }}</span>
             </div>
           }

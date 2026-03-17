@@ -1,4 +1,5 @@
 import { Component, inject, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TranslationService } from '../../../services/translation.service';
@@ -6,6 +7,7 @@ import { CompanyContactsService } from '../../../services/company-contacts.servi
 import { CompanyStateService } from '../../../services/company-state.service';
 import { CompanyContactDto } from '../../../models/company-contact.model';
 import { CompanyDto } from '../../../models/company.model';
+import { SnackbarService } from '../../../services/snackbar.service';
 
 @Component({
   selector: 'app-footer',
@@ -19,6 +21,8 @@ export class FooterComponent implements OnInit, OnDestroy {
   private companyContactsService = inject(CompanyContactsService);
   private cdr = inject(ChangeDetectorRef);
   private router = inject(Router);
+  private sanitizer = inject(DomSanitizer);
+  private snackbar = inject(SnackbarService);
 
   currentYear = new Date().getFullYear();
   contacts: CompanyContactDto[] = [];
@@ -95,6 +99,39 @@ export class FooterComponent implements OnInit, OnDestroy {
       }
       this.loadingContacts = false;
       this.cdr.markForCheck();
+    });
+  }
+
+  getContactHref(contact: CompanyContactDto): string | SafeUrl {
+    if (contact.icon === 'bi-telephone' || contact.icon === 'bi-printer') {
+      return this.sanitizer.bypassSecurityTrustUrl('tel:' + contact.value);
+    }
+    if (contact.icon === 'bi-envelope') {
+      return this.sanitizer.bypassSecurityTrustUrl('mailto:' + contact.value);
+    }
+    if (contact.icon === 'bi-whatsapp') {
+      const phone = contact.value.replace(/[^0-9+]/g, '');
+      return 'https://wa.me/' + phone;
+    }
+    if (contact.icon === 'bi-telegram') {
+      return 'https://t.me/' + contact.value.replace('@', '');
+    }
+    if (contact.icon === 'bi-twitter' || contact.icon === 'bi-twitter-x') {
+      return 'https://x.com/' + contact.value.replace('@', '');
+    }
+    // if (contact.icon === 'bi-geo-alt' || contact.icon === 'bi-geo-alt-fill') {
+    //   return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(contact.value);
+    // }
+    return contact.value;
+  }
+
+  isExternalLink(contact: CompanyContactDto): boolean {
+    return contact.icon !== 'bi-telephone' && contact.icon !== 'bi-envelope';
+  }
+
+  onContactClick(event: Event, contact: CompanyContactDto): void {
+    navigator.clipboard.writeText(contact.value).then(() => {
+      this.snackbar.success(this.translationService.translate('footer.copied'));
     });
   }
 

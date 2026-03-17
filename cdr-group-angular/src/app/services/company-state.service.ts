@@ -24,6 +24,13 @@ export class CompanyStateService {
 
   setSelectedCompany(company: CompanyDto | undefined): void {
     this.selectedCompanySubject.next(company);
+    if (company?.id) {
+      localStorage.setItem('selectedCompanyId', company.id);
+    }
+  }
+
+  getLastSelectedCompanyId(): string | null {
+    return localStorage.getItem('selectedCompanyId');
   }
 
   findCompany(companies: CompanyDto[], id: string): CompanyDto | undefined {

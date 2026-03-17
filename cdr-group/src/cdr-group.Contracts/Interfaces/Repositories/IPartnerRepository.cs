@@ -7,5 +7,6 @@ namespace cdr_group.Contracts.Interfaces.Repositories
     {
         Task<(IEnumerable<Partner> Items, int TotalCount)> GetPartnersPagedAsync(PartnerPagedRequest request);
         Task<IEnumerable<Partner>> GetAllByCompanyIdAsync(Guid companyId);
+        Task<bool> ExistsByCompanyAndCityAsync(Guid companyId, Guid cityId, Guid? excludeId = null);
     }
 }

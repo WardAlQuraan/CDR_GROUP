@@ -254,7 +254,8 @@
     "termsOfService": "شروط الخدمة",
     "quickLinks": "روابط سريعة",
     "socialMedia": "وسائل التواصل الاجتماعي",
-    "contactInfo": "معلومات الاتصال"
+    "contactInfo": "معلومات الاتصال",
+    "copied": "تم النسخ"
   },
   "companyDetail": {
     "notFound": "الشركة غير موجودة",
@@ -618,6 +619,7 @@
       "openingEndTime": "وقت النهاية",
       "openingHoursNoteEn": "ملاحظة ساعات العمل (إنجليزي)",
       "openingHoursNoteAr": "ملاحظة ساعات العمل (عربي)",
+      "numberOfEmployees": "عدد الموظفين",
       "partnershipFormUrl": "رابط نموذج الشراكة",
       "colorsSection": "الألوان",
       "primaryColor": "اللون الأساسي",

@@ -72,13 +72,6 @@ namespace cdr_group.Persistence.Repositories
                 .ToDictionaryAsync(g => g.Key, g => g.Count());
         }
 
-        public async Task<Dictionary<Guid, int>> GetEmployeesCountAsync(IEnumerable<Guid> companyIds)
-        {
-            var ids = companyIds.ToList();
-            return await _context.Employees
-                .Where(e => e.CompanyId.HasValue && ids.Contains(e.CompanyId.Value) && !e.IsDeleted)
-                .GroupBy(e => e.CompanyId!.Value)
-                .ToDictionaryAsync(g => g.Key, g => g.Count());
-        }
+       
     }
 }

@@ -4,6 +4,7 @@ using cdr_group.Contracts.DTOs.Partner;
 using cdr_group.Contracts.Interfaces.Repositories;
 using cdr_group.Contracts.Interfaces.Services;
 using cdr_group.Domain.Entities;
+using cdr_group.Domain.Localization;
 
 namespace cdr_group.Application.Services
 {
@@ -52,6 +53,21 @@ namespace cdr_group.Application.Services
                 }
             }
             return itemDtos;
+        }
+
+        protected override async Task ValidateCreateAsync(CreatePartnerDto dto)
+        {
+            if (await UnitOfWork.Partners.ExistsByCompanyAndCityAsync(dto.CompanyId, dto.CityId))
+                throw new InvalidOperationException(Messages.PartnerAlreadyExists);
+        }
+
+        protected override async Task ValidateUpdateAsync(Guid id, UpdatePartnerDto dto, Partner entity)
+        {
+            var companyId = dto.CompanyId ?? entity.CompanyId;
+            var cityId = dto.CityId ?? entity.CityId;
+
+            if (await UnitOfWork.Partners.ExistsByCompanyAndCityAsync(companyId, cityId, id))
+                throw new InvalidOperationException(Messages.PartnerAlreadyExists);
         }
 
         public override async Task<IEnumerable<PartnerDto>> GetAllAsync()

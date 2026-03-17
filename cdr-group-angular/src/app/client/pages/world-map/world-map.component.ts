@@ -52,9 +52,9 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
   private pendingRequests = 2;
 
   private readonly statusColorMap: Record<string, string> = {
-    'Present': '#4caf50',      // green
-    'NotAvailable': '#e74c3c', // red
-    'Available': '#2196f3'     // blue
+    'Present': '#e74c3c',      // red
+    'NotAvailable': '#ff9800', // orange
+    'Available': '#4caf50'     // green
   };
 
   private readonly statusTranslationMap: Record<string, string> = {
@@ -91,7 +91,7 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
   }
 
   private loadPartners(): void {
-    this.partnersService.getAllByCompanyId().subscribe({
+    this.partnersService.getAllByCompanyId(this.companyId).subscribe({
       next: (response) => {
         if (response.success && response.data) {
           this.partners = response.data;

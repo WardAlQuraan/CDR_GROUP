@@ -13,5 +13,11 @@ namespace cdr_group.Application.Services
         }
 
         protected override IRepository<Country> Repository => UnitOfWork.Countries;
+
+        public async Task<IEnumerable<CountryDto>> GetCountriesWithCitiesAsync()
+        {
+            var countries = await UnitOfWork.Countries.GetCountriesWithCitiesAsync();
+            return Mapper.Map<IEnumerable<CountryDto>>(countries);
+        }
     }
 }

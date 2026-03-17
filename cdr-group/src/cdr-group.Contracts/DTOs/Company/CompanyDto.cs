@@ -32,10 +32,10 @@ namespace cdr_group.Contracts.DTOs.Company
         public Guid? ParentId { get; set; }
         public string? ParentNameEn { get; set; }
         public string? ParentNameAr { get; set; }
+        public int NumberOfEmployees { get; set; }
         public bool IsActive { get; set; }
         public List<CompanyDto> Children { get; set; } = new();
         public int PartnersCount { get; set; }
-        public int EmployeesCount { get; set; }
         [ExcelColumnName("CreatedDate")]
         public DateTime CreatedAt { get; set; }
         [ExcelColumnName("ModifiedDate")]
@@ -114,6 +114,8 @@ namespace cdr_group.Contracts.DTOs.Company
         [StringLength(500)]
         public string? PartnershipFormUrl { get; set; }
 
+        public int NumberOfEmployees { get; set; }
+
         public Guid? ParentId { get; set; }
 
         public bool IsActive { get; set; } = true;
@@ -180,6 +182,8 @@ namespace cdr_group.Contracts.DTOs.Company
 
         [StringLength(500)]
         public string? PartnershipFormUrl { get; set; }
+
+        public int? NumberOfEmployees { get; set; }
 
         public Guid? ParentId { get; set; }
 

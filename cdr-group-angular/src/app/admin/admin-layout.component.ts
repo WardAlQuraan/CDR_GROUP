@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AuthService } from '../services/auth.service';
 import { TranslationService } from '../services/translation.service';
+import { CompanyStateService } from '../services/company-state.service';
 import { Permission, Permissions } from '../models/auth.model';
 
 interface NavItem {
@@ -40,7 +42,9 @@ export class AdminLayoutComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public translationService: TranslationService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private router: Router,
+    private companyState: CompanyStateService
   ) {
     this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.TabletPortrait])
       .subscribe(result => {
@@ -59,6 +63,11 @@ export class AdminLayoutComponent implements OnInit {
 
   toggleSidenav(): void {
     this.isCollapsed = !this.isCollapsed;
+  }
+
+  goToSite(): void {
+    const companyId = this.companyState.getLastSelectedCompanyId();
+    this.router.navigate(['/'], companyId ? { queryParams: { company: companyId } } : {});
   }
 
   logout(): void {

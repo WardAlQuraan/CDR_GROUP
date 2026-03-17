@@ -42,7 +42,7 @@ export class PartnerDialogComponent implements OnInit {
   statusOptions = [
     { value: 'Present', label: 'admin.partners.present' },
     { value: 'Available', label: 'admin.partners.available' },
-    { value: 'NotAvailable', label: 'admin.partners.notAvailable' }
+    // { value: 'NotAvailable', label: 'admin.partners.notAvailable' }
   ];
 
   companyMapper = (company: CompanyDto): SelectOption => ({
@@ -82,7 +82,7 @@ export class PartnerDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.companiesDataSource$ = this.companiesService.getAll();
-    this.countriesDataSource$ = this.countriesService.getAllCached();
+    this.countriesDataSource$ = this.countriesService.getCountriesHaveCities();
     this.citiesDataSource$ = this.citiesService.getAllCached();
     this.initForm();
   }
@@ -115,6 +115,16 @@ export class PartnerDialogComponent implements OnInit {
         countryId: [null],
         cityId: [partner.cityId, [Validators.required]],
         status: [partner.status, [Validators.required]]
+      });
+      // Resolve countryId from the city data
+      this.citiesService.getAllCached().subscribe(res => {
+        const city = res.data?.find(c => c.id === partner.cityId);
+        if (city) {
+          this.selectedCountryId = city.countryId;
+          this.form.get('countryId')?.setValue(city.countryId);
+        }
+        this.showCityFilter = true;
+        this.cdr.markForCheck();
       });
     } else {
       this.form = this.fb.group({

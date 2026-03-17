@@ -31,6 +31,14 @@ namespace cdr_group.API.Controllers
             return await base.GetAll();
         }
 
+        [HttpGet("with-cities")]
+        [AllowAnonymous]
+        public async Task<ActionResult<ApiResponse<IEnumerable<CountryDto>>>> GetCountriesWithCities()
+        {
+            var countries = await Service.GetCountriesWithCitiesAsync();
+            return Ok(ApiResponse<IEnumerable<CountryDto>>.SuccessResponse(countries));
+        }
+
         [HttpGet("{id:guid}")]
         [AllowAnonymous]
         public override async Task<ActionResult<ApiResponse<CountryDto>>> GetById(Guid id)

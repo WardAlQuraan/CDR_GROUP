@@ -73,7 +73,7 @@
           }
 
           <li class="nav-item">
-            <a class="nav-link" [class.active]="activeSection() === 'home'" routerLink="/" (click)="scrollToTop()">{{ 'common.home' | translate }}</a>
+            <a class="nav-link" [class.active]="activeSection() === 'home'" routerLink="/" [queryParams]="{ company: selectedCompanyId }" (click)="scrollToTop()">{{ 'common.home' | translate }}</a>
           </li>
 
           <li class="nav-item">
@@ -96,10 +96,22 @@
             <a class="nav-link" routerLink="/world-map" [queryParams]="{ company: selectedCompanyId }" routerLinkActive="active">{{ 'common.seeOurPartners' | translate }}</a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)" (click)="translationService.toggleLanguage()">
-              {{ translationService.getOtherLanguageName() }}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-globe2 me-1 ms-1"></i>{{ translationService.language() === 'en' ? 'EN' : 'AR' }}
             </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="javascript:void(0)" [class.active]="translationService.language() === 'en'" (click)="translationService.setLanguage('en')">
+                  EN
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="javascript:void(0)" [class.active]="translationService.language() === 'ar'" (click)="translationService.setLanguage('ar')">
+                  AR
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>

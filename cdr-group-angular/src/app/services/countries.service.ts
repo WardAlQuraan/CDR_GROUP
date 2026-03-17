@@ -18,4 +18,10 @@ export class CountriesService extends BaseService<CountryDto, CreateCountryDto, 
   getAllCached(): Observable<ApiResponse<CountryDto[]>> {
     return this.cacheService.get('all-countries', () => this.getAll());
   }
+
+  getCountriesHaveCities(): Observable<ApiResponse<CountryDto[]>> {
+    return this.cacheService.get('countries-with-cities', () => {
+      return this.http.get<ApiResponse<CountryDto[]>>(`${this.getApiUrl()}/with-cities`);
+    });
+  }
 }
