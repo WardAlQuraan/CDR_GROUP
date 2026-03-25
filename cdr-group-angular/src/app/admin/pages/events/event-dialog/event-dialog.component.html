@@ -19,7 +19,7 @@
       <div class="section-content">
         <div class="form-row">
           <app-form-field formControlName="titleEn" label="admin.eventsAdmin.titleEn" icon="title"
-            placeholder="admin.eventsAdmin.placeholders.titleEn"
+            placeholder="admin.eventsAdmin.placeholders.titleEn" dir="ltr"
             [errors]="[{name: 'required', message: 'admin.eventsAdmin.errors.titleEnRequired'}]">
           </app-form-field>
 
@@ -42,7 +42,7 @@
 
       <div class="section-content">
         <app-form-field formControlName="descriptionEn" type="textarea" label="admin.eventsAdmin.descriptionEn"
-          placeholder="admin.eventsAdmin.placeholders.descriptionEn">
+          placeholder="admin.eventsAdmin.placeholders.descriptionEn" dir="ltr">
         </app-form-field>
 
         <app-form-field formControlName="descriptionAr" type="textarea" label="admin.eventsAdmin.descriptionAr"

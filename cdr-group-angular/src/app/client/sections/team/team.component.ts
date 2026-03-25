@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, effect, ChangeDetectorRef, ViewChild, ElementRef, AfterViewInit, OnDestroy, NgZone } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, effect, ChangeDetectorRef, ViewChild, ElementRef, AfterViewInit, OnDestroy, NgZone, HostListener } from '@angular/core';
 import { EmployeesService } from '../../../services/employees.service';
 import { TranslationService } from '../../../services/translation.service';
 import { EmployeeTreeNodeDto } from '../../../models/employee.model';
@@ -22,31 +22,31 @@ interface TeamMember {
 })
 export class TeamComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() companyId = '';
-  @ViewChild('scrollWrapper') scrollWrapper!: ElementRef<HTMLElement>;
+  @ViewChild('swiperViewport') swiperViewport!: ElementRef<HTMLElement>;
 
   loading = false;
   error = false;
   teamData: TeamMember[] = [];
   flatMembers: TeamMember[] = [];
 
-  private colors = [
-    '#D9A93E',
-    '#3E423D',
-    '#D9A93E',
-    '#C4962E',
-    '#5C8D89',
-    '#7B68EE',
-    '#FF6B6B',
-    '#4ECDC4'
-  ];
+  // Swiper state
+  currentIndex = 0;
+  trackOffset = 0;
+  isDragging = false;
+  dotsArray: number[] = [];
+  totalDots = 0;
+  maxIndex = 0;
 
-  // Drag & auto-scroll state
-  private isDragging = false;
-  private startX = 0;
-  private scrollLeft = 0;
-  private autoScrollId: number | null = null;
-  private scrollSpeed = 0.5;
-  private isPaused = false;
+  private cardWidth = 256; // card width (240) + gap (16)
+  private visibleCards = 4;
+  private touchStartX = 0;
+  private touchDeltaX = 0;
+  private startOffset = 0;
+
+  private colors = [
+    '#D9A93E', '#3E423D', '#D9A93E', '#C4962E',
+    '#5C8D89', '#7B68EE', '#FF6B6B', '#4ECDC4'
+  ];
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -69,81 +69,124 @@ export class TeamComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.startAutoScroll();
+    this.calculateLayout();
   }
 
-  ngOnDestroy(): void {
-    this.stopAutoScroll();
+  ngOnDestroy(): void {}
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.calculateLayout();
   }
 
-  // --- Auto scroll ---
-  private startAutoScroll(): void {
-    this.ngZone.runOutsideAngular(() => {
-      const tick = () => {
-        if (!this.isPaused && !this.isDragging && this.scrollWrapper) {
-          const el = this.scrollWrapper.nativeElement;
-          el.scrollLeft += this.scrollSpeed;
-          // Reset to start for seamless loop
-          if (el.scrollLeft >= el.scrollWidth / 2) {
-            el.scrollLeft = 0;
-          }
-        }
-        this.autoScrollId = requestAnimationFrame(tick);
-      };
-      this.autoScrollId = requestAnimationFrame(tick);
-    });
+  private calculateLayout(): void {
+    if (!this.swiperViewport) return;
+    const viewportWidth = this.swiperViewport.nativeElement.offsetWidth;
+
+    if (viewportWidth <= 480) {
+      this.cardWidth = 196; // 180 + 16
+      this.visibleCards = 1;
+    } else if (viewportWidth <= 768) {
+      this.cardWidth = 216; // 200 + 16
+      this.visibleCards = 2;
+    } else if (viewportWidth <= 992) {
+      this.cardWidth = 256;
+      this.visibleCards = 3;
+    } else {
+      this.cardWidth = 256;
+      this.visibleCards = 4;
+    }
+
+    this.maxIndex = Math.max(0, this.flatMembers.length - this.visibleCards);
+    this.totalDots = this.maxIndex + 1;
+    this.dotsArray = Array.from({ length: this.totalDots }, (_, i) => i);
+
+    if (this.currentIndex > this.maxIndex) {
+      this.currentIndex = this.maxIndex;
+    }
+    this.updateTrackOffset();
   }
 
-  private stopAutoScroll(): void {
-    if (this.autoScrollId !== null) {
-      cancelAnimationFrame(this.autoScrollId);
-      this.autoScrollId = null;
+  private updateTrackOffset(): void {
+    this.trackOffset = -(this.currentIndex * this.cardWidth);
+  }
+
+  // Navigation
+  prevSlide(): void {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.updateTrackOffset();
     }
   }
 
-  // --- Mouse events ---
-  onMouseEnter(): void {
-    this.isPaused = true;
+  nextSlide(): void {
+    if (this.currentIndex < this.maxIndex) {
+      this.currentIndex++;
+      this.updateTrackOffset();
+    }
   }
 
-  onMouseLeave(): void {
-    this.isPaused = false;
-    this.isDragging = false;
+  goToSlide(index: number): void {
+    this.currentIndex = Math.min(index, this.maxIndex);
+    this.updateTrackOffset();
   }
 
+  // Mouse events
   onMouseDown(event: MouseEvent): void {
     this.isDragging = true;
-    this.startX = event.pageX - this.scrollWrapper.nativeElement.offsetLeft;
-    this.scrollLeft = this.scrollWrapper.nativeElement.scrollLeft;
+    this.touchStartX = event.clientX;
+    this.startOffset = this.trackOffset;
+    event.preventDefault();
   }
 
   onMouseMove(event: MouseEvent): void {
     if (!this.isDragging) return;
-    event.preventDefault();
-    const x = event.pageX - this.scrollWrapper.nativeElement.offsetLeft;
-    const walk = (x - this.startX) * 2;
-    this.scrollWrapper.nativeElement.scrollLeft = this.scrollLeft - walk;
+    this.touchDeltaX = event.clientX - this.touchStartX;
+    this.trackOffset = this.startOffset + this.touchDeltaX;
   }
 
   onMouseUp(): void {
+    if (!this.isDragging) return;
     this.isDragging = false;
+
+    const cardsMoved = Math.round(Math.abs(this.touchDeltaX) / this.cardWidth) || 1;
+
+    if (this.touchDeltaX < -40) {
+      this.currentIndex = Math.min(this.currentIndex + cardsMoved, this.maxIndex);
+    } else if (this.touchDeltaX > 40) {
+      this.currentIndex = Math.max(this.currentIndex - cardsMoved, 0);
+    }
+
+    this.touchDeltaX = 0;
+    this.updateTrackOffset();
   }
 
-  // --- Touch events ---
+  // Touch events
   onTouchStart(event: TouchEvent): void {
-    this.isPaused = true;
-    this.startX = event.touches[0].pageX - this.scrollWrapper.nativeElement.offsetLeft;
-    this.scrollLeft = this.scrollWrapper.nativeElement.scrollLeft;
+    this.isDragging = true;
+    this.touchStartX = event.touches[0].clientX;
+    this.startOffset = this.trackOffset;
   }
 
   onTouchMove(event: TouchEvent): void {
-    const x = event.touches[0].pageX - this.scrollWrapper.nativeElement.offsetLeft;
-    const walk = (x - this.startX) * 2;
-    this.scrollWrapper.nativeElement.scrollLeft = this.scrollLeft - walk;
+    if (!this.isDragging) return;
+    this.touchDeltaX = event.touches[0].clientX - this.touchStartX;
+    this.trackOffset = this.startOffset + this.touchDeltaX;
   }
 
   onTouchEnd(): void {
-    this.isPaused = false;
+    this.isDragging = false;
+
+    const cardsMoved = Math.round(Math.abs(this.touchDeltaX) / this.cardWidth) || 1;
+
+    if (this.touchDeltaX < -40) {
+      this.currentIndex = Math.min(this.currentIndex + cardsMoved, this.maxIndex);
+    } else if (this.touchDeltaX > 40) {
+      this.currentIndex = Math.max(this.currentIndex - cardsMoved, 0);
+    }
+
+    this.touchDeltaX = 0;
+    this.updateTrackOffset();
   }
 
   get isArabic(): boolean {
@@ -159,10 +202,11 @@ export class TeamComponent implements OnChanges, AfterViewInit, OnDestroy {
         if (response.success && response.data) {
           this.teamData = response.data.map(node => this.mapToTeamMember(node));
           this.flatMembers = this.flattenMembers(this.teamData);
-          console.log('Loaded team members:', this.flatMembers);
+          this.currentIndex = 0;
         }
         this.loading = false;
         this.cdr.markForCheck();
+        setTimeout(() => this.calculateLayout());
       },
       error: () => {
         this.loading = false;

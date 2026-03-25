@@ -42,30 +42,95 @@
   }
 }
 
-// Scroll Wrapper
-.team-scroll-wrapper {
-  overflow-x: auto;
-  overflow-y: hidden;
+// Swiper Container
+.swiper-container {
   position: relative;
+  padding: 0 48px;
+}
+
+// Viewport
+.swiper-viewport {
+  overflow: hidden;
   cursor: grab;
   user-select: none;
 
-  &:active {
+  &.grabbing {
     cursor: grabbing;
   }
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  scrollbar-width: none;
 }
 
-// Team Grid
-.team-grid {
+// Track
+.swiper-track {
   display: flex;
-  flex-wrap: nowrap;
-  gap: 1.5rem;
-  width: max-content;
+  gap: 1rem;
+}
+
+// Navigation Buttons
+.swiper-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--primary-color);
+  background: var(--primary-color);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(217, 169, 62, 0.2);
+  transition: all 0.2s;
+
+  i {
+    font-size: 1rem;
+  }
+
+  &:hover:not(.disabled) {
+    background: var(--custom-btn-bg-hover-color);
+    border-color: var(--custom-btn-bg-hover-color);
+    box-shadow: 0 4px 12px rgba(217, 169, 62, 0.4);
+  }
+
+  &.disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+}
+
+.swiper-btn-prev {
+  left: 0;
+}
+
+.swiper-btn-next {
+  right: 0;
+}
+
+// Dots
+.swiper-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: #d1d5db;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &.active {
+    background: var(--primary-color);
+    width: 24px;
+    border-radius: 4px;
+  }
 }
 
 // Member Card
@@ -147,7 +212,7 @@
   }
 }
 
-// Responsive Design
+// Responsive
 @media (max-width: 992px) {
   .team-section {
     padding: 60px 0;
@@ -155,6 +220,10 @@
     .section-title {
       font-size: 2rem;
     }
+  }
+
+  .swiper-container {
+    padding: 0 44px;
   }
 }
 
@@ -171,8 +240,13 @@
     }
   }
 
-  .team-grid {
-    gap: 1rem;
+  .swiper-container {
+    padding: 0 36px;
+  }
+
+  .swiper-btn {
+    width: 32px;
+    height: 32px;
   }
 
   .member-card {
@@ -195,39 +269,39 @@
     }
   }
 
-  .team-grid {
-    gap: 0.75rem;
+  .swiper-container {
+    padding: 0 32px;
   }
 
   .member-card {
     width: 180px;
     min-width: 180px;
     max-width: 180px;
-  }
 
-  .member-card .card-inner {
-    padding: 1rem;
+    .card-inner {
+      padding: 1rem;
 
-    .avatar {
-      width: 56px;
-      height: 56px;
+      .avatar {
+        width: 56px;
+        height: 56px;
 
-      span {
-        font-size: 1rem;
-      }
-    }
-
-    .info {
-      .name {
-        font-size: 0.875rem;
+        span {
+          font-size: 1rem;
+        }
       }
 
-      .position {
-        font-size: 0.75rem;
-      }
+      .info {
+        .name {
+          font-size: 0.875rem;
+        }
 
-      .department {
-        font-size: 0.625rem;
+        .position {
+          font-size: 0.75rem;
+        }
+
+        .department {
+          font-size: 0.625rem;
+        }
       }
     }
   }

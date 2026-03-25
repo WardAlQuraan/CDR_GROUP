@@ -1,5 +1,6 @@
-import { Component, Input, Optional, Self, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Optional, Self, ChangeDetectorRef, ViewEncapsulation, inject } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { TranslationService } from '../../../services/translation.service';
 
 export interface FieldError {
   name: string;
@@ -21,6 +22,27 @@ export class FormFieldComponent implements ControlValueAccessor {
   @Input() type: 'text' | 'number' | 'email' | 'password' | 'textarea' = 'text';
   @Input() dir = '';
   @Input() rows = 3;
+
+  private translationService = inject(TranslationService);
+
+  get effectiveDir(): string {
+    return this.dir || (this.translationService.language() === 'ar' ? 'rtl' : 'ltr');
+  }
+
+  get isArabicUi(): boolean {
+    return this.translationService.language() === 'ar';
+  }
+
+  get inputDirClass(): string {
+    const textDir = this.effectiveDir;
+    const uiDir = this.isArabicUi ? 'rtl' : 'ltr';
+    const classes: string[] = [];
+    classes.push(textDir === 'rtl' ? 'input-rtl' : 'input-ltr');
+    if (textDir === 'rtl' && uiDir === 'ltr') classes.push('placeholder-ltr');
+    if (textDir === 'ltr' && uiDir === 'rtl') classes.push('placeholder-rtl');
+    return classes.join(' ');
+  }
+
   @Input() errors: FieldError[] = [];
   @Input() required = false;
 

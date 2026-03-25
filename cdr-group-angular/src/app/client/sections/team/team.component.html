@@ -25,62 +25,60 @@
         <p>{{ 'members.noMembers' | translate }}</p>
       </div>
     } @else {
-      <div class="team-scroll-wrapper" #scrollWrapper
-           (mouseenter)="onMouseEnter()"
-           (mouseleave)="onMouseLeave()"
-           (mousedown)="onMouseDown($event)"
-           (mousemove)="onMouseMove($event)"
-           (mouseup)="onMouseUp()"
-           (touchstart)="onTouchStart($event)"
-           (touchmove)="onTouchMove($event)"
-           (touchend)="onTouchEnd()">
-        <div class="team-grid">
-          @for (member of flatMembers; track member.id; let i = $index) {
-            <div class="member-card">
-              <div class="card-inner">
-                <div class="avatar" [style.background-color]="getColor(i)">
-                  @if (member.image && !member.imageError) {
-                    <img [src]="member.image" [alt]="member.name" (error)="member.imageError = true">
-                  } @else {
-                    <span>{{ member.initials }}</span>
-                  }
-                </div>
-                <div class="info">
-                  <h4 class="name">{{ member.name | titlecase }}</h4>
-                  @if (member.position) {
-                    <p class="position">{{ member.position }}</p>
-                  }
-                  @if (member.company) {
-                    <span class="department">{{ member.company }}</span>
-                  }
-                </div>
-              </div>
-            </div>
-          }
-          <!-- Duplicate for seamless loop -->
-          @for (member of flatMembers; track $index; let i = $index) {
-            <div class="member-card" aria-hidden="true">
-              <div class="card-inner">
-                <div class="avatar" [style.background-color]="getColor(i)">
-                  @if (member.image && !member.imageError) {
-                    <img [src]="member.image" [alt]="member.name" (error)="member.imageError = true">
-                  } @else {
-                    <span>{{ member.initials }}</span>
-                  }
-                </div>
-                <div class="info">
-                  <h4 class="name">{{ member.name | titlecase }}</h4>
-                  @if (member.position) {
-                    <p class="position">{{ member.position }}</p>
-                  }
-                  @if (member.company) {
-                    <span class="department">{{ member.company }}</span>
-                  }
+      <div class="swiper-container">
+        <!-- Navigation Arrows -->
+        <button class="swiper-btn swiper-btn-prev" (click)="prevSlide()" [class.disabled]="currentIndex === 0">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <button class="swiper-btn swiper-btn-next" (click)="nextSlide()" [class.disabled]="currentIndex >= maxIndex">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+
+        <!-- Cards Track -->
+        <div class="swiper-viewport" #swiperViewport
+             [class.grabbing]="isDragging"
+             (mousedown)="onMouseDown($event)"
+             (mousemove)="onMouseMove($event)"
+             (mouseup)="onMouseUp()"
+             (mouseleave)="onMouseUp()"
+             (touchstart)="onTouchStart($event)"
+             (touchmove)="onTouchMove($event)"
+             (touchend)="onTouchEnd()">
+          <div class="swiper-track" [style.transform]="'translateX(' + trackOffset + 'px)'"
+               [style.transition]="isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)'">
+            @for (member of flatMembers; track member.id; let i = $index) {
+              <div class="member-card">
+                <div class="card-inner">
+                  <div class="avatar" [style.background-color]="getColor(i)">
+                    @if (member.image && !member.imageError) {
+                      <img [src]="member.image" [alt]="member.name" (error)="member.imageError = true">
+                    } @else {
+                      <span>{{ member.initials }}</span>
+                    }
+                  </div>
+                  <div class="info">
+                    <h4 class="name">{{ member.name | titlecase }}</h4>
+                    @if (member.position) {
+                      <p class="position">{{ member.position }}</p>
+                    }
+                    @if (member.company) {
+                      <span class="department">{{ member.company }}</span>
+                    }
+                  </div>
                 </div>
               </div>
-            </div>
+            }
+          </div>
+        </div>
+
+        <!-- Dots -->
+        @if (totalDots > 1) {
+        <div class="swiper-dots">
+          @for (dot of dotsArray; track $index) {
+            <button class="dot" [class.active]="$index === currentIndex" (click)="goToSlide($index)"></button>
           }
         </div>
+        }
       </div>
     }
   </div>

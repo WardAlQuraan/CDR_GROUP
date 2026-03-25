@@ -4,25 +4,47 @@
   }
 }
 
+.rating-block {
+  display: flex;
+  flex-direction: column;
+}
+
 .star-rating {
   display: flex;
-  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  position: relative;
 
   .star {
-    font-size: 2rem;
     cursor: pointer;
-    color: #555;
-    transition: color 0.2s, transform 0.15s;
+    transition: transform 0.15s;
     user-select: none;
+    line-height: 1;
 
-    &.filled {
+    i {
+      font-size: 2rem;
+      color: #555;
+      transition: color 0.2s;
+    }
+
+    &.filled i {
       color: #ffc107;
     }
 
     &:hover {
-      transform: scale(1.15);
+      transform: scale(1.2);
     }
   }
+}
+
+.rating-value {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  margin-inline-start: 6px;
+  width: 24px;
+  position: absolute;
+  right: -30px;
 }
 
 :host-context([dir="rtl"]) {

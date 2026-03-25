@@ -5,4 +5,49 @@ app-form-field {
   .mdc-text-field--outlined {
     padding-inline: 16px;
   }
+
+  .input-rtl {
+    direction: rtl;
+    text-align: right;
+  }
+
+  .input-ltr {
+    direction: ltr;
+    text-align: left;
+  }
+
+  .placeholder-ltr::placeholder {
+    direction: ltr;
+    text-align: left;
+    unicode-bidi: embed;
+  }
+
+  .placeholder-rtl::placeholder {
+    direction: rtl;
+    text-align: right;
+    unicode-bidi: embed;
+  }
+
+  &.force-label-ltr {
+    .mdc-floating-label {
+      left: 16px !important;
+      right: auto !important;
+      transform-origin: left top !important;
+      direction: ltr !important;
+    }
+
+    .mdc-notched-outline__leading {
+      width: 12px !important;
+    }
+  }
+
+  &.force-label-rtl {
+    .mdc-floating-label {
+      right: 16px !important;
+      left: auto !important;
+      transform-origin: right top !important;
+      direction: rtl !important;
+    }
+  }
+
 }
