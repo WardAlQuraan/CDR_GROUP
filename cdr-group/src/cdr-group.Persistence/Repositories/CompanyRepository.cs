@@ -26,6 +26,7 @@ namespace cdr_group.Persistence.Repositories
                 .Include(c => c.Parent)
                 .Include(c => c.Children.Where(ch => !ch.IsDeleted))
                 .Where(c => c.IsActive && !c.IsDeleted)
+                .OrderBy(x=>x.CreatedAt)
                 .ToListAsync();
         }
 

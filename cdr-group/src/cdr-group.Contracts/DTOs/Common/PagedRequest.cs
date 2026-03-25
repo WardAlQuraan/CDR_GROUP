@@ -18,9 +18,9 @@ namespace cdr_group.Contracts.DTOs.Common
             set => _pageSize = value > MaxPageSize ? MaxPageSize : (value < 1 ? 10 : value);
         }
 
-        public string? SearchTerm { get; set; }
-        public string? SortBy { get; set; }
-        public bool SortDescending { get; set; }
+        public virtual string? SearchTerm { get; set; }
+        public virtual string? SortBy { get; set; }
+        public virtual bool SortDescending { get; set; }
         public List<string>? SearchProperties { get; set; }
     }
 }

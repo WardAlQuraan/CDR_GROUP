@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CompaniesService } from '../services/companies.service';
 import { CompanyStateService } from '../services/company-state.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-client-layout',
@@ -43,7 +44,10 @@ export class ClientLayoutComponent implements OnInit, OnDestroy {
       if (companyId) {
         this.companyState.selectById(companyId);
       } else if (this.companyState.companies.length > 0) {
-        this.companyState.setSelectedCompany(this.companyState.companies[0]);
+        const lastId = this.companyState.getLastSelectedCompanyId() || environment.defaultCompanyId;
+        const lastCompany = lastId ? this.companyState.findCompany(this.companyState.companies, lastId) : undefined;
+        const resolved = lastCompany || this.companyState.companies[0];
+        this.companyState.setSelectedCompany(this.companyState.getLeafCompany(resolved));
       }
       const company = this.companyState.selectedCompany;
       if (company) {

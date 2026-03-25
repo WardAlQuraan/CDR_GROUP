@@ -66,7 +66,7 @@ namespace cdr_group.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Employee>> GetByCompanyIdAsync(Guid? companyId)
+        public async Task<IEnumerable<Employee>> GetByCompanyIdWithParentAsync(Guid? companyId)
         {
             return await _dbSet
                 .Include(e => e.Manager)
@@ -74,6 +74,16 @@ namespace cdr_group.Persistence.Repositories
                 .Include(e => e.Company)
                 .Include(e => e.Position)
                 .Where(e => (e.CompanyId == companyId || !e.CompanyId.HasValue) && e.IsActive && !e.IsDeleted)
+                .ToListAsync();
+        }
+        public async Task<IEnumerable<Employee>> GetByCompanyIdAsync(Guid companyId)
+        {
+            return await _dbSet
+                .Include(e => e.Manager)
+                .Include(e => e.User)
+                .Include(e => e.Company)
+                .Include(e => e.Position)
+                .Where(e => (e.CompanyId == companyId) && e.IsActive && !e.IsDeleted)
                 .ToListAsync();
         }
         public async Task<(IEnumerable<Employee> Items, int TotalCount)> GetEmployeesPagedAsync(EmployeePagedRequest request)

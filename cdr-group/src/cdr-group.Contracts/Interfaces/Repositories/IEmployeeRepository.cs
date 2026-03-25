@@ -10,7 +10,8 @@ namespace cdr_group.Contracts.Interfaces.Repositories
         Task<Employee?> GetWithSubordinatesAsync(Guid id);
         Task<Employee?> GetByUserIdAsync(Guid userId, Guid? execludedId = null);
         Task<IEnumerable<Employee>> GetByManagerIdAsync(Guid managerId);
-        Task<IEnumerable<Employee>> GetByCompanyIdAsync(Guid? companyId);
+        Task<IEnumerable<Employee>> GetByCompanyIdWithParentAsync(Guid? companyId);
+        Task<IEnumerable<Employee>> GetByCompanyIdAsync(Guid companyId);
         Task<(IEnumerable<Employee> Items, int TotalCount)> GetEmployeesPagedAsync(EmployeePagedRequest request);
 
     }

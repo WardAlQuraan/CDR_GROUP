@@ -5,4 +5,8 @@
   mat-form-field {
     width: 100%;
   }
+
+  ::ng-deep .mat-mdc-select-arrow-wrapper {
+    padding-inline-end: 0;
+  }
 }

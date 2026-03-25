@@ -126,6 +126,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
         positionId: [emp.positionId],
         hireDate: [emp.hireDate ? new Date(emp.hireDate) : null],
         salary: [emp.salary, [Validators.min(0)]],
+        rank: [emp.rank, [Validators.required, Validators.min(0)]],
         isActive: [emp.isActive],
         managerId: [emp.managerId],
         salaryChangeReason: ['', [Validators.maxLength(500)]]
@@ -147,6 +148,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
         positionId: [null],
         hireDate: [null],
         salary: [null, [Validators.min(0)]],
+        rank: [null, [Validators.required, Validators.min(0)]],
         isActive: [true],
         managerId: [null]
       });
@@ -188,6 +190,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
       positionId: this.form.value.positionId || undefined,
       hireDate: this.form.value.hireDate || undefined,
       salary: this.form.value.salary || undefined,
+      rank: this.form.value.rank ?? undefined,
       isActive: this.form.value.isActive,
       managerId: this.form.value.managerId || undefined
     };
@@ -216,6 +219,7 @@ export class EmployeeDialogComponent implements OnInit, OnDestroy {
       positionId: this.form.value.positionId || undefined,
       hireDate: this.form.value.hireDate || undefined,
       salary: this.form.value.salary || undefined,
+      rank: this.form.value.rank ?? undefined,
       isActive: this.form.value.isActive,
       managerId: this.form.value.managerId || undefined,
       salaryChangeReason: this.salaryChanged ? (this.form.value.salaryChangeReason || undefined) : undefined

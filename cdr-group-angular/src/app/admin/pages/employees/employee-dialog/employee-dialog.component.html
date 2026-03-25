@@ -95,6 +95,13 @@
           </app-form-field>
         </div>
 
+        <div class="form-row">
+          <app-form-field formControlName="rank" type="number" label="admin.employees.rank" icon="military_tech"
+            placeholder="admin.employees.placeholders.rank"
+            [errors]="[{name: 'required', message: 'admin.employees.errors.rankRequired'}, {name: 'min', message: 'admin.employees.errors.salaryMin'}]">
+          </app-form-field>
+        </div>
+
         @if (isEditMode && salaryChanged) {
           <app-form-field formControlName="salaryChangeReason" label="admin.employees.salaryChangeReason" icon="edit_note"
             placeholder="admin.employees.placeholders.salaryChangeReason">

@@ -20,6 +20,7 @@ namespace cdr_group.Domain.Entities
         public Position? Position { get; set; }
         public decimal? Salary { get; set; }
         public bool IsActive { get; set; } = true;
+        public int? Rank { get; set; }
 
         // Company relationship (optional)
         [AuditDisplayName(typeof(Company), nameof(Company.NameEn), nameof(Company.NameAr))]

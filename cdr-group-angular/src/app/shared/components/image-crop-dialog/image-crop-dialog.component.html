@@ -1,0 +1,31 @@
+<div class="image-crop-dialog">
+  <div class="dialog-header">
+    <div class="dialog-icon primary">
+      <mat-icon>crop</mat-icon>
+    </div>
+    <h2 class="dialog-title">{{ title | translate }}</h2>
+  </div>
+
+  <div class="cropper-container">
+    <image-cropper
+      [imageFile]="imageFile"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="aspectRatio"
+      [roundCropper]="roundCropper"
+      [resizeToWidth]="400"
+      format="png"
+      (imageCropped)="onImageCropped($event)"
+      (imageLoaded)="onImageLoaded()">
+    </image-cropper>
+  </div>
+
+  <div class="dialog-actions">
+    <button mat-button class="cancel-btn" (click)="onCancel()">
+      {{ 'common.cancel' | translate }}
+    </button>
+    <button mat-raised-button color="primary" class="confirm-btn" (click)="onConfirm()" [disabled]="!croppedBlob">
+      <mat-icon>check</mat-icon>
+      {{ 'common.confirm' | translate }}
+    </button>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import { TranslationService } from '../../../services/translation.service';
 import { AuthService } from '../../../services/auth.service';
 import { CompanyStateService } from '../../../services/company-state.service';
 import { CompanyDto } from '../../../models/company.model';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -53,7 +54,10 @@ export class HeaderComponent implements OnInit {
       if (params['company']) {
         this.selectedCompanyId = params['company'];
       } else if (this.companyState.companies.length > 0) {
-        this.selectedCompanyId = this.companyState.companies[0].id;
+        const lastId = this.companyState.getLastSelectedCompanyId() || environment.defaultCompanyId;
+        const lastCompany = lastId ? this.companyState.findCompany(this.companyState.companies, lastId) : undefined;
+        const resolved = lastCompany || this.companyState.companies[0];
+        this.selectedCompanyId = this.companyState.getLeafCompany(resolved).id;
         this.router.navigate([], {
           queryParams: { company: this.selectedCompanyId },
           queryParamsHandling: 'merge'

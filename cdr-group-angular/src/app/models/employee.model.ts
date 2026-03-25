@@ -24,6 +24,7 @@ export interface EmployeeDto {
 
   userId?: string;
   username?: string;
+  rank?: number;
 
   createdAt: Date;
   updatedAt?: Date;
@@ -61,6 +62,7 @@ export interface CreateEmployeeDto {
   positionId?: string;
   managerId?: string;
   userId?: string;
+  rank?: number;
 }
 
 export interface UpdateEmployeeDto {
@@ -78,6 +80,7 @@ export interface UpdateEmployeeDto {
   managerId?: string;
   userId?: string;
   salaryChangeReason?: string;
+  rank?: number;
 }
 
 export interface EmployeePagedRequest {

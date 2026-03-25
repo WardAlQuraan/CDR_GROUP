@@ -158,8 +158,6 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
       zoom: 4,
       minZoom: 3,
       maxZoom: 12,
-      maxBounds: middleEastBounds.pad(0.1),
-      maxBoundsViscosity: 1.0,
     });
 
     this.map.fitBounds(middleEastBounds);

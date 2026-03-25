@@ -22,6 +22,7 @@ namespace cdr_group.Contracts.DTOs.Employee
         public DateTime? HireDate { get; set; }
         public decimal? Salary { get; set; }
         public bool IsActive { get; set; }
+        public int? Rank { get; set; }
 
         [ExcelIgnore]
         public Guid? CompanyId { get; set; }
@@ -45,6 +46,7 @@ namespace cdr_group.Contracts.DTOs.Employee
         public DateTime? UpdatedAt { get; set; }
 
         // File attachment path (e.g., profile photo)
+        [ExcelIgnore]
         public string? FilePath { get; set; }
     }
 
@@ -93,6 +95,7 @@ namespace cdr_group.Contracts.DTOs.Employee
         public Guid? UserId { get; set; }
         public string? Username { get; set; }
         public bool IsActive { get; set; }
+        public int? Rank { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public string? FilePath { get; set; }
@@ -106,6 +109,7 @@ namespace cdr_group.Contracts.DTOs.Employee
 
     public class EmployeePagedRequest : Common.PagedRequest
     {
+        public override string? SortBy { get; set; } = "Rank";
         public Guid? CompanyId { get; set; }
     }
 
@@ -140,6 +144,7 @@ namespace cdr_group.Contracts.DTOs.Employee
         public decimal? Salary { get; set; }
 
         public bool IsActive { get; set; } = true;
+        public int? Rank { get; set; }
 
         public Guid? CompanyId { get; set; }
         public Guid? PositionId { get; set; }
@@ -177,6 +182,7 @@ namespace cdr_group.Contracts.DTOs.Employee
         public string? SalaryChangeReason { get; set; }
 
         public bool? IsActive { get; set; }
+        public int? Rank { get; set; }
 
         public Guid? CompanyId { get; set; }
         public Guid? PositionId { get; set; }

@@ -16,6 +16,7 @@ import { EmployeeViewDialogComponent } from '../employee-view-dialog/employee-vi
 import { EmployeeLinkUserDialogComponent } from '../employee-link-user-dialog/employee-link-user-dialog.component';
 import { SalaryHistoryDialogComponent } from '../salary-history-dialog/salary-history-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { ImageCropDialogComponent, ImageCropDialogData } from '../../../../shared/components/image-crop-dialog/image-crop-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 import { EntityTypes } from '../../../../constants/entity-types.constant';
 import { buildSearchPlaceholder } from '../../../../utils/search.utils';
@@ -164,7 +165,7 @@ export class EmployeesComponent implements OnInit {
           visible: (row) => !row.userId
         },
         {
-          icon: 'history',
+          icon: 'payments',
           tooltip: 'admin.employees.salaryHistory',
           permission: Permissions.SALARY_HISTORIES_READ,
           color: 'accent',
@@ -336,27 +337,47 @@ export class EmployeesComponent implements OnInit {
     if (!input.files?.length || !this.selectedEmployeeForUpload) return;
 
     const file = input.files[0];
-    this.loading = true;
+    input.value = '';
 
-    this.filesService.upload({
-      file,
-      entityId: this.selectedEmployeeForUpload.id,
-      entityType: EntityTypes.EMPLOYEE,
-      removeOldFiles: true
-    }).subscribe({
-      next: () => {
-        this.snackbar.success(this.translate('admin.employees.photoUploaded'));
-        this.loading = false;
+    const dialogData: ImageCropDialogData = {
+      imageFile: file,
+      roundCropper: true,
+      aspectRatio: 1,
+      format: 'png'
+    };
+
+    const dialogRef = this.dialog.open(ImageCropDialogComponent, {
+      width: '600px',
+      maxHeight: '90vh',
+      data: dialogData,
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe((croppedFile: File | null) => {
+      if (!croppedFile || !this.selectedEmployeeForUpload) {
         this.selectedEmployeeForUpload = null;
-        this.cdr.markForCheck();
-        input.value = '';
-      },
-      error: (error) => {
-        this.cdr.markForCheck();
-        this.loading = false;
-        this.selectedEmployeeForUpload = null;
-        input.value = '';
+        return;
       }
+
+      this.loading = true;
+      this.filesService.upload({
+        file: croppedFile,
+        entityId: this.selectedEmployeeForUpload.id,
+        entityType: EntityTypes.EMPLOYEE,
+        removeOldFiles: true
+      }).subscribe({
+        next: () => {
+          this.snackbar.success(this.translate('admin.employees.photoUploaded'));
+          this.loading = false;
+          this.selectedEmployeeForUpload = null;
+          this.cdr.markForCheck();
+        },
+        error: () => {
+          this.loading = false;
+          this.selectedEmployeeForUpload = null;
+          this.cdr.markForCheck();
+        }
+      });
     });
   }
 

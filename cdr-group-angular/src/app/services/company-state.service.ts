@@ -48,4 +48,12 @@ export class CompanyStateService {
     const company = this.findCompany(this.companies, id);
     this.setSelectedCompany(company);
   }
+
+  getLeafCompany(company: CompanyDto): CompanyDto {
+    let current = company;
+    while (current.children?.length) {
+      current = current.children[0];
+    }
+    return current;
+  }
 }

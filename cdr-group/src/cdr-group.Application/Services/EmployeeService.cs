@@ -99,7 +99,7 @@ namespace cdr_group.Application.Services
 
         public async Task<IEnumerable<EmployeeDto>> GetByCompanyIdAsync(Guid? companyId)
         {
-            var employees = await UnitOfWork.Employees.GetByCompanyIdAsync(companyId);
+            var employees = await UnitOfWork.Employees.GetByCompanyIdWithParentAsync(companyId);
             var employeeDtos = Mapper.Map<List<EmployeeDto>>(employees);
             await PopulateFilePathsAsync(employeeDtos);
             return employeeDtos;
@@ -112,7 +112,7 @@ namespace cdr_group.Application.Services
 
             if (request.CompanyId.HasValue)
             {
-                employees = await UnitOfWork.Employees.GetByCompanyIdAsync(request.CompanyId);
+                employees = await UnitOfWork.Employees.GetByCompanyIdWithParentAsync(request.CompanyId);
             }
             else
             {
@@ -142,6 +142,7 @@ namespace cdr_group.Application.Services
                     UserId = e.UserId,
                     Username = e.User?.Username,
                     IsActive = e.IsActive,
+                    Rank = e.Rank,
                     CreatedAt = e.CreatedAt,
                     UpdatedAt = e.UpdatedAt
                 });
@@ -173,7 +174,13 @@ namespace cdr_group.Application.Services
                 }
             }
 
-            return rootNodes;
+            // Order children by Rank
+            foreach (var node in employeeDict.Values)
+            {
+                node.Children = node.Children.OrderBy(c => c.Rank).ToList();
+            }
+            var res = rootNodes.OrderBy(n => n.Rank);
+            return res;
         }
 
         public async Task<EmployeeDto?> AssignManagerAsync(Guid employeeId, Guid? managerId)
