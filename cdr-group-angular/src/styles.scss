@@ -1289,6 +1289,12 @@ strong {
 /*---------------------------------------
   ANGULAR MATERIAL DIALOG OVERRIDES
 -----------------------------------------*/
+// Prevent dialog scroll block from resetting fixed sidebar scroll position
+.cdk-global-scrollblock {
+  position: static !important;
+  overflow: hidden !important;
+}
+
 .mat-mdc-dialog-container {
   --mdc-dialog-container-shape: 12px;
 }

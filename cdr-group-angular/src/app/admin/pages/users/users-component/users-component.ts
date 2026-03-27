@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 import { UsersService } from '../../../../services/users.service';
 import { SnackbarService } from '../../../../services/snackbar.service';
 import { TranslationService } from '../../../../services/translation.service';
@@ -46,7 +47,8 @@ export class UsersComponent implements OnInit {
     private snackbar: SnackbarService,
     private dialog: MatDialog,
     private translationService: TranslationService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -144,6 +146,13 @@ export class UsersComponent implements OnInit {
           permission: Permissions.USERS_UPDATE,
           color: 'info',
           onClick: (row) => this.openManageRolesDialog(row)
+        },
+        {
+          icon: 'history',
+          tooltip: 'admin.auditLogs.history',
+          permission: Permissions.AUDIT_LOGS_READ,
+          color: 'accent',
+          onClick: (row) => this.router.navigate(['/admin/audit-logs', 'User', row.id])
         },
         {
           icon: 'delete',

@@ -107,8 +107,12 @@ export class TeamComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.updateTrackOffset();
   }
 
+  private get dirMultiplier(): number {
+    return this.isArabic ? 1 : -1;
+  }
+
   private updateTrackOffset(): void {
-    this.trackOffset = -(this.currentIndex * this.cardWidth);
+    this.trackOffset = this.dirMultiplier * (this.currentIndex * this.cardWidth);
   }
 
   // Navigation
@@ -148,17 +152,7 @@ export class TeamComponent implements OnChanges, AfterViewInit, OnDestroy {
   onMouseUp(): void {
     if (!this.isDragging) return;
     this.isDragging = false;
-
-    const cardsMoved = Math.round(Math.abs(this.touchDeltaX) / this.cardWidth) || 1;
-
-    if (this.touchDeltaX < -40) {
-      this.currentIndex = Math.min(this.currentIndex + cardsMoved, this.maxIndex);
-    } else if (this.touchDeltaX > 40) {
-      this.currentIndex = Math.max(this.currentIndex - cardsMoved, 0);
-    }
-
-    this.touchDeltaX = 0;
-    this.updateTrackOffset();
+    this.finalizeDrag();
   }
 
   // Touch events
@@ -176,12 +170,18 @@ export class TeamComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   onTouchEnd(): void {
     this.isDragging = false;
+    this.finalizeDrag();
+  }
 
+  private finalizeDrag(): void {
     const cardsMoved = Math.round(Math.abs(this.touchDeltaX) / this.cardWidth) || 1;
+    // In RTL, drag directions are reversed
+    const dragForward = this.isArabic ? this.touchDeltaX > 40 : this.touchDeltaX < -40;
+    const dragBackward = this.isArabic ? this.touchDeltaX < -40 : this.touchDeltaX > 40;
 
-    if (this.touchDeltaX < -40) {
+    if (dragForward) {
       this.currentIndex = Math.min(this.currentIndex + cardsMoved, this.maxIndex);
-    } else if (this.touchDeltaX > 40) {
+    } else if (dragBackward) {
       this.currentIndex = Math.max(this.currentIndex - cardsMoved, 0);
     }
 

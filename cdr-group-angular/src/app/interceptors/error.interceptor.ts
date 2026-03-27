@@ -17,7 +17,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
-      catchError((error: HttpErrorResponse) => {
+      catchError((error: any) => {
         // Don't show error for refresh token failures (auth interceptor handles logout)
         if (request.url.includes('/auth/refresh-token')) {
           return throwError(() => ({
@@ -25,6 +25,16 @@ export class ErrorInterceptor implements HttpInterceptor {
             message: 'Token refresh failed',
             originalError: error
           }));
+        }
+
+        // If error was re-thrown by auth interceptor (not an HttpErrorResponse),
+        // extract the original API message
+        if (!(error instanceof HttpErrorResponse)) {
+          const originalError = error?.originalError as HttpErrorResponse | undefined;
+          const apiBody = originalError?.error as ApiResponse<any> | undefined;
+          const msg = apiBody?.message || error?.message || 'An unexpected error occurred';
+          this.snackbar.error(msg);
+          return throwError(() => error);
         }
 
         let errorMessage = 'An unexpected error occurred';
@@ -37,13 +47,19 @@ export class ErrorInterceptor implements HttpInterceptor {
             case 0:
               errorMessage = 'Unable to connect to server. Please check your internet connection.';
               break;
-            case 401:
-              // AuthInterceptor handles logout and redirect, skip showing error
+            case 401: {
+              // Show API message if available (e.g. "User account is deactivated")
+              const apiError = error.error as ApiResponse<any>;
+              const msg = apiError?.message || 'Session expired';
+              if (apiError?.message) {
+                this.snackbar.error(msg);
+              }
               return throwError(() => ({
                 status: error.status,
-                message: 'Session expired',
+                message: msg,
                 originalError: error
               }));
+            }
             case 403:
               errorMessage = 'Access denied. You do not have permission to perform this action.';
               break;
@@ -78,7 +94,6 @@ export class ErrorInterceptor implements HttpInterceptor {
               }
           }
         }
-
         // Show error message in snackbar
         this.snackbar.error(errorMessage);
 

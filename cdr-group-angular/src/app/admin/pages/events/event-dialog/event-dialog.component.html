@@ -19,12 +19,12 @@
       <div class="section-content">
         <div class="form-row">
           <app-form-field formControlName="titleEn" label="admin.eventsAdmin.titleEn" icon="title"
-            placeholder="admin.eventsAdmin.placeholders.titleEn" dir="ltr"
+            placeholder="admin.eventsAdmin.placeholders.titleEn" textDir="ltr"
             [errors]="[{name: 'required', message: 'admin.eventsAdmin.errors.titleEnRequired'}]">
           </app-form-field>
 
           <app-form-field formControlName="titleAr" label="admin.eventsAdmin.titleAr" icon="title"
-            placeholder="admin.eventsAdmin.placeholders.titleAr" dir="rtl"
+            placeholder="admin.eventsAdmin.placeholders.titleAr" textDir="rtl"
             [errors]="[{name: 'required', message: 'admin.eventsAdmin.errors.titleArRequired'}]">
           </app-form-field>
         </div>
@@ -42,11 +42,11 @@
 
       <div class="section-content">
         <app-form-field formControlName="descriptionEn" type="textarea" label="admin.eventsAdmin.descriptionEn"
-          placeholder="admin.eventsAdmin.placeholders.descriptionEn" dir="ltr">
+          placeholder="admin.eventsAdmin.placeholders.descriptionEn" textDir="ltr">
         </app-form-field>
 
         <app-form-field formControlName="descriptionAr" type="textarea" label="admin.eventsAdmin.descriptionAr"
-          placeholder="admin.eventsAdmin.placeholders.descriptionAr" dir="rtl">
+          placeholder="admin.eventsAdmin.placeholders.descriptionAr" textDir="rtl">
         </app-form-field>
       </div>
     </div>

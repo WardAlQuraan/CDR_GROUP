@@ -224,6 +224,7 @@ $dark-color: #3E423D;
   padding: 1rem 0;
   overflow-y: auto;
   overflow-x: hidden;
+  overscroll-behavior: contain;
 
   &::-webkit-scrollbar {
     width: 4px;

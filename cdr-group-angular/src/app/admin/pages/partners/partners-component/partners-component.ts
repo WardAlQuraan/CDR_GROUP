@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 import { PartnersService } from '../../../../services/partners.service';
 import { CompaniesService } from '../../../../services/companies.service';
 import { CitiesService } from '../../../../services/cities.service';
@@ -50,7 +51,8 @@ export class PartnersComponent implements OnInit {
     private snackbar: SnackbarService,
     private dialog: MatDialog,
     private translationService: TranslationService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -200,6 +202,13 @@ export class PartnersComponent implements OnInit {
           permission: Permissions.PARTNERS_UPDATE,
           color: 'info',
           onClick: (row) => this.openEditDialog(row)
+        },
+        {
+          icon: 'history',
+          tooltip: 'admin.auditLogs.history',
+          permission: Permissions.AUDIT_LOGS_READ,
+          color: 'accent',
+          onClick: (row) => this.router.navigate(['/admin/audit-logs', 'Partner', row.id])
         },
         {
           icon: 'delete',

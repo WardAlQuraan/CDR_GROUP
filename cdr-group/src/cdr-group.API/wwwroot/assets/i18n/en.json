@@ -256,7 +256,8 @@
     "quickLinks": "Quick Links",
     "socialMedia": "Social Media",
     "contactInfo": "Contact Information",
-    "copied": "Copied to clipboard"
+    "copied": "Copied to clipboard",
+    "ourCompanies": "Our Companies"
   },
   "companyDetail": {
     "notFound": "Company Not Found",
@@ -514,10 +515,10 @@
         "code": "Enter employee code",
         "firstName": "Enter first name",
         "lastName": "Enter last name",
-        "firstNameEn": "Enter first name in English",
-        "lastNameEn": "Enter last name in English",
-        "firstNameAr": "Enter first name in Arabic",
-        "lastNameAr": "Enter last name in Arabic",
+        "firstNameEn": "Enter First Name in (English)",
+        "lastNameEn": "Enter Last Name in (English)",
+        "firstNameAr": "Enter First Name in (Arabic)",
+        "lastNameAr": "Enter Last Name in (Arabic)",
         "email": "Enter email",
         "phone": "Enter phone number",
         "position": "Enter position",
@@ -573,10 +574,10 @@
       },
       "placeholders": {
         "code": "Enter position code",
-        "nameEn": "Enter name in English",
-        "nameAr": "Enter name in Arabic",
-        "descriptionEn": "Enter description in English",
-        "descriptionAr": "Enter description in Arabic",
+        "nameEn": "Enter Name in (English)",
+        "nameAr": "Enter Name in (Arabic)",
+        "descriptionEn": "Enter Description in (English)",
+        "descriptionAr": "Enter Description in (Arabic)",
         "minSalary": "Enter minimum salary",
         "maxSalary": "Enter maximum salary"
       }
@@ -663,20 +664,20 @@
       },
       "placeholders": {
         "code": "Enter company code",
-        "nameEn": "Enter name in English",
-        "nameAr": "Enter name in Arabic",
-        "descriptionEn": "Enter description in English",
-        "descriptionAr": "Enter description in Arabic",
-        "storyEn": "Enter story in English",
-        "storyAr": "Enter story in Arabic",
-        "missionEn": "Enter mission in English",
-        "missionAr": "Enter mission in Arabic",
-        "visionEn": "Enter vision in English",
-        "visionAr": "Enter vision in Arabic",
-        "titleEn": "Enter title in English",
-        "titleAr": "Enter title in Arabic",
-        "openingHoursNoteEn": "Enter note in English",
-        "openingHoursNoteAr": "Enter note in Arabic",
+        "nameEn": "Enter Name in (English)",
+        "nameAr": "Enter Name in (Arabic)",
+        "descriptionEn": "Enter Description in (English)",
+        "descriptionAr": "Enter Description in (Arabic)",
+        "storyEn": "Enter Story in (English)",
+        "storyAr": "Enter Story in (Arabic)",
+        "missionEn": "Enter Mission in (English)",
+        "missionAr": "Enter Mission in (Arabic)",
+        "visionEn": "Enter Vision in (English)",
+        "visionAr": "Enter Vision in (Arabic)",
+        "titleEn": "Enter Title in (English)",
+        "titleAr": "Enter Title in (Arabic)",
+        "openingHoursNoteEn": "Enter Note in (English)",
+        "openingHoursNoteAr": "Enter Note in (Arabic)",
         "partnershipFormUrl": "Enter partnership form URL"
       }
     },
@@ -754,10 +755,10 @@
         "titleArRequired": "Arabic title is required"
       },
       "placeholders": {
-        "titleEn": "Enter title in English",
-        "titleAr": "Enter title in Arabic",
-        "descriptionEn": "Enter description in English",
-        "descriptionAr": "Enter description in Arabic",
+        "titleEn": "Enter Title in (English)",
+        "titleAr": "Enter Title in (Arabic)",
+        "descriptionEn": "Enter Description in (English)",
+        "descriptionAr": "Enter Description in (Arabic)",
         "eventUrl": "Enter event URL"
       }
     },

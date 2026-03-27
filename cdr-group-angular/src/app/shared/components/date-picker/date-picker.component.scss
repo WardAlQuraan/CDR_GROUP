@@ -12,10 +12,25 @@ app-date-picker {
 
     .mdc-text-field--outlined {
       background-color: white !important;
+      padding-inline: 16px;
     }
 
     .mat-mdc-form-field-flex {
       background-color: white !important;
+    }
+
+    input {
+      direction: ltr;
+      text-align: left;
+    }
+  }
+}
+
+:host-context([dir="rtl"]) {
+  mat-form-field {
+    .mat-mdc-form-field-infix {
+      direction: ltr;
+      text-align: left;
     }
   }
 }

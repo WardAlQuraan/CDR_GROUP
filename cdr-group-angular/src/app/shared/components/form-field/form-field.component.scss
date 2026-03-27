@@ -6,14 +6,12 @@ app-form-field {
     padding-inline: 16px;
   }
 
-  .input-rtl {
-    direction: rtl;
-    text-align: right;
+  .input-dir-rtl {
+    text-align: right !important;
   }
 
-  .input-ltr {
-    direction: ltr;
-    text-align: left;
+  .input-dir-ltr {
+    text-align: left !important;
   }
 
   .placeholder-ltr::placeholder {
@@ -27,27 +25,4 @@ app-form-field {
     text-align: right;
     unicode-bidi: embed;
   }
-
-  &.force-label-ltr {
-    .mdc-floating-label {
-      left: 16px !important;
-      right: auto !important;
-      transform-origin: left top !important;
-      direction: ltr !important;
-    }
-
-    .mdc-notched-outline__leading {
-      width: 12px !important;
-    }
-  }
-
-  &.force-label-rtl {
-    .mdc-floating-label {
-      right: 16px !important;
-      left: auto !important;
-      transform-origin: right top !important;
-      direction: rtl !important;
-    }
-  }
-
 }

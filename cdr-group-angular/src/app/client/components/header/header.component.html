@@ -22,7 +22,7 @@
               <span class="d-none d-md-inline ms-1">{{ authService.user()?.name }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-              @if (authService.isAdmin()) {
+              @if (authService.user()?.roles?.length) {
                 <li><a class="dropdown-item" routerLink="/admin"><i class="bi bi-speedometer2 me-2"></i>{{ 'admin.dashboard' | translate }}</a></li>
                 <li><hr class="dropdown-divider"></li>
               }

@@ -184,12 +184,12 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
     d3.select(container).selectAll('*').remove();
 
     // Card dimensions - vertical centered layout
-    const cardWidth = 200;
-    const cardHeight = 160;
-    const avatarRadius = 32;
-    const avatarCenterY = 40;
-    const horizontalSpacing = 40;
-    const verticalSpacing = 60;
+    const cardWidth = 140;
+    const cardHeight = 130;
+    const avatarRadius = 30;
+    const avatarCenterY = 38;
+    const horizontalSpacing = 20;
+    const verticalSpacing = 40;
 
     // Create hierarchy
     const root = d3.hierarchy(this.data);
@@ -204,6 +204,11 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
     // Apply layout
     const treeData = treeLayout(root);
 
+    // Flip x-coordinates for RTL so first employee appears on the right
+    if (this.isArabic) {
+      treeData.each(d => { d.x = -d.x; });
+    }
+
     // Calculate bounds
     let minX = Infinity, maxX = -Infinity;
     treeData.each(d => {
@@ -214,17 +219,18 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
     const treeWidth = maxX - minX + cardWidth + 100;
     const svgHeight = treeHeight + 120;
 
-    // Calculate scale to fit within container width
-    const scale = treeWidth > containerWidth ? containerWidth / treeWidth : 1;
-    const scaledHeight = svgHeight * scale;
+    const svgWidth = Math.max(treeWidth, containerWidth);
 
-    // Create SVG with viewBox for proper scaling
+    // Make container scrollable
+    container.style.overflowX = 'auto';
+    container.style.overflowY = 'auto';
+
+    // Create SVG at actual size (scrollable, no scaling)
     this.svg = d3.select(container)
       .append('svg')
-      .attr('width', '100%')
-      .attr('height', scaledHeight)
-      .attr('viewBox', `0 0 ${treeWidth} ${svgHeight}`)
-      .attr('preserveAspectRatio', 'xMidYMin meet')
+      .attr('width', svgWidth)
+      .attr('height', svgHeight)
+      .attr('viewBox', `0 0 ${svgWidth} ${svgHeight}`)
       .attr('class', 'org-chart-svg');
 
     // Add SVG definitions for gradients
@@ -326,7 +332,7 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
       .style('color', 'white')
       .style('padding', '10px 14px')
       .style('border-radius', '6px')
-      .style('font-size', '13px')
+      .style('font-size', '16px')
       .style('box-shadow', '0 4px 12px rgba(0, 0, 0, 0.3)')
       .style('pointer-events', 'none')
       .style('z-index', '10000')
@@ -423,9 +429,9 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
       .attr('text-anchor', 'middle')
       .attr('dominant-baseline', 'central')
       .style('fill', 'white')
-      .style('font-size', '15px')
+      .style('font-size', '13px')
       .style('font-weight', '700')
-      .style('letter-spacing', '0.5px')
+      .style('letter-spacing', '1px')
       .text(d => d.data.initials);
 
     // Avatar image background - for nodes WITH image
@@ -452,34 +458,34 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
     nodes.append('text')
       .attr('class', 'node-name-text')
       .attr('x', centerX)
-      .attr('y', avatarCenterY + avatarRadius + 22)
+      .attr('y', avatarCenterY + avatarRadius + 16)
       .attr('text-anchor', 'middle')
       .style('fill', '#1e293b')
-      .style('font-size', '13px')
+      .style('font-size', '11px')
       .style('font-weight', '700')
-      .text(d => this.truncateText(d.data.name, 18));
+      .text(d => this.truncateText(d.data.name, 16));
 
     // Title - centered below name
     nodes.append('text')
       .attr('class', 'node-title-text')
       .attr('x', centerX)
-      .attr('y', avatarCenterY + avatarRadius + 40)
+      .attr('y', avatarCenterY + avatarRadius + 30)
       .attr('text-anchor', 'middle')
       .style('fill', '#D9A93E')
-      .style('font-size', '11px')
+      .style('font-size', '9px')
       .style('font-weight', '600')
-      .text(d => this.truncateText(d.data.title, 22));
+      .text(d => this.truncateText(d.data.title, 20));
 
     // Company - centered at bottom
     nodes.append('text')
       .attr('class', 'node-company-text')
       .attr('x', centerX)
-      .attr('y', avatarCenterY + avatarRadius + 56)
+      .attr('y', avatarCenterY + avatarRadius + 42)
       .attr('text-anchor', 'middle')
       .style('fill', '#64748b')
-      .style('font-size', '10px')
+      .style('font-size', '8px')
       .style('font-weight', '500')
-      .text(d => this.truncateText(d.data.company, 24));
+      .text(d => this.truncateText(d.data.company, 28));
 
     // Bottom connector dot for nodes with children
     nodes.filter(d => !!(d.children && d.children.length > 0))

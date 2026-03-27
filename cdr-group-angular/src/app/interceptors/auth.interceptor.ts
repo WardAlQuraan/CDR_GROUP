@@ -39,7 +39,7 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         console.log('AuthInterceptor caught an error:', error);
         if (error.status === 401 && !this.isAuthEndpoint(request.url)) {
-          return this.handle401Error(request, next);
+          return this.handle401Error(request, next, error);
         }
         return throwError(() => error);
       })
@@ -60,7 +60,7 @@ export class AuthInterceptor implements HttpInterceptor {
            url.includes('/auth/refresh-token');
   }
 
-  private handle401Error(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  private handle401Error(request: HttpRequest<any>, next: HttpHandler, originalError: HttpErrorResponse): Observable<HttpEvent<any>> {
     if (!this.authService.isRefreshTokenInProgress()) {
       this.authService.setRefreshTokenInProgress(true);
       this.authService.getRefreshTokenSubject().next(null);
@@ -72,12 +72,12 @@ export class AuthInterceptor implements HttpInterceptor {
             return next.handle(this.addToken(request, response.data.accessToken));
           }
           this.authService.logout();
-          return throwError(() => new Error('Token refresh failed'));
+          return throwError(() => originalError);
         }),
-        catchError(error => {
+        catchError(() => {
           this.authService.setRefreshTokenInProgress(false);
           this.authService.logout();
-          return throwError(() => error);
+          return throwError(() => originalError);
         })
       );
     } else {

@@ -230,6 +230,7 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.UseAuthentication();
+app.UseActiveUserCheck();
 app.UseAuthorization();
 
 app.MapControllers();

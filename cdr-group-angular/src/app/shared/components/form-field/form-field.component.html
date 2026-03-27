@@ -1,4 +1,4 @@
-<mat-form-field appearance="outline" [class.force-label-ltr]="dir === 'rtl' && !isArabicUi" [class.force-label-rtl]="dir === 'ltr' && isArabicUi">
+<mat-form-field appearance="outline">
   <mat-label>{{ label | translate }}@if (isRequired) { *}</mat-label>
 
   @if (icon) {
@@ -12,7 +12,7 @@
     <textarea matInput
       [value]="value"
       [placeholder]="placeholder | translate"
-      [ngClass]="inputDirClass"
+      [ngClass]="inputClasses"
       [rows]="rows"
       [required]="required"
       [disabled]="disabled"
@@ -24,7 +24,7 @@
       [value]="value"
       [type]="hidePassword ? 'password' : 'text'"
       [placeholder]="placeholder | translate"
-      [ngClass]="inputDirClass"
+      [ngClass]="inputClasses"
       [required]="required"
       [disabled]="disabled"
       (input)="onInput($event)"
@@ -34,7 +34,7 @@
       [value]="value"
       [type]="type"
       [placeholder]="placeholder | translate"
-      [ngClass]="inputDirClass"
+      [ngClass]="inputClasses"
       [required]="required"
       [disabled]="disabled"
       (input)="onInput($event)"

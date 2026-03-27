@@ -20,26 +20,31 @@ export class FormFieldComponent implements ControlValueAccessor {
   @Input() icon = '';
   @Input() textPrefix = '';
   @Input() type: 'text' | 'number' | 'email' | 'password' | 'textarea' = 'text';
-  @Input() dir = '';
+  @Input() textDir = '';
   @Input() rows = 3;
 
   private translationService = inject(TranslationService);
 
   get effectiveDir(): string {
-    return this.dir || (this.translationService.language() === 'ar' ? 'rtl' : 'ltr');
+    return this.textDir || (this.translationService.language() === 'ar' ? 'rtl' : 'ltr');
   }
 
   get isArabicUi(): boolean {
     return this.translationService.language() === 'ar';
   }
 
-  get inputDirClass(): string {
+  get inputClasses(): string {
     const textDir = this.effectiveDir;
     const uiDir = this.isArabicUi ? 'rtl' : 'ltr';
     const classes: string[] = [];
-    classes.push(textDir === 'rtl' ? 'input-rtl' : 'input-ltr');
+
+    // Only set text alignment — avoid CSS direction which breaks Material's outline
+    classes.push(textDir === 'rtl' ? 'input-dir-rtl' : 'input-dir-ltr');
+
+    // Placeholder direction follows UI language
     if (textDir === 'rtl' && uiDir === 'ltr') classes.push('placeholder-ltr');
     if (textDir === 'ltr' && uiDir === 'rtl') classes.push('placeholder-rtl');
+
     return classes.join(' ');
   }
 

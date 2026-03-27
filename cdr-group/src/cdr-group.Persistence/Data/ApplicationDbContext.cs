@@ -172,6 +172,7 @@ namespace cdr_group.Persistence.Data
         {
             return value switch
             {
+                bool b => b ? "Yes" : "No",
                 DateTime dt => dt.ToString("yyyy/MM/dd hh:mm:ss"),
                 DateTimeOffset dto => dto.ToString("yyyy/MM/dd hh:mm:ss"),
                 _ => value
