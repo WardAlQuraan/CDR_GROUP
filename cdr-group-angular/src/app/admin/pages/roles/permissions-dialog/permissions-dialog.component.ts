@@ -48,6 +48,19 @@ export class PermissionsDialogComponent implements OnInit {
     return this.translationService.translate(key);
   }
 
+  translateModule(module: string): string {
+    const key = `admin.permissionLabels.modules.${module.toLowerCase()}`;
+    const translated = this.translate(key);
+    return translated !== key ? translated : module;
+  }
+
+  translatePermission(permission: PermissionDto): string {
+    const safeKey = permission.name.toLowerCase().replace('.', '_');
+    const key = `admin.permissionLabels.permissions.${safeKey}`;
+    const translated = this.translate(key);
+    return translated !== key ? translated : (permission.description || permission.name);
+  }
+
   private loadPermissions(): void {
     if (!this.data.role?.id) {
       return;
@@ -58,7 +71,6 @@ export class PermissionsDialogComponent implements OnInit {
     // First load all permissions
     this.permissionsService.getAll().subscribe({
       next: (allPermissionsResponse) => {
-        debugger;
         if (allPermissionsResponse.success && allPermissionsResponse.data) {
           this.allPermissions = allPermissionsResponse.data;
           this.groupPermissionsByModule();

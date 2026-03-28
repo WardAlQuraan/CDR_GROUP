@@ -20,5 +20,31 @@
   @if (companyDisplayName) {
     <h3 class="org-chart-company-name">{{ companyDisplayName }}</h3>
   }
-  <div #chartContainer class="org-chart-container"></div>
+  <div class="org-chart-swiper">
+    <!-- Navigation Arrows -->
+    <button class="swiper-nav swiper-nav-left" (click)="panLeft()" [class.disabled]="!canPanLeft">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <button class="swiper-nav swiper-nav-right" (click)="panRight()" [class.disabled]="!canPanRight">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+    <button class="swiper-nav swiper-nav-up" (click)="panUp()" [class.disabled]="!canPanUp">
+      <mat-icon>keyboard_arrow_up</mat-icon>
+    </button>
+    <button class="swiper-nav swiper-nav-down" (click)="panDown()" [class.disabled]="!canPanDown">
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+
+    <!-- Chart viewport -->
+    <div #chartContainer class="chart-viewport"
+         [class.grabbing]="isDragging"
+         (mousedown)="onMouseDown($event)"
+         (mousemove)="onMouseMove($event)"
+         (mouseup)="onMouseUp()"
+         (mouseleave)="onMouseUp()"
+         (touchstart)="onTouchStart($event)"
+         (touchmove)="onTouchMove($event)"
+         (touchend)="onTouchEnd()">
+    </div>
+  </div>
 }

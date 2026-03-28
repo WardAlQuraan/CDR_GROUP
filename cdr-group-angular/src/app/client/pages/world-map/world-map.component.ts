@@ -158,7 +158,13 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
       zoom: 4,
       minZoom: 3,
       maxZoom: 12,
+      zoomControl: false,
     });
+
+    L.control.zoom({
+      zoomInTitle: this.isArabic ? 'تكبير' : 'Zoom in',
+      zoomOutTitle: this.isArabic ? 'تصغير' : 'Zoom out',
+    }).addTo(this.map);
 
     this.map.fitBounds(middleEastBounds);
 

@@ -1,3 +1,30 @@
 :host {
   display: block;
 }
+
+.complaint-form {
+  .form-control.is-invalid {
+    background-image: none;
+  }
+
+  #complaint-email:focus::placeholder {
+    color: #6c757d !important;
+    opacity: 1;
+  }
+}
+
+:host-context([dir="rtl"]) {
+  .complaint-form {
+    input,
+    textarea {
+      direction: rtl;
+      text-align: right;
+    }
+
+    .form-floating > label {
+      right: 0;
+      left: auto;
+      text-align: right;
+    }
+  }
+}

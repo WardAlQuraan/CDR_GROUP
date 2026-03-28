@@ -2,8 +2,7 @@ app-org-chart {
   display: block;
   width: 100%;
   height: calc(100vh - 200px);
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 // Loading state
@@ -85,14 +84,93 @@ app-org-chart {
   }
 }
 
-// D3 Chart Container
-.org-chart-container {
+// Swiper wrapper
+.org-chart-swiper {
+  position: relative;
   width: 100%;
   height: 100%;
-  padding: 30px;
-  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
   border-radius: 16px;
-  box-sizing: border-box;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  overflow: hidden;
+}
+
+// Chart viewport
+.chart-viewport {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+
+  &.grabbing {
+    cursor: grabbing;
+  }
+}
+
+// Navigation arrows
+.swiper-nav {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  background: var(--secondary-color, #3E423D);
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+
+  mat-icon {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+  }
+
+  &:hover:not(.disabled) {
+    background: var(--secondary-color, #3E423D);
+    filter: brightness(1.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  &.disabled {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &-left {
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &-right {
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &-up {
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &-down {
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+// D3 Chart Container
+.org-chart-container {
+  display: block;
 }
 
 // D3 SVG Styles

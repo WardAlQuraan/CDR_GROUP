@@ -1,8 +1,11 @@
+using System.Text.Json;
 using AutoMapper;
 using cdr_group.Contracts.DTOs.Common;
 using cdr_group.Contracts.DTOs.Identity;
 using cdr_group.Contracts.Interfaces.Repositories;
 using cdr_group.Contracts.Interfaces.Services;
+using cdr_group.Domain.Constants;
+using cdr_group.Domain.Entities;
 using cdr_group.Domain.Entities.Identity;
 using cdr_group.Domain.Localization;
 
@@ -10,8 +13,11 @@ namespace cdr_group.Application.Services
 {
     public class UserService : BaseService<User, UserDto, CreateUserDto, UpdateUserDto>, IUserService
     {
-        public UserService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+        private readonly ICurrentUserService _currentUserService;
+
+        public UserService(IUnitOfWork unitOfWork, IMapper mapper, ICurrentUserService currentUserService) : base(unitOfWork, mapper)
         {
+            _currentUserService = currentUserService;
         }
 
         protected override IRepository<User> Repository => UnitOfWork.Users;
@@ -156,6 +162,38 @@ namespace cdr_group.Application.Services
                 }
 
                 await UnitOfWork.SaveChangesAsync();
+
+                // Add audit log for the user's role assignment change
+                var newRoles = new List<string>();
+                foreach (var roleId in requestedRoleIds)
+                {
+                    var role = await UnitOfWork.Roles.GetByIdAsync(roleId);
+                    if (role != null) newRoles.Add(role.Name);
+                }
+
+                var oldRoles = new List<string>();
+                foreach (var roleId in currentActiveRoleIds)
+                {
+                    var role = await UnitOfWork.Roles.GetByIdAsync(roleId);
+                    if (role != null) oldRoles.Add(role.Name);
+                }
+
+                var auditLog = new AuditLog
+                {
+                    Id = Guid.NewGuid(),
+                    EntityName = "User",
+                    EntityId = userId.ToString(),
+                    ActionType = AuditActionTypes.Update,
+                    OldValues = JsonSerializer.Serialize(new { Roles = oldRoles }),
+                    NewValues = JsonSerializer.Serialize(new { Roles = newRoles }),
+                    AffectedColumns = JsonSerializer.Serialize(new[] { "Roles" }),
+                    PerformedBy = _currentUserService.Username,
+                    Timestamp = DateTime.UtcNow
+                };
+
+                await UnitOfWork.AuditLogs.AddAsync(auditLog);
+                await UnitOfWork.SaveChangesAsync();
+
                 await UnitOfWork.CommitTransactionAsync();
             }
             catch

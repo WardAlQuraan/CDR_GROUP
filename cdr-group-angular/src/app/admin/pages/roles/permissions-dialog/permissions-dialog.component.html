@@ -29,7 +29,7 @@
                   [indeterminate]="isSomeSelectedInGroup(group)"
                   (click)="$event.stopPropagation()"
                   (change)="toggleAllInGroup(group)">
-                  {{ group.module }}
+                  {{ translateModule(group.module) }}
                 </mat-checkbox>
               </mat-panel-title>
               <mat-panel-description>
@@ -40,7 +40,7 @@
             <mat-selection-list (selectionChange)="onSelectionChange($event, group)">
               @for (permission of group.permissions; track permission.id) {
                 <mat-list-option [value]="permission.id" [selected]="selectedPermissionIds.has(permission.id)">
-                  <span matListItemTitle>{{ permission.description }}</span>
+                  <span matListItemTitle>{{ translatePermission(permission) }}</span>
                   @if (permission.description) {
                     <!-- <span matListItemLine class="permission-description">{{ permission.name }}</span> -->
                   }

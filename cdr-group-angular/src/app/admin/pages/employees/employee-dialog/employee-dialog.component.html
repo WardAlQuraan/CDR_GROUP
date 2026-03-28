@@ -89,7 +89,7 @@
           <app-date-picker formControlName="hireDate" label="admin.employees.hireDate" icon="event">
           </app-date-picker>
 
-          <app-form-field formControlName="salary" type="number" label="admin.employees.salary" textPrefix="JOD"
+          <app-form-field formControlName="salary" type="number" label="admin.employees.salary" [textPrefix]="isArabic ? 'دينار' : 'JOD'"
             placeholder="admin.employees.placeholders.salary"
             [errors]="[{name: 'min', message: 'admin.employees.errors.salaryMin'}]">
           </app-form-field>
@@ -98,7 +98,7 @@
         <div class="form-row">
           <app-form-field formControlName="rank" type="number" label="admin.employees.rank" icon="military_tech"
             placeholder="admin.employees.placeholders.rank"
-            [errors]="[{name: 'required', message: 'admin.employees.errors.rankRequired'}, {name: 'min', message: 'admin.employees.errors.salaryMin'}]">
+            [errors]="[{name: 'required', message: 'admin.employees.errors.rankRequired'}, {name: 'min', message: 'admin.employees.errors.rankMin'}]">
           </app-form-field>
         </div>
 

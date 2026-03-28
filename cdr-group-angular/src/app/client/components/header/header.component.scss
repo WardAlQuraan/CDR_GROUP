@@ -2,6 +2,13 @@
   cursor: pointer;
 }
 
+// Fix dropdown caret spacing for RTL
+.dropdown-toggle::after {
+  margin-left: 0;
+  margin-right: 0;
+  margin-inline-start: 0.4em;
+}
+
 .dropdown-menu .parent-item {
   font-weight: 600;
   display: flex;
