@@ -59,11 +59,10 @@ export class ImageCropDialogComponent {
 
   onConfirm(): void {
     if (this.croppedBlob) {
-      const extension = this.format === 'jpeg' ? 'jpg' : this.format;
       const croppedFile = new File(
         [this.croppedBlob],
-        `cropped-avatar.${extension}`,
-        { type: `image/${this.format}` }
+        this.imageFile.name,
+        { type: this.imageFile.type }
       );
       this.dialogRef.close(croppedFile);
     }

@@ -281,6 +281,7 @@
   "admin": {
     "dashboard": "لوحة التحكم",
     "organizationChart": "الهيكل التنظيمي",
+    "organizationChartDescription": "عرض الهيكل التنظيمي وترتيب الموظفين في الشركة",
     "noEmployeesFound": "لا يوجد موظفون",
     "members": "الأعضاء",
     "events": "الفعاليات",

@@ -1,3 +1,4 @@
+using System.Text.Json;
 using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -5,6 +6,7 @@ using cdr_group.Application.Helpers;
 using cdr_group.Contracts.DTOs.FileAttachment;
 using cdr_group.Contracts.Interfaces.Repositories;
 using cdr_group.Contracts.Interfaces.Services;
+using cdr_group.Domain.Constants;
 using cdr_group.Domain.Entities;
 
 namespace cdr_group.Application.Services
@@ -14,17 +16,20 @@ namespace cdr_group.Application.Services
         private readonly IFileAttachmentRepository _fileAttachmentRepository;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ICurrentUserService _currentUserService;
         private const string UploadFolder = "uploads";
 
         public FileAttachmentService(
             IUnitOfWork unitOfWork,
             IMapper mapper,
             IWebHostEnvironment webHostEnvironment,
-            IHttpContextAccessor httpContextAccessor) : base(unitOfWork, mapper)
+            IHttpContextAccessor httpContextAccessor,
+            ICurrentUserService currentUserService) : base(unitOfWork, mapper)
         {
             _fileAttachmentRepository = unitOfWork.FileAttachments;
             _webHostEnvironment = webHostEnvironment;
             _httpContextAccessor = httpContextAccessor;
+            _currentUserService = currentUserService;
         }
 
         protected override IRepository<FileAttachment> Repository => _fileAttachmentRepository;
@@ -123,6 +128,34 @@ namespace cdr_group.Application.Services
             }
 
             await base.BeforeCreateAsync(entity, dto);
+        }
+
+        protected override async Task AfterCreateAsync(FileAttachment entity, CreateFileAttachmentDto dto)
+        {
+            if (string.Equals(entity.EntityType, "Employee", StringComparison.OrdinalIgnoreCase) && entity.EntityId.HasValue)
+            {
+                var auditLog = new AuditLog
+                {
+                    Id = Guid.NewGuid(),
+                    EntityName = "Employee",
+                    EntityId = entity.EntityId.Value.ToString(),
+                    ActionType = AuditActionTypes.Update,
+                    NewValues = JsonSerializer.Serialize(new
+                    {
+                        FileName = entity.FileName,
+                        Description = entity.Description,
+                        //FileId = entity.Id
+                    }),
+                    AffectedColumns = JsonSerializer.Serialize(new[] { "FileAttachment" }),
+                    PerformedBy = _currentUserService.Username,
+                    Timestamp = DateTime.UtcNow
+                };
+
+                await UnitOfWork.AuditLogs.AddAsync(auditLog);
+                await UnitOfWork.SaveChangesAsync();
+            }
+
+            await base.AfterCreateAsync(entity, dto);
         }
 
         protected override async Task BeforeUpdateAsync(FileAttachment entity, UpdateFileAttachmentDto dto)

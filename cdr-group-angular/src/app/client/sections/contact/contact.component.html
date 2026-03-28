@@ -1,7 +1,7 @@
 <form class="custom-form contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
   <div class="form-floating mb-4">
     <input type="text" id="contact-full-name" class="form-control" [class.is-invalid]="contactForm.get('fullName')!.invalid && contactForm.get('fullName')!.touched" [placeholder]="'common.fullName' | translate" formControlName="fullName">
-    <label for="contact-full-name">{{ 'common.fullName' | translate }}</label>
+    <label for="contact-full-name">{{ 'common.fullName' | translate }} *</label>
     @if (contactForm.get('fullName')!.invalid && contactForm.get('fullName')!.touched) {
       <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
     }
@@ -9,7 +9,7 @@
 
   <div class="form-floating mb-4">
     <input type="email" id="contact-email" class="form-control" [class.is-invalid]="contactForm.get('email')!.invalid && contactForm.get('email')!.touched" placeholder="example@email.com" formControlName="email">
-    <label for="contact-email">{{ 'common.email' | translate }}</label>
+    <label for="contact-email">{{ 'common.email' | translate }} *</label>
     @if (contactForm.get('email')!.hasError('required') && contactForm.get('email')!.touched) {
       <div class="invalid-feedback d-block">{{ 'validation.required' | translate }}</div>
     }
@@ -20,7 +20,7 @@
 
   <div class="form-floating mb-4">
     <textarea id="contact-message" class="form-control" [class.is-invalid]="contactForm.get('message')!.invalid && contactForm.get('message')!.touched" [placeholder]="'common.message' | translate" formControlName="message"></textarea>
-    <label for="contact-message">{{ 'common.message' | translate }}</label>
+    <label for="contact-message">{{ 'common.message' | translate }} *</label>
     @if (contactForm.get('message')!.invalid && contactForm.get('message')!.touched) {
       <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
     }

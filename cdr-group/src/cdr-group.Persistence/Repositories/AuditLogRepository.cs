@@ -38,5 +38,10 @@ namespace cdr_group.Persistence.Repositories
 
             return (items, totalCount);
         }
+
+        public async Task AddAsync(AuditLog auditLog)
+        {
+            await _context.AuditLogs.AddAsync(auditLog);
+        }
     }
 }

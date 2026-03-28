@@ -281,6 +281,7 @@
   "admin": {
     "dashboard": "Dashboard",
     "organizationChart": "Organization Chart",
+    "organizationChartDescription": "View the company hierarchy and employee structure",
     "noEmployeesFound": "No employees found",
     "members": "Members",
     "events": "Events",

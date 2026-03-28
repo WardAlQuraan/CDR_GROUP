@@ -4,7 +4,7 @@
       [class.is-invalid]="complaintForm.get('fullName')!.invalid && complaintForm.get('fullName')!.touched"
       [placeholder]="'common.fullName' | translate"
       formControlName="fullName">
-    <label for="complaint-full-name">{{ 'common.fullName' | translate }}</label>
+    <label for="complaint-full-name">{{ 'common.fullName' | translate }} *</label>
     @if (complaintForm.get('fullName')!.invalid && complaintForm.get('fullName')!.touched) {
       <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
     }
@@ -15,7 +15,7 @@
       [class.is-invalid]="complaintForm.get('email')!.invalid && complaintForm.get('email')!.touched"
       placeholder="example@email.com"
       formControlName="email">
-    <label for="complaint-email">{{ 'common.email' | translate }}</label>
+    <label for="complaint-email">{{ 'common.email' | translate }} *</label>
     @if (complaintForm.get('email')!.hasError('required') && complaintForm.get('email')!.touched) {
       <div class="invalid-feedback d-block">{{ 'validation.required' | translate }}</div>
     }
@@ -29,7 +29,7 @@
       [class.is-invalid]="complaintForm.get('subject')!.invalid && complaintForm.get('subject')!.touched"
       [placeholder]="'complaint.subject' | translate"
       formControlName="subject">
-    <label for="complaint-subject">{{ 'complaint.subject' | translate }}</label>
+    <label for="complaint-subject">{{ 'complaint.subject' | translate }} *</label>
     @if (complaintForm.get('subject')!.invalid && complaintForm.get('subject')!.touched) {
       <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
     }
@@ -41,7 +41,7 @@
       [placeholder]="'common.message' | translate"
       formControlName="message"
       rows="4"></textarea>
-    <label for="complaint-message">{{ 'common.message' | translate }}</label>
+    <label for="complaint-message">{{ 'common.message' | translate }} *</label>
     @if (complaintForm.get('message')!.invalid && complaintForm.get('message')!.touched) {
       <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
     }

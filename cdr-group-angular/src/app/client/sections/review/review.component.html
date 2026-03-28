@@ -32,7 +32,7 @@
         [placeholder]="'review.commentPlaceholder' | translate"
         formControlName="comment"
         rows="4"></textarea>
-      <label for="review-comment">{{ 'review.comment' | translate }}</label>
+      <label for="review-comment">{{ 'review.comment' | translate }} *</label>
       @if (reviewForm.get('comment')!.hasError('required') && reviewForm.get('comment')!.touched) {
         <div class="invalid-feedback">{{ 'validation.required' | translate }}</div>
       }
