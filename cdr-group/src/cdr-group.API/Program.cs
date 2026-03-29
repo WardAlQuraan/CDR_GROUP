@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using cdr_group.Application.Mappings;
+using cdr_group.Domain.Localization;
 using cdr_group.Application.Services;
 using cdr_group.Application.Settings;
 using cdr_group.Contracts.Interfaces.Repositories;
@@ -64,12 +65,16 @@ builder.Services.AddAuthentication(options =>
                 context.Response.StatusCode = 401;
                 context.Response.ContentType = "application/json";
 
+                var language = context.Request.Headers["Accept-Language"].FirstOrDefault() ?? "en";
+                var isExpired = context.AuthenticateFailure is SecurityTokenExpiredException;
+                var messageKey = isExpired ? Messages.SessionExpired : Messages.Unauthorized;
+
                 var response = new
                 {
                     success = false,
                     data = (object?)null,
-                    message = "Unauthorized. Please provide a valid token.",
-                    errors = new[] { "Authentication required" }
+                    message = Messages.Get(messageKey, language),
+                    errors = Array.Empty<string>()
                 };
 
                 var json = System.Text.Json.JsonSerializer.Serialize(response, new System.Text.Json.JsonSerializerOptions
@@ -87,12 +92,13 @@ builder.Services.AddAuthentication(options =>
                 context.Response.StatusCode = 403;
                 context.Response.ContentType = "application/json";
 
+                var language = context.Request.Headers["Accept-Language"].FirstOrDefault() ?? "en";
                 var response = new
                 {
                     success = false,
                     data = (object?)null,
-                    message = "Forbidden. You do not have permission to access this resource.",
-                    errors = new[] { "Access denied" }
+                    message = Messages.Get(Messages.Forbidden, language),
+                    errors = Array.Empty<string>()
                 };
 
                 var json = System.Text.Json.JsonSerializer.Serialize(response, new System.Text.Json.JsonSerializerOptions

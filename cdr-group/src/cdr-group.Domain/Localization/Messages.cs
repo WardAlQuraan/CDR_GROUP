@@ -8,6 +8,7 @@ namespace cdr_group.Domain.Localization
         public const string UnexpectedError = "unexpected_error";
         public const string ValidationError = "validation_error";
         public const string Unauthorized = "unauthorized";
+        public const string SessionExpired = "session_expired";
         public const string Forbidden = "forbidden";
 
         // Auth
@@ -72,6 +73,7 @@ namespace cdr_group.Domain.Localization
                 [UnexpectedError] = "An unexpected error occurred.",
                 [ValidationError] = "One or more validation errors occurred.",
                 [Unauthorized] = "Unauthorized access.",
+                [SessionExpired] = "Your session has expired. Please log in again.",
                 [Forbidden] = "Access forbidden.",
 
                 // Auth
@@ -135,6 +137,7 @@ namespace cdr_group.Domain.Localization
                 [UnexpectedError] = "حدث خطأ غير متوقع.",
                 [ValidationError] = "حدث خطأ واحد أو أكثر في التحقق.",
                 [Unauthorized] = "وصول غير مصرح به.",
+                [SessionExpired] = "انتهت جلستك. يرجى تسجيل الدخول مرة أخرى.",
                 [Forbidden] = "الوصول محظور.",
 
                 // Auth
