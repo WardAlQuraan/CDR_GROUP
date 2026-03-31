@@ -1,93 +1,82 @@
 <footer class="site-footer">
   <div class="container">
-    <!-- Top Section: Brand + Columns -->
     <div class="footer-top">
-      <!-- Brand Column -->
-      <div class="footer-brand-col">
-        <a class="footer-brand" routerLink="/">
-          <img src="assets/images/logo.jpg" class="footer-brand-image" alt="CDR Group Logo">
-          <span class="footer-brand-name">{{ 'header.logo' | translate }} {{ 'header.logoSubtitle' | translate }}</span>
-        </a>
-      </div>
-
-      <!-- Operating Hours Column -->
-      @if (openingDays || openingNote) {
+      <!-- Column 1: Companies -->
       <div class="footer-col">
-        <h6 class="footer-title">{{ 'footer.operatingHours' | translate }}</h6>
+        <h5 class="footer-title">{{ 'footer.ourCompanies' | translate }}</h5>
         <ul class="footer-links">
-          @if (openingDays) {
-          <li>
-            <i class="bi bi-calendar3"></i>
-            <span>{{ openingDays }}</span>
-          </li>
-          <li>
-            <i class="bi bi-clock"></i>
-            <span>{{ openingTimes }}</span>
-          </li>
-          }
-          @if (openingNote) {
-          <li class="footer-note">{{ openingNote }}</li>
-          }
-        </ul>
-      </div>
-      }
-
-      <!-- Connect Column -->
-      <div class="footer-col">
-        @if (contacts.length > 0) {
-        <h6 class="footer-title">{{ 'footer.connectWithUs' | translate }}</h6>
-        }
-
-        @if (loadingContacts) {
-        <div class="contacts-loader">
-          <div class="spinner"></div>
-        </div>
-        } @else {
-        <ul class="social-icon">
-          @for (contact of contacts; track contact.id) {
-          <li class="social-icon-item">
-            <a [href]="getContactHref(contact)" [target]="isExternalLink(contact) ? '_blank' : '_self'" rel="noopener"
-              [class]="'social-icon-link ' + contact.icon" [title]="contact.name"
-              (click)="onContactClick($event, contact)"></a>
-          </li>
-          }
-        </ul>
-        }
-      </div>
-    </div>
-
-    <!-- Companies Bar -->
-    @if (companyState.companies.length > 1) {
-    <div class="footer-companies">
-      <span class="companies-label">{{ 'footer.ourCompanies' | translate }}:</span>
-      <div class="companies-list">
-        @for (company of companyState.companies; track company.id) {
-          @if (company.children && company.children.length > 0) {
-            @for (child of company.children; track child.id) {
-              <button class="company-item" [class.active]="selectedCompany?.id === child.id"
-                (click)="selectCompany(child.id)">
-                <span class="company-dot"></span>
-                {{ getCompanyName(child) }}
-              </button>
+          @for (company of companyState.companies; track company.id) {
+            @if (company.children && company.children.length > 0) {
+              @for (child of company.children; track child.id) {
+                <li>
+                  <a (click)="selectCompany(child.id)" class="footer-link" [class.active]="selectedCompany?.id === child.id">
+                    {{ getCompanyName(child) }}
+                  </a>
+                </li>
+              }
+            } @else {
+              <li>
+                <a (click)="selectCompany(company.id)" class="footer-link" [class.active]="selectedCompany?.id === company.id">
+                  {{ getCompanyName(company) }}
+                </a>
+              </li>
             }
-          } @else {
-            <button class="company-item" [class.active]="selectedCompany?.id === company.id"
-              (click)="selectCompany(company.id)">
-              <span class="company-dot"></span>
-              {{ getCompanyName(company) }}
-            </button>
           }
+        </ul>
+      </div>
+
+      <!-- Column 2: Operating Hours -->
+      <div class="footer-col">
+        @if (openingDays || openingNote) {
+          <h5 class="footer-title">{{ 'footer.operatingHours' | translate }}</h5>
+          <ul class="footer-links">
+            @if (openingDays) {
+              <li>
+                <i class="bi bi-calendar3"></i>
+                <span>{{ openingDays }}</span>
+              </li>
+              <li>
+                <i class="bi bi-clock"></i>
+                <span>{{ openingTimes }}</span>
+              </li>
+            }
+            @if (openingNote) {
+              <li class="footer-note">{{ openingNote }}</li>
+            }
+          </ul>
         }
       </div>
-    </div>
-    }
 
-    <!-- Copyright -->
-    <div class="footer-bottom">
-      <p class="copyright-text">
-        Copyright &copy; {{ currentYear }} {{ 'header.logo' | translate }} {{ 'header.logoSubtitle' | translate }}.
-        {{ 'footer.copyright' | translate }}.
-      </p>
+      <!-- Column 3: Connect With Us -->
+      <div class="footer-col">
+        <h5 class="footer-title">{{ 'footer.connectWithUs' | translate }}</h5>
+        @if (loadingContacts) {
+          <div class="contacts-loader">
+            <div class="spinner"></div>
+          </div>
+        } @else {
+          <ul class="footer-links">
+            @for (contact of addressContacts; track contact.id) {
+              <li>
+                <a [href]="getContactHref(contact)" [target]="isExternalLink(contact) ? '_blank' : '_self'" rel="noopener"
+                  class="footer-link" (click)="onContactClick($event, contact)">
+                  <i class="bi" [ngClass]="contact.icon"></i>
+                  <span>{{ contact.value }}</span>
+                </a>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+
     </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="footer-bottom">
+    <p class="copyright-text">
+      &copy; {{ currentYear }} {{ 'header.logo' | translate }} {{ 'header.logoSubtitle' | translate }}.
+      {{ 'footer.copyright' | translate }}.
+    </p>
   </div>
 </footer>

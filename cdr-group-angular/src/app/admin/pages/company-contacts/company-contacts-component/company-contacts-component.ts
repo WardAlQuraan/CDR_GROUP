@@ -77,11 +77,6 @@ export class CompanyContactsComponent implements OnInit {
 
       columns: [
         {
-          key: 'icon',
-          header: 'admin.companyContacts.icon',
-          type: 'icon'
-        },
-        {
           key: 'name',
           header: 'admin.companyContacts.name',
           sortable: true

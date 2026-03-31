@@ -63,6 +63,38 @@ export class FooterComponent implements OnInit, OnDestroy {
     return this.isArabic ? (this.dayTranslations[day] || day) : day;
   }
 
+  getCompanyDescription(): string {
+    if (!this.selectedCompany) return '';
+    return (this.isArabic ? this.selectedCompany.descriptionAr : this.selectedCompany.descriptionEn) || '';
+  }
+
+  get addressContacts(): CompanyContactDto[] {
+    return this.contacts.filter(c =>
+      ['bi-geo-alt', 'bi-geo-alt-fill', 'bi-envelope', 'bi-telephone', 'bi-printer', 'bi-phone'].includes(c.icon)
+    );
+  }
+
+  get socialContacts(): CompanyContactDto[] {
+    return this.contacts.filter(c =>
+      !['bi-geo-alt', 'bi-geo-alt-fill', 'bi-envelope', 'bi-telephone', 'bi-printer', 'bi-phone'].includes(c.icon)
+    );
+  }
+
+  getSocialClass(contact: CompanyContactDto): string {
+    const map: Record<string, string> = {
+      'bi-facebook': 'social-facebook',
+      'bi-twitter': 'social-twitter',
+      'bi-twitter-x': 'social-twitter',
+      'bi-instagram': 'social-instagram',
+      'bi-linkedin': 'social-linkedin',
+      'bi-whatsapp': 'social-whatsapp',
+      'bi-telegram': 'social-telegram',
+      'bi-tiktok': 'social-tiktok',
+      'bi-snapchat': 'social-snapchat',
+    };
+    return map[contact.icon] || '';
+  }
+
   get openingDays(): string {
     if (!this.selectedCompany?.openingStartDay || !this.selectedCompany?.openingEndDay) return '';
     return `${this.translateDay(this.selectedCompany.openingStartDay)} - ${this.translateDay(this.selectedCompany.openingEndDay)}`;

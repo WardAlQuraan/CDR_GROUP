@@ -133,7 +133,8 @@ export class CompanyContactDialogComponent implements OnInit {
     const updateDto: UpdateCompanyContactDto = {
       icon: this.form.value.icon,
       name: this.form.value.name,
-      value: this.form.value.value
+      value: this.form.value.value,
+      companyId: this.data.companyId
     };
 
     this.companyContactsService.update(this.data.contact!.id, updateDto).subscribe({
