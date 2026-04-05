@@ -14,19 +14,19 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<User?> GetByUsernameAsync(string username)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .FirstOrDefaultAsync(u => u.Username == username && !u.IsDeleted);
         }
 
         public async Task<User?> GetByEmailAsync(string email)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .FirstOrDefaultAsync(u => u.Email == email && !u.IsDeleted);
         }
 
         public async Task<User?> GetWithRolesAsync(Guid id)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(u => u.UserRoles)
                     .ThenInclude(ur => ur.Role)
                 .FirstOrDefaultAsync(u => u.Id == id && !u.IsDeleted);
@@ -34,7 +34,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<IEnumerable<User>> GetUsersWithRolesAsync()
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(u => u.UserRoles)
                     .ThenInclude(ur => ur.Role)
                 .Where(u => !u.IsDeleted)
@@ -43,7 +43,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<(IEnumerable<User> Users, int TotalCount)> GetUsersWithRolesPagedAsync(PagedRequest request)
         {
-            var query = _dbSet
+            var query = _dbSet.AsQueryable().AsNoTracking()
                 .Include(u => u.UserRoles)
                     .ThenInclude(ur => ur.Role)
                 .Where(u => !u.IsDeleted);
@@ -92,7 +92,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<List<UserRole>> GetAllUserRolesAsync(Guid userId)
         {
-            return await _context.UserRoles
+            return await _context.UserRoles.AsQueryable().AsNoTracking()
                 .IgnoreQueryFilters()
                 .Where(ur => ur.UserId == userId)
                 .ToListAsync();

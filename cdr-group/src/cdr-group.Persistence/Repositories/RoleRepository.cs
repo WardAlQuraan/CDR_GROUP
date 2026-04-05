@@ -14,13 +14,13 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<Role?> GetByNameAsync(string name)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .FirstOrDefaultAsync(r => r.Name == name && !r.IsDeleted);
         }
 
         public async Task<Role?> GetWithPermissionsAsync(Guid id)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(r => r.RolePermissions)
                     .ThenInclude(rp => rp.Permission)
                 .FirstOrDefaultAsync(r => r.Id == id && !r.IsDeleted);
@@ -28,7 +28,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<Role?> GetWithAllPermissionsAsync(Guid id)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(r => r.RolePermissions.Where(rp => true))
                     .ThenInclude(rp => rp.Permission)
                 .IgnoreQueryFilters()
@@ -37,7 +37,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<IEnumerable<Role>> GetRolesWithPermissionsAsync()
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(r => r.RolePermissions)
                     .ThenInclude(rp => rp.Permission)
                 .Where(r => !r.IsDeleted)
@@ -46,7 +46,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<(IEnumerable<Role> Roles, int TotalCount)> GetRolesWithPermissionsPagedAsync(PagedRequest request)
         {
-            var query = _dbSet
+            var query = _dbSet.AsQueryable().AsNoTracking()
                 .Include(r => r.RolePermissions)
                     .ThenInclude(rp => rp.Permission)
                 .Where(r => !r.IsDeleted);
@@ -86,7 +86,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<List<RolePermission>> GetAllRolePermissionsAsync(Guid roleId)
         {
-            return await _context.RolePermissions
+            return await _context.RolePermissions.AsQueryable().AsNoTracking()
                 .IgnoreQueryFilters()
                 .Where(rp => rp.RoleId == roleId)
                 .ToListAsync();

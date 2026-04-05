@@ -16,17 +16,17 @@ namespace cdr_group.Persistence.Repositories
 
         public override async Task<IEnumerable<Partner>> GetAllAsync()
         {
-            return await _dbSet.Include(e => e.Company).Include(e => e.City).ThenInclude(c=>c.Country).Where(e => !e.IsDeleted).ToListAsync();
+            return await _dbSet.AsQueryable().AsNoTracking().Include(e => e.Company).Include(e => e.City).ThenInclude(c=>c.Country).Where(e => !e.IsDeleted).ToListAsync();
         }
 
         public override async Task<Partner?> GetByIdAsync(Guid id)
         {
-            return await _dbSet.Include(e => e.Company).Include(e => e.City).FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
+            return await _dbSet.AsQueryable().AsNoTracking().Include(e => e.Company).Include(e => e.City).FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
         }
 
         public async Task<IEnumerable<Partner>> GetAllByCompanyIdAsync(Guid companyId)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(e => e.Company)
                 .Include(e => e.City).ThenInclude(c => c.Country)
                 .Where(e => !e.IsDeleted && e.CompanyId == companyId)
@@ -43,7 +43,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<(IEnumerable<Partner> Items, int TotalCount)> GetPartnersPagedAsync(PartnerPagedRequest request)
         {
-            var query = _dbSet.Include(e => e.Company).Include(e => e.City).Where(e => !e.IsDeleted);
+            var query = _dbSet.AsQueryable().AsNoTracking().Include(e => e.Company).Include(e => e.City).Where(e => !e.IsDeleted);
 
             if (request.CompanyId.HasValue)
             {

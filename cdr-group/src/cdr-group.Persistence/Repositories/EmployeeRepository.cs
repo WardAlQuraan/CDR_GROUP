@@ -16,7 +16,7 @@ namespace cdr_group.Persistence.Repositories
 
         public override async Task<IEnumerable<Employee>> GetAllAsync()
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(e => e.Manager)
                 .Include(e => e.User)
                 .Include(e => e.Company)
@@ -24,7 +24,7 @@ namespace cdr_group.Persistence.Repositories
         }
         public async Task<Employee?> GetWithManagerAsync(Guid id)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(e => e.Manager)
                 .Include(e => e.User)
                 .Include(e => e.Company)
@@ -34,7 +34,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<Employee?> GetWithSubordinatesAsync(Guid id)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(e => e.Manager)
                 .Include(e => e.User)
                 .Include(e => e.Company)
@@ -48,7 +48,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<Employee?> GetByUserIdAsync(Guid userId, Guid? execludedId = null)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(e => e.Manager)
                 .Include(e => e.User)
                 .Include(e => e.Company)
@@ -58,7 +58,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<IEnumerable<Employee>> GetByManagerIdAsync(Guid managerId)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(e => e.User)
                 .Include(e => e.Company)
                 .Include(e => e.Position)
@@ -68,7 +68,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<IEnumerable<Employee>> GetByCompanyIdWithParentAsync(Guid? companyId)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(e => e.Manager)
                 .Include(e => e.User)
                 .Include(e => e.Company)
@@ -78,7 +78,7 @@ namespace cdr_group.Persistence.Repositories
         }
         public async Task<IEnumerable<Employee>> GetByCompanyIdAsync(Guid companyId)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(e => e.Manager)
                 .Include(e => e.User)
                 .Include(e => e.Company)
@@ -88,7 +88,7 @@ namespace cdr_group.Persistence.Repositories
         }
         public async Task<(IEnumerable<Employee> Items, int TotalCount)> GetEmployeesPagedAsync(EmployeePagedRequest request)
         {
-            var query = _dbSet
+            var query = _dbSet.AsQueryable().AsNoTracking()
                 .Include(e => e.Manager)
                 .Include(e => e.User)
                 .Include(e => e.Company)

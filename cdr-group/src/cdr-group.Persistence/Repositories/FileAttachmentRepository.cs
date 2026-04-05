@@ -13,7 +13,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<IEnumerable<FileAttachment>> GetByEntityIdAsync(Guid entityId)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Where(f => f.EntityId == entityId && !f.IsDeleted)
                 .OrderByDescending(f => f.CreatedAt)
                 .ToListAsync();
@@ -21,7 +21,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<IEnumerable<FileAttachment>> GetByEntityTypeAsync(string entityType)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Where(f => f.EntityType == entityType && !f.IsDeleted)
                 .OrderByDescending(f => f.CreatedAt)
                 .ToListAsync();
@@ -29,7 +29,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<IEnumerable<FileAttachment>> GetByEntityAsync(Guid entityId, string entityType)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Where(f => f.EntityId == entityId && f.EntityType == entityType && !f.IsDeleted)
                 .OrderByDescending(f => f.CreatedAt)
                 .ToListAsync();

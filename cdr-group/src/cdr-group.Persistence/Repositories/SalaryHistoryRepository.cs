@@ -15,14 +15,14 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<SalaryHistory?> GetWithEmployeeAsync(Guid id)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(sh => sh.Employee)
                 .FirstOrDefaultAsync(sh => sh.Id == id && !sh.IsDeleted);
         }
 
         public async Task<IEnumerable<SalaryHistory>> GetByEmployeeIdAsync(Guid employeeId)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(sh => sh.Employee)
                 .Where(sh => sh.EmployeeId == employeeId && !sh.IsDeleted)
                 .OrderByDescending(sh => sh.EffectiveDate)
@@ -31,7 +31,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<(IEnumerable<SalaryHistory> Items, int TotalCount)> GetSalaryHistoriesPagedAsync(PagedRequest request, Guid? employeeId = null)
         {
-            var query = _dbSet
+            var query = _dbSet.AsQueryable().AsNoTracking()
                 .Include(sh => sh.Employee)
                 .Where(sh => !sh.IsDeleted);
 

@@ -15,17 +15,17 @@ namespace cdr_group.Persistence.Repositories
 
         public override async Task<IEnumerable<City>> GetAllAsync()
         {
-            return await _dbSet.Include(e => e.Country).Where(e => !e.IsDeleted).ToListAsync();
+            return await _dbSet.AsQueryable().AsNoTracking().Include(e => e.Country).Where(e => !e.IsDeleted).ToListAsync();
         }
 
         public override async Task<City?> GetByIdAsync(Guid id)
         {
-            return await _dbSet.Include(e => e.Country).FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
+            return await _dbSet.AsQueryable().AsNoTracking().Include(e => e.Country).FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
         }
 
         public async Task<(IEnumerable<City> Items, int TotalCount)> GetCitiesPagedAsync(CityPagedRequest request)
         {
-            var query = _dbSet.Include(e => e.Country).Where(e => !e.IsDeleted);
+            var query = _dbSet.AsQueryable().AsNoTracking().Include(e => e.Country).Where(e => !e.IsDeleted);
 
             if (request.CountryId.HasValue)
             {

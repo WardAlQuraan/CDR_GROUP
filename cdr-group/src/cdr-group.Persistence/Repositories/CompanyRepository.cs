@@ -15,14 +15,14 @@ namespace cdr_group.Persistence.Repositories
 
         public override async Task<Company?> GetByIdAsync(Guid id)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(c => c.Parent)
                 .FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
         }
 
         public async Task<IEnumerable<Company>> GetActiveCompaniesAsync()
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(c => c.Parent)
                 .Include(c => c.Children.Where(ch => !ch.IsDeleted))
                 .Where(c => c.IsActive && !c.IsDeleted)
@@ -32,7 +32,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<(IEnumerable<Company> Items, int TotalCount)> GetCompaniesPagedAsync(PagedRequest request)
         {
-            var query = _dbSet
+            var query = _dbSet.AsQueryable().AsNoTracking()
             .Include(c => c.Parent)
             .Include(c => c.Children.Where(ch => !ch.IsDeleted))
             .Where(c => !c.IsDeleted);

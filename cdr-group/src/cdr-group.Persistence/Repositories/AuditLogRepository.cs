@@ -18,7 +18,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<(IEnumerable<AuditLog> Items, int TotalCount)> GetPagedAsync(PagedRequest request, string? entityName = null, string? entityId = null)
         {
-            var query = _context.AuditLogs.AsQueryable();
+            var query = _context.AuditLogs.AsQueryable().AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(entityName))
             {

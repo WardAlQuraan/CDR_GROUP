@@ -15,20 +15,20 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<Position?> GetByNameAsync(string name)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .FirstOrDefaultAsync(p => (p.NameEn == name || p.NameAr == name) && !p.IsDeleted);
         }
 
         public async Task<IEnumerable<Position>> GetActivePositionsAsync()
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Where(p => p.IsActive && !p.IsDeleted)
                 .ToListAsync();
         }
 
         public async Task<(IEnumerable<Position> Items, int TotalCount)> GetPositionsPagedAsync(PagedRequest request)
         {
-            var query = _dbSet
+            var query = _dbSet.AsQueryable().AsNoTracking()
                 .Where(p => !p.IsDeleted);
 
             query = QueryHelper.ApplySearch(query, request);

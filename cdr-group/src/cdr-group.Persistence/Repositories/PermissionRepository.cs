@@ -14,20 +14,20 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<Permission?> GetByNameAsync(string name)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .FirstOrDefaultAsync(p => p.Name == name && !p.IsDeleted);
         }
 
         public async Task<IEnumerable<Permission>> GetByModuleAsync(string module)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Where(p => p.Module == module && !p.IsDeleted)
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<Permission>> GetPermissionsByRoleIdAsync(Guid roleId)
         {
-            return await _context.RolePermissions
+            return await _context.RolePermissions.AsQueryable().AsNoTracking()
                 .Where(rp => rp.RoleId == roleId && !rp.IsDeleted)
                 .Include(rp => rp.Permission)
                 .Select(rp => rp.Permission)
@@ -37,7 +37,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<IEnumerable<Permission>> GetPermissionsByUserIdAsync(Guid userId)
         {
-            return await _context.UserRoles
+            return await _context.UserRoles.AsQueryable().AsNoTracking()
                 .Where(ur => ur.UserId == userId && !ur.IsDeleted)
                 .SelectMany(ur => ur.Role.RolePermissions)
                 .Where(rp => !rp.IsDeleted)
@@ -49,7 +49,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<(IEnumerable<Permission> Permissions, int TotalCount)> GetPermissionsPagedAsync(PagedRequest request)
         {
-            var query = _dbSet.Where(p => !p.IsDeleted);
+            var query = _dbSet.AsQueryable().AsNoTracking().Where(p => !p.IsDeleted);
 
             // Apply search filter
             if (!string.IsNullOrWhiteSpace(request.SearchTerm))

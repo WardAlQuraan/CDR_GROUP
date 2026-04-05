@@ -20,17 +20,17 @@ namespace cdr_group.Persistence.Repositories
 
         public virtual async Task<T?> GetByIdAsync(Guid id)
         {
-            return await _dbSet.FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
+            return await _dbSet.AsQueryable().AsNoTracking().FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
         }
 
         public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _dbSet.Where(e => !e.IsDeleted).ToListAsync();
+            return await _dbSet.AsQueryable().AsNoTracking().Where(e => !e.IsDeleted).ToListAsync();
         }
 
         public virtual async Task<(IEnumerable<T> Items, int TotalCount)> GetPagedAsync(PagedRequest request)
         {
-            var query = _dbSet.Where(e => !e.IsDeleted);
+            var query = _dbSet.AsQueryable().AsNoTracking().Where(e => !e.IsDeleted);
 
             // Apply search, sort, and paging
             query = QueryHelper.ApplySearch(query, request);

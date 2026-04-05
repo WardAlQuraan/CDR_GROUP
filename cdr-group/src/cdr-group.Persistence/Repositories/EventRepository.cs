@@ -16,19 +16,19 @@ namespace cdr_group.Persistence.Repositories
 
         public override async Task<IEnumerable<Event>> GetAllAsync()
         {
-            return await _dbSet.Include(e => e.Company).Where(e => !e.IsDeleted).ToListAsync();
+            return await _dbSet.AsQueryable().AsNoTracking().Include(e => e.Company).Where(e => !e.IsDeleted).ToListAsync();
         }
 
         public async Task<Event?> GetWithCompanyAsync(Guid id)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(e => e.Company)
                 .FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
         }
 
         public async Task<IEnumerable<Event>> GetByCompanyIdAsync(Guid companyId)
         {
-            return await _dbSet
+            return await _dbSet.AsQueryable().AsNoTracking()
                 .Include(e => e.Company)
                 .Where(e => e.CompanyId == companyId && !e.IsDeleted)
                 .OrderByDescending(e => e.CreatedAt)
@@ -37,7 +37,7 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<(IEnumerable<Event> Items, int TotalCount)> GetEventsPagedAsync(EventPagedRequest request)
         {
-            var query = _dbSet
+            var query = _dbSet.AsQueryable().AsNoTracking()
                 .Include(e => e.Company)
                 .Where(e => !e.IsDeleted);
 
