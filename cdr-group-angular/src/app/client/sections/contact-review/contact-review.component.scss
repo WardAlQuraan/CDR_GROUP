@@ -1,17 +1,20 @@
 .section-tabs {
   display: flex;
   gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 
   .section-tab {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 10px 24px;
+    white-space: nowrap;
+    padding: 6px 10px;
     border: 2px solid var(--secondary-color, #6c757d);
     border-radius: 30px;
     background: var(--secondary-color, #6c757d);
     color: #fff;
-    font-size: 0.95rem;
+    font-size: 0.7rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;

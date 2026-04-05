@@ -38,6 +38,15 @@ export class HeaderComponent implements OnInit {
 
   navigateToCompany(companyId: string): void {
     this.router.navigate(['/'], { queryParams: { company: companyId } });
+    this.closeNavbar();
+  }
+
+  closeNavbar(): void {
+    const navbarCollapse = document.getElementById('navbarNav');
+    if (navbarCollapse?.classList.contains('show')) {
+      const toggler = document.querySelector('.navbar-toggler') as HTMLElement;
+      toggler?.click();
+    }
   }
 
   get selectedCompanyName(): string {

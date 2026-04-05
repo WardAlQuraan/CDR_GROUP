@@ -38,9 +38,28 @@
   --font-weight-bold: 700;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--white-color);
   font-family: var(--body-font-family);
+}
+
+app-root,
+app-client-layout,
+app-home,
+app-hero,
+app-about,
+app-events,
+app-team,
+app-reviews-display,
+app-contact-review,
+app-header,
+app-footer {
+  display: block;
 }
 
 /*---------------------------------------
@@ -1098,11 +1117,27 @@ strong {
   .navbar-nav .dropdown-menu {
     position: relative;
     left: 10px;
-    opacity: 1;
-    pointer-events: auto;
-    max-width: 155px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    width: auto;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+    transition: none;
+
+    &.show {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      height: auto;
+      padding: 8px 0;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      overflow: visible;
+    }
   }
 
   .navbar-expand-lg .navbar-nav {
@@ -1118,6 +1153,7 @@ strong {
   .hero-section {
     position: relative;
     top: 82px;
+    margin-top: 0;
     margin-bottom: 82px;
   }
 

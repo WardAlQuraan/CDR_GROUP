@@ -51,7 +51,7 @@
               <ul class="dropdown-menu">
                 @for (company of companyState.companies; track company.id) {
                   <li>
-                    <a class="dropdown-item parent-item" href="javascript:void(0)" (click)="hasChildren(company) ? toggleSubmenu(company.id) : navigateToCompany(company.id)">
+                    <a class="dropdown-item parent-item" href="javascript:void(0)" (click)="hasChildren(company) ? toggleSubmenu(company.id) : navigateToCompany(company.id); hasChildren(company) && $event.stopPropagation()">
                       {{ getCompanyName(company) }}
                       @if (hasChildren(company)) {
                         <i class="bi bi-chevron-down submenu-arrow" [class.open]="isSubmenuOpen(company.id)"></i>
@@ -73,27 +73,27 @@
           }
 
           <li class="nav-item">
-            <a class="nav-link" [class.active]="activeSection() === 'home'" routerLink="/" [queryParams]="{ company: selectedCompanyId }" (click)="scrollToTop()">{{ 'common.home' | translate }}</a>
+            <a class="nav-link" [class.active]="activeSection() === 'home'" routerLink="/" [queryParams]="{ company: selectedCompanyId }" (click)="scrollToTop(); closeNavbar()">{{ 'common.home' | translate }}</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" [class.active]="activeSection() === 'section_2'" (click)="navigateToSection('section_2')">{{ 'common.about' | translate }}</a>
+            <a class="nav-link" [class.active]="activeSection() === 'section_2'" (click)="navigateToSection('section_2'); closeNavbar()">{{ 'common.about' | translate }}</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" [class.active]="activeSection() === 'section_events'" (click)="navigateToSection('section_events')">{{ 'common.events' | translate }}</a>
+            <a class="nav-link" [class.active]="activeSection() === 'section_events'" (click)="navigateToSection('section_events'); closeNavbar()">{{ 'common.events' | translate }}</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" [class.active]="activeSection() === 'section_team'" (click)="navigateToSection('section_team')">{{ 'common.team' | translate }}</a>
+            <a class="nav-link" [class.active]="activeSection() === 'section_team'" (click)="navigateToSection('section_team'); closeNavbar()">{{ 'common.team' | translate }}</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" [class.active]="activeSection() === 'section_5'" (click)="navigateToSection('section_5')">{{ 'common.contactUs' | translate }}</a>
+            <a class="nav-link" [class.active]="activeSection() === 'section_5'" (click)="navigateToSection('section_5'); closeNavbar()">{{ 'common.contactUs' | translate }}</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" routerLink="/world-map" [queryParams]="{ company: selectedCompanyId }" routerLinkActive="active">{{ 'common.seeOurPartners' | translate }}</a>
+            <a class="nav-link" routerLink="/world-map" [queryParams]="{ company: selectedCompanyId }" routerLinkActive="active" (click)="closeNavbar()">{{ 'common.seeOurPartners' | translate }}</a>
           </li>
 
           <li class="nav-item dropdown">

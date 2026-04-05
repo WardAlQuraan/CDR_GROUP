@@ -31,7 +31,8 @@
         <a class="nav-item"
            [routerLink]="item.route"
            routerLinkActive="active"
-           [routerLinkActiveOptions]="{exact: item.exact ?? false}">
+           [routerLinkActiveOptions]="{exact: item.exact ?? false}"
+           (click)="isMobile && toggleSidenav()">
           <mat-icon>{{ item.icon }}</mat-icon>
           <span class="nav-text">{{ item.label | translate }}</span>
           <span class="nav-tooltip">{{ item.label | translate }}</span>
