@@ -68,6 +68,7 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
   private startVbX = 0;
   private startVbY = 0;
   private panStep = 300;
+  private get isMobile(): boolean { return window.innerWidth < 768; }
 
   private data: OrgNode | null = null;
   private svg: d3.Selection<SVGSVGElement, unknown, null, undefined> | null = null;
@@ -304,13 +305,15 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
     // Clear existing chart
     d3.select(container).selectAll('*').remove();
 
-    // Card dimensions
-    const cardWidth = 140;
-    const cardHeight = 130;
-    const avatarRadius = 30;
-    const avatarCenterY = 38;
-    const horizontalSpacing = 20;
-    const verticalSpacing = 40;
+    // Card dimensions — smaller on mobile
+    const mobile = this.isMobile;
+    const cardWidth = mobile ? 100 : 140;
+    const cardHeight = mobile ? 95 : 130;
+    const avatarRadius = mobile ? 20 : 30;
+    const avatarCenterY = mobile ? 28 : 38;
+    const horizontalSpacing = mobile ? 10 : 20;
+    const verticalSpacing = mobile ? 25 : 40;
+    this.panStep = mobile ? 150 : 300;
 
     // Create hierarchy & layout
     const root = d3.hierarchy(this.data);
@@ -340,17 +343,20 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
     const offsetX = padding - minX + cardWidth / 2;
     const offsetY = padding;
 
-    // Initial viewBox: show first element
+    // Find the first visible node (skip virtual root)
+    const firstVisible = treeData.data.isVirtualRoot && treeData.children?.length
+      ? treeData.children[0]
+      : treeData;
+    const focusX = offsetX + firstVisible.x;
+    const focusY = offsetY + firstVisible.y;
+
+    // Initial viewBox: center on the first visible node
     if (this.contentW <= this.vpW) {
-      this.vbX = 0; // content fits, starts at left
-    } else if (this.isArabic) {
-      // RTL: first element is on the right side
-      this.vbX = this.contentW - this.vpW;
-    } else {
-      // LTR: first element is on the left side
       this.vbX = 0;
+    } else {
+      this.vbX = this.clampX(focusX - this.vpW / 2);
     }
-    this.vbY = 0;
+    this.vbY = this.clampY(focusY - this.vpH / 3);
 
     // Create SVG filling the viewport, viewBox controls visible area
     this.svg = d3.select(container)
@@ -512,7 +518,7 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
       .attr('text-anchor', 'middle')
       .attr('dominant-baseline', 'central')
       .style('fill', 'white')
-      .style('font-size', '13px')
+      .style('font-size', mobile ? '10px' : '13px')
       .style('font-weight', '700')
       .style('letter-spacing', '1px')
       .text(d => d.data.initials);
@@ -536,38 +542,90 @@ export class OrgChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
       .attr('preserveAspectRatio', 'xMidYMid slice')
       .attr('href', d => d.data.filePath || '');
 
-    // Name
-    nodes.append('text')
-      .attr('class', 'node-name-text')
-      .attr('x', centerX)
-      .attr('y', avatarCenterY + avatarRadius + 16)
-      .attr('text-anchor', 'middle')
-      .style('fill', '#1e293b')
-      .style('font-size', '11px')
-      .style('font-weight', '700')
-      .text(d => this.truncateText(d.data.name, 16));
+    // Name — use foreignObject for reliable Arabic text on mobile
+    if (this.isArabic) {
+      nodes.append('foreignObject')
+        .attr('x', 0).attr('y', avatarCenterY + avatarRadius + (mobile ? 4 : 6))
+        .attr('width', cardWidth).attr('height', mobile ? 14 : 18)
+        .append('xhtml:div')
+        .style('width', '100%')
+        .style('text-align', 'center')
+        .style('direction', 'rtl')
+        .style('font-size', mobile ? '8px' : '11px')
+        .style('font-weight', '700')
+        .style('color', '#1e293b')
+        .style('line-height', '1')
+        .style('overflow', 'hidden')
+        .style('text-overflow', 'ellipsis')
+        .style('white-space', 'nowrap')
+        .text(d => this.truncateText(d.data.name, mobile ? 12 : 16));
 
-    // Title
-    nodes.append('text')
-      .attr('class', 'node-title-text')
-      .attr('x', centerX)
-      .attr('y', avatarCenterY + avatarRadius + 30)
-      .attr('text-anchor', 'middle')
-      .style('fill', '#D9A93E')
-      .style('font-size', '9px')
-      .style('font-weight', '600')
-      .text(d => this.truncateText(d.data.title, 20));
+      nodes.append('foreignObject')
+        .attr('x', 0).attr('y', avatarCenterY + avatarRadius + (mobile ? 16 : 22))
+        .attr('width', cardWidth).attr('height', mobile ? 12 : 14)
+        .append('xhtml:div')
+        .style('width', '100%')
+        .style('text-align', 'center')
+        .style('direction', 'rtl')
+        .style('font-size', mobile ? '7px' : '9px')
+        .style('font-weight', '600')
+        .style('color', '#D9A93E')
+        .style('line-height', '1')
+        .style('overflow', 'hidden')
+        .style('text-overflow', 'ellipsis')
+        .style('white-space', 'nowrap')
+        .text(d => this.truncateText(d.data.title, mobile ? 14 : 20));
 
-    // Company
-    nodes.append('text')
-      .attr('class', 'node-company-text')
-      .attr('x', centerX)
-      .attr('y', avatarCenterY + avatarRadius + 42)
-      .attr('text-anchor', 'middle')
-      .style('fill', '#64748b')
-      .style('font-size', '8px')
-      .style('font-weight', '500')
-      .text(d => this.truncateText(d.data.company, 28));
+      nodes.append('foreignObject')
+        .attr('x', 0).attr('y', avatarCenterY + avatarRadius + (mobile ? 26 : 34))
+        .attr('width', cardWidth).attr('height', mobile ? 10 : 12)
+        .append('xhtml:div')
+        .style('width', '100%')
+        .style('text-align', 'center')
+        .style('direction', 'rtl')
+        .style('font-size', mobile ? '6px' : '8px')
+        .style('font-weight', '500')
+        .style('color', '#64748b')
+        .style('line-height', '1')
+        .style('overflow', 'hidden')
+        .style('text-overflow', 'ellipsis')
+        .style('white-space', 'nowrap')
+        .text(d => this.truncateText(d.data.company, mobile ? 18 : 28));
+    } else {
+      // Name
+      nodes.append('text')
+        .attr('class', 'node-name-text')
+        .attr('x', centerX)
+        .attr('y', avatarCenterY + avatarRadius + (mobile ? 12 : 16))
+        .attr('text-anchor', 'middle')
+        .style('fill', '#1e293b')
+        .style('font-size', mobile ? '8px' : '11px')
+        .style('font-weight', '700')
+        .text(d => this.truncateText(d.data.name, mobile ? 12 : 16));
+
+      // Title
+      nodes.append('text')
+        .attr('class', 'node-title-text')
+        .attr('x', centerX)
+        .attr('y', avatarCenterY + avatarRadius + (mobile ? 22 : 30))
+        .attr('text-anchor', 'middle')
+        .style('fill', '#D9A93E')
+        .style('font-size', mobile ? '7px' : '9px')
+        .style('font-weight', '600')
+        .text(d => this.truncateText(d.data.title, mobile ? 14 : 20));
+
+      // Company
+      nodes.append('text')
+        .attr('class', 'node-company-text')
+        .attr('x', centerX)
+        .attr('y', avatarCenterY + avatarRadius + (mobile ? 31 : 42))
+        .attr('text-anchor', 'middle')
+        .style('fill', '#64748b')
+        .style('font-size', mobile ? '6px' : '8px')
+        .style('font-weight', '500')
+        .text(d => this.truncateText(d.data.company, mobile ? 18 : 28));
+    }
+
 
     // Bottom connector
     nodes.filter(d => !!(d.children && d.children.length > 0))

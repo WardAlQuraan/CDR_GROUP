@@ -153,13 +153,6 @@ export class UsersComponent implements OnInit {
           permission: Permissions.AUDIT_LOGS_READ,
           color: 'accent',
           onClick: (row) => this.router.navigate(['/admin/audit-logs', 'User', row.id])
-        },
-        {
-          icon: 'delete',
-          tooltip: 'admin.users.delete',
-          permission: Permissions.USERS_DELETE,
-          color: 'warn',
-          onClick: (row) => this.deleteUser(row)
         }
       ],
       showExport: true,

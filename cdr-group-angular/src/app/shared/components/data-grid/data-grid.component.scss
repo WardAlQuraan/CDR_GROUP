@@ -355,6 +355,67 @@ $transition: 200ms ease;
   }
 }
 
+// ── Action Buttons ──
+.action-btn {
+  width: 36px;
+  height: 36px;
+  margin: 0 2px;
+  transition: $transition;
+  border-radius: $radius-sm;
+
+  mat-icon {
+    font-size: 20px;
+    color: $text-secondary;
+    transition: color $transition-fast;
+  }
+
+  &:hover {
+    background: $primary-light;
+
+    mat-icon {
+      color: $primary-color;
+    }
+  }
+
+  @each $name, $bg, $fg in
+    (primary, $primary-light, $primary-color),
+    (warn, $warn-light, $warn-color),
+    (success, $success-light, $success-color),
+    (info, $info-light, $info-color),
+    (accent, $accent-light, $accent-color) {
+    &.#{$name} {
+      mat-icon { color: $fg; }
+      &:hover {
+        background: $bg;
+      }
+    }
+  }
+}
+
+// ── Status Badges ──
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: $radius-full;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+
+  @each $name, $bg, $fg in
+    (success, $success-light, $success-color),
+    (warn, $warn-light, $warn-color),
+    (accent, $accent-light, $accent-color),
+    (info, $info-light, $info-color),
+    (primary, $primary-light, $primary-color) {
+    &.badge-#{$name} {
+      background: $bg;
+      color: $fg;
+    }
+  }
+}
+
 .loading-overlay {
   position: absolute;
   inset: 0;
@@ -386,6 +447,71 @@ $transition: 200ms ease;
     font-size: 0.875rem;
     font-weight: 500;
   }
+}
+
+// ── Cards (Mobile) ──
+.cards-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.data-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  overflow: hidden;
+  transition: box-shadow $transition;
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+}
+
+.card-fields {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.card-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-bottom: 0.625rem;
+  border-bottom: 1px solid lighten($border-color, 3%);
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.card-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+
+.card-value {
+  font-size: 0.875rem;
+  color: $dark-color;
+  text-align: end;
+  word-break: break-word;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  background: $background-light;
+  border-top: 1px solid $border-color;
 }
 
 .table-wrapper {
@@ -455,66 +581,6 @@ $transition: 200ms ease;
   // Actions
   .actions-cell {
     padding: 0.5rem 1rem;
-  }
-
-  .action-btn {
-    width: 36px;
-    height: 36px;
-    margin: 0 2px;
-    transition: $transition;
-    border-radius: $radius-sm;
-
-    mat-icon {
-      font-size: 20px;
-      color: $text-secondary;
-      transition: color $transition-fast;
-    }
-
-    &:hover {
-      background: $primary-light;
-
-      mat-icon {
-        color: $primary-color;
-      }
-    }
-
-    @each $name, $bg, $fg in
-      (primary, $primary-light, $primary-color),
-      (warn, $warn-light, $warn-color),
-      (success, $success-light, $success-color),
-      (info, $info-light, $info-color),
-      (accent, $accent-light, $accent-color) {
-      &.#{$name} {
-        mat-icon { color: $fg; }
-        &:hover {
-          background: $bg;
-        }
-      }
-    }
-  }
-
-  // Status badges
-  .status-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.25rem 0.75rem;
-    border-radius: $radius-full;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.025em;
-
-    @each $name, $bg, $fg in
-      (success, $success-light, $success-color),
-      (warn, $warn-light, $warn-color),
-      (accent, $accent-light, $accent-color),
-      (info, $info-light, $info-color),
-      (primary, $primary-light, $primary-color) {
-      &.badge-#{$name} {
-        background: $bg;
-        color: $fg;
-      }
-    }
   }
 
   // Empty State
@@ -686,90 +752,91 @@ $transition: 200ms ease;
     }
   }
 
-  // Fallback Material Paginator styles
-  mat-paginator {
-    border-top: 1px solid $border-color;
+}
 
-    ::ng-deep {
-      .mat-mdc-paginator-outer-container {
-        padding: 0.25rem 0;
-      }
+mat-paginator {
+  border-top: 1px solid $border-color;
+  margin-top: 1rem;
 
-      .mat-mdc-paginator-container {
-        padding: 0.5rem 1.25rem;
-        min-height: 60px;
-        gap: 1rem;
-      }
+  ::ng-deep {
+    .mat-mdc-paginator-outer-container {
+      padding: 0.25rem 0;
+    }
 
-      .mat-mdc-paginator-page-size {
-        align-items: center;
-        gap: 0.5rem;
-      }
+    .mat-mdc-paginator-container {
+      padding: 0.5rem 1.25rem;
+      min-height: 60px;
+      gap: 1rem;
+    }
 
-      .mat-mdc-paginator-page-size-label {
-        color: $text-secondary;
-        font-size: 0.8125rem;
-        margin: 0;
-      }
+    .mat-mdc-paginator-page-size {
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-      .mat-mdc-paginator-page-size-select {
-        margin: 0;
-        width: auto;
+    .mat-mdc-paginator-page-size-label {
+      color: $text-secondary;
+      font-size: 0.8125rem;
+      margin: 0;
+    }
 
-        .mat-mdc-text-field-wrapper {
-          padding: 0 0.75rem;
-          background: $white;
-          border: 1px solid $border-color;
-          border-radius: $radius-sm;
+    .mat-mdc-paginator-page-size-select {
+      margin: 0;
+      width: auto;
 
-          &:hover {
-            border-color: color.adjust($border-color, $lightness: -10%);
-          }
-        }
-
-        .mdc-notched-outline {
-          display: none;
-        }
-
-        .mat-mdc-select-value {
-          font-size: 0.875rem;
-        }
-      }
-
-      .mat-mdc-paginator-range-label {
-        color: $text-secondary;
-        font-size: 0.875rem;
-        margin: 0 1rem;
-      }
-
-      .mat-mdc-paginator-range-actions {
-        gap: 0.25rem;
-      }
-
-      [class*="mat-mdc-paginator-navigation"] {
-        width: 36px;
-        height: 36px;
+      .mat-mdc-text-field-wrapper {
+        padding: 0 0.75rem;
         background: $white;
         border: 1px solid $border-color;
         border-radius: $radius-sm;
-        transition: $transition;
 
-        &:hover:not(:disabled) {
-          background: $primary-light;
-          border-color: $primary-color;
-
-          .mat-mdc-paginator-icon { fill: $primary-color; }
+        &:hover {
+          border-color: color.adjust($border-color, $lightness: -10%);
         }
+      }
 
-        &:disabled {
-          opacity: 0.4;
-          background: $background-light;
-        }
+      .mdc-notched-outline {
+        display: none;
+      }
 
-        .mat-mdc-paginator-icon {
-          fill: $text-secondary;
-          transition: fill $transition-fast;
-        }
+      .mat-mdc-select-value {
+        font-size: 0.875rem;
+      }
+    }
+
+    .mat-mdc-paginator-range-label {
+      color: $text-secondary;
+      font-size: 0.875rem;
+      margin: 0 1rem;
+    }
+
+    .mat-mdc-paginator-range-actions {
+      gap: 0.25rem;
+    }
+
+    [class*="mat-mdc-paginator-navigation"] {
+      width: 36px;
+      height: 36px;
+      background: $white;
+      border: 1px solid $border-color;
+      border-radius: $radius-sm;
+      transition: $transition;
+
+      &:hover:not(:disabled) {
+        background: $primary-light;
+        border-color: $primary-color;
+
+        .mat-mdc-paginator-icon { fill: $primary-color; }
+      }
+
+      &:disabled {
+        opacity: 0.4;
+        background: $background-light;
+      }
+
+      .mat-mdc-paginator-icon {
+        fill: $text-secondary;
+        transition: fill $transition-fast;
       }
     }
   }
@@ -817,6 +884,18 @@ $transition: 200ms ease;
       background-position: left 0.5rem center;
       padding: 0.375rem 0.75rem 0.375rem 2rem;
     }
+  }
+
+  .card-field {
+    flex-direction: row-reverse;
+  }
+
+  .card-value {
+    text-align: start;
+  }
+
+  .card-actions {
+    justify-content: flex-start;
   }
 }
 

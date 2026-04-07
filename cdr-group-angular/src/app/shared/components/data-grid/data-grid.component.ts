@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild, ChangeDetectorRef, HostListener } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -20,6 +20,9 @@ export class DataGridComponent<T> implements OnChanges {
   @Input() pageSize = 10;
   @Input() pageIndex = 0;
   @Input() exporting = false;
+  @Input() mobileBreakpoint = 768;
+
+  isMobile = false;
 
   @Output() pageChange = new EventEmitter<PageEvent>();
   @Output() sortChange = new EventEmitter<Sort>();
@@ -36,7 +39,18 @@ export class DataGridComponent<T> implements OnChanges {
   filterValues: FilterValues = {};
   searchTerm = '';
 
-  constructor(private cdr: ChangeDetectorRef, private authService: AuthService) {}
+  constructor(private cdr: ChangeDetectorRef, private authService: AuthService) {
+    this.checkMobile();
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.checkMobile();
+  }
+
+  private checkMobile(): void {
+    this.isMobile = window.innerWidth < this.mobileBreakpoint;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {

@@ -82,12 +82,12 @@ namespace cdr_group.Persistence.Repositories
 
         public async Task<bool> UsernameExistsAsync(string username)
         {
-            return await _dbSet.AnyAsync(u => u.Username == username && !u.IsDeleted);
+            return await _dbSet.IgnoreQueryFilters().AnyAsync(u => u.Username == username);
         }
 
         public async Task<bool> EmailExistsAsync(string email)
         {
-            return await _dbSet.AnyAsync(u => u.Email == email && !u.IsDeleted);
+            return await _dbSet.IgnoreQueryFilters().AnyAsync(u => u.Email == email);
         }
 
         public async Task<List<UserRole>> GetAllUserRolesAsync(Guid userId)

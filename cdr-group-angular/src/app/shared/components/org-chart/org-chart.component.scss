@@ -168,9 +168,73 @@ app-org-chart {
   }
 }
 
+// Company name
+.org-chart-company-name {
+  text-align: center;
+  margin: 0 0 0.5rem;
+}
+
 // D3 Chart Container
 .org-chart-container {
   display: block;
+}
+
+// ── Mobile responsive ──
+@media (max-width: 768px) {
+  app-org-chart {
+    height: calc(100vh - 160px);
+  }
+
+  .org-chart-loading,
+  .org-chart-error,
+  .org-chart-empty {
+    min-height: 250px;
+    padding: 24px;
+  }
+
+  .org-chart-error {
+    mat-icon {
+      font-size: 40px;
+      width: 40px;
+      height: 40px;
+    }
+
+    p {
+      font-size: 0.95rem;
+    }
+  }
+
+  .org-chart-empty {
+    mat-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+    }
+
+    p {
+      font-size: 0.95rem;
+    }
+  }
+
+  .org-chart-swiper {
+    border-radius: 10px;
+  }
+
+  .swiper-nav {
+    width: 32px;
+    height: 32px;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+
+    &-left { left: 4px; }
+    &-right { right: 4px; }
+    &-up { top: 4px; }
+    &-down { bottom: 4px; }
+  }
 }
 
 // D3 SVG Styles
