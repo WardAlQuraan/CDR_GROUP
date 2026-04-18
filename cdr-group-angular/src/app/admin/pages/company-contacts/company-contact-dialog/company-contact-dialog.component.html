@@ -34,12 +34,12 @@
 
         <app-form-field formControlName="name" label="admin.companyContacts.name" icon="label"
           placeholder="admin.companyContacts.placeholders.name"
-          [errors]="[{name: 'required', message: 'admin.companyContacts.errors.nameRequired'}]">
+          [errors]="[{name: 'required', message: 'admin.companyContacts.errors.nameRequired'}, {name: 'maxlength', message: 'admin.companyContacts.errors.nameMaxLength'}]">
         </app-form-field>
 
         <app-form-field formControlName="value" label="admin.companyContacts.value" icon="link"
           placeholder="admin.companyContacts.placeholders.value"
-          [errors]="[{name: 'required', message: 'admin.companyContacts.errors.valueRequired'}]">
+          [errors]="[{name: 'required', message: 'admin.companyContacts.errors.valueRequired'}, {name: 'maxlength', message: 'admin.companyContacts.errors.valueMaxLength'}]">
         </app-form-field>
       </div>
     </div>

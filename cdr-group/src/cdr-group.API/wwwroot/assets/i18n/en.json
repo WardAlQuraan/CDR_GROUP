@@ -596,7 +596,11 @@
         "emailInvalid": "Please enter a valid email",
         "salaryMin": "Salary cannot be negative",
         "rankRequired": "Rank is required",
-        "rankMin": "Rank cannot be negative"
+        "rankMin": "Rank cannot be negative",
+        "nameMaxLength": "Name must not exceed 100 characters",
+        "emailMaxLength": "Email must not exceed 256 characters",
+        "phoneMaxLength": "Phone must not exceed 20 characters",
+        "salaryChangeReasonMaxLength": "Reason must not exceed 500 characters"
       },
       "placeholders": {
         "code": "Enter employee code",
@@ -657,7 +661,9 @@
         "codeRequired": "Position code is required",
         "nameEnRequired": "English name is required",
         "nameArRequired": "Arabic name is required",
-        "salaryMin": "Salary cannot be negative"
+        "salaryMin": "Salary cannot be negative",
+        "nameMaxLength": "Name must not exceed 200 characters",
+        "descriptionMaxLength": "Description must not exceed 500 characters"
       },
       "placeholders": {
         "code": "Enter position code",
@@ -747,7 +753,19 @@
         "openingStartDayRequired": "Start day is required",
         "openingEndDayRequired": "End day is required",
         "openingStartTimeRequired": "Start time is required",
-        "openingEndTimeRequired": "End time is required"
+        "openingEndTimeRequired": "End time is required",
+        "nameMinLength": "Name must be at least 2 characters",
+        "nameMaxLength": "Name must not exceed 200 characters",
+        "titleMinLength": "Title must be at least 2 characters",
+        "titleMaxLength": "Title must not exceed 500 characters",
+        "descriptionMinLength": "Description must be at least 10 characters",
+        "descriptionMaxLength": "Description must not exceed 2000 characters",
+        "storyMinLength": "Story must be at least 10 characters",
+        "storyMaxLength": "Story must not exceed 2000 characters",
+        "missionMinLength": "Mission must be at least 10 characters",
+        "missionMaxLength": "Mission must not exceed 1000 characters",
+        "visionMinLength": "Vision must be at least 10 characters",
+        "visionMaxLength": "Vision must not exceed 1000 characters"
       },
       "placeholders": {
         "code": "Enter company code",
@@ -795,7 +813,9 @@
         "deleteFailed": "Failed to delete contact",
         "iconRequired": "Icon is required",
         "nameRequired": "Name is required",
-        "valueRequired": "Value is required"
+        "valueRequired": "Value is required",
+        "nameMaxLength": "Name must not exceed 200 characters",
+        "valueMaxLength": "Value must not exceed 500 characters"
       },
       "placeholders": {
         "icon": "Enter icon name (e.g. phone, email)",
@@ -839,7 +859,10 @@
         "updateFailed": "Failed to update event",
         "deleteFailed": "Failed to delete event",
         "titleEnRequired": "English title is required",
-        "titleArRequired": "Arabic title is required"
+        "titleArRequired": "Arabic title is required",
+        "titleMaxLength": "Title must not exceed 200 characters",
+        "descriptionMaxLength": "Description must not exceed 2000 characters",
+        "eventUrlMaxLength": "URL must not exceed 500 characters"
       },
       "placeholders": {
         "titleEn": "Enter Title in (English)",
@@ -899,7 +922,8 @@
         "updateFailed": "Failed to update review",
         "deleteFailed": "Failed to delete review",
         "numberOfStarsRequired": "Rating is required",
-        "commentRequired": "Comment is required"
+        "commentRequired": "Comment is required",
+        "commentMaxLength": "Comment must not exceed 2000 characters"
       },
       "placeholders": {
         "comment": "Enter review comment"

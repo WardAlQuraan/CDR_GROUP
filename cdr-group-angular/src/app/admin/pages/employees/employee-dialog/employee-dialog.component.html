@@ -15,24 +15,24 @@
         <div class="form-row">
           <app-form-field formControlName="firstNameEn" label="admin.employees.firstNameEn" icon="person"
             placeholder="admin.employees.placeholders.firstNameEn" textDir="ltr"
-            [errors]="[{name: 'required', message: 'admin.employees.errors.firstNameEnRequired'}]">
+            [errors]="[{name: 'required', message: 'admin.employees.errors.firstNameEnRequired'}, {name: 'maxlength', message: 'admin.employees.errors.nameMaxLength'}]">
           </app-form-field>
 
           <app-form-field formControlName="lastNameEn" label="admin.employees.lastNameEn" icon="person"
             placeholder="admin.employees.placeholders.lastNameEn" textDir="ltr"
-            [errors]="[{name: 'required', message: 'admin.employees.errors.lastNameEnRequired'}]">
+            [errors]="[{name: 'required', message: 'admin.employees.errors.lastNameEnRequired'}, {name: 'maxlength', message: 'admin.employees.errors.nameMaxLength'}]">
           </app-form-field>
         </div>
 
         <div class="form-row">
           <app-form-field formControlName="firstNameAr" label="admin.employees.firstNameAr" icon="person"
             placeholder="admin.employees.placeholders.firstNameAr" textDir="rtl"
-            [errors]="[{name: 'required', message: 'admin.employees.errors.firstNameArRequired'}]">
+            [errors]="[{name: 'required', message: 'admin.employees.errors.firstNameArRequired'}, {name: 'maxlength', message: 'admin.employees.errors.nameMaxLength'}]">
           </app-form-field>
 
           <app-form-field formControlName="lastNameAr" label="admin.employees.lastNameAr" icon="person"
             placeholder="admin.employees.placeholders.lastNameAr" textDir="rtl"
-            [errors]="[{name: 'required', message: 'admin.employees.errors.lastNameArRequired'}]">
+            [errors]="[{name: 'required', message: 'admin.employees.errors.lastNameArRequired'}, {name: 'maxlength', message: 'admin.employees.errors.nameMaxLength'}]">
           </app-form-field>
         </div>
       </div>
@@ -51,11 +51,12 @@
         <div class="form-row">
           <app-form-field formControlName="email" type="email" label="admin.employees.email" icon="email"
             placeholder="admin.employees.placeholders.email"
-            [errors]="[{name: 'email', message: 'admin.employees.errors.emailInvalid'}]">
+            [errors]="[{name: 'email', message: 'admin.employees.errors.emailInvalid'}, {name: 'maxlength', message: 'admin.employees.errors.emailMaxLength'}]">
           </app-form-field>
 
           <app-form-field formControlName="phone" label="admin.employees.phone" icon="phone"
-            placeholder="admin.employees.placeholders.phone">
+            placeholder="admin.employees.placeholders.phone"
+            [errors]="[{name: 'maxlength', message: 'admin.employees.errors.phoneMaxLength'}]">
           </app-form-field>
         </div>
       </div>
@@ -104,7 +105,8 @@
 
         @if (isEditMode && salaryChanged) {
           <app-form-field formControlName="salaryChangeReason" label="admin.employees.salaryChangeReason" icon="edit_note"
-            placeholder="admin.employees.placeholders.salaryChangeReason">
+            placeholder="admin.employees.placeholders.salaryChangeReason"
+            [errors]="[{name: 'maxlength', message: 'admin.employees.errors.salaryChangeReasonMaxLength'}]">
           </app-form-field>
         }
 

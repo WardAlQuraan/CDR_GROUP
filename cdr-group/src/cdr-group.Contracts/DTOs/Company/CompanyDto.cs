@@ -60,10 +60,10 @@ namespace cdr_group.Contracts.DTOs.Company
         [StringLength(200)]
         public string NameAr { get; set; } = string.Empty;
 
-        [StringLength(500)]
+        [StringLength(2000)]
         public string? DescriptionEn { get; set; }
 
-        [StringLength(500)]
+        [StringLength(2000)]
         public string? DescriptionAr { get; set; }
 
         [StringLength(2000)]
@@ -129,10 +129,10 @@ namespace cdr_group.Contracts.DTOs.Company
         [StringLength(200)]
         public string? NameAr { get; set; }
 
-        [StringLength(500)]
+        [StringLength(2000)]
         public string? DescriptionEn { get; set; }
 
-        [StringLength(500)]
+        [StringLength(2000)]
         public string? DescriptionAr { get; set; }
 
         [StringLength(2000)]

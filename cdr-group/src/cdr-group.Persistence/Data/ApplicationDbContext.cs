@@ -347,8 +347,8 @@ namespace cdr_group.Persistence.Data
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.NameEn).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.NameAr).IsRequired().HasMaxLength(200);
-                entity.Property(e => e.DescriptionEn).HasMaxLength(500);
-                entity.Property(e => e.DescriptionAr).HasMaxLength(500);
+                entity.Property(e => e.DescriptionEn).HasMaxLength(2000);
+                entity.Property(e => e.DescriptionAr).HasMaxLength(2000);
                 entity.Property(e => e.StoryEn).HasMaxLength(2000);
                 entity.Property(e => e.StoryAr).HasMaxLength(2000);
                 entity.Property(e => e.MissionEn).HasMaxLength(1000);

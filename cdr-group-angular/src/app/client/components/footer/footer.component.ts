@@ -157,6 +157,24 @@ export class FooterComponent implements OnInit, OnDestroy {
     return contact.value;
   }
 
+  getDisplayValue(contact: CompanyContactDto): string {
+    const value = contact.value || '';
+    if (contact.icon === 'bi-telephone' || contact.icon === 'bi-printer' || contact.icon === 'bi-phone' || contact.icon === 'bi-envelope') {
+      return value;
+    }
+    if (/^https?:\/\//i.test(value)) {
+      try {
+        const url = new URL(value);
+        const path = (url.pathname + url.search).replace(/\/$/, '');
+        const display = url.hostname.replace(/^www\./, '') + path;
+        return display.length > 32 ? display.slice(0, 32) + '…' : display;
+      } catch {
+        return value.length > 32 ? value.slice(0, 32) + '…' : value;
+      }
+    }
+    return value.length > 32 ? value.slice(0, 32) + '…' : value;
+  }
+
   isExternalLink(contact: CompanyContactDto): boolean {
     return contact.icon !== 'bi-telephone' && contact.icon !== 'bi-envelope';
   }

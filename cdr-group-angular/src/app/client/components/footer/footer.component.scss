@@ -63,6 +63,7 @@
   transition: color 0.2s;
   cursor: pointer;
   font-size: 0.95rem;
+  min-width: 0;
 
   &:hover {
     color: var(--primary-color);
@@ -78,6 +79,12 @@
     width: 22px;
     text-align: center;
     flex-shrink: 0;
+  }
+
+  span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 }
 

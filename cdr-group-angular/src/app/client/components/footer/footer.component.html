@@ -56,12 +56,12 @@
           </div>
         } @else {
           <ul class="footer-links">
-            @for (contact of addressContacts; track contact.id) {
+            @for (contact of contacts; track contact.id) {
               <li>
                 <a [href]="getContactHref(contact)" [target]="isExternalLink(contact) ? '_blank' : '_self'" rel="noopener"
-                  class="footer-link" (click)="onContactClick($event, contact)">
+                  class="footer-link" [title]="contact.value" (click)="onContactClick($event, contact)">
                   <i class="bi" [ngClass]="contact.icon"></i>
-                  <span>{{ contact.value }}</span>
+                  <span>{{ getDisplayValue(contact) }}</span>
                 </a>
               </li>
             }

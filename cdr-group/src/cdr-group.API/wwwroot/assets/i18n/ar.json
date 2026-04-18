@@ -596,7 +596,11 @@
         "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
         "salaryMin": "الراتب لا يمكن أن يكون سالباً",
         "rankRequired": "الرتبة مطلوبة",
-        "rankMin": "الرتبة لا يمكن أن تكون سالبة"
+        "rankMin": "الرتبة لا يمكن أن تكون سالبة",
+        "nameMaxLength": "يجب ألا يتجاوز الاسم 100 حرف",
+        "emailMaxLength": "يجب ألا يتجاوز البريد الإلكتروني 256 حرف",
+        "phoneMaxLength": "يجب ألا يتجاوز رقم الهاتف 20 حرف",
+        "salaryChangeReasonMaxLength": "يجب ألا يتجاوز السبب 500 حرف"
       },
       "placeholders": {
         "code": "أدخل رمز الموظف",
@@ -657,7 +661,9 @@
         "codeRequired": "رمز المنصب مطلوب",
         "nameEnRequired": "الاسم الإنجليزي مطلوب",
         "nameArRequired": "الاسم العربي مطلوب",
-        "salaryMin": "الراتب لا يمكن أن يكون سالباً"
+        "salaryMin": "الراتب لا يمكن أن يكون سالباً",
+        "nameMaxLength": "يجب ألا يتجاوز الاسم 200 حرف",
+        "descriptionMaxLength": "يجب ألا يتجاوز الوصف 500 حرف"
       },
       "placeholders": {
         "code": "أدخل رمز المنصب",
@@ -747,7 +753,19 @@
         "openingStartDayRequired": "يوم البداية مطلوب",
         "openingEndDayRequired": "يوم النهاية مطلوب",
         "openingStartTimeRequired": "وقت البداية مطلوب",
-        "openingEndTimeRequired": "وقت النهاية مطلوب"
+        "openingEndTimeRequired": "وقت النهاية مطلوب",
+        "nameMinLength": "يجب أن يكون الاسم على الأقل 2 حرف",
+        "nameMaxLength": "يجب ألا يتجاوز الاسم 200 حرف",
+        "titleMinLength": "يجب أن يكون العنوان على الأقل 2 حرف",
+        "titleMaxLength": "يجب ألا يتجاوز العنوان 500 حرف",
+        "descriptionMinLength": "يجب أن يكون الوصف على الأقل 10 أحرف",
+        "descriptionMaxLength": "يجب ألا يتجاوز الوصف 2000 حرف",
+        "storyMinLength": "يجب أن تكون القصة على الأقل 10 أحرف",
+        "storyMaxLength": "يجب ألا تتجاوز القصة 2000 حرف",
+        "missionMinLength": "يجب أن تكون المهمة على الأقل 10 أحرف",
+        "missionMaxLength": "يجب ألا تتجاوز المهمة 1000 حرف",
+        "visionMinLength": "يجب أن تكون الرؤية على الأقل 10 أحرف",
+        "visionMaxLength": "يجب ألا تتجاوز الرؤية 1000 حرف"
       },
       "placeholders": {
         "code": "أدخل رمز الشركة",
@@ -795,7 +813,9 @@
         "deleteFailed": "فشل حذف جهة الاتصال",
         "iconRequired": "الأيقونة مطلوبة",
         "nameRequired": "الاسم مطلوب",
-        "valueRequired": "القيمة مطلوبة"
+        "valueRequired": "القيمة مطلوبة",
+        "nameMaxLength": "يجب ألا يتجاوز الاسم 200 حرف",
+        "valueMaxLength": "يجب ألا تتجاوز القيمة 500 حرف"
       },
       "placeholders": {
         "icon": "أدخل اسم الأيقونة (مثل phone, email)",
@@ -839,7 +859,10 @@
         "updateFailed": "فشل في تحديث الفعالية",
         "deleteFailed": "فشل في حذف الفعالية",
         "titleEnRequired": "العنوان الإنجليزي مطلوب",
-        "titleArRequired": "العنوان العربي مطلوب"
+        "titleArRequired": "العنوان العربي مطلوب",
+        "titleMaxLength": "يجب ألا يتجاوز العنوان 200 حرف",
+        "descriptionMaxLength": "يجب ألا يتجاوز الوصف 2000 حرف",
+        "eventUrlMaxLength": "يجب ألا يتجاوز الرابط 500 حرف"
       },
       "placeholders": {
         "titleEn": "أدخل العنوان (بالإنجليزية)",
@@ -899,7 +922,8 @@
         "updateFailed": "فشل في تحديث التقييم",
         "deleteFailed": "فشل في حذف التقييم",
         "numberOfStarsRequired": "التقييم مطلوب",
-        "commentRequired": "التعليق مطلوب"
+        "commentRequired": "التعليق مطلوب",
+        "commentMaxLength": "يجب ألا يتجاوز التعليق 2000 حرف"
       },
       "placeholders": {
         "comment": "أدخل تعليق التقييم"

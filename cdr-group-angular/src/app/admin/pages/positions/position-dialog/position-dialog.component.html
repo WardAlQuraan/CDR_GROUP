@@ -20,12 +20,12 @@
         <div class="form-row">
           <app-form-field formControlName="nameEn" label="admin.positions.nameEn"
             placeholder="admin.positions.placeholders.nameEn" textDir="ltr"
-            [errors]="[{name: 'required', message: 'admin.positions.errors.nameEnRequired'}]">
+            [errors]="[{name: 'required', message: 'admin.positions.errors.nameEnRequired'}, {name: 'maxlength', message: 'admin.positions.errors.nameMaxLength'}]">
           </app-form-field>
 
-          <app-form-field formControlName="nameAr" label="admin.positions.nameAr" 
+          <app-form-field formControlName="nameAr" label="admin.positions.nameAr"
             placeholder="admin.positions.placeholders.nameAr" textDir="rtl"
-            [errors]="[{name: 'required', message: 'admin.positions.errors.nameArRequired'}]">
+            [errors]="[{name: 'required', message: 'admin.positions.errors.nameArRequired'}, {name: 'maxlength', message: 'admin.positions.errors.nameMaxLength'}]">
           </app-form-field>
         </div>
       </div>
@@ -42,11 +42,13 @@
 
       <div class="section-content">
         <app-form-field formControlName="descriptionEn" type="textarea" label="admin.positions.descriptionEn"
-          placeholder="admin.positions.placeholders.descriptionEn" textDir="ltr">
+          placeholder="admin.positions.placeholders.descriptionEn" textDir="ltr"
+          [errors]="[{name: 'maxlength', message: 'admin.positions.errors.descriptionMaxLength'}]">
         </app-form-field>
 
         <app-form-field formControlName="descriptionAr" type="textarea" label="admin.positions.descriptionAr"
-          placeholder="admin.positions.placeholders.descriptionAr" textDir="rtl">
+          placeholder="admin.positions.placeholders.descriptionAr" textDir="rtl"
+          [errors]="[{name: 'maxlength', message: 'admin.positions.errors.descriptionMaxLength'}]">
         </app-form-field>
       </div>
     </div>

@@ -20,12 +20,12 @@
         <div class="form-row">
           <app-form-field formControlName="titleEn" label="admin.eventsAdmin.titleEn" icon="title"
             placeholder="admin.eventsAdmin.placeholders.titleEn" textDir="ltr"
-            [errors]="[{name: 'required', message: 'admin.eventsAdmin.errors.titleEnRequired'}]">
+            [errors]="[{name: 'required', message: 'admin.eventsAdmin.errors.titleEnRequired'}, {name: 'maxlength', message: 'admin.eventsAdmin.errors.titleMaxLength'}]">
           </app-form-field>
 
           <app-form-field formControlName="titleAr" label="admin.eventsAdmin.titleAr" icon="title"
             placeholder="admin.eventsAdmin.placeholders.titleAr" textDir="rtl"
-            [errors]="[{name: 'required', message: 'admin.eventsAdmin.errors.titleArRequired'}]">
+            [errors]="[{name: 'required', message: 'admin.eventsAdmin.errors.titleArRequired'}, {name: 'maxlength', message: 'admin.eventsAdmin.errors.titleMaxLength'}]">
           </app-form-field>
         </div>
       </div>
@@ -42,11 +42,13 @@
 
       <div class="section-content">
         <app-form-field formControlName="descriptionEn" type="textarea" label="admin.eventsAdmin.descriptionEn"
-          placeholder="admin.eventsAdmin.placeholders.descriptionEn" textDir="ltr">
+          placeholder="admin.eventsAdmin.placeholders.descriptionEn" textDir="ltr"
+          [errors]="[{name: 'maxlength', message: 'admin.eventsAdmin.errors.descriptionMaxLength'}]">
         </app-form-field>
 
         <app-form-field formControlName="descriptionAr" type="textarea" label="admin.eventsAdmin.descriptionAr"
-          placeholder="admin.eventsAdmin.placeholders.descriptionAr" textDir="rtl">
+          placeholder="admin.eventsAdmin.placeholders.descriptionAr" textDir="rtl"
+          [errors]="[{name: 'maxlength', message: 'admin.eventsAdmin.errors.descriptionMaxLength'}]">
         </app-form-field>
       </div>
     </div>
@@ -69,7 +71,8 @@
           </app-date-picker>
 
           <app-form-field formControlName="eventUrl" label="admin.eventsAdmin.eventUrl" icon="link"
-            placeholder="admin.eventsAdmin.placeholders.eventUrl">
+            placeholder="admin.eventsAdmin.placeholders.eventUrl"
+            [errors]="[{name: 'maxlength', message: 'admin.eventsAdmin.errors.eventUrlMaxLength'}]">
           </app-form-field>
         </div>
 

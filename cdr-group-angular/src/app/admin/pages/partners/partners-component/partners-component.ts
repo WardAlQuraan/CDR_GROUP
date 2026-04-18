@@ -162,7 +162,7 @@ export class PartnersComponent implements OnInit {
             { value: 'all', label: 'admin.partners.all' },
             { value: 'Present', label: 'admin.partners.present' },
             { value: 'Available', label: 'admin.partners.available' },
-            { value: 'NotAvailable', label: 'admin.partners.notAvailable' }
+            // { value: 'NotAvailable', label: 'admin.partners.notAvailable' }
           ]
         }
       ],
