@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using cdr_group.Contracts.DTOs.Company;
 
 namespace cdr_group.Contracts.Interfaces.Services
@@ -6,5 +7,6 @@ namespace cdr_group.Contracts.Interfaces.Services
     {
         Task<IEnumerable<CompanyDto>> GetActiveCompaniesAsync();
         Task<IEnumerable<CompanyDto>> GetTreeAsync();
+        Task<string> UploadLogoAsync(Guid id, IFormFile file);
     }
 }

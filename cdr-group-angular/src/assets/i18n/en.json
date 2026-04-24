@@ -1,4 +1,8 @@
 {
+  "host": {
+    "chooseCompany": "Choose a Company",
+    "chooseCompanySubtitle": "Select a company to explore its story, team, and events"
+  },
   "common": {
     "home": "Home",
     "about": "About",
@@ -731,6 +735,10 @@
       "companyCreated": "Company created successfully",
       "companyUpdated": "Company updated successfully",
       "companyDeleted": "Company deleted successfully",
+      "logoSection": "Company Logo",
+      "uploadLogo": "Upload Logo",
+      "chooseAnother": "Choose another",
+      "logoUploaded": "Logo uploaded successfully",
       "basicInfo": "Basic Information",
       "errors": {
         "loadFailed": "Failed to load companies",

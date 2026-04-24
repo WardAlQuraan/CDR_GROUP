@@ -6,7 +6,7 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" routerLink="/">
-        <img src="assets/images/logo.jpg" class="navbar-brand-image img-fluid" alt="CDR Group Logo">
+        <img [src]="selectedCompanyLogo" class="navbar-brand-image img-fluid" alt="Company Logo">
         <!-- <span class="navbar-brand-text">
           {{ 'header.logo' | translate }}
           <small>{{ 'header.logoSubtitle' | translate }}</small>
@@ -73,7 +73,7 @@
           }
 
           <li class="nav-item">
-            <a class="nav-link" [class.active]="activeSection() === 'home'" routerLink="/" [queryParams]="{ company: selectedCompanyId }" (click)="scrollToTop(); closeNavbar()">{{ 'common.home' | translate }}</a>
+            <a class="nav-link" [class.active]="activeSection() === 'home'" [routerLink]="['/', selectedCompanyId]" (click)="scrollToTop(); closeNavbar()">{{ 'common.home' | translate }}</a>
           </li>
 
           <li class="nav-item">
@@ -93,7 +93,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" routerLink="/world-map" [queryParams]="{ company: selectedCompanyId }" routerLinkActive="active" (click)="closeNavbar()">{{ 'common.seeOurPartners' | translate }}</a>
+            <a class="nav-link" [routerLink]="['/', selectedCompanyId, 'world-map']" routerLinkActive="active" (click)="closeNavbar()">{{ 'common.seeOurPartners' | translate }}</a>
           </li>
 
           <li class="nav-item dropdown">

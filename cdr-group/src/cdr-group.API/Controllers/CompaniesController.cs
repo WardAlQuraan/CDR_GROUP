@@ -67,5 +67,18 @@ namespace cdr_group.API.Controllers
         {
             return await base.Delete(id);
         }
+
+        [HttpPost("{id:guid}/logo")]
+        [HasPermission(Permissions.Companies.Update)]
+        public async Task<ActionResult<ApiResponse<string>>> UploadLogo(Guid id, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest(ApiResponse<string>.FailureResponse("No file uploaded."));
+            }
+
+            var url = await Service.UploadLogoAsync(id, file);
+            return Ok(ApiResponse<string>.SuccessResponse(url, "Logo uploaded successfully."));
+        }
     }
 }

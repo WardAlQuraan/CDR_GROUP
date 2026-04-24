@@ -37,7 +37,7 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
     private translationService: TranslationService,
     private cdr: ChangeDetectorRef
   ) {
-    this.companyId = this.route.snapshot.queryParams['company'];
+    this.companyId = this.route.snapshot.paramMap.get('companyId') || undefined;
   }
 
   private get isArabic(): boolean {

@@ -67,7 +67,7 @@ export class AdminLayoutComponent implements OnInit {
 
   goToSite(): void {
     const companyId = this.companyState.getLastSelectedCompanyId();
-    this.router.navigate(['/'], companyId ? { queryParams: { company: companyId } } : {});
+    this.router.navigate(companyId ? ['/', companyId] : ['/']);
   }
 
   logout(): void {

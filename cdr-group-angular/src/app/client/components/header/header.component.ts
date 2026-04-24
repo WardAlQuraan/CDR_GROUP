@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateToCompany(companyId: string): void {
-    this.router.navigate(['/'], { queryParams: { company: companyId } });
+    this.router.navigate(['/', companyId]);
     this.closeNavbar();
   }
 
@@ -57,20 +57,27 @@ export class HeaderComponent implements OnInit {
     return '';
   }
 
+  get selectedCompanyLogo(): string {
+    const company = this.companyState.findCompany(this.companyState.companies, this.selectedCompanyId);
+    const logo = company?.logo;
+    if (!logo) return 'assets/images/logo.jpg';
+    if (/^https?:\/\//i.test(logo)) return logo;
+    const base = environment.apiUrl.replace(/\/api\/?$/, '');
+    return `${base}${logo.startsWith('/') ? '' : '/'}${logo}`;
+  }
+
   ngOnInit() {
     this.updateActiveSection();
-    this.route.queryParams.subscribe(params => {
-      if (params['company']) {
-        this.selectedCompanyId = params['company'];
+    this.route.paramMap.subscribe(params => {
+      const companyId = params.get('companyId');
+      if (companyId) {
+        this.selectedCompanyId = companyId;
       } else if (this.companyState.companies.length > 0) {
         const lastId = this.companyState.getLastSelectedCompanyId() || environment.defaultCompanyId;
         const lastCompany = lastId ? this.companyState.findCompany(this.companyState.companies, lastId) : undefined;
         const resolved = lastCompany || this.companyState.companies[0];
         this.selectedCompanyId = this.companyState.getLeafCompany(resolved).id;
-        this.router.navigate([], {
-          queryParams: { company: this.selectedCompanyId },
-          queryParamsHandling: 'merge'
-        });
+        this.router.navigate(['/', this.selectedCompanyId]);
       }
     });
   }
@@ -148,7 +155,7 @@ export class HeaderComponent implements OnInit {
       element.scrollIntoView({ behavior: 'smooth' });
     } else {
       // Navigate to home page with fragment
-      this.router.navigate(['/'], { fragment: sectionId }).then(() => {
+      this.router.navigate(['/', this.selectedCompanyId], { fragment: sectionId }).then(() => {
         setTimeout(() => {
           const el = document.getElementById(sectionId);
           if (el) {

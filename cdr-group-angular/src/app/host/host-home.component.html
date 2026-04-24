@@ -1,0 +1,72 @@
+<div class="host-home">
+  <!-- Top header: Jordan flag + company names -->
+  <header class="host-topbar">
+    <div class="topbar-flag" [title]="isArabic ? 'الأردن' : 'Jordan'">
+      <img src="assets/images/jo-flag.jpg" class="jordan-flag" alt="Jordan flag" />
+    </div>
+
+    <div class="topbar-marquee" dir="ltr">
+      <div class="marquee-track" [class.rtl]="isArabic">
+        <div class="marquee-group">
+          @for (company of marqueeCompanies; track company.id) {
+            <button type="button" class="marquee-item" (click)="selectCompany(company)">
+              {{ getCompanyName(company) }}
+            </button>
+          }
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          @for (company of marqueeCompanies; track 'dup-' + company.id) {
+            <button type="button" class="marquee-item" (click)="selectCompany(company)" tabindex="-1">
+              {{ getCompanyName(company) }}
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="host-lang dropdown">
+      <a class="lang-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language">
+        <i class="bi bi-globe2 lang-globe"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+          <a class="dropdown-item" href="javascript:void(0)" [class.active]="translationService.language() === 'ar'" (click)="translationService.setLanguage('ar')">AR</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="javascript:void(0)" [class.active]="translationService.language() === 'en'" (click)="translationService.setLanguage('en')">EN</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Root company branding -->
+  <section class="host-brand">
+    @if (rootCompany) {
+      <div class="brand-logo" (click)="selectRoot()" role="button" tabindex="0">
+        <img [src]="getLogoUrl(rootCompany)" [alt]="getCompanyName(rootCompany)" />
+      </div>
+    }
+  </section>
+
+  <!-- Sub-companies row -->
+  <section class="host-children">
+    @if (loading) {
+      <div class="host-loader">
+        <div class="spinner"></div>
+      </div>
+    } @else if (children.length) {
+      <div class="children-row">
+        @for (child of children; track child.id) {
+          <button
+            type="button"
+            class="child-circle"
+            (click)="selectCompany(child)"
+            [title]="getCompanyName(child)"
+            [style.--accent]="child.primaryColor || '#d4a94b'">
+            <img [src]="getLogoUrl(child)" [alt]="getCompanyName(child)" />
+          </button>
+        }
+      </div>
+    }
+  </section>
+</div>

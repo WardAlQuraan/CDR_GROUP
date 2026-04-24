@@ -31,6 +31,7 @@ import { EventDialogComponent } from './pages/events/event-dialog/event-dialog.c
 import { EventViewDialogComponent } from './pages/events/event-view-dialog/event-view-dialog.component';
 import { CompaniesComponent } from './pages/companies/companies-component/companies-component';
 import { CompanyDialogComponent } from './pages/companies/company-dialog/company-dialog.component';
+import { CompanyLogoDialogComponent } from './pages/companies/company-logo-dialog/company-logo-dialog.component';
 import { CompanyOrgChartPageComponent } from './pages/companies/company-org-chart-page/company-org-chart-page.component';
 import { ContactUsAdminComponent } from './pages/contact-us/contact-us-component/contact-us-component';
 import { ContactUsViewDialogComponent } from './pages/contact-us/contact-us-view-dialog/contact-us-view-dialog.component';
@@ -71,6 +72,7 @@ import { PartnerDialogComponent } from './pages/partners/partner-dialog/partner-
     EventViewDialogComponent,
     CompaniesComponent,
     CompanyDialogComponent,
+    CompanyLogoDialogComponent,
     CompanyOrgChartPageComponent,
     ContactUsAdminComponent,
     ContactUsViewDialogComponent,

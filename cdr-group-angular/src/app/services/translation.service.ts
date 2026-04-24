@@ -13,7 +13,7 @@ export interface TranslationDictionary {
 })
 export class TranslationService {
   private readonly STORAGE_KEY = 'app_language';
-  private readonly DEFAULT_LANGUAGE: Language = 'en';
+  private readonly DEFAULT_LANGUAGE: Language = 'ar';
 
   private translations = signal<TranslationDictionary>({});
   private currentLanguage = signal<Language>(this.getStoredLanguage());

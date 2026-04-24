@@ -1,4 +1,7 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using cdr_group.Application.Helpers;
 using cdr_group.Contracts.DTOs.Common;
 using cdr_group.Contracts.DTOs.Company;
 using cdr_group.Contracts.Interfaces.Repositories;
@@ -10,8 +13,18 @@ namespace cdr_group.Application.Services
 {
     public class CompanyService : BaseService<Company, CompanyDto, CreateCompanyDto, UpdateCompanyDto>, ICompanyService
     {
-        public CompanyService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private const string LogoFolder = "uploads/companies";
+
+        public CompanyService(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IWebHostEnvironment webHostEnvironment,
+            IHttpContextAccessor httpContextAccessor) : base(unitOfWork, mapper)
         {
+            _webHostEnvironment = webHostEnvironment;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         protected override IRepository<Company> Repository => UnitOfWork.Companies;
@@ -123,6 +136,48 @@ namespace cdr_group.Application.Services
                     if (currentParent == null) break;
                 }
             }
+        }
+
+        public async Task<string> UploadLogoAsync(Guid id, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                throw new InvalidOperationException("No file uploaded.");
+            }
+
+            var company = await UnitOfWork.Companies.GetByIdAsync(id)
+                ?? throw new InvalidOperationException(Messages.CompanyNotFound);
+
+            if (!string.IsNullOrEmpty(company.Logo))
+            {
+                var oldAbsolutePath = Path.Combine(_webHostEnvironment.WebRootPath, company.Logo);
+                if (File.Exists(oldAbsolutePath))
+                {
+                    File.Delete(oldAbsolutePath);
+                }
+            }
+
+            var extension = Path.GetExtension(file.FileName);
+            var storedFileName = $"{Guid.NewGuid()}{extension}";
+            var relativePath = Path.Combine(LogoFolder, storedFileName).Replace("\\", "/");
+            var absolutePath = Path.Combine(_webHostEnvironment.WebRootPath, relativePath);
+
+            var directory = Path.GetDirectoryName(absolutePath);
+            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            using (var stream = new FileStream(absolutePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            company.Logo = relativePath;
+            await UnitOfWork.Companies.UpdateAsync(company);
+            await UnitOfWork.SaveChangesAsync();
+
+            return UrlHelper.BuildFullUrl(relativePath, _httpContextAccessor) ?? relativePath;
         }
 
         protected override async Task ValidateDeleteAsync(Guid id, Company entity)

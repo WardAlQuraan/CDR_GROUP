@@ -28,6 +28,7 @@ export interface CompanyDto {
   children: CompanyDto[];
   partnershipFormUrl?: string;
   partnersCount: number;
+  logo?: string;
   createdAt: Date;
   updatedAt?: Date;
 }

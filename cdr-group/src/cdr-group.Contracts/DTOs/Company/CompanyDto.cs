@@ -28,6 +28,7 @@ namespace cdr_group.Contracts.DTOs.Company
         public string? OpeningHoursNoteEn { get; set; }
         public string? OpeningHoursNoteAr { get; set; }
         public string? PartnershipFormUrl { get; set; }
+        public string? Logo { get; set; }
         [ExcelIgnore]
         public Guid? ParentId { get; set; }
         public string? ParentNameEn { get; set; }

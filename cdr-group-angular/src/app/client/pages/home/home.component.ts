@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { TranslationService } from '../../../services/translation.service';
 import { CompanyStateService } from '../../../services/company-state.service';
 import { CompanyDto } from '../../../models/company.model';
@@ -11,7 +11,6 @@ import { CompanyDto } from '../../../models/company.model';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  private route = inject(ActivatedRoute);
   private router = inject(Router);
   private translationService = inject(TranslationService);
   companyState = inject(CompanyStateService);
@@ -33,10 +32,6 @@ export class HomeComponent {
   }
 
   onCompanyChange(companyId: string): void {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { company: companyId },
-      queryParamsHandling: 'merge'
-    });
+    this.router.navigate(['/', companyId]);
   }
 }

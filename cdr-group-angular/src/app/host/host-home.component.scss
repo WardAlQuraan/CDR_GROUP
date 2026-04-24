@@ -1,0 +1,339 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+$bg-dark: #0e2240;
+$bg-darker: #081326;
+$gold: #d4a94b;
+$gold-bright: #e9c46a;
+
+.host-home {
+  position: relative;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at center, #1a3a6b 0%, $bg-dark 50%, $bg-darker 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+// Subtle pattern overlay
+.host-home::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+// Top header: flag + companies + lang
+.host-topbar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 32px;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  z-index: 3;
+}
+
+.topbar-flag {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.jordan-flag {
+  width: 54px;
+  height: 27px;
+  object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  display: block;
+}
+
+// Marquee (company names scroller)
+.topbar-marquee {
+  flex: 1;
+  overflow: hidden;
+  min-width: 0;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 30s linear infinite;
+
+  &.rtl {
+    animation-direction: reverse;
+  }
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding-right: 48px;
+  flex-shrink: 0;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-item {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 6px 4px;
+  white-space: nowrap;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $gold-bright;
+  }
+}
+
+.topbar-marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+// Language switcher
+.host-lang {
+  flex-shrink: 0;
+
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    color: rgba(255, 255, 255, 0.92);
+    text-decoration: none;
+    transition: color 0.2s, background 0.2s;
+
+    &:hover, &:focus, &.show {
+      color: $gold-bright;
+      background: transparent;
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  .lang-globe {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  .dropdown-menu {
+    min-width: 100px;
+    background: rgba(10, 24, 41, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .dropdown-item {
+    color: rgba(255, 255, 255, 0.78);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+
+    &:hover, &:focus {
+      background: rgba(255, 255, 255, 0.05);
+      color: $gold-bright;
+    }
+
+    &.active {
+      background: transparent;
+      color: $gold-bright;
+    }
+  }
+}
+
+// Root branding
+.host-brand {
+  text-align: center;
+  padding: 60px 24px 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 24px;
+  cursor: pointer;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5));
+  }
+}
+
+.brand-name {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: $gold;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+.brand-subtitle {
+  font-size: 1rem;
+  letter-spacing: 0.4em;
+  color: $gold-bright;
+  text-transform: uppercase;
+}
+
+// Sub-companies row
+.host-children {
+  flex: 1;
+  padding: 40px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.host-loader {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: $gold;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.children-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.child-circle {
+  --accent: #{$gold};
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  border: 4px solid var(--accent);
+  background: #0a1829;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.04),
+    0 0 25px color-mix(in srgb, var(--accent) 50%, transparent),
+    inset 0 0 20px color-mix(in srgb, var(--accent) 15%, transparent);
+
+  &:hover {
+    transform: translateY(-6px) scale(1.05);
+    box-shadow:
+      0 0 0 2px rgba(255, 255, 255, 0.08),
+      0 12px 45px color-mix(in srgb, var(--accent) 70%, transparent),
+      inset 0 0 25px color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+
+  img {
+    width: 85%;
+    height: 85%;
+    object-fit: contain;
+  }
+}
+
+// Responsive
+@media (max-width: 900px) {
+  .children-row {
+    gap: 30px;
+  }
+
+  .child-circle {
+    width: 170px;
+    height: 170px;
+  }
+
+  .brand-name {
+    font-size: 1.5rem;
+    letter-spacing: 0.2em;
+  }
+
+  .brand-subtitle {
+    font-size: 0.85rem;
+  }
+
+}
+
+@media (max-width: 600px) {
+  .host-topbar {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
+  .jordan-flag {
+    width: 42px;
+    height: 21px;
+  }
+
+  .host-brand {
+    padding: 40px 16px 24px;
+  }
+
+  .brand-logo {
+    width: 130px;
+    height: 130px;
+  }
+
+  .children-row {
+    gap: 20px;
+  }
+
+  .child-circle {
+    width: 130px;
+    height: 130px;
+  }
+}

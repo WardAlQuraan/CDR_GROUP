@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { adminGuard } from './guards/auth.guard';
+import { HostHomeComponent } from './host/host-home.component';
 
 export const routes: Routes = [
   {
@@ -9,6 +10,11 @@ export const routes: Routes = [
   },
   {
     path: '',
+    pathMatch: 'full',
+    component: HostHomeComponent
+  },
+  {
+    path: ':companyId',
     loadChildren: () => import('./client/client.module').then(m => m.ClientModule)
   },
   // { path: '**', redirectTo: '' }

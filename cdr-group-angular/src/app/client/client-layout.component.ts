@@ -39,8 +39,8 @@ export class ClientLayoutComponent implements OnInit, OnDestroy {
   }
 
   private subscribeToQueryParams(): void {
-    this.sub = this.route.queryParams.subscribe(params => {
-      const companyId = params['company'];
+    this.sub = this.route.paramMap.subscribe(params => {
+      const companyId = params.get('companyId');
       if (companyId) {
         this.companyState.selectById(companyId);
       } else if (this.companyState.companies.length > 0) {

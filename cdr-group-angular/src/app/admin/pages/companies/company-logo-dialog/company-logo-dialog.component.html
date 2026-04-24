@@ -1,0 +1,52 @@
+<app-base-dialog
+  title="admin.companies.uploadLogo"
+  [showActions]="false">
+
+  <div class="logo-dialog-content">
+    <div class="logo-preview" [class.pending]="pendingPreview">
+      @if (pendingPreview) {
+        <img [src]="pendingPreview" alt="new logo" />
+      } @else if (fullLogoUrl) {
+        <img [src]="fullLogoUrl" alt="logo" />
+      } @else {
+        <mat-icon class="logo-placeholder">image_not_supported</mat-icon>
+      }
+    </div>
+
+    <div class="company-name">
+      {{ translationService.language() === 'ar' ? company.nameAr : company.nameEn }}
+    </div>
+
+    @if (!pendingFile) {
+      <button type="button" mat-raised-button color="primary" (click)="triggerPick()" [disabled]="uploading">
+        <mat-icon>upload</mat-icon>
+        {{ 'admin.companies.uploadLogo' | translate }}
+      </button>
+    } @else {
+      <div class="pending-actions">
+        <button type="button" mat-stroked-button (click)="triggerPick()" [disabled]="uploading">
+          <mat-icon>refresh</mat-icon>
+          {{ 'admin.companies.chooseAnother' | translate }}
+        </button>
+        <button type="button" mat-raised-button color="primary" (click)="confirmUpload()" [disabled]="uploading">
+          <mat-icon>check</mat-icon>
+          {{ (uploading ? 'common.loading' : 'common.confirm') | translate }}
+        </button>
+      </div>
+    }
+
+    <input
+      #logoInput
+      type="file"
+      accept="image/*"
+      style="display: none"
+      (change)="onFileSelected($event)">
+
+    <div class="dialog-actions">
+      <button mat-stroked-button (click)="onClose()" [disabled]="uploading">
+        {{ 'common.close' | translate }}
+      </button>
+    </div>
+  </div>
+
+</app-base-dialog>

@@ -1,4 +1,8 @@
 {
+  "host": {
+    "chooseCompany": "اختر شركة",
+    "chooseCompanySubtitle": "اختر شركة لاستكشاف قصتها وفريقها وفعالياتها"
+  },
   "common": {
     "home": "الرئيسية",
     "about": "قصتنا",
@@ -731,6 +735,10 @@
       "companyCreated": "تم إنشاء الشركة بنجاح",
       "companyUpdated": "تم تحديث الشركة بنجاح",
       "companyDeleted": "تم حذف الشركة بنجاح",
+      "logoSection": "شعار الشركة",
+      "uploadLogo": "رفع الشعار",
+      "chooseAnother": "اختر صورة أخرى",
+      "logoUploaded": "تم رفع الشعار بنجاح",
       "basicInfo": "المعلومات الأساسية",
       "errors": {
         "loadFailed": "فشل في تحميل الشركات",

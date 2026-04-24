@@ -10,6 +10,7 @@ import { CompanyDto } from '../../../../models/company.model';
 import { PagedRequest } from '../../../../models/paged.model';
 import { DataGridConfig, FilterValues } from '../../../../shared/components/data-grid/data-grid.models';
 import { CompanyDialogComponent, CompanyDialogData } from '../company-dialog/company-dialog.component';
+import { CompanyLogoDialogComponent } from '../company-logo-dialog/company-logo-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 import { buildSearchPlaceholder } from '../../../../utils/search.utils';
@@ -141,6 +142,13 @@ export class CompaniesComponent implements OnInit {
           onClick: (row) => this.openEditDialog(row)
         },
         {
+          icon: 'image',
+          tooltip: 'admin.companies.uploadLogo',
+          permission: Permissions.COMPANIES_UPDATE,
+          color: 'primary',
+          onClick: (row) => this.openLogoDialog(row)
+        },
+        {
           icon: 'history',
           tooltip: 'admin.auditLogs.history',
           permission: Permissions.AUDIT_LOGS_READ,
@@ -254,6 +262,19 @@ export class CompaniesComponent implements OnInit {
   openOrgChart(company: CompanyDto): void {
     const url = `/admin/companies/${company.id}/org-chart`;
     window.open(url, '_blank');
+  }
+
+  openLogoDialog(company: CompanyDto): void {
+    const dialogRef = this.dialog.open(CompanyLogoDialogComponent, {
+      width: '450px',
+      data: company
+    });
+
+    dialogRef.afterClosed().subscribe(changed => {
+      if (changed) {
+        this.loadCompanies();
+      }
+    });
   }
 
   exportToExcel(): void {

@@ -26,6 +26,7 @@ namespace cdr_group.Domain.Entities
         public string? OpeningHoursNoteEn { get; set; }
         public string? OpeningHoursNoteAr { get; set; }
         public string? PartnershipFormUrl { get; set; }
+        public string? Logo { get; set; }
         public int NumberOfEmployees { get; set; }
         public bool IsActive { get; set; } = true;
 

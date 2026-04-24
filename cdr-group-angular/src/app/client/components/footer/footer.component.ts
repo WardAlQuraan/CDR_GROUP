@@ -111,7 +111,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   selectCompany(companyId: string): void {
-    this.router.navigate(['/'], { queryParams: { company: companyId } });
+    this.router.navigate(['/', companyId]);
   }
 
   private formatTime(time: string): string {
