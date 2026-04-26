@@ -1,0 +1,221 @@
+// Hub footer — sits inside .hub-page so it inherits --brand-primary / --brand-secondary
+:host {
+  display: block;
+  position: relative;
+  z-index: 1;
+  margin-top: auto; // pin to bottom when .hub-page flex column has slack
+}
+
+.hub-footer {
+  position: relative;
+  padding: 50px 0 0;
+  color: #fff;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.40)),
+    var(--brand-secondary, #0e2240);
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding-bottom: 40px;
+}
+
+.footer-col {
+  min-width: 0;
+}
+
+.footer-title {
+  color: var(--brand-primary, #d4a94b);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 36px;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--brand-primary, #d4a94b) 80%, transparent),
+      transparent
+    );
+  }
+}
+
+[dir='rtl'] .footer-title::after {
+  left: auto;
+  right: 0;
+  background: linear-gradient(
+    to left,
+    color-mix(in srgb, var(--brand-primary, #d4a94b) 80%, transparent),
+    transparent
+  );
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255, 255, 255, 0.70);
+    font-size: 0.95rem;
+
+    i {
+      color: var(--brand-primary, #d4a94b);
+      font-size: 1.05rem;
+      width: 22px;
+      text-align: center;
+      flex-shrink: 0;
+      opacity: 0.85;
+    }
+  }
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.70);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  min-width: 0;
+  position: relative;
+  padding-inline-start: 14px;
+  transition: color 0.2s ease, transform 0.2s ease;
+
+  // Vertical accent bar that fills in when active
+  &::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    border-radius: 2px;
+    background: var(--brand-primary, #d4a94b);
+    transition: height 0.2s ease, opacity 0.2s ease;
+    opacity: 0;
+  }
+
+  &:hover {
+    color: var(--brand-primary, #d4a94b);
+    transform: translateX(2px);
+
+    i { opacity: 1; }
+  }
+
+  &.active {
+    color: var(--brand-primary, #d4a94b);
+    font-weight: 600;
+
+    &::before {
+      height: 70%;
+      opacity: 1;
+    }
+  }
+
+  &--parent {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.92);
+    letter-spacing: 0.04em;
+  }
+
+  i {
+    font-size: 1.05rem;
+    width: 22px;
+    text-align: center;
+    flex-shrink: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+
+[dir='rtl'] .footer-link:hover {
+  transform: translateX(-2px);
+}
+
+.footer-note {
+  color: rgba(255, 255, 255, 0.50) !important;
+  font-size: 0.85rem !important;
+  line-height: 1.6;
+}
+
+.contacts-loader {
+  display: flex;
+  padding: 8px 0;
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-top-color: var(--brand-primary, #d4a94b);
+  border-radius: 50%;
+  animation: hub-footer-spin 0.8s linear infinite;
+}
+
+@keyframes hub-footer-spin {
+  to { transform: rotate(360deg); }
+}
+
+.footer-bottom {
+  padding: 16px 0;
+  text-align: center;
+  background: color-mix(in srgb, var(--brand-primary, #d4a94b) 95%, #000);
+  border-top: 1px solid rgba(0, 0, 0, 0.20);
+}
+
+.copyright-text {
+  color: #fff;
+  font-size: 0.9rem;
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 991px) {
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hub-footer {
+    padding: 36px 0 0;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-bottom: 28px;
+  }
+
+  .footer-title {
+    font-size: 1rem;
+    margin-bottom: 16px;
+  }
+}

@@ -100,8 +100,20 @@ export class CompanyHubComponent implements OnInit {
     return this.isArabic ? company.nameAr : company.nameEn;
   }
 
+  splitBrandName(company: CompanyDto): string[] {
+    const name = this.getCompanyName(company) || '';
+    if (this.isArabic) {
+      return name.split(/(\s+)/).filter(s => s.length > 0);
+    }
+    return Array.from(name);
+  }
+
   getCompanyTitle(company: CompanyDto): string {
     return (this.isArabic ? company.titleAr : company.titleEn) || '';
+  }
+
+  getCompanyDescription(company: CompanyDto): string {
+    return (this.isArabic ? company.descriptionAr : company.descriptionEn) || '';
   }
 
   getLogoUrl(company?: CompanyDto): string {

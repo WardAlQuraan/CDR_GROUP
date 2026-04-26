@@ -30,6 +30,8 @@ import { EventDetailComponent } from './pages/event-detail/event-detail.componen
 import { CompanyDetailComponent } from './pages/company-detail/company-detail.component';
 import { WorldMapComponent } from './pages/world-map/world-map.component';
 import { CompanyHubComponent } from './pages/company-hub/company-hub.component';
+import { HubHeaderComponent } from './pages/company-hub/hub-header/hub-header.component';
+import { HubFooterComponent } from './pages/company-hub/hub-footer/hub-footer.component';
 
 // Routes
 import { clientRoutes } from './client.routes';
@@ -59,6 +61,8 @@ import { clientRoutes } from './client.routes';
     CompanyDetailComponent,
     WorldMapComponent,
     CompanyHubComponent,
+    HubHeaderComponent,
+    HubFooterComponent,
   ],
   imports: [
     SharedModule,

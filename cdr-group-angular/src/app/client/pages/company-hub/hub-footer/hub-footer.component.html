@@ -1,0 +1,90 @@
+<footer class="hub-footer">
+  <div class="container">
+    <div class="footer-top">
+      <!-- Companies (children of the parent shown in the hub) -->
+      @if (children.length) {
+        <div class="footer-col">
+          <h5 class="footer-title">{{ 'footer.ourCompanies' | translate }}</h5>
+          <ul class="footer-links">
+            <!-- @if (parentCompany) {
+              <li>
+                <a class="footer-link footer-link--parent"
+                   [class.active]="isActive(parentCompany)"
+                   (click)="setActiveCompany(parentCompany)">
+                  {{ getCompanyName(parentCompany) }}
+                </a>
+              </li>
+            } -->
+            @for (child of children; track child.id) {
+              <li>
+                <a class="footer-link"
+                   [class.active]="isActive(child)"
+                   (click)="setActiveCompany(child)">
+                  {{ getCompanyName(child) }}
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+
+      <!-- Operating Hours -->
+      @if (openingDays || openingNote) {
+        <div class="footer-col">
+          <h5 class="footer-title">{{ 'footer.operatingHours' | translate }}</h5>
+          <ul class="footer-links">
+            @if (openingDays) {
+              <li>
+                <i class="bi bi-calendar3"></i>
+                <span>{{ openingDays }}</span>
+              </li>
+              <li>
+                <i class="bi bi-clock"></i>
+                <span>{{ openingTimes }}</span>
+              </li>
+            }
+            @if (openingNote) {
+              <li class="footer-note">{{ openingNote }}</li>
+            }
+          </ul>
+        </div>
+      }
+
+      <!-- Connect With Us -->
+      <div class="footer-col">
+        @if(contacts.length){
+
+          <h5 class="footer-title">{{ 'footer.connectWithUs' | translate }}</h5>
+        }
+        @if (loadingContacts) {
+          <div class="contacts-loader">
+            <div class="spinner"></div>
+          </div>
+        } @else if (contacts.length) {
+          <ul class="footer-links">
+            @for (contact of contacts; track contact.id) {
+              <li>
+                <a [href]="getContactHref(contact)"
+                   [target]="isExternalLink(contact) ? '_blank' : '_self'"
+                   rel="noopener"
+                   class="footer-link"
+                   [title]="contact.value"
+                   (click)="onContactClick($event, contact)">
+                  <i class="bi" [ngClass]="contact.icon"></i>
+                  <span>{{ getDisplayValue(contact) }}</span>
+                </a>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="footer-bottom">
+    <p class="copyright-text">
+      &copy; {{ currentYear }} {{ parentName }}. {{ 'footer.copyright' | translate }}.
+    </p>
+  </div>
+</footer>

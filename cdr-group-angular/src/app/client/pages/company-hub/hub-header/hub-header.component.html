@@ -2,7 +2,10 @@
 <app-login></app-login>
 
 <!-- Navbar -->
-<div class="sticky-wrapper" [class.is-sticky]="isSticky()">
+<div class="sticky-wrapper hub-header"
+     [class.is-sticky]="isSticky()"
+     [style.--header-color]="headerBg || ''"
+     [style.--accent-color]="logoBg || ''">
   <nav class="navbar navbar-expand-lg" [style.background-color]="headerBg">
     <div class="container">
       <!-- Back button - always on the visual left, all breakpoints -->
@@ -11,14 +14,10 @@
       </a>
 
       <a class="navbar-brand d-flex align-items-center" routerLink="/">
-        <img [src]="selectedCompanyLogo" class="navbar-brand-image img-fluid" alt="Company Logo">
-        <!-- <span class="navbar-brand-text">
-          {{ 'header.logo' | translate }}
-          <small>{{ 'header.logoSubtitle' | translate }}</small>
-        </span> -->
+        <img [src]="selectedCompanyLogo" class="navbar-brand-image img-fluid" alt="Company Logo" [style.--logo-accent]="logoBg || ''">
       </a>
 
-      <!-- User dropdown - desktop only; mobile shows the same actions inside the menu list -->
+      <!-- User dropdown - desktop only; mobile renders it inside the collapsed nav list -->
       <div class="navbar-user-section d-none d-lg-flex align-items-center">
         @if (authService.isLoggedIn()) {
           <div class="dropdown">
@@ -42,40 +41,12 @@
         }
       </div>
 
-      <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#hubNavbarNav" aria-controls="hubNavbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse" id="hubNavbarNav">
         <ul class="navbar-nav ms-auto">
-          <!-- @if (companyState.companies.length > 0) {
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" [class.active]="isCompanyRoute" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {{ selectedCompanyName }}
-              </a>
-              <ul class="dropdown-menu">
-                @for (company of companyState.companies; track company.id) {
-                  <li>
-                    <a class="dropdown-item parent-item" href="javascript:void(0)" (click)="hasChildren(company) ? toggleSubmenu(company.id) : navigateToCompany(company.id); hasChildren(company) && $event.stopPropagation()">
-                      {{ getCompanyName(company) }}
-                      @if (hasChildren(company)) {
-                        <i class="bi bi-chevron-down submenu-arrow" [class.open]="isSubmenuOpen(company.id)"></i>
-                      }
-                    </a>
-                  </li>
-                  @if (hasChildren(company) && isSubmenuOpen(company.id)) {
-                    @for (child of company.children; track child.id) {
-                      <li>
-                        <a class="dropdown-item child-item" href="javascript:void(0)" (click)="navigateToCompany(child.id)">
-                          {{ getCompanyName(child) }}
-                        </a>
-                      </li>
-                    }
-                  }
-                }
-              </ul>
-            </li>
-          } -->
 
           @if (authService.isLoggedIn() && authService.user()?.roles?.length) {
             <li class="nav-item d-lg-none nav-profile-item nav-profile-item--first">
@@ -85,33 +56,9 @@
             </li>
           }
 
-          <li class="nav-item">
-            <a class="nav-link" [class.active]="activeSection() === 'home'" [routerLink]="['/', selectedCompanyId]" (click)="scrollToTop(); closeNavbar()">{{ 'common.home' | translate }}</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" [class.active]="activeSection() === 'section_2'" (click)="navigateToSection('section_2'); closeNavbar()">{{ 'common.about' | translate }}</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" [class.active]="activeSection() === 'section_events'" (click)="navigateToSection('section_events'); closeNavbar()">{{ 'common.events' | translate }}</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" [class.active]="activeSection() === 'section_team'" (click)="navigateToSection('section_team'); closeNavbar()">{{ 'common.team' | translate }}</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" [class.active]="activeSection() === 'section_5'" (click)="navigateToSection('section_5'); closeNavbar()">{{ 'common.contactUs' | translate }}</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/', selectedCompanyId, 'world-map']" routerLinkActive="active" (click)="closeNavbar()">{{ 'common.seeOurPartners' | translate }}</a>
-          </li>
-
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-globe2 me-1 ms-1"></i>{{ translationService.language() === 'en' ? 'EN' : 'AR' }}
+              <i class="bi bi-globe2 me-1 ms-1"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
