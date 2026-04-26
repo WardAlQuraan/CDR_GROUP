@@ -1,0 +1,38 @@
+<div class="hub-page">
+  <!-- Same header used by client layout -->
+  <app-header></app-header>
+  <!-- Parent company branding -->
+  <section class="hub-brand">
+    @if (parentCompany) {
+      <div class="brand-logo">
+        <img [src]="getLogoUrl(parentCompany)" [alt]="getCompanyName(parentCompany)" />
+      </div>
+      <h1 class="brand-name">{{ getCompanyName(parentCompany) }}</h1>
+      @if (getCompanyTitle(parentCompany)) {
+        <div class="brand-subtitle">{{ getCompanyTitle(parentCompany) }}</div>
+      }
+    }
+  </section>
+
+  <!-- Children row -->
+  <section class="hub-children">
+    @if (loading) {
+      <div class="hub-loader">
+        <div class="spinner"></div>
+      </div>
+    } @else if (children.length) {
+      <div class="children-row">
+        @for (child of children; track child.id) {
+          <button
+            type="button"
+            class="child-circle"
+            (click)="selectCompany(child)"
+            [title]="getCompanyName(child)"
+            [style.--accent]="child.primaryColor || '#d4a94b'">
+            <img [src]="getLogoUrl(child)" [alt]="getCompanyName(child)" />
+          </button>
+        }
+      </div>
+    }
+  </section>
+</div>

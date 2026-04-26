@@ -53,9 +53,9 @@ namespace cdr_group.Application.Services
             return dtos;
         }
 
-        public async Task<IEnumerable<CompanyDto>> GetTreeAsync()
+        public async Task<IEnumerable<CompanyDto>> GetTreeAsync(Guid? parentId = null)
         {
-            var companies = await UnitOfWork.Companies.GetActiveCompaniesAsync();
+            var companies = await UnitOfWork.Companies.GetRelatedActiveCompaniesAsync(parentId);
             var allDtos = Mapper.Map<List<CompanyDto>>(companies);
             await PopulateCountsAsync(allDtos);
 

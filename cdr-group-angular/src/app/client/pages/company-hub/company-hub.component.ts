@@ -1,48 +1,80 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { CompaniesService } from '../services/companies.service';
-import { CompanyStateService } from '../services/company-state.service';
-import { TranslationService } from '../services/translation.service';
-import { CompanyDto } from '../models/company.model';
-import { environment } from '../../environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CompaniesService } from '../../../services/companies.service';
+import { CompanyStateService } from '../../../services/company-state.service';
+import { TranslationService } from '../../../services/translation.service';
+import { CompanyDto } from '../../../models/company.model';
+import { environment } from '../../../../environments/environment';
 
 @Component({
-  selector: 'app-host-home',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './host-home.component.html',
-  styleUrl: './host-home.component.scss',
+  selector: 'app-company-hub',
+  standalone: false,
+  templateUrl: './company-hub.component.html',
+  styleUrl: './company-hub.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HostHomeComponent implements OnInit {
+export class CompanyHubComponent implements OnInit {
   private companiesService = inject(CompaniesService);
   private companyState = inject(CompanyStateService);
+  private route = inject(ActivatedRoute);
   private router = inject(Router);
   private cdr = inject(ChangeDetectorRef);
   translationService = inject(TranslationService);
 
-  rootCompany?: CompanyDto;
+  parentCompany?: CompanyDto;
   children: CompanyDto[] = [];
   allCompanies: CompanyDto[] = [];
   loading = true;
 
   ngOnInit(): void {
-    this.companiesService.getTree().subscribe({
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('companyId');
+      if (!id) {
+        this.router.navigate(['/']);
+        return;
+      }
+      this.loadHub(id);
+    });
+  }
+
+  private loadHub(companyId: string): void {
+    this.loading = true;
+    if (this.companyState.companies.length) {
+      this.applyHub(companyId, this.companyState.companies);
+      return;
+    }
+    this.companiesService.getTreeByCompanyId(companyId).subscribe({
       next: (response) => {
         if (response.success && response.data?.length) {
-          this.rootCompany = response.data[0];
-          this.children = response.data.slice(1);
-          this.allCompanies = this.flatten(response.data);
+          this.applyHub(companyId, response.data);
+        } else {
+          this.loading = false;
+          this.cdr.markForCheck();
         }
-        this.loading = false;
-        this.cdr.markForCheck();
       },
       error: () => {
         this.loading = false;
         this.cdr.markForCheck();
       }
     });
+  }
+
+  private applyHub(companyId: string, tree: CompanyDto[]): void {
+    const found = this.companyState.findCompany(tree, companyId);
+    if (!found) {
+      this.router.navigate(['/']);
+      return;
+    }
+    if (!found.children?.length) {
+      this.router.navigate(['/', found.id]);
+      return;
+    }
+    this.parentCompany = found;
+    this.companyState.setSelectedCompany(found);
+    this.children = found.children;
+    this.allCompanies = this.flatten(tree);
+    this.loading = false;
+    this.cdr.markForCheck();
   }
 
   private flatten(companies: CompanyDto[]): CompanyDto[] {
@@ -81,8 +113,6 @@ export class HostHomeComponent implements OnInit {
   }
 
   selectCompany(company: CompanyDto): void {
-    debugger;
-    this.companyState.setSelectedCompany(company);
     if (company.children?.length) {
       this.router.navigate(['/', company.id, 'group']);
     } else {
@@ -90,7 +120,7 @@ export class HostHomeComponent implements OnInit {
     }
   }
 
-  selectRoot(): void {
-    if (this.rootCompany) this.selectCompany(this.rootCompany);
+  goBack(): void {
+    this.router.navigate(['/']);
   }
 }

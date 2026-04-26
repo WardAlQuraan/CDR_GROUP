@@ -33,9 +33,9 @@ namespace cdr_group.API.Controllers
 
         [HttpGet("tree")]
         [AllowAnonymous]
-        public async Task<ActionResult<ApiResponse<IEnumerable<CompanyDto>>>> GetTree()
+        public async Task<ActionResult<ApiResponse<IEnumerable<CompanyDto>>>> GetTree([FromQuery] Guid? parentId = null)
         {
-            var tree = await Service.GetTreeAsync();
+            var tree = await Service.GetTreeAsync(parentId);
             return Ok(ApiResponse<IEnumerable<CompanyDto>>.SuccessResponse(tree));
         }
 

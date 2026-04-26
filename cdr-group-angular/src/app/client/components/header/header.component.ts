@@ -1,7 +1,8 @@
-import { Component, HostListener, OnInit, signal, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit, signal, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslationService } from '../../../services/translation.service';
 import { AuthService } from '../../../services/auth.service';
+import { CompaniesService } from '../../../services/companies.service';
 import { CompanyStateService } from '../../../services/company-state.service';
 import { CompanyDto } from '../../../models/company.model';
 import { environment } from '../../../../environments/environment';
@@ -15,12 +16,16 @@ import { environment } from '../../../../environments/environment';
 export class HeaderComponent implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private companiesService = inject(CompaniesService);
+  private cdr = inject(ChangeDetectorRef);
   translationService = inject(TranslationService);
   authService = inject(AuthService);
   companyState = inject(CompanyStateService);
   isSticky = signal(false);
   activeSection = signal('home');
   selectedCompanyId = '';
+  headerCompanies: CompanyDto[] = [];
+  private loadedForId?: string;
 
   private sections = ['section_2', 'section_events', 'section_team', 'section_5'];
 
@@ -36,8 +41,30 @@ export class HeaderComponent implements OnInit {
     return this.router.url.includes('company=');
   }
 
+  get headerBg(): string | null {
+    const selected = this.companyState.selectedCompany;
+    const fromState = selected?.id === this.selectedCompanyId ? selected?.secondaryColor : undefined;
+    const fromTree = this.companyState.findCompany(this.companyState.companies, this.selectedCompanyId)?.secondaryColor;
+    return fromState || fromTree || null;
+  }
+
+  goBack(): void {
+    const selected = this.companyState.selectedCompany;
+    if (selected?.parentId) {
+      this.router.navigate(['/', selected.parentId, 'group']);
+    } else {
+      this.router.navigate(['/']);
+    }
+    this.closeNavbar();
+  }
+
   navigateToCompany(companyId: string): void {
-    this.router.navigate(['/', companyId]);
+    const company = this.companyState.findCompany(this.companyState.companies, companyId);
+    if (company?.children?.length) {
+      this.router.navigate(['/', companyId, 'group']);
+    } else {
+      this.router.navigate(['/', companyId]);
+    }
     this.closeNavbar();
   }
 
@@ -58,8 +85,10 @@ export class HeaderComponent implements OnInit {
   }
 
   get selectedCompanyLogo(): string {
-    const company = this.companyState.findCompany(this.companyState.companies, this.selectedCompanyId);
-    const logo = company?.logo;
+    const selected = this.companyState.selectedCompany;
+    const fromState = selected?.id === this.selectedCompanyId ? selected?.logo : undefined;
+    const fromTree = this.companyState.findCompany(this.companyState.companies, this.selectedCompanyId)?.logo;
+    const logo = fromState || fromTree;
     if (!logo) return 'assets/images/logo.jpg';
     if (/^https?:\/\//i.test(logo)) return logo;
     const base = environment.apiUrl.replace(/\/api\/?$/, '');
@@ -67,6 +96,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    debugger;
     this.updateActiveSection();
     this.route.paramMap.subscribe(params => {
       const companyId = params.get('companyId');
@@ -80,6 +110,38 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/', this.selectedCompanyId]);
       }
     });
+
+    // this.companyState.selectedCompany$.subscribe(company => {
+    //   this.loadHeaderCompanies(company);
+    // });
+  }
+
+  private loadHeaderCompanies(selected?: CompanyDto): void {
+    if (!selected) return;
+    const contextId = selected.parentId || selected.id;
+    if (this.loadedForId === contextId) return;
+    this.loadedForId = contextId;
+    this.companiesService.getTreeByCompanyId(contextId).subscribe(response => {
+      if (response.success && response.data) {
+        this.headerCompanies = response.data;
+        this.cdr.markForCheck();
+      }
+    });
+  }
+
+  get flattenedCompanies(): CompanyDto[] {
+    const result: CompanyDto[] = [];
+    const walk = (list: CompanyDto[]) => {
+      for (const c of list) {
+        if (c.children?.length) {
+          walk(c.children);
+        } else {
+          result.push(c);
+        }
+      }
+    };
+    walk(this.headerCompanies);
+    return result;
   }
 
   getCompanyName(company: CompanyDto): string {

@@ -29,6 +29,7 @@ import { EventListingComponent } from './pages/event-listing/event-listing.compo
 import { EventDetailComponent } from './pages/event-detail/event-detail.component';
 import { CompanyDetailComponent } from './pages/company-detail/company-detail.component';
 import { WorldMapComponent } from './pages/world-map/world-map.component';
+import { CompanyHubComponent } from './pages/company-hub/company-hub.component';
 
 // Routes
 import { clientRoutes } from './client.routes';
@@ -57,6 +58,7 @@ import { clientRoutes } from './client.routes';
     EventDetailComponent,
     CompanyDetailComponent,
     WorldMapComponent,
+    CompanyHubComponent,
   ],
   imports: [
     SharedModule,

@@ -6,7 +6,7 @@ namespace cdr_group.Contracts.Interfaces.Services
     public interface ICompanyService : IBaseService<CompanyDto, CreateCompanyDto, UpdateCompanyDto>
     {
         Task<IEnumerable<CompanyDto>> GetActiveCompaniesAsync();
-        Task<IEnumerable<CompanyDto>> GetTreeAsync();
+        Task<IEnumerable<CompanyDto>> GetTreeAsync(Guid? parentId = null);
         Task<string> UploadLogoAsync(Guid id, IFormFile file);
     }
 }

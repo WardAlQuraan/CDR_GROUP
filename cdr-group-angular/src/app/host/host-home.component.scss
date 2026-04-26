@@ -9,9 +9,10 @@ $gold: #d4a94b;
 $gold-bright: #e9c46a;
 
 .host-home {
+  --bg: #{$bg-dark};
   position: relative;
   min-height: 100vh;
-  background: radial-gradient(ellipse at center, #1a3a6b 0%, $bg-dark 50%, $bg-darker 100%);
+  background: var(--bg);
   color: #fff;
   display: flex;
   flex-direction: column;

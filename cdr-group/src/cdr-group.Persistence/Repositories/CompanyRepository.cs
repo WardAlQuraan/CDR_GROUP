@@ -29,6 +29,23 @@ namespace cdr_group.Persistence.Repositories
                 .OrderBy(x=>x.CreatedAt)
                 .ToListAsync();
         }
+        public async Task<IEnumerable<Company>> GetRelatedActiveCompaniesAsync(Guid? parentId = null)
+        {
+            var query = _dbSet.AsNoTracking()
+                .Include(c => c.Parent)
+                .Include(c => c.Children.Where(ch => !ch.IsDeleted))
+                .Where(c => c.IsActive && !c.IsDeleted)
+                .OrderBy(x => x.CreatedAt)
+                .AsQueryable();
+
+
+            if (parentId.HasValue)
+            {
+                query = query.Where(x=>x.Id == parentId.Value || x.ParentId == parentId.Value);
+            }
+
+            return await query.ToListAsync();
+        }
 
         public async Task<(IEnumerable<Company> Items, int TotalCount)> GetCompaniesPagedAsync(PagedRequest request)
         {

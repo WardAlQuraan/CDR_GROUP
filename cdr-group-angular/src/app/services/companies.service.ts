@@ -25,6 +25,9 @@ export class CompaniesService extends BaseService<CompanyDto, CreateCompanyDto, 
   getTree(): Observable<ApiResponse<CompanyDto[]>> {
     return this.get<CompanyDto[]>('/tree');
   }
+  getTreeByCompanyId(companyId: string): Observable<ApiResponse<CompanyDto[]>> {
+    return this.get<CompanyDto[]>(`/tree?parentId=${companyId}`);
+  }
 
   uploadLogo(id: string, file: File): Observable<ApiResponse<CompanyDto>> {
     const formData = new FormData();
