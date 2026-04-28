@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cdr_group.Persistence.Data;
 
@@ -11,9 +12,11 @@ using cdr_group.Persistence.Data;
 namespace cdr_group.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260427103843_background-table")]
+    partial class backgroundtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -4131,42 +4134,6 @@ namespace cdr_group.Persistence.Migrations
                             IsDeleted = false,
                             Module = "Partners",
                             Name = "partners.delete"
-                        },
-                        new
-                        {
-                            Id = new Guid("aabbccdd-9999-9999-9999-aaaaaaaaaaaa"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "View company backgrounds",
-                            IsDeleted = false,
-                            Module = "CompanyBackgrounds",
-                            Name = "company-backgrounds.read"
-                        },
-                        new
-                        {
-                            Id = new Guid("aabbccdd-9999-9999-9999-bbbbbbbbbbbb"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Create company backgrounds",
-                            IsDeleted = false,
-                            Module = "CompanyBackgrounds",
-                            Name = "company-backgrounds.create"
-                        },
-                        new
-                        {
-                            Id = new Guid("aabbccdd-9999-9999-9999-cccccccccccc"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Update company backgrounds",
-                            IsDeleted = false,
-                            Module = "CompanyBackgrounds",
-                            Name = "company-backgrounds.update"
-                        },
-                        new
-                        {
-                            Id = new Guid("aabbccdd-9999-9999-9999-dddddddddddd"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Delete company backgrounds",
-                            IsDeleted = false,
-                            Module = "CompanyBackgrounds",
-                            Name = "company-backgrounds.delete"
                         });
                 });
 
@@ -4818,38 +4785,6 @@ namespace cdr_group.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("00000000-0000-0000-0000-000000000062"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-9999-9999-9999-aaaaaaaaaaaa"),
-                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000063"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-9999-9999-9999-bbbbbbbbbbbb"),
-                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000064"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-9999-9999-9999-cccccccccccc"),
-                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000065"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-9999-9999-9999-dddddddddddd"),
-                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
-                        },
-                        new
-                        {
                             Id = new Guid("00000000-0000-0000-1111-000000000001"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
@@ -5310,38 +5245,6 @@ namespace cdr_group.Persistence.Migrations
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
                             PermissionId = new Guid("aabbccdd-8888-8888-8888-dddddddddddd"),
-                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-1111-000000000059"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-9999-9999-9999-aaaaaaaaaaaa"),
-                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-1111-000000000060"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-9999-9999-9999-bbbbbbbbbbbb"),
-                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-1111-000000000061"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-9999-9999-9999-cccccccccccc"),
-                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-1111-000000000062"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            PermissionId = new Guid("aabbccdd-9999-9999-9999-dddddddddddd"),
                             RoleId = new Guid("55555555-5555-5555-5555-555555555555")
                         });
                 });

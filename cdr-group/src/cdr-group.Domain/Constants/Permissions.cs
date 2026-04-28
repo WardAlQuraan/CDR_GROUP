@@ -82,6 +82,14 @@ public static class Positions
             public const string Delete = "company-contacts.delete";
         }
 
+        public static class CompanyBackgrounds
+        {
+            public const string Read = "company-backgrounds.read";
+            public const string Create = "company-backgrounds.create";
+            public const string Update = "company-backgrounds.update";
+            public const string Delete = "company-backgrounds.delete";
+        }
+
         public static class AuditLogs
         {
             public const string Read = "audit-logs.read";

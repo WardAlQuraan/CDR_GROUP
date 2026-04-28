@@ -211,6 +211,7 @@ namespace cdr_group.Persistence.Data
         public DbSet<SalaryHistory> SalaryHistories { get; set; }
         public DbSet<AuditLog> AuditLogs { get; set; }
         public DbSet<CompanyContact> CompanyContacts { get; set; }
+        public DbSet<CompanyBackground> CompanyBackgrounds { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Country> Countries { get; set; }
@@ -377,6 +378,19 @@ namespace cdr_group.Persistence.Data
 
                 entity.HasOne(e => e.Company)
                     .WithMany(e => e.CompanyContacts)
+                    .HasForeignKey(e => e.CompanyId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // CompanyBackground configuration
+            modelBuilder.Entity<CompanyBackground>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.ImageUrl).IsRequired().HasMaxLength(500);
+
+                entity.HasOne(e => e.Company)
+                    .WithMany(e => e.CompanyBackgrounds)
                     .HasForeignKey(e => e.CompanyId)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);

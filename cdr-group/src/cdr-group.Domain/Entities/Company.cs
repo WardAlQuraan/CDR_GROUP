@@ -47,5 +47,8 @@ namespace cdr_group.Domain.Entities
 
         // Partners for this company
         public virtual ICollection<Partner> Partners { get; set; } = new List<Partner>();
+
+        // Background images for this company
+        public virtual ICollection<CompanyBackground> CompanyBackgrounds { get; set; } = new List<CompanyBackground>();
     }
 }
