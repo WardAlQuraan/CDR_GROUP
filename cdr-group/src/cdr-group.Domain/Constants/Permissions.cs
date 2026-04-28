@@ -90,6 +90,14 @@ public static class Positions
             public const string Delete = "company-backgrounds.delete";
         }
 
+        public static class CompanyForms
+        {
+            public const string Read = "company-forms.read";
+            public const string Create = "company-forms.create";
+            public const string Update = "company-forms.update";
+            public const string Delete = "company-forms.delete";
+        }
+
         public static class AuditLogs
         {
             public const string Read = "audit-logs.read";

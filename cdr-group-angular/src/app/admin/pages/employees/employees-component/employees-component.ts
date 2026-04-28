@@ -161,6 +161,7 @@ export class EmployeesComponent implements OnInit {
           tooltip: 'admin.employees.linkToUser',
           permission: Permissions.EMPLOYEES_LINK_TO_USER,
           color: 'primary',
+          primary: false,
           onClick: (row) => this.openLinkToUserDialog(row),
           visible: (row) => !row.userId
         },
@@ -169,6 +170,7 @@ export class EmployeesComponent implements OnInit {
           tooltip: 'admin.employees.salaryHistory',
           permission: Permissions.SALARY_HISTORIES_READ,
           color: 'accent',
+          primary: false,
           onClick: (row) => this.openSalaryHistoryDialog(row)
         },
         {
@@ -176,6 +178,7 @@ export class EmployeesComponent implements OnInit {
           tooltip: 'admin.employees.uploadPhoto',
           permission: Permissions.EMPLOYEES_UPDATE,
           color: 'primary',
+          primary: false,
           onClick: (row) => this.triggerFileUpload(row)
         },
         {
@@ -183,6 +186,7 @@ export class EmployeesComponent implements OnInit {
           tooltip: 'admin.auditLogs.history',
           permission: Permissions.AUDIT_LOGS_READ,
           color: 'accent',
+          primary: false,
           onClick: (row) => this.router.navigate(['/admin/audit-logs', 'Employee', row.id])
         },
         {

@@ -11,6 +11,8 @@ import { CompanyOrgChartPageComponent } from './pages/companies/company-org-char
 import { ContactUsAdminComponent } from './pages/contact-us/contact-us-component/contact-us-component';
 import { AuditLogsComponent } from './pages/audit-logs/audit-logs-component/audit-logs-component';
 import { CompanyContactsComponent } from './pages/company-contacts/company-contacts-component/company-contacts-component';
+import { CompanyBackgroundsComponent } from './pages/company-backgrounds/company-backgrounds-component/company-backgrounds-component';
+import { CompanyFormsComponent } from './pages/company-forms/company-forms-component/company-forms-component';
 import { ReviewsComponent } from './pages/reviews/reviews-component/reviews-component';
 import { ComplaintsComponent } from './pages/complaints/complaints-component/complaints-component';
 import { PartnersComponent } from './pages/partners/partners-component/partners-component';
@@ -29,6 +31,8 @@ export const adminRoutes: Routes = [
       { path: 'companies', component: CompaniesComponent },
       { path: 'companies/:id/org-chart', component: CompanyOrgChartPageComponent },
       { path: 'companies/:companyId/contacts', component: CompanyContactsComponent },
+      { path: 'companies/:companyId/backgrounds', component: CompanyBackgroundsComponent },
+      { path: 'companies/:companyId/forms', component: CompanyFormsComponent },
       { path: 'partners', component: PartnersComponent },
       { path: 'contact-us', component: ContactUsAdminComponent },
       { path: 'reviews', component: ReviewsComponent },

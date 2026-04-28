@@ -17,6 +17,14 @@ export class AboutComponent {
 
   teamMembers: TeamMember[] = this.membershipService.getTeamMembers();
 
+  get primaryColorValue(): string {
+    return this.company?.primaryColor || '#833AB4';
+  }
+
+  get secondaryColorValue(): string {
+    return this.company?.secondaryColor || '#FD1D1D';
+  }
+
   get isArabic(): boolean {
     return this.translationService.language() === 'ar';
   }

@@ -1,12 +1,37 @@
 <section class="hero-section d-flex justify-content-center align-items-center" [class.hero-50]="isSmall" id="section_1">
-  <video class="hero-video-bg" autoplay muted loop playsinline preload="auto">
-    <source src="assets/videos/IMG_9152.mp4" type="video/mp4">
-  </video>
+  @if (backgroundUrls.length > 0) {
+    @for (url of backgroundUrls; track url; let i = $index) {
+      <img
+        class="hero-image-bg"
+        [class.is-active]="i === currentIndex"
+        [src]="url"
+        alt=""
+        aria-hidden="true">
+    }
+  } @else {
+    <video class="hero-video-bg" autoplay muted loop playsinline preload="auto">
+      <source src="assets/videos/IMG_9152.mp4" type="video/mp4">
+    </video>
+  }
   <div class="section-overlay"></div>
+
+  @if (backgroundUrls.length > 1) {
+    <div class="hero-slider-indicators" role="tablist">
+      @for (url of backgroundUrls; track url; let i = $index) {
+        <button
+          type="button"
+          class="hero-slider-dot"
+          [class.is-active]="i === currentIndex"
+          [attr.aria-label]="'Slide ' + (i + 1)"
+          [attr.aria-selected]="i === currentIndex"
+          (click)="goToSlide(i)"></button>
+      }
+    </div>
+  }
 
   
 
-  <div class="container">
+  <!-- <div class="container">
     <div class="row">
       @if (!isSmall) {
         <div class="col-lg-6 col-12">
@@ -35,6 +60,6 @@
         </div>
       }
     </div>
-  </div>
+  </div> -->
 
 </section>

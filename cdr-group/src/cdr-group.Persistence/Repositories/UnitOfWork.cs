@@ -21,6 +21,7 @@ namespace cdr_group.Persistence.Repositories
         private ISalaryHistoryRepository? _salaryHistories;
         private ICompanyContactRepository? _companyContacts;
         private ICompanyBackgroundRepository? _companyBackgrounds;
+        private ICompanyFormRepository? _companyForms;
         private IAuditLogRepository? _auditLogs;
         private IReviewRepository? _reviews;
         private IComplaintRepository? _complaints;
@@ -45,6 +46,7 @@ namespace cdr_group.Persistence.Repositories
         public ISalaryHistoryRepository SalaryHistories => _salaryHistories ??= new SalaryHistoryRepository(_context);
         public ICompanyContactRepository CompanyContacts => _companyContacts ??= new CompanyContactRepository(_context);
         public ICompanyBackgroundRepository CompanyBackgrounds => _companyBackgrounds ??= new CompanyBackgroundRepository(_context);
+        public ICompanyFormRepository CompanyForms => _companyForms ??= new CompanyFormRepository(_context);
         public IAuditLogRepository AuditLogs => _auditLogs ??= new AuditLogRepository(_context);
         public IReviewRepository Reviews => _reviews ??= new ReviewRepository(_context);
         public IComplaintRepository Complaints => _complaints ??= new ComplaintRepository(_context);

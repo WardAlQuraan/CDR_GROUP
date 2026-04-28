@@ -122,6 +122,7 @@ export class UsersComponent implements OnInit {
           tooltip: 'admin.users.changePassword',
           permission: Permissions.USERS_UPDATE,
           color: 'accent',
+          primary: false,
           onClick: (row) => this.openChangePasswordDialog(row)
         },
         {
@@ -145,6 +146,7 @@ export class UsersComponent implements OnInit {
           tooltip: 'admin.users.manageRoles',
           permission: Permissions.USERS_UPDATE,
           color: 'info',
+          primary: false,
           onClick: (row) => this.openManageRolesDialog(row)
         },
         {
@@ -152,6 +154,7 @@ export class UsersComponent implements OnInit {
           tooltip: 'admin.auditLogs.history',
           permission: Permissions.AUDIT_LOGS_READ,
           color: 'accent',
+          primary: false,
           onClick: (row) => this.router.navigate(['/admin/audit-logs', 'User', row.id])
         }
       ],

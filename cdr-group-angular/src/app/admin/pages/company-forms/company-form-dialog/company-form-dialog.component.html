@@ -1,0 +1,61 @@
+<app-base-dialog
+  [title]="dialogTitle"
+  [saveLabel]="saveLabel"
+  [saveDisabled]="form.invalid || uploading"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <form [formGroup]="form" class="dialog-form">
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>description</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companyForms.formInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <app-form-field formControlName="formNameEn" label="admin.companyForms.formNameEn" icon="label"
+          placeholder="admin.companyForms.placeholders.formNameEn"
+          [errors]="[
+            {name: 'required', message: 'admin.companyForms.errors.formNameEnRequired'},
+            {name: 'maxlength', message: 'admin.companyForms.errors.formNameEnMaxLength'}
+          ]">
+        </app-form-field>
+
+        <app-form-field formControlName="formNameAr" label="admin.companyForms.formNameAr" icon="label"
+          placeholder="admin.companyForms.placeholders.formNameAr"
+          [errors]="[
+            {name: 'required', message: 'admin.companyForms.errors.formNameArRequired'},
+            {name: 'maxlength', message: 'admin.companyForms.errors.formNameArMaxLength'}
+          ]">
+        </app-form-field>
+
+        <app-form-field formControlName="formUrl" label="admin.companyForms.formUrl" icon="link"
+          placeholder="admin.companyForms.placeholders.formUrl"
+          [errors]="[
+            {name: 'required', message: 'admin.companyForms.errors.formUrlRequired'},
+            {name: 'maxlength', message: 'admin.companyForms.errors.formUrlMaxLength'}
+          ]">
+        </app-form-field>
+
+        <div class="upload-row">
+          <button type="button" mat-stroked-button color="primary" (click)="triggerPick()" [disabled]="uploading || loading">
+            <mat-icon>upload_file</mat-icon>
+            {{ (uploading ? 'admin.companyForms.uploading' : 'admin.companyForms.uploadFile') | translate }}
+          </button>
+          <span class="upload-hint">{{ 'admin.companyForms.uploadHint' | translate }}</span>
+        </div>
+
+        <input
+          #fileInput
+          type="file"
+          accept=".pdf,.doc,.docx,.xls,.xlsx,image/*"
+          style="display: none"
+          (change)="onFileSelected($event)">
+      </div>
+    </div>
+  </form>
+
+</app-base-dialog>

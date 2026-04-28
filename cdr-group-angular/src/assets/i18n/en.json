@@ -55,6 +55,7 @@
     "clear": "Clear",
     "noData": "No data available",
     "actions": "Actions",
+    "more": "More",
     "itemsPerPage": "Items per page",
     "of": "of",
     "firstPage": "First page",
@@ -135,6 +136,10 @@
     "visionText": "To be the leading creative agency in the region, recognized for excellence in development, realization, and strategic production.",
     "trustedPartners": "Trusted Partners Worldwide",
     "teamMembers": "Dedicated Team Members"
+  },
+  "forms": {
+    "title": "Your Path to Achievement",
+    "subtitle": "Quick access to forms available for this company"
   },
   "events": {
     "title": "Upcoming Events",
@@ -737,6 +742,8 @@
       "companyDeleted": "Company deleted successfully",
       "logoSection": "Company Logo",
       "uploadLogo": "Upload Logo",
+      "backgrounds": "Backgrounds",
+      "forms": "Forms",
       "chooseAnother": "Choose another",
       "logoUploaded": "Logo uploaded successfully",
       "basicInfo": "Basic Information",
@@ -792,6 +799,75 @@
         "openingHoursNoteEn": "Enter Note in (English)",
         "openingHoursNoteAr": "Enter Note in (Arabic)",
         "partnershipFormUrl": "Enter partnership form URL"
+      }
+    },
+    "companyForms": {
+      "title": "Company Forms",
+      "subtitle": "Manage forms and documents available for the company",
+      "addForm": "Add Form",
+      "createForm": "Create Form",
+      "editForm": "Edit Form",
+      "deleteForm": "Delete Form",
+      "formInfo": "Form Information",
+      "formNameEn": "Form Name (English)",
+      "formNameAr": "Form Name (Arabic)",
+      "formUrl": "Form URL",
+      "name": "Name",
+      "company": "Company",
+      "created": "Created",
+      "edit": "Edit",
+      "delete": "Delete",
+      "open": "Open Form",
+      "uploadFile": "Upload File",
+      "uploading": "Uploading...",
+      "uploadHint": "Or paste a URL above",
+      "confirmDelete": "Are you sure you want to delete this form?",
+      "formCreated": "Form created successfully",
+      "formUpdated": "Form updated successfully",
+      "formDeleted": "Form deleted successfully",
+      "placeholders": {
+        "formNameEn": "Enter form name in English",
+        "formNameAr": "Enter form name in Arabic",
+        "formUrl": "https://...",
+        "name": "Enter form name"
+      },
+      "errors": {
+        "loadFailed": "Failed to load forms",
+        "createFailed": "Failed to create form",
+        "updateFailed": "Failed to update form",
+        "deleteFailed": "Failed to delete form",
+        "formNameEnRequired": "English name is required",
+        "formNameEnMaxLength": "English name must be at most 200 characters",
+        "formNameArRequired": "Arabic name is required",
+        "formNameArMaxLength": "Arabic name must be at most 200 characters",
+        "formUrlRequired": "Form URL is required",
+        "formUrlMaxLength": "Form URL must be at most 500 characters"
+      }
+    },
+    "companyBackgrounds": {
+      "title": "Company Backgrounds",
+      "subtitle": "Manage background images shown for the company",
+      "addBackground": "Add Background",
+      "createBackground": "Create Background",
+      "editBackground": "Edit Background",
+      "deleteBackground": "Delete Background",
+      "image": "Image",
+      "company": "Company",
+      "created": "Created",
+      "edit": "Edit",
+      "delete": "Delete",
+      "selectImage": "Select Image",
+      "replaceImage": "Replace Image",
+      "confirmDelete": "Are you sure you want to delete this background?",
+      "backgroundCreated": "Background created successfully",
+      "backgroundUpdated": "Background updated successfully",
+      "backgroundDeleted": "Background deleted successfully",
+      "errors": {
+        "loadFailed": "Failed to load backgrounds",
+        "createFailed": "Failed to create background",
+        "updateFailed": "Failed to update background",
+        "deleteFailed": "Failed to delete background",
+        "imageRequired": "Image is required"
       }
     },
     "companyContacts": {

@@ -1229,6 +1229,52 @@ namespace cdr_group.Persistence.Migrations
                     b.ToTable("CompanyContacts");
                 });
 
+            modelBuilder.Entity("cdr_group.Domain.Entities.CompanyForm", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FormNameAr")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("FormNameEn")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("FormUrl")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("CompanyForms");
+                });
+
             modelBuilder.Entity("cdr_group.Domain.Entities.Complaint", b =>
                 {
                     b.Property<Guid>("Id")
@@ -4167,6 +4213,42 @@ namespace cdr_group.Persistence.Migrations
                             IsDeleted = false,
                             Module = "CompanyBackgrounds",
                             Name = "company-backgrounds.delete"
+                        },
+                        new
+                        {
+                            Id = new Guid("bbccddee-1111-1111-1111-aaaaaaaaaaaa"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "View company forms",
+                            IsDeleted = false,
+                            Module = "CompanyForms",
+                            Name = "company-forms.read"
+                        },
+                        new
+                        {
+                            Id = new Guid("bbccddee-1111-1111-1111-bbbbbbbbbbbb"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Create company forms",
+                            IsDeleted = false,
+                            Module = "CompanyForms",
+                            Name = "company-forms.create"
+                        },
+                        new
+                        {
+                            Id = new Guid("bbccddee-1111-1111-1111-cccccccccccc"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Update company forms",
+                            IsDeleted = false,
+                            Module = "CompanyForms",
+                            Name = "company-forms.update"
+                        },
+                        new
+                        {
+                            Id = new Guid("bbccddee-1111-1111-1111-dddddddddddd"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Delete company forms",
+                            IsDeleted = false,
+                            Module = "CompanyForms",
+                            Name = "company-forms.delete"
                         });
                 });
 
@@ -4850,6 +4932,38 @@ namespace cdr_group.Persistence.Migrations
                         },
                         new
                         {
+                            Id = new Guid("00000000-0000-0000-0000-000000000066"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            PermissionId = new Guid("bbccddee-1111-1111-1111-aaaaaaaaaaaa"),
+                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000067"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            PermissionId = new Guid("bbccddee-1111-1111-1111-bbbbbbbbbbbb"),
+                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000068"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            PermissionId = new Guid("bbccddee-1111-1111-1111-cccccccccccc"),
+                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000069"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            PermissionId = new Guid("bbccddee-1111-1111-1111-dddddddddddd"),
+                            RoleId = new Guid("11111111-1111-1111-1111-111111111111")
+                        },
+                        new
+                        {
                             Id = new Guid("00000000-0000-0000-1111-000000000001"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
@@ -5342,6 +5456,38 @@ namespace cdr_group.Persistence.Migrations
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             IsDeleted = false,
                             PermissionId = new Guid("aabbccdd-9999-9999-9999-dddddddddddd"),
+                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-1111-000000000063"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            PermissionId = new Guid("bbccddee-1111-1111-1111-aaaaaaaaaaaa"),
+                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-1111-000000000064"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            PermissionId = new Guid("bbccddee-1111-1111-1111-bbbbbbbbbbbb"),
+                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-1111-000000000065"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            PermissionId = new Guid("bbccddee-1111-1111-1111-cccccccccccc"),
+                            RoleId = new Guid("55555555-5555-5555-5555-555555555555")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-1111-000000000066"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            PermissionId = new Guid("bbccddee-1111-1111-1111-dddddddddddd"),
                             RoleId = new Guid("55555555-5555-5555-5555-555555555555")
                         });
                 });
@@ -10189,6 +10335,17 @@ namespace cdr_group.Persistence.Migrations
                     b.Navigation("Company");
                 });
 
+            modelBuilder.Entity("cdr_group.Domain.Entities.CompanyForm", b =>
+                {
+                    b.HasOne("cdr_group.Domain.Entities.Company", "Company")
+                        .WithMany("CompanyForms")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
             modelBuilder.Entity("cdr_group.Domain.Entities.Complaint", b =>
                 {
                     b.HasOne("cdr_group.Domain.Entities.Company", "Company")
@@ -10354,6 +10511,8 @@ namespace cdr_group.Persistence.Migrations
                     b.Navigation("CompanyBackgrounds");
 
                     b.Navigation("CompanyContacts");
+
+                    b.Navigation("CompanyForms");
 
                     b.Navigation("Employees");
 

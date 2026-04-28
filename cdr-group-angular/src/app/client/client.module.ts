@@ -22,6 +22,7 @@ import { ReviewComponent } from './sections/review/review.component';
 import { ContactReviewComponent } from './sections/contact-review/contact-review.component';
 import { ComplaintComponent } from './sections/complaint/complaint.component';
 import { ReviewsDisplayComponent } from './sections/reviews-display/reviews-display.component';
+import { FormsComponent } from './sections/forms/forms.component';
 
 // Pages
 import { HomeComponent } from './pages/home/home.component';
@@ -54,6 +55,7 @@ import { clientRoutes } from './client.routes';
     ContactReviewComponent,
     ComplaintComponent,
     ReviewsDisplayComponent,
+    FormsComponent,
     // Pages
     HomeComponent,
     EventListingComponent,

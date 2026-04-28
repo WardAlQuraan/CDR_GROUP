@@ -55,6 +55,7 @@
     "clear": "مسح",
     "noData": "لا توجد بيانات",
     "actions": "الإجراءات",
+    "more": "المزيد",
     "itemsPerPage": "عناصر لكل صفحة",
     "of": "من",
     "firstPage": "الصفحة الأولى",
@@ -135,6 +136,10 @@
     "visionText": "أن نكون الوكالة الإبداعية الرائدة في المنطقة، معروفين بالتميز في التطوير والتحقيق والإنتاج الاستراتيجي.",
     "trustedPartners": "شركاء موثوقون حول العالم",
     "teamMembers": "أعضاء فريق متفانون"
+  },
+  "forms": {
+    "title": "طريقك للإنجاز",
+    "subtitle": "وصول سريع إلى النماذج المتاحة لهذه الشركة"
   },
   "events": {
     "title": "الفعاليات القادمة",
@@ -737,6 +742,8 @@
       "companyDeleted": "تم حذف الشركة بنجاح",
       "logoSection": "شعار الشركة",
       "uploadLogo": "رفع الشعار",
+      "backgrounds": "الخلفيات",
+      "forms": "النماذج",
       "chooseAnother": "اختر صورة أخرى",
       "logoUploaded": "تم رفع الشعار بنجاح",
       "basicInfo": "المعلومات الأساسية",
@@ -792,6 +799,75 @@
         "openingHoursNoteEn": "أدخل الملاحظة (بالإنجليزية)",
         "openingHoursNoteAr": "أدخل الملاحظة (بالعربية)",
         "partnershipFormUrl": "أدخل رابط نموذج الشراكة"
+      }
+    },
+    "companyForms": {
+      "title": "نماذج الشركة",
+      "subtitle": "إدارة النماذج والمستندات المتاحة للشركة",
+      "addForm": "إضافة نموذج",
+      "createForm": "إنشاء نموذج",
+      "editForm": "تعديل النموذج",
+      "deleteForm": "حذف النموذج",
+      "formInfo": "معلومات النموذج",
+      "formNameEn": "اسم النموذج (إنجليزي)",
+      "formNameAr": "اسم النموذج (عربي)",
+      "formUrl": "رابط النموذج",
+      "name": "الاسم",
+      "company": "الشركة",
+      "created": "تاريخ الإنشاء",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "open": "فتح النموذج",
+      "uploadFile": "رفع ملف",
+      "uploading": "جاري الرفع...",
+      "uploadHint": "أو الصق رابطًا أعلاه",
+      "confirmDelete": "هل أنت متأكد من حذف هذا النموذج؟",
+      "formCreated": "تم إنشاء النموذج بنجاح",
+      "formUpdated": "تم تحديث النموذج بنجاح",
+      "formDeleted": "تم حذف النموذج بنجاح",
+      "placeholders": {
+        "formNameEn": "أدخل اسم النموذج بالإنجليزية",
+        "formNameAr": "أدخل اسم النموذج بالعربية",
+        "formUrl": "https://...",
+        "name": "أدخل اسم النموذج"
+      },
+      "errors": {
+        "loadFailed": "فشل تحميل النماذج",
+        "createFailed": "فشل إنشاء النموذج",
+        "updateFailed": "فشل تحديث النموذج",
+        "deleteFailed": "فشل حذف النموذج",
+        "formNameEnRequired": "الاسم بالإنجليزية مطلوب",
+        "formNameEnMaxLength": "الاسم بالإنجليزية يجب ألا يتجاوز 200 حرف",
+        "formNameArRequired": "الاسم بالعربية مطلوب",
+        "formNameArMaxLength": "الاسم بالعربية يجب ألا يتجاوز 200 حرف",
+        "formUrlRequired": "رابط النموذج مطلوب",
+        "formUrlMaxLength": "رابط النموذج يجب ألا يتجاوز 500 حرف"
+      }
+    },
+    "companyBackgrounds": {
+      "title": "خلفيات الشركة",
+      "subtitle": "إدارة صور الخلفية الخاصة بالشركة",
+      "addBackground": "إضافة خلفية",
+      "createBackground": "إنشاء خلفية",
+      "editBackground": "تعديل الخلفية",
+      "deleteBackground": "حذف الخلفية",
+      "image": "الصورة",
+      "company": "الشركة",
+      "created": "تاريخ الإنشاء",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "selectImage": "اختيار صورة",
+      "replaceImage": "استبدال الصورة",
+      "confirmDelete": "هل أنت متأكد من حذف هذه الخلفية؟",
+      "backgroundCreated": "تم إنشاء الخلفية بنجاح",
+      "backgroundUpdated": "تم تحديث الخلفية بنجاح",
+      "backgroundDeleted": "تم حذف الخلفية بنجاح",
+      "errors": {
+        "loadFailed": "فشل تحميل الخلفيات",
+        "createFailed": "فشل إنشاء الخلفية",
+        "updateFailed": "فشل تحديث الخلفية",
+        "deleteFailed": "فشل حذف الخلفية",
+        "imageRequired": "الصورة مطلوبة"
       }
     },
     "companyContacts": {

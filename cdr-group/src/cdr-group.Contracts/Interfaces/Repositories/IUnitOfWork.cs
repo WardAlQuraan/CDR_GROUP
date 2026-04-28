@@ -14,6 +14,7 @@ IPositionRepository Positions { get; }
         ISalaryHistoryRepository SalaryHistories { get; }
         ICompanyContactRepository CompanyContacts { get; }
         ICompanyBackgroundRepository CompanyBackgrounds { get; }
+        ICompanyFormRepository CompanyForms { get; }
         IAuditLogRepository AuditLogs { get; }
         IReviewRepository Reviews { get; }
         IComplaintRepository Complaints { get; }

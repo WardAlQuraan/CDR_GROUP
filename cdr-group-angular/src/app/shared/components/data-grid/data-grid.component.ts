@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewC
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { DataGridConfig, FilterConfig, FilterValues } from './data-grid.models';
+import { DataGridConfig, FilterConfig, FilterValues, GridAction } from './data-grid.models';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -132,10 +132,22 @@ export class DataGridComponent<T> implements OnChanges {
     this.sortChange.emit(resolved);
   }
 
-  isActionVisible(action: any, row: T): boolean {
+  isActionVisible(action: GridAction<T>, row: T): boolean {
     if (action.permission && !this.authService.hasPermission(action.permission)) {
       return false;
     }
     return action.visible ? action.visible(row) : true;
+  }
+
+  getPrimaryActions(): GridAction<T>[] {
+    return (this.config.actions ?? []).filter(a => a.primary !== false);
+  }
+
+  getSecondaryActions(): GridAction<T>[] {
+    return (this.config.actions ?? []).filter(a => a.primary === false);
+  }
+
+  hasVisibleSecondaryActions(row: T): boolean {
+    return this.getSecondaryActions().some(a => this.isActionVisible(a, row));
   }
 }

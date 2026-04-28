@@ -134,6 +134,7 @@ export class RolesComponent implements OnInit {
           tooltip: 'admin.roles.managePermissions',
           permission: Permissions.ROLES_MANAGE,
           color: 'primary',
+          primary: false,
           onClick: (row) => this.openPermissionsDialog(row)
         },
         {
@@ -141,6 +142,7 @@ export class RolesComponent implements OnInit {
           tooltip: 'admin.auditLogs.history',
           permission: Permissions.AUDIT_LOGS_READ,
           color: 'accent',
+          primary: false,
           onClick: (row) => this.router.navigate(['/admin/audit-logs', 'Role', row.id])
         },
         {

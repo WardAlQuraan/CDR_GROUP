@@ -122,19 +122,6 @@ export class CompaniesComponent implements OnInit {
       ],
       actions: [
         {
-          icon: 'account_tree',
-          tooltip: 'admin.companies.organizationChart',
-          color: 'success',
-          onClick: (row) => this.openOrgChart(row)
-        },
-        {
-          icon: 'contacts',
-          tooltip: 'admin.companyContacts.contacts',
-          permission: Permissions.COMPANY_CONTACTS_READ,
-          color: 'primary',
-          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'contacts'])
-        },
-        {
           icon: 'edit',
           tooltip: 'admin.companies.edit',
           permission: Permissions.COMPANIES_UPDATE,
@@ -142,10 +129,49 @@ export class CompaniesComponent implements OnInit {
           onClick: (row) => this.openEditDialog(row)
         },
         {
+          icon: 'delete',
+          tooltip: 'admin.companies.delete',
+          permission: Permissions.COMPANIES_DELETE,
+          color: 'warn',
+          onClick: (row) => this.deleteCompany(row)
+        },
+        {
+          icon: 'account_tree',
+          tooltip: 'admin.companies.organizationChart',
+          color: 'success',
+          primary: false,
+          onClick: (row) => this.openOrgChart(row)
+        },
+        {
+          icon: 'contacts',
+          tooltip: 'admin.companyContacts.contacts',
+          permission: Permissions.COMPANY_CONTACTS_READ,
+          color: 'primary',
+          primary: false,
+          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'contacts'])
+        },
+        {
+          icon: 'wallpaper',
+          tooltip: 'admin.companies.backgrounds',
+          permission: Permissions.COMPANY_BACKGROUNDS_READ,
+          color: 'accent',
+          primary: false,
+          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'backgrounds'])
+        },
+        {
+          icon: 'description',
+          tooltip: 'admin.companies.forms',
+          permission: Permissions.COMPANY_FORMS_READ,
+          color: 'accent',
+          primary: false,
+          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'forms'])
+        },
+        {
           icon: 'image',
           tooltip: 'admin.companies.uploadLogo',
           permission: Permissions.COMPANIES_UPDATE,
           color: 'primary',
+          primary: false,
           onClick: (row) => this.openLogoDialog(row)
         },
         {
@@ -153,14 +179,8 @@ export class CompaniesComponent implements OnInit {
           tooltip: 'admin.auditLogs.history',
           permission: Permissions.AUDIT_LOGS_READ,
           color: 'accent',
+          primary: false,
           onClick: (row) => this.router.navigate(['/admin/audit-logs', 'Company', row.id])
-        },
-        {
-          icon: 'delete',
-          tooltip: 'admin.companies.delete',
-          permission: Permissions.COMPANIES_DELETE,
-          color: 'warn',
-          onClick: (row) => this.deleteCompany(row)
         }
       ],
       showExport: true,

@@ -50,5 +50,8 @@ namespace cdr_group.Domain.Entities
 
         // Background images for this company
         public virtual ICollection<CompanyBackground> CompanyBackgrounds { get; set; } = new List<CompanyBackground>();
+
+        // Forms for this company
+        public virtual ICollection<CompanyForm> CompanyForms { get; set; } = new List<CompanyForm>();
     }
 }

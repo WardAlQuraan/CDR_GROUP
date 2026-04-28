@@ -87,6 +87,18 @@ export const Permissions = {
   COMPANIES_UPDATE: 'companies.update',
   COMPANIES_DELETE: 'companies.delete',
 
+  // Company Backgrounds
+  COMPANY_BACKGROUNDS_READ: 'company-backgrounds.read',
+  COMPANY_BACKGROUNDS_CREATE: 'company-backgrounds.create',
+  COMPANY_BACKGROUNDS_UPDATE: 'company-backgrounds.update',
+  COMPANY_BACKGROUNDS_DELETE: 'company-backgrounds.delete',
+
+  // Company Forms
+  COMPANY_FORMS_READ: 'company-forms.read',
+  COMPANY_FORMS_CREATE: 'company-forms.create',
+  COMPANY_FORMS_UPDATE: 'company-forms.update',
+  COMPANY_FORMS_DELETE: 'company-forms.delete',
+
   // Contact Us
   CONTACTUS_READ: 'contactus.read',
   CONTACTUS_DELETE: 'contactus.delete',

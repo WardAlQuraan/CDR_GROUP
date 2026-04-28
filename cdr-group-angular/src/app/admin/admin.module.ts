@@ -41,6 +41,10 @@ import { AuditLogsComponent } from './pages/audit-logs/audit-logs-component/audi
 import { AuditLogViewDialogComponent } from './pages/audit-logs/audit-log-view-dialog/audit-log-view-dialog.component';
 import { CompanyContactsComponent } from './pages/company-contacts/company-contacts-component/company-contacts-component';
 import { CompanyContactDialogComponent } from './pages/company-contacts/company-contact-dialog/company-contact-dialog.component';
+import { CompanyBackgroundsComponent } from './pages/company-backgrounds/company-backgrounds-component/company-backgrounds-component';
+import { CompanyBackgroundDialogComponent } from './pages/company-backgrounds/company-background-dialog/company-background-dialog.component';
+import { CompanyFormsComponent } from './pages/company-forms/company-forms-component/company-forms-component';
+import { CompanyFormDialogComponent } from './pages/company-forms/company-form-dialog/company-form-dialog.component';
 import { ReviewsComponent } from './pages/reviews/reviews-component/reviews-component';
 import { ReviewDialogComponent } from './pages/reviews/review-dialog/review-dialog.component';
 import { ComplaintsComponent } from './pages/complaints/complaints-component/complaints-component';
@@ -80,6 +84,10 @@ import { PartnerDialogComponent } from './pages/partners/partner-dialog/partner-
     AuditLogViewDialogComponent,
     CompanyContactsComponent,
     CompanyContactDialogComponent,
+    CompanyBackgroundsComponent,
+    CompanyBackgroundDialogComponent,
+    CompanyFormsComponent,
+    CompanyFormDialogComponent,
     ReviewsComponent,
     ReviewDialogComponent,
     ComplaintsComponent,

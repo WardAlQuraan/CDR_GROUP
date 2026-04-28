@@ -1,0 +1,24 @@
+@if (hasForms) {
+  <section class="forms-section" id="section_forms" [style.--brand-primary]="primaryColorValue" [style.--brand-secondary]="secondaryColorValue">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-3">
+          <h2 class="section-title">{{ 'forms.title' | translate }}</h2>
+          <!-- <p class="section-subtitle">{{ 'forms.subtitle' | translate }}</p> -->
+        </div>
+      </div>
+
+      <div class="forms-grid">
+        @for (form of forms; track form.id) {
+          <button type="button" class="form-card" (click)="openForm(form)" [attr.aria-label]="getFormName(form)">
+            <span class="icon-wrap">
+              <mat-icon class="form-icon">description</mat-icon>
+            </span>
+            <span class="form-name" [title]="getFormName(form)">{{ getFormName(form) }}</span>
+            <mat-icon class="open-icon">arrow_outward</mat-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </section>
+}

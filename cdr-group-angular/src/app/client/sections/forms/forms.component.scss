@@ -1,0 +1,204 @@
+.forms-section {
+  --brand-primary: #833AB4;
+  --brand-secondary: #FD1D1D;
+
+  position: relative;
+  background:
+    radial-gradient(900px 360px at 8% -10%, color-mix(in srgb, var(--brand-primary) 55%, transparent), transparent 60%),
+    radial-gradient(900px 380px at 110% 110%, color-mix(in srgb, var(--brand-secondary) 50%, transparent), transparent 60%),
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--brand-primary) 35%, #0b0612) 0%,
+      color-mix(in srgb, var(--brand-secondary) 35%, #0b0612) 100%);
+  padding: 56px 0 52px;
+  overflow: hidden;
+  isolation: isolate;
+
+  // Subtle dot texture
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    padding-left: 12px;
+    padding-right: 12px;
+    max-width: none;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #f8fafc;
+    margin-bottom: 0.4rem;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+    color: rgba(226, 232, 240, 0.75);
+    max-width: 620px;
+    margin: 0 auto;
+  }
+}
+
+.forms-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.form-card {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 22px 14px 14px;
+  min-height: 64px;
+  max-width: 320px;
+  border-radius: 999px;
+  color: #ffffff;
+  font-family: inherit;
+  text-align: start;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+    0 12px 28px -14px rgba(0, 0, 0, 0.55);
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease,
+    filter 0.2s ease;
+
+  // Glossy diagonal sheen
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 45%);
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.05);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.22),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.22),
+      0 18px 36px -14px rgba(0, 0, 0, 0.65);
+
+    .open-icon {
+      transform: translate(2px, -2px);
+      opacity: 1;
+    }
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.22),
+      0 0 0 3px rgba(255, 255, 255, 0.35),
+      0 12px 28px -14px rgba(0, 0, 0, 0.55);
+  }
+
+  &:active {
+    transform: translateY(-1px) scale(0.98);
+  }
+}
+
+.icon-wrap {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+
+  .form-icon {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    color: #ffffff;
+  }
+}
+
+.form-name {
+  flex: 1 1 auto;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #ffffff;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  letter-spacing: 0.005em;
+}
+
+.open-icon {
+  flex: 0 0 auto;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  color: rgba(255, 255, 255, 0.85);
+  opacity: 0.75;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+@media (max-width: 576px) {
+  .forms-section {
+    padding: 44px 0 40px;
+
+    .section-title {
+      font-size: 1.6rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+    }
+  }
+
+  .forms-grid {
+    gap: 12px;
+  }
+
+  .form-card {
+    padding: 12px 18px 12px 12px;
+    min-height: 56px;
+    gap: 12px;
+  }
+
+  .icon-wrap {
+    width: 34px;
+    height: 34px;
+
+    .form-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+    }
+  }
+
+  .form-name {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,16 @@
+<app-back-button></app-back-button>
+
+<app-data-grid
+  [data]="backgrounds"
+  [config]="gridConfig"
+  [totalCount]="totalCount"
+  [loading]="loading"
+  [exporting]="exporting"
+  [pageIndex]="pageNumber - 1"
+  [pageSize]="pageSize"
+  (pageChange)="onPageChange($event)"
+  (sortChange)="onSortChange($event)"
+  (filterChange)="onFilterChange($event)"
+  (addClick)="openCreateDialog()"
+  (exportClick)="exportToExcel()">
+</app-data-grid>

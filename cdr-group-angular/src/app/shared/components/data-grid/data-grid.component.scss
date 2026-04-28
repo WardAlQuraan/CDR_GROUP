@@ -285,6 +285,36 @@ $transition: 200ms ease;
   border-radius: $radius-sm;
 }
 
+::ng-deep .grid-action-menu.mat-mdc-menu-panel {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  box-shadow: $shadow-lg;
+
+  .mat-mdc-menu-content {
+    background: $white;
+    padding: 0.25rem 0;
+  }
+
+  .mat-mdc-menu-item {
+    background: $white;
+
+    &:hover:not([disabled]) {
+      background: $background-hover;
+    }
+
+    mat-icon {
+      color: $text-secondary;
+
+      &.primary { color: $primary-color; }
+      &.warn    { color: $warn-color; }
+      &.success { color: $success-color; }
+      &.info    { color: $info-color; }
+      &.accent  { color: $accent-color; }
+    }
+  }
+}
+
 ::ng-deep .mat-mdc-select-panel {
   background: $white !important;
   border: 1px solid $border-color;
@@ -389,6 +419,35 @@ $transition: 200ms ease;
         background: $bg;
       }
     }
+  }
+}
+
+// ── Image Cell ──
+.grid-image {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: $radius-sm;
+  border: 1px solid $border-color;
+  background: $background-light;
+  display: block;
+}
+
+.grid-image-empty {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: $radius-sm;
+  background: $background-light;
+  border: 1px dashed $border-color;
+  color: $text-muted;
+
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
   }
 }
 

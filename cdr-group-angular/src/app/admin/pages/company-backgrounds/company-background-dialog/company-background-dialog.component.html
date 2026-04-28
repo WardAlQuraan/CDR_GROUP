@@ -1,0 +1,46 @@
+<app-base-dialog
+  [title]="dialogTitle"
+  [saveLabel]="saveLabel"
+  [saveDisabled]="saveDisabled"
+  [loading]="loading"
+  (save)="onSave()"
+  (cancel)="onCancel()">
+
+  <div class="background-dialog-content">
+    <div class="image-preview" [class.pending]="pendingPreview">
+      @if (pendingPreview) {
+        <img [src]="pendingPreview" alt="" />
+      } @else if (fullExistingUrl) {
+        <img [src]="fullExistingUrl" alt="" />
+      } @else {
+        <mat-icon class="image-placeholder">wallpaper</mat-icon>
+      }
+    </div>
+
+    @if (!pendingFile) {
+      <button type="button" mat-raised-button color="primary" (click)="triggerPick()" [disabled]="loading">
+        <mat-icon>upload</mat-icon>
+        {{ (existingImageUrl ? 'admin.companyBackgrounds.replaceImage' : 'admin.companyBackgrounds.selectImage') | translate }}
+      </button>
+    } @else {
+      <div class="pending-actions">
+        <button type="button" mat-stroked-button (click)="triggerPick()" [disabled]="loading">
+          <mat-icon>refresh</mat-icon>
+          {{ 'admin.companies.chooseAnother' | translate }}
+        </button>
+        <button type="button" mat-stroked-button color="warn" (click)="discardPending()" [disabled]="loading">
+          <mat-icon>close</mat-icon>
+          {{ 'common.cancel' | translate }}
+        </button>
+      </div>
+    }
+
+    <input
+      #imageInput
+      type="file"
+      accept="image/*"
+      style="display: none"
+      (change)="onFileSelected($event)">
+  </div>
+
+</app-base-dialog>

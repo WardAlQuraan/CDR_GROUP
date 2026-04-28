@@ -134,6 +134,7 @@ export class PositionsComponent implements OnInit {
           tooltip: 'admin.auditLogs.history',
           permission: Permissions.AUDIT_LOGS_READ,
           color: 'accent',
+          primary: false,
           onClick: (row) => this.router.navigate(['/admin/audit-logs', 'Position', row.id])
         },
         {

@@ -64,10 +64,12 @@ export interface GridColumn<T = any> {
   sortable?: boolean;
   sortBy?: string;
   width?: string;
-  type?: 'text' | 'date' | 'icon' | 'badge' | 'custom';
+  type?: 'text' | 'date' | 'icon' | 'badge' | 'image' | 'custom';
   dateFormat?: string;
   cell?: (row: T) => string;
   badge?: (row: T) => BadgeConfig;
+  // Returns the absolute (or relative-to-base-url) image URL. Used when type === 'image'.
+  imageUrl?: (row: T) => string | undefined;
   permission?: string;
 }
 
@@ -78,4 +80,7 @@ export interface GridAction<T = any> {
   color?: 'primary' | 'accent' | 'warn' | 'success' | 'info';
   onClick: (row: T) => void;
   visible?: (row: T) => boolean;
+  // When false, the action is rendered inside the row's overflow ("more") menu
+  // instead of as a standalone icon button. Defaults to true.
+  primary?: boolean;
 }
