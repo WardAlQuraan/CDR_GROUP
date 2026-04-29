@@ -167,6 +167,14 @@ export class CompaniesComponent implements OnInit {
           onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'forms'])
         },
         {
+          icon: 'tune',
+          tooltip: 'admin.companies.preferences',
+          permission: Permissions.COMPANY_PREFERENCES_READ,
+          color: 'accent',
+          primary: false,
+          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'preferences'])
+        },
+        {
           icon: 'image',
           tooltip: 'admin.companies.uploadLogo',
           permission: Permissions.COMPANIES_UPDATE,

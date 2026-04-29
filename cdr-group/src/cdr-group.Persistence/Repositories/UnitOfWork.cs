@@ -22,6 +22,7 @@ namespace cdr_group.Persistence.Repositories
         private ICompanyContactRepository? _companyContacts;
         private ICompanyBackgroundRepository? _companyBackgrounds;
         private ICompanyFormRepository? _companyForms;
+        private ICompanyPreferenceRepository? _companyPreferences;
         private IAuditLogRepository? _auditLogs;
         private IReviewRepository? _reviews;
         private IComplaintRepository? _complaints;
@@ -47,6 +48,7 @@ namespace cdr_group.Persistence.Repositories
         public ICompanyContactRepository CompanyContacts => _companyContacts ??= new CompanyContactRepository(_context);
         public ICompanyBackgroundRepository CompanyBackgrounds => _companyBackgrounds ??= new CompanyBackgroundRepository(_context);
         public ICompanyFormRepository CompanyForms => _companyForms ??= new CompanyFormRepository(_context);
+        public ICompanyPreferenceRepository CompanyPreferences => _companyPreferences ??= new CompanyPreferenceRepository(_context);
         public IAuditLogRepository AuditLogs => _auditLogs ??= new AuditLogRepository(_context);
         public IReviewRepository Reviews => _reviews ??= new ReviewRepository(_context);
         public IComplaintRepository Complaints => _complaints ??= new ComplaintRepository(_context);

@@ -98,6 +98,14 @@ public static class Positions
             public const string Delete = "company-forms.delete";
         }
 
+        public static class CompanyPreferences
+        {
+            public const string Read = "company-preferences.read";
+            public const string Create = "company-preferences.create";
+            public const string Update = "company-preferences.update";
+            public const string Delete = "company-preferences.delete";
+        }
+
         public static class AuditLogs
         {
             public const string Read = "audit-logs.read";

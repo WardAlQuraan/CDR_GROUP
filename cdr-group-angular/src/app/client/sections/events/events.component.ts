@@ -1,7 +1,11 @@
 import { ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges, effect } from '@angular/core';
 import { EventsService } from '../../../services/events.service';
 import { TranslationService } from '../../../services/translation.service';
+import { CompanyPreferencesService } from '../../../services/company-preferences.service';
 import { EventDto } from '../../../models/event.model';
+import { CompanyPreferenceDto } from '../../../models/company-preference.model';
+
+const NEWS_LABEL_CODE = 'NEWS_LABEL';
 
 interface DisplayEvent {
   id: string;
@@ -26,6 +30,7 @@ export class EventsComponent implements OnChanges {
   paginationLoading = false;
   error = false;
   events: DisplayEvent[] = [];
+  newsLabelPreference: CompanyPreferenceDto | null = null;
 
   // Pagination
   pageNumber = 1;
@@ -45,6 +50,7 @@ export class EventsComponent implements OnChanges {
   constructor(
     private eventsService: EventsService,
     private translationService: TranslationService,
+    private companyPreferencesService: CompanyPreferencesService,
     private cdr: ChangeDetectorRef
   ) {
     effect(() => {
@@ -59,11 +65,38 @@ export class EventsComponent implements OnChanges {
     if (changes['companyId']) {
       this.pageNumber = 1;
       this.loadEvents();
+      this.loadSectionTitle();
     }
   }
 
   get isArabic(): boolean {
     return this.translationService.language() === 'ar';
+  }
+
+  get sectionTitle(): string {
+    const value = this.isArabic ? this.newsLabelPreference?.valueAr : this.newsLabelPreference?.valueEn;
+    return value?.trim() ? value : this.translationService.translate('events.latestEvents');
+  }
+
+  private loadSectionTitle(): void {
+    this.newsLabelPreference = null;
+    if (!this.companyId) {
+      this.cdr.markForCheck();
+      return;
+    }
+
+    this.companyPreferencesService.getByCompanyAndCode(this.companyId, NEWS_LABEL_CODE).subscribe({
+      next: (response) => {
+        if (response.success && response.data) {
+          this.newsLabelPreference = response.data;
+        }
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.newsLabelPreference = null;
+        this.cdr.markForCheck();
+      }
+    });
   }
 
   loadEvents(isPagination = false): void {

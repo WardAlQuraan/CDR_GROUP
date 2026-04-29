@@ -99,6 +99,12 @@ export const Permissions = {
   COMPANY_FORMS_UPDATE: 'company-forms.update',
   COMPANY_FORMS_DELETE: 'company-forms.delete',
 
+  // Company Preferences
+  COMPANY_PREFERENCES_READ: 'company-preferences.read',
+  COMPANY_PREFERENCES_CREATE: 'company-preferences.create',
+  COMPANY_PREFERENCES_UPDATE: 'company-preferences.update',
+  COMPANY_PREFERENCES_DELETE: 'company-preferences.delete',
+
   // Contact Us
   CONTACTUS_READ: 'contactus.read',
   CONTACTUS_DELETE: 'contactus.delete',

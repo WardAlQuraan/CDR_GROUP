@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cdr_group.Persistence.Data;
 
@@ -11,9 +12,11 @@ using cdr_group.Persistence.Data;
 namespace cdr_group.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260428141421_company-preference")]
+    partial class companypreference
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1304,12 +1307,7 @@ namespace cdr_group.Persistence.Migrations
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ValueAr")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("varchar(1000)");
-
-                    b.Property<string>("ValueEn")
+                    b.Property<string>("Value")
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("varchar(1000)");

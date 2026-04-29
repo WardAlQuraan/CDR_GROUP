@@ -213,6 +213,7 @@ namespace cdr_group.Persistence.Data
         public DbSet<CompanyContact> CompanyContacts { get; set; }
         public DbSet<CompanyBackground> CompanyBackgrounds { get; set; }
         public DbSet<CompanyForm> CompanyForms { get; set; }
+        public DbSet<CompanyPreference> CompanyPreferences { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Country> Countries { get; set; }
@@ -407,6 +408,23 @@ namespace cdr_group.Persistence.Data
 
                 entity.HasOne(e => e.Company)
                     .WithMany(e => e.CompanyForms)
+                    .HasForeignKey(e => e.CompanyId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // CompanyPreference configuration
+            modelBuilder.Entity<CompanyPreference>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Code).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.ValueEn).IsRequired().HasMaxLength(1000);
+                entity.Property(e => e.ValueAr).IsRequired().HasMaxLength(1000);
+
+                entity.HasIndex(e => new { e.CompanyId, e.Code }).IsUnique();
+
+                entity.HasOne(e => e.Company)
+                    .WithMany(e => e.CompanyPreferences)
                     .HasForeignKey(e => e.CompanyId)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);

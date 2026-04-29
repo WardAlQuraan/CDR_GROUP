@@ -45,6 +45,8 @@ import { CompanyBackgroundsComponent } from './pages/company-backgrounds/company
 import { CompanyBackgroundDialogComponent } from './pages/company-backgrounds/company-background-dialog/company-background-dialog.component';
 import { CompanyFormsComponent } from './pages/company-forms/company-forms-component/company-forms-component';
 import { CompanyFormDialogComponent } from './pages/company-forms/company-form-dialog/company-form-dialog.component';
+import { CompanyPreferencesComponent } from './pages/company-preferences/company-preferences-component/company-preferences-component';
+import { CompanyPreferenceDialogComponent } from './pages/company-preferences/company-preference-dialog/company-preference-dialog.component';
 import { ReviewsComponent } from './pages/reviews/reviews-component/reviews-component';
 import { ReviewDialogComponent } from './pages/reviews/review-dialog/review-dialog.component';
 import { ComplaintsComponent } from './pages/complaints/complaints-component/complaints-component';
@@ -88,6 +90,8 @@ import { PartnerDialogComponent } from './pages/partners/partner-dialog/partner-
     CompanyBackgroundDialogComponent,
     CompanyFormsComponent,
     CompanyFormDialogComponent,
+    CompanyPreferencesComponent,
+    CompanyPreferenceDialogComponent,
     ReviewsComponent,
     ReviewDialogComponent,
     ComplaintsComponent,

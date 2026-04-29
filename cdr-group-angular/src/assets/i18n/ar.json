@@ -744,6 +744,7 @@
       "uploadLogo": "رفع الشعار",
       "backgrounds": "الخلفيات",
       "forms": "النماذج",
+      "preferences": "التفضيلات",
       "chooseAnother": "اختر صورة أخرى",
       "logoUploaded": "تم رفع الشعار بنجاح",
       "basicInfo": "المعلومات الأساسية",
@@ -842,6 +843,43 @@
         "formNameArMaxLength": "الاسم بالعربية يجب ألا يتجاوز 200 حرف",
         "formUrlRequired": "رابط النموذج مطلوب",
         "formUrlMaxLength": "رابط النموذج يجب ألا يتجاوز 500 حرف"
+      }
+    },
+    "companyPreferences": {
+      "title": "تفضيلات الشركة",
+      "subtitle": "إدارة التفضيلات القابلة للتهيئة الخاصة بالشركة",
+      "addPreference": "إضافة تفضيل",
+      "createPreference": "إنشاء تفضيل",
+      "editPreference": "تعديل التفضيل",
+      "deletePreference": "حذف التفضيل",
+      "preferenceInfo": "معلومات التفضيل",
+      "code": "الرمز",
+      "value": "القيمة",
+      "valueEn": "القيمة (إنجليزي)",
+      "valueAr": "القيمة (عربي)",
+      "created": "تاريخ الإنشاء",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "confirmDelete": "هل أنت متأكد من حذف هذا التفضيل؟",
+      "preferenceCreated": "تم إنشاء التفضيل بنجاح",
+      "preferenceUpdated": "تم تحديث التفضيل بنجاح",
+      "preferenceDeleted": "تم حذف التفضيل بنجاح",
+      "placeholders": {
+        "code": "أدخل رمز التفضيل",
+        "valueEn": "أدخل قيمة التفضيل بالإنجليزية",
+        "valueAr": "أدخل قيمة التفضيل بالعربية"
+      },
+      "errors": {
+        "loadFailed": "فشل تحميل التفضيلات",
+        "createFailed": "فشل إنشاء التفضيل",
+        "updateFailed": "فشل تحديث التفضيل",
+        "deleteFailed": "فشل حذف التفضيل",
+        "codeRequired": "الرمز مطلوب",
+        "codeMaxLength": "الرمز يجب ألا يتجاوز 100 حرف",
+        "valueEnRequired": "القيمة بالإنجليزية مطلوبة",
+        "valueEnMaxLength": "القيمة بالإنجليزية يجب ألا تتجاوز 1000 حرف",
+        "valueArRequired": "القيمة بالعربية مطلوبة",
+        "valueArMaxLength": "القيمة بالعربية يجب ألا تتجاوز 1000 حرف"
       }
     },
     "companyBackgrounds": {

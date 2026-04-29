@@ -15,6 +15,7 @@ IPositionRepository Positions { get; }
         ICompanyContactRepository CompanyContacts { get; }
         ICompanyBackgroundRepository CompanyBackgrounds { get; }
         ICompanyFormRepository CompanyForms { get; }
+        ICompanyPreferenceRepository CompanyPreferences { get; }
         IAuditLogRepository AuditLogs { get; }
         IReviewRepository Reviews { get; }
         IComplaintRepository Complaints { get; }

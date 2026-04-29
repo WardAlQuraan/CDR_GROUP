@@ -120,6 +120,12 @@ namespace cdr_group.Persistence.Data
             var companyFormsUpdateId = Guid.Parse("bbccddee-1111-1111-1111-cccccccccccc");
             var companyFormsDeleteId = Guid.Parse("bbccddee-1111-1111-1111-dddddddddddd");
 
+            // CompanyPreference Permission IDs
+            var companyPreferencesReadId = Guid.Parse("bbccddee-2222-2222-2222-aaaaaaaaaaaa");
+            var companyPreferencesCreateId = Guid.Parse("bbccddee-2222-2222-2222-bbbbbbbbbbbb");
+            var companyPreferencesUpdateId = Guid.Parse("bbccddee-2222-2222-2222-cccccccccccc");
+            var companyPreferencesDeleteId = Guid.Parse("bbccddee-2222-2222-2222-dddddddddddd");
+
             // Company IDs
             var cdrGroupCompanyId = Guid.Parse("aabbccdd-aabb-aabb-aabb-aabbccddeeff");
 
@@ -248,6 +254,11 @@ namespace cdr_group.Persistence.Data
                 new Permission { Id = companyFormsCreateId, Name = PermissionConstants.CompanyForms.Create, Description = "Create company forms", Module = "CompanyForms", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = companyFormsUpdateId, Name = PermissionConstants.CompanyForms.Update, Description = "Update company forms", Module = "CompanyForms", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = companyFormsDeleteId, Name = PermissionConstants.CompanyForms.Delete, Description = "Delete company forms", Module = "CompanyForms", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                // CompanyPreference permissions
+                new Permission { Id = companyPreferencesReadId, Name = PermissionConstants.CompanyPreferences.Read, Description = "View company preferences", Module = "CompanyPreferences", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companyPreferencesCreateId, Name = PermissionConstants.CompanyPreferences.Create, Description = "Create company preferences", Module = "CompanyPreferences", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companyPreferencesUpdateId, Name = PermissionConstants.CompanyPreferences.Update, Description = "Update company preferences", Module = "CompanyPreferences", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companyPreferencesDeleteId, Name = PermissionConstants.CompanyPreferences.Delete, Description = "Delete company preferences", Module = "CompanyPreferences", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
             };
 
             modelBuilder.Entity<Permission>().HasData(permissions);

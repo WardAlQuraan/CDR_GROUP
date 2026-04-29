@@ -4,6 +4,7 @@ using cdr_group.Contracts.DTOs.Company;
 using cdr_group.Contracts.DTOs.CompanyContact;
 using cdr_group.Contracts.DTOs.CompanyBackground;
 using cdr_group.Contracts.DTOs.CompanyForm;
+using cdr_group.Contracts.DTOs.CompanyPreference;
 using cdr_group.Contracts.DTOs.Employee;
 using cdr_group.Contracts.DTOs.Event;
 using cdr_group.Contracts.DTOs.FileAttachment;
@@ -214,6 +215,19 @@ namespace cdr_group.Application.Mappings
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
 
             CreateMap<UpdateCompanyFormDto, CompanyForm>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            // CompanyPreference mappings
+            CreateMap<CompanyPreference, CompanyPreferenceDto>()
+                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
+                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameAr : null));
+
+            CreateMap<CreateCompanyPreferenceDto, CompanyPreference>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+            CreateMap<UpdateCompanyPreferenceDto, CompanyPreference>()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
             // AuditLog mappings

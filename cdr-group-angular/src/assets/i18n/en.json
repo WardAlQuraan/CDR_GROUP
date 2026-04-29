@@ -744,6 +744,7 @@
       "uploadLogo": "Upload Logo",
       "backgrounds": "Backgrounds",
       "forms": "Forms",
+      "preferences": "Preferences",
       "chooseAnother": "Choose another",
       "logoUploaded": "Logo uploaded successfully",
       "basicInfo": "Basic Information",
@@ -842,6 +843,43 @@
         "formNameArMaxLength": "Arabic name must be at most 200 characters",
         "formUrlRequired": "Form URL is required",
         "formUrlMaxLength": "Form URL must be at most 500 characters"
+      }
+    },
+    "companyPreferences": {
+      "title": "Company Preferences",
+      "subtitle": "Manage configurable preferences for the company",
+      "addPreference": "Add Preference",
+      "createPreference": "Create Preference",
+      "editPreference": "Edit Preference",
+      "deletePreference": "Delete Preference",
+      "preferenceInfo": "Preference Information",
+      "code": "Code",
+      "value": "Value",
+      "valueEn": "Value (English)",
+      "valueAr": "Value (Arabic)",
+      "created": "Created",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this preference?",
+      "preferenceCreated": "Preference created successfully",
+      "preferenceUpdated": "Preference updated successfully",
+      "preferenceDeleted": "Preference deleted successfully",
+      "placeholders": {
+        "code": "Enter preference code",
+        "valueEn": "Enter preference value in English",
+        "valueAr": "Enter preference value in Arabic"
+      },
+      "errors": {
+        "loadFailed": "Failed to load preferences",
+        "createFailed": "Failed to create preference",
+        "updateFailed": "Failed to update preference",
+        "deleteFailed": "Failed to delete preference",
+        "codeRequired": "Code is required",
+        "codeMaxLength": "Code must be at most 100 characters",
+        "valueEnRequired": "English value is required",
+        "valueEnMaxLength": "English value must be at most 1000 characters",
+        "valueArRequired": "Arabic value is required",
+        "valueArMaxLength": "Arabic value must be at most 1000 characters"
       }
     },
     "companyBackgrounds": {

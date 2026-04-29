@@ -53,5 +53,8 @@ namespace cdr_group.Domain.Entities
 
         // Forms for this company
         public virtual ICollection<CompanyForm> CompanyForms { get; set; } = new List<CompanyForm>();
+
+        // Preferences for this company
+        public virtual ICollection<CompanyPreference> CompanyPreferences { get; set; } = new List<CompanyPreference>();
     }
 }

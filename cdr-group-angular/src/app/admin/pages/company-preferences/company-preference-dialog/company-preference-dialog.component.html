@@ -1,0 +1,53 @@
+<app-base-dialog
+  [title]="dialogTitle"
+  [saveLabel]="saveLabel"
+  [saveDisabled]="form.invalid"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <form [formGroup]="form" class="dialog-form">
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>tune</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companyPreferences.preferenceInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'admin.companyPreferences.code' | translate }}</mat-label>
+          <mat-icon matPrefix>code</mat-icon>
+          <mat-select formControlName="code">
+            @for (code of allowedCodes; track code) {
+              <mat-option [value]="code">{{ code }}</mat-option>
+            }
+          </mat-select>
+          @if (form.get('code')?.hasError('required') && form.get('code')?.touched) {
+            <mat-error>{{ 'admin.companyPreferences.errors.codeRequired' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <app-form-field formControlName="valueEn" label="admin.companyPreferences.valueEn" icon="text_fields"
+          textDir="ltr"
+          placeholder="admin.companyPreferences.placeholders.valueEn"
+          [errors]="[
+            {name: 'required', message: 'admin.companyPreferences.errors.valueEnRequired'},
+            {name: 'maxlength', message: 'admin.companyPreferences.errors.valueEnMaxLength'}
+          ]">
+        </app-form-field>
+
+        <app-form-field formControlName="valueAr" label="admin.companyPreferences.valueAr" icon="text_fields"
+          textDir="rtl"
+          placeholder="admin.companyPreferences.placeholders.valueAr"
+          [errors]="[
+            {name: 'required', message: 'admin.companyPreferences.errors.valueArRequired'},
+            {name: 'maxlength', message: 'admin.companyPreferences.errors.valueArMaxLength'}
+          ]">
+        </app-form-field>
+      </div>
+    </div>
+  </form>
+
+</app-base-dialog>
