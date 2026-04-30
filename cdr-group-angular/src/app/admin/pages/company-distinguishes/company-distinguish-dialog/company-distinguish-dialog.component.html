@@ -1,0 +1,48 @@
+<app-base-dialog
+  [title]="dialogTitle"
+  [saveLabel]="saveLabel"
+  [saveDisabled]="form.invalid"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <form [formGroup]="form" class="dialog-form">
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>workspace_premium</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companyDistinguishes.distinguishInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <app-form-field formControlName="titleEn" label="admin.companyDistinguishes.titleEn" icon="title"
+          placeholder="admin.companyDistinguishes.placeholders.titleEn" textDir="ltr"
+          [errors]="[
+            {name: 'required', message: 'admin.companyDistinguishes.errors.titleEnRequired'},
+            {name: 'maxlength', message: 'admin.companyDistinguishes.errors.titleMaxLength'}
+          ]">
+        </app-form-field>
+
+        <app-form-field formControlName="titleAr" label="admin.companyDistinguishes.titleAr" icon="title"
+          placeholder="admin.companyDistinguishes.placeholders.titleAr" textDir="rtl"
+          [errors]="[
+            {name: 'required', message: 'admin.companyDistinguishes.errors.titleArRequired'},
+            {name: 'maxlength', message: 'admin.companyDistinguishes.errors.titleMaxLength'}
+          ]">
+        </app-form-field>
+
+        <app-form-field formControlName="descriptionEn" type="textarea" label="admin.companyDistinguishes.descriptionEn"
+          placeholder="admin.companyDistinguishes.placeholders.descriptionEn" textDir="ltr"
+          [errors]="[{name: 'maxlength', message: 'admin.companyDistinguishes.errors.descriptionMaxLength'}]">
+        </app-form-field>
+
+        <app-form-field formControlName="descriptionAr" type="textarea" label="admin.companyDistinguishes.descriptionAr"
+          placeholder="admin.companyDistinguishes.placeholders.descriptionAr" textDir="rtl"
+          [errors]="[{name: 'maxlength', message: 'admin.companyDistinguishes.errors.descriptionMaxLength'}]">
+        </app-form-field>
+      </div>
+    </div>
+  </form>
+
+</app-base-dialog>

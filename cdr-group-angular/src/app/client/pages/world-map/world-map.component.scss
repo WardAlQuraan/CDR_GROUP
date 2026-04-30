@@ -1,24 +1,51 @@
+$gold: #d9a93e;
+$gold-deep: #a87f24;
+$gold-soft: #b8902f;
+$bg-page-top: #f7f4ec;
+$bg-page-bot: #eef1f5;
+$surface: #ffffff;
+$ink: #1f2230;
+$ink-mute: #5b6072;
+$border-soft: rgba(217, 169, 62, 0.22);
+$border-mid: rgba(217, 169, 62, 0.4);
+$hairline: rgba(31, 34, 48, 0.08);
+
+$status-present: #ef4858;
+$status-available: #16a34a;
+$status-pending: #d97706;
+$status-info: #0284c7;
+
 .world-map-page {
   padding: 120px 24px 80px;
   max-width: 100%;
   margin: 0 auto;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(217, 169, 62, 0.18), transparent 55%),
+    radial-gradient(ellipse at 80% 100%, rgba(2, 132, 199, 0.06), transparent 50%),
+    linear-gradient(180deg, $bg-page-top 0%, $bg-page-bot 100%);
+  min-height: 100vh;
 }
 
 .map-header {
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 
   h2 {
-    margin: 0 0 8px;
-    font-size: 28px;
-    font-weight: 600;
-    color: #333;
+    margin: 0 0 10px;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, $ink 0%, $gold-deep 60%, $gold 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   p {
     margin: 0;
-    color: #777;
+    color: $ink-mute;
     font-size: 15px;
+    letter-spacing: 0.2px;
   }
 }
 
@@ -34,67 +61,158 @@
   }
 
   .map-header h2 {
-    font-size: 22px;
+    font-size: 24px;
   }
 }
 
 .legend {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
 }
 
 .legend-item {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  padding: 6px 14px;
   font-size: 13px;
-  color: #555;
+  font-weight: 500;
+  color: $ink;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid $hairline;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 2px rgba(31, 34, 48, 0.04);
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    background: #fff;
+    border-color: $border-soft;
+    box-shadow: 0 2px 6px rgba(31, 34, 48, 0.06);
+  }
 }
 
 .dot {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   display: inline-block;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9), 0 0 6px currentColor;
 
-  &.green { background: #4caf50; }
-  &.red { background: #e74c3c; }
-  &.orange { background: #ff9800; }
-  &.blue { background: #2196f3; }
+  &.green { background: $status-available; color: $status-available; }
+  &.red { background: $status-present; color: $status-present; }
+  &.orange { background: $status-pending; color: $status-pending; }
+  &.blue { background: $status-info; color: $status-info; }
 }
 
 .search-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .search-field {
   width: 100%;
-  max-width: 400px;
+  max-width: 440px;
+
+  ::ng-deep {
+    .mat-mdc-text-field-wrapper {
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 1px 3px rgba(31, 34, 48, 0.05);
+    }
+
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: $hairline !important;
+    }
+
+    .mdc-notched-outline__leading {
+      border-start-start-radius: 28px !important;
+      border-end-start-radius: 28px !important;
+      border-start-end-radius: 0 !important;
+      border-end-end-radius: 0 !important;
+      width: 28px !important;
+    }
+
+    .mdc-notched-outline__trailing {
+      border-start-end-radius: 28px !important;
+      border-end-end-radius: 28px !important;
+      border-start-start-radius: 0 !important;
+      border-end-start-radius: 0 !important;
+    }
+
+    .mdc-notched-outline__notch {
+      border-right: none !important;
+      border-left: none !important;
+    }
+
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
+
+    .mdc-text-field--focused .mdc-notched-outline__leading,
+    .mdc-text-field--focused .mdc-notched-outline__notch,
+    .mdc-text-field--focused .mdc-notched-outline__trailing {
+      border-color: $gold !important;
+      border-width: 1.5px !important;
+    }
+
+    input.mat-mdc-input-element {
+      color: $ink;
+      caret-color: $gold;
+    }
+
+    input::placeholder {
+      color: rgba(31, 34, 48, 0.45) !important;
+    }
+
+    .mat-mdc-form-field-icon-prefix mat-icon,
+    .mat-mdc-form-field-icon-suffix mat-icon {
+      color: $ink-mute;
+    }
+  }
 }
 
 .search-results {
-  max-width: 500px;
-  margin: 0 auto 16px;
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  max-height: 200px;
+  max-width: 520px;
+  margin: 0 auto 20px;
+  background: $surface;
+  border: 1px solid $hairline;
+  border-radius: 14px;
+  max-height: 220px;
   overflow-y: auto;
+  box-shadow: 0 12px 32px rgba(31, 34, 48, 0.08);
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $border-mid;
+    border-radius: 3px;
+  }
 }
 
 .result-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  border-bottom: 1px solid #f0f0f0;
+  gap: 12px;
+  padding: 12px 18px;
+  border-bottom: 1px solid $hairline;
+  transition: background 0.15s;
 
   &:last-child {
     border-bottom: none;
+  }
+
+  &:hover {
+    background: rgba(217, 169, 62, 0.08);
   }
 
   .dot {
@@ -104,26 +222,63 @@
   .result-name {
     flex: 1;
     font-size: 14px;
-    color: #333;
+    color: $ink;
   }
 
   .result-status {
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
     white-space: nowrap;
   }
 }
 
 .no-results {
   text-align: center;
-  margin-bottom: 16px;
-  color: #777;
+  margin-bottom: 20px;
+  padding: 16px;
+  color: $ink-mute;
   font-size: 14px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px dashed rgba(31, 34, 48, 0.15);
+  border-radius: 12px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+
+  p { margin: 0; }
 }
 
 .map-container {
   position: relative;
   z-index: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px $border-mid,
+    0 24px 60px rgba(31, 34, 48, 0.12),
+    0 0 100px rgba(217, 169, 62, 0.1);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 5;
+    box-shadow: inset 0 0 60px rgba(247, 244, 236, 0.5);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 6;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
 }
 
 .loading-overlay {
@@ -132,20 +287,95 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(247, 244, 236, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
-  border-radius: 8px;
+  backdrop-filter: blur(6px);
+
+  ::ng-deep .mat-mdc-progress-spinner circle {
+    stroke: $gold;
+  }
 }
 
 .map-wrapper {
   width: 100%;
   height: 65vh;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  border-radius: 20px;
   overflow: hidden;
+  background: #efe8d8;
+}
+
+::ng-deep .leaflet-tile-pane {
+  filter: sepia(0.18) saturate(0.85) hue-rotate(-8deg) brightness(1.02);
+}
+
+::ng-deep .leaflet-container {
+  background: #efe8d8 !important;
+  font-family: inherit !important;
+}
+
+::ng-deep .leaflet-control-attribution {
+  background: rgba(255, 255, 255, 0.75) !important;
+  color: $ink-mute !important;
+  font-size: 10px !important;
+  padding: 2px 8px !important;
+  border-radius: 6px 0 0 0 !important;
+  backdrop-filter: blur(6px);
+
+  a {
+    color: $gold-deep !important;
+  }
+}
+
+::ng-deep .leaflet-marker-icon.city-marker {
+  background: transparent;
+  border: none;
+}
+
+@keyframes city-pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  70% { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+::ng-deep .city-marker-wrap {
+  position: relative;
+  width: 18px;
+  height: 18px;
+
+  .city-marker-pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.5;
+    animation: city-pulse 2.4s ease-out infinite;
+  }
+
+  .city-marker-dot {
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow:
+      0 0 0 2px #fff,
+      0 0 0 3px rgba(0, 0, 0, 0.15),
+      0 2px 6px rgba(0, 0, 0, 0.25);
+  }
+}
+
+::ng-deep .country-pin {
+  background: none;
+  border: none;
+
+  svg {
+    display: block;
+    width: 32px;
+    height: 40px;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.35));
+  }
 }
 
 ::ng-deep .country-label {
@@ -156,9 +386,50 @@
     display: block;
     text-align: center;
     font-size: 11px;
-    font-weight: 500;
-    color: #555;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    color: #5a4a1d;
+    text-transform: uppercase;
     white-space: nowrap;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    text-shadow:
+      0 0 3px rgba(255, 255, 255, 0.95),
+      0 1px 2px rgba(255, 255, 255, 0.9),
+      -1px 0 2px rgba(255, 255, 255, 0.9),
+      1px 0 2px rgba(255, 255, 255, 0.9);
+  }
+}
+
+::ng-deep .leaflet-control-zoom {
+  border: 1px solid $hairline !important;
+  border-radius: 10px !important;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(31, 34, 48, 0.12) !important;
+
+  a {
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: $ink !important;
+    border-bottom-color: $hairline !important;
+    transition: background 0.15s, color 0.15s;
+
+    &:hover {
+      background: rgba(217, 169, 62, 0.15) !important;
+      color: $gold-deep !important;
+    }
+  }
+}
+
+::ng-deep .leaflet-tooltip {
+  background: rgba(255, 255, 255, 0.97) !important;
+  border: 1px solid $border-soft !important;
+  color: $ink !important;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  box-shadow: 0 8px 24px rgba(31, 34, 48, 0.15) !important;
+  backdrop-filter: blur(8px);
+
+  &::before {
+    border-top-color: rgba(255, 255, 255, 0.97) !important;
   }
 }

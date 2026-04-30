@@ -214,6 +214,10 @@ namespace cdr_group.Persistence.Data
         public DbSet<CompanyBackground> CompanyBackgrounds { get; set; }
         public DbSet<CompanyForm> CompanyForms { get; set; }
         public DbSet<CompanyPreference> CompanyPreferences { get; set; }
+        public DbSet<CompanyBranch> CompanyBranches { get; set; }
+        public DbSet<CompanySuccessReason> CompanySuccessReasons { get; set; }
+        public DbSet<CompanyDistinguish> CompanyDistinguishes { get; set; }
+        public DbSet<CompanyDistributionMarketing> CompanyDistributionMarketings { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Country> Countries { get; set; }
@@ -425,6 +429,77 @@ namespace cdr_group.Persistence.Data
 
                 entity.HasOne(e => e.Company)
                     .WithMany(e => e.CompanyPreferences)
+                    .HasForeignKey(e => e.CompanyId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // CompanyBranch configuration
+            modelBuilder.Entity<CompanyBranch>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.NameEn).IsRequired().HasMaxLength(200);
+                entity.Property(e => e.NameAr).IsRequired().HasMaxLength(200);
+                entity.Property(e => e.NickNameEn).HasMaxLength(200);
+                entity.Property(e => e.NickNameAr).HasMaxLength(200);
+                entity.Property(e => e.DescriptionEn).HasMaxLength(2000);
+                entity.Property(e => e.DescriptionAr).HasMaxLength(2000);
+                entity.Property(e => e.OpeningDate).IsRequired();
+
+                entity.HasOne(e => e.Company)
+                    .WithMany(e => e.CompanyBranches)
+                    .HasForeignKey(e => e.CompanyId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(e => e.City)
+                    .WithMany()
+                    .HasForeignKey(e => e.CityId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // CompanySuccessReason configuration
+            modelBuilder.Entity<CompanySuccessReason>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.ReasonEn).IsRequired().HasMaxLength(1000);
+                entity.Property(e => e.ReasonAr).IsRequired().HasMaxLength(1000);
+
+                entity.HasOne(e => e.Company)
+                    .WithMany(e => e.CompanySuccessReasons)
+                    .HasForeignKey(e => e.CompanyId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // CompanyDistinguish configuration
+            modelBuilder.Entity<CompanyDistinguish>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.TitleEn).IsRequired().HasMaxLength(500);
+                entity.Property(e => e.TitleAr).IsRequired().HasMaxLength(500);
+                entity.Property(e => e.DescriptionEn).HasMaxLength(2000);
+                entity.Property(e => e.DescriptionAr).HasMaxLength(2000);
+
+                entity.HasOne(e => e.Company)
+                    .WithMany(e => e.CompanyDistinguishes)
+                    .HasForeignKey(e => e.CompanyId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // CompanyDistributionMarketing configuration
+            modelBuilder.Entity<CompanyDistributionMarketing>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.TitleEn).IsRequired().HasMaxLength(500);
+                entity.Property(e => e.TitleAr).IsRequired().HasMaxLength(500);
+                entity.Property(e => e.DescriptionEn).HasMaxLength(2000);
+                entity.Property(e => e.DescriptionAr).HasMaxLength(2000);
+
+                entity.HasOne(e => e.Company)
+                    .WithMany(e => e.CompanyDistributionMarketings)
                     .HasForeignKey(e => e.CompanyId)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);

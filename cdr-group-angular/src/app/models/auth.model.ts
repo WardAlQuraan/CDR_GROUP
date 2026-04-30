@@ -121,6 +121,30 @@ export const Permissions = {
   COMPANY_CONTACTS_UPDATE: 'company-contacts.update',
   COMPANY_CONTACTS_DELETE: 'company-contacts.delete',
 
+  // Company Branches
+  COMPANY_BRANCHES_READ: 'company-branches.read',
+  COMPANY_BRANCHES_CREATE: 'company-branches.create',
+  COMPANY_BRANCHES_UPDATE: 'company-branches.update',
+  COMPANY_BRANCHES_DELETE: 'company-branches.delete',
+
+  // Company Success Reasons
+  COMPANY_SUCCESS_REASONS_READ: 'company-success-reasons.read',
+  COMPANY_SUCCESS_REASONS_CREATE: 'company-success-reasons.create',
+  COMPANY_SUCCESS_REASONS_UPDATE: 'company-success-reasons.update',
+  COMPANY_SUCCESS_REASONS_DELETE: 'company-success-reasons.delete',
+
+  // Company Distinguishes
+  COMPANY_DISTINGUISHES_READ: 'company-distinguishes.read',
+  COMPANY_DISTINGUISHES_CREATE: 'company-distinguishes.create',
+  COMPANY_DISTINGUISHES_UPDATE: 'company-distinguishes.update',
+  COMPANY_DISTINGUISHES_DELETE: 'company-distinguishes.delete',
+
+  // Company Distribution Marketings
+  COMPANY_DISTRIBUTION_MARKETINGS_READ: 'company-distribution-marketings.read',
+  COMPANY_DISTRIBUTION_MARKETINGS_CREATE: 'company-distribution-marketings.create',
+  COMPANY_DISTRIBUTION_MARKETINGS_UPDATE: 'company-distribution-marketings.update',
+  COMPANY_DISTRIBUTION_MARKETINGS_DELETE: 'company-distribution-marketings.delete',
+
   // Reviews
   REVIEWS_READ: 'reviews.read',
   REVIEWS_CREATE: 'reviews.create',

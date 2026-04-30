@@ -47,6 +47,14 @@ import { CompanyFormsComponent } from './pages/company-forms/company-forms-compo
 import { CompanyFormDialogComponent } from './pages/company-forms/company-form-dialog/company-form-dialog.component';
 import { CompanyPreferencesComponent } from './pages/company-preferences/company-preferences-component/company-preferences-component';
 import { CompanyPreferenceDialogComponent } from './pages/company-preferences/company-preference-dialog/company-preference-dialog.component';
+import { CompanyBranchesComponent } from './pages/company-branches/company-branches-component/company-branches-component';
+import { CompanyBranchDialogComponent } from './pages/company-branches/company-branch-dialog/company-branch-dialog.component';
+import { CompanySuccessReasonsComponent } from './pages/company-success-reasons/company-success-reasons-component/company-success-reasons-component';
+import { CompanySuccessReasonDialogComponent } from './pages/company-success-reasons/company-success-reason-dialog/company-success-reason-dialog.component';
+import { CompanyDistinguishesComponent } from './pages/company-distinguishes/company-distinguishes-component/company-distinguishes-component';
+import { CompanyDistinguishDialogComponent } from './pages/company-distinguishes/company-distinguish-dialog/company-distinguish-dialog.component';
+import { CompanyDistributionMarketingsComponent } from './pages/company-distribution-marketings/company-distribution-marketings-component/company-distribution-marketings-component';
+import { CompanyDistributionMarketingDialogComponent } from './pages/company-distribution-marketings/company-distribution-marketing-dialog/company-distribution-marketing-dialog.component';
 import { ReviewsComponent } from './pages/reviews/reviews-component/reviews-component';
 import { ReviewDialogComponent } from './pages/reviews/review-dialog/review-dialog.component';
 import { ComplaintsComponent } from './pages/complaints/complaints-component/complaints-component';
@@ -92,6 +100,14 @@ import { PartnerDialogComponent } from './pages/partners/partner-dialog/partner-
     CompanyFormDialogComponent,
     CompanyPreferencesComponent,
     CompanyPreferenceDialogComponent,
+    CompanyBranchesComponent,
+    CompanyBranchDialogComponent,
+    CompanySuccessReasonsComponent,
+    CompanySuccessReasonDialogComponent,
+    CompanyDistinguishesComponent,
+    CompanyDistinguishDialogComponent,
+    CompanyDistributionMarketingsComponent,
+    CompanyDistributionMarketingDialogComponent,
     ReviewsComponent,
     ReviewDialogComponent,
     ComplaintsComponent,

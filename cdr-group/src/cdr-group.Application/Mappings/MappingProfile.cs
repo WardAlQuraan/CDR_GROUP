@@ -5,6 +5,10 @@ using cdr_group.Contracts.DTOs.CompanyContact;
 using cdr_group.Contracts.DTOs.CompanyBackground;
 using cdr_group.Contracts.DTOs.CompanyForm;
 using cdr_group.Contracts.DTOs.CompanyPreference;
+using cdr_group.Contracts.DTOs.CompanyBranch;
+using cdr_group.Contracts.DTOs.CompanySuccessReason;
+using cdr_group.Contracts.DTOs.CompanyDistinguish;
+using cdr_group.Contracts.DTOs.CompanyDistributionMarketing;
 using cdr_group.Contracts.DTOs.Employee;
 using cdr_group.Contracts.DTOs.Event;
 using cdr_group.Contracts.DTOs.FileAttachment;
@@ -228,6 +232,62 @@ namespace cdr_group.Application.Mappings
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
 
             CreateMap<UpdateCompanyPreferenceDto, CompanyPreference>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            // CompanyBranch mappings
+            CreateMap<CompanyBranch, CompanyBranchDto>()
+                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
+                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameAr : null))
+                .ForMember(dest => dest.CityNameEn, opt => opt.MapFrom(src =>
+                    src.City != null ? src.City.NameEn : null))
+                .ForMember(dest => dest.CityNameAr, opt => opt.MapFrom(src =>
+                    src.City != null ? src.City.NameAr : null));
+
+            CreateMap<CreateCompanyBranchDto, CompanyBranch>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+            CreateMap<UpdateCompanyBranchDto, CompanyBranch>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            // CompanySuccessReason mappings
+            CreateMap<CompanySuccessReason, CompanySuccessReasonDto>()
+                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
+                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameAr : null));
+
+            CreateMap<CreateCompanySuccessReasonDto, CompanySuccessReason>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+            CreateMap<UpdateCompanySuccessReasonDto, CompanySuccessReason>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            // CompanyDistinguish mappings
+            CreateMap<CompanyDistinguish, CompanyDistinguishDto>()
+                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
+                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameAr : null));
+
+            CreateMap<CreateCompanyDistinguishDto, CompanyDistinguish>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+            CreateMap<UpdateCompanyDistinguishDto, CompanyDistinguish>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            // CompanyDistributionMarketing mappings
+            CreateMap<CompanyDistributionMarketing, CompanyDistributionMarketingDto>()
+                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
+                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameAr : null));
+
+            CreateMap<CreateCompanyDistributionMarketingDto, CompanyDistributionMarketing>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+            CreateMap<UpdateCompanyDistributionMarketingDto, CompanyDistributionMarketing>()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
             // AuditLog mappings

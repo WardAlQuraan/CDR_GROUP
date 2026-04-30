@@ -23,6 +23,10 @@ namespace cdr_group.Persistence.Repositories
         private ICompanyBackgroundRepository? _companyBackgrounds;
         private ICompanyFormRepository? _companyForms;
         private ICompanyPreferenceRepository? _companyPreferences;
+        private ICompanyBranchRepository? _companyBranches;
+        private ICompanySuccessReasonRepository? _companySuccessReasons;
+        private ICompanyDistinguishRepository? _companyDistinguishes;
+        private ICompanyDistributionMarketingRepository? _companyDistributionMarketings;
         private IAuditLogRepository? _auditLogs;
         private IReviewRepository? _reviews;
         private IComplaintRepository? _complaints;
@@ -49,6 +53,10 @@ namespace cdr_group.Persistence.Repositories
         public ICompanyBackgroundRepository CompanyBackgrounds => _companyBackgrounds ??= new CompanyBackgroundRepository(_context);
         public ICompanyFormRepository CompanyForms => _companyForms ??= new CompanyFormRepository(_context);
         public ICompanyPreferenceRepository CompanyPreferences => _companyPreferences ??= new CompanyPreferenceRepository(_context);
+        public ICompanyBranchRepository CompanyBranches => _companyBranches ??= new CompanyBranchRepository(_context);
+        public ICompanySuccessReasonRepository CompanySuccessReasons => _companySuccessReasons ??= new CompanySuccessReasonRepository(_context);
+        public ICompanyDistinguishRepository CompanyDistinguishes => _companyDistinguishes ??= new CompanyDistinguishRepository(_context);
+        public ICompanyDistributionMarketingRepository CompanyDistributionMarketings => _companyDistributionMarketings ??= new CompanyDistributionMarketingRepository(_context);
         public IAuditLogRepository AuditLogs => _auditLogs ??= new AuditLogRepository(_context);
         public IReviewRepository Reviews => _reviews ??= new ReviewRepository(_context);
         public IComplaintRepository Complaints => _complaints ??= new ComplaintRepository(_context);

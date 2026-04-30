@@ -102,6 +102,15 @@ namespace cdr_group.Application.Services
 
         protected override async Task ValidateUpdateAsync(Guid id, UpdateCompanyDto dto, Company entity)
         {
+            entity.StoryEn = dto.StoryEn;
+            entity.StoryAr = dto.StoryAr;
+            entity.MissionEn = dto.MissionEn;
+            entity.MissionAr = dto.MissionAr;
+            entity.VisionEn = dto.VisionEn;
+            entity.VisionAr = dto.VisionAr;
+            entity.DescriptionAr = dto.DescriptionAr;
+            entity.DescriptionEn = dto.DescriptionEn;
+
             // Check if deactivating a company with active children
             if (dto.IsActive == false && entity.IsActive)
             {

@@ -56,5 +56,17 @@ namespace cdr_group.Domain.Entities
 
         // Preferences for this company
         public virtual ICollection<CompanyPreference> CompanyPreferences { get; set; } = new List<CompanyPreference>();
+
+        // Branches for this company
+        public virtual ICollection<CompanyBranch> CompanyBranches { get; set; } = new List<CompanyBranch>();
+
+        // Success reasons for this company
+        public virtual ICollection<CompanySuccessReason> CompanySuccessReasons { get; set; } = new List<CompanySuccessReason>();
+
+        // Distinguishes for this company
+        public virtual ICollection<CompanyDistinguish> CompanyDistinguishes { get; set; } = new List<CompanyDistinguish>();
+
+        // Distribution marketings for this company
+        public virtual ICollection<CompanyDistributionMarketing> CompanyDistributionMarketings { get; set; } = new List<CompanyDistributionMarketing>();
     }
 }

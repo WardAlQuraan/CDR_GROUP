@@ -151,6 +151,14 @@ export class CompaniesComponent implements OnInit {
           onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'contacts'])
         },
         {
+          icon: 'store',
+          tooltip: 'admin.companyBranches.branches',
+          permission: Permissions.COMPANY_BRANCHES_READ,
+          color: 'primary',
+          primary: false,
+          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'branches'])
+        },
+        {
           icon: 'wallpaper',
           tooltip: 'admin.companies.backgrounds',
           permission: Permissions.COMPANY_BACKGROUNDS_READ,
@@ -173,6 +181,30 @@ export class CompaniesComponent implements OnInit {
           color: 'accent',
           primary: false,
           onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'preferences'])
+        },
+        {
+          icon: 'emoji_events',
+          tooltip: 'admin.companies.successReasons',
+          permission: Permissions.COMPANY_SUCCESS_REASONS_READ,
+          color: 'accent',
+          primary: false,
+          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'success-reasons'])
+        },
+        {
+          icon: 'workspace_premium',
+          tooltip: 'admin.companies.distinguishes',
+          permission: Permissions.COMPANY_DISTINGUISHES_READ,
+          color: 'accent',
+          primary: false,
+          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'distinguishes'])
+        },
+        {
+          icon: 'campaign',
+          tooltip: 'admin.companies.distributionMarketings',
+          permission: Permissions.COMPANY_DISTRIBUTION_MARKETINGS_READ,
+          color: 'accent',
+          primary: false,
+          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'distribution-marketings'])
         },
         {
           icon: 'image',

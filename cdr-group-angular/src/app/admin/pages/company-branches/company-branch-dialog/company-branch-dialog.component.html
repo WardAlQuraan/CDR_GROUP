@@ -1,0 +1,82 @@
+<app-base-dialog
+  [title]="dialogTitle"
+  [saveLabel]="saveLabel"
+  [saveDisabled]="form.invalid"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <form [formGroup]="form" class="dialog-form">
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>store</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companyBranches.branchInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <app-form-field formControlName="nameEn" label="admin.companyBranches.nameEn" icon="label"
+          placeholder="admin.companyBranches.placeholders.nameEn"
+          [errors]="[{name: 'required', message: 'admin.companyBranches.errors.nameEnRequired'}, {name: 'maxlength', message: 'admin.companyBranches.errors.nameMaxLength'}]">
+        </app-form-field>
+
+        <app-form-field formControlName="nameAr" label="admin.companyBranches.nameAr" icon="label"
+          placeholder="admin.companyBranches.placeholders.nameAr"
+          [errors]="[{name: 'required', message: 'admin.companyBranches.errors.nameArRequired'}, {name: 'maxlength', message: 'admin.companyBranches.errors.nameMaxLength'}]">
+        </app-form-field>
+
+        <app-form-field formControlName="nickNameEn" label="admin.companyBranches.nickNameEn" icon="badge"
+          placeholder="admin.companyBranches.placeholders.nickNameEn"
+          [errors]="[{name: 'maxlength', message: 'admin.companyBranches.errors.nameMaxLength'}]">
+        </app-form-field>
+
+        <app-form-field formControlName="nickNameAr" label="admin.companyBranches.nickNameAr" icon="badge"
+          placeholder="admin.companyBranches.placeholders.nickNameAr"
+          [errors]="[{name: 'maxlength', message: 'admin.companyBranches.errors.nameMaxLength'}]">
+        </app-form-field>
+
+        <app-form-field formControlName="descriptionEn" type="textarea" label="admin.companyBranches.descriptionEn"
+          placeholder="admin.companyBranches.placeholders.descriptionEn" textDir="ltr"
+          [errors]="[{name: 'maxlength', message: 'admin.companyBranches.errors.descriptionMaxLength'}]">
+        </app-form-field>
+
+        <app-form-field formControlName="descriptionAr" type="textarea" label="admin.companyBranches.descriptionAr"
+          placeholder="admin.companyBranches.placeholders.descriptionAr" textDir="rtl"
+          [errors]="[{name: 'maxlength', message: 'admin.companyBranches.errors.descriptionMaxLength'}]">
+        </app-form-field>
+
+        <app-date-picker
+          formControlName="openingDate"
+          [label]="'admin.companyBranches.openingDate' | translate"
+          icon="calendar_today">
+        </app-date-picker>
+
+        <app-async-select
+          formControlName="countryId"
+          label="admin.companyBranches.country"
+          icon="public"
+          [dataSource$]="countriesDataSource$"
+          [optionMapper]="countryMapper"
+          [resetOnDataSourceChange]="false"
+          [showNullOption]="false"
+          (selectionChange)="onCountryChange($event)">
+        </app-async-select>
+
+        @if (showCityFilter) {
+          <app-async-select
+            formControlName="cityId"
+            label="admin.companyBranches.city"
+            icon="location_city"
+            [dataSource$]="citiesDataSource$"
+            [optionMapper]="cityMapper"
+            [filterFn]="cityFilter"
+            [showNullOption]="false"
+            [resetOnDataSourceChange]="false">
+          </app-async-select>
+        }
+      </div>
+    </div>
+  </form>
+
+</app-base-dialog>

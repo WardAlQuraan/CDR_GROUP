@@ -106,6 +106,38 @@ public static class Positions
             public const string Delete = "company-preferences.delete";
         }
 
+        public static class CompanyBranches
+        {
+            public const string Read = "company-branches.read";
+            public const string Create = "company-branches.create";
+            public const string Update = "company-branches.update";
+            public const string Delete = "company-branches.delete";
+        }
+
+        public static class CompanySuccessReasons
+        {
+            public const string Read = "company-success-reasons.read";
+            public const string Create = "company-success-reasons.create";
+            public const string Update = "company-success-reasons.update";
+            public const string Delete = "company-success-reasons.delete";
+        }
+
+        public static class CompanyDistinguishes
+        {
+            public const string Read = "company-distinguishes.read";
+            public const string Create = "company-distinguishes.create";
+            public const string Update = "company-distinguishes.update";
+            public const string Delete = "company-distinguishes.delete";
+        }
+
+        public static class CompanyDistributionMarketings
+        {
+            public const string Read = "company-distribution-marketings.read";
+            public const string Create = "company-distribution-marketings.create";
+            public const string Update = "company-distribution-marketings.update";
+            public const string Delete = "company-distribution-marketings.delete";
+        }
+
         public static class AuditLogs
         {
             public const string Read = "audit-logs.read";

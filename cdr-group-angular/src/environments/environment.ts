@@ -4,5 +4,5 @@ export const environment = {
   appName: 'CDR Group',
   version: '1.0.0-dev',
   defaultCompanyId: 'aabbccdd-aabb-aabb-aabb-aabbccddeeff',
-  companyPreferenceCodes: ['NEWS_LABEL']
+  companyPreferenceCodes: ['NEWS_LABEL', 'ABOUT_DESCRIPTION_TITLE']
 };

@@ -23,6 +23,10 @@ import { ContactReviewComponent } from './sections/contact-review/contact-review
 import { ComplaintComponent } from './sections/complaint/complaint.component';
 import { ReviewsDisplayComponent } from './sections/reviews-display/reviews-display.component';
 import { FormsComponent } from './sections/forms/forms.component';
+import { BranchesComponent } from './sections/branches/branches.component';
+import { SuccessReasonsComponent } from './sections/success-reasons/success-reasons.component';
+import { DistinguishesComponent } from './sections/distinguishes/distinguishes.component';
+import { DistributionMarketingsComponent } from './sections/distribution-marketings/distribution-marketings.component';
 
 // Pages
 import { HomeComponent } from './pages/home/home.component';
@@ -56,6 +60,10 @@ import { clientRoutes } from './client.routes';
     ComplaintComponent,
     ReviewsDisplayComponent,
     FormsComponent,
+    BranchesComponent,
+    SuccessReasonsComponent,
+    DistinguishesComponent,
+    DistributionMarketingsComponent,
     // Pages
     HomeComponent,
     EventListingComponent,

@@ -15,7 +15,7 @@ interface City {
   lat: number;
   lng: number;
   color: string;
-  marker?: L.CircleMarker;
+  marker?: L.Marker;
 }
 
 @Component({
@@ -52,9 +52,9 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
   private pendingRequests = 2;
 
   private readonly statusColorMap: Record<string, string> = {
-    'Present': '#e74c3c',      // red
-    'NotAvailable': '#ff9800', // orange
-    'Available': '#4caf50'     // green
+    'Present': '#ef4858',      // rose
+    'NotAvailable': '#f59e0b', // amber
+    'Available': '#34d399'     // emerald
   };
 
   private readonly statusTranslationMap: Record<string, string> = {
@@ -83,6 +83,7 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
         if (response.success && response.data) {
           this.countries = response.data;
           this.addCountryLabels();
+          this.addJordanFlag();
         }
         this.onRequestComplete();
       },
@@ -168,7 +169,7 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
 
     this.map.fitBounds(middleEastBounds);
 
-    // Clean map without labels — no country names shown
+    // Clean light map without labels — no country names shown
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; OpenStreetMap &copy; CARTO',
     }).addTo(this.map);
@@ -191,15 +192,47 @@ export class WorldMapComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  private addJordanFlag(): void {
+    const jordan = this.countries.find(
+      c => c.nameEn?.toLowerCase() === 'jordan' || c.nameAr === 'الأردن'
+    );
+    if (!jordan) return;
+
+    L.marker([jordan.latitude, jordan.longitude], {
+      icon: L.divIcon({
+        className: 'country-pin',
+        html: `
+          <svg viewBox="0 0 32 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="jo-pin-grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f6cf6a" />
+                <stop offset="55%" stop-color="#d9a93e" />
+                <stop offset="100%" stop-color="#a87f24" />
+              </linearGradient>
+            </defs>
+            <ellipse cx="16" cy="37" rx="5" ry="1.2" fill="rgba(31,34,48,0.28)" />
+            <path d="M16 37 L7 22 Q3 12 10 6 Q16 1 22 6 Q29 12 25 22 Z"
+                  fill="url(#jo-pin-grad)" stroke="#7a5a16" stroke-width="1" stroke-linejoin="round" />
+            <circle cx="16" cy="13" r="4" fill="#fff" stroke="#7a5a16" stroke-width="0.8" />
+          </svg>
+        `,
+        iconSize: [32, 40],
+        iconAnchor: [16, 37],
+      }),
+      interactive: false,
+    }).addTo(this.map);
+  }
+
   private addCities(): void {
     for (const city of this.cities) {
-      const marker = L.circleMarker([city.lat, city.lng], {
-        radius: 7,
-        fillColor: city.color,
-        color: '#fff',
-        weight: 2,
-        fillOpacity: 0.9,
-      }).addTo(this.map);
+      const icon = L.divIcon({
+        className: 'city-marker',
+        html: `<div class="city-marker-wrap" style="color:${city.color}"><span class="city-marker-pulse"></span><span class="city-marker-dot"></span></div>`,
+        iconSize: [18, 18],
+        iconAnchor: [9, 9],
+      });
+
+      const marker = L.marker([city.lat, city.lng], { icon }).addTo(this.map);
 
       const statusLabel = this.translationService.translate(this.statusTranslationMap[city.status] || city.status);
       marker.bindTooltip(`${city.companyName} - ${city.name}<br>${statusLabel}`, { direction: 'top', offset: [0, -8] });

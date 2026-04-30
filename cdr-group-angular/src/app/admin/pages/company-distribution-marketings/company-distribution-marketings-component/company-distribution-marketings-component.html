@@ -1,0 +1,14 @@
+<app-back-button></app-back-button>
+
+<app-data-grid
+  [data]="marketings"
+  [config]="gridConfig"
+  [totalCount]="totalCount"
+  [loading]="loading"
+  [pageIndex]="pageNumber - 1"
+  [pageSize]="pageSize"
+  (pageChange)="onPageChange($event)"
+  (sortChange)="onSortChange($event)"
+  (filterChange)="onFilterChange($event)"
+  (addClick)="openCreateDialog()">
+</app-data-grid>

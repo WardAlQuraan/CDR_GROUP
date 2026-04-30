@@ -4,35 +4,48 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-12">
-        <span class="about-label">{{ 'about.subtitle' | translate }}</span>
-        <h2 class="about-title">{{ 'about.title' | translate }}</h2>
+        @if (companyStory || companyDescription) {
+          <!-- <span class="about-label">{{ 'about.subtitle' | translate }}</span> -->
+          <!-- <h2 class="about-title">{{ 'about.title' | translate }}</h2> -->
 
-        <p class="about-text">{{ companyStory || ('about.description' | translate) }}</p>
-        @if (!companyStory) {
-          <p class="about-text">{{ 'about.passion' | translate }}</p>
+          @if (companyDescription) {
+            @if (descriptionTitle) {
+              <h3 class="about-description-title">{{ descriptionTitle }}</h3>
+            }
+            <p class="about-text">{{ companyDescription }}</p>
+          }
+          @if (companyStory) {
+            <p class="about-text">{{ companyStory }}</p>
+          }
         }
 
-        <div class="about-highlights">
-          <div class="highlight-item">
-            <div class="highlight-icon">
-              <i class="bi bi-lightbulb"></i>
-            </div>
-            <div>
-              <h5>{{ 'about.mission' | translate }}</h5>
-              <p>{{ companyMission || ('about.missionText' | translate) }}</p>
-            </div>
-          </div>
+        @if (companyMission || companyVision) {
+          <div class="about-highlights">
+            @if (companyMission) {
+              <div class="highlight-item">
+                <div class="highlight-icon">
+                  <i class="bi bi-lightbulb"></i>
+                </div>
+                <div>
+                  <h5>{{ 'about.mission' | translate }}</h5>
+                  <p>{{ companyMission }}</p>
+                </div>
+              </div>
+            }
 
-          <div class="highlight-item">
-            <div class="highlight-icon">
-              <i class="bi bi-eye"></i>
-            </div>
-            <div>
-              <h5>{{ 'about.vision' | translate }}</h5>
-              <p>{{ companyVision || ('about.visionText' | translate) }}</p>
-            </div>
+            @if (companyVision) {
+              <div class="highlight-item">
+                <div class="highlight-icon">
+                  <i class="bi bi-eye"></i>
+                </div>
+                <div>
+                  <h5>{{ 'about.vision' | translate }}</h5>
+                  <p>{{ companyVision }}</p>
+                </div>
+              </div>
+            }
           </div>
-        </div>
+        }
 
       </div>
     </div>

@@ -141,6 +141,33 @@
     "title": "طريقك للإنجاز",
     "subtitle": "وصول سريع إلى النماذج المتاحة لهذه الشركة"
   },
+  "distinguishes": {
+    "eyebrow": "ما يميزنا",
+    "title": "ما الذي يجعلنا مختلفين",
+    "subtitle": "الصفات التي تشكل هويتنا وتنعكس في كل تجربة نقدمها"
+  },
+  "distributionMarketings": {
+    "eyebrow": "التوزيع والتسويق",
+    "title": "كيف نصل إليك",
+    "subtitle": "القنوات التي نستخدمها لإيصال منتجاتنا وقصصنا في كل مكان"
+  },
+  "successReasons": {
+    "title": "لماذا تختارنا",
+    "subtitle": "الأسباب التي تقود نجاحنا"
+  },
+  "branches": {
+    "title": "فروعنا",
+    "subtitle": "خط زمني لكل فرع قمنا بافتتاحه",
+    "branch": "الفرع",
+    "gap": {
+      "year": "سنة",
+      "years": "سنوات",
+      "month": "شهر",
+      "months": "أشهر",
+      "day": "يوم",
+      "days": "أيام"
+    }
+  },
   "events": {
     "title": "الفعاليات القادمة",
     "latestEvents": "أحدث الأخبار",
@@ -745,6 +772,9 @@
       "backgrounds": "الخلفيات",
       "forms": "النماذج",
       "preferences": "التفضيلات",
+      "successReasons": "أسباب النجاح",
+      "distinguishes": "ما يميزنا",
+      "distributionMarketings": "التوزيع والتسويق",
       "chooseAnother": "اختر صورة أخرى",
       "logoUploaded": "تم رفع الشعار بنجاح",
       "basicInfo": "المعلومات الأساسية",
@@ -943,6 +973,164 @@
         "icon": "أدخل اسم الأيقونة (مثل phone, email)",
         "name": "أدخل اسم جهة الاتصال",
         "value": "أدخل قيمة جهة الاتصال"
+      }
+    },
+    "companyDistributionMarketings": {
+      "title": "التوزيع والتسويق",
+      "subtitle": "إدارة قنوات التوزيع والتسويق للشركة",
+      "addMarketing": "إضافة قناة",
+      "createMarketing": "إنشاء قناة",
+      "editMarketing": "تعديل قناة",
+      "deleteMarketing": "حذف قناة",
+      "marketingInfo": "معلومات القناة",
+      "marketingTitle": "العنوان",
+      "description": "الوصف",
+      "titleEn": "العنوان (إنجليزي)",
+      "titleAr": "العنوان (عربي)",
+      "descriptionEn": "الوصف (إنجليزي)",
+      "descriptionAr": "الوصف (عربي)",
+      "created": "تاريخ الإنشاء",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "confirmDelete": "هل أنت متأكد من حذف هذا العنصر؟",
+      "marketingCreated": "تم إنشاء القناة بنجاح",
+      "marketingUpdated": "تم تحديث القناة بنجاح",
+      "marketingDeleted": "تم حذف القناة بنجاح",
+      "errors": {
+        "loadFailed": "فشل تحميل القنوات",
+        "createFailed": "فشل إنشاء القناة",
+        "updateFailed": "فشل تحديث القناة",
+        "deleteFailed": "فشل حذف القناة",
+        "titleEnRequired": "العنوان (إنجليزي) مطلوب",
+        "titleArRequired": "العنوان (عربي) مطلوب",
+        "titleMaxLength": "يجب ألا يتجاوز العنوان 500 حرف",
+        "descriptionMaxLength": "يجب ألا يتجاوز الوصف 2000 حرف"
+      },
+      "placeholders": {
+        "titleEn": "أدخل العنوان بالإنجليزية",
+        "titleAr": "أدخل العنوان بالعربية",
+        "descriptionEn": "أدخل الوصف بالإنجليزية",
+        "descriptionAr": "أدخل الوصف بالعربية"
+      }
+    },
+    "companyDistinguishes": {
+      "title": "ما يميزنا",
+      "subtitle": "إدارة ما يميز الشركة",
+      "addDistinguish": "إضافة ميزة",
+      "createDistinguish": "إنشاء ميزة",
+      "editDistinguish": "تعديل ميزة",
+      "deleteDistinguish": "حذف ميزة",
+      "distinguishInfo": "معلومات الميزة",
+      "distinguishTitle": "العنوان",
+      "description": "الوصف",
+      "titleEn": "العنوان (إنجليزي)",
+      "titleAr": "العنوان (عربي)",
+      "descriptionEn": "الوصف (إنجليزي)",
+      "descriptionAr": "الوصف (عربي)",
+      "created": "تاريخ الإنشاء",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "confirmDelete": "هل أنت متأكد من حذف هذا العنصر؟",
+      "distinguishCreated": "تم إنشاء الميزة بنجاح",
+      "distinguishUpdated": "تم تحديث الميزة بنجاح",
+      "distinguishDeleted": "تم حذف الميزة بنجاح",
+      "errors": {
+        "loadFailed": "فشل تحميل المميزات",
+        "createFailed": "فشل إنشاء الميزة",
+        "updateFailed": "فشل تحديث الميزة",
+        "deleteFailed": "فشل حذف الميزة",
+        "titleEnRequired": "العنوان (إنجليزي) مطلوب",
+        "titleArRequired": "العنوان (عربي) مطلوب",
+        "titleMaxLength": "يجب ألا يتجاوز العنوان 500 حرف",
+        "descriptionMaxLength": "يجب ألا يتجاوز الوصف 2000 حرف"
+      },
+      "placeholders": {
+        "titleEn": "أدخل العنوان بالإنجليزية",
+        "titleAr": "أدخل العنوان بالعربية",
+        "descriptionEn": "أدخل الوصف بالإنجليزية",
+        "descriptionAr": "أدخل الوصف بالعربية"
+      }
+    },
+    "companySuccessReasons": {
+      "title": "أسباب النجاح",
+      "subtitle": "إدارة أسباب نجاح الشركة",
+      "addReason": "إضافة سبب",
+      "createReason": "إنشاء سبب",
+      "editReason": "تعديل سبب",
+      "deleteReason": "حذف سبب",
+      "reasonInfo": "معلومات السبب",
+      "reason": "السبب",
+      "reasonEn": "السبب (إنجليزي)",
+      "reasonAr": "السبب (عربي)",
+      "created": "تاريخ الإنشاء",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "confirmDelete": "هل أنت متأكد من حذف هذا السبب؟",
+      "reasonCreated": "تم إنشاء السبب بنجاح",
+      "reasonUpdated": "تم تحديث السبب بنجاح",
+      "reasonDeleted": "تم حذف السبب بنجاح",
+      "errors": {
+        "loadFailed": "فشل تحميل أسباب النجاح",
+        "createFailed": "فشل إنشاء السبب",
+        "updateFailed": "فشل تحديث السبب",
+        "deleteFailed": "فشل حذف السبب",
+        "reasonEnRequired": "السبب (إنجليزي) مطلوب",
+        "reasonArRequired": "السبب (عربي) مطلوب",
+        "reasonMaxLength": "يجب ألا يتجاوز السبب 1000 حرف"
+      },
+      "placeholders": {
+        "reasonEn": "أدخل السبب بالإنجليزية",
+        "reasonAr": "أدخل السبب بالعربية"
+      }
+    },
+    "companyBranches": {
+      "title": "فروع الشركة",
+      "subtitle": "إدارة فروع الشركة ومواقعها",
+      "addBranch": "إضافة فرع",
+      "createBranch": "إنشاء فرع",
+      "editBranch": "تعديل فرع",
+      "deleteBranch": "حذف فرع",
+      "branchInfo": "معلومات الفرع",
+      "nameEn": "الاسم (إنجليزي)",
+      "nameAr": "الاسم (عربي)",
+      "nickNameEn": "لقب (إنجليزي)",
+      "nickNameAr": "لقب (عربي)",
+      "descriptionEn": "الوصف (إنجليزي)",
+      "descriptionAr": "الوصف (عربي)",
+      "openingDate": "تاريخ الافتتاح",
+      "company": "الشركة",
+      "country": "الدولة",
+      "city": "المدينة",
+      "created": "تاريخ الإنشاء",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "confirmDelete": "هل أنت متأكد من حذف هذا الفرع؟",
+      "branchCreated": "تم إنشاء الفرع بنجاح",
+      "branchUpdated": "تم تحديث الفرع بنجاح",
+      "branchDeleted": "تم حذف الفرع بنجاح",
+      "branches": "الفروع",
+      "errors": {
+        "loadFailed": "فشل تحميل الفروع",
+        "createFailed": "فشل إنشاء الفرع",
+        "updateFailed": "فشل تحديث الفرع",
+        "deleteFailed": "فشل حذف الفرع",
+        "nameEnRequired": "الاسم (إنجليزي) مطلوب",
+        "nameArRequired": "الاسم (عربي) مطلوب",
+        "openingDateRequired": "تاريخ الافتتاح مطلوب",
+        "companyRequired": "الشركة مطلوبة",
+        "cityRequired": "المدينة مطلوبة",
+        "nameMaxLength": "يجب ألا يتجاوز الاسم 200 حرف",
+        "descriptionMaxLength": "يجب ألا يتجاوز الوصف 2000 حرف"
+      },
+      "placeholders": {
+        "nameEn": "أدخل اسم الفرع بالإنجليزية",
+        "nameAr": "أدخل اسم الفرع بالعربية",
+        "nickNameEn": "أدخل لقب الفرع بالإنجليزية",
+        "nickNameAr": "أدخل لقب الفرع بالعربية",
+        "descriptionEn": "أدخل وصف الفرع بالإنجليزية",
+        "descriptionAr": "أدخل وصف الفرع بالعربية",
+        "selectCompany": "اختر شركة",
+        "selectCity": "اختر مدينة"
       }
     },
     "eventsAdmin": {

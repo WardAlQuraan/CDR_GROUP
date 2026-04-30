@@ -7,9 +7,9 @@
           <button class="section-tab" [class.active]="activeTab === 'contact'" (click)="activeTab = 'contact'">
             <i class="bi-envelope"></i>{{ 'contact.title' | translate }}
           </button>
-          <button class="section-tab" [class.active]="activeTab === 'review'" (click)="activeTab = 'review'">
+          <!-- <button class="section-tab" [class.active]="activeTab === 'review'" (click)="activeTab = 'review'">
             <i class="bi-star"></i>{{ 'review.title' | translate }}
-          </button>
+          </button> -->
           <button class="section-tab" [class.active]="activeTab === 'complaint'" (click)="activeTab = 'complaint'">
             <i class="bi-exclamation-triangle"></i>{{ 'complaint.title' | translate }}
           </button>
@@ -21,9 +21,9 @@
         }
 
         <!-- Review Form -->
-        @if (activeTab === 'review') {
+        <!-- @if (activeTab === 'review') {
           <app-review [companyId]="companyId"></app-review>
-        }
+        } -->
 
         <!-- Complaint Form -->
         @if (activeTab === 'complaint') {

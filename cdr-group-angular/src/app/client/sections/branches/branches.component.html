@@ -1,0 +1,48 @@
+@if (hasBranches) {
+  <section class="branches-section" id="section_branches"
+    [style.--brand-primary]="primaryColorValue"
+    [style.--brand-secondary]="secondaryColorValue">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-3">
+          <h2 class="section-title">{{ 'branches.title' | translate }}</h2>
+          <p class="section-subtitle">{{ 'branches.subtitle' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="journey-wrapper">
+        <div class="journey">
+          @for (row of rows; track row.branch.id; let first = $first) {
+            @if (!first) {
+              <div class="journey-connector">
+                @if (row.gapLabel) {
+                  <span class="connector-label">{{ row.gapLabel }}</span>
+                }
+                <span class="connector-line" aria-hidden="true"></span>
+                <span class="connector-arrow" aria-hidden="true"></span>
+              </div>
+            }
+            <div class="journey-step">
+              <div class="step-node" [title]="getBranchName(row.branch)">
+                <span class="step-name">{{ getBranchName(row.branch) }}</span>
+                @if (hasNickname(row.branch)) {
+                  <span class="step-nickname" [title]="getBranchNickname(row.branch)">{{ getBranchNickname(row.branch) }}</span>
+                }
+              </div>
+              <div class="step-info">
+                <div class="branch-city" [title]="getCityName(row.branch)">
+                  <i class="bi bi-geo-alt-fill"></i>
+                  <span>{{ getCityName(row.branch) }}</span>
+                </div>
+                <div class="branch-date">{{ row.startDate | date:'MMM yyyy' }}</div>
+                @if (getDescription(row.branch)) {
+                  <p class="branch-description" [title]="getDescription(row.branch)">{{ getDescription(row.branch) }}</p>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+}

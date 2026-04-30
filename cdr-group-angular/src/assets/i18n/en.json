@@ -141,6 +141,33 @@
     "title": "Your Path to Achievement",
     "subtitle": "Quick access to forms available for this company"
   },
+  "distinguishes": {
+    "eyebrow": "What sets us apart",
+    "title": "What Makes Us Different",
+    "subtitle": "The qualities that define us and shape every experience we deliver"
+  },
+  "distributionMarketings": {
+    "eyebrow": "Distribution & Marketing",
+    "title": "How We Reach You",
+    "subtitle": "The channels we use to deliver our products and stories everywhere"
+  },
+  "successReasons": {
+    "title": "Why Choose Us",
+    "subtitle": "The reasons that drive our success"
+  },
+  "branches": {
+    "title": "Our Branches",
+    "subtitle": "A timeline of every branch we have opened",
+    "branch": "Branch",
+    "gap": {
+      "year": "year",
+      "years": "years",
+      "month": "month",
+      "months": "months",
+      "day": "day",
+      "days": "days"
+    }
+  },
   "events": {
     "title": "Upcoming Events",
     "latestEvents": "Latest News",
@@ -745,6 +772,9 @@
       "backgrounds": "Backgrounds",
       "forms": "Forms",
       "preferences": "Preferences",
+      "successReasons": "Success Reasons",
+      "distinguishes": "Distinguishes",
+      "distributionMarketings": "Distribution & Marketing",
       "chooseAnother": "Choose another",
       "logoUploaded": "Logo uploaded successfully",
       "basicInfo": "Basic Information",
@@ -943,6 +973,164 @@
         "icon": "Enter icon name (e.g. phone, email)",
         "name": "Enter contact name",
         "value": "Enter contact value"
+      }
+    },
+    "companyDistributionMarketings": {
+      "title": "Distribution & Marketing",
+      "subtitle": "Manage the company's distribution and marketing channels",
+      "addMarketing": "Add Channel",
+      "createMarketing": "Create Channel",
+      "editMarketing": "Edit Channel",
+      "deleteMarketing": "Delete Channel",
+      "marketingInfo": "Channel Information",
+      "marketingTitle": "Title",
+      "description": "Description",
+      "titleEn": "Title (English)",
+      "titleAr": "Title (Arabic)",
+      "descriptionEn": "Description (English)",
+      "descriptionAr": "Description (Arabic)",
+      "created": "Created",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this entry?",
+      "marketingCreated": "Channel created successfully",
+      "marketingUpdated": "Channel updated successfully",
+      "marketingDeleted": "Channel deleted successfully",
+      "errors": {
+        "loadFailed": "Failed to load channels",
+        "createFailed": "Failed to create channel",
+        "updateFailed": "Failed to update channel",
+        "deleteFailed": "Failed to delete channel",
+        "titleEnRequired": "Title (English) is required",
+        "titleArRequired": "Title (Arabic) is required",
+        "titleMaxLength": "Title must not exceed 500 characters",
+        "descriptionMaxLength": "Description must not exceed 2000 characters"
+      },
+      "placeholders": {
+        "titleEn": "Enter the title in English",
+        "titleAr": "Enter the title in Arabic",
+        "descriptionEn": "Enter the description in English",
+        "descriptionAr": "Enter the description in Arabic"
+      }
+    },
+    "companyDistinguishes": {
+      "title": "Distinguishes",
+      "subtitle": "Manage what makes the company stand out",
+      "addDistinguish": "Add Distinguish",
+      "createDistinguish": "Create Distinguish",
+      "editDistinguish": "Edit Distinguish",
+      "deleteDistinguish": "Delete Distinguish",
+      "distinguishInfo": "Distinguish Information",
+      "distinguishTitle": "Title",
+      "description": "Description",
+      "titleEn": "Title (English)",
+      "titleAr": "Title (Arabic)",
+      "descriptionEn": "Description (English)",
+      "descriptionAr": "Description (Arabic)",
+      "created": "Created",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this entry?",
+      "distinguishCreated": "Distinguish created successfully",
+      "distinguishUpdated": "Distinguish updated successfully",
+      "distinguishDeleted": "Distinguish deleted successfully",
+      "errors": {
+        "loadFailed": "Failed to load distinguishes",
+        "createFailed": "Failed to create distinguish",
+        "updateFailed": "Failed to update distinguish",
+        "deleteFailed": "Failed to delete distinguish",
+        "titleEnRequired": "Title (English) is required",
+        "titleArRequired": "Title (Arabic) is required",
+        "titleMaxLength": "Title must not exceed 500 characters",
+        "descriptionMaxLength": "Description must not exceed 2000 characters"
+      },
+      "placeholders": {
+        "titleEn": "Enter the title in English",
+        "titleAr": "Enter the title in Arabic",
+        "descriptionEn": "Enter the description in English",
+        "descriptionAr": "Enter the description in Arabic"
+      }
+    },
+    "companySuccessReasons": {
+      "title": "Success Reasons",
+      "subtitle": "Manage the company's success reasons",
+      "addReason": "Add Reason",
+      "createReason": "Create Reason",
+      "editReason": "Edit Reason",
+      "deleteReason": "Delete Reason",
+      "reasonInfo": "Reason Information",
+      "reason": "Reason",
+      "reasonEn": "Reason (English)",
+      "reasonAr": "Reason (Arabic)",
+      "created": "Created",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this reason?",
+      "reasonCreated": "Reason created successfully",
+      "reasonUpdated": "Reason updated successfully",
+      "reasonDeleted": "Reason deleted successfully",
+      "errors": {
+        "loadFailed": "Failed to load success reasons",
+        "createFailed": "Failed to create reason",
+        "updateFailed": "Failed to update reason",
+        "deleteFailed": "Failed to delete reason",
+        "reasonEnRequired": "Reason (English) is required",
+        "reasonArRequired": "Reason (Arabic) is required",
+        "reasonMaxLength": "Reason must not exceed 1000 characters"
+      },
+      "placeholders": {
+        "reasonEn": "Enter the reason in English",
+        "reasonAr": "Enter the reason in Arabic"
+      }
+    },
+    "companyBranches": {
+      "title": "Company Branches",
+      "subtitle": "Manage company branches and locations",
+      "addBranch": "Add Branch",
+      "createBranch": "Create Branch",
+      "editBranch": "Edit Branch",
+      "deleteBranch": "Delete Branch",
+      "branchInfo": "Branch Information",
+      "nameEn": "Name (English)",
+      "nameAr": "Name (Arabic)",
+      "nickNameEn": "Nickname (English)",
+      "nickNameAr": "Nickname (Arabic)",
+      "descriptionEn": "Description (English)",
+      "descriptionAr": "Description (Arabic)",
+      "openingDate": "Opening Date",
+      "company": "Company",
+      "country": "Country",
+      "city": "City",
+      "created": "Created",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this branch?",
+      "branchCreated": "Branch created successfully",
+      "branchUpdated": "Branch updated successfully",
+      "branchDeleted": "Branch deleted successfully",
+      "branches": "Branches",
+      "errors": {
+        "loadFailed": "Failed to load branches",
+        "createFailed": "Failed to create branch",
+        "updateFailed": "Failed to update branch",
+        "deleteFailed": "Failed to delete branch",
+        "nameEnRequired": "Name (English) is required",
+        "nameArRequired": "Name (Arabic) is required",
+        "openingDateRequired": "Opening date is required",
+        "companyRequired": "Company is required",
+        "cityRequired": "City is required",
+        "nameMaxLength": "Name must not exceed 200 characters",
+        "descriptionMaxLength": "Description must not exceed 2000 characters"
+      },
+      "placeholders": {
+        "nameEn": "Enter branch name in English",
+        "nameAr": "Enter branch name in Arabic",
+        "nickNameEn": "Short nickname shown on the timeline",
+        "nickNameAr": "اختصار الاسم لعرضه على الخط الزمني",
+        "descriptionEn": "Enter branch description in English",
+        "descriptionAr": "Enter branch description in Arabic",
+        "selectCompany": "Select a company",
+        "selectCity": "Select a city"
       }
     },
     "eventsAdmin": {

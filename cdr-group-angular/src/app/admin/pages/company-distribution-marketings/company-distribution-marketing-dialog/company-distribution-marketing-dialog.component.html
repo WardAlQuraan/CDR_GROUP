@@ -1,0 +1,48 @@
+<app-base-dialog
+  [title]="dialogTitle"
+  [saveLabel]="saveLabel"
+  [saveDisabled]="form.invalid"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <form [formGroup]="form" class="dialog-form">
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>campaign</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companyDistributionMarketings.marketingInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <app-form-field formControlName="titleEn" label="admin.companyDistributionMarketings.titleEn" icon="title"
+          placeholder="admin.companyDistributionMarketings.placeholders.titleEn" textDir="ltr"
+          [errors]="[
+            {name: 'required', message: 'admin.companyDistributionMarketings.errors.titleEnRequired'},
+            {name: 'maxlength', message: 'admin.companyDistributionMarketings.errors.titleMaxLength'}
+          ]">
+        </app-form-field>
+
+        <app-form-field formControlName="titleAr" label="admin.companyDistributionMarketings.titleAr" icon="title"
+          placeholder="admin.companyDistributionMarketings.placeholders.titleAr" textDir="rtl"
+          [errors]="[
+            {name: 'required', message: 'admin.companyDistributionMarketings.errors.titleArRequired'},
+            {name: 'maxlength', message: 'admin.companyDistributionMarketings.errors.titleMaxLength'}
+          ]">
+        </app-form-field>
+
+        <app-form-field formControlName="descriptionEn" type="textarea" label="admin.companyDistributionMarketings.descriptionEn"
+          placeholder="admin.companyDistributionMarketings.placeholders.descriptionEn" textDir="ltr"
+          [errors]="[{name: 'maxlength', message: 'admin.companyDistributionMarketings.errors.descriptionMaxLength'}]">
+        </app-form-field>
+
+        <app-form-field formControlName="descriptionAr" type="textarea" label="admin.companyDistributionMarketings.descriptionAr"
+          placeholder="admin.companyDistributionMarketings.placeholders.descriptionAr" textDir="rtl"
+          [errors]="[{name: 'maxlength', message: 'admin.companyDistributionMarketings.errors.descriptionMaxLength'}]">
+        </app-form-field>
+      </div>
+    </div>
+  </form>
+
+</app-base-dialog>

@@ -1,5 +1,9 @@
 <app-hero [company]="selectedCompany"></app-hero>
 <app-about [company]="selectedCompany"></app-about>
+<app-branches [companyId]="selectedCompanyId"></app-branches>
+<app-distinguishes [companyId]="selectedCompanyId"></app-distinguishes>
+<app-distribution-marketings [companyId]="selectedCompanyId"></app-distribution-marketings>
+<app-success-reasons [companyId]="selectedCompanyId"></app-success-reasons>
 
 <!-- @if (companies.length > 1) {
   <div class="company-filter-section">
@@ -21,5 +25,5 @@
 <app-forms [companyId]="selectedCompanyId"></app-forms>
 <app-events [companyId]="selectedCompanyId"></app-events>
 <app-team [companyId]="selectedCompanyId"></app-team>
-<app-reviews-display [companyId]="selectedCompany?.id"></app-reviews-display>
+<!-- <app-reviews-display [companyId]="selectedCompany?.id"></app-reviews-display> -->
 <app-contact-review [companyId]="selectedCompany?.id"></app-contact-review>
