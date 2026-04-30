@@ -7,7 +7,7 @@ using cdr_group.Domain.Constants;
 using cdr_group.Infrastructure.Authorization;
 using Microsoft.AspNetCore.Authorization;
 
-namespace cdr_group.API.Controllers
+namespace cdr_group.API.Controllers.CompanyControllers
 {
     public class CompanyDistributionMarketingsController : BaseController<CompanyDistributionMarketingDto, CreateCompanyDistributionMarketingDto, UpdateCompanyDistributionMarketingDto, ICompanyDistributionMarketingService>
     {

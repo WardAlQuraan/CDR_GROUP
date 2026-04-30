@@ -145,6 +145,30 @@ export const Permissions = {
   COMPANY_DISTRIBUTION_MARKETINGS_UPDATE: 'company-distribution-marketings.update',
   COMPANY_DISTRIBUTION_MARKETINGS_DELETE: 'company-distribution-marketings.delete',
 
+  // Company Pre Contract Studies
+  COMPANY_PRE_CONTRACT_STUDIES_READ: 'company-pre-contract-studies.read',
+  COMPANY_PRE_CONTRACT_STUDIES_CREATE: 'company-pre-contract-studies.create',
+  COMPANY_PRE_CONTRACT_STUDIES_UPDATE: 'company-pre-contract-studies.update',
+  COMPANY_PRE_CONTRACT_STUDIES_DELETE: 'company-pre-contract-studies.delete',
+
+  // Company Geographic Expansions
+  COMPANY_GEOGRAPHIC_EXPANSIONS_READ: 'company-geographic-expansions.read',
+  COMPANY_GEOGRAPHIC_EXPANSIONS_CREATE: 'company-geographic-expansions.create',
+  COMPANY_GEOGRAPHIC_EXPANSIONS_UPDATE: 'company-geographic-expansions.update',
+  COMPANY_GEOGRAPHIC_EXPANSIONS_DELETE: 'company-geographic-expansions.delete',
+
+  // Company Financial Clauses Rights
+  COMPANY_FINANCIAL_CLAUSES_RIGHTS_READ: 'company-financial-clauses-rights.read',
+  COMPANY_FINANCIAL_CLAUSES_RIGHTS_CREATE: 'company-financial-clauses-rights.create',
+  COMPANY_FINANCIAL_CLAUSES_RIGHTS_UPDATE: 'company-financial-clauses-rights.update',
+  COMPANY_FINANCIAL_CLAUSES_RIGHTS_DELETE: 'company-financial-clauses-rights.delete',
+
+  // Company Partnership Franchise Mechanisms
+  COMPANY_PARTNERSHIP_FRANCHISE_MECHANISMS_READ: 'company-partnership-franchise-mechanisms.read',
+  COMPANY_PARTNERSHIP_FRANCHISE_MECHANISMS_CREATE: 'company-partnership-franchise-mechanisms.create',
+  COMPANY_PARTNERSHIP_FRANCHISE_MECHANISMS_UPDATE: 'company-partnership-franchise-mechanisms.update',
+  COMPANY_PARTNERSHIP_FRANCHISE_MECHANISMS_DELETE: 'company-partnership-franchise-mechanisms.delete',
+
   // Reviews
   REVIEWS_READ: 'reviews.read',
   REVIEWS_CREATE: 'reviews.create',

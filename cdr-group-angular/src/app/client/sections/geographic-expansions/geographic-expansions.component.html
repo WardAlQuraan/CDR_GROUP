@@ -1,0 +1,27 @@
+@if (hasExpansions) {
+  <section class="geographic-expansions-section" id="section_geographic_expansions"
+    [style.--brand-primary]="primaryColorValue"
+    [style.--brand-secondary]="secondaryColorValue">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-3">
+          <h2 class="section-title">{{ 'geographicExpansions.title' | translate }}</h2>
+          <p class="section-subtitle">{{ 'geographicExpansions.subtitle' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="expansions-grid">
+        @for (item of expansions; track item.id; let i = $index) {
+          <article class="expansion-card" [style.--index]="i">
+            <div class="expansion-body">
+              <h3 class="expansion-title">{{ getTitle(item) }}</h3>
+              @if (getDescription(item)) {
+                <p class="expansion-description">{{ getDescription(item) }}</p>
+              }
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+}

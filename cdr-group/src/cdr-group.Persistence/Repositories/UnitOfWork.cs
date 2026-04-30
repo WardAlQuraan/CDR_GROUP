@@ -27,6 +27,10 @@ namespace cdr_group.Persistence.Repositories
         private ICompanySuccessReasonRepository? _companySuccessReasons;
         private ICompanyDistinguishRepository? _companyDistinguishes;
         private ICompanyDistributionMarketingRepository? _companyDistributionMarketings;
+        private ICompanyPreContractStudyRepository? _companyPreContractStudies;
+        private ICompanyGeographicExpansionRepository? _companyGeographicExpansions;
+        private ICompanyPartnershipFranchiseMechanismRepository? _companyPartnershipFranchiseMechanisms;
+        private ICompanyFinancialClausesRightsRepository? _companyFinancialClausesRights;
         private IAuditLogRepository? _auditLogs;
         private IReviewRepository? _reviews;
         private IComplaintRepository? _complaints;
@@ -57,6 +61,10 @@ namespace cdr_group.Persistence.Repositories
         public ICompanySuccessReasonRepository CompanySuccessReasons => _companySuccessReasons ??= new CompanySuccessReasonRepository(_context);
         public ICompanyDistinguishRepository CompanyDistinguishes => _companyDistinguishes ??= new CompanyDistinguishRepository(_context);
         public ICompanyDistributionMarketingRepository CompanyDistributionMarketings => _companyDistributionMarketings ??= new CompanyDistributionMarketingRepository(_context);
+        public ICompanyPreContractStudyRepository CompanyPreContractStudies => _companyPreContractStudies ??= new CompanyPreContractStudyRepository(_context);
+        public ICompanyGeographicExpansionRepository CompanyGeographicExpansions => _companyGeographicExpansions ??= new CompanyGeographicExpansionRepository(_context);
+        public ICompanyPartnershipFranchiseMechanismRepository CompanyPartnershipFranchiseMechanisms => _companyPartnershipFranchiseMechanisms ??= new CompanyPartnershipFranchiseMechanismRepository(_context);
+        public ICompanyFinancialClausesRightsRepository CompanyFinancialClausesRights => _companyFinancialClausesRights ??= new CompanyFinancialClausesRightsRepository(_context);
         public IAuditLogRepository AuditLogs => _auditLogs ??= new AuditLogRepository(_context);
         public IReviewRepository Reviews => _reviews ??= new ReviewRepository(_context);
         public IComplaintRepository Complaints => _complaints ??= new ComplaintRepository(_context);

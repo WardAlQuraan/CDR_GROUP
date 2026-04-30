@@ -1,0 +1,26 @@
+@if (hasStudies) {
+  <section class="pre-contract-studies-section" id="section_pre_contract_studies"
+    [style.--brand-primary]="primaryColorValue"
+    [style.--brand-secondary]="secondaryColorValue">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-3">
+          <h2 class="section-title">{{ 'preContractStudies.title' | translate }}</h2>
+          <p class="section-subtitle">{{ 'preContractStudies.subtitle' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="studies-grid">
+        @for (item of studies; track item.id; let i = $index) {
+          @if (getDescription(item)) {
+            <article class="study-card" [style.--index]="i">
+              <div class="study-body">
+                <p class="study-description">{{ getDescription(item) }}</p>
+              </div>
+            </article>
+          }
+        }
+      </div>
+    </div>
+  </section>
+}

@@ -1,0 +1,38 @@
+<app-base-dialog
+  [title]="dialogTitle"
+  [saveLabel]="saveLabel"
+  [saveDisabled]="form.invalid"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <form [formGroup]="form" class="dialog-form">
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>handshake</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companyPartnershipFranchiseMechanisms.mechanismInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <app-form-field formControlName="descriptionEn" type="textarea" label="admin.companyPartnershipFranchiseMechanisms.descriptionEn"
+          placeholder="admin.companyPartnershipFranchiseMechanisms.placeholders.descriptionEn" textDir="ltr"
+          [errors]="[
+            {name: 'required', message: 'admin.companyPartnershipFranchiseMechanisms.errors.descriptionEnRequired'},
+            {name: 'maxlength', message: 'admin.companyPartnershipFranchiseMechanisms.errors.descriptionMaxLength'}
+          ]">
+        </app-form-field>
+
+        <app-form-field formControlName="descriptionAr" type="textarea" label="admin.companyPartnershipFranchiseMechanisms.descriptionAr"
+          placeholder="admin.companyPartnershipFranchiseMechanisms.placeholders.descriptionAr" textDir="rtl"
+          [errors]="[
+            {name: 'required', message: 'admin.companyPartnershipFranchiseMechanisms.errors.descriptionArRequired'},
+            {name: 'maxlength', message: 'admin.companyPartnershipFranchiseMechanisms.errors.descriptionMaxLength'}
+          ]">
+        </app-form-field>
+      </div>
+    </div>
+  </form>
+
+</app-base-dialog>

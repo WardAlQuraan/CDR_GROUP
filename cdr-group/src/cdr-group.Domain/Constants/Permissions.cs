@@ -138,6 +138,38 @@ public static class Positions
             public const string Delete = "company-distribution-marketings.delete";
         }
 
+        public static class CompanyPreContractStudies
+        {
+            public const string Read = "company-pre-contract-studies.read";
+            public const string Create = "company-pre-contract-studies.create";
+            public const string Update = "company-pre-contract-studies.update";
+            public const string Delete = "company-pre-contract-studies.delete";
+        }
+
+        public static class CompanyGeographicExpansions
+        {
+            public const string Read = "company-geographic-expansions.read";
+            public const string Create = "company-geographic-expansions.create";
+            public const string Update = "company-geographic-expansions.update";
+            public const string Delete = "company-geographic-expansions.delete";
+        }
+
+        public static class CompanyPartnershipFranchiseMechanisms
+        {
+            public const string Read = "company-partnership-franchise-mechanisms.read";
+            public const string Create = "company-partnership-franchise-mechanisms.create";
+            public const string Update = "company-partnership-franchise-mechanisms.update";
+            public const string Delete = "company-partnership-franchise-mechanisms.delete";
+        }
+
+        public static class CompanyFinancialClausesRights
+        {
+            public const string Read = "company-financial-clauses-rights.read";
+            public const string Create = "company-financial-clauses-rights.create";
+            public const string Update = "company-financial-clauses-rights.update";
+            public const string Delete = "company-financial-clauses-rights.delete";
+        }
+
         public static class AuditLogs
         {
             public const string Read = "audit-logs.read";

@@ -55,12 +55,20 @@ import { CompanyDistinguishesComponent } from './pages/company-distinguishes/com
 import { CompanyDistinguishDialogComponent } from './pages/company-distinguishes/company-distinguish-dialog/company-distinguish-dialog.component';
 import { CompanyDistributionMarketingsComponent } from './pages/company-distribution-marketings/company-distribution-marketings-component/company-distribution-marketings-component';
 import { CompanyDistributionMarketingDialogComponent } from './pages/company-distribution-marketings/company-distribution-marketing-dialog/company-distribution-marketing-dialog.component';
+import { CompanyPreContractStudiesComponent } from './pages/company-pre-contract-studies/company-pre-contract-studies-component/company-pre-contract-studies-component';
+import { CompanyPreContractStudyDialogComponent } from './pages/company-pre-contract-studies/company-pre-contract-study-dialog/company-pre-contract-study-dialog.component';
+import { CompanyGeographicExpansionsComponent } from './pages/company-geographic-expansions/company-geographic-expansions-component/company-geographic-expansions-component';
+import { CompanyGeographicExpansionDialogComponent } from './pages/company-geographic-expansions/company-geographic-expansion-dialog/company-geographic-expansion-dialog.component';
+import { CompanyPartnershipFranchiseMechanismsComponent } from './pages/company-partnership-franchise-mechanisms/company-partnership-franchise-mechanisms-component/company-partnership-franchise-mechanisms-component';
+import { CompanyPartnershipFranchiseMechanismDialogComponent } from './pages/company-partnership-franchise-mechanisms/company-partnership-franchise-mechanism-dialog/company-partnership-franchise-mechanism-dialog.component';
 import { ReviewsComponent } from './pages/reviews/reviews-component/reviews-component';
 import { ReviewDialogComponent } from './pages/reviews/review-dialog/review-dialog.component';
 import { ComplaintsComponent } from './pages/complaints/complaints-component/complaints-component';
 import { ComplaintViewDialogComponent } from './pages/complaints/complaint-view-dialog/complaint-view-dialog.component';
 import { PartnersComponent } from './pages/partners/partners-component/partners-component';
 import { PartnerDialogComponent } from './pages/partners/partner-dialog/partner-dialog.component';
+import { CompanyFinancialClausesRightsComponent } from './pages/company-financial-clauses-rights/company-financial-clauses-rights-component/company-financial-clauses-rights-component';
+import { CompanyFinancialClausesRightsDialogComponent } from './pages/company-financial-clauses-rights/company-financial-clauses-rights-dialog/company-financial-clauses-rights-dialog.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +116,14 @@ import { PartnerDialogComponent } from './pages/partners/partner-dialog/partner-
     CompanyDistinguishDialogComponent,
     CompanyDistributionMarketingsComponent,
     CompanyDistributionMarketingDialogComponent,
+    CompanyPreContractStudiesComponent,
+    CompanyPreContractStudyDialogComponent,
+    CompanyGeographicExpansionsComponent,
+    CompanyGeographicExpansionDialogComponent,
+    CompanyPartnershipFranchiseMechanismsComponent,
+    CompanyPartnershipFranchiseMechanismDialogComponent,
+    CompanyFinancialClausesRightsComponent,
+    CompanyFinancialClausesRightsDialogComponent,
     ReviewsComponent,
     ReviewDialogComponent,
     ComplaintsComponent,

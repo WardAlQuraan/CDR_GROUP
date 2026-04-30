@@ -207,6 +207,38 @@ export class CompaniesComponent implements OnInit {
           onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'distribution-marketings'])
         },
         {
+          icon: 'attach_money',
+          tooltip: 'admin.companies.financialClausesRights',
+          permission: Permissions.COMPANY_FINANCIAL_CLAUSES_RIGHTS_READ,
+          color: 'accent',
+          primary: false,
+          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'financial-clauses-rights'])
+        },
+        {
+          icon: 'assessment',
+          tooltip: 'admin.companies.preContractStudies',
+          permission: Permissions.COMPANY_PRE_CONTRACT_STUDIES_READ,
+          color: 'accent',
+          primary: false,
+          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'pre-contract-studies'])
+        },
+        {
+          icon: 'public',
+          tooltip: 'admin.companies.geographicExpansions',
+          permission: Permissions.COMPANY_GEOGRAPHIC_EXPANSIONS_READ,
+          color: 'accent',
+          primary: false,
+          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'geographic-expansions'])
+        },
+        {
+          icon: 'handshake',
+          tooltip: 'admin.companies.partnershipFranchiseMechanisms',
+          permission: Permissions.COMPANY_PARTNERSHIP_FRANCHISE_MECHANISMS_READ,
+          color: 'accent',
+          primary: false,
+          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'partnership-franchise-mechanisms'])
+        },
+        {
           icon: 'image',
           tooltip: 'admin.companies.uploadLogo',
           permission: Permissions.COMPANIES_UPDATE,

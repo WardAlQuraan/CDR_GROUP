@@ -68,5 +68,17 @@ namespace cdr_group.Domain.Entities
 
         // Distribution marketings for this company
         public virtual ICollection<CompanyDistributionMarketing> CompanyDistributionMarketings { get; set; } = new List<CompanyDistributionMarketing>();
+
+        // Pre-contract studies for this company
+        public virtual ICollection<CompanyPreContractStudy> CompanyPreContractStudies { get; set; } = new List<CompanyPreContractStudy>();
+
+        // Geographic expansions for this company
+        public virtual ICollection<CompanyGeographicExpansion> CompanyGeographicExpansions { get; set; } = new List<CompanyGeographicExpansion>();
+
+        // Partnership / franchise mechanisms for this company
+        public virtual ICollection<CompanyPartnershipFranchiseMechanism> CompanyPartnershipFranchiseMechanisms { get; set; } = new List<CompanyPartnershipFranchiseMechanism>();
+
+        // Financial clauses & rights for this company
+        public virtual ICollection<CompanyFinancialClausesRights> CompanyFinancialClausesRights { get; set; } = new List<CompanyFinancialClausesRights>();
     }
 }

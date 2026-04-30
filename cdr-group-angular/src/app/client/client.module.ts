@@ -27,6 +27,9 @@ import { BranchesComponent } from './sections/branches/branches.component';
 import { SuccessReasonsComponent } from './sections/success-reasons/success-reasons.component';
 import { DistinguishesComponent } from './sections/distinguishes/distinguishes.component';
 import { DistributionMarketingsComponent } from './sections/distribution-marketings/distribution-marketings.component';
+import { PreContractStudiesComponent } from './sections/pre-contract-studies/pre-contract-studies.component';
+import { GeographicExpansionsComponent } from './sections/geographic-expansions/geographic-expansions.component';
+import { PartnershipFranchiseMechanismsComponent } from './sections/partnership-franchise-mechanisms/partnership-franchise-mechanisms.component';
 
 // Pages
 import { HomeComponent } from './pages/home/home.component';
@@ -64,6 +67,9 @@ import { clientRoutes } from './client.routes';
     SuccessReasonsComponent,
     DistinguishesComponent,
     DistributionMarketingsComponent,
+    PreContractStudiesComponent,
+    GeographicExpansionsComponent,
+    PartnershipFranchiseMechanismsComponent,
     // Pages
     HomeComponent,
     EventListingComponent,

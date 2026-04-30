@@ -18,9 +18,13 @@ import { CompanyBranchesComponent } from './pages/company-branches/company-branc
 import { CompanySuccessReasonsComponent } from './pages/company-success-reasons/company-success-reasons-component/company-success-reasons-component';
 import { CompanyDistinguishesComponent } from './pages/company-distinguishes/company-distinguishes-component/company-distinguishes-component';
 import { CompanyDistributionMarketingsComponent } from './pages/company-distribution-marketings/company-distribution-marketings-component/company-distribution-marketings-component';
+import { CompanyPreContractStudiesComponent } from './pages/company-pre-contract-studies/company-pre-contract-studies-component/company-pre-contract-studies-component';
+import { CompanyGeographicExpansionsComponent } from './pages/company-geographic-expansions/company-geographic-expansions-component/company-geographic-expansions-component';
+import { CompanyPartnershipFranchiseMechanismsComponent } from './pages/company-partnership-franchise-mechanisms/company-partnership-franchise-mechanisms-component/company-partnership-franchise-mechanisms-component';
 import { ReviewsComponent } from './pages/reviews/reviews-component/reviews-component';
 import { ComplaintsComponent } from './pages/complaints/complaints-component/complaints-component';
 import { PartnersComponent } from './pages/partners/partners-component/partners-component';
+import { CompanyFinancialClausesRightsComponent } from './pages/company-financial-clauses-rights/company-financial-clauses-rights-component/company-financial-clauses-rights-component';
 
 export const adminRoutes: Routes = [
   {
@@ -43,6 +47,10 @@ export const adminRoutes: Routes = [
       { path: 'companies/:companyId/success-reasons', component: CompanySuccessReasonsComponent },
       { path: 'companies/:companyId/distinguishes', component: CompanyDistinguishesComponent },
       { path: 'companies/:companyId/distribution-marketings', component: CompanyDistributionMarketingsComponent },
+      { path: 'companies/:companyId/pre-contract-studies', component: CompanyPreContractStudiesComponent },
+      { path: 'companies/:companyId/geographic-expansions', component: CompanyGeographicExpansionsComponent },
+      { path: 'companies/:companyId/partnership-franchise-mechanisms', component: CompanyPartnershipFranchiseMechanismsComponent },
+      { path: 'companies/:companyId/financial-clauses-rights', component: CompanyFinancialClausesRightsComponent },
       { path: 'partners', component: PartnersComponent },
       { path: 'contact-us', component: ContactUsAdminComponent },
       { path: 'reviews', component: ReviewsComponent },

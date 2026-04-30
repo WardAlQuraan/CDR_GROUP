@@ -151,6 +151,18 @@
     "title": "How We Reach You",
     "subtitle": "The channels we use to deliver our products and stories everywhere"
   },
+  "preContractStudies": {
+    "title": "Pre-Contract Studies",
+    "subtitle": "Feasibility and analyses we deliver before any engagement begins"
+  },
+  "geographicExpansions": {
+    "title": "Geographic Expansions",
+    "subtitle": "Where we operate today and the markets we are growing into next"
+  },
+  "partnershipFranchiseMechanisms": {
+    "title": "Partnership & Franchise",
+    "subtitle": "How we structure partnerships and franchise opportunities"
+  },
   "successReasons": {
     "title": "Why Choose Us",
     "subtitle": "The reasons that drive our success"
@@ -775,6 +787,10 @@
       "successReasons": "Success Reasons",
       "distinguishes": "Distinguishes",
       "distributionMarketings": "Distribution & Marketing",
+      "preContractStudies": "Pre-Contract Studies",
+      "geographicExpansions": "Geographic Expansions",
+      "partnershipFranchiseMechanisms": "Partnership & Franchise",
+      "financialClausesRights" : "Financial Clauses & Rights",
       "chooseAnother": "Choose another",
       "logoUploaded": "Logo uploaded successfully",
       "basicInfo": "Basic Information",
@@ -973,6 +989,155 @@
         "icon": "Enter icon name (e.g. phone, email)",
         "name": "Enter contact name",
         "value": "Enter contact value"
+      }
+    },
+    "companyPartnershipFranchiseMechanisms": {
+      "title": "Partnership & Franchise",
+      "subtitle": "Manage partnership and franchise mechanisms",
+      "addMechanism": "Add Mechanism",
+      "createMechanism": "Create Mechanism",
+      "editMechanism": "Edit Mechanism",
+      "deleteMechanism": "Delete Mechanism",
+      "mechanismInfo": "Mechanism Information",
+      "description": "Description",
+      "descriptionEn": "Description (English)",
+      "descriptionAr": "Description (Arabic)",
+      "created": "Created",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this entry?",
+      "mechanismCreated": "Mechanism created successfully",
+      "mechanismUpdated": "Mechanism updated successfully",
+      "mechanismDeleted": "Mechanism deleted successfully",
+      "errors": {
+        "loadFailed": "Failed to load mechanisms",
+        "createFailed": "Failed to create mechanism",
+        "updateFailed": "Failed to update mechanism",
+        "deleteFailed": "Failed to delete mechanism",
+        "descriptionEnRequired": "Description (English) is required",
+        "descriptionArRequired": "Description (Arabic) is required",
+        "descriptionMaxLength": "Description must not exceed 2000 characters"
+      },
+      "placeholders": {
+        "descriptionEn": "Enter the description in English",
+        "descriptionAr": "Enter the description in Arabic"
+      }
+    },
+    "companyFinancialClausesRights": {
+      "title": "Financial Clauses & Rights",
+      "titleEn": "Financial Clauses & Rights Title (English)",
+      "titleAr": "Financial Clauses & Rights Title (Arabic)",
+      "subtitle": "Manage financial clauses and rights associated with the company",
+      "addEntry": "Add Entry",
+      "createEntry": "Create Entry",
+      "editEntry": "Edit Entry",
+      "deleteEntry": "Delete Entry",
+      "entryInfo": "Entry Information",
+      "description": "Description",
+      "descriptionEn": "Description (English)",
+      "descriptionAr": "Description (Arabic)",
+      "created": "Created",
+      "edit": "Edit",
+      "delete": "Delete",
+      "createFinancialClause": "Create Financial Clause/Rights",
+      "editFinancialClause": "Edit Financial Clause/Rights",
+      "financialClauseInfo": "Financial Clause/Rights Information",
+      "confirmDelete": "Are you sure you want to delete this entry?",
+      "entryCreated": "Entry created successfully",
+      "entryUpdated": "Entry updated successfully",
+      "entryDeleted": "Entry deleted successfully",
+      "clauseTitle": "Clause Title",
+      "errors": {
+        "titleEnRequired": "Title (English) is required",
+        "titleArRequired": "Title (Arabic) is required",
+        "loadFailed": "Failed to load entries",
+        "createFailed": "Failed to create entry",
+        "updateFailed": "Failed to update entry",
+        "deleteFailed": "Failed to delete entry",
+        "descriptionEnRequired": "Description (English) is required",
+        "descriptionArRequired": "Description (Arabic) is required",
+        "descriptionMaxLength": "Description must not exceed 2000 characters"
+      },
+      "placeholders": {
+        "titleEn": "Enter the title in English",
+        "titleAr": "Enter the title in Arabic",
+        "descriptionEn": "Enter the description in English",
+        "descriptionAr": "Enter the description in Arabic"
+      }
+    },
+    "companyGeographicExpansions": {
+      "title": "Geographic Expansions",
+      "subtitle": "Manage the company's geographic expansion plans and footprints",
+      "addExpansion": "Add Expansion",
+      "createExpansion": "Create Expansion",
+      "editExpansion": "Edit Expansion",
+      "deleteExpansion": "Delete Expansion",
+      "expansionInfo": "Expansion Information",
+      "expansionTitle": "Title",
+      "description": "Description",
+      "titleEn": "Title (English)",
+      "titleAr": "Title (Arabic)",
+      "descriptionEn": "Description (English)",
+      "descriptionAr": "Description (Arabic)",
+      "created": "Created",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this expansion?",
+      "expansionCreated": "Expansion created successfully",
+      "expansionUpdated": "Expansion updated successfully",
+      "expansionDeleted": "Expansion deleted successfully",
+      "errors": {
+        "loadFailed": "Failed to load expansions",
+        "createFailed": "Failed to create expansion",
+        "updateFailed": "Failed to update expansion",
+        "deleteFailed": "Failed to delete expansion",
+        "titleEnRequired": "Title (English) is required",
+        "titleArRequired": "Title (Arabic) is required",
+        "titleMaxLength": "Title must not exceed 500 characters",
+        "descriptionMaxLength": "Description must not exceed 2000 characters"
+      },
+      "placeholders": {
+        "titleEn": "Enter the title in English",
+        "titleAr": "Enter the title in Arabic",
+        "descriptionEn": "Enter the description in English",
+        "descriptionAr": "Enter the description in Arabic"
+      }
+    },
+    "companyPreContractStudies": {
+      "title": "Pre-Contract Studies",
+      "subtitle": "Manage feasibility and pre-contract studies",
+      "addStudy": "Add Study",
+      "createStudy": "Create Study",
+      "editStudy": "Edit Study",
+      "deleteStudy": "Delete Study",
+      "studyInfo": "Study Information",
+      "studyTitle": "Title",
+      "description": "Description",
+      "titleEn": "Title (English)",
+      "titleAr": "Title (Arabic)",
+      "descriptionEn": "Description (English)",
+      "descriptionAr": "Description (Arabic)",
+      "created": "Created",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this study?",
+      "studyCreated": "Study created successfully",
+      "studyUpdated": "Study updated successfully",
+      "studyDeleted": "Study deleted successfully",
+      "errors": {
+        "loadFailed": "Failed to load studies",
+        "createFailed": "Failed to create study",
+        "updateFailed": "Failed to update study",
+        "deleteFailed": "Failed to delete study",
+        "descriptionEnRequired": "Description (English) is required",
+        "descriptionArRequired": "Description (Arabic) is required",
+        "descriptionMaxLength": "Description must not exceed 2000 characters"
+      },
+      "placeholders": {
+        "titleEn": "Enter the title in English",
+        "titleAr": "Enter the title in Arabic",
+        "descriptionEn": "Enter the description in English",
+        "descriptionAr": "Enter the description in Arabic"
       }
     },
     "companyDistributionMarketings": {
