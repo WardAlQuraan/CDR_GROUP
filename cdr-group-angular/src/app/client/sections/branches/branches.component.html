@@ -2,46 +2,100 @@
   <section class="branches-section" id="section_branches"
     [style.--brand-primary]="primaryColorValue"
     [style.--brand-secondary]="secondaryColorValue">
+    <div class="bg-shape bg-shape--one" aria-hidden="true"></div>
+    <div class="bg-shape bg-shape--two" aria-hidden="true"></div>
+
     <div class="container">
-      <div class="row">
-        <div class="col-12 text-center mb-3">
-          <h2 class="section-title">{{ 'branches.title' | translate }}</h2>
-          <p class="section-subtitle">{{ 'branches.subtitle' | translate }}</p>
+      <header class="section-head">
+        <!-- <span class="section-eyebrow">{{ 'branches.eyebrow' | translate }}</span> -->
+        <h2 class="section-title">{{ 'branches.title' | translate }}</h2>
+        <p class="section-subtitle">{{ 'branches.subtitle' | translate }}</p>
+      </header>
+
+      <div class="branches-stats">
+        <div class="stat">
+          <span class="stat-num">{{ rows.length }}</span>
+          <span class="stat-label">
+            {{ (rows.length === 1 ? 'branches.meta.branch' : 'branches.meta.branches') | translate }}
+          </span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">{{ uniqueCities }}</span>
+          <span class="stat-label">{{ 'branches.meta.cities' | translate }}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">{{ yearsActive }}+</span>
+          <span class="stat-label">{{ 'branches.meta.years' | translate }}</span>
         </div>
       </div>
 
-      <div class="journey-wrapper">
-        <div class="journey">
-          @for (row of rows; track row.branch.id; let first = $first) {
-            @if (!first) {
-              <div class="journey-connector">
-                @if (row.gapLabel) {
-                  <span class="connector-label">{{ row.gapLabel }}</span>
-                }
-                <span class="connector-line" aria-hidden="true"></span>
-                <span class="connector-arrow" aria-hidden="true"></span>
-              </div>
-            }
-            <div class="journey-step">
-              <div class="step-node" [title]="getBranchName(row.branch)">
-                <span class="step-name">{{ getBranchName(row.branch) }}</span>
-                @if (hasNickname(row.branch)) {
-                  <span class="step-nickname" [title]="getBranchNickname(row.branch)">{{ getBranchNickname(row.branch) }}</span>
-                }
-              </div>
-              <div class="step-info">
-                <div class="branch-city" [title]="getCityName(row.branch)">
-                  <i class="bi bi-geo-alt-fill"></i>
-                  <span>{{ getCityName(row.branch) }}</span>
-                </div>
-                <div class="branch-date">{{ row.startDate | date:'MMM yyyy' }}</div>
-                @if (getDescription(row.branch)) {
-                  <p class="branch-description" [title]="getDescription(row.branch)">{{ getDescription(row.branch) }}</p>
-                }
-              </div>
+      <div class="bento-grid">
+        @for (row of rows; track row.branch.id; let i = $index; let last = $last) {
+          @if (i > 0 && row.gapLabel) {
+            <div class="branches-gap" [title]="('branches.gap.sincePrevious' | translate) + ': ' + row.gapLabel">
+              <span class="branches-gap-pill">
+                <i class="bi bi-hourglass-split"></i>
+                <span>+ {{ row.gapLabel }}</span>
+              </span>
             </div>
           }
-        </div>
+          <article
+            class="bento-tile"
+            [class.bento-tile--wide]="i > 0 && i % 5 === 0"
+            [class.bento-tile--with-image]="!!getImageUrl(row.branch)"
+            [title]="getBranchName(row.branch)">
+            @if (getImageUrl(row.branch); as imgSrc) {
+              <img class="tile-image" [src]="imgSrc" [alt]="getBranchName(row.branch)" loading="lazy" />
+              <span class="tile-image-overlay" aria-hidden="true"></span>
+            }
+            <span class="tile-year-bg" aria-hidden="true">{{ row.startDate | date:'yyyy' }}</span>
+
+            <div class="tile-top">
+              <span class="tile-index">#{{ (i + 1).toString().padStart(2, '0') }}</span>
+              <span class="tile-date">
+                <i class="bi bi-calendar3"></i>
+                {{ row.startDate | date:'MMM yyyy' }}
+              </span>
+            </div>
+
+            <div class="tile-body">
+              <h3 class="tile-name">{{ getBranchName(row.branch) }}</h3>
+              @if (hasNickname(row.branch)) {
+                <span class="tile-nickname">{{ getBranchNickname(row.branch) }}</span>
+              }
+              <div class="tile-city">
+                <i class="bi bi-geo-alt-fill"></i>
+                <span>{{ getCityName(row.branch) }}</span>
+              </div>
+              @if (getDescription(row.branch)) {
+                <div class="tile-desc-wrap" aria-hidden="false">
+                  <p class="tile-desc">{{ getDescription(row.branch) }}</p>
+                </div>
+              }
+              @if (row.branch.locationUrl) {
+                <a
+                  class="tile-map-link"
+                  [href]="row.branch.locationUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  (click)="$event.stopPropagation()">
+                  <i class="bi bi-map"></i>
+                  <span>{{ 'branches.viewOnMap' | translate }}</span>
+                  <i class="bi bi-arrow-up-right"></i>
+                </a>
+              }
+            </div>
+
+            @if (last && rows.length > 1) {
+              <span class="tile-badge tile-badge--latest">
+                <i class="bi bi-stars"></i>
+                {{ 'branches.badge.latest' | translate }}
+              </span>
+            }
+
+            <span class="tile-corner" aria-hidden="true"></span>
+          </article>
+        }
       </div>
     </div>
   </section>

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges, effect, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges, ViewChild, effect, inject } from '@angular/core';
 import { CompanyGeographicExpansionsService } from '../../../services/company-geographic-expansions.service';
 import { CompanyStateService } from '../../../services/company-state.service';
 import { TranslationService } from '../../../services/translation.service';
@@ -10,13 +10,19 @@ import { CompanyGeographicExpansionDto } from '../../../models/company-geographi
   templateUrl: './geographic-expansions.component.html',
   styleUrl: './geographic-expansions.component.scss',
 })
-export class GeographicExpansionsComponent implements OnChanges {
+export class GeographicExpansionsComponent implements OnChanges, OnDestroy {
   @Input() companyId = '';
+
+  @ViewChild('scroller') scrollerRef?: ElementRef<HTMLDivElement>;
 
   private companyState = inject(CompanyStateService);
 
   expansions: CompanyGeographicExpansionDto[] = [];
   loading = false;
+  isPaused = false;
+
+  private autoplayId: ReturnType<typeof setInterval> | null = null;
+  private static readonly AUTOPLAY_MS = 4500;
 
   constructor(
     private companyGeographicExpansionsService: CompanyGeographicExpansionsService,
@@ -35,12 +41,28 @@ export class GeographicExpansionsComponent implements OnChanges {
     }
   }
 
+  ngOnDestroy(): void {
+    this.stopAutoplay();
+  }
+
+  onPointerEnter(): void {
+    this.isPaused = true;
+  }
+
+  onPointerLeave(): void {
+    this.isPaused = false;
+  }
+
   get isArabic(): boolean {
     return this.translationService.language() === 'ar';
   }
 
   get hasExpansions(): boolean {
     return this.expansions.length > 0;
+  }
+
+  get hasMultiple(): boolean {
+    return this.expansions.length > 1;
   }
 
   get primaryColorValue(): string {
@@ -59,16 +81,84 @@ export class GeographicExpansionsComponent implements OnChanges {
     return (this.isArabic ? item.descriptionAr : item.descriptionEn) ?? '';
   }
 
+  scrollPrev(): void {
+    this.scrollByCard(false);
+    this.restartAutoplay();
+  }
+
+  scrollNext(): void {
+    this.scrollByCard(true);
+    this.restartAutoplay();
+  }
+
+  private scrollByCard(forward: boolean): void {
+    const el = this.scrollerRef?.nativeElement;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>('.expansion-card');
+    if (!card) return;
+    const styles = getComputedStyle(el);
+    const gap = parseFloat(styles.columnGap || styles.gap || '0') || 22;
+    const step = card.offsetWidth + gap;
+    const direction = forward !== this.isArabic ? 1 : -1;
+    el.scrollBy({ left: direction * step, behavior: 'smooth' });
+  }
+
+  private advanceAuto(): void {
+    const el = this.scrollerRef?.nativeElement;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>('.expansion-card');
+    if (!card) return;
+
+    const styles = getComputedStyle(el);
+    const gap = parseFloat(styles.columnGap || styles.gap || '0') || 22;
+    const step = card.offsetWidth + gap;
+
+    const maxScroll = Math.max(0, el.scrollWidth - el.clientWidth);
+    const currentScroll = Math.abs(el.scrollLeft);
+
+    if (maxScroll <= 0 || currentScroll >= maxScroll - 4) {
+      el.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      const direction = this.isArabic ? -1 : 1;
+      el.scrollBy({ left: direction * step, behavior: 'smooth' });
+    }
+  }
+
+  private startAutoplay(): void {
+    this.stopAutoplay();
+    if (!this.hasMultiple) return;
+    this.autoplayId = setInterval(() => {
+      if (!this.isPaused) {
+        this.advanceAuto();
+      }
+    }, GeographicExpansionsComponent.AUTOPLAY_MS);
+  }
+
+  private stopAutoplay(): void {
+    if (this.autoplayId) {
+      clearInterval(this.autoplayId);
+      this.autoplayId = null;
+    }
+  }
+
+  private restartAutoplay(): void {
+    if (this.autoplayId) {
+      this.startAutoplay();
+    }
+  }
+
   private loadExpansions(): void {
     this.loading = true;
     this.companyGeographicExpansionsService.getByCompany(this.companyId).subscribe({
       next: (response) => {
         this.expansions = response.success && response.data ? response.data : [];
+        this.startAutoplay();
         this.loading = false;
         this.cdr.markForCheck();
       },
       error: () => {
         this.expansions = [];
+        this.stopAutoplay();
         this.loading = false;
         this.cdr.markForCheck();
       }

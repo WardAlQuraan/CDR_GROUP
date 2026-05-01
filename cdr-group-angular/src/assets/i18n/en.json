@@ -171,13 +171,26 @@
     "title": "Our Branches",
     "subtitle": "A timeline of every branch we have opened",
     "branch": "Branch",
+    "eyebrow": "Our Journey",
+    "meta": {
+      "branch": "branch",
+      "branches": "branches",
+      "cities": "cities",
+      "years": "years of growth"
+    },
+    "badge": {
+      "first": "First branch",
+      "latest": "Latest"
+    },
+    "viewOnMap": "View on map",
     "gap": {
       "year": "year",
       "years": "years",
       "month": "month",
       "months": "months",
       "day": "day",
-      "days": "days"
+      "days": "days",
+      "sincePrevious": "Since previous branch"
     }
   },
   "events": {
@@ -226,6 +239,7 @@
   "team": {
     "title": "Our Team",
     "subtitle": "Meet the work team",
+    "leader": "Leader",
     "founder": "Founder",
     "coFounder": "Co-Founder",
     "ceo": "CEO",
@@ -1266,6 +1280,7 @@
       "company": "Company",
       "country": "Country",
       "city": "City",
+      "locationUrl": "Location URL",
       "created": "Created",
       "edit": "Edit",
       "delete": "Delete",
@@ -1273,6 +1288,10 @@
       "branchCreated": "Branch created successfully",
       "branchUpdated": "Branch updated successfully",
       "branchDeleted": "Branch deleted successfully",
+      "uploadImage": "Upload Image",
+      "selectImage": "Upload Image",
+      "replaceImage": "Replace Image",
+      "imageUpdated": "Branch image updated",
       "branches": "Branches",
       "errors": {
         "loadFailed": "Failed to load branches",
@@ -1295,7 +1314,8 @@
         "descriptionEn": "Enter branch description in English",
         "descriptionAr": "Enter branch description in Arabic",
         "selectCompany": "Select a company",
-        "selectCity": "Select a city"
+        "selectCity": "Select a city",
+        "locationUrl": "https://maps.google.com/..."
       }
     },
     "eventsAdmin": {

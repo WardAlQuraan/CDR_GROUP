@@ -75,6 +75,11 @@
             [resetOnDataSourceChange]="false">
           </app-async-select>
         }
+
+        <app-form-field formControlName="locationUrl" label="admin.companyBranches.locationUrl" icon="map"
+          placeholder="admin.companyBranches.placeholders.locationUrl" textDir="ltr"
+          [errors]="[{name: 'maxlength', message: 'admin.companyBranches.errors.descriptionMaxLength'}]">
+        </app-form-field>
       </div>
     </div>
   </form>

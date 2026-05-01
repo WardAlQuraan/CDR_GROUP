@@ -448,6 +448,8 @@ namespace cdr_group.Persistence.Data
                 entity.Property(e => e.NickNameAr).HasMaxLength(200);
                 entity.Property(e => e.DescriptionEn).HasMaxLength(2000);
                 entity.Property(e => e.DescriptionAr).HasMaxLength(2000);
+                entity.Property(e => e.ImageUrl).HasMaxLength(500);
+                entity.Property(e => e.LocationUrl).HasMaxLength(500);
                 entity.Property(e => e.OpeningDate).IsRequired();
 
                 entity.HasOne(e => e.Company)

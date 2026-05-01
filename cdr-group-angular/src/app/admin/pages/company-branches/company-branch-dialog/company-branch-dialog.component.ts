@@ -109,7 +109,8 @@ export class CompanyBranchDialogComponent implements OnInit {
         descriptionAr: [branch.descriptionAr ?? '', [Validators.maxLength(2000)]],
         openingDate: [branch.openingDate ? new Date(branch.openingDate) : null, [Validators.required]],
         countryId: [null],
-        cityId: [branch.cityId, [Validators.required]]
+        cityId: [branch.cityId, [Validators.required]],
+        locationUrl: [branch.locationUrl ?? '', [Validators.maxLength(2000)]]
       });
       this.citiesService.getAllCached().subscribe(res => {
         const city = res.data?.find(c => c.id === branch.cityId);
@@ -130,7 +131,8 @@ export class CompanyBranchDialogComponent implements OnInit {
         descriptionAr: ['', [Validators.maxLength(2000)]],
         openingDate: [null, [Validators.required]],
         countryId: [null],
-        cityId: [null, [Validators.required]]
+        cityId: [null, [Validators.required]],
+        locationUrl: ['', [Validators.maxLength(2000)]]
       });
       this.showCityFilter = true;
     }
@@ -175,7 +177,8 @@ export class CompanyBranchDialogComponent implements OnInit {
       descriptionAr: this.form.value.descriptionAr || undefined,
       openingDate: this.form.value.openingDate,
       companyId: this.data.companyId,
-      cityId: this.form.value.cityId
+      cityId: this.form.value.cityId,
+      locationUrl: this.form.value.locationUrl?.trim() || undefined
     };
 
     this.companyBranchesService.create(createDto).subscribe({
@@ -200,7 +203,8 @@ export class CompanyBranchDialogComponent implements OnInit {
       descriptionAr: this.form.value.descriptionAr || undefined,
       openingDate: this.form.value.openingDate,
       companyId: this.data.companyId,
-      cityId: this.form.value.cityId
+      cityId: this.form.value.cityId,
+      locationUrl: this.form.value.locationUrl?.trim() || undefined
     };
 
     this.companyBranchesService.update(this.data.branch!.id, updateDto).subscribe({

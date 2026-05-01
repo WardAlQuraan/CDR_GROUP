@@ -1,8 +1,11 @@
 import { ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges, effect, inject } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CompanyDistributionMarketingsService } from '../../../services/company-distribution-marketings.service';
+import { CompanyPreferencesService } from '../../../services/company-preferences.service';
 import { CompanyStateService } from '../../../services/company-state.service';
 import { TranslationService } from '../../../services/translation.service';
 import { CompanyDistributionMarketingDto } from '../../../models/company-distribution-marketing.model';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-distribution-marketings',
@@ -14,9 +17,15 @@ export class DistributionMarketingsComponent implements OnChanges {
   @Input() companyId = '';
 
   private companyState = inject(CompanyStateService);
+  private companyPreferencesService = inject(CompanyPreferencesService);
+  private sanitizer = inject(DomSanitizer);
+
 
   marketings: CompanyDistributionMarketingDto[] = [];
   loading = false;
+
+  private titleEn = '';
+  private titleAr = '';
 
   constructor(
     private companyDistributionMarketingsService: CompanyDistributionMarketingsService,
@@ -32,7 +41,35 @@ export class DistributionMarketingsComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['companyId'] && this.companyId) {
       this.loadMarketings();
+      this.loadTitle();
     }
+  }
+
+  get sectionTitle(): string {
+    return (this.isArabic ? this.titleAr : this.titleEn) || '';
+  }
+
+  get safeSectionTitle(): SafeHtml | null {
+    const value = this.sectionTitle;
+    return value ? this.sanitizer.bypassSecurityTrustHtml(value) : null;
+  }
+
+  private loadTitle(): void {
+    this.titleEn = '';
+    this.titleAr = '';
+    if (!this.companyId) return;
+    this.companyPreferencesService
+      .getByCompanyAndCode(this.companyId, 'MARKETING_DESCRIPTION')
+      .subscribe({
+        next: (response) => {
+          if (response.success && response.data?.id) {
+            this.titleEn = response.data.valueEn ?? '';
+            this.titleAr = response.data.valueAr ?? '';
+            this.cdr.markForCheck();
+          }
+        },
+        error: () => {}
+      });
   }
 
   get isArabic(): boolean {

@@ -19,67 +19,57 @@
           {{ 'members.retry' | translate }}
         </button>
       </div>
-    } @else if (flatMembers.length === 0) {
+    } @else if (teamData.length === 0) {
       <div class="empty-container">
         <mat-icon>people_outline</mat-icon>
         <p>{{ 'members.noMembers' | translate }}</p>
       </div>
     } @else {
-      <div class="swiper-container">
-        <!-- Navigation Arrows -->
-        <button class="swiper-btn swiper-btn-prev" (click)="isArabic ? nextSlide() : prevSlide()" [class.disabled]="isArabic ? currentIndex >= maxIndex : currentIndex === 0">
-          <i class="bi bi-chevron-left"></i>
-        </button>
-        <button class="swiper-btn swiper-btn-next" (click)="isArabic ? prevSlide() : nextSlide()" [class.disabled]="isArabic ? currentIndex === 0 : currentIndex >= maxIndex">
-          <i class="bi bi-chevron-right"></i>
-        </button>
+      <div class="team-tree-wrap">
+        <div class="team-tree">
+          @for (node of teamData; track node.id; let i = $index) {
+            <ng-container *ngTemplateOutlet="nodeTpl; context: { $implicit: node, level: 0, index: i }"></ng-container>
+          }
+        </div>
+      </div>
+    }
 
-        <!-- Cards Track -->
-        <div class="swiper-viewport" #swiperViewport
-             [class.grabbing]="isDragging"
-             (mousedown)="onMouseDown($event)"
-             (mousemove)="onMouseMove($event)"
-             (mouseup)="onMouseUp()"
-             (mouseleave)="onMouseUp()"
-             (touchstart)="onTouchStart($event)"
-             (touchmove)="onTouchMove($event)"
-             (touchend)="onTouchEnd()">
-          <div class="swiper-track" [style.transform]="'translateX(' + trackOffset + 'px)'"
-               [style.transition]="isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)'">
-            @for (member of flatMembers; track member.id; let i = $index) {
-              <div class="member-card">
-                <div class="card-inner">
-                  <div class="avatar" [style.background-color]="getColor(i)">
-                    @if (member.image && !member.imageError) {
-                      <img [src]="member.image" [alt]="member.name" (error)="member.imageError = true">
-                    } @else {
-                      <span>{{ member.initials }}</span>
-                    }
-                  </div>
-                  <div class="info">
-                    <h4 class="name">{{ member.name | titlecase }}</h4>
-                    @if (member.position) {
-                      <p class="position">{{ member.position }}</p>
-                    }
-                    @if (member.company) {
-                      <span class="department">{{ member.company }}</span>
-                    }
-                  </div>
-                </div>
+    <ng-template #nodeTpl let-node let-level="level" let-index="index">
+      <div class="tree-node" [style.--level]="level">
+        <article class="member-card"
+          [class.is-leader]="level === 0"
+          [class.is-parent]="node.children?.length">
+          <div class="card-avatar" [style.background-color]="getColor(index ?? 0)">
+            @if (node.image && !node.imageError) {
+              <img [src]="node.image" [alt]="node.name" (error)="node.imageError = true">
+            } @else {
+              <i class="bi bi-person-fill"></i>
+            }
+          </div>
+          <div class="card-info">
+            <h4 class="card-name">{{ node.name | titlecase }}</h4>
+            @if (node.position) {
+              <p class="card-position">{{ node.position }}</p>
+            }
+          </div>
+        </article>
+
+        @if (node.children?.length) {
+          <div class="tree-children" [class.single-child]="node.children.length === 1">
+            <svg class="branch-fan" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              @for (i of branchIndices(node.children.length); track i) {
+                <path [attr.d]="getBranchPath(i, node.children.length)"
+                      stroke="currentColor" stroke-width="0.6" fill="none" stroke-linecap="round" />
+              }
+            </svg>
+            @for (child of node.children; track child.id; let i = $index) {
+              <div class="tree-branch" [class.has-children]="child.children?.length">
+                <ng-container *ngTemplateOutlet="nodeTpl; context: { $implicit: child, level: level + 1, index: i }"></ng-container>
               </div>
             }
           </div>
-        </div>
-
-        <!-- Dots -->
-        @if (totalDots > 1) {
-        <div class="swiper-dots">
-          @for (dot of dotsArray; track $index) {
-            <button class="dot" [class.active]="$index === currentIndex" (click)="goToSlide($index)"></button>
-          }
-        </div>
         }
       </div>
-    }
+    </ng-template>
   </div>
 </section>

@@ -1,3 +1,10 @@
+.home-sections {
+  padding-top: 80px;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--primary-color) 14%, #ffffff) 0%,
+    color-mix(in srgb, var(--secondary-color) 14%, #ffffff) 100%);
+}
+
 .company-filter-section {
   padding: 1.5rem 0;
   background: #f8fafc;

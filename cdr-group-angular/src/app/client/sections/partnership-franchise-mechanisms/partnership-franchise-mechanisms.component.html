@@ -10,17 +10,47 @@
         </div>
       </div>
 
-      <div class="mechanisms-grid">
-        @for (item of mechanisms; track item.id; let i = $index) {
-          @if (getDescription(item)) {
-            <article class="mechanism-card" [style.--index]="i">
-              <div class="mechanism-body">
-                <p class="mechanism-description">{{ getDescription(item) }}</p>
-              </div>
-            </article>
-          }
+      <div class="mechanisms-slider"
+        (mouseenter)="onPointerEnter()"
+        (mouseleave)="onPointerLeave()"
+        (focusin)="onPointerEnter()"
+        (focusout)="onPointerLeave()">
+
+        @if (hasMultiple) {
+          <button type="button" class="slider-arrow slider-arrow-prev" (click)="prev()" aria-label="Previous mechanism">
+            <i class="bi" [class.bi-chevron-left]="!isArabic" [class.bi-chevron-right]="isArabic"></i>
+          </button>
+        }
+
+        <div class="slider-viewport">
+          <div class="slider-track" [style.transform]="trackTransform">
+            @for (item of visibleMechanisms; track item.id; let i = $index) {
+              <article class="mechanism-slide" [class.is-active]="i === currentIndex">
+                <div class="mechanism-card">
+                  <p class="mechanism-description">{{ getDescription(item) }}</p>
+                </div>
+              </article>
+            }
+          </div>
+        </div>
+
+        @if (hasMultiple) {
+          <button type="button" class="slider-arrow slider-arrow-next" (click)="next()" aria-label="Next mechanism">
+            <i class="bi" [class.bi-chevron-right]="!isArabic" [class.bi-chevron-left]="isArabic"></i>
+          </button>
         }
       </div>
+
+      @if (hasMultiple) {
+        <div class="slider-dots">
+          @for (item of visibleMechanisms; track item.id; let i = $index) {
+            <button type="button" class="slider-dot"
+              [class.is-active]="i === currentIndex"
+              (click)="goTo(i)"
+              [attr.aria-label]="'Slide ' + (i + 1)"></button>
+          }
+        </div>
+      }
     </div>
   </section>
 }

@@ -10,16 +10,36 @@
         </div>
       </div>
 
-      <div class="expansions-grid">
-        @for (item of expansions; track item.id; let i = $index) {
-          <article class="expansion-card" [style.--index]="i">
-            <div class="expansion-body">
-              <h3 class="expansion-title">{{ getTitle(item) }}</h3>
-              @if (getDescription(item)) {
-                <p class="expansion-description">{{ getDescription(item) }}</p>
-              }
-            </div>
-          </article>
+      <div class="expansions-slider"
+        (mouseenter)="onPointerEnter()"
+        (mouseleave)="onPointerLeave()"
+        (focusin)="onPointerEnter()"
+        (focusout)="onPointerLeave()">
+        @if (hasMultiple) {
+          <button type="button" class="slider-arrow slider-arrow-prev"
+            (click)="scrollPrev()" aria-label="Previous">
+            <i class="bi" [class.bi-chevron-left]="!isArabic" [class.bi-chevron-right]="isArabic"></i>
+          </button>
+        }
+
+        <div class="expansions-scroller" #scroller>
+          @for (item of expansions; track item.id; let i = $index) {
+            <article class="expansion-card" [style.--index]="i">
+              <div class="expansion-body">
+                <h3 class="expansion-title">{{ getTitle(item) }}</h3>
+                @if (getDescription(item)) {
+                  <p class="expansion-description">{{ getDescription(item) }}</p>
+                }
+              </div>
+            </article>
+          }
+        </div>
+
+        @if (hasMultiple) {
+          <button type="button" class="slider-arrow slider-arrow-next"
+            (click)="scrollNext()" aria-label="Next">
+            <i class="bi" [class.bi-chevron-right]="!isArabic" [class.bi-chevron-left]="isArabic"></i>
+          </button>
         }
       </div>
     </div>

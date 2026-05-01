@@ -13,6 +13,8 @@ namespace cdr_group.Contracts.DTOs.CompanyBranch
         public string? NickNameAr { get; set; }
         public string? DescriptionEn { get; set; }
         public string? DescriptionAr { get; set; }
+        public string? ImageUrl { get; set; }
+        public string? LocationUrl { get; set; }
         public DateTime OpeningDate { get; set; }
 
         [ExcelIgnore]
@@ -53,6 +55,12 @@ namespace cdr_group.Contracts.DTOs.CompanyBranch
         [StringLength(2000)]
         public string? DescriptionAr { get; set; }
 
+        [StringLength(500)]
+        public string? ImageUrl { get; set; }
+
+        [StringLength(500)]
+        public string? LocationUrl { get; set; }
+
         [Required]
         public DateTime OpeningDate { get; set; }
 
@@ -82,6 +90,12 @@ namespace cdr_group.Contracts.DTOs.CompanyBranch
 
         [StringLength(2000)]
         public string? DescriptionAr { get; set; }
+
+        [StringLength(500)]
+        public string? ImageUrl { get; set; }
+
+        [StringLength(500)]
+        public string? LocationUrl { get; set; }
 
         public DateTime? OpeningDate { get; set; }
 

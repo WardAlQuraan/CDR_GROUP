@@ -171,13 +171,26 @@
     "title": "فروعنا",
     "subtitle": "خط زمني لكل فرع قمنا بافتتاحه",
     "branch": "الفرع",
+    "eyebrow": "مسيرتنا",
+    "meta": {
+      "branch": "فرع",
+      "branches": "فروع",
+      "cities": "مدن",
+      "years": "سنوات من النمو"
+    },
+    "badge": {
+      "first": "أول فرع",
+      "latest": "الأحدث"
+    },
+    "viewOnMap": "عرض على الخريطة",
     "gap": {
       "year": "سنة",
       "years": "سنوات",
       "month": "شهر",
       "months": "أشهر",
       "day": "يوم",
-      "days": "أيام"
+      "days": "أيام",
+      "sincePrevious": "منذ الفرع السابق"
     }
   },
   "events": {
@@ -226,6 +239,7 @@
   "team": {
     "title": "فريقنا",
     "subtitle": "تعرّف على فريق العمل ",
+    "leader": "القائد",
     "founder": "المؤسس",
     "coFounder": "الشريك المؤسس",
     "ceo": "الرئيس التنفيذي",
@@ -1266,6 +1280,7 @@
       "company": "الشركة",
       "country": "الدولة",
       "city": "المدينة",
+      "locationUrl": "رابط الموقع",
       "created": "تاريخ الإنشاء",
       "edit": "تعديل",
       "delete": "حذف",
@@ -1273,6 +1288,10 @@
       "branchCreated": "تم إنشاء الفرع بنجاح",
       "branchUpdated": "تم تحديث الفرع بنجاح",
       "branchDeleted": "تم حذف الفرع بنجاح",
+      "uploadImage": "رفع صورة",
+      "selectImage": "رفع صورة",
+      "replaceImage": "استبدال الصورة",
+      "imageUpdated": "تم تحديث صورة الفرع",
       "branches": "الفروع",
       "errors": {
         "loadFailed": "فشل تحميل الفروع",
@@ -1295,7 +1314,8 @@
         "descriptionEn": "أدخل وصف الفرع بالإنجليزية",
         "descriptionAr": "أدخل وصف الفرع بالعربية",
         "selectCompany": "اختر شركة",
-        "selectCity": "اختر مدينة"
+        "selectCity": "اختر مدينة",
+        "locationUrl": "https://maps.google.com/..."
       }
     },
     "eventsAdmin": {

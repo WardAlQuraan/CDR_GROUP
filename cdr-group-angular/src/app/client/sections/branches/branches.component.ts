@@ -3,6 +3,7 @@ import { CompanyBranchesService } from '../../../services/company-branches.servi
 import { CompanyStateService } from '../../../services/company-state.service';
 import { TranslationService } from '../../../services/translation.service';
 import { CompanyBranchDto } from '../../../models/company-branch.model';
+import { environment } from '../../../../environments/environment';
 
 interface BranchTimelineRow {
   branch: CompanyBranchDto;
@@ -51,6 +52,20 @@ export class BranchesComponent implements OnChanges {
     return this.branches.length > 0;
   }
 
+  get uniqueCities(): number {
+    const cities = new Set(
+      this.branches.map(b => (this.isArabic ? b.cityNameAr : b.cityNameEn)?.trim()).filter(Boolean)
+    );
+    return cities.size;
+  }
+
+  get yearsActive(): number {
+    if (!this.rows.length) return 0;
+    const earliest = this.rows[0].startDate.getTime();
+    const diff = Date.now() - earliest;
+    return Math.max(1, Math.floor(diff / (365.25 * 86_400_000)));
+  }
+
   get primaryColorValue(): string {
     return this.companyState.selectedCompany?.primaryColor || '#833AB4';
   }
@@ -79,6 +94,14 @@ export class BranchesComponent implements OnChanges {
 
   getDescription(branch: CompanyBranchDto): string {
     return (this.isArabic ? branch.descriptionAr : branch.descriptionEn) ?? '';
+  }
+
+  getImageUrl(branch: CompanyBranchDto): string | undefined {
+    const url = branch.imageUrl;
+    if (!url) return undefined;
+    if (/^https?:\/\//i.test(url)) return url;
+    const base = environment.apiUrl.replace(/\/api\/?$/, '');
+    return `${base}${url.startsWith('/') ? '' : '/'}${url}`;
   }
 
   private loadBranches(): void {

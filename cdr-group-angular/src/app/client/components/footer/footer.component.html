@@ -1,29 +1,12 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-top">
-      <!-- Column 1: Companies -->
-      <div class="footer-col">
-        <h5 class="footer-title">{{ 'footer.ourCompanies' | translate }}</h5>
-        <ul class="footer-links">
-          @for (company of companyState.companies; track company.id) {
-            @if (company.children && company.children.length > 0) {
-              @for (child of company.children; track child.id) {
-                <li>
-                  <a (click)="selectCompany(child.id)" class="footer-link" [class.active]="selectedCompany?.id === child.id">
-                    {{ getCompanyName(child) }}
-                  </a>
-                </li>
-              }
-            } @else {
-              <li>
-                <a (click)="selectCompany(company.id)" class="footer-link" [class.active]="selectedCompany?.id === company.id">
-                  {{ getCompanyName(company) }}
-                </a>
-              </li>
-            }
-          }
-        </ul>
-      </div>
+      <!-- Column 1: Selected company name -->
+      @if (selectedCompany) {
+        <div class="footer-col">
+          <h5 class="footer-title">{{ getCompanyName(selectedCompany) }}</h5>
+        </div>
+      }
 
       <!-- Column 2: Operating Hours -->
       <div class="footer-col">
@@ -55,17 +38,15 @@
             <div class="spinner"></div>
           </div>
         } @else {
-          <ul class="footer-links">
+          <div class="contact-icons">
             @for (contact of contacts; track contact.id) {
-              <li>
-                <a [href]="getContactHref(contact)" [target]="isExternalLink(contact) ? '_blank' : '_self'" rel="noopener"
-                  class="footer-link" [title]="contact.value" (click)="onContactClick($event, contact)">
-                  <i class="bi" [ngClass]="contact.icon"></i>
-                  <span>{{ getDisplayValue(contact) }}</span>
-                </a>
-              </li>
+              <a [href]="getContactHref(contact)" [target]="isExternalLink(contact) ? '_blank' : '_self'" rel="noopener"
+                class="contact-icon-btn" [title]="contact.value" (click)="onContactClick($event, contact)"
+                [attr.aria-label]="contact.value">
+                <i class="bi" [ngClass]="contact.icon"></i>
+              </a>
             }
-          </ul>
+          </div>
         }
       </div>
 

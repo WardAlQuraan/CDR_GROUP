@@ -4,12 +4,7 @@
 
   position: relative;
   padding: 72px 0 64px;
-  background:
-    radial-gradient(900px 360px at 8% -10%, color-mix(in srgb, var(--brand-primary) 35%, transparent), transparent 60%),
-    radial-gradient(900px 380px at 110% 110%, color-mix(in srgb, var(--brand-secondary) 30%, transparent), transparent 60%),
-    linear-gradient(135deg,
-      color-mix(in srgb, var(--brand-primary) 14%, #ffffff) 0%,
-      color-mix(in srgb, var(--brand-secondary) 14%, #ffffff) 100%);
+  background: transparent;
   overflow: hidden;
   isolation: isolate;
   color: #1f2937;
@@ -49,7 +44,11 @@
     font-size: 2.25rem;
     font-weight: 900;
     letter-spacing: -0.025em;
-    color: #0f172a;
+    background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
     line-height: 1.15;
     margin-bottom: 0.5rem;
   }
@@ -201,6 +200,10 @@
     }
 
     .distinguish-title {
+      background: none;
+      -webkit-background-clip: initial;
+      background-clip: initial;
+      -webkit-text-fill-color: #ffffff;
       color: #ffffff;
       text-shadow: 0 2px 14px rgba(0, 0, 0, 0.22);
       transform: translateY(-2px);
@@ -228,9 +231,13 @@
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.25;
-  color: #0f172a;
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
   text-align: center;
-  transition: color 0.5s ease, text-shadow 0.5s ease, transform 0.5s ease;
+  transition: color 0.5s ease, text-shadow 0.5s ease, transform 0.5s ease, -webkit-text-fill-color 0.5s ease;
 }
 
 .distinguish-description {

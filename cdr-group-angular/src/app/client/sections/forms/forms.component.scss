@@ -3,12 +3,7 @@
   --brand-secondary: #FD1D1D;
 
   position: relative;
-  background:
-    radial-gradient(900px 360px at 8% -10%, color-mix(in srgb, var(--brand-primary) 55%, transparent), transparent 60%),
-    radial-gradient(900px 380px at 110% 110%, color-mix(in srgb, var(--brand-secondary) 50%, transparent), transparent 60%),
-    linear-gradient(135deg,
-      color-mix(in srgb, var(--brand-primary) 35%, #0b0612) 0%,
-      color-mix(in srgb, var(--brand-secondary) 35%, #0b0612) 100%);
+  background: transparent;
   padding: 56px 0 52px;
   overflow: hidden;
   isolation: isolate;

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using cdr_group.API.Controllers.Base;
 using cdr_group.Contracts.DTOs.Common;
@@ -65,6 +66,15 @@ namespace cdr_group.API.Controllers.CompanyControllers
         public override async Task<ActionResult<ApiResponse>> Delete(Guid id)
         {
             return await base.Delete(id);
+        }
+
+        [HttpPost("{id:guid}/image")]
+        [HasPermission(Permissions.CompanyBranches.Update)]
+        [Consumes("multipart/form-data")]
+        public async Task<ActionResult<ApiResponse<string>>> UploadImage(Guid id, IFormFile file)
+        {
+            var url = await Service.UploadImageAsync(id, file);
+            return Ok(ApiResponse<string>.SuccessResponse(url, $"{EntityName} image uploaded successfully."));
         }
     }
 }

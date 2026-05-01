@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { BaseService } from './base.service';
 import { ApiResponse } from '../models/api-response.model';
 import { PagedResult } from '../models/paged.model';
@@ -32,5 +33,13 @@ export class CompanyBranchesService extends BaseService<CompanyBranchDto, Create
 
   getByCompanyId(companyId: string): Observable<ApiResponse<CompanyBranchDto[]>> {
     return this.get<CompanyBranchDto[]>(`/by-company/${companyId}`);
+  }
+
+  uploadImage(id: string, file: File): Observable<ApiResponse<string>> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<ApiResponse<string>>(`${this.getApiUrl()}/${id}/image`, formData).pipe(
+      catchError(error => this.handleError(error))
+    );
   }
 }

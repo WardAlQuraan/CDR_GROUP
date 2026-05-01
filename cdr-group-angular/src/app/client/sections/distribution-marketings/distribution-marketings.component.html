@@ -5,9 +5,12 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center mb-3">
-          <span class="section-eyebrow">{{ 'distributionMarketings.eyebrow' | translate }}</span>
           <h2 class="section-title">{{ 'distributionMarketings.title' | translate }}</h2>
-          <p class="section-subtitle">{{ 'distributionMarketings.subtitle' | translate }}</p>
+          @if (safeSectionTitle) {
+            <p class="section-subtitle" [innerHTML]="safeSectionTitle"></p>
+          } @else {
+            <p class="section-subtitle">{{ 'distributionMarketings.subtitle' | translate }}</p>
+          }
         </div>
       </div>
 

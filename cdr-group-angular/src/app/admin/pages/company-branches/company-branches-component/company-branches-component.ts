@@ -9,6 +9,7 @@ import { TranslationService } from '../../../../services/translation.service';
 import { CompanyBranchDto, CompanyBranchPagedRequest } from '../../../../models/company-branch.model';
 import { DataGridConfig, FilterValues } from '../../../../shared/components/data-grid/data-grid.models';
 import { CompanyBranchDialogComponent, CompanyBranchDialogData } from '../company-branch-dialog/company-branch-dialog.component';
+import { CompanyBranchImageDialogComponent, CompanyBranchImageDialogData } from '../company-branch-image-dialog/company-branch-image-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 import { buildSearchPlaceholder } from '../../../../utils/search.utils';
@@ -111,6 +112,13 @@ export class CompanyBranchesComponent implements OnInit {
           onClick: (row) => this.openEditDialog(row)
         },
         {
+          icon: 'image',
+          tooltip: 'admin.companyBranches.uploadImage',
+          permission: Permissions.COMPANY_BRANCHES_UPDATE,
+          color: 'success',
+          onClick: (row) => this.openImageDialog(row)
+        },
+        {
           icon: 'history',
           tooltip: 'admin.auditLogs.history',
           permission: Permissions.AUDIT_LOGS_READ,
@@ -202,6 +210,21 @@ export class CompanyBranchesComponent implements OnInit {
     const dialogData: CompanyBranchDialogData = { mode: 'edit', companyId: this.companyId, branch };
     const dialogRef = this.dialog.open(CompanyBranchDialogComponent, {
       width: '600px',
+      data: dialogData,
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadBranches();
+      }
+    });
+  }
+
+  openImageDialog(branch: CompanyBranchDto): void {
+    const dialogData: CompanyBranchImageDialogData = { companyId: this.companyId, branch };
+    const dialogRef = this.dialog.open(CompanyBranchImageDialogComponent, {
+      width: '560px',
       data: dialogData,
       disableClose: true
     });

@@ -49,6 +49,7 @@ import { CompanyPreferencesComponent } from './pages/company-preferences/company
 import { CompanyPreferenceDialogComponent } from './pages/company-preferences/company-preference-dialog/company-preference-dialog.component';
 import { CompanyBranchesComponent } from './pages/company-branches/company-branches-component/company-branches-component';
 import { CompanyBranchDialogComponent } from './pages/company-branches/company-branch-dialog/company-branch-dialog.component';
+import { CompanyBranchImageDialogComponent } from './pages/company-branches/company-branch-image-dialog/company-branch-image-dialog.component';
 import { CompanySuccessReasonsComponent } from './pages/company-success-reasons/company-success-reasons-component/company-success-reasons-component';
 import { CompanySuccessReasonDialogComponent } from './pages/company-success-reasons/company-success-reason-dialog/company-success-reason-dialog.component';
 import { CompanyDistinguishesComponent } from './pages/company-distinguishes/company-distinguishes-component/company-distinguishes-component';
@@ -110,6 +111,7 @@ import { CompanyFinancialClausesRightsDialogComponent } from './pages/company-fi
     CompanyPreferenceDialogComponent,
     CompanyBranchesComponent,
     CompanyBranchDialogComponent,
+    CompanyBranchImageDialogComponent,
     CompanySuccessReasonsComponent,
     CompanySuccessReasonDialogComponent,
     CompanyDistinguishesComponent,

@@ -11,6 +11,8 @@ namespace cdr_group.Domain.Entities
         public string? NickNameAr { get; set; }
         public string? DescriptionEn { get; set; }
         public string? DescriptionAr { get; set; }
+        public string? ImageUrl { get; set; }
+        public string? LocationUrl { get; set; }
         public DateTime OpeningDate { get; set; }
 
         // Company relationship
