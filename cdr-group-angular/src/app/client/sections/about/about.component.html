@@ -14,8 +14,15 @@
             }
             <p class="about-text">{{ companyDescription }}</p>
           }
-          @if (companyStory) {
-            <p class="about-text">{{ companyStory }}</p>
+        
+        }
+
+        @if (safeSecondaryDescriptionTitle || safeSecondaryDescriptionText) {
+          @if (safeSecondaryDescriptionTitle) {
+            <h3 class="about-description-title" [innerHTML]="safeSecondaryDescriptionTitle"></h3>
+          }
+          @if (safeSecondaryDescriptionText) {
+            <p class="about-text" [innerHTML]="safeSecondaryDescriptionText"></p>
           }
         }
 
@@ -50,25 +57,17 @@
       </div>
     </div>
 
-    @if (company && (company.partnersCount > 0 || (company.numberOfEmployees && company.numberOfEmployees > 0))) {
+    @if (safeFirstSection || safeSecondSection) {
       <div class="stats-wrapper">
         <div class="stats-strip">
-          @if (company.partnersCount > 0) {
-            <div class="stat-pill">
-              <i class="bi bi-handshake"></i>
-              <span class="stat-value">{{ company.partnersCount | number }}</span>
-              <span class="stat-text">{{ 'about.trustedPartners' | translate }}</span>
-            </div>
+          @if (safeFirstSection) {
+            <div class="stat-pill" [innerHTML]="safeFirstSection"></div>
           }
-          @if (company.partnersCount > 0 && (company.numberOfEmployees && company.numberOfEmployees > 0)) {
+          @if (safeFirstSection && safeSecondSection) {
             <div class="stat-divider"></div>
           }
-          @if (company.numberOfEmployees && company.numberOfEmployees > 0) {
-            <div class="stat-pill">
-              <i class="bi bi-people-fill"></i>
-              <span class="stat-value">{{ company.numberOfEmployees | number }}</span>
-              <span class="stat-text">{{ 'about.teamMembers' | translate }}</span>
-            </div>
+          @if (safeSecondSection) {
+            <div class="stat-pill" [innerHTML]="safeSecondSection"></div>
           }
         </div>
       </div>

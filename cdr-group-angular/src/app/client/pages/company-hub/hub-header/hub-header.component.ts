@@ -56,12 +56,7 @@ export class HubHeaderComponent implements OnInit {
   }
 
   goBack(): void {
-    const selected = this.companyState.selectedCompany;
-    if (selected?.parentId) {
-      this.router.navigate(['/', selected.parentId, 'group']);
-    } else {
-      this.router.navigate(['/']);
-    }
+    this.router.navigate(['/']);
     this.closeNavbar();
   }
 

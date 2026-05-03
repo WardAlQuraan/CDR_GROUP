@@ -105,6 +105,12 @@ export const Permissions = {
   COMPANY_PREFERENCES_UPDATE: 'company-preferences.update',
   COMPANY_PREFERENCES_DELETE: 'company-preferences.delete',
 
+  // Company Title Descriptions
+  COMPANY_TITLE_DESCRIPTIONS_READ: 'company-title-descriptions.read',
+  COMPANY_TITLE_DESCRIPTIONS_CREATE: 'company-title-descriptions.create',
+  COMPANY_TITLE_DESCRIPTIONS_UPDATE: 'company-title-descriptions.update',
+  COMPANY_TITLE_DESCRIPTIONS_DELETE: 'company-title-descriptions.delete',
+
   // Contact Us
   CONTACTUS_READ: 'contactus.read',
   CONTACTUS_DELETE: 'contactus.delete',
@@ -127,12 +133,6 @@ export const Permissions = {
   COMPANY_BRANCHES_UPDATE: 'company-branches.update',
   COMPANY_BRANCHES_DELETE: 'company-branches.delete',
 
-  // Company Success Reasons
-  COMPANY_SUCCESS_REASONS_READ: 'company-success-reasons.read',
-  COMPANY_SUCCESS_REASONS_CREATE: 'company-success-reasons.create',
-  COMPANY_SUCCESS_REASONS_UPDATE: 'company-success-reasons.update',
-  COMPANY_SUCCESS_REASONS_DELETE: 'company-success-reasons.delete',
-
   // Company Distinguishes
   COMPANY_DISTINGUISHES_READ: 'company-distinguishes.read',
   COMPANY_DISTINGUISHES_CREATE: 'company-distinguishes.create',
@@ -151,12 +151,6 @@ export const Permissions = {
   COMPANY_PRE_CONTRACT_STUDIES_UPDATE: 'company-pre-contract-studies.update',
   COMPANY_PRE_CONTRACT_STUDIES_DELETE: 'company-pre-contract-studies.delete',
 
-  // Company Geographic Expansions
-  COMPANY_GEOGRAPHIC_EXPANSIONS_READ: 'company-geographic-expansions.read',
-  COMPANY_GEOGRAPHIC_EXPANSIONS_CREATE: 'company-geographic-expansions.create',
-  COMPANY_GEOGRAPHIC_EXPANSIONS_UPDATE: 'company-geographic-expansions.update',
-  COMPANY_GEOGRAPHIC_EXPANSIONS_DELETE: 'company-geographic-expansions.delete',
-
   // Company Financial Clauses Rights
   COMPANY_FINANCIAL_CLAUSES_RIGHTS_READ: 'company-financial-clauses-rights.read',
   COMPANY_FINANCIAL_CLAUSES_RIGHTS_CREATE: 'company-financial-clauses-rights.create',
@@ -168,6 +162,12 @@ export const Permissions = {
   COMPANY_PARTNERSHIP_FRANCHISE_MECHANISMS_CREATE: 'company-partnership-franchise-mechanisms.create',
   COMPANY_PARTNERSHIP_FRANCHISE_MECHANISMS_UPDATE: 'company-partnership-franchise-mechanisms.update',
   COMPANY_PARTNERSHIP_FRANCHISE_MECHANISMS_DELETE: 'company-partnership-franchise-mechanisms.delete',
+
+  // Company Client Reaches
+  COMPANY_CLIENT_REACHES_READ: 'company-client-reaches.read',
+  COMPANY_CLIENT_REACHES_CREATE: 'company-client-reaches.create',
+  COMPANY_CLIENT_REACHES_UPDATE: 'company-client-reaches.update',
+  COMPANY_CLIENT_REACHES_DELETE: 'company-client-reaches.delete',
 
   // Reviews
   REVIEWS_READ: 'reviews.read',

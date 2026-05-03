@@ -155,17 +155,18 @@
     "title": "دراسات ما قبل التعاقد",
     "subtitle": "دراسات الجدوى والتحليلات التي نقدمها قبل بدء أي ارتباط"
   },
-  "geographicExpansions": {
-    "title": "التوسعات الجغرافية",
-    "subtitle": "الأسواق التي نعمل فيها اليوم والأسواق التي نتوسع نحوها"
-  },
   "partnershipFranchiseMechanisms": {
     "title": "الشراكة والامتياز",
     "subtitle": "كيف نُنظم الشراكات وفرص الامتياز التجاري"
   },
-  "successReasons": {
-    "title": "لماذا تختارنا",
-    "subtitle": "الأسباب التي تقود نجاحنا"
+  "clientReaches": {
+    "title": "إنجازاتنا",
+    "subtitle": "العلامات التجارية التي عملنا معها والجماهير التي وصلنا إليها سويًا",
+    "million": "مليون"
+  },
+  "subCompanies": {
+    "title": "شركاتنا",
+    "subtitle": "استكشف الشركات التي تشكل مجموعتنا"
   },
   "branches": {
     "title": "فروعنا",
@@ -798,13 +799,13 @@
       "backgrounds": "الخلفيات",
       "forms": "النماذج",
       "preferences": "التفضيلات",
-      "successReasons": "أسباب النجاح",
+      "titleDescriptions": "أقسام العنوان والوصف",
       "distinguishes": "ما يميزنا",
       "distributionMarketings": "التوزيع والتسويق",
       "preContractStudies": "دراسات ما قبل التعاقد",
-      "geographicExpansions": "التوسعات الجغرافية",
       "partnershipFranchiseMechanisms": "الشراكة والامتياز",
       "financialClausesRights": "الشروط المالية والحقوق",
+      "clientReaches": "توسع العملاء",
       "chooseAnother": "اختر صورة أخرى",
       "logoUploaded": "تم رفع الشعار بنجاح",
       "basicInfo": "المعلومات الأساسية",
@@ -1079,42 +1080,92 @@
         "descriptionAr": "أدخل الوصف بالعربية"
       }
     },
-    "companyGeographicExpansions": {
-      "title": "التوسعات الجغرافية",
-      "subtitle": "إدارة خطط التوسع الجغرافي للشركة",
-      "addExpansion": "إضافة توسع",
-      "createExpansion": "إنشاء توسع",
-      "editExpansion": "تعديل توسع",
-      "deleteExpansion": "حذف توسع",
-      "expansionInfo": "معلومات التوسع",
-      "expansionTitle": "العنوان",
+    "companyClientReaches": {
+      "title": "توسع العملاء",
+      "subtitle": "إدارة مؤشرات وصول العملاء وشعاراتهم",
+      "addReach": "إضافة عميل",
+      "createReach": "إنشاء عميل",
+      "editReach": "تعديل العميل",
+      "deleteReach": "حذف العميل",
+      "reachInfo": "معلومات وصول العميل",
+      "clientName": "اسم العميل",
+      "clientNameEn": "اسم العميل (إنجليزي)",
+      "clientNameAr": "اسم العميل (عربي)",
+      "clientLogo": "شعار العميل",
+      "uploadLogo": "رفع الشعار",
+      "selectLogo": "رفع الشعار",
+      "replaceLogo": "استبدال الشعار",
+      "chooseAnother": "اختيار آخر",
+      "logoUploaded": "تم رفع شعار العميل بنجاح",
+      "reach": "الوصول",
       "description": "الوصف",
-      "titleEn": "العنوان (إنجليزي)",
-      "titleAr": "العنوان (عربي)",
       "descriptionEn": "الوصف (إنجليزي)",
       "descriptionAr": "الوصف (عربي)",
       "created": "تاريخ الإنشاء",
       "edit": "تعديل",
       "delete": "حذف",
-      "confirmDelete": "هل أنت متأكد من حذف هذا التوسع؟",
-      "expansionCreated": "تم إنشاء التوسع بنجاح",
-      "expansionUpdated": "تم تحديث التوسع بنجاح",
-      "expansionDeleted": "تم حذف التوسع بنجاح",
+      "confirmDelete": "هل أنت متأكد من حذف هذا العميل؟",
+      "reachCreated": "تم إنشاء العميل بنجاح",
+      "reachUpdated": "تم تحديث العميل بنجاح",
+      "reachDeleted": "تم حذف العميل بنجاح",
       "errors": {
-        "loadFailed": "فشل تحميل التوسعات",
-        "createFailed": "فشل إنشاء التوسع",
-        "updateFailed": "فشل تحديث التوسع",
-        "deleteFailed": "فشل حذف التوسع",
-        "titleEnRequired": "العنوان (إنجليزي) مطلوب",
-        "titleArRequired": "العنوان (عربي) مطلوب",
+        "loadFailed": "فشل تحميل العملاء",
+        "createFailed": "فشل إنشاء العميل",
+        "updateFailed": "فشل تحديث العميل",
+        "deleteFailed": "فشل حذف العميل",
+        "clientNameEnRequired": "اسم العميل بالإنجليزية مطلوب",
+        "clientNameArRequired": "اسم العميل بالعربية مطلوب",
+        "reachRequired": "حقل الوصول مطلوب",
+        "logoRequired": "شعار العميل مطلوب",
+        "nameMaxLength": "يجب ألا يتجاوز 200 حرف",
+        "descriptionMaxLength": "يجب ألا يتجاوز الوصف 2000 حرف"
+      },
+      "placeholders": {
+        "clientNameEn": "أدخل اسم العميل بالإنجليزية",
+        "clientNameAr": "أدخل اسم العميل بالعربية",
+        "reach": "مثل: مليون+، عالمي، محلي",
+        "descriptionEn": "وصف اختياري بالإنجليزية",
+        "descriptionAr": "وصف اختياري بالعربية"
+      }
+    },
+    "companyTitleDescriptions": {
+      "title": "أقسام العنوان والوصف",
+      "subtitle": "إدارة العناوين والأوصاف ثنائية اللغة المستخدمة في الأقسام عبر الكود",
+      "addItem": "إضافة قسم",
+      "createItem": "إنشاء قسم",
+      "editItem": "تعديل القسم",
+      "deleteItem": "حذف القسم",
+      "itemInfo": "معلومات القسم",
+      "code": "الكود",
+      "itemTitle": "العنوان",
+      "titleEn": "العنوان (إنجليزي)",
+      "titleAr": "العنوان (عربي)",
+      "description": "الوصف",
+      "descriptionEn": "الوصف (إنجليزي)",
+      "descriptionAr": "الوصف (عربي)",
+      "created": "تاريخ الإنشاء",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "confirmDelete": "هل أنت متأكد من حذف هذا القسم؟",
+      "itemCreated": "تم إنشاء القسم بنجاح",
+      "itemUpdated": "تم تحديث القسم بنجاح",
+      "itemDeleted": "تم حذف القسم بنجاح",
+      "errors": {
+        "loadFailed": "فشل تحميل الأقسام",
+        "createFailed": "فشل إنشاء القسم",
+        "updateFailed": "فشل تحديث القسم",
+        "deleteFailed": "فشل حذف القسم",
+        "codeRequired": "الكود مطلوب",
+        "codeMaxLength": "يجب ألا يتجاوز الكود 100 حرف",
         "titleMaxLength": "يجب ألا يتجاوز العنوان 500 حرف",
         "descriptionMaxLength": "يجب ألا يتجاوز الوصف 2000 حرف"
       },
       "placeholders": {
-        "titleEn": "أدخل العنوان بالإنجليزية",
-        "titleAr": "أدخل العنوان بالعربية",
-        "descriptionEn": "أدخل الوصف بالإنجليزية",
-        "descriptionAr": "أدخل الوصف بالعربية"
+        "code": "مثل: ABOUT_HERO_SECTION",
+        "titleEn": "عنوان اختياري بالإنجليزية",
+        "titleAr": "عنوان اختياري بالعربية",
+        "descriptionEn": "وصف اختياري بالإنجليزية",
+        "descriptionAr": "وصف اختياري بالعربية"
       }
     },
     "companyPreContractStudies": {
@@ -1228,38 +1279,6 @@
         "titleAr": "أدخل العنوان بالعربية",
         "descriptionEn": "أدخل الوصف بالإنجليزية",
         "descriptionAr": "أدخل الوصف بالعربية"
-      }
-    },
-    "companySuccessReasons": {
-      "title": "أسباب النجاح",
-      "subtitle": "إدارة أسباب نجاح الشركة",
-      "addReason": "إضافة سبب",
-      "createReason": "إنشاء سبب",
-      "editReason": "تعديل سبب",
-      "deleteReason": "حذف سبب",
-      "reasonInfo": "معلومات السبب",
-      "reason": "السبب",
-      "reasonEn": "السبب (إنجليزي)",
-      "reasonAr": "السبب (عربي)",
-      "created": "تاريخ الإنشاء",
-      "edit": "تعديل",
-      "delete": "حذف",
-      "confirmDelete": "هل أنت متأكد من حذف هذا السبب؟",
-      "reasonCreated": "تم إنشاء السبب بنجاح",
-      "reasonUpdated": "تم تحديث السبب بنجاح",
-      "reasonDeleted": "تم حذف السبب بنجاح",
-      "errors": {
-        "loadFailed": "فشل تحميل أسباب النجاح",
-        "createFailed": "فشل إنشاء السبب",
-        "updateFailed": "فشل تحديث السبب",
-        "deleteFailed": "فشل حذف السبب",
-        "reasonEnRequired": "السبب (إنجليزي) مطلوب",
-        "reasonArRequired": "السبب (عربي) مطلوب",
-        "reasonMaxLength": "يجب ألا يتجاوز السبب 1000 حرف"
-      },
-      "placeholders": {
-        "reasonEn": "أدخل السبب بالإنجليزية",
-        "reasonAr": "أدخل السبب بالعربية"
       }
     },
     "companyBranches": {

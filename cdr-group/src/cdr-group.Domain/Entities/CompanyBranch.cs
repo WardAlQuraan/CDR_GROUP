@@ -13,6 +13,9 @@ namespace cdr_group.Domain.Entities
         public string? DescriptionAr { get; set; }
         public string? ImageUrl { get; set; }
         public string? LocationUrl { get; set; }
+        public string? Address { get; set; }
+        public double? Latitude { get; set; }
+        public double? Longitude { get; set; }
         public DateTime OpeningDate { get; set; }
 
         // Company relationship

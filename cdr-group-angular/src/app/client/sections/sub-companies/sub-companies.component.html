@@ -1,0 +1,35 @@
+@if (hasChildren) {
+  <section class="sub-companies-section" id="section_sub_companies"
+    [style.--brand-primary]="primaryColorValue"
+    [style.--brand-secondary]="secondaryColorValue">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-3">
+          <h2 class="section-title">{{ 'subCompanies.title' | translate }}</h2>
+          <p class="section-subtitle">{{ 'subCompanies.subtitle' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="children-row">
+        @for (child of children; track child.id; let i = $index) {
+          <button
+            type="button"
+            class="child-card"
+            [style.animation-delay.ms]="i * 70"
+            (click)="selectCompany(child)"
+            [title]="getCompanyName(child)"
+            [style.--accent]="child.primaryColor || primaryColorValue">
+            <div class="child-orb">
+              <span class="child-ring"></span>
+              <img [src]="getLogoUrl(child)" [alt]="getCompanyName(child)" />
+            </div>
+            <div class="child-name">{{ getCompanyName(child) }}</div>
+            @if (getCompanyDescription(child); as description) {
+              <p class="child-description" (click)="$event.stopPropagation()">{{ description }}</p>
+            }
+          </button>
+        }
+      </div>
+    </div>
+  </section>
+}

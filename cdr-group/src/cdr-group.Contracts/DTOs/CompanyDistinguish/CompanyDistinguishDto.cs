@@ -7,8 +7,8 @@ namespace cdr_group.Contracts.DTOs.CompanyDistinguish
     {
         [ExcelIgnore]
         public Guid Id { get; set; }
-        public string TitleEn { get; set; } = string.Empty;
-        public string TitleAr { get; set; } = string.Empty;
+        public string? TitleEn { get; set; }
+        public string? TitleAr { get; set; }
         public string? DescriptionEn { get; set; }
         public string? DescriptionAr { get; set; }
 
@@ -25,13 +25,11 @@ namespace cdr_group.Contracts.DTOs.CompanyDistinguish
 
     public class CreateCompanyDistinguishDto
     {
-        [Required]
         [StringLength(500)]
-        public string TitleEn { get; set; } = string.Empty;
+        public string? TitleEn { get; set; }
 
-        [Required]
         [StringLength(500)]
-        public string TitleAr { get; set; } = string.Empty;
+        public string? TitleAr { get; set; }
 
         [StringLength(2000)]
         public string? DescriptionEn { get; set; }

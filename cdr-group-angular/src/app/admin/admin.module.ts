@@ -50,16 +50,12 @@ import { CompanyPreferenceDialogComponent } from './pages/company-preferences/co
 import { CompanyBranchesComponent } from './pages/company-branches/company-branches-component/company-branches-component';
 import { CompanyBranchDialogComponent } from './pages/company-branches/company-branch-dialog/company-branch-dialog.component';
 import { CompanyBranchImageDialogComponent } from './pages/company-branches/company-branch-image-dialog/company-branch-image-dialog.component';
-import { CompanySuccessReasonsComponent } from './pages/company-success-reasons/company-success-reasons-component/company-success-reasons-component';
-import { CompanySuccessReasonDialogComponent } from './pages/company-success-reasons/company-success-reason-dialog/company-success-reason-dialog.component';
 import { CompanyDistinguishesComponent } from './pages/company-distinguishes/company-distinguishes-component/company-distinguishes-component';
 import { CompanyDistinguishDialogComponent } from './pages/company-distinguishes/company-distinguish-dialog/company-distinguish-dialog.component';
 import { CompanyDistributionMarketingsComponent } from './pages/company-distribution-marketings/company-distribution-marketings-component/company-distribution-marketings-component';
 import { CompanyDistributionMarketingDialogComponent } from './pages/company-distribution-marketings/company-distribution-marketing-dialog/company-distribution-marketing-dialog.component';
 import { CompanyPreContractStudiesComponent } from './pages/company-pre-contract-studies/company-pre-contract-studies-component/company-pre-contract-studies-component';
 import { CompanyPreContractStudyDialogComponent } from './pages/company-pre-contract-studies/company-pre-contract-study-dialog/company-pre-contract-study-dialog.component';
-import { CompanyGeographicExpansionsComponent } from './pages/company-geographic-expansions/company-geographic-expansions-component/company-geographic-expansions-component';
-import { CompanyGeographicExpansionDialogComponent } from './pages/company-geographic-expansions/company-geographic-expansion-dialog/company-geographic-expansion-dialog.component';
 import { CompanyPartnershipFranchiseMechanismsComponent } from './pages/company-partnership-franchise-mechanisms/company-partnership-franchise-mechanisms-component/company-partnership-franchise-mechanisms-component';
 import { CompanyPartnershipFranchiseMechanismDialogComponent } from './pages/company-partnership-franchise-mechanisms/company-partnership-franchise-mechanism-dialog/company-partnership-franchise-mechanism-dialog.component';
 import { ReviewsComponent } from './pages/reviews/reviews-component/reviews-component';
@@ -70,6 +66,11 @@ import { PartnersComponent } from './pages/partners/partners-component/partners-
 import { PartnerDialogComponent } from './pages/partners/partner-dialog/partner-dialog.component';
 import { CompanyFinancialClausesRightsComponent } from './pages/company-financial-clauses-rights/company-financial-clauses-rights-component/company-financial-clauses-rights-component';
 import { CompanyFinancialClausesRightsDialogComponent } from './pages/company-financial-clauses-rights/company-financial-clauses-rights-dialog/company-financial-clauses-rights-dialog.component';
+import { CompanyClientReachesComponent } from './pages/company-client-reaches/company-client-reaches-component/company-client-reaches-component';
+import { CompanyClientReachDialogComponent } from './pages/company-client-reaches/company-client-reach-dialog/company-client-reach-dialog.component';
+import { CompanyClientReachLogoDialogComponent } from './pages/company-client-reaches/company-client-reach-logo-dialog/company-client-reach-logo-dialog.component';
+import { CompanyTitleDescriptionsComponent } from './pages/company-title-descriptions/company-title-descriptions-component/company-title-descriptions-component';
+import { CompanyTitleDescriptionDialogComponent } from './pages/company-title-descriptions/company-title-description-dialog/company-title-description-dialog.component';
 
 @NgModule({
   declarations: [
@@ -112,20 +113,21 @@ import { CompanyFinancialClausesRightsDialogComponent } from './pages/company-fi
     CompanyBranchesComponent,
     CompanyBranchDialogComponent,
     CompanyBranchImageDialogComponent,
-    CompanySuccessReasonsComponent,
-    CompanySuccessReasonDialogComponent,
     CompanyDistinguishesComponent,
     CompanyDistinguishDialogComponent,
     CompanyDistributionMarketingsComponent,
     CompanyDistributionMarketingDialogComponent,
     CompanyPreContractStudiesComponent,
     CompanyPreContractStudyDialogComponent,
-    CompanyGeographicExpansionsComponent,
-    CompanyGeographicExpansionDialogComponent,
     CompanyPartnershipFranchiseMechanismsComponent,
     CompanyPartnershipFranchiseMechanismDialogComponent,
     CompanyFinancialClausesRightsComponent,
     CompanyFinancialClausesRightsDialogComponent,
+    CompanyClientReachesComponent,
+    CompanyClientReachDialogComponent,
+    CompanyClientReachLogoDialogComponent,
+    CompanyTitleDescriptionsComponent,
+    CompanyTitleDescriptionDialogComponent,
     ReviewsComponent,
     ReviewDialogComponent,
     ComplaintsComponent,

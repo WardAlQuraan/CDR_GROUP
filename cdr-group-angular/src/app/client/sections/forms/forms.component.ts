@@ -1,5 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges, effect, inject } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CompanyFormsService } from '../../../services/company-forms.service';
+import { CompanyPreferencesService } from '../../../services/company-preferences.service';
 import { CompanyStateService } from '../../../services/company-state.service';
 import { TranslationService } from '../../../services/translation.service';
 import { CompanyFormDto } from '../../../models/company-form.model';
@@ -14,9 +16,16 @@ export class FormsComponent implements OnChanges {
   @Input() companyId = '';
 
   private companyState = inject(CompanyStateService);
+  private companyPreferencesService = inject(CompanyPreferencesService);
+  private sanitizer = inject(DomSanitizer);
 
   forms: CompanyFormDto[] = [];
   loading = false;
+
+  private titleEn = '';
+  private titleAr = '';
+  private subtitleEn = '';
+  private subtitleAr = '';
 
   constructor(
     private companyFormsService: CompanyFormsService,
@@ -40,6 +49,8 @@ export class FormsComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['companyId'] && this.companyId) {
       this.loadForms();
+      this.loadTitle();
+      this.loadSubtitle();
     }
   }
 
@@ -49,6 +60,58 @@ export class FormsComponent implements OnChanges {
 
   get hasForms(): boolean {
     return this.forms.length > 0;
+  }
+
+  get sectionTitle(): string {
+    return (this.isArabic ? this.titleAr : this.titleEn) || '';
+  }
+
+  get safeSectionTitle(): SafeHtml | null {
+    return this.sectionTitle ? this.sanitizer.bypassSecurityTrustHtml(this.sectionTitle) : null;
+  }
+
+  get sectionSubtitle(): string {
+    return (this.isArabic ? this.subtitleAr : this.subtitleEn) || '';
+  }
+
+  get safeSectionSubtitle(): SafeHtml | null {
+    return this.sectionSubtitle ? this.sanitizer.bypassSecurityTrustHtml(this.sectionSubtitle) : null;
+  }
+
+  private loadTitle(): void {
+    this.titleEn = '';
+    this.titleAr = '';
+    if (!this.companyId) return;
+    this.companyPreferencesService
+      .getByCompanyAndCode(this.companyId, 'COMPANY_FORMS_TITLE')
+      .subscribe({
+        next: (response) => {
+          if (response.success && response.data?.id) {
+            this.titleEn = response.data.valueEn ?? '';
+            this.titleAr = response.data.valueAr ?? '';
+            this.cdr.markForCheck();
+          }
+        },
+        error: () => {}
+      });
+  }
+
+  private loadSubtitle(): void {
+    this.subtitleEn = '';
+    this.subtitleAr = '';
+    if (!this.companyId) return;
+    this.companyPreferencesService
+      .getByCompanyAndCode(this.companyId, 'COMPANY_FORMS_DESCRIPTION')
+      .subscribe({
+        next: (response) => {
+          if (response.success && response.data?.id) {
+            this.subtitleEn = response.data.valueEn ?? '';
+            this.subtitleAr = response.data.valueAr ?? '';
+            this.cdr.markForCheck();
+          }
+        },
+        error: () => {}
+      });
   }
 
   getFormName(form: CompanyFormDto): string {

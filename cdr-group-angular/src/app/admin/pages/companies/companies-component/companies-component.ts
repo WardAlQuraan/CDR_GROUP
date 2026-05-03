@@ -183,12 +183,12 @@ export class CompaniesComponent implements OnInit {
           onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'preferences'])
         },
         {
-          icon: 'emoji_events',
-          tooltip: 'admin.companies.successReasons',
-          permission: Permissions.COMPANY_SUCCESS_REASONS_READ,
+          icon: 'subtitles',
+          tooltip: 'admin.companies.titleDescriptions',
+          permission: Permissions.COMPANY_TITLE_DESCRIPTIONS_READ,
           color: 'accent',
           primary: false,
-          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'success-reasons'])
+          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'title-descriptions'])
         },
         {
           icon: 'workspace_premium',
@@ -215,20 +215,20 @@ export class CompaniesComponent implements OnInit {
           onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'financial-clauses-rights'])
         },
         {
+          icon: 'handshake',
+          tooltip: 'admin.companies.clientReaches',
+          permission: Permissions.COMPANY_CLIENT_REACHES_READ,
+          color: 'accent',
+          primary: false,
+          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'client-reaches'])
+        },
+        {
           icon: 'assessment',
           tooltip: 'admin.companies.preContractStudies',
           permission: Permissions.COMPANY_PRE_CONTRACT_STUDIES_READ,
           color: 'accent',
           primary: false,
           onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'pre-contract-studies'])
-        },
-        {
-          icon: 'public',
-          tooltip: 'admin.companies.geographicExpansions',
-          permission: Permissions.COMPANY_GEOGRAPHIC_EXPANSIONS_READ,
-          color: 'accent',
-          primary: false,
-          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'geographic-expansions'])
         },
         {
           icon: 'handshake',

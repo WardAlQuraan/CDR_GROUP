@@ -132,13 +132,7 @@ namespace cdr_group.Persistence.Data
             var companyBranchesUpdateId = Guid.Parse("bbccddee-3333-3333-3333-cccccccccccc");
             var companyBranchesDeleteId = Guid.Parse("bbccddee-3333-3333-3333-dddddddddddd");
 
-            // CompanySuccessReason Permission IDs
-            var companySuccessReasonsReadId = Guid.Parse("bbccddee-4444-4444-4444-aaaaaaaaaaaa");
-            var companySuccessReasonsCreateId = Guid.Parse("bbccddee-4444-4444-4444-bbbbbbbbbbbb");
-            var companySuccessReasonsUpdateId = Guid.Parse("bbccddee-4444-4444-4444-cccccccccccc");
-            var companySuccessReasonsDeleteId = Guid.Parse("bbccddee-4444-4444-4444-dddddddddddd");
-
-            // CompanyDistinguish Permission IDs
+// CompanyDistinguish Permission IDs
             var companyDistinguishesReadId = Guid.Parse("bbccddee-5555-5555-5555-aaaaaaaaaaaa");
             var companyDistinguishesCreateId = Guid.Parse("bbccddee-5555-5555-5555-bbbbbbbbbbbb");
             var companyDistinguishesUpdateId = Guid.Parse("bbccddee-5555-5555-5555-cccccccccccc");
@@ -156,13 +150,7 @@ namespace cdr_group.Persistence.Data
             var companyPreContractStudiesUpdateId = Guid.Parse("bbccddee-7777-7777-7777-cccccccccccc");
             var companyPreContractStudiesDeleteId = Guid.Parse("bbccddee-7777-7777-7777-dddddddddddd");
 
-            // CompanyGeographicExpansion Permission IDs
-            var companyGeographicExpansionsReadId = Guid.Parse("bbccddee-8888-8888-8888-aaaaaaaaaaaa");
-            var companyGeographicExpansionsCreateId = Guid.Parse("bbccddee-8888-8888-8888-bbbbbbbbbbbb");
-            var companyGeographicExpansionsUpdateId = Guid.Parse("bbccddee-8888-8888-8888-cccccccccccc");
-            var companyGeographicExpansionsDeleteId = Guid.Parse("bbccddee-8888-8888-8888-dddddddddddd");
-
-            // CompanyPartnershipFranchiseMechanism Permission IDs
+// CompanyPartnershipFranchiseMechanism Permission IDs
             var companyPartnershipFranchiseMechanismsReadId = Guid.Parse("bbccddee-9999-9999-9999-aaaaaaaaaaaa");
             var companyPartnershipFranchiseMechanismsCreateId = Guid.Parse("bbccddee-9999-9999-9999-bbbbbbbbbbbb");
             var companyPartnershipFranchiseMechanismsUpdateId = Guid.Parse("bbccddee-9999-9999-9999-cccccccccccc");
@@ -173,6 +161,18 @@ namespace cdr_group.Persistence.Data
             var companyFinancialClausesRightsCreateId = Guid.Parse("ccddeeff-1111-1111-1111-bbbbbbbbbbbb");
             var companyFinancialClausesRightsUpdateId = Guid.Parse("ccddeeff-1111-1111-1111-cccccccccccc");
             var companyFinancialClausesRightsDeleteId = Guid.Parse("ccddeeff-1111-1111-1111-dddddddddddd");
+
+            // CompanyClientReach Permission IDs
+            var companyClientReachesReadId = Guid.Parse("ccddeeff-2222-2222-2222-aaaaaaaaaaaa");
+            var companyClientReachesCreateId = Guid.Parse("ccddeeff-2222-2222-2222-bbbbbbbbbbbb");
+            var companyClientReachesUpdateId = Guid.Parse("ccddeeff-2222-2222-2222-cccccccccccc");
+            var companyClientReachesDeleteId = Guid.Parse("ccddeeff-2222-2222-2222-dddddddddddd");
+
+            // CompanyTitleDescription Permission IDs
+            var companyTitleDescriptionsReadId = Guid.Parse("ccddeeff-3333-3333-3333-aaaaaaaaaaaa");
+            var companyTitleDescriptionsCreateId = Guid.Parse("ccddeeff-3333-3333-3333-bbbbbbbbbbbb");
+            var companyTitleDescriptionsUpdateId = Guid.Parse("ccddeeff-3333-3333-3333-cccccccccccc");
+            var companyTitleDescriptionsDeleteId = Guid.Parse("ccddeeff-3333-3333-3333-dddddddddddd");
 
             // Company IDs
             var cdrGroupCompanyId = Guid.Parse("aabbccdd-aabb-aabb-aabb-aabbccddeeff");
@@ -312,12 +312,7 @@ namespace cdr_group.Persistence.Data
                 new Permission { Id = companyBranchesCreateId, Name = PermissionConstants.CompanyBranches.Create, Description = "Create company branches", Module = "CompanyBranches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = companyBranchesUpdateId, Name = PermissionConstants.CompanyBranches.Update, Description = "Update company branches", Module = "CompanyBranches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = companyBranchesDeleteId, Name = PermissionConstants.CompanyBranches.Delete, Description = "Delete company branches", Module = "CompanyBranches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                // CompanySuccessReason permissions
-                new Permission { Id = companySuccessReasonsReadId, Name = PermissionConstants.CompanySuccessReasons.Read, Description = "View company success reasons", Module = "CompanySuccessReasons", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                new Permission { Id = companySuccessReasonsCreateId, Name = PermissionConstants.CompanySuccessReasons.Create, Description = "Create company success reasons", Module = "CompanySuccessReasons", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                new Permission { Id = companySuccessReasonsUpdateId, Name = PermissionConstants.CompanySuccessReasons.Update, Description = "Update company success reasons", Module = "CompanySuccessReasons", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                new Permission { Id = companySuccessReasonsDeleteId, Name = PermissionConstants.CompanySuccessReasons.Delete, Description = "Delete company success reasons", Module = "CompanySuccessReasons", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                // CompanyDistinguish permissions
+// CompanyDistinguish permissions
                 new Permission { Id = companyDistinguishesReadId, Name = PermissionConstants.CompanyDistinguishes.Read, Description = "View company distinguishes", Module = "CompanyDistinguishes", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = companyDistinguishesCreateId, Name = PermissionConstants.CompanyDistinguishes.Create, Description = "Create company distinguishes", Module = "CompanyDistinguishes", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = companyDistinguishesUpdateId, Name = PermissionConstants.CompanyDistinguishes.Update, Description = "Update company distinguishes", Module = "CompanyDistinguishes", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
@@ -332,12 +327,7 @@ namespace cdr_group.Persistence.Data
                 new Permission { Id = companyPreContractStudiesCreateId, Name = PermissionConstants.CompanyPreContractStudies.Create, Description = "Create company pre-contract studies", Module = "CompanyPreContractStudies", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = companyPreContractStudiesUpdateId, Name = PermissionConstants.CompanyPreContractStudies.Update, Description = "Update company pre-contract studies", Module = "CompanyPreContractStudies", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = companyPreContractStudiesDeleteId, Name = PermissionConstants.CompanyPreContractStudies.Delete, Description = "Delete company pre-contract studies", Module = "CompanyPreContractStudies", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                // CompanyGeographicExpansion permissions
-                new Permission { Id = companyGeographicExpansionsReadId, Name = PermissionConstants.CompanyGeographicExpansions.Read, Description = "View company geographic expansions", Module = "CompanyGeographicExpansions", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                new Permission { Id = companyGeographicExpansionsCreateId, Name = PermissionConstants.CompanyGeographicExpansions.Create, Description = "Create company geographic expansions", Module = "CompanyGeographicExpansions", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                new Permission { Id = companyGeographicExpansionsUpdateId, Name = PermissionConstants.CompanyGeographicExpansions.Update, Description = "Update company geographic expansions", Module = "CompanyGeographicExpansions", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                new Permission { Id = companyGeographicExpansionsDeleteId, Name = PermissionConstants.CompanyGeographicExpansions.Delete, Description = "Delete company geographic expansions", Module = "CompanyGeographicExpansions", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                // CompanyPartnershipFranchiseMechanism permissions
+// CompanyPartnershipFranchiseMechanism permissions
                 new Permission { Id = companyPartnershipFranchiseMechanismsReadId, Name = PermissionConstants.CompanyPartnershipFranchiseMechanisms.Read, Description = "View company partnership franchise mechanisms", Module = "CompanyPartnershipFranchiseMechanisms", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = companyPartnershipFranchiseMechanismsCreateId, Name = PermissionConstants.CompanyPartnershipFranchiseMechanisms.Create, Description = "Create company partnership franchise mechanisms", Module = "CompanyPartnershipFranchiseMechanisms", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = companyPartnershipFranchiseMechanismsUpdateId, Name = PermissionConstants.CompanyPartnershipFranchiseMechanisms.Update, Description = "Update company partnership franchise mechanisms", Module = "CompanyPartnershipFranchiseMechanisms", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
@@ -347,6 +337,16 @@ namespace cdr_group.Persistence.Data
                 new Permission { Id = companyFinancialClausesRightsCreateId, Name = PermissionConstants.CompanyFinancialClausesRights.Create, Description = "Create company financial clauses rights", Module = "CompanyFinancialClausesRights", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = companyFinancialClausesRightsUpdateId, Name = PermissionConstants.CompanyFinancialClausesRights.Update, Description = "Update company financial clauses rights", Module = "CompanyFinancialClausesRights", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = companyFinancialClausesRightsDeleteId, Name = PermissionConstants.CompanyFinancialClausesRights.Delete, Description = "Delete company financial clauses rights", Module = "CompanyFinancialClausesRights", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                // CompanyClientReach permissions
+                new Permission { Id = companyClientReachesReadId, Name = PermissionConstants.CompanyClientReaches.Read, Description = "View company client reaches", Module = "CompanyClientReaches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companyClientReachesCreateId, Name = PermissionConstants.CompanyClientReaches.Create, Description = "Create company client reaches", Module = "CompanyClientReaches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companyClientReachesUpdateId, Name = PermissionConstants.CompanyClientReaches.Update, Description = "Update company client reaches", Module = "CompanyClientReaches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companyClientReachesDeleteId, Name = PermissionConstants.CompanyClientReaches.Delete, Description = "Delete company client reaches", Module = "CompanyClientReaches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                // CompanyTitleDescription permissions
+                new Permission { Id = companyTitleDescriptionsReadId, Name = PermissionConstants.CompanyTitleDescriptions.Read, Description = "View company title descriptions", Module = "CompanyTitleDescriptions", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companyTitleDescriptionsCreateId, Name = PermissionConstants.CompanyTitleDescriptions.Create, Description = "Create company title descriptions", Module = "CompanyTitleDescriptions", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companyTitleDescriptionsUpdateId, Name = PermissionConstants.CompanyTitleDescriptions.Update, Description = "Update company title descriptions", Module = "CompanyTitleDescriptions", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companyTitleDescriptionsDeleteId, Name = PermissionConstants.CompanyTitleDescriptions.Delete, Description = "Delete company title descriptions", Module = "CompanyTitleDescriptions", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
             };
 
             modelBuilder.Entity<Permission>().HasData(permissions);

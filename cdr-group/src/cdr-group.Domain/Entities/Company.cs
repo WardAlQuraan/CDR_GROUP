@@ -60,10 +60,7 @@ namespace cdr_group.Domain.Entities
         // Branches for this company
         public virtual ICollection<CompanyBranch> CompanyBranches { get; set; } = new List<CompanyBranch>();
 
-        // Success reasons for this company
-        public virtual ICollection<CompanySuccessReason> CompanySuccessReasons { get; set; } = new List<CompanySuccessReason>();
-
-        // Distinguishes for this company
+// Distinguishes for this company
         public virtual ICollection<CompanyDistinguish> CompanyDistinguishes { get; set; } = new List<CompanyDistinguish>();
 
         // Distribution marketings for this company
@@ -72,13 +69,16 @@ namespace cdr_group.Domain.Entities
         // Pre-contract studies for this company
         public virtual ICollection<CompanyPreContractStudy> CompanyPreContractStudies { get; set; } = new List<CompanyPreContractStudy>();
 
-        // Geographic expansions for this company
-        public virtual ICollection<CompanyGeographicExpansion> CompanyGeographicExpansions { get; set; } = new List<CompanyGeographicExpansion>();
-
         // Partnership / franchise mechanisms for this company
         public virtual ICollection<CompanyPartnershipFranchiseMechanism> CompanyPartnershipFranchiseMechanisms { get; set; } = new List<CompanyPartnershipFranchiseMechanism>();
 
         // Financial clauses & rights for this company
         public virtual ICollection<CompanyFinancialClausesRights> CompanyFinancialClausesRights { get; set; } = new List<CompanyFinancialClausesRights>();
+
+        // Client reaches for this company
+        public virtual ICollection<CompanyClientReach> CompanyClientReaches { get; set; } = new List<CompanyClientReach>();
+
+        // Title/description content blocks for this company
+        public virtual ICollection<CompanyTitleDescription> CompanyTitleDescriptions { get; set; } = new List<CompanyTitleDescription>();
     }
 }

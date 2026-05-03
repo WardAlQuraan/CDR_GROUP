@@ -215,13 +215,13 @@ namespace cdr_group.Persistence.Data
         public DbSet<CompanyForm> CompanyForms { get; set; }
         public DbSet<CompanyPreference> CompanyPreferences { get; set; }
         public DbSet<CompanyBranch> CompanyBranches { get; set; }
-        public DbSet<CompanySuccessReason> CompanySuccessReasons { get; set; }
         public DbSet<CompanyDistinguish> CompanyDistinguishes { get; set; }
         public DbSet<CompanyDistributionMarketing> CompanyDistributionMarketings { get; set; }
         public DbSet<CompanyPreContractStudy> CompanyPreContractStudies { get; set; }
-        public DbSet<CompanyGeographicExpansion> CompanyGeographicExpansions { get; set; }
         public DbSet<CompanyPartnershipFranchiseMechanism> CompanyPartnershipFranchiseMechanisms { get; set; }
         public DbSet<CompanyFinancialClausesRights> CompanyFinancialClausesRights { get; set; }
+        public DbSet<CompanyClientReach> CompanyClientReaches { get; set; }
+        public DbSet<CompanyTitleDescription> CompanyTitleDescriptions { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Country> Countries { get; set; }
@@ -450,6 +450,7 @@ namespace cdr_group.Persistence.Data
                 entity.Property(e => e.DescriptionAr).HasMaxLength(2000);
                 entity.Property(e => e.ImageUrl).HasMaxLength(500);
                 entity.Property(e => e.LocationUrl).HasMaxLength(500);
+                entity.Property(e => e.Address).HasMaxLength(500);
                 entity.Property(e => e.OpeningDate).IsRequired();
 
                 entity.HasOne(e => e.Company)
@@ -465,26 +466,12 @@ namespace cdr_group.Persistence.Data
                     .OnDelete(DeleteBehavior.Restrict);
             });
 
-            // CompanySuccessReason configuration
-            modelBuilder.Entity<CompanySuccessReason>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.ReasonEn).IsRequired().HasMaxLength(1000);
-                entity.Property(e => e.ReasonAr).IsRequired().HasMaxLength(1000);
-
-                entity.HasOne(e => e.Company)
-                    .WithMany(e => e.CompanySuccessReasons)
-                    .HasForeignKey(e => e.CompanyId)
-                    .IsRequired()
-                    .OnDelete(DeleteBehavior.Restrict);
-            });
-
-            // CompanyDistinguish configuration
+// CompanyDistinguish configuration
             modelBuilder.Entity<CompanyDistinguish>(entity =>
             {
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.TitleEn).IsRequired().HasMaxLength(500);
-                entity.Property(e => e.TitleAr).IsRequired().HasMaxLength(500);
+                entity.Property(e => e.TitleEn).HasMaxLength(500);
+                entity.Property(e => e.TitleAr).HasMaxLength(500);
                 entity.Property(e => e.DescriptionEn).HasMaxLength(2000);
                 entity.Property(e => e.DescriptionAr).HasMaxLength(2000);
 
@@ -525,23 +512,7 @@ namespace cdr_group.Persistence.Data
                     .OnDelete(DeleteBehavior.Restrict);
             });
 
-            // CompanyGeographicExpansion configuration
-            modelBuilder.Entity<CompanyGeographicExpansion>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.TitleEn).IsRequired().HasMaxLength(500);
-                entity.Property(e => e.TitleAr).IsRequired().HasMaxLength(500);
-                entity.Property(e => e.DescriptionEn).HasMaxLength(2000);
-                entity.Property(e => e.DescriptionAr).HasMaxLength(2000);
-
-                entity.HasOne(e => e.Company)
-                    .WithMany(e => e.CompanyGeographicExpansions)
-                    .HasForeignKey(e => e.CompanyId)
-                    .IsRequired()
-                    .OnDelete(DeleteBehavior.Restrict);
-            });
-
-            // CompanyPartnershipFranchiseMechanism configuration
+// CompanyPartnershipFranchiseMechanism configuration
             modelBuilder.Entity<CompanyPartnershipFranchiseMechanism>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -566,6 +537,43 @@ namespace cdr_group.Persistence.Data
 
                 entity.HasOne(e => e.Company)
                     .WithMany(e => e.CompanyFinancialClausesRights)
+                    .HasForeignKey(e => e.CompanyId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // CompanyClientReach configuration
+            modelBuilder.Entity<CompanyClientReach>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.ClientNameEn).IsRequired().HasMaxLength(200);
+                entity.Property(e => e.ClientNameAr).IsRequired().HasMaxLength(200);
+                entity.Property(e => e.ClientLogoUrl).HasMaxLength(500);
+                entity.Property(e => e.Reach).IsRequired().HasMaxLength(200);
+                entity.Property(e => e.DescriptionEn).HasMaxLength(2000);
+                entity.Property(e => e.DescriptionAr).HasMaxLength(2000);
+
+                entity.HasOne(e => e.Company)
+                    .WithMany(e => e.CompanyClientReaches)
+                    .HasForeignKey(e => e.CompanyId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // CompanyTitleDescription configuration
+            modelBuilder.Entity<CompanyTitleDescription>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Code).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.TitleEn).HasMaxLength(500);
+                entity.Property(e => e.TitleAr).HasMaxLength(500);
+                entity.Property(e => e.DescriptionEn).HasMaxLength(2000);
+                entity.Property(e => e.DescriptionAr).HasMaxLength(2000);
+
+                entity.HasIndex(e => new { e.CompanyId, e.Code });
+
+                entity.HasOne(e => e.Company)
+                    .WithMany(e => e.CompanyTitleDescriptions)
                     .HasForeignKey(e => e.CompanyId)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);

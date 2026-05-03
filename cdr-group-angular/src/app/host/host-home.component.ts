@@ -32,7 +32,7 @@ export class HostHomeComponent implements OnInit {
       next: (response) => {
         if (response.success && response.data?.length) {
           this.rootCompany = response.data[0];
-          this.children = response.data.slice(1);
+          this.children = this.rootCompany.children ?? [];
           this.allCompanies = this.flatten(response.data);
         }
         this.loading = false;
@@ -81,7 +81,6 @@ export class HostHomeComponent implements OnInit {
   }
 
   selectCompany(company: CompanyDto): void {
-    debugger;
     this.companyState.setSelectedCompany(company);
     if (company.children?.length) {
       this.router.navigate(['/', company.id, 'group']);
@@ -91,6 +90,8 @@ export class HostHomeComponent implements OnInit {
   }
 
   selectRoot(): void {
-    if (this.rootCompany) this.selectCompany(this.rootCompany);
+    if (!this.rootCompany) return;
+    this.companyState.setSelectedCompany(this.rootCompany);
+    this.router.navigate(['/', this.rootCompany.id]);
   }
 }

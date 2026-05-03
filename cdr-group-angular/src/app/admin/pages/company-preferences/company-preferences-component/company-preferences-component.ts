@@ -96,13 +96,7 @@ export class CompanyPreferencesComponent implements OnInit {
           color: 'info',
           onClick: (row) => this.openEditDialog(row)
         },
-        {
-          icon: 'delete',
-          tooltip: 'admin.companyPreferences.delete',
-          permission: Permissions.COMPANY_PREFERENCES_DELETE,
-          color: 'warn',
-          onClick: (row) => this.deletePreference(row)
-        },
+        
         {
           icon: 'history',
           tooltip: 'admin.auditLogs.history',

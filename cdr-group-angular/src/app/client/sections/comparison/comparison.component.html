@@ -1,0 +1,49 @@
+@if (hasContent) {
+  <section class="comparison-section" id="section_comparison"
+    [style.--brand-primary]="primaryColorValue"
+    [style.--brand-secondary]="secondaryColorValue">
+
+    <div class="comparison-bg" aria-hidden="true">
+      <span class="bg-glow bg-glow--left"></span>
+      <span class="bg-glow bg-glow--right"></span>
+    </div>
+
+    <div class="container">
+      <div class="comparison-grid" [class.is-rtl]="isArabic">
+        <div class="comparison-column comparison-column--left" [attr.dir]="isArabic ? 'rtl' : 'ltr'">
+          @if (leftTitle) {
+            <h2 class="column-title">{{ leftTitle }}</h2>
+          }
+          @if (safeLeftContent) {
+            <div class="content-marquee" [attr.dir]="isArabic ? 'rtl' : 'ltr'">
+              <div class="content-track">
+                <div class="column-content" [innerHTML]="safeLeftContent"></div>
+                <div class="column-content" [innerHTML]="safeLeftContent" aria-hidden="true"></div>
+              </div>
+            </div>
+          }
+        </div>
+
+        <div class="comparison-divider" aria-hidden="true">
+          <div class="vs-badge">
+            <span class="vs-text">VS</span>
+          </div>
+        </div>
+
+        <div class="comparison-column comparison-column--right" [attr.dir]="isArabic ? 'rtl' : 'ltr'">
+          @if (rightTitle) {
+            <h2 class="column-title">{{ rightTitle }}</h2>
+          }
+          @if (safeRightContent) {
+            <div class="content-marquee" [attr.dir]="isArabic ? 'rtl' : 'ltr'">
+              <div class="content-track">
+                <div class="column-content" [innerHTML]="safeRightContent"></div>
+                <div class="column-content" [innerHTML]="safeRightContent" aria-hidden="true"></div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+}

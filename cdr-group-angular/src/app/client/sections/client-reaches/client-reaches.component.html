@@ -1,0 +1,57 @@
+@if (hasReaches) {
+  <section class="client-reaches-section" id="section_client_reaches"
+    [style.--brand-primary]="primaryColorValue"
+    [style.--brand-secondary]="secondaryColorValue">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-3">
+          @if (safeSectionTitle) {
+            <h2 class="section-title" [innerHTML]="safeSectionTitle"></h2>
+          } @else {
+            <h2 class="section-title">{{ 'clientReaches.title' | translate }}</h2>
+          }
+          @if (safeSectionSubtitle) {
+            <p class="section-subtitle" [innerHTML]="safeSectionSubtitle"></p>
+          } @else {
+            <p class="section-subtitle">{{ 'clientReaches.subtitle' | translate }}</p>
+          }
+        </div>
+      </div>
+
+      <div class="reaches-marquee"
+        [class.is-paused]="isPaused"
+        (mouseenter)="onPointerEnter()"
+        (mouseleave)="onPointerLeave()"
+        (focusin)="onPointerEnter()"
+        (focusout)="onPointerLeave()">
+
+        <div class="marquee-track">
+          @for (item of marqueeReaches; track $index; let i = $index) {
+            <article class="reach-card" [attr.aria-hidden]="i >= reaches.length ? 'true' : null">
+              <div class="reach-logo-wrap">
+                @if (getLogoUrl(item); as logoSrc) {
+                  <img class="reach-logo" [src]="logoSrc" [alt]="getClientName(item)" loading="lazy" />
+                } @else {
+                  <div class="reach-logo reach-logo--placeholder">
+                    <i class="bi bi-buildings"></i>
+                  </div>
+                }
+              </div>
+
+              <div class="reach-body">
+                <h3 class="reach-name">{{ getClientName(item) }}</h3>
+                <span class="reach-metric">
+                  <i class="bi bi-eye"></i>
+                  <span>{{ item.reach }} {{ 'clientReaches.million' | translate }}</span>
+                </span>
+                @if (getDescription(item)) {
+                  <p class="reach-description">{{ getDescription(item) }}</p>
+                }
+              </div>
+            </article>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+}

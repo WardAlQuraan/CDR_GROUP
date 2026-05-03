@@ -17,13 +17,13 @@ IPositionRepository Positions { get; }
         ICompanyFormRepository CompanyForms { get; }
         ICompanyPreferenceRepository CompanyPreferences { get; }
         ICompanyBranchRepository CompanyBranches { get; }
-        ICompanySuccessReasonRepository CompanySuccessReasons { get; }
         ICompanyDistinguishRepository CompanyDistinguishes { get; }
         ICompanyDistributionMarketingRepository CompanyDistributionMarketings { get; }
         ICompanyPreContractStudyRepository CompanyPreContractStudies { get; }
-        ICompanyGeographicExpansionRepository CompanyGeographicExpansions { get; }
         ICompanyPartnershipFranchiseMechanismRepository CompanyPartnershipFranchiseMechanisms { get; }
         ICompanyFinancialClausesRightsRepository CompanyFinancialClausesRights { get; }
+        ICompanyClientReachRepository CompanyClientReaches { get; }
+        ICompanyTitleDescriptionRepository CompanyTitleDescriptions { get; }
         IAuditLogRepository AuditLogs { get; }
         IReviewRepository Reviews { get; }
         IComplaintRepository Complaints { get; }

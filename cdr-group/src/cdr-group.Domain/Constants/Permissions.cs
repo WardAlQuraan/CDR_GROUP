@@ -114,15 +114,7 @@ public static class Positions
             public const string Delete = "company-branches.delete";
         }
 
-        public static class CompanySuccessReasons
-        {
-            public const string Read = "company-success-reasons.read";
-            public const string Create = "company-success-reasons.create";
-            public const string Update = "company-success-reasons.update";
-            public const string Delete = "company-success-reasons.delete";
-        }
-
-        public static class CompanyDistinguishes
+public static class CompanyDistinguishes
         {
             public const string Read = "company-distinguishes.read";
             public const string Create = "company-distinguishes.create";
@@ -146,15 +138,7 @@ public static class Positions
             public const string Delete = "company-pre-contract-studies.delete";
         }
 
-        public static class CompanyGeographicExpansions
-        {
-            public const string Read = "company-geographic-expansions.read";
-            public const string Create = "company-geographic-expansions.create";
-            public const string Update = "company-geographic-expansions.update";
-            public const string Delete = "company-geographic-expansions.delete";
-        }
-
-        public static class CompanyPartnershipFranchiseMechanisms
+public static class CompanyPartnershipFranchiseMechanisms
         {
             public const string Read = "company-partnership-franchise-mechanisms.read";
             public const string Create = "company-partnership-franchise-mechanisms.create";
@@ -168,6 +152,22 @@ public static class Positions
             public const string Create = "company-financial-clauses-rights.create";
             public const string Update = "company-financial-clauses-rights.update";
             public const string Delete = "company-financial-clauses-rights.delete";
+        }
+
+        public static class CompanyClientReaches
+        {
+            public const string Read = "company-client-reaches.read";
+            public const string Create = "company-client-reaches.create";
+            public const string Update = "company-client-reaches.update";
+            public const string Delete = "company-client-reaches.delete";
+        }
+
+        public static class CompanyTitleDescriptions
+        {
+            public const string Read = "company-title-descriptions.read";
+            public const string Create = "company-title-descriptions.create";
+            public const string Update = "company-title-descriptions.update";
+            public const string Delete = "company-title-descriptions.delete";
         }
 
         public static class AuditLogs

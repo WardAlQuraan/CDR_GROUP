@@ -1,0 +1,56 @@
+<app-base-dialog
+  [title]="dialogTitle"
+  [saveLabel]="saveLabel"
+  [saveDisabled]="saveDisabled"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <form [formGroup]="form" class="dialog-form">
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>handshake</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companyClientReaches.reachInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <app-form-field formControlName="clientNameEn" label="admin.companyClientReaches.clientNameEn" icon="badge"
+          placeholder="admin.companyClientReaches.placeholders.clientNameEn" textDir="ltr"
+          [errors]="[
+            {name: 'required', message: 'admin.companyClientReaches.errors.clientNameEnRequired'},
+            {name: 'maxlength', message: 'admin.companyClientReaches.errors.nameMaxLength'}
+          ]">
+        </app-form-field>
+
+        <app-form-field formControlName="clientNameAr" label="admin.companyClientReaches.clientNameAr" icon="badge"
+          placeholder="admin.companyClientReaches.placeholders.clientNameAr" textDir="rtl"
+          [errors]="[
+            {name: 'required', message: 'admin.companyClientReaches.errors.clientNameArRequired'},
+            {name: 'maxlength', message: 'admin.companyClientReaches.errors.nameMaxLength'}
+          ]">
+        </app-form-field>
+
+        <app-form-field formControlName="reach" label="admin.companyClientReaches.reach" icon="trending_up"
+          placeholder="admin.companyClientReaches.placeholders.reach"
+          [errors]="[
+            {name: 'required', message: 'admin.companyClientReaches.errors.reachRequired'},
+            {name: 'maxlength', message: 'admin.companyClientReaches.errors.nameMaxLength'}
+          ]">
+        </app-form-field>
+
+        <app-form-field formControlName="descriptionEn" type="textarea" label="admin.companyClientReaches.descriptionEn"
+          placeholder="admin.companyClientReaches.placeholders.descriptionEn" textDir="ltr"
+          [errors]="[{name: 'maxlength', message: 'admin.companyClientReaches.errors.descriptionMaxLength'}]">
+        </app-form-field>
+
+        <app-form-field formControlName="descriptionAr" type="textarea" label="admin.companyClientReaches.descriptionAr"
+          placeholder="admin.companyClientReaches.placeholders.descriptionAr" textDir="rtl"
+          [errors]="[{name: 'maxlength', message: 'admin.companyClientReaches.errors.descriptionMaxLength'}]">
+        </app-form-field>
+      </div>
+    </div>
+  </form>
+
+</app-base-dialog>

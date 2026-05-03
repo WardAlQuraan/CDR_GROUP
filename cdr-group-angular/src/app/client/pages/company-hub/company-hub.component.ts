@@ -43,7 +43,7 @@ export class CompanyHubComponent implements OnInit {
       this.applyHub(companyId, this.companyState.companies);
       return;
     }
-    this.companiesService.getTreeByCompanyId(companyId).subscribe({
+    this.companiesService.getTree().subscribe({
       next: (response) => {
         if (response.success && response.data?.length) {
           this.applyHub(companyId, response.data);
@@ -62,6 +62,10 @@ export class CompanyHubComponent implements OnInit {
   private applyHub(companyId: string, tree: CompanyDto[]): void {
     const found = this.companyState.findCompany(tree, companyId);
     if (!found) {
+      this.router.navigate(['/']);
+      return;
+    }
+    if (!found.parentId) {
       this.router.navigate(['/']);
       return;
     }

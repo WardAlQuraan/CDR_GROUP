@@ -2,13 +2,26 @@
 
 <div class="home-sections">
   <app-about [company]="selectedCompany"></app-about>
+  <app-sub-companies [companyId]="selectedCompanyId"></app-sub-companies>
   <app-branches [companyId]="selectedCompanyId"></app-branches>
   <app-distinguishes [companyId]="selectedCompanyId"></app-distinguishes>
   <app-distribution-marketings [companyId]="selectedCompanyId"></app-distribution-marketings>
-  <app-success-reasons [companyId]="selectedCompanyId"></app-success-reasons>
+  <app-quote-slider
+    [companyId]="selectedCompanyId"
+    code="SUCCESS_REASON"
+    titleCode="SUCCESS_REASON_TITLE"
+    descriptionCode="SUCCESS_REASON_DESCRIPTION"></app-quote-slider>
+  <app-quote-slider
+    [companyId]="selectedCompanyId"
+    code="WHEN_WHERE"
+    titleCode="WHEN_WHERE_TITLE"
+    descriptionCode="WHEN_WHERE_DESCRIPTION"></app-quote-slider>
   <app-pre-contract-studies [companyId]="selectedCompanyId"></app-pre-contract-studies>
-  <app-geographic-expansions [companyId]="selectedCompanyId"></app-geographic-expansions>
+  <app-glass-card [companyId]="selectedCompanyId" code="COMPANY_GEOGRAPHIC_EXPANSIONS"></app-glass-card>
+  <app-glass-card [companyId]="selectedCompanyId" code="WHAT_WE_DO"></app-glass-card>
   <app-partnership-franchise-mechanisms [companyId]="selectedCompanyId"></app-partnership-franchise-mechanisms>
+  <app-client-reaches [companyId]="selectedCompanyId"></app-client-reaches>
+  <app-comparison [companyId]="selectedCompanyId"></app-comparison>
 
 <!-- @if (companies.length > 1) {
   <div class="company-filter-section">

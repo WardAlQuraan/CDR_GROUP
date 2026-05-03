@@ -1,0 +1,59 @@
+<app-base-dialog
+  [title]="dialogTitle"
+  [saveLabel]="saveLabel"
+  [saveDisabled]="form.invalid"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <form [formGroup]="form" class="dialog-form">
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>description</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companyTitleDescriptions.itemInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'admin.companyTitleDescriptions.code' | translate }}</mat-label>
+          <mat-icon matPrefix>code</mat-icon>
+          <mat-select formControlName="code">
+            @for (code of allowedCodes; track code) {
+              <mat-option [value]="code">{{ code }}</mat-option>
+            }
+          </mat-select>
+          @if (form.get('code')?.hasError('required') && form.get('code')?.touched) {
+            <mat-error>{{ 'admin.companyTitleDescriptions.errors.codeRequired' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <app-form-field formControlName="titleEn" label="admin.companyTitleDescriptions.titleEn" icon="title"
+          placeholder="admin.companyTitleDescriptions.placeholders.titleEn" textDir="ltr"
+          [errors]="[
+            {name: 'maxlength', message: 'admin.companyTitleDescriptions.errors.titleMaxLength'}
+          ]">
+        </app-form-field>
+
+        <app-form-field formControlName="titleAr" label="admin.companyTitleDescriptions.titleAr" icon="title"
+          placeholder="admin.companyTitleDescriptions.placeholders.titleAr" textDir="rtl"
+          [errors]="[
+            {name: 'maxlength', message: 'admin.companyTitleDescriptions.errors.titleMaxLength'}
+          ]">
+        </app-form-field>
+
+        <app-form-field formControlName="descriptionEn" type="textarea" label="admin.companyTitleDescriptions.descriptionEn"
+          placeholder="admin.companyTitleDescriptions.placeholders.descriptionEn" textDir="ltr"
+          [errors]="[{name: 'maxlength', message: 'admin.companyTitleDescriptions.errors.descriptionMaxLength'}]">
+        </app-form-field>
+
+        <app-form-field formControlName="descriptionAr" type="textarea" label="admin.companyTitleDescriptions.descriptionAr"
+          placeholder="admin.companyTitleDescriptions.placeholders.descriptionAr" textDir="rtl"
+          [errors]="[{name: 'maxlength', message: 'admin.companyTitleDescriptions.errors.descriptionMaxLength'}]">
+        </app-form-field>
+      </div>
+    </div>
+  </form>
+
+</app-base-dialog>

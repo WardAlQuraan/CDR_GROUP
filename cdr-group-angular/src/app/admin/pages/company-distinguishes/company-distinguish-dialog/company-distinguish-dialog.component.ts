@@ -64,8 +64,8 @@ export class CompanyDistinguishDialogComponent implements OnInit {
   private initForm(): void {
     const existing = this.data.distinguish;
     this.form = this.fb.group({
-      titleEn: [existing?.titleEn ?? '', [Validators.required, Validators.maxLength(500)]],
-      titleAr: [existing?.titleAr ?? '', [Validators.required, Validators.maxLength(500)]],
+      titleEn: [existing?.titleEn ?? '', [Validators.maxLength(500)]],
+      titleAr: [existing?.titleAr ?? '', [Validators.maxLength(500)]],
       descriptionEn: [existing?.descriptionEn ?? '', [Validators.maxLength(2000)]],
       descriptionAr: [existing?.descriptionAr ?? '', [Validators.maxLength(2000)]]
     });
@@ -92,8 +92,8 @@ export class CompanyDistinguishDialogComponent implements OnInit {
 
   private createDistinguish(): void {
     const dto: CreateCompanyDistinguishDto = {
-      titleEn: this.form.value.titleEn,
-      titleAr: this.form.value.titleAr,
+      titleEn: this.form.value.titleEn || undefined,
+      titleAr: this.form.value.titleAr || undefined,
       descriptionEn: this.form.value.descriptionEn || undefined,
       descriptionAr: this.form.value.descriptionAr || undefined,
       companyId: this.data.companyId
@@ -113,8 +113,8 @@ export class CompanyDistinguishDialogComponent implements OnInit {
 
   private updateDistinguish(): void {
     const dto: UpdateCompanyDistinguishDto = {
-      titleEn: this.form.value.titleEn,
-      titleAr: this.form.value.titleAr,
+      titleEn: this.form.value.titleEn || undefined,
+      titleAr: this.form.value.titleAr || undefined,
       descriptionEn: this.form.value.descriptionEn || undefined,
       descriptionAr: this.form.value.descriptionAr || undefined,
       companyId: this.data.companyId

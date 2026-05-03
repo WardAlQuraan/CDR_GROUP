@@ -25,9 +25,12 @@
 
         <div class="distinguishes-scroller" #scroller>
           @for (item of distinguishes; track item.id; let i = $index) {
-            <article class="distinguish-card" [style.--index]="i">
+            <article class="distinguish-card" [style.--index]="i"
+              [class.is-description-only]="!getTitle(item) && getDescription(item)">
               <div class="distinguish-body">
-                <h3 class="distinguish-title">{{ getTitle(item) }}</h3>
+                @if (getTitle(item)) {
+                  <h3 class="distinguish-title">{{ getTitle(item) }}</h3>
+                }
                 @if (getDescription(item)) {
                   <p class="distinguish-description">{{ getDescription(item) }}</p>
                 }

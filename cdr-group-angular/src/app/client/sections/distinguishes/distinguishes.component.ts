@@ -74,7 +74,7 @@ export class DistinguishesComponent implements OnChanges, OnDestroy {
   }
 
   getTitle(item: CompanyDistinguishDto): string {
-    return this.isArabic ? item.titleAr : item.titleEn;
+    return (this.isArabic ? item.titleAr : item.titleEn) ?? '';
   }
 
   getDescription(item: CompanyDistinguishDto): string {

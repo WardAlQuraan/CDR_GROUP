@@ -15,6 +15,9 @@ namespace cdr_group.Contracts.DTOs.CompanyBranch
         public string? DescriptionAr { get; set; }
         public string? ImageUrl { get; set; }
         public string? LocationUrl { get; set; }
+        public string? Address { get; set; }
+        public double? Latitude { get; set; }
+        public double? Longitude { get; set; }
         public DateTime OpeningDate { get; set; }
 
         [ExcelIgnore]
@@ -61,6 +64,13 @@ namespace cdr_group.Contracts.DTOs.CompanyBranch
         [StringLength(500)]
         public string? LocationUrl { get; set; }
 
+        [StringLength(500)]
+        public string? Address { get; set; }
+
+        public double? Latitude { get; set; }
+
+        public double? Longitude { get; set; }
+
         [Required]
         public DateTime OpeningDate { get; set; }
 
@@ -96,6 +106,13 @@ namespace cdr_group.Contracts.DTOs.CompanyBranch
 
         [StringLength(500)]
         public string? LocationUrl { get; set; }
+
+        [StringLength(500)]
+        public string? Address { get; set; }
+
+        public double? Latitude { get; set; }
+
+        public double? Longitude { get; set; }
 
         public DateTime? OpeningDate { get; set; }
 

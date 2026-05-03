@@ -3,8 +3,16 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center mb-3">
-          <h2 class="section-title">{{ 'forms.title' | translate }}</h2>
-          <!-- <p class="section-subtitle">{{ 'forms.subtitle' | translate }}</p> -->
+          @if (safeSectionTitle) {
+            <h2 class="section-title" [innerHTML]="safeSectionTitle"></h2>
+          } @else {
+            <h2 class="section-title">{{ 'forms.title' | translate }}</h2>
+          }
+          @if (safeSectionSubtitle) {
+            <p class="section-subtitle" [innerHTML]="safeSectionSubtitle"></p>
+          } @else {
+            <p class="section-subtitle">{{ 'forms.subtitle' | translate }}</p>
+          }
         </div>
       </div>
 

@@ -6,13 +6,13 @@ using cdr_group.Contracts.DTOs.CompanyBackground;
 using cdr_group.Contracts.DTOs.CompanyForm;
 using cdr_group.Contracts.DTOs.CompanyPreference;
 using cdr_group.Contracts.DTOs.CompanyBranch;
-using cdr_group.Contracts.DTOs.CompanySuccessReason;
 using cdr_group.Contracts.DTOs.CompanyDistinguish;
 using cdr_group.Contracts.DTOs.CompanyDistributionMarketing;
 using cdr_group.Contracts.DTOs.CompanyPreContractStudy;
-using cdr_group.Contracts.DTOs.CompanyGeographicExpansion;
 using cdr_group.Contracts.DTOs.CompanyPartnershipFranchiseMechanism;
 using cdr_group.Contracts.DTOs.CompanyFinancialClausesRights;
+using cdr_group.Contracts.DTOs.CompanyClientReach;
+using cdr_group.Contracts.DTOs.CompanyTitleDescription;
 using cdr_group.Contracts.DTOs.Employee;
 using cdr_group.Contracts.DTOs.Event;
 using cdr_group.Contracts.DTOs.FileAttachment;
@@ -255,20 +255,7 @@ namespace cdr_group.Application.Mappings
             CreateMap<UpdateCompanyBranchDto, CompanyBranch>()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
-            // CompanySuccessReason mappings
-            CreateMap<CompanySuccessReason, CompanySuccessReasonDto>()
-                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
-                    src.Company != null ? src.Company.NameEn : null))
-                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
-                    src.Company != null ? src.Company.NameAr : null));
-
-            CreateMap<CreateCompanySuccessReasonDto, CompanySuccessReason>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
-
-            CreateMap<UpdateCompanySuccessReasonDto, CompanySuccessReason>()
-                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
-
-            // CompanyDistinguish mappings
+// CompanyDistinguish mappings
             CreateMap<CompanyDistinguish, CompanyDistinguishDto>()
                 .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
                     src.Company != null ? src.Company.NameEn : null))
@@ -307,20 +294,7 @@ namespace cdr_group.Application.Mappings
             CreateMap<UpdateCompanyPreContractStudyDto, CompanyPreContractStudy>()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
-            // CompanyGeographicExpansion mappings
-            CreateMap<CompanyGeographicExpansion, CompanyGeographicExpansionDto>()
-                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
-                    src.Company != null ? src.Company.NameEn : null))
-                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
-                    src.Company != null ? src.Company.NameAr : null));
-
-            CreateMap<CreateCompanyGeographicExpansionDto, CompanyGeographicExpansion>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
-
-            CreateMap<UpdateCompanyGeographicExpansionDto, CompanyGeographicExpansion>()
-                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
-
-            // CompanyPartnershipFranchiseMechanism mappings
+// CompanyPartnershipFranchiseMechanism mappings
             CreateMap<CompanyPartnershipFranchiseMechanism, CompanyPartnershipFranchiseMechanismDto>()
                 .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
                     src.Company != null ? src.Company.NameEn : null))
@@ -344,6 +318,32 @@ namespace cdr_group.Application.Mappings
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
 
             CreateMap<UpdateCompanyFinancialClausesRightsDto, CompanyFinancialClausesRights>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            // CompanyClientReach mappings
+            CreateMap<CompanyClientReach, CompanyClientReachDto>()
+                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
+                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameAr : null));
+
+            CreateMap<CreateCompanyClientReachDto, CompanyClientReach>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+            CreateMap<UpdateCompanyClientReachDto, CompanyClientReach>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            // CompanyTitleDescription mappings
+            CreateMap<CompanyTitleDescription, CompanyTitleDescriptionDto>()
+                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
+                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameAr : null));
+
+            CreateMap<CreateCompanyTitleDescriptionDto, CompanyTitleDescription>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+            CreateMap<UpdateCompanyTitleDescriptionDto, CompanyTitleDescription>()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
             // AuditLog mappings

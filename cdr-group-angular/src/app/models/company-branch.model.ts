@@ -22,6 +22,8 @@ export interface CompanyBranchDto {
   cityNameAr: string;
   imageUrl?: string;
   locationUrl?: string;
+  latitude?: number;
+  longitude?: number;
   createdAt: Date;
   updatedAt?: Date;
 }
@@ -38,6 +40,8 @@ export interface CreateCompanyBranchDto {
   cityId: string;
   imageUrl?: string;
   locationUrl?: string;
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface UpdateCompanyBranchDto {
@@ -52,4 +56,6 @@ export interface UpdateCompanyBranchDto {
   cityId?: string;
   imageUrl?: string;
   locationUrl?: string;
+  latitude?: number;
+  longitude?: number;
 }

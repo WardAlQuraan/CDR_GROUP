@@ -6,8 +6,8 @@ export interface CompanyDistinguishPagedRequest extends PagedRequest {
 
 export interface CompanyDistinguishDto {
   id: string;
-  titleEn: string;
-  titleAr: string;
+  titleEn?: string;
+  titleAr?: string;
   descriptionEn?: string;
   descriptionAr?: string;
   companyId: string;
@@ -18,8 +18,8 @@ export interface CompanyDistinguishDto {
 }
 
 export interface CreateCompanyDistinguishDto {
-  titleEn: string;
-  titleAr: string;
+  titleEn?: string;
+  titleAr?: string;
   descriptionEn?: string;
   descriptionAr?: string;
   companyId: string;

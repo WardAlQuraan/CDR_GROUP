@@ -144,25 +144,32 @@
   border-radius: 999px;
   cursor: default;
   transition: background 0.2s;
+  color: var(--brand-secondary);
 
-  i {
-    font-size: 1.1rem;
-    background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+  ::ng-deep {
+    i,
+    .bi,
+    [class*="bi-"],
+    [class*="fa-"],
+    svg {
+      font-size: 1.1rem;
+      color: var(--brand-primary) !important;
+      fill: var(--brand-primary);
+      background: none !important;
+      -webkit-text-fill-color: var(--brand-primary) !important;
+      background-clip: initial !important;
+      -webkit-background-clip: initial !important;
+    }
 
-  .stat-value {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: #111827;
-  }
+    .stat-value {
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
 
-  .stat-text {
-    font-size: 0.85rem;
-    color: #4b5563;
-    font-weight: 400;
+    .stat-text {
+      font-size: 0.85rem;
+      font-weight: 400;
+    }
   }
 
   &:hover {

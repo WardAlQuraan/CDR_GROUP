@@ -24,12 +24,15 @@ import { ComplaintComponent } from './sections/complaint/complaint.component';
 import { ReviewsDisplayComponent } from './sections/reviews-display/reviews-display.component';
 import { FormsComponent } from './sections/forms/forms.component';
 import { BranchesComponent } from './sections/branches/branches.component';
-import { SuccessReasonsComponent } from './sections/success-reasons/success-reasons.component';
 import { DistinguishesComponent } from './sections/distinguishes/distinguishes.component';
 import { DistributionMarketingsComponent } from './sections/distribution-marketings/distribution-marketings.component';
 import { PreContractStudiesComponent } from './sections/pre-contract-studies/pre-contract-studies.component';
-import { GeographicExpansionsComponent } from './sections/geographic-expansions/geographic-expansions.component';
 import { PartnershipFranchiseMechanismsComponent } from './sections/partnership-franchise-mechanisms/partnership-franchise-mechanisms.component';
+import { ClientReachesComponent } from './sections/client-reaches/client-reaches.component';
+import { SubCompaniesComponent } from './sections/sub-companies/sub-companies.component';
+import { ComparisonComponent } from './sections/comparison/comparison.component';
+import { GlassCardComponent } from './sections/glass-card/glass-card.component';
+import { QuoteSliderComponent } from './sections/quote-slider/quote-slider.component';
 
 // Pages
 import { HomeComponent } from './pages/home/home.component';
@@ -64,12 +67,15 @@ import { clientRoutes } from './client.routes';
     ReviewsDisplayComponent,
     FormsComponent,
     BranchesComponent,
-    SuccessReasonsComponent,
     DistinguishesComponent,
     DistributionMarketingsComponent,
     PreContractStudiesComponent,
-    GeographicExpansionsComponent,
     PartnershipFranchiseMechanismsComponent,
+    ClientReachesComponent,
+    SubCompaniesComponent,
+    ComparisonComponent,
+    GlassCardComponent,
+    QuoteSliderComponent,
     // Pages
     HomeComponent,
     EventListingComponent,

@@ -225,6 +225,18 @@
   z-index: 3;
 }
 
+.distinguish-card.is-description-only {
+  justify-content: center;
+
+  .distinguish-body {
+    text-align: center;
+  }
+
+  .distinguish-description {
+    text-align: center;
+  }
+}
+
 .distinguish-title {
   margin: 0 0 14px;
   font-size: 2rem;

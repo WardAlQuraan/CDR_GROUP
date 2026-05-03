@@ -74,7 +74,7 @@ namespace cdr_group.Application.Services
                 }
             }
 
-            return allDtos.Where(c => !c.ParentId.HasValue).ToList();
+            return allDtos.ToList();
         }
 
         private async Task PopulateCountsAsync(List<CompanyDto> dtos)

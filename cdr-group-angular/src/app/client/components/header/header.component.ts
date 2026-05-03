@@ -96,7 +96,6 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger;
     this.updateActiveSection();
     this.route.paramMap.subscribe(params => {
       const companyId = params.get('companyId');

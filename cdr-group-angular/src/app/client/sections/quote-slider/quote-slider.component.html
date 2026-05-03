@@ -1,0 +1,65 @@
+@if (hasItems) {
+  <section class="quote-slider-section" [id]="sectionId"
+    [style.--brand-primary]="primaryColorValue"
+    [style.--brand-secondary]="secondaryColorValue">
+    <div class="container">
+      @if (safeSectionTitle || safeSectionDescription) {
+        <div class="row">
+          <div class="col-12 text-center mb-3">
+            @if (safeSectionTitle) {
+              <h2 class="section-title" [innerHTML]="safeSectionTitle"></h2>
+            }
+            @if (safeSectionDescription) {
+              <p class="section-subtitle" [innerHTML]="safeSectionDescription"></p>
+            }
+          </div>
+        </div>
+      }
+
+      <div class="quote-slider"
+        (mouseenter)="onPointerEnter()"
+        (mouseleave)="onPointerLeave()"
+        (focusin)="onPointerEnter()"
+        (focusout)="onPointerLeave()">
+
+        @if (hasMultiple) {
+          <button type="button" class="slider-arrow slider-arrow-prev" (click)="prev()" aria-label="Previous">
+            <i class="bi" [class.bi-chevron-left]="!isArabic" [class.bi-chevron-right]="isArabic"></i>
+          </button>
+        }
+
+        <div class="slider-viewport">
+          <div class="slider-track" [style.transform]="trackTransform">
+            @for (item of items; track item.id; let i = $index) {
+              <article class="quote-slide" [class.is-active]="i === currentIndex">
+                @if (getTitle(item); as title) {
+                  <h3 class="quote-title">{{ title }}</h3>
+                }
+                @if (getDescription(item); as description) {
+                  <p class="quote-text">{{ description }}</p>
+                }
+              </article>
+            }
+          </div>
+        </div>
+
+        @if (hasMultiple) {
+          <button type="button" class="slider-arrow slider-arrow-next" (click)="next()" aria-label="Next">
+            <i class="bi" [class.bi-chevron-right]="!isArabic" [class.bi-chevron-left]="isArabic"></i>
+          </button>
+        }
+      </div>
+
+      @if (hasMultiple) {
+        <div class="slider-dots">
+          @for (item of items; track item.id; let i = $index) {
+            <button type="button" class="slider-dot"
+              [class.is-active]="i === currentIndex"
+              (click)="goTo(i)"
+              [attr.aria-label]="'Slide ' + (i + 1)"></button>
+          }
+        </div>
+      }
+    </div>
+  </section>
+}
