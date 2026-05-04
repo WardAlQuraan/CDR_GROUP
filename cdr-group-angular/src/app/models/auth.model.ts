@@ -145,6 +145,12 @@ export const Permissions = {
   COMPANY_CLIENT_REACHES_UPDATE: 'company-client-reaches.update',
   COMPANY_CLIENT_REACHES_DELETE: 'company-client-reaches.delete',
 
+  // Company Home Component Setups
+  COMPANY_HOME_COMPONENT_SETUPS_READ: 'company-home-component-setups.read',
+  COMPANY_HOME_COMPONENT_SETUPS_CREATE: 'company-home-component-setups.create',
+  COMPANY_HOME_COMPONENT_SETUPS_UPDATE: 'company-home-component-setups.update',
+  COMPANY_HOME_COMPONENT_SETUPS_DELETE: 'company-home-component-setups.delete',
+
   // Reviews
   REVIEWS_READ: 'reviews.read',
   REVIEWS_CREATE: 'reviews.create',

@@ -68,5 +68,8 @@ namespace cdr_group.Domain.Entities
 
         // Title/description content blocks for this company
         public virtual ICollection<CompanyTitleDescription> CompanyTitleDescriptions { get; set; } = new List<CompanyTitleDescription>();
+
+        // Home component setup entries for this company
+        public virtual ICollection<CompanyHomeComponentSetup> CompanyHomeComponentSetups { get; set; } = new List<CompanyHomeComponentSetup>();
     }
 }

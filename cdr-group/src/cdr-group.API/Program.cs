@@ -169,6 +169,7 @@ builder.Services.AddScoped<ICompanyBranchService, CompanyBranchService>();
 builder.Services.AddScoped<ICompanyFinancialClausesRightsService, CompanyFinancialClausesRightsService>();
 builder.Services.AddScoped<ICompanyClientReachService, CompanyClientReachService>();
 builder.Services.AddScoped<ICompanyTitleDescriptionService, CompanyTitleDescriptionService>();
+builder.Services.AddScoped<ICompanyHomeComponentSetupService, CompanyHomeComponentSetupService>();
 builder.Services.AddScoped<IAuditLogService, AuditLogService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IComplaintService, ComplaintService>();

@@ -27,6 +27,7 @@ namespace cdr_group.Persistence.Repositories
         private ICompanyFinancialClausesRightsRepository? _companyFinancialClausesRights;
         private ICompanyClientReachRepository? _companyClientReaches;
         private ICompanyTitleDescriptionRepository? _companyTitleDescriptions;
+        private ICompanyHomeComponentSetupRepository? _companyHomeComponentSetups;
         private IAuditLogRepository? _auditLogs;
         private IReviewRepository? _reviews;
         private IComplaintRepository? _complaints;
@@ -57,6 +58,7 @@ namespace cdr_group.Persistence.Repositories
         public ICompanyFinancialClausesRightsRepository CompanyFinancialClausesRights => _companyFinancialClausesRights ??= new CompanyFinancialClausesRightsRepository(_context);
         public ICompanyClientReachRepository CompanyClientReaches => _companyClientReaches ??= new CompanyClientReachRepository(_context);
         public ICompanyTitleDescriptionRepository CompanyTitleDescriptions => _companyTitleDescriptions ??= new CompanyTitleDescriptionRepository(_context);
+        public ICompanyHomeComponentSetupRepository CompanyHomeComponentSetups => _companyHomeComponentSetups ??= new CompanyHomeComponentSetupRepository(_context);
         public IAuditLogRepository AuditLogs => _auditLogs ??= new AuditLogRepository(_context);
         public IReviewRepository Reviews => _reviews ??= new ReviewRepository(_context);
         public IComplaintRepository Complaints => _complaints ??= new ComplaintRepository(_context);

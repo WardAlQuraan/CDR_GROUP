@@ -20,6 +20,7 @@ IPositionRepository Positions { get; }
         ICompanyFinancialClausesRightsRepository CompanyFinancialClausesRights { get; }
         ICompanyClientReachRepository CompanyClientReaches { get; }
         ICompanyTitleDescriptionRepository CompanyTitleDescriptions { get; }
+        ICompanyHomeComponentSetupRepository CompanyHomeComponentSetups { get; }
         IAuditLogRepository AuditLogs { get; }
         IReviewRepository Reviews { get; }
         IComplaintRepository Complaints { get; }

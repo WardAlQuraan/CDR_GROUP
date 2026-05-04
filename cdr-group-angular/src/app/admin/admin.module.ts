@@ -63,6 +63,8 @@ import { CompanyClientReachDialogComponent } from './pages/company-client-reache
 import { CompanyClientReachLogoDialogComponent } from './pages/company-client-reaches/company-client-reach-logo-dialog/company-client-reach-logo-dialog.component';
 import { CompanyTitleDescriptionsComponent } from './pages/company-title-descriptions/company-title-descriptions-component/company-title-descriptions-component';
 import { CompanyTitleDescriptionDialogComponent } from './pages/company-title-descriptions/company-title-description-dialog/company-title-description-dialog.component';
+import { CompanyHomeComponentSetupsComponent } from './pages/company-home-component-setups/company-home-component-setups-component/company-home-component-setups-component';
+import { CompanyHomeComponentSetupDialogComponent } from './pages/company-home-component-setups/company-home-component-setup-dialog/company-home-component-setup-dialog.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +114,8 @@ import { CompanyTitleDescriptionDialogComponent } from './pages/company-title-de
     CompanyClientReachLogoDialogComponent,
     CompanyTitleDescriptionsComponent,
     CompanyTitleDescriptionDialogComponent,
+    CompanyHomeComponentSetupsComponent,
+    CompanyHomeComponentSetupDialogComponent,
     ReviewsComponent,
     ReviewDialogComponent,
     ComplaintsComponent,

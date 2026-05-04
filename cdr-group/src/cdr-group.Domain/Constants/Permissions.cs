@@ -138,6 +138,14 @@ public static class Positions
             public const string Delete = "company-title-descriptions.delete";
         }
 
+        public static class CompanyHomeComponentSetups
+        {
+            public const string Read = "company-home-component-setups.read";
+            public const string Create = "company-home-component-setups.create";
+            public const string Update = "company-home-component-setups.update";
+            public const string Delete = "company-home-component-setups.delete";
+        }
+
         public static class AuditLogs
         {
             public const string Read = "audit-logs.read";

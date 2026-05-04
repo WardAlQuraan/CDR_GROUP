@@ -218,6 +218,7 @@ namespace cdr_group.Persistence.Data
         public DbSet<CompanyFinancialClausesRights> CompanyFinancialClausesRights { get; set; }
         public DbSet<CompanyClientReach> CompanyClientReaches { get; set; }
         public DbSet<CompanyTitleDescription> CompanyTitleDescriptions { get; set; }
+        public DbSet<CompanyHomeComponentSetup> CompanyHomeComponentSetups { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Country> Countries { get; set; }
@@ -510,6 +511,24 @@ namespace cdr_group.Persistence.Data
 
                 entity.HasOne(e => e.Company)
                     .WithMany(e => e.CompanyTitleDescriptions)
+                    .HasForeignKey(e => e.CompanyId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // CompanyHomeComponentSetup configuration
+            modelBuilder.Entity<CompanyHomeComponentSetup>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.ComponentCode).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.CompanyTitleDescriptionCode).HasMaxLength(100);
+                entity.Property(e => e.PreferenceTitleCode).HasMaxLength(100);
+                entity.Property(e => e.PreferenceDescriptionCode).HasMaxLength(100);
+
+                entity.HasIndex(e => new { e.CompanyId, e.ComponentCode });
+
+                entity.HasOne(e => e.Company)
+                    .WithMany(e => e.CompanyHomeComponentSetups)
                     .HasForeignKey(e => e.CompanyId)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);

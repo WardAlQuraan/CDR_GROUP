@@ -1,0 +1,73 @@
+<app-base-dialog
+  [title]="dialogTitle"
+  [saveLabel]="saveLabel"
+  [saveDisabled]="form.invalid"
+  [loading]="loading"
+  (save)="onSubmit()"
+  (cancel)="onCancel()">
+
+  <form [formGroup]="form" class="dialog-form">
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>widgets</mat-icon>
+        </div>
+        <div class="section-title">{{ 'admin.companyHomeComponentSetups.setupInfo' | translate }}</div>
+      </div>
+
+      <div class="section-content">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'admin.companyHomeComponentSetups.componentCode' | translate }}</mat-label>
+          <mat-icon matPrefix>code</mat-icon>
+          <mat-select formControlName="componentCode">
+            @for (code of componentCodes; track code) {
+              <mat-option [value]="code">{{ code }}</mat-option>
+            }
+          </mat-select>
+          @if (form.get('componentCode')?.hasError('required') && form.get('componentCode')?.touched) {
+            <mat-error>{{ 'admin.companyHomeComponentSetups.errors.componentCodeRequired' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'admin.companyHomeComponentSetups.companyTitleDescriptionCode' | translate }}</mat-label>
+          <mat-icon matPrefix>subtitles</mat-icon>
+          <mat-select formControlName="companyTitleDescriptionCode">
+            <mat-option [value]="null">--</mat-option>
+            @for (code of titleDescriptionCodes; track code) {
+              <mat-option [value]="code">{{ code }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'admin.companyHomeComponentSetups.preferenceTitleCode' | translate }}</mat-label>
+          <mat-icon matPrefix>title</mat-icon>
+          <mat-select formControlName="preferenceTitleCode">
+            <mat-option [value]="null">--</mat-option>
+            @for (code of preferenceCodes; track code) {
+              <mat-option [value]="code">{{ code }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'admin.companyHomeComponentSetups.preferenceDescriptionCode' | translate }}</mat-label>
+          <mat-icon matPrefix>description</mat-icon>
+          <mat-select formControlName="preferenceDescriptionCode">
+            <mat-option [value]="null">--</mat-option>
+            @for (code of preferenceCodes; track code) {
+              <mat-option [value]="code">{{ code }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <app-form-field formControlName="rank" type="number"
+          label="admin.companyHomeComponentSetups.rank" icon="sort"
+          [errors]="[{name: 'required', message: 'admin.companyHomeComponentSetups.errors.rankRequired'}]">
+        </app-form-field>
+      </div>
+    </div>
+  </form>
+
+</app-base-dialog>

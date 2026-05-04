@@ -9,6 +9,7 @@ using cdr_group.Contracts.DTOs.CompanyBranch;
 using cdr_group.Contracts.DTOs.CompanyFinancialClausesRights;
 using cdr_group.Contracts.DTOs.CompanyClientReach;
 using cdr_group.Contracts.DTOs.CompanyTitleDescription;
+using cdr_group.Contracts.DTOs.CompanyHomeComponentSetup;
 using cdr_group.Contracts.DTOs.Employee;
 using cdr_group.Contracts.DTOs.Event;
 using cdr_group.Contracts.DTOs.FileAttachment;
@@ -288,6 +289,19 @@ namespace cdr_group.Application.Mappings
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
 
             CreateMap<UpdateCompanyTitleDescriptionDto, CompanyTitleDescription>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            // CompanyHomeComponentSetup mappings
+            CreateMap<CompanyHomeComponentSetup, CompanyHomeComponentSetupDto>()
+                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameEn : null))
+                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
+                    src.Company != null ? src.Company.NameAr : null));
+
+            CreateMap<CreateCompanyHomeComponentSetupDto, CompanyHomeComponentSetup>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+            CreateMap<UpdateCompanyHomeComponentSetupDto, CompanyHomeComponentSetup>()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
             // AuditLog mappings

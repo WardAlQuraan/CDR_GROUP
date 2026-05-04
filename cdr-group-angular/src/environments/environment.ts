@@ -48,5 +48,23 @@ export const environment = {
     'DISTINGUISHES',
     'PRE_CONTRACT_STUDIES',
     'PARTNERSHIP_FRANCHISE_MECHANISM',
+  ],
+  componentCodes: [
+    'app-hero',
+    'app-about',
+    'app-sub-companies',
+    'app-branches',
+    'app-card-scroller',
+    'app-fill-cards',
+    'app-quote-slider',
+    'app-glass-slider',
+    'app-glass-card',
+    'app-statement-slider',
+    'app-client-reaches',
+    'app-comparison',
+    'app-forms',
+    'app-events',
+    'app-team',
+    'app-contact-review',
   ]
 };

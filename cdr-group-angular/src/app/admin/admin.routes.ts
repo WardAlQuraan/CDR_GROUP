@@ -21,6 +21,7 @@ import { PartnersComponent } from './pages/partners/partners-component/partners-
 import { CompanyFinancialClausesRightsComponent } from './pages/company-financial-clauses-rights/company-financial-clauses-rights-component/company-financial-clauses-rights-component';
 import { CompanyClientReachesComponent } from './pages/company-client-reaches/company-client-reaches-component/company-client-reaches-component';
 import { CompanyTitleDescriptionsComponent } from './pages/company-title-descriptions/company-title-descriptions-component/company-title-descriptions-component';
+import { CompanyHomeComponentSetupsComponent } from './pages/company-home-component-setups/company-home-component-setups-component/company-home-component-setups-component';
 
 export const adminRoutes: Routes = [
   {
@@ -43,6 +44,7 @@ export const adminRoutes: Routes = [
       { path: 'companies/:companyId/financial-clauses-rights', component: CompanyFinancialClausesRightsComponent },
       { path: 'companies/:companyId/client-reaches', component: CompanyClientReachesComponent },
       { path: 'companies/:companyId/title-descriptions', component: CompanyTitleDescriptionsComponent },
+      { path: 'companies/:companyId/home-component-setups', component: CompanyHomeComponentSetupsComponent },
       { path: 'partners', component: PartnersComponent },
       { path: 'contact-us', component: ContactUsAdminComponent },
       { path: 'reviews', component: ReviewsComponent },

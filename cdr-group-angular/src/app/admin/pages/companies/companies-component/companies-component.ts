@@ -207,6 +207,14 @@ export class CompaniesComponent implements OnInit {
           onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'client-reaches'])
         },
         {
+          icon: 'widgets',
+          tooltip: 'admin.companies.homeComponentSetups',
+          permission: Permissions.COMPANY_HOME_COMPONENT_SETUPS_READ,
+          color: 'accent',
+          primary: false,
+          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'home-component-setups'])
+        },
+        {
           icon: 'image',
           tooltip: 'admin.companies.uploadLogo',
           permission: Permissions.COMPANIES_UPDATE,

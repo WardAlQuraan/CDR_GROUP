@@ -1,72 +1,77 @@
 <app-hero [company]="selectedCompany"></app-hero>
 
 <div class="home-sections">
-  <app-about [company]="selectedCompany"></app-about>
-  <app-sub-companies [companyId]="selectedCompanyId"></app-sub-companies>
-  <app-branches [companyId]="selectedCompanyId"></app-branches>
-  <app-card-scroller
-    [companyId]="selectedCompanyId"
-    code="DISTINGUISHES"
-    titleCode="DISTINGUISHES_TITLE"
-    descriptionCode="DISTINGUISHES_DESCRIPTION"></app-card-scroller>
-  <app-fill-cards
-    [companyId]="selectedCompanyId"
-    code="DISTRIBUTION_MARKETING"
-    titleCode="DISTRIBUTION_MARKETING_TITLE"
-    descriptionCode="DISTRIBUTION_MARKETING_DESCRIPTION"></app-fill-cards>
-  <app-quote-slider
-    [companyId]="selectedCompanyId"
-    code="SUCCESS_REASON"
-    titleCode="SUCCESS_REASON_TITLE"
-    descriptionCode="SUCCESS_REASON_DESCRIPTION"></app-quote-slider>
-  <app-quote-slider
-    [companyId]="selectedCompanyId"
-    code="WHEN_WHERE"
-    titleCode="WHEN_WHERE_TITLE"
-    descriptionCode="WHEN_WHERE_DESCRIPTION"></app-quote-slider>
-  <app-glass-slider
-    [companyId]="selectedCompanyId"
-    code="PRE_CONTRACT_STUDIES"
-    titleCode="PRE_CONTRACT_STUDIES_TITLE"
-    descriptionCode="PRE_CONTRACT_STUDIES_DESCRIPTION"></app-glass-slider>
-  <app-glass-card
-    [companyId]="selectedCompanyId"
-    code="COMPANY_GEOGRAPHIC_EXPANSIONS"
-    titleCode="COMPANY_GEOGRAPHIC_EXPANSIONS_TITLE"
-    descriptionCode="COMPANY_GEOGRAPHIC_EXPANSIONS_DESCRIPTION"></app-glass-card>
-  <app-glass-card
-    [companyId]="selectedCompanyId"
-    code="WHAT_WE_DO"
-    titleCode="WHAT_WE_DO_TITLE"
-    descriptionCode="WHAT_WE_DO_DESCRIPTION"></app-glass-card>
-  <app-statement-slider
-    [companyId]="selectedCompanyId"
-    code="PARTNERSHIP_FRANCHISE_MECHANISM"
-    titleCode="PARTNERSHIP_FRANCHISE_MECHANISM_TITLE"
-    descriptionCode="PARTNERSHIP_FRANCHISE_MECHANISM_DESCRIPTION"></app-statement-slider>
-  <app-client-reaches [companyId]="selectedCompanyId"></app-client-reaches>
-  <app-comparison [companyId]="selectedCompanyId"></app-comparison>
-
-<!-- @if (companies.length > 1) {
-  <div class="company-filter-section">
-    <div class="container">
-      <div class="company-filter">
-        @for (company of companies; track company.id) {
-          <button
-            class="company-filter-btn"
-            [class.active]="selectedCompanyId === company.id"
-            (click)="onCompanyChange(company.id)">
-            {{ getCompanyName(company) }}
-          </button>
-        }
-      </div>
-    </div>
-  </div>
-} -->
-
-  <app-forms [companyId]="selectedCompanyId"></app-forms>
-  <app-events [companyId]="selectedCompanyId"></app-events>
-  <app-team [companyId]="selectedCompanyId"></app-team>
-  <!-- <app-reviews-display [companyId]="selectedCompany?.id"></app-reviews-display> -->
-  <app-contact-review [companyId]="selectedCompany?.id"></app-contact-review>
+  @for (setup of setups; track setup.id) {
+    @switch (setup.componentCode) {
+      @case ('app-about') {
+        <app-about [company]="selectedCompany"></app-about>
+      }
+      @case ('app-sub-companies') {
+        <app-sub-companies [companyId]="selectedCompanyId"></app-sub-companies>
+      }
+      @case ('app-branches') {
+        <app-branches [companyId]="selectedCompanyId"></app-branches>
+      }
+      @case ('app-card-scroller') {
+        <app-card-scroller
+          [companyId]="selectedCompanyId"
+          [code]="setup.companyTitleDescriptionCode || ''"
+          [titleCode]="setup.preferenceTitleCode || ''"
+          [descriptionCode]="setup.preferenceDescriptionCode || ''"></app-card-scroller>
+      }
+      @case ('app-fill-cards') {
+        <app-fill-cards
+          [companyId]="selectedCompanyId"
+          [code]="setup.companyTitleDescriptionCode || ''"
+          [titleCode]="setup.preferenceTitleCode || ''"
+          [descriptionCode]="setup.preferenceDescriptionCode || ''"></app-fill-cards>
+      }
+      @case ('app-quote-slider') {
+        <app-quote-slider
+          [companyId]="selectedCompanyId"
+          [code]="setup.companyTitleDescriptionCode || ''"
+          [titleCode]="setup.preferenceTitleCode || ''"
+          [descriptionCode]="setup.preferenceDescriptionCode || ''"></app-quote-slider>
+      }
+      @case ('app-glass-slider') {
+        <app-glass-slider
+          [companyId]="selectedCompanyId"
+          [code]="setup.companyTitleDescriptionCode || ''"
+          [titleCode]="setup.preferenceTitleCode || ''"
+          [descriptionCode]="setup.preferenceDescriptionCode || ''"></app-glass-slider>
+      }
+      @case ('app-glass-card') {
+        <app-glass-card
+          [companyId]="selectedCompanyId"
+          [code]="setup.companyTitleDescriptionCode || ''"
+          [titleCode]="setup.preferenceTitleCode || ''"
+          [descriptionCode]="setup.preferenceDescriptionCode || ''"></app-glass-card>
+      }
+      @case ('app-statement-slider') {
+        <app-statement-slider
+          [companyId]="selectedCompanyId"
+          [code]="setup.companyTitleDescriptionCode || ''"
+          [titleCode]="setup.preferenceTitleCode || ''"
+          [descriptionCode]="setup.preferenceDescriptionCode || ''"></app-statement-slider>
+      }
+      @case ('app-client-reaches') {
+        <app-client-reaches [companyId]="selectedCompanyId"></app-client-reaches>
+      }
+      @case ('app-comparison') {
+        <app-comparison [companyId]="selectedCompanyId"></app-comparison>
+      }
+      @case ('app-forms') {
+        <app-forms [companyId]="selectedCompanyId"></app-forms>
+      }
+      @case ('app-events') {
+        <app-events [companyId]="selectedCompanyId"></app-events>
+      }
+      @case ('app-team') {
+        <app-team [companyId]="selectedCompanyId"></app-team>
+      }
+      @case ('app-contact-review') {
+        <app-contact-review [companyId]="selectedCompanyId"></app-contact-review>
+      }
+    }
+  }
 </div>

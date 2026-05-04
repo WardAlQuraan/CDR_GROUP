@@ -156,6 +156,12 @@ namespace cdr_group.Persistence.Data
             var companyTitleDescriptionsUpdateId = Guid.Parse("ccddeeff-3333-3333-3333-cccccccccccc");
             var companyTitleDescriptionsDeleteId = Guid.Parse("ccddeeff-3333-3333-3333-dddddddddddd");
 
+            // CompanyHomeComponentSetup Permission IDs
+            var companyHomeComponentSetupsReadId = Guid.Parse("ccddeeff-4444-4444-4444-aaaaaaaaaaaa");
+            var companyHomeComponentSetupsCreateId = Guid.Parse("ccddeeff-4444-4444-4444-bbbbbbbbbbbb");
+            var companyHomeComponentSetupsUpdateId = Guid.Parse("ccddeeff-4444-4444-4444-cccccccccccc");
+            var companyHomeComponentSetupsDeleteId = Guid.Parse("ccddeeff-4444-4444-4444-dddddddddddd");
+
             // Company IDs
             var cdrGroupCompanyId = Guid.Parse("aabbccdd-aabb-aabb-aabb-aabbccddeeff");
 
@@ -312,6 +318,11 @@ namespace cdr_group.Persistence.Data
                 new Permission { Id = companyTitleDescriptionsCreateId, Name = PermissionConstants.CompanyTitleDescriptions.Create, Description = "Create company title descriptions", Module = "CompanyTitleDescriptions", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = companyTitleDescriptionsUpdateId, Name = PermissionConstants.CompanyTitleDescriptions.Update, Description = "Update company title descriptions", Module = "CompanyTitleDescriptions", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = companyTitleDescriptionsDeleteId, Name = PermissionConstants.CompanyTitleDescriptions.Delete, Description = "Delete company title descriptions", Module = "CompanyTitleDescriptions", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                // CompanyHomeComponentSetup permissions
+                new Permission { Id = companyHomeComponentSetupsReadId, Name = PermissionConstants.CompanyHomeComponentSetups.Read, Description = "View company home component setups", Module = "CompanyHomeComponentSetups", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companyHomeComponentSetupsCreateId, Name = PermissionConstants.CompanyHomeComponentSetups.Create, Description = "Create company home component setups", Module = "CompanyHomeComponentSetups", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companyHomeComponentSetupsUpdateId, Name = PermissionConstants.CompanyHomeComponentSetups.Update, Description = "Update company home component setups", Module = "CompanyHomeComponentSetups", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+                new Permission { Id = companyHomeComponentSetupsDeleteId, Name = PermissionConstants.CompanyHomeComponentSetups.Delete, Description = "Delete company home component setups", Module = "CompanyHomeComponentSetups", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
             };
 
             modelBuilder.Entity<Permission>().HasData(permissions);

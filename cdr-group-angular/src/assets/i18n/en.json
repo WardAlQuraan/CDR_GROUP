@@ -784,6 +784,7 @@
       "titleDescriptions": "Title & Description Sections",
       "financialClausesRights" : "Financial Clauses & Rights",
       "clientReaches": "Client Reaches",
+      "homeComponentSetups": "Home Component Setups",
       "chooseAnother": "Choose another",
       "logoUploaded": "Logo uploaded successfully",
       "basicInfo": "Basic Information",
@@ -1024,6 +1025,41 @@
         "titleAr": "Enter the title in Arabic",
         "descriptionEn": "Enter the description in English",
         "descriptionAr": "Enter the description in Arabic"
+      }
+    },
+    "companyHomeComponentSetups": {
+      "title": "Home Component Setups",
+      "subtitle": "Configure home page components, their order, and linked title/preference codes",
+      "addSetup": "Add Setup",
+      "createSetup": "Create Setup",
+      "editSetup": "Edit Setup",
+      "deleteSetup": "Delete Setup",
+      "setupInfo": "Setup Information",
+      "componentCode": "Component Code",
+      "companyTitleDescriptionCode": "Title/Description Code",
+      "preferenceTitleCode": "Preference Title Code",
+      "preferenceDescriptionCode": "Preference Description Code",
+      "rank": "Rank",
+      "created": "Created",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this setup?",
+      "setupCreated": "Setup created successfully",
+      "setupUpdated": "Setup updated successfully",
+      "setupDeleted": "Setup deleted successfully",
+      "errors": {
+        "componentCodeRequired": "Component Code is required",
+        "rankRequired": "Rank is required",
+        "codeMaxLength": "Code must not exceed 100 characters",
+        "loadFailed": "Failed to load setups",
+        "createFailed": "Failed to create setup",
+        "updateFailed": "Failed to update setup",
+        "deleteFailed": "Failed to delete setup"
+      },
+      "placeholders": {
+        "companyTitleDescriptionCode": "e.g. DISTINGUISHES",
+        "preferenceTitleCode": "e.g. DISTINGUISHES_TITLE",
+        "preferenceDescriptionCode": "e.g. DISTINGUISHES_DESCRIPTION"
       }
     },
     "companyClientReaches": {

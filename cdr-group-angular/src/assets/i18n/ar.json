@@ -784,6 +784,7 @@
       "titleDescriptions": "أقسام العنوان والوصف",
       "financialClausesRights": "الشروط المالية والحقوق",
       "clientReaches": "توسع العملاء",
+      "homeComponentSetups": "إعدادات مكونات الصفحة الرئيسية",
       "chooseAnother": "اختر صورة أخرى",
       "logoUploaded": "تم رفع الشعار بنجاح",
       "basicInfo": "المعلومات الأساسية",
@@ -1024,6 +1025,41 @@
         "titleAr": "أدخل العنوان بالعربية",
         "descriptionEn": "أدخل الوصف بالإنجليزية",
         "descriptionAr": "أدخل الوصف بالعربية"
+      }
+    },
+    "companyHomeComponentSetups": {
+      "title": "إعدادات مكونات الصفحة الرئيسية",
+      "subtitle": "تكوين مكونات الصفحة الرئيسية وترتيبها وربطها بأكواد العناوين والتفضيلات",
+      "addSetup": "إضافة إعداد",
+      "createSetup": "إنشاء إعداد",
+      "editSetup": "تعديل الإعداد",
+      "deleteSetup": "حذف الإعداد",
+      "setupInfo": "معلومات الإعداد",
+      "componentCode": "كود المكون",
+      "companyTitleDescriptionCode": "كود العنوان/الوصف",
+      "preferenceTitleCode": "كود عنوان التفضيل",
+      "preferenceDescriptionCode": "كود وصف التفضيل",
+      "rank": "الترتيب",
+      "created": "تاريخ الإنشاء",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "confirmDelete": "هل أنت متأكد من حذف هذا الإعداد؟",
+      "setupCreated": "تم إنشاء الإعداد بنجاح",
+      "setupUpdated": "تم تحديث الإعداد بنجاح",
+      "setupDeleted": "تم حذف الإعداد بنجاح",
+      "errors": {
+        "componentCodeRequired": "كود المكون مطلوب",
+        "rankRequired": "الترتيب مطلوب",
+        "codeMaxLength": "يجب ألا يتجاوز الكود 100 حرف",
+        "loadFailed": "فشل تحميل الإعدادات",
+        "createFailed": "فشل إنشاء الإعداد",
+        "updateFailed": "فشل تحديث الإعداد",
+        "deleteFailed": "فشل حذف الإعداد"
+      },
+      "placeholders": {
+        "companyTitleDescriptionCode": "مثال: DISTINGUISHES",
+        "preferenceTitleCode": "مثال: DISTINGUISHES_TITLE",
+        "preferenceDescriptionCode": "مثال: DISTINGUISHES_DESCRIPTION"
       }
     },
     "companyClientReaches": {
