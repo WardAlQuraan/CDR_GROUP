@@ -133,35 +133,11 @@ export const Permissions = {
   COMPANY_BRANCHES_UPDATE: 'company-branches.update',
   COMPANY_BRANCHES_DELETE: 'company-branches.delete',
 
-  // Company Distinguishes
-  COMPANY_DISTINGUISHES_READ: 'company-distinguishes.read',
-  COMPANY_DISTINGUISHES_CREATE: 'company-distinguishes.create',
-  COMPANY_DISTINGUISHES_UPDATE: 'company-distinguishes.update',
-  COMPANY_DISTINGUISHES_DELETE: 'company-distinguishes.delete',
-
-  // Company Distribution Marketings
-  COMPANY_DISTRIBUTION_MARKETINGS_READ: 'company-distribution-marketings.read',
-  COMPANY_DISTRIBUTION_MARKETINGS_CREATE: 'company-distribution-marketings.create',
-  COMPANY_DISTRIBUTION_MARKETINGS_UPDATE: 'company-distribution-marketings.update',
-  COMPANY_DISTRIBUTION_MARKETINGS_DELETE: 'company-distribution-marketings.delete',
-
-  // Company Pre Contract Studies
-  COMPANY_PRE_CONTRACT_STUDIES_READ: 'company-pre-contract-studies.read',
-  COMPANY_PRE_CONTRACT_STUDIES_CREATE: 'company-pre-contract-studies.create',
-  COMPANY_PRE_CONTRACT_STUDIES_UPDATE: 'company-pre-contract-studies.update',
-  COMPANY_PRE_CONTRACT_STUDIES_DELETE: 'company-pre-contract-studies.delete',
-
   // Company Financial Clauses Rights
   COMPANY_FINANCIAL_CLAUSES_RIGHTS_READ: 'company-financial-clauses-rights.read',
   COMPANY_FINANCIAL_CLAUSES_RIGHTS_CREATE: 'company-financial-clauses-rights.create',
   COMPANY_FINANCIAL_CLAUSES_RIGHTS_UPDATE: 'company-financial-clauses-rights.update',
   COMPANY_FINANCIAL_CLAUSES_RIGHTS_DELETE: 'company-financial-clauses-rights.delete',
-
-  // Company Partnership Franchise Mechanisms
-  COMPANY_PARTNERSHIP_FRANCHISE_MECHANISMS_READ: 'company-partnership-franchise-mechanisms.read',
-  COMPANY_PARTNERSHIP_FRANCHISE_MECHANISMS_CREATE: 'company-partnership-franchise-mechanisms.create',
-  COMPANY_PARTNERSHIP_FRANCHISE_MECHANISMS_UPDATE: 'company-partnership-franchise-mechanisms.update',
-  COMPANY_PARTNERSHIP_FRANCHISE_MECHANISMS_DELETE: 'company-partnership-franchise-mechanisms.delete',
 
   // Company Client Reaches
   COMPANY_CLIENT_REACHES_READ: 'company-client-reaches.read',

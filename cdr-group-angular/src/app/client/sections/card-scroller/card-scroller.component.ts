@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges, effect, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges, ViewChild, effect, inject } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CompanyPreferencesService } from '../../../services/company-preferences.service';
 import { CompanyTitleDescriptionsService } from '../../../services/company-title-descriptions.service';
@@ -7,16 +7,18 @@ import { TranslationService } from '../../../services/translation.service';
 import { CompanyTitleDescriptionDto } from '../../../models/company-title-description.model';
 
 @Component({
-  selector: 'app-glass-card',
+  selector: 'app-card-scroller',
   standalone: false,
-  templateUrl: './glass-card.component.html',
-  styleUrl: './glass-card.component.scss',
+  templateUrl: './card-scroller.component.html',
+  styleUrl: './card-scroller.component.scss',
 })
-export class GlassCardComponent implements OnChanges {
+export class CardScrollerComponent implements OnChanges, OnDestroy {
   @Input() companyId = '';
   @Input() code = '';
   @Input() titleCode = '';
   @Input() descriptionCode = '';
+
+  @ViewChild('scroller') scrollerRef?: ElementRef<HTMLDivElement>;
 
   private companyState = inject(CompanyStateService);
   private companyTitleDescriptionsService = inject(CompanyTitleDescriptionsService);
@@ -27,14 +29,15 @@ export class GlassCardComponent implements OnChanges {
 
   items: CompanyTitleDescriptionDto[] = [];
   loading = false;
-  currentIndex = 0;
-
-  private static readonly VISIBLE_COUNT = 3;
+  isPaused = false;
 
   private titleEn = '';
   private titleAr = '';
   private descriptionEn = '';
   private descriptionAr = '';
+
+  private autoplayId: ReturnType<typeof setInterval> | null = null;
+  private static readonly AUTOPLAY_MS = 4500;
 
   constructor() {
     effect(() => {
@@ -55,6 +58,18 @@ export class GlassCardComponent implements OnChanges {
     }
   }
 
+  ngOnDestroy(): void {
+    this.stopAutoplay();
+  }
+
+  onPointerEnter(): void {
+    this.isPaused = true;
+  }
+
+  onPointerLeave(): void {
+    this.isPaused = false;
+  }
+
   get isArabic(): boolean {
     return this.translationService.language() === 'ar';
   }
@@ -63,47 +78,8 @@ export class GlassCardComponent implements OnChanges {
     return this.items.length > 0;
   }
 
-  get visibleCount(): number {
-    return GlassCardComponent.VISIBLE_COUNT;
-  }
-
-  get maxIndex(): number {
-    return Math.max(0, this.items.length - this.visibleCount);
-  }
-
-  get totalPositions(): number {
-    return this.maxIndex + 1;
-  }
-
-  get positionDots(): number[] {
-    return Array.from({ length: this.totalPositions }, (_, i) => i);
-  }
-
   get hasMultiple(): boolean {
-    return this.items.length > this.visibleCount;
-  }
-
-  get trackTransform(): string {
-    const sign = this.isArabic ? 1 : -1;
-    const shiftPercent = this.currentIndex * (100 / this.visibleCount);
-    return `translateX(${sign * shiftPercent}%)`;
-  }
-
-  next(): void {
-    if (!this.hasMultiple) return;
-    this.currentIndex = (this.currentIndex + 1) % this.totalPositions;
-    this.cdr.markForCheck();
-  }
-
-  prev(): void {
-    if (!this.hasMultiple) return;
-    this.currentIndex = (this.currentIndex - 1 + this.totalPositions) % this.totalPositions;
-    this.cdr.markForCheck();
-  }
-
-  goTo(index: number): void {
-    this.currentIndex = index;
-    this.cdr.markForCheck();
+    return this.items.length > 1;
   }
 
   get primaryColorValue(): string {
@@ -132,6 +108,98 @@ export class GlassCardComponent implements OnChanges {
 
   get safeSectionDescription(): SafeHtml | null {
     return this.sectionDescription ? this.sanitizer.bypassSecurityTrustHtml(this.sectionDescription) : null;
+  }
+
+  getTitle(item: CompanyTitleDescriptionDto): string {
+    return (this.isArabic ? item.titleAr : item.titleEn) || '';
+  }
+
+  getDescription(item: CompanyTitleDescriptionDto): string {
+    return (this.isArabic ? item.descriptionAr : item.descriptionEn) || '';
+  }
+
+  scrollPrev(): void {
+    this.scrollByCard(false);
+    this.restartAutoplay();
+  }
+
+  scrollNext(): void {
+    this.scrollByCard(true);
+    this.restartAutoplay();
+  }
+
+  private scrollByCard(forward: boolean): void {
+    const el = this.scrollerRef?.nativeElement;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>('.scroller-card');
+    if (!card) return;
+    const styles = getComputedStyle(el);
+    const gap = parseFloat(styles.columnGap || styles.gap || '0') || 22;
+    const step = card.offsetWidth + gap;
+    const direction = forward !== this.isArabic ? 1 : -1;
+    el.scrollBy({ left: direction * step, behavior: 'smooth' });
+  }
+
+  private advanceAuto(): void {
+    const el = this.scrollerRef?.nativeElement;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>('.scroller-card');
+    if (!card) return;
+
+    const styles = getComputedStyle(el);
+    const gap = parseFloat(styles.columnGap || styles.gap || '0') || 22;
+    const step = card.offsetWidth + gap;
+
+    const maxScroll = Math.max(0, el.scrollWidth - el.clientWidth);
+    const currentScroll = Math.abs(el.scrollLeft);
+
+    if (maxScroll <= 0 || currentScroll >= maxScroll - 4) {
+      el.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      const direction = this.isArabic ? -1 : 1;
+      el.scrollBy({ left: direction * step, behavior: 'smooth' });
+    }
+  }
+
+  private startAutoplay(): void {
+    this.stopAutoplay();
+    if (!this.hasMultiple) return;
+    this.autoplayId = setInterval(() => {
+      if (!this.isPaused) {
+        this.advanceAuto();
+      }
+    }, CardScrollerComponent.AUTOPLAY_MS);
+  }
+
+  private stopAutoplay(): void {
+    if (this.autoplayId) {
+      clearInterval(this.autoplayId);
+      this.autoplayId = null;
+    }
+  }
+
+  private restartAutoplay(): void {
+    if (this.autoplayId) {
+      this.startAutoplay();
+    }
+  }
+
+  private loadItems(): void {
+    this.loading = true;
+    this.companyTitleDescriptionsService.getByCompanyAndCode(this.companyId, this.code).subscribe({
+      next: (response) => {
+        this.items = response.success && response.data ? response.data : [];
+        this.startAutoplay();
+        this.loading = false;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.items = [];
+        this.stopAutoplay();
+        this.loading = false;
+        this.cdr.markForCheck();
+      }
+    });
   }
 
   private loadTitle(): void {
@@ -168,36 +236,5 @@ export class GlassCardComponent implements OnChanges {
         },
         error: () => {}
       });
-  }
-
-  getTitle(item: CompanyTitleDescriptionDto): string {
-    return (this.isArabic ? item.titleAr : item.titleEn) || '';
-  }
-
-  getDescription(item: CompanyTitleDescriptionDto): string {
-    return (this.isArabic ? item.descriptionAr : item.descriptionEn) || '';
-  }
-
-  getSafeDescription(item: CompanyTitleDescriptionDto): SafeHtml | null {
-    const desc = this.getDescription(item);
-    return desc ? this.sanitizer.bypassSecurityTrustHtml(desc) : null;
-  }
-
-  private loadItems(): void {
-    this.loading = true;
-    this.items = [];
-    this.companyTitleDescriptionsService.getByCompanyAndCode(this.companyId, this.code).subscribe({
-      next: (response) => {
-        this.items = response.success && response.data ? response.data : [];
-        this.currentIndex = 0;
-        this.loading = false;
-        this.cdr.markForCheck();
-      },
-      error: () => {
-        this.items = [];
-        this.loading = false;
-        this.cdr.markForCheck();
-      }
-    });
   }
 }

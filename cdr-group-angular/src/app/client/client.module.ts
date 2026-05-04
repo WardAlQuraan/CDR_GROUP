@@ -24,15 +24,15 @@ import { ComplaintComponent } from './sections/complaint/complaint.component';
 import { ReviewsDisplayComponent } from './sections/reviews-display/reviews-display.component';
 import { FormsComponent } from './sections/forms/forms.component';
 import { BranchesComponent } from './sections/branches/branches.component';
-import { DistinguishesComponent } from './sections/distinguishes/distinguishes.component';
-import { DistributionMarketingsComponent } from './sections/distribution-marketings/distribution-marketings.component';
-import { PreContractStudiesComponent } from './sections/pre-contract-studies/pre-contract-studies.component';
-import { PartnershipFranchiseMechanismsComponent } from './sections/partnership-franchise-mechanisms/partnership-franchise-mechanisms.component';
 import { ClientReachesComponent } from './sections/client-reaches/client-reaches.component';
 import { SubCompaniesComponent } from './sections/sub-companies/sub-companies.component';
 import { ComparisonComponent } from './sections/comparison/comparison.component';
 import { GlassCardComponent } from './sections/glass-card/glass-card.component';
 import { QuoteSliderComponent } from './sections/quote-slider/quote-slider.component';
+import { FillCardsComponent } from './sections/fill-cards/fill-cards.component';
+import { CardScrollerComponent } from './sections/card-scroller/card-scroller.component';
+import { GlassSliderComponent } from './sections/glass-slider/glass-slider.component';
+import { StatementSliderComponent } from './sections/statement-slider/statement-slider.component';
 
 // Pages
 import { HomeComponent } from './pages/home/home.component';
@@ -67,15 +67,15 @@ import { clientRoutes } from './client.routes';
     ReviewsDisplayComponent,
     FormsComponent,
     BranchesComponent,
-    DistinguishesComponent,
-    DistributionMarketingsComponent,
-    PreContractStudiesComponent,
-    PartnershipFranchiseMechanismsComponent,
     ClientReachesComponent,
     SubCompaniesComponent,
     ComparisonComponent,
     GlassCardComponent,
     QuoteSliderComponent,
+    FillCardsComponent,
+    CardScrollerComponent,
+    GlassSliderComponent,
+    StatementSliderComponent,
     // Pages
     HomeComponent,
     EventListingComponent,

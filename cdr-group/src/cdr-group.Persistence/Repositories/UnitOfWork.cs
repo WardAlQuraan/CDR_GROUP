@@ -24,10 +24,6 @@ namespace cdr_group.Persistence.Repositories
         private ICompanyFormRepository? _companyForms;
         private ICompanyPreferenceRepository? _companyPreferences;
         private ICompanyBranchRepository? _companyBranches;
-        private ICompanyDistinguishRepository? _companyDistinguishes;
-        private ICompanyDistributionMarketingRepository? _companyDistributionMarketings;
-        private ICompanyPreContractStudyRepository? _companyPreContractStudies;
-        private ICompanyPartnershipFranchiseMechanismRepository? _companyPartnershipFranchiseMechanisms;
         private ICompanyFinancialClausesRightsRepository? _companyFinancialClausesRights;
         private ICompanyClientReachRepository? _companyClientReaches;
         private ICompanyTitleDescriptionRepository? _companyTitleDescriptions;
@@ -58,10 +54,6 @@ namespace cdr_group.Persistence.Repositories
         public ICompanyFormRepository CompanyForms => _companyForms ??= new CompanyFormRepository(_context);
         public ICompanyPreferenceRepository CompanyPreferences => _companyPreferences ??= new CompanyPreferenceRepository(_context);
         public ICompanyBranchRepository CompanyBranches => _companyBranches ??= new CompanyBranchRepository(_context);
-        public ICompanyDistinguishRepository CompanyDistinguishes => _companyDistinguishes ??= new CompanyDistinguishRepository(_context);
-        public ICompanyDistributionMarketingRepository CompanyDistributionMarketings => _companyDistributionMarketings ??= new CompanyDistributionMarketingRepository(_context);
-        public ICompanyPreContractStudyRepository CompanyPreContractStudies => _companyPreContractStudies ??= new CompanyPreContractStudyRepository(_context);
-        public ICompanyPartnershipFranchiseMechanismRepository CompanyPartnershipFranchiseMechanisms => _companyPartnershipFranchiseMechanisms ??= new CompanyPartnershipFranchiseMechanismRepository(_context);
         public ICompanyFinancialClausesRightsRepository CompanyFinancialClausesRights => _companyFinancialClausesRights ??= new CompanyFinancialClausesRightsRepository(_context);
         public ICompanyClientReachRepository CompanyClientReaches => _companyClientReaches ??= new CompanyClientReachRepository(_context);
         public ICompanyTitleDescriptionRepository CompanyTitleDescriptions => _companyTitleDescriptions ??= new CompanyTitleDescriptionRepository(_context);

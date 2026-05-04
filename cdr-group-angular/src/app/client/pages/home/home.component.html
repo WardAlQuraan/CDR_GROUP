@@ -4,8 +4,16 @@
   <app-about [company]="selectedCompany"></app-about>
   <app-sub-companies [companyId]="selectedCompanyId"></app-sub-companies>
   <app-branches [companyId]="selectedCompanyId"></app-branches>
-  <app-distinguishes [companyId]="selectedCompanyId"></app-distinguishes>
-  <app-distribution-marketings [companyId]="selectedCompanyId"></app-distribution-marketings>
+  <app-card-scroller
+    [companyId]="selectedCompanyId"
+    code="DISTINGUISHES"
+    titleCode="DISTINGUISHES_TITLE"
+    descriptionCode="DISTINGUISHES_DESCRIPTION"></app-card-scroller>
+  <app-fill-cards
+    [companyId]="selectedCompanyId"
+    code="DISTRIBUTION_MARKETING"
+    titleCode="DISTRIBUTION_MARKETING_TITLE"
+    descriptionCode="DISTRIBUTION_MARKETING_DESCRIPTION"></app-fill-cards>
   <app-quote-slider
     [companyId]="selectedCompanyId"
     code="SUCCESS_REASON"
@@ -16,10 +24,26 @@
     code="WHEN_WHERE"
     titleCode="WHEN_WHERE_TITLE"
     descriptionCode="WHEN_WHERE_DESCRIPTION"></app-quote-slider>
-  <app-pre-contract-studies [companyId]="selectedCompanyId"></app-pre-contract-studies>
-  <app-glass-card [companyId]="selectedCompanyId" code="COMPANY_GEOGRAPHIC_EXPANSIONS"></app-glass-card>
-  <app-glass-card [companyId]="selectedCompanyId" code="WHAT_WE_DO"></app-glass-card>
-  <app-partnership-franchise-mechanisms [companyId]="selectedCompanyId"></app-partnership-franchise-mechanisms>
+  <app-glass-slider
+    [companyId]="selectedCompanyId"
+    code="PRE_CONTRACT_STUDIES"
+    titleCode="PRE_CONTRACT_STUDIES_TITLE"
+    descriptionCode="PRE_CONTRACT_STUDIES_DESCRIPTION"></app-glass-slider>
+  <app-glass-card
+    [companyId]="selectedCompanyId"
+    code="COMPANY_GEOGRAPHIC_EXPANSIONS"
+    titleCode="COMPANY_GEOGRAPHIC_EXPANSIONS_TITLE"
+    descriptionCode="COMPANY_GEOGRAPHIC_EXPANSIONS_DESCRIPTION"></app-glass-card>
+  <app-glass-card
+    [companyId]="selectedCompanyId"
+    code="WHAT_WE_DO"
+    titleCode="WHAT_WE_DO_TITLE"
+    descriptionCode="WHAT_WE_DO_DESCRIPTION"></app-glass-card>
+  <app-statement-slider
+    [companyId]="selectedCompanyId"
+    code="PARTNERSHIP_FRANCHISE_MECHANISM"
+    titleCode="PARTNERSHIP_FRANCHISE_MECHANISM_TITLE"
+    descriptionCode="PARTNERSHIP_FRANCHISE_MECHANISM_DESCRIPTION"></app-statement-slider>
   <app-client-reaches [companyId]="selectedCompanyId"></app-client-reaches>
   <app-comparison [companyId]="selectedCompanyId"></app-comparison>
 

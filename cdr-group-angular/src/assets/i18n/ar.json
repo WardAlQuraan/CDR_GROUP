@@ -141,24 +141,6 @@
     "title": "طريقك للإنجاز",
     "subtitle": "وصول سريع إلى النماذج المتاحة لهذه الشركة"
   },
-  "distinguishes": {
-    "eyebrow": "ما يميزنا",
-    "title": "ما الذي يجعلنا مختلفين",
-    "subtitle": "الصفات التي تشكل هويتنا وتنعكس في كل تجربة نقدمها"
-  },
-  "distributionMarketings": {
-    "eyebrow": "التوزيع والتسويق",
-    "title": "كيف نصل إليك",
-    "subtitle": "القنوات التي نستخدمها لإيصال منتجاتنا وقصصنا في كل مكان"
-  },
-  "preContractStudies": {
-    "title": "دراسات ما قبل التعاقد",
-    "subtitle": "دراسات الجدوى والتحليلات التي نقدمها قبل بدء أي ارتباط"
-  },
-  "partnershipFranchiseMechanisms": {
-    "title": "الشراكة والامتياز",
-    "subtitle": "كيف نُنظم الشراكات وفرص الامتياز التجاري"
-  },
   "clientReaches": {
     "title": "إنجازاتنا",
     "subtitle": "العلامات التجارية التي عملنا معها والجماهير التي وصلنا إليها سويًا",
@@ -800,10 +782,6 @@
       "forms": "النماذج",
       "preferences": "التفضيلات",
       "titleDescriptions": "أقسام العنوان والوصف",
-      "distinguishes": "ما يميزنا",
-      "distributionMarketings": "التوزيع والتسويق",
-      "preContractStudies": "دراسات ما قبل التعاقد",
-      "partnershipFranchiseMechanisms": "الشراكة والامتياز",
       "financialClausesRights": "الشروط المالية والحقوق",
       "clientReaches": "توسع العملاء",
       "chooseAnother": "اختر صورة أخرى",
@@ -1006,38 +984,6 @@
         "value": "أدخل قيمة جهة الاتصال"
       }
     },
-    "companyPartnershipFranchiseMechanisms": {
-      "title": "الشراكة والامتياز",
-      "subtitle": "إدارة آليات الشراكة والامتياز",
-      "addMechanism": "إضافة آلية",
-      "createMechanism": "إنشاء آلية",
-      "editMechanism": "تعديل آلية",
-      "deleteMechanism": "حذف آلية",
-      "mechanismInfo": "معلومات الآلية",
-      "description": "الوصف",
-      "descriptionEn": "الوصف (إنجليزي)",
-      "descriptionAr": "الوصف (عربي)",
-      "created": "تاريخ الإنشاء",
-      "edit": "تعديل",
-      "delete": "حذف",
-      "confirmDelete": "هل أنت متأكد من حذف هذا العنصر؟",
-      "mechanismCreated": "تم إنشاء الآلية بنجاح",
-      "mechanismUpdated": "تم تحديث الآلية بنجاح",
-      "mechanismDeleted": "تم حذف الآلية بنجاح",
-      "errors": {
-        "loadFailed": "فشل تحميل الآليات",
-        "createFailed": "فشل إنشاء الآلية",
-        "updateFailed": "فشل تحديث الآلية",
-        "deleteFailed": "فشل حذف الآلية",
-        "descriptionEnRequired": "الوصف (إنجليزي) مطلوب",
-        "descriptionArRequired": "الوصف (عربي) مطلوب",
-        "descriptionMaxLength": "يجب ألا يتجاوز الوصف 2000 حرف"
-      },
-      "placeholders": {
-        "descriptionEn": "أدخل الوصف بالإنجليزية",
-        "descriptionAr": "أدخل الوصف بالعربية"
-      }
-    },
     "companyFinancialClausesRights": {
       "title": "الشروط المالية والحقوق",
       "titleEn": "عنوان الشروط المالية والحقوق (إنجليزي)",
@@ -1166,119 +1112,6 @@
         "titleAr": "عنوان اختياري بالعربية",
         "descriptionEn": "وصف اختياري بالإنجليزية",
         "descriptionAr": "وصف اختياري بالعربية"
-      }
-    },
-    "companyPreContractStudies": {
-      "title": "دراسات ما قبل التعاقد",
-      "subtitle": "إدارة دراسات الجدوى وما قبل التعاقد",
-      "addStudy": "إضافة دراسة",
-      "createStudy": "إنشاء دراسة",
-      "editStudy": "تعديل دراسة",
-      "deleteStudy": "حذف دراسة",
-      "studyInfo": "معلومات الدراسة",
-      "studyTitle": "العنوان",
-      "description": "الوصف",
-      "titleEn": "العنوان (إنجليزي)",
-      "titleAr": "العنوان (عربي)",
-      "descriptionEn": "الوصف (إنجليزي)",
-      "descriptionAr": "الوصف (عربي)",
-      "created": "تاريخ الإنشاء",
-      "edit": "تعديل",
-      "delete": "حذف",
-      "confirmDelete": "هل أنت متأكد من حذف هذه الدراسة؟",
-      "studyCreated": "تم إنشاء الدراسة بنجاح",
-      "studyUpdated": "تم تحديث الدراسة بنجاح",
-      "studyDeleted": "تم حذف الدراسة بنجاح",
-      "errors": {
-        "loadFailed": "فشل تحميل الدراسات",
-        "createFailed": "فشل إنشاء الدراسة",
-        "updateFailed": "فشل تحديث الدراسة",
-        "deleteFailed": "فشل حذف الدراسة",
-        "descriptionEnRequired": "الوصف (إنجليزي) مطلوب",
-        "descriptionArRequired": "الوصف (عربي) مطلوب",
-        "descriptionMaxLength": "يجب ألا يتجاوز الوصف 2000 حرف"
-      },
-      "placeholders": {
-        "titleEn": "أدخل العنوان بالإنجليزية",
-        "titleAr": "أدخل العنوان بالعربية",
-        "descriptionEn": "أدخل الوصف بالإنجليزية",
-        "descriptionAr": "أدخل الوصف بالعربية"
-      }
-    },
-    "companyDistributionMarketings": {
-      "title": "التوزيع والتسويق",
-      "subtitle": "إدارة قنوات التوزيع والتسويق للشركة",
-      "addMarketing": "إضافة قناة",
-      "createMarketing": "إنشاء قناة",
-      "editMarketing": "تعديل قناة",
-      "deleteMarketing": "حذف قناة",
-      "marketingInfo": "معلومات القناة",
-      "marketingTitle": "العنوان",
-      "description": "الوصف",
-      "titleEn": "العنوان (إنجليزي)",
-      "titleAr": "العنوان (عربي)",
-      "descriptionEn": "الوصف (إنجليزي)",
-      "descriptionAr": "الوصف (عربي)",
-      "created": "تاريخ الإنشاء",
-      "edit": "تعديل",
-      "delete": "حذف",
-      "confirmDelete": "هل أنت متأكد من حذف هذا العنصر؟",
-      "marketingCreated": "تم إنشاء القناة بنجاح",
-      "marketingUpdated": "تم تحديث القناة بنجاح",
-      "marketingDeleted": "تم حذف القناة بنجاح",
-      "errors": {
-        "loadFailed": "فشل تحميل القنوات",
-        "createFailed": "فشل إنشاء القناة",
-        "updateFailed": "فشل تحديث القناة",
-        "deleteFailed": "فشل حذف القناة",
-        "titleEnRequired": "العنوان (إنجليزي) مطلوب",
-        "titleArRequired": "العنوان (عربي) مطلوب",
-        "titleMaxLength": "يجب ألا يتجاوز العنوان 500 حرف",
-        "descriptionMaxLength": "يجب ألا يتجاوز الوصف 2000 حرف"
-      },
-      "placeholders": {
-        "titleEn": "أدخل العنوان بالإنجليزية",
-        "titleAr": "أدخل العنوان بالعربية",
-        "descriptionEn": "أدخل الوصف بالإنجليزية",
-        "descriptionAr": "أدخل الوصف بالعربية"
-      }
-    },
-    "companyDistinguishes": {
-      "title": "ما يميزنا",
-      "subtitle": "إدارة ما يميز الشركة",
-      "addDistinguish": "إضافة ميزة",
-      "createDistinguish": "إنشاء ميزة",
-      "editDistinguish": "تعديل ميزة",
-      "deleteDistinguish": "حذف ميزة",
-      "distinguishInfo": "معلومات الميزة",
-      "distinguishTitle": "العنوان",
-      "description": "الوصف",
-      "titleEn": "العنوان (إنجليزي)",
-      "titleAr": "العنوان (عربي)",
-      "descriptionEn": "الوصف (إنجليزي)",
-      "descriptionAr": "الوصف (عربي)",
-      "created": "تاريخ الإنشاء",
-      "edit": "تعديل",
-      "delete": "حذف",
-      "confirmDelete": "هل أنت متأكد من حذف هذا العنصر؟",
-      "distinguishCreated": "تم إنشاء الميزة بنجاح",
-      "distinguishUpdated": "تم تحديث الميزة بنجاح",
-      "distinguishDeleted": "تم حذف الميزة بنجاح",
-      "errors": {
-        "loadFailed": "فشل تحميل المميزات",
-        "createFailed": "فشل إنشاء الميزة",
-        "updateFailed": "فشل تحديث الميزة",
-        "deleteFailed": "فشل حذف الميزة",
-        "titleEnRequired": "العنوان (إنجليزي) مطلوب",
-        "titleArRequired": "العنوان (عربي) مطلوب",
-        "titleMaxLength": "يجب ألا يتجاوز العنوان 500 حرف",
-        "descriptionMaxLength": "يجب ألا يتجاوز الوصف 2000 حرف"
-      },
-      "placeholders": {
-        "titleEn": "أدخل العنوان بالإنجليزية",
-        "titleAr": "أدخل العنوان بالعربية",
-        "descriptionEn": "أدخل الوصف بالإنجليزية",
-        "descriptionAr": "أدخل الوصف بالعربية"
       }
     },
     "companyBranches": {

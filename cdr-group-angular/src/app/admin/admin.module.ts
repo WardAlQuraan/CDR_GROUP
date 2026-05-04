@@ -50,14 +50,6 @@ import { CompanyPreferenceDialogComponent } from './pages/company-preferences/co
 import { CompanyBranchesComponent } from './pages/company-branches/company-branches-component/company-branches-component';
 import { CompanyBranchDialogComponent } from './pages/company-branches/company-branch-dialog/company-branch-dialog.component';
 import { CompanyBranchImageDialogComponent } from './pages/company-branches/company-branch-image-dialog/company-branch-image-dialog.component';
-import { CompanyDistinguishesComponent } from './pages/company-distinguishes/company-distinguishes-component/company-distinguishes-component';
-import { CompanyDistinguishDialogComponent } from './pages/company-distinguishes/company-distinguish-dialog/company-distinguish-dialog.component';
-import { CompanyDistributionMarketingsComponent } from './pages/company-distribution-marketings/company-distribution-marketings-component/company-distribution-marketings-component';
-import { CompanyDistributionMarketingDialogComponent } from './pages/company-distribution-marketings/company-distribution-marketing-dialog/company-distribution-marketing-dialog.component';
-import { CompanyPreContractStudiesComponent } from './pages/company-pre-contract-studies/company-pre-contract-studies-component/company-pre-contract-studies-component';
-import { CompanyPreContractStudyDialogComponent } from './pages/company-pre-contract-studies/company-pre-contract-study-dialog/company-pre-contract-study-dialog.component';
-import { CompanyPartnershipFranchiseMechanismsComponent } from './pages/company-partnership-franchise-mechanisms/company-partnership-franchise-mechanisms-component/company-partnership-franchise-mechanisms-component';
-import { CompanyPartnershipFranchiseMechanismDialogComponent } from './pages/company-partnership-franchise-mechanisms/company-partnership-franchise-mechanism-dialog/company-partnership-franchise-mechanism-dialog.component';
 import { ReviewsComponent } from './pages/reviews/reviews-component/reviews-component';
 import { ReviewDialogComponent } from './pages/reviews/review-dialog/review-dialog.component';
 import { ComplaintsComponent } from './pages/complaints/complaints-component/complaints-component';
@@ -113,14 +105,6 @@ import { CompanyTitleDescriptionDialogComponent } from './pages/company-title-de
     CompanyBranchesComponent,
     CompanyBranchDialogComponent,
     CompanyBranchImageDialogComponent,
-    CompanyDistinguishesComponent,
-    CompanyDistinguishDialogComponent,
-    CompanyDistributionMarketingsComponent,
-    CompanyDistributionMarketingDialogComponent,
-    CompanyPreContractStudiesComponent,
-    CompanyPreContractStudyDialogComponent,
-    CompanyPartnershipFranchiseMechanismsComponent,
-    CompanyPartnershipFranchiseMechanismDialogComponent,
     CompanyFinancialClausesRightsComponent,
     CompanyFinancialClausesRightsDialogComponent,
     CompanyClientReachesComponent,

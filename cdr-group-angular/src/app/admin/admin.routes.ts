@@ -15,10 +15,6 @@ import { CompanyBackgroundsComponent } from './pages/company-backgrounds/company
 import { CompanyFormsComponent } from './pages/company-forms/company-forms-component/company-forms-component';
 import { CompanyPreferencesComponent } from './pages/company-preferences/company-preferences-component/company-preferences-component';
 import { CompanyBranchesComponent } from './pages/company-branches/company-branches-component/company-branches-component';
-import { CompanyDistinguishesComponent } from './pages/company-distinguishes/company-distinguishes-component/company-distinguishes-component';
-import { CompanyDistributionMarketingsComponent } from './pages/company-distribution-marketings/company-distribution-marketings-component/company-distribution-marketings-component';
-import { CompanyPreContractStudiesComponent } from './pages/company-pre-contract-studies/company-pre-contract-studies-component/company-pre-contract-studies-component';
-import { CompanyPartnershipFranchiseMechanismsComponent } from './pages/company-partnership-franchise-mechanisms/company-partnership-franchise-mechanisms-component/company-partnership-franchise-mechanisms-component';
 import { ReviewsComponent } from './pages/reviews/reviews-component/reviews-component';
 import { ComplaintsComponent } from './pages/complaints/complaints-component/complaints-component';
 import { PartnersComponent } from './pages/partners/partners-component/partners-component';
@@ -44,10 +40,6 @@ export const adminRoutes: Routes = [
       { path: 'companies/:companyId/forms', component: CompanyFormsComponent },
       { path: 'companies/:companyId/preferences', component: CompanyPreferencesComponent },
       { path: 'companies/:companyId/branches', component: CompanyBranchesComponent },
-      { path: 'companies/:companyId/distinguishes', component: CompanyDistinguishesComponent },
-      { path: 'companies/:companyId/distribution-marketings', component: CompanyDistributionMarketingsComponent },
-      { path: 'companies/:companyId/pre-contract-studies', component: CompanyPreContractStudiesComponent },
-      { path: 'companies/:companyId/partnership-franchise-mechanisms', component: CompanyPartnershipFranchiseMechanismsComponent },
       { path: 'companies/:companyId/financial-clauses-rights', component: CompanyFinancialClausesRightsComponent },
       { path: 'companies/:companyId/client-reaches', component: CompanyClientReachesComponent },
       { path: 'companies/:companyId/title-descriptions', component: CompanyTitleDescriptionsComponent },

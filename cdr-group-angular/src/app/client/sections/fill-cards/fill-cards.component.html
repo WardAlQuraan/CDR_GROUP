@@ -1,0 +1,35 @@
+@if (hasItems) {
+  <section class="fill-cards-section" [id]="sectionId"
+    [style.--brand-primary]="primaryColorValue"
+    [style.--brand-secondary]="secondaryColorValue">
+    <div class="container">
+      @if (safeSectionTitle || safeSectionDescription) {
+        <div class="row">
+          <div class="col-12 text-center mb-3">
+            @if (safeSectionTitle) {
+              <h2 class="section-title" [innerHTML]="safeSectionTitle"></h2>
+            }
+            @if (safeSectionDescription) {
+              <p class="section-subtitle" [innerHTML]="safeSectionDescription"></p>
+            }
+          </div>
+        </div>
+      }
+
+      <div class="cards-grid">
+        @for (item of items; track item.id; let i = $index) {
+          <article class="fill-card" [style.--index]="i">
+            <div class="card-body">
+              @if (getTitle(item); as title) {
+                <h3 class="card-title">{{ title }}</h3>
+              }
+              @if (getDescription(item); as description) {
+                <p class="card-description">{{ description }}</p>
+              }
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+}

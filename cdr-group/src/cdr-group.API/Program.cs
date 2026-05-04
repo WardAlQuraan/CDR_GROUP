@@ -138,10 +138,6 @@ builder.Services.AddScoped<ICompanyBackgroundRepository, CompanyBackgroundReposi
 builder.Services.AddScoped<ICompanyFormRepository, CompanyFormRepository>();
 builder.Services.AddScoped<ICompanyPreferenceRepository, CompanyPreferenceRepository>();
 builder.Services.AddScoped<ICompanyBranchRepository, CompanyBranchRepository>();
-builder.Services.AddScoped<ICompanyDistinguishRepository, CompanyDistinguishRepository>();
-builder.Services.AddScoped<ICompanyDistributionMarketingRepository, CompanyDistributionMarketingRepository>();
-builder.Services.AddScoped<ICompanyPreContractStudyRepository, CompanyPreContractStudyRepository>();
-builder.Services.AddScoped<ICompanyPartnershipFranchiseMechanismRepository, CompanyPartnershipFranchiseMechanismRepository>();
 builder.Services.AddScoped<ICompanyFinancialClausesRightsRepository, CompanyFinancialClausesRightsRepository>();
 builder.Services.AddScoped<ICompanyClientReachRepository, CompanyClientReachRepository>();
 builder.Services.AddScoped<ICompanyTitleDescriptionRepository, CompanyTitleDescriptionRepository>();
@@ -170,10 +166,6 @@ builder.Services.AddScoped<ICompanyBackgroundService, CompanyBackgroundService>(
 builder.Services.AddScoped<ICompanyFormService, CompanyFormService>();
 builder.Services.AddScoped<ICompanyPreferenceService, CompanyPreferenceService>();
 builder.Services.AddScoped<ICompanyBranchService, CompanyBranchService>();
-builder.Services.AddScoped<ICompanyDistinguishService, CompanyDistinguishService>();
-builder.Services.AddScoped<ICompanyDistributionMarketingService, CompanyDistributionMarketingService>();
-builder.Services.AddScoped<ICompanyPreContractStudyService, CompanyPreContractStudyService>();
-builder.Services.AddScoped<ICompanyPartnershipFranchiseMechanismService, CompanyPartnershipFranchiseMechanismService>();
 builder.Services.AddScoped<ICompanyFinancialClausesRightsService, CompanyFinancialClausesRightsService>();
 builder.Services.AddScoped<ICompanyClientReachService, CompanyClientReachService>();
 builder.Services.AddScoped<ICompanyTitleDescriptionService, CompanyTitleDescriptionService>();

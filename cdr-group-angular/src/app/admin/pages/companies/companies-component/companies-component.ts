@@ -191,22 +191,6 @@ export class CompaniesComponent implements OnInit {
           onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'title-descriptions'])
         },
         {
-          icon: 'workspace_premium',
-          tooltip: 'admin.companies.distinguishes',
-          permission: Permissions.COMPANY_DISTINGUISHES_READ,
-          color: 'accent',
-          primary: false,
-          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'distinguishes'])
-        },
-        {
-          icon: 'campaign',
-          tooltip: 'admin.companies.distributionMarketings',
-          permission: Permissions.COMPANY_DISTRIBUTION_MARKETINGS_READ,
-          color: 'accent',
-          primary: false,
-          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'distribution-marketings'])
-        },
-        {
           icon: 'attach_money',
           tooltip: 'admin.companies.financialClausesRights',
           permission: Permissions.COMPANY_FINANCIAL_CLAUSES_RIGHTS_READ,
@@ -221,22 +205,6 @@ export class CompaniesComponent implements OnInit {
           color: 'accent',
           primary: false,
           onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'client-reaches'])
-        },
-        {
-          icon: 'assessment',
-          tooltip: 'admin.companies.preContractStudies',
-          permission: Permissions.COMPANY_PRE_CONTRACT_STUDIES_READ,
-          color: 'accent',
-          primary: false,
-          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'pre-contract-studies'])
-        },
-        {
-          icon: 'handshake',
-          tooltip: 'admin.companies.partnershipFranchiseMechanisms',
-          permission: Permissions.COMPANY_PARTNERSHIP_FRANCHISE_MECHANISMS_READ,
-          color: 'accent',
-          primary: false,
-          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'partnership-franchise-mechanisms'])
         },
         {
           icon: 'image',

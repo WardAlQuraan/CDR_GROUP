@@ -7,12 +7,12 @@ import { TranslationService } from '../../../services/translation.service';
 import { CompanyTitleDescriptionDto } from '../../../models/company-title-description.model';
 
 @Component({
-  selector: 'app-glass-card',
+  selector: 'app-fill-cards',
   standalone: false,
-  templateUrl: './glass-card.component.html',
-  styleUrl: './glass-card.component.scss',
+  templateUrl: './fill-cards.component.html',
+  styleUrl: './fill-cards.component.scss',
 })
-export class GlassCardComponent implements OnChanges {
+export class FillCardsComponent implements OnChanges {
   @Input() companyId = '';
   @Input() code = '';
   @Input() titleCode = '';
@@ -27,9 +27,6 @@ export class GlassCardComponent implements OnChanges {
 
   items: CompanyTitleDescriptionDto[] = [];
   loading = false;
-  currentIndex = 0;
-
-  private static readonly VISIBLE_COUNT = 3;
 
   private titleEn = '';
   private titleAr = '';
@@ -63,49 +60,6 @@ export class GlassCardComponent implements OnChanges {
     return this.items.length > 0;
   }
 
-  get visibleCount(): number {
-    return GlassCardComponent.VISIBLE_COUNT;
-  }
-
-  get maxIndex(): number {
-    return Math.max(0, this.items.length - this.visibleCount);
-  }
-
-  get totalPositions(): number {
-    return this.maxIndex + 1;
-  }
-
-  get positionDots(): number[] {
-    return Array.from({ length: this.totalPositions }, (_, i) => i);
-  }
-
-  get hasMultiple(): boolean {
-    return this.items.length > this.visibleCount;
-  }
-
-  get trackTransform(): string {
-    const sign = this.isArabic ? 1 : -1;
-    const shiftPercent = this.currentIndex * (100 / this.visibleCount);
-    return `translateX(${sign * shiftPercent}%)`;
-  }
-
-  next(): void {
-    if (!this.hasMultiple) return;
-    this.currentIndex = (this.currentIndex + 1) % this.totalPositions;
-    this.cdr.markForCheck();
-  }
-
-  prev(): void {
-    if (!this.hasMultiple) return;
-    this.currentIndex = (this.currentIndex - 1 + this.totalPositions) % this.totalPositions;
-    this.cdr.markForCheck();
-  }
-
-  goTo(index: number): void {
-    this.currentIndex = index;
-    this.cdr.markForCheck();
-  }
-
   get primaryColorValue(): string {
     return this.companyState.selectedCompany?.primaryColor || '#833AB4';
   }
@@ -132,6 +86,31 @@ export class GlassCardComponent implements OnChanges {
 
   get safeSectionDescription(): SafeHtml | null {
     return this.sectionDescription ? this.sanitizer.bypassSecurityTrustHtml(this.sectionDescription) : null;
+  }
+
+  getTitle(item: CompanyTitleDescriptionDto): string {
+    return (this.isArabic ? item.titleAr : item.titleEn) || '';
+  }
+
+  getDescription(item: CompanyTitleDescriptionDto): string {
+    return (this.isArabic ? item.descriptionAr : item.descriptionEn) || '';
+  }
+
+  private loadItems(): void {
+    this.loading = true;
+    this.items = [];
+    this.companyTitleDescriptionsService.getByCompanyAndCode(this.companyId, this.code).subscribe({
+      next: (response) => {
+        this.items = response.success && response.data ? response.data : [];
+        this.loading = false;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.items = [];
+        this.loading = false;
+        this.cdr.markForCheck();
+      }
+    });
   }
 
   private loadTitle(): void {
@@ -168,36 +147,5 @@ export class GlassCardComponent implements OnChanges {
         },
         error: () => {}
       });
-  }
-
-  getTitle(item: CompanyTitleDescriptionDto): string {
-    return (this.isArabic ? item.titleAr : item.titleEn) || '';
-  }
-
-  getDescription(item: CompanyTitleDescriptionDto): string {
-    return (this.isArabic ? item.descriptionAr : item.descriptionEn) || '';
-  }
-
-  getSafeDescription(item: CompanyTitleDescriptionDto): SafeHtml | null {
-    const desc = this.getDescription(item);
-    return desc ? this.sanitizer.bypassSecurityTrustHtml(desc) : null;
-  }
-
-  private loadItems(): void {
-    this.loading = true;
-    this.items = [];
-    this.companyTitleDescriptionsService.getByCompanyAndCode(this.companyId, this.code).subscribe({
-      next: (response) => {
-        this.items = response.success && response.data ? response.data : [];
-        this.currentIndex = 0;
-        this.loading = false;
-        this.cdr.markForCheck();
-      },
-      error: () => {
-        this.items = [];
-        this.loading = false;
-        this.cdr.markForCheck();
-      }
-    });
   }
 }
