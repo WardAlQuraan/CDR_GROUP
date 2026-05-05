@@ -9,19 +9,31 @@
           <!-- <h2 class="about-title">{{ 'about.title' | translate }}</h2> -->
 
           @if (companyDescription) {
-            @if (descriptionTitle) {
+            @if (loadingDescriptionTitle) {
+              <div class="about-loading-row">
+                <div class="spinner spinner-inline"></div>
+              </div>
+            } @else if (descriptionTitle) {
               <h3 class="about-description-title">{{ descriptionTitle }}</h3>
             }
             <p class="about-text">{{ companyDescription }}</p>
           }
-        
+
         }
 
-        @if (safeSecondaryDescriptionTitle || safeSecondaryDescriptionText) {
-          @if (safeSecondaryDescriptionTitle) {
+        @if (loadingSecondaryTitle || loadingSecondaryText || safeSecondaryDescriptionTitle || safeSecondaryDescriptionText) {
+          @if (loadingSecondaryTitle) {
+            <div class="about-loading-row">
+              <div class="spinner spinner-inline"></div>
+            </div>
+          } @else if (safeSecondaryDescriptionTitle) {
             <h3 class="about-description-title" [innerHTML]="safeSecondaryDescriptionTitle"></h3>
           }
-          @if (safeSecondaryDescriptionText) {
+          @if (loadingSecondaryText) {
+            <div class="about-loading-row">
+              <div class="spinner spinner-inline"></div>
+            </div>
+          } @else if (safeSecondaryDescriptionText) {
             <p class="about-text" [innerHTML]="safeSecondaryDescriptionText"></p>
           }
         }
@@ -57,19 +69,15 @@
       </div>
     </div>
 
-    @if (safeFirstSection || safeSecondSection) {
+    @if (loadingSectionHint || safeSectionHint) {
       <div class="stats-wrapper">
-        <div class="stats-strip">
-          @if (safeFirstSection) {
-            <div class="stat-pill" [innerHTML]="safeFirstSection"></div>
-          }
-          @if (safeFirstSection && safeSecondSection) {
-            <div class="stat-divider"></div>
-          }
-          @if (safeSecondSection) {
-            <div class="stat-pill" [innerHTML]="safeSecondSection"></div>
-          }
-        </div>
+        @if (loadingSectionHint) {
+          <div class="about-loading-row">
+            <div class="spinner spinner-section"></div>
+          </div>
+        } @else if (safeSectionHint) {
+          <div class="stats-strip" [innerHTML]="safeSectionHint"></div>
+        }
       </div>
     }
   </div>

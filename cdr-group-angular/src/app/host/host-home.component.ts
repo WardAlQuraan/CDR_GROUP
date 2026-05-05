@@ -82,11 +82,11 @@ export class HostHomeComponent implements OnInit {
 
   selectCompany(company: CompanyDto): void {
     this.companyState.setSelectedCompany(company);
-    if (company.children?.length) {
-      this.router.navigate(['/', company.id, 'group']);
-    } else {
+    // if (company.children?.length) {
+    //   this.router.navigate(['/', company.id, 'group']);
+    // } else {
       this.router.navigate(['/', company.id]);
-    }
+    // }
   }
 
   selectRoot(): void {

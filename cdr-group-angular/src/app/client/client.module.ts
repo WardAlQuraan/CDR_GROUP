@@ -33,6 +33,8 @@ import { FillCardsComponent } from './sections/fill-cards/fill-cards.component';
 import { CardScrollerComponent } from './sections/card-scroller/card-scroller.component';
 import { GlassSliderComponent } from './sections/glass-slider/glass-slider.component';
 import { StatementSliderComponent } from './sections/statement-slider/statement-slider.component';
+import { ImageTitleSliderComponent } from './sections/image-title-slider/image-title-slider.component';
+import { PromiseBannerComponent } from './sections/promise-banner/promise-banner.component';
 
 // Pages
 import { HomeComponent } from './pages/home/home.component';
@@ -76,6 +78,8 @@ import { clientRoutes } from './client.routes';
     CardScrollerComponent,
     GlassSliderComponent,
     StatementSliderComponent,
+    ImageTitleSliderComponent,
+    PromiseBannerComponent,
     // Pages
     HomeComponent,
     EventListingComponent,

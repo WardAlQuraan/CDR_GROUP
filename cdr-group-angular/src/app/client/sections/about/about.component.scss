@@ -120,6 +120,46 @@
     0 8px 20px -10px rgba(0, 0, 0, 0.6);
 }
 
+.about-loading-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 1.75em;
+  margin-bottom: 8px;
+}
+
+.about-section .spinner {
+  border-radius: 50%;
+  border-style: solid;
+  animation: about-spin 0.8s linear infinite;
+}
+
+.about-section .spinner-section {
+  width: 36px;
+  height: 36px;
+  border-width: 3px;
+  border-color: color-mix(in srgb, var(--brand-primary) 22%, transparent);
+  border-top-color: var(--brand-primary);
+}
+
+.about-section .spinner-inline {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+  border-color: color-mix(in srgb, var(--brand-primary) 22%, transparent);
+  border-top-color: var(--brand-primary);
+}
+
+@keyframes about-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-section .spinner {
+    animation: none;
+  }
+}
+
 .stats-wrapper {
   display: flex;
   justify-content: center;
@@ -134,19 +174,20 @@
   border-radius: 999px;
   padding: 0.25rem 0.5rem;
   backdrop-filter: blur(8px);
-}
 
-.stat-pill {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.5rem;
-  border-radius: 999px;
-  cursor: default;
-  transition: background 0.2s;
-  color: var(--brand-secondary);
+  // .stat-pill and .stat-divider come from the preference's innerHTML, so
+  // they don't carry the component's view-encapsulation attribute. Style
+  // them via ::ng-deep, scoped to .stats-strip so we don't leak globally.
+  ::ng-deep .stat-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.5rem;
+    border-radius: 999px;
+    cursor: default;
+    transition: background 0.2s;
+    color: var(--brand-secondary);
 
-  ::ng-deep {
     i,
     .bi,
     [class*="bi-"],
@@ -170,18 +211,18 @@
       font-size: 0.85rem;
       font-weight: 400;
     }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.7);
+    }
   }
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.7);
+  ::ng-deep .stat-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(15, 23, 42, 0.12) !important;
+    flex-shrink: 0;
   }
-}
-
-.stat-divider {
-  width: 1px;
-  height: 24px;
-  background: rgba(15, 23, 42, 0.12) !important;
-  flex-shrink: 0;
 }
 
 .team-cards {

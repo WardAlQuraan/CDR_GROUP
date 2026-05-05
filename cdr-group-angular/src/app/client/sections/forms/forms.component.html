@@ -1,14 +1,22 @@
-@if (hasForms) {
+@if (loading || hasForms || loadingTitle || loadingSubtitle) {
   <section class="forms-section" id="section_forms" [style.--brand-primary]="primaryColorValue" [style.--brand-secondary]="secondaryColorValue">
     <div class="container">
       <div class="row">
         <div class="col-12 text-center mb-3">
-          @if (safeSectionTitle) {
+          @if (loadingTitle) {
+            <div class="forms-loading-row">
+              <div class="spinner spinner-inline"></div>
+            </div>
+          } @else if (safeSectionTitle) {
             <h2 class="section-title" [innerHTML]="safeSectionTitle"></h2>
           } @else {
             <h2 class="section-title">{{ 'forms.title' | translate }}</h2>
           }
-          @if (safeSectionSubtitle) {
+          @if (loadingSubtitle) {
+            <div class="forms-loading-row">
+              <div class="spinner spinner-inline"></div>
+            </div>
+          } @else if (safeSectionSubtitle) {
             <p class="section-subtitle" [innerHTML]="safeSectionSubtitle"></p>
           } @else {
             <p class="section-subtitle">{{ 'forms.subtitle' | translate }}</p>
@@ -16,17 +24,23 @@
         </div>
       </div>
 
-      <div class="forms-grid">
-        @for (form of forms; track form.id) {
-          <button type="button" class="form-card" (click)="openForm(form)" [attr.aria-label]="getFormName(form)">
-            <span class="icon-wrap">
-              <mat-icon class="form-icon">description</mat-icon>
-            </span>
-            <span class="form-name" [title]="getFormName(form)">{{ getFormName(form) }}</span>
-            <mat-icon class="open-icon">arrow_outward</mat-icon>
-          </button>
-        }
-      </div>
+      @if (loading) {
+        <div class="forms-grid-loading">
+          <div class="spinner spinner-section"></div>
+        </div>
+      } @else if (hasForms) {
+        <div class="forms-grid">
+          @for (form of forms; track form.id) {
+            <button type="button" class="form-card" (click)="openForm(form)" [attr.aria-label]="getFormName(form)">
+              <span class="icon-wrap">
+                <mat-icon class="form-icon">description</mat-icon>
+              </span>
+              <span class="form-name" [title]="getFormName(form)">{{ getFormName(form) }}</span>
+              <mat-icon class="open-icon">arrow_outward</mat-icon>
+            </button>
+          }
+        </div>
+      }
     </div>
   </section>
 }

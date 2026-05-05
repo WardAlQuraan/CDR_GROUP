@@ -7,17 +7,14 @@ $bg-dark: #0e2240;
 $gold: #d4a94b;
 $gold-bright: #e9c46a;
 
-.hub-page {
+// Shared dark, brand-tinted backdrop with drifting blobs + noise grain.
+// Applied per-section because there is no longer a single page-wide wrapper.
+@mixin hub-section-backdrop {
   position: relative;
-  min-height: 100vh;
-  background-color: var(--brand-secondary, #{$bg-dark});
+  background-color: var(--secondary-color, #{$bg-dark});
   color: #fff;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
 
-  // Living background — slow-drifting brand-tinted highlights layered over the
-  // secondary-color base, plus a static noise grain on top
   &::before,
   &::after {
     content: '';
@@ -30,10 +27,10 @@ $gold-bright: #e9c46a;
     z-index: 0;
     background:
       radial-gradient(circle at 22% 28%,
-        color-mix(in srgb, var(--brand-primary, #{$gold}) 22%, transparent) 0%,
+        color-mix(in srgb, var(--primary-color, #{$gold}) 22%, transparent) 0%,
         transparent 55%),
       radial-gradient(circle at 78% 72%,
-        color-mix(in srgb, var(--brand-primary, #{$gold-bright}) 16%, transparent) 0%,
+        color-mix(in srgb, var(--primary-color, #{$gold-bright}) 16%, transparent) 0%,
         transparent 60%),
       radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.08), transparent 55%),
       radial-gradient(circle at 80% 100%, rgba(0, 0, 0, 0.22), transparent 60%);
@@ -50,6 +47,12 @@ $gold-bright: #e9c46a;
     opacity: 0.30;
     mix-blend-mode: overlay;
   }
+
+  // Direct children sit above the decorative pseudo-elements
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 @keyframes hub-blob-drift {
@@ -58,12 +61,18 @@ $gold-bright: #e9c46a;
   100% { transform: translate3d(-2%, 2.6%, 0) scale(0.97); }
 }
 
+// Body wrapper carries the dark backdrop, drifting blobs and noise grain
+// for both the brand and children sections in one continuous surface.
+.hub-body {
+  @include hub-section-backdrop;
+  display: flex;
+  flex-direction: column;
+}
+
 // Brand
 .hub-brand {
   text-align: center;
   padding: 100px 24px 40px; // extra top padding clears the fixed app-header
-  position: relative;
-  z-index: 1;
 }
 
 .brand-logo {
@@ -180,8 +189,6 @@ $gold-bright: #e9c46a;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  z-index: 1;
 }
 
 .hub-loader {
@@ -416,7 +423,7 @@ $gold-bright: #e9c46a;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hub-page::before { animation: none; }
+  .hub-body::before { animation: none; }
   .child-ring { animation: none; }
   .brand-token {
     animation: none;

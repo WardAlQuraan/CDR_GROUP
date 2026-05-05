@@ -60,9 +60,6 @@ namespace cdr_group.Domain.Entities
         // Branches for this company
         public virtual ICollection<CompanyBranch> CompanyBranches { get; set; } = new List<CompanyBranch>();
 
-        // Financial clauses & rights for this company
-        public virtual ICollection<CompanyFinancialClausesRights> CompanyFinancialClausesRights { get; set; } = new List<CompanyFinancialClausesRights>();
-
         // Client reaches for this company
         public virtual ICollection<CompanyClientReach> CompanyClientReaches { get; set; } = new List<CompanyClientReach>();
 

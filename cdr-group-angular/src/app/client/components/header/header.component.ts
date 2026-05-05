@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
   goBack(): void {
     const selected = this.companyState.selectedCompany;
     if (selected?.parentId) {
-      this.router.navigate(['/', selected.parentId, 'group']);
+      this.router.navigate(['/', selected.parentId]);
     } else {
       this.router.navigate(['/']);
     }
@@ -59,12 +59,7 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateToCompany(companyId: string): void {
-    const company = this.companyState.findCompany(this.companyState.companies, companyId);
-    if (company?.children?.length) {
-      this.router.navigate(['/', companyId, 'group']);
-    } else {
-      this.router.navigate(['/', companyId]);
-    }
+    this.router.navigate(['/', companyId]);
     this.closeNavbar();
   }
 

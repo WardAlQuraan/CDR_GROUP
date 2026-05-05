@@ -1,60 +1,53 @@
-<div class="hub-page"
-     [style.--brand-primary]="parentCompany?.primaryColor || null"
-     [style.--brand-secondary]="parentCompany?.secondaryColor || null"
-     [style.--brand-text]="parentCompany?.primaryColor || null">
-  <!-- Hub-specific header -->
-  <app-hub-header></app-hub-header>
-  <!-- Parent company branding -->
-  <section class="hub-brand">
-    @if (parentCompany) {
-      <div class="brand-logo">
-        <img [src]="getLogoUrl(parentCompany)" [alt]="getCompanyName(parentCompany)" />
-      </div>
-      <h1 class="brand-name" [attr.aria-label]="getCompanyName(parentCompany)">
-        @for (token of splitBrandName(parentCompany); track $index; let i = $index) {
-          <span class="brand-token"
-                [style.animation-delay.ms]="80 + i * (isArabic ? 90 : 35)"
-                aria-hidden="true">{{ token === ' ' ? ' ' : token }}</span>
-        }
-      </h1>
-      <!-- @if (getCompanyTitle(parentCompany)) {
-        <div class="brand-subtitle">{{ getCompanyDescription(parentCompany) }}</div>
-      } -->
-      @if (getCompanyDescription(parentCompany)) {
-        <p class="brand-description">{{ getCompanyDescription(parentCompany) }}</p>
+
+<div class="hub-body">
+<!-- Parent company branding -->
+<section class="hub-brand">
+  @if (parentCompany) {
+    <div class="brand-logo">
+      <img [src]="getLogoUrl(parentCompany)" [alt]="getCompanyName(parentCompany)" />
+    </div>
+    <h1 class="brand-name" [attr.aria-label]="getCompanyName(parentCompany)">
+      @for (token of splitBrandName(parentCompany); track $index; let i = $index) {
+        <span class="brand-token"
+              [style.animation-delay.ms]="80 + i * (isArabic ? 90 : 35)"
+              aria-hidden="true">{{ token === ' ' ? ' ' : token }}</span>
       }
+    </h1>
+    <!-- @if (getCompanyTitle(parentCompany)) {
+      <div class="brand-subtitle">{{ getCompanyDescription(parentCompany) }}</div>
+    } -->
+    @if (getCompanyDescription(parentCompany)) {
+      <p class="brand-description">{{ getCompanyDescription(parentCompany) }}</p>
     }
-  </section>
+  }
+</section>
 
-  <!-- Children row -->
-  <section class="hub-children">
-    @if (loading) {
-      <div class="hub-loader">
-        <div class="spinner"></div>
-      </div>
-    } @else if (children.length) {
-      <div class="children-row">
-        @for (child of children; track child.id; let i = $index) {
-          <div class="child-tile" [style.animation-delay.ms]="i * 80">
-            <button
-              type="button"
-              class="child-card"
-              (click)="selectCompany(child)"
-              [title]="getCompanyName(child)"
-              [style.--accent]="child.primaryColor || '#d4a94b'">
-              <div class="child-orb">
-                <span class="child-ring"></span>
-                <img [src]="getLogoUrl(child)" [alt]="getCompanyName(child)" />
-              </div>
-              <div class="child-name">{{ getCompanyName(child) }}</div>
-            </button>
-          </div>
-        }
-      </div>
-    }
-  </section>
-
-  <!-- Hub footer -->
-  <app-hub-footer></app-hub-footer>
+<!-- Children row -->
+<section class="hub-children">
+  @if (loading) {
+    <div class="hub-loader">
+      <div class="spinner"></div>
+    </div>
+  } @else if (children.length) {
+    <div class="children-row">
+      @for (child of children; track child.id; let i = $index) {
+        <div class="child-tile" [style.animation-delay.ms]="i * 80">
+          <button
+            type="button"
+            class="child-card"
+            (click)="selectCompany(child)"
+            [title]="getCompanyName(child)"
+            [style.--accent]="child.primaryColor || '#d4a94b'">
+            <div class="child-orb">
+              <span class="child-ring"></span>
+              <img [src]="getLogoUrl(child)" [alt]="getCompanyName(child)" />
+            </div>
+            <div class="child-name">{{ getCompanyName(child) }}</div>
+          </button>
+        </div>
+      }
+    </div>
+  }
+</section>
 </div>
 

@@ -78,5 +78,13 @@ namespace cdr_group.API.Controllers.CompanyControllers
         {
             return await base.Delete(id);
         }
+
+        [HttpPut("reorder")]
+        [HasPermission(Permissions.CompanyHomeComponentSetups.Update)]
+        public async Task<ActionResult<ApiResponse>> Reorder([FromBody] List<ReorderCompanyHomeComponentSetupItemDto> items)
+        {
+            await Service.ReorderAsync(items);
+            return Ok(ApiResponse.SuccessResponse($"{EntityName} ranks updated successfully."));
+        }
     }
 }

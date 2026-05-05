@@ -16,6 +16,10 @@ import {
   CompanyTitleDescriptionDialogData
 } from '../company-title-description-dialog/company-title-description-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import {
+  BulkUploadDialogComponent,
+  BulkUploadDialogData
+} from '../../../../shared/components/bulk-upload-dialog/bulk-upload-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 import { buildSearchPlaceholder } from '../../../../utils/search.utils';
 
@@ -115,6 +119,14 @@ export class CompanyTitleDescriptionsComponent implements OnInit {
           onClick: (row) => this.deleteItem(row)
         },
         {
+          icon: 'cloud_upload',
+          tooltip: 'admin.companyTitleDescriptions.uploadImage',
+          permission: Permissions.COMPANY_TITLE_DESCRIPTIONS_UPDATE,
+          color: 'primary',
+          primary: false,
+          onClick: (row) => this.openImageUploadDialog(row)
+        },
+        {
           icon: 'history',
           tooltip: 'admin.auditLogs.history',
           permission: Permissions.AUDIT_LOGS_READ,
@@ -207,6 +219,20 @@ export class CompanyTitleDescriptionsComponent implements OnInit {
       if (result) {
         this.loadItems();
       }
+    });
+  }
+
+  openImageUploadDialog(item: CompanyTitleDescriptionDto): void {
+    const dialogData: BulkUploadDialogData = {
+      title: 'admin.companyTitleDescriptions.uploadImage',
+      entityId: item.id,
+      entityType: 'CompanyTitleDescription',
+      acceptedTypes: 'image/*'
+    };
+
+    this.dialog.open(BulkUploadDialogComponent, {
+      width: '550px',
+      data: dialogData,
     });
   }
 

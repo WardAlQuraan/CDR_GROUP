@@ -23,7 +23,7 @@ export class CompaniesService extends BaseService<CompanyDto, CreateCompanyDto, 
   }
 
   getTree(): Observable<ApiResponse<CompanyDto[]>> {
-    return this.get<CompanyDto[]>('/tree');
+    return  this.get<CompanyDto[]>('/tree');
   }
   getTreeByCompanyId(companyId: string): Observable<ApiResponse<CompanyDto[]>> {
     return this.get<CompanyDto[]>(`/tree?parentId=${companyId}`);

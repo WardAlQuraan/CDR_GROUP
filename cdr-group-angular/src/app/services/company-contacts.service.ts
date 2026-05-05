@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { BaseService } from './base.service';
+import { CacheService } from './cache.service';
 import { ApiResponse } from '../models/api-response.model';
 import { PagedResult } from '../models/paged.model';
 import {
@@ -16,7 +16,7 @@ import {
   providedIn: 'root'
 })
 export class CompanyContactsService extends BaseService<CompanyContactDto, CreateCompanyContactDto, UpdateCompanyContactDto> {
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient, private cacheService: CacheService) {
     super(http, 'CompanyContacts');
   }
 
@@ -29,6 +29,9 @@ export class CompanyContactsService extends BaseService<CompanyContactDto, Creat
   }
 
   getByCompanyId(companyId: string): Observable<ApiResponse<CompanyContactDto[]>> {
-    return this.get<CompanyContactDto[]>(`/by-company/${companyId}`);
+    return this.cacheService.get(
+      `company-contacts-${companyId}`,
+      () => this.get<CompanyContactDto[]>(`/by-company/${companyId}`)
+    );
   }
 }

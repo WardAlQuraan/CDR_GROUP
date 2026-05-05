@@ -138,11 +138,7 @@ namespace cdr_group.Persistence.Data
 
 // CompanyPartnershipFranchiseMechanism Permission IDs
 
-            // CompanyFinancialClausesRights Permission IDs
-            var companyFinancialClausesRightsReadId = Guid.Parse("ccddeeff-1111-1111-1111-aaaaaaaaaaaa");
-            var companyFinancialClausesRightsCreateId = Guid.Parse("ccddeeff-1111-1111-1111-bbbbbbbbbbbb");
-            var companyFinancialClausesRightsUpdateId = Guid.Parse("ccddeeff-1111-1111-1111-cccccccccccc");
-            var companyFinancialClausesRightsDeleteId = Guid.Parse("ccddeeff-1111-1111-1111-dddddddddddd");
+// CompanyFinancialClausesRights Permission IDs
 
             // CompanyClientReach Permission IDs
             var companyClientReachesReadId = Guid.Parse("ccddeeff-2222-2222-2222-aaaaaaaaaaaa");
@@ -303,11 +299,7 @@ namespace cdr_group.Persistence.Data
 // CompanyDistinguish permissions
 // CompanyPreContractStudy permissions
 // CompanyPartnershipFranchiseMechanism permissions
-                // CompanyFinancialClausesRights permissions
-                new Permission { Id = companyFinancialClausesRightsReadId, Name = PermissionConstants.CompanyFinancialClausesRights.Read, Description = "View company financial clauses rights", Module = "CompanyFinancialClausesRights", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                new Permission { Id = companyFinancialClausesRightsCreateId, Name = PermissionConstants.CompanyFinancialClausesRights.Create, Description = "Create company financial clauses rights", Module = "CompanyFinancialClausesRights", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                new Permission { Id = companyFinancialClausesRightsUpdateId, Name = PermissionConstants.CompanyFinancialClausesRights.Update, Description = "Update company financial clauses rights", Module = "CompanyFinancialClausesRights", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
-                new Permission { Id = companyFinancialClausesRightsDeleteId, Name = PermissionConstants.CompanyFinancialClausesRights.Delete, Description = "Delete company financial clauses rights", Module = "CompanyFinancialClausesRights", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
+// CompanyFinancialClausesRights permissions
                 // CompanyClientReach permissions
                 new Permission { Id = companyClientReachesReadId, Name = PermissionConstants.CompanyClientReaches.Read, Description = "View company client reaches", Module = "CompanyClientReaches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },
                 new Permission { Id = companyClientReachesCreateId, Name = PermissionConstants.CompanyClientReaches.Create, Description = "Create company client reaches", Module = "CompanyClientReaches", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), IsDeleted = false },

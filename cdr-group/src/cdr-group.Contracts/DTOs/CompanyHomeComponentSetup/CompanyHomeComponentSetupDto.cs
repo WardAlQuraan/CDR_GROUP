@@ -69,4 +69,11 @@ namespace cdr_group.Contracts.DTOs.CompanyHomeComponentSetup
         public Guid? CompanyId { get; set; }
         public string? ComponentCode { get; set; }
     }
+
+    public class ReorderCompanyHomeComponentSetupItemDto
+    {
+        [Required]
+        public Guid Id { get; set; }
+        public int Rank { get; set; }
+    }
 }

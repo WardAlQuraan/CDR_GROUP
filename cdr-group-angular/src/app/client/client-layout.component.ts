@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CompaniesService } from '../services/companies.service';
 import { CompanyStateService } from '../services/company-state.service';
+import { CompanyHomeComponentSetupsService } from '../services/company-home-component-setups.service';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -17,10 +18,14 @@ export class ClientLayoutComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private companiesService: CompaniesService,
     private companyState: CompanyStateService,
+    private homeComponentSetupsService: CompanyHomeComponentSetupsService,
     private cdr: ChangeDetectorRef) {}
 
   private sub?: Subscription;
+  private companySub?: Subscription;
   loading = true;
+  hasHubHeader = false;
+  hasHubFooter = false;
 
   ngOnInit(): void {
     this.companiesService.getTree().subscribe({
@@ -31,9 +36,42 @@ export class ClientLayoutComponent implements OnInit, OnDestroy {
         this.loading = false;
         this.cdr.markForCheck();
         this.subscribeToQueryParams();
+        this.subscribeToCompanyChanges();
       },
       error: () => {
         this.loading = false;
+      }
+    });
+  }
+
+  private subscribeToCompanyChanges(): void {
+    this.companySub = this.companyState.selectedCompany$.subscribe(company => {
+      if (!company?.id) {
+        this.hasHubHeader = false;
+        this.hasHubFooter = false;
+        this.cdr.markForCheck();
+        return;
+      }
+      this.loadLayoutSetups(company.id);
+    });
+  }
+
+  private loadLayoutSetups(companyId: string): void {
+    this.loading = true;
+    this.cdr.markForCheck();
+    this.homeComponentSetupsService.getByCompany(companyId).subscribe({
+      next: response => {
+        const setups = response.success && response.data ? response.data : [];
+        this.hasHubHeader = setups.some(s => s.componentCode === 'app-hub-header');
+        this.hasHubFooter = setups.some(s => s.componentCode === 'app-hub-footer');
+        this.loading = false;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.hasHubHeader = false;
+        this.hasHubFooter = false;
+        this.loading = false;
+        this.cdr.markForCheck();
       }
     });
   }
@@ -77,6 +115,7 @@ export class ClientLayoutComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
+    this.companySub?.unsubscribe();
     const root = document.documentElement;
     root.style.removeProperty('--primary-color');
     root.style.removeProperty('--custom-btn-bg-color');

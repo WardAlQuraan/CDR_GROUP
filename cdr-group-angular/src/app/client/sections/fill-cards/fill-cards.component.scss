@@ -1,3 +1,50 @@
+.fill-cards-items-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.fill-cards-loading-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 1.5em;
+  margin-bottom: 8px;
+}
+
+.fill-cards-section .spinner {
+  border-radius: 50%;
+  border-style: solid;
+  animation: fill-cards-spin 0.8s linear infinite;
+}
+
+.fill-cards-section .spinner-section {
+  width: 42px;
+  height: 42px;
+  border-width: 3px;
+  border-color: color-mix(in srgb, var(--brand-primary) 22%, transparent);
+  border-top-color: var(--brand-primary);
+}
+
+.fill-cards-section .spinner-inline {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+  border-color: color-mix(in srgb, var(--brand-primary) 22%, transparent);
+  border-top-color: var(--brand-primary);
+}
+
+@keyframes fill-cards-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fill-cards-section .spinner {
+    animation: none;
+  }
+}
+
 .fill-cards-section {
   --brand-primary: #833AB4;
   --brand-secondary: #FD1D1D;
@@ -52,6 +99,109 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   gap: 20px;
+}
+
+// ─────────────────────────────────────────────────────────────────
+// Slider variant — used when items count > SLIDER_THRESHOLD
+// ─────────────────────────────────────────────────────────────────
+.cards-slider {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.cards-slider-track {
+  flex: 1;
+  // Min width 0 lets the flex item shrink below its content width — required
+  // for the fluid-card calc widths below to read off the visible track size
+  // rather than the (overflowing) total content size.
+  min-width: 0;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  // Hide horizontal scrollbar across browsers — arrows handle navigation
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 4px 4px 12px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Cards sized as exact fractions of the visible track so each "page" fits
+  // completely with no partial card peeking on the trailing edge.
+  // 3 per page on desktop — adjusted at smaller breakpoints below.
+  .fill-card {
+    flex: 0 0 calc((100% - 40px) / 3);
+    width: calc((100% - 40px) / 3);
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 1024px) {
+  .cards-slider-track .fill-card {
+    flex-basis: calc((100% - 20px) / 2);
+    width: calc((100% - 20px) / 2);
+  }
+}
+
+.cards-slider .slider-arrow {
+  flex-shrink: 0;
+  align-self: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--brand-secondary) 16%, transparent);
+  background: #ffffff;
+  color: var(--brand-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--brand-secondary) 8%, transparent),
+    0 8px 22px color-mix(in srgb, var(--brand-secondary) 12%, transparent);
+  transition:
+    transform 0.25s cubic-bezier(.22, 1, .36, 1),
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.3s ease;
+
+  i {
+    transition: transform 0.25s ease;
+  }
+
+  &:hover {
+    color: #ffffff;
+    background: var(--brand-primary);
+    border-color: var(--brand-primary);
+    box-shadow:
+      0 1px 2px color-mix(in srgb, var(--brand-secondary) 8%, transparent),
+      0 12px 26px color-mix(in srgb, var(--brand-primary) 38%, transparent);
+    transform: translateY(-1px);
+  }
+
+  &.slider-arrow-prev:hover i {
+    transform: translateX(-3px);
+  }
+
+  &.slider-arrow-next:hover i {
+    transform: translateX(3px);
+  }
+
+  [dir='rtl'] &.slider-arrow-prev:hover i {
+    transform: translateX(3px);
+  }
+
+  [dir='rtl'] &.slider-arrow-next:hover i {
+    transform: translateX(-3px);
+  }
 }
 
 .fill-card {
@@ -203,6 +353,23 @@
   .cards-grid {
     grid-template-columns: 1fr;
     gap: 14px;
+  }
+
+  .cards-slider .slider-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
+  }
+
+  .cards-slider-track {
+    gap: 14px;
+
+    .fill-card {
+      // 1 per page on phones — gives the full card width and avoids
+      // squishing it into a sliver.
+      flex-basis: 100%;
+      width: 100%;
+    }
   }
 
   .fill-card {

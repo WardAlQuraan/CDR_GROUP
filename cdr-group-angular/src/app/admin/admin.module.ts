@@ -56,8 +56,6 @@ import { ComplaintsComponent } from './pages/complaints/complaints-component/com
 import { ComplaintViewDialogComponent } from './pages/complaints/complaint-view-dialog/complaint-view-dialog.component';
 import { PartnersComponent } from './pages/partners/partners-component/partners-component';
 import { PartnerDialogComponent } from './pages/partners/partner-dialog/partner-dialog.component';
-import { CompanyFinancialClausesRightsComponent } from './pages/company-financial-clauses-rights/company-financial-clauses-rights-component/company-financial-clauses-rights-component';
-import { CompanyFinancialClausesRightsDialogComponent } from './pages/company-financial-clauses-rights/company-financial-clauses-rights-dialog/company-financial-clauses-rights-dialog.component';
 import { CompanyClientReachesComponent } from './pages/company-client-reaches/company-client-reaches-component/company-client-reaches-component';
 import { CompanyClientReachDialogComponent } from './pages/company-client-reaches/company-client-reach-dialog/company-client-reach-dialog.component';
 import { CompanyClientReachLogoDialogComponent } from './pages/company-client-reaches/company-client-reach-logo-dialog/company-client-reach-logo-dialog.component';
@@ -65,6 +63,7 @@ import { CompanyTitleDescriptionsComponent } from './pages/company-title-descrip
 import { CompanyTitleDescriptionDialogComponent } from './pages/company-title-descriptions/company-title-description-dialog/company-title-description-dialog.component';
 import { CompanyHomeComponentSetupsComponent } from './pages/company-home-component-setups/company-home-component-setups-component/company-home-component-setups-component';
 import { CompanyHomeComponentSetupDialogComponent } from './pages/company-home-component-setups/company-home-component-setup-dialog/company-home-component-setup-dialog.component';
+import { CompanyHomeComponentCodesDialogComponent } from './pages/companies/company-home-component-codes-dialog/company-home-component-codes-dialog.component';
 
 @NgModule({
   declarations: [
@@ -107,8 +106,6 @@ import { CompanyHomeComponentSetupDialogComponent } from './pages/company-home-c
     CompanyBranchesComponent,
     CompanyBranchDialogComponent,
     CompanyBranchImageDialogComponent,
-    CompanyFinancialClausesRightsComponent,
-    CompanyFinancialClausesRightsDialogComponent,
     CompanyClientReachesComponent,
     CompanyClientReachDialogComponent,
     CompanyClientReachLogoDialogComponent,
@@ -116,6 +113,7 @@ import { CompanyHomeComponentSetupDialogComponent } from './pages/company-home-c
     CompanyTitleDescriptionDialogComponent,
     CompanyHomeComponentSetupsComponent,
     CompanyHomeComponentSetupDialogComponent,
+    CompanyHomeComponentCodesDialogComponent,
     ReviewsComponent,
     ReviewDialogComponent,
     ComplaintsComponent,

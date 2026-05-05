@@ -1,8 +1,14 @@
-<app-hero [company]="selectedCompany"></app-hero>
-
 <div class="home-sections">
+  @if (loading) {
+    <div class="setups-loading">
+      <div class="spinner"></div>
+    </div>
+  } @else {
   @for (setup of setups; track setup.id) {
     @switch (setup.componentCode) {
+      @case ('app-hero') {
+        <app-hero [company]="selectedCompany"></app-hero>
+      }
       @case ('app-about') {
         <app-about [company]="selectedCompany"></app-about>
       }
@@ -40,6 +46,19 @@
           [titleCode]="setup.preferenceTitleCode || ''"
           [descriptionCode]="setup.preferenceDescriptionCode || ''"></app-glass-slider>
       }
+      @case ('app-image-title-slider') {
+        <app-image-title-slider
+          [companyId]="selectedCompanyId"
+          [code]="setup.companyTitleDescriptionCode || ''"
+          [titleCode]="setup.preferenceTitleCode || ''"
+          [descriptionCode]="setup.preferenceDescriptionCode || ''"></app-image-title-slider>
+      }
+      @case ('app-promise-banner') {
+        <app-promise-banner
+          [companyId]="selectedCompanyId"
+          [titleCode]="setup.preferenceTitleCode || ''"
+          [descriptionCode]="setup.preferenceDescriptionCode || ''"></app-promise-banner>
+      }
       @case ('app-glass-card') {
         <app-glass-card
           [companyId]="selectedCompanyId"
@@ -72,6 +91,10 @@
       @case ('app-contact-review') {
         <app-contact-review [companyId]="selectedCompanyId"></app-contact-review>
       }
+      @case ('app-company-hub') {
+        <app-company-hub></app-company-hub>
+      }
     }
+  }
   }
 </div>

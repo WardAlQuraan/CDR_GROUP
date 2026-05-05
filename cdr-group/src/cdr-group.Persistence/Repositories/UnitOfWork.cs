@@ -24,7 +24,6 @@ namespace cdr_group.Persistence.Repositories
         private ICompanyFormRepository? _companyForms;
         private ICompanyPreferenceRepository? _companyPreferences;
         private ICompanyBranchRepository? _companyBranches;
-        private ICompanyFinancialClausesRightsRepository? _companyFinancialClausesRights;
         private ICompanyClientReachRepository? _companyClientReaches;
         private ICompanyTitleDescriptionRepository? _companyTitleDescriptions;
         private ICompanyHomeComponentSetupRepository? _companyHomeComponentSetups;
@@ -55,7 +54,6 @@ namespace cdr_group.Persistence.Repositories
         public ICompanyFormRepository CompanyForms => _companyForms ??= new CompanyFormRepository(_context);
         public ICompanyPreferenceRepository CompanyPreferences => _companyPreferences ??= new CompanyPreferenceRepository(_context);
         public ICompanyBranchRepository CompanyBranches => _companyBranches ??= new CompanyBranchRepository(_context);
-        public ICompanyFinancialClausesRightsRepository CompanyFinancialClausesRights => _companyFinancialClausesRights ??= new CompanyFinancialClausesRightsRepository(_context);
         public ICompanyClientReachRepository CompanyClientReaches => _companyClientReaches ??= new CompanyClientReachRepository(_context);
         public ICompanyTitleDescriptionRepository CompanyTitleDescriptions => _companyTitleDescriptions ??= new CompanyTitleDescriptionRepository(_context);
         public ICompanyHomeComponentSetupRepository CompanyHomeComponentSetups => _companyHomeComponentSetups ??= new CompanyHomeComponentSetupRepository(_context);

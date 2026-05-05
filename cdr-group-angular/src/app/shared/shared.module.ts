@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 // Angular Material
 import { MatInputModule } from '@angular/material/input';
@@ -72,6 +73,7 @@ import { CustomPaginatorIntl } from './custom-paginator-intl';
     ReactiveFormsModule,
     RouterModule,
     OverlayModule,
+    DragDropModule,
     TranslatePipe,
     // Angular Material
     MatInputModule,
@@ -106,6 +108,7 @@ import { CustomPaginatorIntl } from './custom-paginator-intl';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    DragDropModule,
     TranslatePipe,
     // Angular Material
     MatInputModule,

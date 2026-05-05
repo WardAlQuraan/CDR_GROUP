@@ -61,12 +61,7 @@ export class HubHeaderComponent implements OnInit {
   }
 
   navigateToCompany(companyId: string): void {
-    const company = this.companyState.findCompany(this.companyState.companies, companyId);
-    if (company?.children?.length) {
-      this.router.navigate(['/', companyId, 'group']);
-    } else {
-      this.router.navigate(['/', companyId]);
-    }
+    this.router.navigate(['/', companyId]);
     this.closeNavbar();
   }
 

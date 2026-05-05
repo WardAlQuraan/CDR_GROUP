@@ -11,6 +11,10 @@ import { PagedRequest } from '../../../../models/paged.model';
 import { DataGridConfig, FilterValues } from '../../../../shared/components/data-grid/data-grid.models';
 import { CompanyDialogComponent, CompanyDialogData } from '../company-dialog/company-dialog.component';
 import { CompanyLogoDialogComponent } from '../company-logo-dialog/company-logo-dialog.component';
+import {
+  CompanyHomeComponentCodesDialogComponent,
+  CompanyHomeComponentCodesDialogData,
+} from '../company-home-component-codes-dialog/company-home-component-codes-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Permissions } from '../../../../models/auth.model';
 import { buildSearchPlaceholder } from '../../../../utils/search.utils';
@@ -191,14 +195,6 @@ export class CompaniesComponent implements OnInit {
           onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'title-descriptions'])
         },
         {
-          icon: 'attach_money',
-          tooltip: 'admin.companies.financialClausesRights',
-          permission: Permissions.COMPANY_FINANCIAL_CLAUSES_RIGHTS_READ,
-          color: 'accent',
-          primary: false,
-          onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'financial-clauses-rights'])
-        },
-        {
           icon: 'handshake',
           tooltip: 'admin.companies.clientReaches',
           permission: Permissions.COMPANY_CLIENT_REACHES_READ,
@@ -213,6 +209,14 @@ export class CompaniesComponent implements OnInit {
           color: 'accent',
           primary: false,
           onClick: (row) => this.router.navigate(['/admin/companies', row.id, 'home-component-setups'])
+        },
+        {
+          icon: 'view_list',
+          tooltip: 'admin.companies.viewHomeComponentCodes',
+          permission: Permissions.COMPANY_HOME_COMPONENT_SETUPS_READ,
+          color: 'accent',
+          primary: false,
+          onClick: (row) => this.openHomeComponentCodesDialog(row)
         },
         {
           icon: 'image',
@@ -330,6 +334,17 @@ export class CompaniesComponent implements OnInit {
   openOrgChart(company: CompanyDto): void {
     const url = `/admin/companies/${company.id}/org-chart`;
     window.open(url, '_blank');
+  }
+
+  openHomeComponentCodesDialog(company: CompanyDto): void {
+    const data: CompanyHomeComponentCodesDialogData = {
+      companyId: company.id,
+      companyName: this.isArabic ? company.nameAr : company.nameEn,
+    };
+    this.dialog.open(CompanyHomeComponentCodesDialogComponent, {
+      width: '900px',
+      data,
+    });
   }
 
   openLogoDialog(company: CompanyDto): void {

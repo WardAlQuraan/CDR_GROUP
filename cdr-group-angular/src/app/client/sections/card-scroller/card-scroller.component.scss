@@ -1,3 +1,50 @@
+.card-scroller-items-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.card-scroller-loading-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 1.5em;
+  margin-bottom: 8px;
+}
+
+.card-scroller-section .spinner {
+  border-radius: 50%;
+  border-style: solid;
+  animation: card-scroller-spin 0.8s linear infinite;
+}
+
+.card-scroller-section .spinner-section {
+  width: 42px;
+  height: 42px;
+  border-width: 3px;
+  border-color: color-mix(in srgb, var(--brand-primary) 22%, transparent);
+  border-top-color: var(--brand-primary);
+}
+
+.card-scroller-section .spinner-inline {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+  border-color: color-mix(in srgb, var(--brand-primary) 22%, transparent);
+  border-top-color: var(--brand-primary);
+}
+
+@keyframes card-scroller-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-scroller-section .spinner {
+    animation: none;
+  }
+}
+
 .card-scroller-section {
   --brand-primary: #833AB4;
   --brand-secondary: #FD1D1D;

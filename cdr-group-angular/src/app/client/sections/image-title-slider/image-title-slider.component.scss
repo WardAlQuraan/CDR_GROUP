@@ -1,0 +1,383 @@
+.image-title-slider-section {
+  --brand-primary: #D9A93E;
+  --brand-secondary: #3E423D;
+
+  position: relative;
+  padding: 96px 0 88px;
+  background:
+    radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--brand-primary) 16%, transparent) 0%, transparent 45%),
+    radial-gradient(circle at 88% 100%, color-mix(in srgb, var(--brand-secondary) 14%, transparent) 0%, transparent 50%),
+    color-mix(in srgb, var(--brand-secondary) 4%, #ffffff);
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--brand-secondary);
+
+  .container {
+    position: relative;
+    z-index: 1;
+    padding-left: 24px;
+    padding-right: 24px;
+    max-width: 1280px;
+  }
+}
+
+// ────────────────────────────────────────────────────────────────────
+// Section header
+// ────────────────────────────────────────────────────────────────────
+.section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 56px;
+  gap: 14px;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  width: 56px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brand-primary), var(--brand-secondary));
+}
+
+.section-title {
+  font-size: clamp(1.875rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.02em;
+  color: var(--brand-secondary);
+}
+
+.section-subtitle {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--brand-secondary) 70%, transparent);
+  max-width: 640px;
+  margin: 0;
+}
+
+// ────────────────────────────────────────────────────────────────────
+// Slider shell
+// ────────────────────────────────────────────────────────────────────
+.image-title-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.slider-viewport {
+  flex: 1;
+  overflow: hidden;
+  // 3D perspective so cards subtly turn as the track translates
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  mask-image: linear-gradient(to right,
+    transparent 0,
+    #000 32px,
+    #000 calc(100% - 32px),
+    transparent 100%);
+}
+
+.slider-track {
+  display: flex;
+  gap: 16px;
+  padding: 8px 0 14px;
+  // Smoother, slightly elastic motion on next/prev
+  transition: transform 0.75s cubic-bezier(.22, 1, .36, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+// ────────────────────────────────────────────────────────────────────
+// Slide card
+// ────────────────────────────────────────────────────────────────────
+.image-title-slide {
+  flex: 0 0 320px;
+  width: 320px;
+  min-width: 0;
+  box-sizing: border-box;
+  // Staggered entry animation — each card fades in from below
+  animation: slide-rise 0.7s cubic-bezier(.22, 1, .36, 1) backwards;
+
+  @for $i from 1 through 12 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{($i - 1) * 70}ms;
+    }
+  }
+}
+
+@keyframes slide-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.slide-card {
+  position: relative;
+  height: 340px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--brand-secondary);
+  cursor: pointer;
+  isolation: isolate;
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--brand-secondary) 12%, transparent),
+    0 12px 32px color-mix(in srgb, var(--brand-secondary) 18%, transparent);
+  transition:
+    transform 0.5s cubic-bezier(.22, 1, .36, 1),
+    box-shadow 0.5s ease;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-6px);
+    box-shadow:
+      0 1px 2px color-mix(in srgb, var(--brand-secondary) 12%, transparent),
+      0 24px 48px color-mix(in srgb, var(--brand-secondary) 28%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--brand-primary) 50%, transparent);
+
+    .slide-media img {
+      transform: scale(1.06);
+    }
+
+    .slide-description {
+      max-height: 5.5em;
+      opacity: 0.92;
+      margin-top: 10px;
+    }
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+// ────────────────────────────────────────────────────────────────────
+// Media
+// ────────────────────────────────────────────────────────────────────
+.slide-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--brand-primary) 65%, var(--brand-secondary)) 0%,
+      var(--brand-secondary) 100%);
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .slide-media-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: color-mix(in srgb, var(--brand-primary) 70%, transparent);
+    font-size: 4.5rem;
+  }
+
+  .slide-overlay {
+    // Neutral darken at the bottom for title legibility — no brand tint here so
+    // the underlying image keeps its true colors.
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      transparent 30%,
+      rgba(0, 0, 0, 0.45) 65%,
+      rgba(0, 0, 0, 0.85) 100%);
+    pointer-events: none;
+    transition: background 0.4s ease;
+  }
+}
+
+// ────────────────────────────────────────────────────────────────────
+// Content overlay
+// ────────────────────────────────────────────────────────────────────
+.slide-content {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  padding: 22px 22px 24px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.slide-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.slide-description {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, #ffffff 88%, transparent);
+  margin: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.45s cubic-bezier(.22, 1, .36, 1),
+    opacity 0.35s ease 0.05s,
+    margin-top 0.35s ease;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+// ────────────────────────────────────────────────────────────────────
+// Arrow buttons
+// ────────────────────────────────────────────────────────────────────
+.slider-arrow {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--brand-secondary) 14%, transparent);
+  background: color-mix(in srgb, var(--brand-secondary) 4%, #ffffff);
+  color: var(--brand-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--brand-secondary) 8%, transparent),
+    0 8px 24px color-mix(in srgb, var(--brand-secondary) 12%, transparent);
+  transition:
+    transform 0.3s cubic-bezier(.22, 1, .36, 1),
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.3s ease;
+
+  i {
+    transition: transform 0.3s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  &:hover {
+    color: var(--brand-secondary);
+    background: var(--brand-primary);
+    border-color: var(--brand-primary);
+    box-shadow:
+      0 1px 2px color-mix(in srgb, var(--brand-secondary) 8%, transparent),
+      0 12px 28px color-mix(in srgb, var(--brand-primary) 38%, transparent);
+    transform: translateY(-1px);
+  }
+
+  &.slider-arrow-prev:hover i {
+    transform: translateX(-3px);
+  }
+
+  &.slider-arrow-next:hover i {
+    transform: translateX(3px);
+  }
+
+  [dir='rtl'] &.slider-arrow-prev:hover i {
+    transform: translateX(3px);
+  }
+
+  [dir='rtl'] &.slider-arrow-next:hover i {
+    transform: translateX(-3px);
+  }
+}
+
+// ────────────────────────────────────────────────────────────────────
+// Progress / dots
+// ────────────────────────────────────────────────────────────────────
+.slider-progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.slider-progress-dot {
+  height: 4px;
+  width: 22px;
+  border-radius: 999px;
+  border: 0;
+  padding: 0;
+  background: color-mix(in srgb, var(--brand-secondary) 18%, transparent);
+  cursor: pointer;
+  transition:
+    width 0.4s cubic-bezier(.22, 1, .36, 1),
+    background-color 0.3s ease;
+
+  &:hover {
+    background: color-mix(in srgb, var(--brand-secondary) 35%, transparent);
+  }
+
+  &.is-active {
+    width: 44px;
+    background: linear-gradient(90deg, var(--brand-primary), var(--brand-secondary));
+  }
+}
+
+// ────────────────────────────────────────────────────────────────────
+// Responsive
+// ────────────────────────────────────────────────────────────────────
+@media (max-width: 768px) {
+  .image-title-slider-section {
+    padding: 64px 0 56px;
+  }
+
+  .section-header {
+    margin-bottom: 36px;
+  }
+
+  .slide-card {
+    height: 300px;
+  }
+
+  .slider-arrow {
+    width: 42px;
+    height: 42px;
+    font-size: 1rem;
+  }
+
+  .slide-title {
+    font-size: 1.2rem;
+  }
+
+  .slide-description {
+    font-size: 0.875rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slider-track,
+  .slide-card,
+  .slide-media img,
+  .slide-description,
+  .slider-arrow,
+  .slider-progress-dot {
+    transition: none !important;
+  }
+
+  .image-title-slide {
+    animation: none !important;
+  }
+}

@@ -21,6 +21,8 @@ export class FormsComponent implements OnChanges {
 
   forms: CompanyFormDto[] = [];
   loading = false;
+  loadingTitle = false;
+  loadingSubtitle = false;
 
   private titleEn = '';
   private titleAr = '';
@@ -82,6 +84,8 @@ export class FormsComponent implements OnChanges {
     this.titleEn = '';
     this.titleAr = '';
     if (!this.companyId) return;
+    this.loadingTitle = true;
+    this.cdr.markForCheck();
     this.companyPreferencesService
       .getByCompanyAndCode(this.companyId, 'COMPANY_FORMS_TITLE')
       .subscribe({
@@ -89,10 +93,14 @@ export class FormsComponent implements OnChanges {
           if (response.success && response.data?.id) {
             this.titleEn = response.data.valueEn ?? '';
             this.titleAr = response.data.valueAr ?? '';
-            this.cdr.markForCheck();
           }
+          this.loadingTitle = false;
+          this.cdr.markForCheck();
         },
-        error: () => {}
+        error: () => {
+          this.loadingTitle = false;
+          this.cdr.markForCheck();
+        }
       });
   }
 
@@ -100,6 +108,8 @@ export class FormsComponent implements OnChanges {
     this.subtitleEn = '';
     this.subtitleAr = '';
     if (!this.companyId) return;
+    this.loadingSubtitle = true;
+    this.cdr.markForCheck();
     this.companyPreferencesService
       .getByCompanyAndCode(this.companyId, 'COMPANY_FORMS_DESCRIPTION')
       .subscribe({
@@ -107,10 +117,14 @@ export class FormsComponent implements OnChanges {
           if (response.success && response.data?.id) {
             this.subtitleEn = response.data.valueEn ?? '';
             this.subtitleAr = response.data.valueAr ?? '';
-            this.cdr.markForCheck();
           }
+          this.loadingSubtitle = false;
+          this.cdr.markForCheck();
         },
-        error: () => {}
+        error: () => {
+          this.loadingSubtitle = false;
+          this.cdr.markForCheck();
+        }
       });
   }
 

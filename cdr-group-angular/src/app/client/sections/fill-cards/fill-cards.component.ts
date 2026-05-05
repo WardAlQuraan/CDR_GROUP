@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges, effect, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild, effect, inject } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CompanyPreferencesService } from '../../../services/company-preferences.service';
 import { CompanyTitleDescriptionsService } from '../../../services/company-title-descriptions.service';
@@ -18,6 +18,12 @@ export class FillCardsComponent implements OnChanges {
   @Input() titleCode = '';
   @Input() descriptionCode = '';
 
+  @ViewChild('scroller') scrollerRef?: ElementRef<HTMLElement>;
+
+  // When the number of items exceeds this threshold, render as a horizontal
+  // slider with arrow buttons instead of a wrapping grid.
+  private static readonly SLIDER_THRESHOLD = 3;
+
   private companyState = inject(CompanyStateService);
   private companyTitleDescriptionsService = inject(CompanyTitleDescriptionsService);
   private companyPreferencesService = inject(CompanyPreferencesService);
@@ -27,6 +33,8 @@ export class FillCardsComponent implements OnChanges {
 
   items: CompanyTitleDescriptionDto[] = [];
   loading = false;
+  loadingTitle = false;
+  loadingDescription = false;
 
   private titleEn = '';
   private titleAr = '';
@@ -58,6 +66,30 @@ export class FillCardsComponent implements OnChanges {
 
   get hasItems(): boolean {
     return this.items.length > 0;
+  }
+
+  get isSlider(): boolean {
+    return this.items.length > FillCardsComponent.SLIDER_THRESHOLD;
+  }
+
+  scrollPrev(): void {
+    this.scrollByCard(false);
+  }
+
+  scrollNext(): void {
+    this.scrollByCard(true);
+  }
+
+  private scrollByCard(forward: boolean): void {
+    const el = this.scrollerRef?.nativeElement;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>('.fill-card');
+    if (!card) return;
+    const styles = getComputedStyle(el);
+    const gap = parseFloat(styles.columnGap || styles.gap || '0') || 20;
+    const step = card.offsetWidth + gap;
+    const direction = forward !== this.isArabic ? 1 : -1;
+    el.scrollBy({ left: direction * step, behavior: 'smooth' });
   }
 
   get primaryColorValue(): string {
@@ -117,6 +149,8 @@ export class FillCardsComponent implements OnChanges {
     this.titleEn = '';
     this.titleAr = '';
     if (!this.companyId || !this.titleCode) return;
+    this.loadingTitle = true;
+    this.cdr.markForCheck();
     this.companyPreferencesService
       .getByCompanyAndCode(this.companyId, this.titleCode)
       .subscribe({
@@ -124,10 +158,14 @@ export class FillCardsComponent implements OnChanges {
           if (response.success && response.data?.id) {
             this.titleEn = response.data.valueEn ?? '';
             this.titleAr = response.data.valueAr ?? '';
-            this.cdr.markForCheck();
           }
+          this.loadingTitle = false;
+          this.cdr.markForCheck();
         },
-        error: () => {}
+        error: () => {
+          this.loadingTitle = false;
+          this.cdr.markForCheck();
+        }
       });
   }
 
@@ -135,6 +173,8 @@ export class FillCardsComponent implements OnChanges {
     this.descriptionEn = '';
     this.descriptionAr = '';
     if (!this.companyId || !this.descriptionCode) return;
+    this.loadingDescription = true;
+    this.cdr.markForCheck();
     this.companyPreferencesService
       .getByCompanyAndCode(this.companyId, this.descriptionCode)
       .subscribe({
@@ -142,10 +182,14 @@ export class FillCardsComponent implements OnChanges {
           if (response.success && response.data?.id) {
             this.descriptionEn = response.data.valueEn ?? '';
             this.descriptionAr = response.data.valueAr ?? '';
-            this.cdr.markForCheck();
           }
+          this.loadingDescription = false;
+          this.cdr.markForCheck();
         },
-        error: () => {}
+        error: () => {
+          this.loadingDescription = false;
+          this.cdr.markForCheck();
+        }
       });
   }
 }

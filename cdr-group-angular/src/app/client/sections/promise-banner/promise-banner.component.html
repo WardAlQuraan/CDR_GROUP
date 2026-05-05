@@ -1,0 +1,20 @@
+@if (hasContent) {
+  <section class="promise-banner"
+    [style.--brand-primary]="primaryColorValue"
+    [style.--brand-secondary]="secondaryColorValue">
+
+    <div class="promise-decor" aria-hidden="true">
+      <span class="promise-decor-blob promise-decor-blob-a"></span>
+      <span class="promise-decor-blob promise-decor-blob-b"></span>
+    </div>
+
+    <div class="container promise-content">
+      @if (safeTitle) {
+        <h2 class="promise-title" [innerHTML]="safeTitle"></h2>
+      }
+      @if (safeDescription) {
+        <p class="promise-description" [innerHTML]="safeDescription"></p>
+      }
+    </div>
+  </section>
+}

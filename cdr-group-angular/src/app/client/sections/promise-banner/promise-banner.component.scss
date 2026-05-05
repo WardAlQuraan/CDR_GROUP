@@ -1,0 +1,129 @@
+.promise-banner {
+  --brand-primary: #D9A93E;
+  --brand-secondary: #3E423D;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: clamp(280px, 40vh, 460px);
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  // Brand-driven background, no image. Diagonal gradient between
+  // secondary (dominant) and primary (accent edge).
+  background:
+    linear-gradient(135deg,
+      var(--brand-secondary) 0%,
+      color-mix(in srgb, var(--brand-secondary) 75%, var(--brand-primary)) 100%);
+
+  .container {
+    max-width: 1280px;
+    width: 100%;
+    padding: clamp(48px, 6vw, 96px) clamp(24px, 5vw, 64px);
+    position: relative;
+    z-index: 2;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// Decorative brand blobs (no image, just brand-tinted glow shapes)
+// ─────────────────────────────────────────────────────────────────
+.promise-decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.promise-decor-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+}
+
+.promise-decor-blob-a {
+  width: 420px;
+  height: 420px;
+  inset-inline-start: -120px;
+  top: -160px;
+  background: radial-gradient(circle,
+    color-mix(in srgb, var(--brand-primary) 70%, transparent) 0%,
+    transparent 70%);
+}
+
+.promise-decor-blob-b {
+  width: 480px;
+  height: 480px;
+  inset-inline-end: -180px;
+  bottom: -200px;
+  background: radial-gradient(circle,
+    color-mix(in srgb, var(--brand-primary) 45%, transparent) 0%,
+    transparent 70%);
+}
+
+// ─────────────────────────────────────────────────────────────────
+// Content
+// ─────────────────────────────────────────────────────────────────
+.promise-content {
+  max-width: 920px;
+}
+
+.promise-title {
+  font-size: clamp(1.875rem, 4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 clamp(16px, 2vw, 24px);
+  color: #ffffff;
+
+  // Hairline brand-primary underline accent
+  position: relative;
+  padding-bottom: clamp(14px, 1.5vw, 20px);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    bottom: 0;
+    width: clamp(48px, 6vw, 84px);
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg,
+      var(--brand-primary),
+      color-mix(in srgb, var(--brand-primary) 60%, transparent));
+  }
+}
+
+.promise-description {
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.85;
+  color: color-mix(in srgb, #ffffff 90%, transparent);
+  margin: 0;
+  max-width: 760px;
+}
+
+// ─────────────────────────────────────────────────────────────────
+// Responsive
+// ─────────────────────────────────────────────────────────────────
+@media (max-width: 768px) {
+  .promise-banner {
+    min-height: 240px;
+  }
+
+  .promise-decor-blob {
+    filter: blur(40px);
+    opacity: 0.4;
+  }
+
+  .promise-decor-blob-a {
+    width: 280px;
+    height: 280px;
+  }
+
+  .promise-decor-blob-b {
+    width: 320px;
+    height: 320px;
+  }
+}

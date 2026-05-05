@@ -69,10 +69,6 @@ export class CompanyHubComponent implements OnInit {
       this.router.navigate(['/']);
       return;
     }
-    if (!found.children?.length) {
-      this.router.navigate(['/', found.id]);
-      return;
-    }
     this.parentCompany = found;
     this.companyState.setSelectedCompany(found);
     this.children = found.children;
@@ -129,11 +125,7 @@ export class CompanyHubComponent implements OnInit {
   }
 
   selectCompany(company: CompanyDto): void {
-    if (company.children?.length) {
-      this.router.navigate(['/', company.id, 'group']);
-    } else {
-      this.router.navigate(['/', company.id]);
-    }
+    this.router.navigate(['/', company.id]);
   }
 
   goBack(): void {

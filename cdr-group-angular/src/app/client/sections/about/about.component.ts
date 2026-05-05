@@ -19,8 +19,7 @@ export class AboutComponent implements OnChanges {
   private cdr = inject(ChangeDetectorRef);
 
   private static readonly DESCRIPTION_TITLE_CODE = 'ABOUT_DESCRIPTION_TITLE';
-  private static readonly FIRST_SECTION_CODE = 'FIRST_SECTION_ABOUT_COMPANY';
-  private static readonly SECOND_SECTION_CODE = 'SECOND_SECTION_ABOUT_COMPANY';
+  private static readonly SECTION_HINT_CODE = 'ABOUT_SECTION_HINT';
   private static readonly SECONDARY_DESCRIPTION_TITLE_CODE = 'SECONDARY_ABOUT_DESCRIPTION_TITLE';
   private static readonly SECONDARY_DESCRIPTION_TEXT_CODE = 'SECONDARY_ABOUT_DESCRIPTION_SUB_TITLE';
 
@@ -30,20 +29,22 @@ export class AboutComponent implements OnChanges {
 
   private descriptionTitleEn = '';
   private descriptionTitleAr = '';
-  private firstSectionEn = '';
-  private firstSectionAr = '';
-  private secondSectionEn = '';
-  private secondSectionAr = '';
+  private sectionHintEn = '';
+  private sectionHintAr = '';
   private secondaryDescriptionTitleEn = '';
   private secondaryDescriptionTitleAr = '';
   private secondaryDescriptionTextEn = '';
   private secondaryDescriptionTextAr = '';
 
+  loadingDescriptionTitle = false;
+  loadingSectionHint = false;
+  loadingSecondaryTitle = false;
+  loadingSecondaryText = false;
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['company']) {
       this.loadDescriptionTitle();
-      this.loadFirstSection();
-      this.loadSecondSection();
+      this.loadSectionHint();
       this.loadSecondaryDescriptionTitle();
       this.loadSecondaryDescriptionText();
     }
@@ -93,20 +94,12 @@ export class AboutComponent implements OnChanges {
     return (this.isArabic ? this.descriptionTitleAr : this.descriptionTitleEn) || '';
   }
 
-  get firstSection(): string {
-    return (this.isArabic ? this.firstSectionAr : this.firstSectionEn) || '';
+  get sectionHint(): string {
+    return (this.isArabic ? this.sectionHintAr : this.sectionHintEn) || '';
   }
 
-  get safeFirstSection(): SafeHtml | null {
-    return this.firstSection ? this.sanitizer.bypassSecurityTrustHtml(this.firstSection) : null;
-  }
-
-  get secondSection(): string {
-    return (this.isArabic ? this.secondSectionAr : this.secondSectionEn) || '';
-  }
-
-  get safeSecondSection(): SafeHtml | null {
-    return this.secondSection ? this.sanitizer.bypassSecurityTrustHtml(this.secondSection) : null;
+  get safeSectionHint(): SafeHtml | null {
+    return this.sectionHint ? this.sanitizer.bypassSecurityTrustHtml(this.sectionHint) : null;
   }
 
   get secondaryDescriptionTitle(): string {
@@ -132,9 +125,12 @@ export class AboutComponent implements OnChanges {
   private loadDescriptionTitle(): void {
     this.descriptionTitleEn = '';
     this.descriptionTitleAr = '';
+    this.loadingDescriptionTitle = false;
     if (!this.company?.id || !this.companyDescription) {
       return;
     }
+    this.loadingDescriptionTitle = true;
+    this.cdr.markForCheck();
     this.companyPreferencesService
       .getByCompanyAndCode(this.company.id, AboutComponent.DESCRIPTION_TITLE_CODE)
       .subscribe({
@@ -142,53 +138,49 @@ export class AboutComponent implements OnChanges {
           if (response.success && response.data?.id) {
             this.descriptionTitleEn = response.data.valueEn ?? '';
             this.descriptionTitleAr = response.data.valueAr ?? '';
-            this.cdr.markForCheck();
           }
+          this.loadingDescriptionTitle = false;
+          this.cdr.markForCheck();
         },
-        error: () => {}
+        error: () => {
+          this.loadingDescriptionTitle = false;
+          this.cdr.markForCheck();
+        }
       });
   }
 
-  private loadFirstSection(): void {
-    this.firstSectionEn = '';
-    this.firstSectionAr = '';
+  private loadSectionHint(): void {
+    this.sectionHintEn = '';
+    this.sectionHintAr = '';
+    this.loadingSectionHint = false;
     if (!this.company?.id) return;
+    this.loadingSectionHint = true;
+    this.cdr.markForCheck();
     this.companyPreferencesService
-      .getByCompanyAndCode(this.company.id, AboutComponent.FIRST_SECTION_CODE)
+      .getByCompanyAndCode(this.company.id, AboutComponent.SECTION_HINT_CODE)
       .subscribe({
         next: (response) => {
           if (response.success && response.data?.id) {
-            this.firstSectionEn = response.data.valueEn ?? '';
-            this.firstSectionAr = response.data.valueAr ?? '';
-            this.cdr.markForCheck();
+            this.sectionHintEn = response.data.valueEn ?? '';
+            this.sectionHintAr = response.data.valueAr ?? '';
           }
+          this.loadingSectionHint = false;
+          this.cdr.markForCheck();
         },
-        error: () => {}
-      });
-  }
-
-  private loadSecondSection(): void {
-    this.secondSectionEn = '';
-    this.secondSectionAr = '';
-    if (!this.company?.id) return;
-    this.companyPreferencesService
-      .getByCompanyAndCode(this.company.id, AboutComponent.SECOND_SECTION_CODE)
-      .subscribe({
-        next: (response) => {
-          if (response.success && response.data?.id) {
-            this.secondSectionEn = response.data.valueEn ?? '';
-            this.secondSectionAr = response.data.valueAr ?? '';
-            this.cdr.markForCheck();
-          }
-        },
-        error: () => {}
+        error: () => {
+          this.loadingSectionHint = false;
+          this.cdr.markForCheck();
+        }
       });
   }
 
   private loadSecondaryDescriptionTitle(): void {
     this.secondaryDescriptionTitleEn = '';
     this.secondaryDescriptionTitleAr = '';
+    this.loadingSecondaryTitle = false;
     if (!this.company?.id) return;
+    this.loadingSecondaryTitle = true;
+    this.cdr.markForCheck();
     this.companyPreferencesService
       .getByCompanyAndCode(this.company.id, AboutComponent.SECONDARY_DESCRIPTION_TITLE_CODE)
       .subscribe({
@@ -196,17 +188,24 @@ export class AboutComponent implements OnChanges {
           if (response.success && response.data?.id) {
             this.secondaryDescriptionTitleEn = response.data.valueEn ?? '';
             this.secondaryDescriptionTitleAr = response.data.valueAr ?? '';
-            this.cdr.markForCheck();
           }
+          this.loadingSecondaryTitle = false;
+          this.cdr.markForCheck();
         },
-        error: () => {}
+        error: () => {
+          this.loadingSecondaryTitle = false;
+          this.cdr.markForCheck();
+        }
       });
   }
 
   private loadSecondaryDescriptionText(): void {
     this.secondaryDescriptionTextEn = '';
     this.secondaryDescriptionTextAr = '';
+    this.loadingSecondaryText = false;
     if (!this.company?.id) return;
+    this.loadingSecondaryText = true;
+    this.cdr.markForCheck();
     this.companyPreferencesService
       .getByCompanyAndCode(this.company.id, AboutComponent.SECONDARY_DESCRIPTION_TEXT_CODE)
       .subscribe({
@@ -214,10 +213,14 @@ export class AboutComponent implements OnChanges {
           if (response.success && response.data?.id) {
             this.secondaryDescriptionTextEn = response.data.valueEn ?? '';
             this.secondaryDescriptionTextAr = response.data.valueAr ?? '';
-            this.cdr.markForCheck();
           }
+          this.loadingSecondaryText = false;
+          this.cdr.markForCheck();
         },
-        error: () => {}
+        error: () => {
+          this.loadingSecondaryText = false;
+          this.cdr.markForCheck();
+        }
       });
   }
 }

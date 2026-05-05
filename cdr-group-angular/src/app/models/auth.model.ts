@@ -133,12 +133,6 @@ export const Permissions = {
   COMPANY_BRANCHES_UPDATE: 'company-branches.update',
   COMPANY_BRANCHES_DELETE: 'company-branches.delete',
 
-  // Company Financial Clauses Rights
-  COMPANY_FINANCIAL_CLAUSES_RIGHTS_READ: 'company-financial-clauses-rights.read',
-  COMPANY_FINANCIAL_CLAUSES_RIGHTS_CREATE: 'company-financial-clauses-rights.create',
-  COMPANY_FINANCIAL_CLAUSES_RIGHTS_UPDATE: 'company-financial-clauses-rights.update',
-  COMPANY_FINANCIAL_CLAUSES_RIGHTS_DELETE: 'company-financial-clauses-rights.delete',
-
   // Company Client Reaches
   COMPANY_CLIENT_REACHES_READ: 'company-client-reaches.read',
   COMPANY_CLIENT_REACHES_CREATE: 'company-client-reaches.create',

@@ -6,7 +6,6 @@ using cdr_group.Contracts.DTOs.CompanyBackground;
 using cdr_group.Contracts.DTOs.CompanyForm;
 using cdr_group.Contracts.DTOs.CompanyPreference;
 using cdr_group.Contracts.DTOs.CompanyBranch;
-using cdr_group.Contracts.DTOs.CompanyFinancialClausesRights;
 using cdr_group.Contracts.DTOs.CompanyClientReach;
 using cdr_group.Contracts.DTOs.CompanyTitleDescription;
 using cdr_group.Contracts.DTOs.CompanyHomeComponentSetup;
@@ -250,19 +249,6 @@ namespace cdr_group.Application.Mappings
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
 
             CreateMap<UpdateCompanyBranchDto, CompanyBranch>()
-                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
-
-            // CompanyFinancialClausesRights mappings
-            CreateMap<CompanyFinancialClausesRights, CompanyFinancialClausesRightsDto>()
-                .ForMember(dest => dest.CompanyNameEn, opt => opt.MapFrom(src =>
-                    src.Company != null ? src.Company.NameEn : null))
-                .ForMember(dest => dest.CompanyNameAr, opt => opt.MapFrom(src =>
-                    src.Company != null ? src.Company.NameAr : null));
-
-            CreateMap<CreateCompanyFinancialClausesRightsDto, CompanyFinancialClausesRights>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
-
-            CreateMap<UpdateCompanyFinancialClausesRightsDto, CompanyFinancialClausesRights>()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
             // CompanyClientReach mappings

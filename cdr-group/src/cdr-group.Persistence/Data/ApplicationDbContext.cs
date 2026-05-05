@@ -215,7 +215,6 @@ namespace cdr_group.Persistence.Data
         public DbSet<CompanyForm> CompanyForms { get; set; }
         public DbSet<CompanyPreference> CompanyPreferences { get; set; }
         public DbSet<CompanyBranch> CompanyBranches { get; set; }
-        public DbSet<CompanyFinancialClausesRights> CompanyFinancialClausesRights { get; set; }
         public DbSet<CompanyClientReach> CompanyClientReaches { get; set; }
         public DbSet<CompanyTitleDescription> CompanyTitleDescriptions { get; set; }
         public DbSet<CompanyHomeComponentSetup> CompanyHomeComponentSetups { get; set; }
@@ -459,22 +458,6 @@ namespace cdr_group.Persistence.Data
                 entity.HasOne(e => e.City)
                     .WithMany()
                     .HasForeignKey(e => e.CityId)
-                    .IsRequired()
-                    .OnDelete(DeleteBehavior.Restrict);
-            });
-
-            // CompanyFinancialClausesRights configuration
-            modelBuilder.Entity<CompanyFinancialClausesRights>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.TitleEn).IsRequired().HasMaxLength(500);
-                entity.Property(e => e.TitleAr).IsRequired().HasMaxLength(500);
-                entity.Property(e => e.DescriptionEn).HasMaxLength(2000);
-                entity.Property(e => e.DescriptionAr).HasMaxLength(2000);
-
-                entity.HasOne(e => e.Company)
-                    .WithMany(e => e.CompanyFinancialClausesRights)
-                    .HasForeignKey(e => e.CompanyId)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);
             });

@@ -138,7 +138,6 @@ builder.Services.AddScoped<ICompanyBackgroundRepository, CompanyBackgroundReposi
 builder.Services.AddScoped<ICompanyFormRepository, CompanyFormRepository>();
 builder.Services.AddScoped<ICompanyPreferenceRepository, CompanyPreferenceRepository>();
 builder.Services.AddScoped<ICompanyBranchRepository, CompanyBranchRepository>();
-builder.Services.AddScoped<ICompanyFinancialClausesRightsRepository, CompanyFinancialClausesRightsRepository>();
 builder.Services.AddScoped<ICompanyClientReachRepository, CompanyClientReachRepository>();
 builder.Services.AddScoped<ICompanyTitleDescriptionRepository, CompanyTitleDescriptionRepository>();
 builder.Services.AddScoped<IAuditLogRepository, AuditLogRepository>();
@@ -166,7 +165,6 @@ builder.Services.AddScoped<ICompanyBackgroundService, CompanyBackgroundService>(
 builder.Services.AddScoped<ICompanyFormService, CompanyFormService>();
 builder.Services.AddScoped<ICompanyPreferenceService, CompanyPreferenceService>();
 builder.Services.AddScoped<ICompanyBranchService, CompanyBranchService>();
-builder.Services.AddScoped<ICompanyFinancialClausesRightsService, CompanyFinancialClausesRightsService>();
 builder.Services.AddScoped<ICompanyClientReachService, CompanyClientReachService>();
 builder.Services.AddScoped<ICompanyTitleDescriptionService, CompanyTitleDescriptionService>();
 builder.Services.AddScoped<ICompanyHomeComponentSetupService, CompanyHomeComponentSetupService>();

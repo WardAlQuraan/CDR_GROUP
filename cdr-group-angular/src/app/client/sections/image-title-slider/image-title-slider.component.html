@@ -1,0 +1,79 @@
+@if (hasItems) {
+  <section class="image-title-slider-section" [id]="sectionId"
+    [style.--brand-primary]="primaryColorValue"
+    [style.--brand-secondary]="secondaryColorValue">
+    <div class="container">
+      @if (safeSectionTitle || safeSectionDescription) {
+        <div class="section-header">
+          @if (safeSectionTitle) {
+            <span class="section-eyebrow"></span>
+            <h2 class="section-title" [innerHTML]="safeSectionTitle"></h2>
+          }
+          @if (safeSectionDescription) {
+            <p class="section-subtitle" [innerHTML]="safeSectionDescription"></p>
+          }
+        </div>
+      }
+
+      <div class="image-title-slider"
+        (mouseenter)="onPointerEnter()"
+        (mouseleave)="onPointerLeave()"
+        (focusin)="onPointerEnter()"
+        (focusout)="onPointerLeave()">
+
+        @if (hasMultiplePages) {
+          <button type="button" class="slider-arrow slider-arrow-prev" (click)="prev()" aria-label="Previous">
+            <i class="bi" [class.bi-arrow-left]="!isArabic" [class.bi-arrow-right]="isArabic"></i>
+          </button>
+        }
+
+        <div class="slider-viewport" #viewport>
+          <div class="slider-track" [style.transform]="trackTransform">
+            @for (item of items; track item.id; let i = $index) {
+              <article class="image-title-slide" [class.is-active]="i === currentIndex">
+                <div class="slide-card" tabindex="0">
+                  <div class="slide-media">
+                    @if (item.imageUrl) {
+                      <img [src]="item.imageUrl" [alt]="getTitle(item)" loading="lazy" />
+                    } @else {
+                      <div class="slide-media-placeholder">
+                        <i class="bi bi-image"></i>
+                      </div>
+                    }
+                    <div class="slide-overlay"></div>
+                  </div>
+
+                  <div class="slide-content">
+                    <h3 class="slide-title">{{ getTitle(item) }}</h3>
+                    @if (getDescription(item); as description) {
+                      <p class="slide-description">{{ description }}</p>
+                    }
+                  </div>
+                </div>
+              </article>
+            }
+          </div>
+        </div>
+
+        @if (hasMultiplePages) {
+          <button type="button" class="slider-arrow slider-arrow-next" (click)="next()" aria-label="Next">
+            <i class="bi" [class.bi-arrow-right]="!isArabic" [class.bi-arrow-left]="isArabic"></i>
+          </button>
+        }
+      </div>
+
+      @if (hasMultiplePages) {
+        <div class="slider-progress" role="tablist">
+          @for (page of pageRange(); track page) {
+            <button type="button" class="slider-progress-dot"
+              [class.is-active]="page === activePage"
+              (click)="goToPage(page)"
+              role="tab"
+              [attr.aria-selected]="page === activePage"
+              [attr.aria-label]="'Page ' + (page + 1)"></button>
+          }
+        </div>
+      }
+    </div>
+  </section>
+}

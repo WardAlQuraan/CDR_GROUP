@@ -69,5 +69,35 @@ namespace cdr_group.Application.Services
         {
             return Task.CompletedTask;
         }
+
+        public async Task ReorderAsync(IEnumerable<ReorderCompanyHomeComponentSetupItemDto> items)
+        {
+            var list = items?.ToList() ?? new List<ReorderCompanyHomeComponentSetupItemDto>();
+            if (list.Count == 0) return;
+
+            await UnitOfWork.BeginTransactionAsync();
+            try
+            {
+                foreach (var item in list)
+                {
+                    var entity = await UnitOfWork.CompanyHomeComponentSetups.GetByIdAsync(item.Id);
+                    if (entity == null)
+                    {
+                        throw new InvalidOperationException($"CompanyHomeComponentSetup '{item.Id}' not found.");
+                    }
+
+                    entity.Rank = item.Rank;
+                    await UnitOfWork.CompanyHomeComponentSetups.UpdateAsync(entity);
+                }
+
+                await UnitOfWork.SaveChangesAsync();
+                await UnitOfWork.CommitTransactionAsync();
+            }
+            catch
+            {
+                await UnitOfWork.RollbackTransactionAsync();
+                throw;
+            }
+        }
     }
 }

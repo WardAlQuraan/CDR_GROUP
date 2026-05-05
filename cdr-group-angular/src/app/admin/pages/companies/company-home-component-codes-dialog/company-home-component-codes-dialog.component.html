@@ -1,0 +1,76 @@
+<app-base-dialog
+  title="admin.companies.homeComponentCodesTitle"
+  [showActions]="false">
+
+  <div class="view-content">
+    <div class="form-section section-primary">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>widgets</mat-icon>
+        </div>
+        <div class="section-title">{{ data.companyName }}</div>
+      </div>
+
+      <div class="section-content">
+        <div class="developer-warning" role="note">
+          <mat-icon>warning_amber</mat-icon>
+          <span>{{ 'admin.companies.homeComponentCodesDeveloperWarning' | translate }}</span>
+        </div>
+        @if (loading) {
+          <div class="loading-row">{{ 'common.loading' | translate }}</div>
+        } @else if (setups.length === 0) {
+          <div class="empty-row">{{ 'admin.companies.homeComponentCodesEmpty' | translate }}</div>
+        } @else {
+          <div class="hint-row">
+            <mat-icon>drag_indicator</mat-icon>
+            <span>{{ 'admin.companies.homeComponentCodesDragHint' | translate }}</span>
+            @if (hasChanges) {
+              <span class="unsaved-badge">{{ 'admin.companies.homeComponentCodesUnsaved' | translate }}</span>
+            }
+          </div>
+
+          <table class="codes-table">
+            <thead>
+              <tr>
+                <th class="drag-col"></th>
+                <th>{{ 'admin.companyHomeComponentSetups.rank' | translate }}</th>
+                <th>{{ 'admin.companyHomeComponentSetups.componentCode' | translate }}</th>
+                <th>{{ 'admin.companyHomeComponentSetups.companyTitleDescriptionCode' | translate }}</th>
+                <th>{{ 'admin.companyHomeComponentSetups.preferenceTitleCode' | translate }}</th>
+                <th>{{ 'admin.companyHomeComponentSetups.preferenceDescriptionCode' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody cdkDropList (cdkDropListDropped)="onDrop($event)">
+              @for (setup of setups; track setup.id) {
+                <tr cdkDrag [cdkDragDisabled]="saving">
+                  <td class="drag-col" cdkDragHandle>
+                    <mat-icon>drag_indicator</mat-icon>
+                  </td>
+                  <td class="rank-cell">{{ setup.rank }}</td>
+                  <td><code>{{ setup.componentCode }}</code></td>
+                  <td>{{ setup.companyTitleDescriptionCode || '-' }}</td>
+                  <td>{{ setup.preferenceTitleCode || '-' }}</td>
+                  <td>{{ setup.preferenceDescriptionCode || '-' }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        }
+      </div>
+    </div>
+
+    <div class="dialog-actions">
+      <button mat-raised-button class="close-btn" (click)="onClose()" [disabled]="saving">
+        {{ 'common.close' | translate }}
+      </button>
+      <button mat-raised-button class="save-btn" (click)="onSave()"
+        [disabled]="!hasChanges || saving">
+        @if (saving) {
+          <mat-progress-spinner diameter="16" mode="indeterminate"></mat-progress-spinner>
+        }
+        {{ 'common.save' | translate }}
+      </button>
+    </div>
+  </div>
+
+</app-base-dialog>

@@ -29,6 +29,8 @@ export class QuoteSliderComponent implements OnChanges, OnDestroy {
   currentIndex = 0;
   isPaused = false;
   loading = false;
+  loadingTitle = false;
+  loadingDescription = false;
 
   private titleEn = '';
   private titleAr = '';
@@ -105,6 +107,8 @@ export class QuoteSliderComponent implements OnChanges, OnDestroy {
     this.titleEn = '';
     this.titleAr = '';
     if (!this.companyId || !this.titleCode) return;
+    this.loadingTitle = true;
+    this.cdr.markForCheck();
     this.companyPreferencesService
       .getByCompanyAndCode(this.companyId, this.titleCode)
       .subscribe({
@@ -112,10 +116,14 @@ export class QuoteSliderComponent implements OnChanges, OnDestroy {
           if (response.success && response.data?.id) {
             this.titleEn = response.data.valueEn ?? '';
             this.titleAr = response.data.valueAr ?? '';
-            this.cdr.markForCheck();
           }
+          this.loadingTitle = false;
+          this.cdr.markForCheck();
         },
-        error: () => {}
+        error: () => {
+          this.loadingTitle = false;
+          this.cdr.markForCheck();
+        }
       });
   }
 
@@ -123,6 +131,8 @@ export class QuoteSliderComponent implements OnChanges, OnDestroy {
     this.descriptionEn = '';
     this.descriptionAr = '';
     if (!this.companyId || !this.descriptionCode) return;
+    this.loadingDescription = true;
+    this.cdr.markForCheck();
     this.companyPreferencesService
       .getByCompanyAndCode(this.companyId, this.descriptionCode)
       .subscribe({
@@ -130,10 +140,14 @@ export class QuoteSliderComponent implements OnChanges, OnDestroy {
           if (response.success && response.data?.id) {
             this.descriptionEn = response.data.valueEn ?? '';
             this.descriptionAr = response.data.valueAr ?? '';
-            this.cdr.markForCheck();
           }
+          this.loadingDescription = false;
+          this.cdr.markForCheck();
         },
-        error: () => {}
+        error: () => {
+          this.loadingDescription = false;
+          this.cdr.markForCheck();
+        }
       });
   }
 

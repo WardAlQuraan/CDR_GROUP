@@ -114,14 +114,6 @@ public static class Positions
             public const string Delete = "company-branches.delete";
         }
 
-        public static class CompanyFinancialClausesRights
-        {
-            public const string Read = "company-financial-clauses-rights.read";
-            public const string Create = "company-financial-clauses-rights.create";
-            public const string Update = "company-financial-clauses-rights.update";
-            public const string Delete = "company-financial-clauses-rights.delete";
-        }
-
         public static class CompanyClientReaches
         {
             public const string Read = "company-client-reaches.read";

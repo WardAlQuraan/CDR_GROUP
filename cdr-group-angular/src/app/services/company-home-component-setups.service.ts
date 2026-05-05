@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
+import { CacheService } from './cache.service';
 import {
   CompanyHomeComponentSetupDto,
   CompanyHomeComponentSetupPagedRequest,
+  CompanyHomeComponentSetupRankUpdate,
   CreateCompanyHomeComponentSetupDto,
   UpdateCompanyHomeComponentSetupDto,
 } from '../models/company-home-component-setup.model';
@@ -19,7 +21,7 @@ export class CompanyHomeComponentSetupsService extends BaseService<
   CreateCompanyHomeComponentSetupDto,
   UpdateCompanyHomeComponentSetupDto
 > {
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient, private cacheService: CacheService) {
     super(http, 'CompanyHomeComponentSetups');
   }
 
@@ -39,8 +41,17 @@ export class CompanyHomeComponentSetupsService extends BaseService<
   }
 
   getByCompany(companyId: string): Observable<ApiResponse<CompanyHomeComponentSetupDto[]>> {
+    return this.cacheService.get(
+      `home-component-setups-${companyId}`,
+      () => this.http
+        .get<ApiResponse<CompanyHomeComponentSetupDto[]>>(`${this.getApiUrl()}/by-company/${companyId}`)
+        .pipe(catchError(error => this.handleError(error)))
+    );
+  }
+
+  reorder(items: CompanyHomeComponentSetupRankUpdate[]): Observable<ApiResponse<void>> {
     return this.http
-      .get<ApiResponse<CompanyHomeComponentSetupDto[]>>(`${this.getApiUrl()}/by-company/${companyId}`)
+      .put<ApiResponse<void>>(`${this.getApiUrl()}/reorder`, items)
       .pipe(catchError(error => this.handleError(error)));
   }
 

@@ -6,5 +6,6 @@ namespace cdr_group.Contracts.Interfaces.Services
     {
         Task<IEnumerable<CompanyHomeComponentSetupDto>> GetByCompanyIdAsync(Guid companyId);
         Task<CompanyHomeComponentSetupDto?> GetByCompanyAndComponentCodeAsync(Guid companyId, string componentCode);
+        Task ReorderAsync(IEnumerable<ReorderCompanyHomeComponentSetupItemDto> items);
     }
 }

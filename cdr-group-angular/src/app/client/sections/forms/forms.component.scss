@@ -1,3 +1,50 @@
+.forms-grid-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.forms-loading-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 1.5em;
+  margin-bottom: 8px;
+}
+
+.forms-section .spinner {
+  border-radius: 50%;
+  border-style: solid;
+  animation: forms-spin 0.8s linear infinite;
+}
+
+.forms-section .spinner-section {
+  width: 42px;
+  height: 42px;
+  border-width: 3px;
+  border-color: color-mix(in srgb, var(--brand-primary) 22%, transparent);
+  border-top-color: var(--brand-primary);
+}
+
+.forms-section .spinner-inline {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+  border-color: color-mix(in srgb, var(--brand-primary) 22%, transparent);
+  border-top-color: var(--brand-primary);
+}
+
+@keyframes forms-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forms-section .spinner {
+    animation: none;
+  }
+}
+
 .forms-section {
   --brand-primary: #833AB4;
   --brand-secondary: #FD1D1D;

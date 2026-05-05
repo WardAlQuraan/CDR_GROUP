@@ -3,7 +3,15 @@
 </div>
 
 <ng-container *ngIf="!loading">
-  <app-header></app-header>
+  @if (hasHubHeader) {
+    <app-hub-header></app-hub-header>
+  } @else {
+    <app-header></app-header>
+  }
   <router-outlet></router-outlet>
-  <app-footer></app-footer>
+  @if (hasHubFooter) {
+    <app-hub-footer></app-hub-footer>
+  } @else {
+    <app-footer></app-footer>
+  }
 </ng-container>

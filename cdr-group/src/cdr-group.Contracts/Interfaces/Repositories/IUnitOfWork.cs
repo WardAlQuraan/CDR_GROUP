@@ -17,7 +17,6 @@ IPositionRepository Positions { get; }
         ICompanyFormRepository CompanyForms { get; }
         ICompanyPreferenceRepository CompanyPreferences { get; }
         ICompanyBranchRepository CompanyBranches { get; }
-        ICompanyFinancialClausesRightsRepository CompanyFinancialClausesRights { get; }
         ICompanyClientReachRepository CompanyClientReaches { get; }
         ICompanyTitleDescriptionRepository CompanyTitleDescriptions { get; }
         ICompanyHomeComponentSetupRepository CompanyHomeComponentSetups { get; }

@@ -18,7 +18,6 @@ import { CompanyBranchesComponent } from './pages/company-branches/company-branc
 import { ReviewsComponent } from './pages/reviews/reviews-component/reviews-component';
 import { ComplaintsComponent } from './pages/complaints/complaints-component/complaints-component';
 import { PartnersComponent } from './pages/partners/partners-component/partners-component';
-import { CompanyFinancialClausesRightsComponent } from './pages/company-financial-clauses-rights/company-financial-clauses-rights-component/company-financial-clauses-rights-component';
 import { CompanyClientReachesComponent } from './pages/company-client-reaches/company-client-reaches-component/company-client-reaches-component';
 import { CompanyTitleDescriptionsComponent } from './pages/company-title-descriptions/company-title-descriptions-component/company-title-descriptions-component';
 import { CompanyHomeComponentSetupsComponent } from './pages/company-home-component-setups/company-home-component-setups-component/company-home-component-setups-component';
@@ -41,7 +40,6 @@ export const adminRoutes: Routes = [
       { path: 'companies/:companyId/forms', component: CompanyFormsComponent },
       { path: 'companies/:companyId/preferences', component: CompanyPreferencesComponent },
       { path: 'companies/:companyId/branches', component: CompanyBranchesComponent },
-      { path: 'companies/:companyId/financial-clauses-rights', component: CompanyFinancialClausesRightsComponent },
       { path: 'companies/:companyId/client-reaches', component: CompanyClientReachesComponent },
       { path: 'companies/:companyId/title-descriptions', component: CompanyTitleDescriptionsComponent },
       { path: 'companies/:companyId/home-component-setups', component: CompanyHomeComponentSetupsComponent },

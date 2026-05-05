@@ -28,6 +28,11 @@ export interface CreateCompanyHomeComponentSetupDto {
   companyId: string;
 }
 
+export interface CompanyHomeComponentSetupRankUpdate {
+  id: string;
+  rank: number;
+}
+
 export interface UpdateCompanyHomeComponentSetupDto {
   componentCode?: string;
   companyTitleDescriptionCode?: string;

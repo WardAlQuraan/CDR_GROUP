@@ -1,4 +1,4 @@
-@if (hasChildren) {
+@if (loading || hasChildren) {
   <section class="sub-companies-section" id="section_sub_companies"
     [style.--brand-primary]="primaryColorValue"
     [style.--brand-secondary]="secondaryColorValue">
@@ -10,26 +10,36 @@
         </div>
       </div>
 
-      <div class="children-row">
-        @for (child of children; track child.id; let i = $index) {
-          <button
-            type="button"
-            class="child-card"
-            [style.animation-delay.ms]="i * 70"
-            (click)="selectCompany(child)"
-            [title]="getCompanyName(child)"
-            [style.--accent]="child.primaryColor || primaryColorValue">
-            <div class="child-orb">
-              <span class="child-ring"></span>
-              <img [src]="getLogoUrl(child)" [alt]="getCompanyName(child)" />
-            </div>
-            <div class="child-name">{{ getCompanyName(child) }}</div>
-            @if (getCompanyDescription(child); as description) {
-              <p class="child-description" (click)="$event.stopPropagation()">{{ description }}</p>
-            }
-          </button>
-        }
-      </div>
+      @if (loading) {
+        <div class="children-loading">
+          <div class="spinner spinner-section"></div>
+        </div>
+      } @else {
+        <div class="children-row">
+          @for (child of children; track child.id; let i = $index) {
+            <button
+              type="button"
+              class="child-card"
+              [style.animation-delay.ms]="i * 70"
+              (click)="selectCompany(child)"
+              [title]="getCompanyName(child)"
+              [style.--accent]="child.primaryColor || primaryColorValue">
+              <div class="child-orb">
+                <span class="child-ring"></span>
+                <img [src]="getLogoUrl(child)" [alt]="getCompanyName(child)" />
+              </div>
+              <div class="child-name">{{ getCompanyName(child) }}</div>
+              @if (isDescriptionLoading(child)) {
+                <div class="child-description-loading" (click)="$event.stopPropagation()">
+                  <div class="spinner spinner-inline"></div>
+                </div>
+              } @else if (getSafeCompanyDescription(child); as description) {
+                <p class="child-description" [innerHTML]="description" (click)="$event.stopPropagation()"></p>
+              }
+            </button>
+          }
+        </div>
+      }
     </div>
   </section>
 }

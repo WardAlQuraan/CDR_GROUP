@@ -1,57 +1,71 @@
-@if (hasItems) {
+@if (loading || hasItems || loadingTitle || loadingDescription) {
   <section class="card-scroller-section" [id]="sectionId"
     [style.--brand-primary]="primaryColorValue"
     [style.--brand-secondary]="secondaryColorValue">
     <div class="container">
-      @if (safeSectionTitle || safeSectionDescription) {
+      @if (safeSectionTitle || safeSectionDescription || loadingTitle || loadingDescription) {
         <div class="row">
           <div class="col-12 text-center mb-3">
-            @if (safeSectionTitle) {
+            @if (loadingTitle) {
+              <div class="card-scroller-loading-row">
+                <div class="spinner spinner-inline"></div>
+              </div>
+            } @else if (safeSectionTitle) {
               <h2 class="section-title" [innerHTML]="safeSectionTitle"></h2>
             }
-            @if (safeSectionDescription) {
+            @if (loadingDescription) {
+              <div class="card-scroller-loading-row">
+                <div class="spinner spinner-inline"></div>
+              </div>
+            } @else if (safeSectionDescription) {
               <p class="section-subtitle" [innerHTML]="safeSectionDescription"></p>
             }
           </div>
         </div>
       }
 
-      <div class="card-scroller"
-        (mouseenter)="onPointerEnter()"
-        (mouseleave)="onPointerLeave()"
-        (focusin)="onPointerEnter()"
-        (focusout)="onPointerLeave()">
+      @if (loading) {
+        <div class="card-scroller-items-loading">
+          <div class="spinner spinner-section"></div>
+        </div>
+      } @else if (hasItems) {
+        <div class="card-scroller"
+          (mouseenter)="onPointerEnter()"
+          (mouseleave)="onPointerLeave()"
+          (focusin)="onPointerEnter()"
+          (focusout)="onPointerLeave()">
 
-        @if (hasMultiple) {
-          <button type="button" class="slider-arrow slider-arrow-prev"
-            (click)="scrollPrev()" aria-label="Previous">
-            <i class="bi" [class.bi-chevron-left]="!isArabic" [class.bi-chevron-right]="isArabic"></i>
-          </button>
-        }
+          @if (hasMultiple) {
+            <button type="button" class="slider-arrow slider-arrow-prev"
+              (click)="scrollPrev()" aria-label="Previous">
+              <i class="bi" [class.bi-chevron-left]="!isArabic" [class.bi-chevron-right]="isArabic"></i>
+            </button>
+          }
 
-        <div class="card-scroller-track" #scroller>
-          @for (item of items; track item.id; let i = $index) {
-            <article class="scroller-card" [style.--index]="i"
-              [class.is-description-only]="!getTitle(item) && getDescription(item)">
-              <div class="scroller-body">
-                @if (getTitle(item)) {
-                  <h3 class="scroller-title">{{ getTitle(item) }}</h3>
-                }
-                @if (getDescription(item)) {
-                  <p class="scroller-description">{{ getDescription(item) }}</p>
-                }
-              </div>
-            </article>
+          <div class="card-scroller-track" #scroller>
+            @for (item of items; track item.id; let i = $index) {
+              <article class="scroller-card" [style.--index]="i"
+                [class.is-description-only]="!getTitle(item) && getDescription(item)">
+                <div class="scroller-body">
+                  @if (getTitle(item)) {
+                    <h3 class="scroller-title">{{ getTitle(item) }}</h3>
+                  }
+                  @if (getDescription(item)) {
+                    <p class="scroller-description">{{ getDescription(item) }}</p>
+                  }
+                </div>
+              </article>
+            }
+          </div>
+
+          @if (hasMultiple) {
+            <button type="button" class="slider-arrow slider-arrow-next"
+              (click)="scrollNext()" aria-label="Next">
+              <i class="bi" [class.bi-chevron-right]="!isArabic" [class.bi-chevron-left]="isArabic"></i>
+            </button>
           }
         </div>
-
-        @if (hasMultiple) {
-          <button type="button" class="slider-arrow slider-arrow-next"
-            (click)="scrollNext()" aria-label="Next">
-            <i class="bi" [class.bi-chevron-right]="!isArabic" [class.bi-chevron-left]="isArabic"></i>
-          </button>
-        }
-      </div>
+      }
     </div>
   </section>
 }

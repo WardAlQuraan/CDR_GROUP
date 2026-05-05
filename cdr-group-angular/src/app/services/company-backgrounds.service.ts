@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { BaseService } from './base.service';
+import { CacheService } from './cache.service';
 import { ApiResponse } from '../models/api-response.model';
 import { PagedResult } from '../models/paged.model';
 import {
@@ -17,7 +18,7 @@ import {
 })
 export class CompanyBackgroundsService extends BaseService<CompanyBackgroundDto, CreateCompanyBackgroundDto, UpdateCompanyBackgroundDto> {
 
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient, private cacheService: CacheService) {
     super(http, 'CompanyBackgrounds');
   }
 
@@ -32,8 +33,11 @@ export class CompanyBackgroundsService extends BaseService<CompanyBackgroundDto,
   }
 
   getByCompany(companyId: string): Observable<ApiResponse<CompanyBackgroundDto[]>> {
-    return this.http.get<ApiResponse<CompanyBackgroundDto[]>>(`${this.getApiUrl()}/by-company/${companyId}`).pipe(
-      catchError(error => this.handleError(error))
+    return this.cacheService.get(
+      `company-backgrounds-${companyId}`,
+      () => this.http.get<ApiResponse<CompanyBackgroundDto[]>>(`${this.getApiUrl()}/by-company/${companyId}`).pipe(
+        catchError(error => this.handleError(error))
+      )
     );
   }
 }

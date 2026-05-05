@@ -41,7 +41,6 @@ export const environment = {
   companyTitleDescriptionCodes: [
     'WHAT_WE_DO',
     'COMPANY_GEOGRAPHIC_EXPANSIONS',
-    'COMPANY_FINANCIAL_CLAUSES_RIGHTS',
     'WHEN_WHERE',
     'SUCCESS_REASON',
     'DISTRIBUTION_MARKETING',
@@ -57,6 +56,8 @@ export const environment = {
     'app-fill-cards',
     'app-quote-slider',
     'app-glass-slider',
+    'app-image-title-slider',
+    'app-promise-banner',
     'app-glass-card',
     'app-statement-slider',
     'app-client-reaches',
